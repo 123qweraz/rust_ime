@@ -66,23 +66,38 @@ impl Vkbd {
     }
 
     fn paste_text(&mut self, text: &str) {
-        if let Some(cb) = &mut self.clipboard {
-            if let Err(e) = cb.set_text(text.to_string()) {
-                eprintln!("Clipboard set failed: {}", e);
-                return;
+        // Use xclip to set BOTH Clipboard and Primary selections.
+        // This ensures Shift+Insert (usually Primary) and Ctrl+V (Clipboard) both work.
+        use std::process::{Command, Stdio};
+        use std::io::Write;
+
+        let selections = ["clipboard", "primary"];
+        for selection in selections {
+            if let Ok(mut child) = Command::new("xclip")
+                .arg("-selection")
+                .arg(selection)
+                .stdin(Stdio::piped())
+                .spawn() 
+            {
+                if let Some(mut stdin) = child.stdin.take() {
+                    let _ = stdin.write_all(text.as_bytes());
+                }
+                let _ = child.wait();
             }
-            thread::sleep(Duration::from_millis(50));
-            
-            // Send Shift + Insert
-            self.emit(Key::KEY_LEFTSHIFT, 1);
-            self.sync();
-            self.emit(Key::KEY_INSERT, 1);
-            self.sync();
-            self.emit(Key::KEY_INSERT, 0);
-            self.sync();
-            self.emit(Key::KEY_LEFTSHIFT, 0);
-            self.sync();
         }
+
+        // Delay to allow X11 to process the new selection
+        thread::sleep(Duration::from_millis(100));
+        
+        // Send Shift + Insert (Universal Linux Paste)
+        self.emit(Key::KEY_LEFTSHIFT, 1);
+        self.sync();
+        self.emit(Key::KEY_INSERT, 1);
+        self.sync();
+        self.emit(Key::KEY_INSERT, 0);
+        self.sync();
+        self.emit(Key::KEY_LEFTSHIFT, 0);
+        self.sync();
     }
 }
 
