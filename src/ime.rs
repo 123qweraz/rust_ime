@@ -112,6 +112,7 @@ impl Ime {
     fn notify_preview(&self) {
         if self.buffer.is_empty() { return; }
 
+        let buffer = self.buffer.clone();
         let mut body = String::new();
         if self.candidates.is_empty() {
             body = "(无候选)".to_string();
@@ -126,12 +127,14 @@ impl Ime {
             }
         }
 
-        Notification::new()
-            .summary(&format!("拼音: {}", self.buffer))
-            .body(&body)
-            .timeout(1000) // 1秒后消失
-            .show()
-            .ok();
+        std::thread::spawn(move || {
+            Notification::new()
+                .summary(&format!("拼音: {}", buffer))
+                .body(&body)
+                .timeout(1000)
+                .show()
+                .ok();
+        });
     }
 
     fn print_preview(&self) {

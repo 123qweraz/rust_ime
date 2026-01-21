@@ -95,7 +95,8 @@ impl Vkbd {
 
     pub fn emit_raw(&mut self, key: Key, value: i32) {
         let ev = InputEvent::new(EventType::KEY, key.code(), value);
-        let _ = self.dev.emit(&[ev]);
+        let syn = InputEvent::new(EventType::SYNCHRONIZATION, 0, 0); // SYN_REPORT
+        let _ = self.dev.emit(&[ev, syn]);
         // 稍微缩短同步时间，提高响应速度
         thread::sleep(Duration::from_micros(100));
     }

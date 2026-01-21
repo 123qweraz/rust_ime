@@ -137,6 +137,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Blind-IME ready. [Right Shift] to toggle.");
     println!("Current mode: English (System Keyboard)");
     
+    let mut ctrl_held = false;
+    let mut alt_held = false;
+    let mut meta_held = false;
+
     loop {
         let events: Vec<_> = match dev.fetch_events() {
             Ok(iterator) => iterator.collect(),
@@ -149,10 +153,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         for ev in events {
             if let InputEventKind::Key(key) = ev.kind() {
                 let val = ev.value();
-                let is_press = val == 1; 
+                let is_press = val != 0; 
+
+                // 跟踪修饰键状态
+                match key {
+                    Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL => ctrl_held = is_press,
+                    Key::KEY_LEFTALT | Key::KEY_RIGHTALT => alt_held = is_press,
+                    Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA => meta_held = is_press,
+                    _ => {}
+                }
 
                 if key == Key::KEY_RIGHTSHIFT {
-                    if is_press {
+                    if val == 1 { // 仅在按下时切换
                         ime.chinese_enabled = !ime.chinese_enabled;
                         ime.reset();
                         
@@ -170,6 +182,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
 
                 if ime.chinese_enabled {
+                    // 如果 Ctrl, Alt 或 Meta 被按下，放行按键以便快捷键工作
+                    if ctrl_held || alt_held || meta_held {
+                        vkbd.emit_raw(key, val);
+                        continue;
+                    }
+
                     match ime.handle_key(key, val != 0) {
                         Action::Emit(s) => {
                             vkbd.send_text(&s);
