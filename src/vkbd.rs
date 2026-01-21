@@ -89,20 +89,7 @@ impl Vkbd {
         // Delay to allow X11 to process the new selection
         thread::sleep(Duration::from_millis(100));
         
-        // 1. Send Ctrl + V (Most universal for GUI apps)
-        self.emit(Key::KEY_LEFTCTRL, 1);
-        self.sync();
-        self.emit(Key::KEY_V, 1);
-        self.sync();
-        self.emit(Key::KEY_V, 0);
-        self.sync();
-        self.emit(Key::KEY_LEFTCTRL, 0);
-        self.sync();
-
-        // Short gap between attempts
-        thread::sleep(Duration::from_millis(20));
-
-        // 2. Send Ctrl + Shift + V (Standard for many Linux Terminals)
+        // Send Ctrl + Shift + V (Universal for Terminals, often works in GUI too)
         self.emit(Key::KEY_LEFTCTRL, 1);
         self.emit(Key::KEY_LEFTSHIFT, 1);
         self.sync();
