@@ -8,12 +8,12 @@
 
 ### 1. 安装系统依赖
 
-编译和运行需要一些底层库（主要用于剪贴板支持）：
+编译和运行需要一些底层库（用于剪贴板支持和系统通知）：
 
 ```bash
 # Ubuntu/Debian
 sudo apt-get update
-sudo apt-get install libxcb-composite0-dev libx11-dev
+sudo apt-get install libxcb-composite0-dev libx11-dev libdbus-1-dev
 ```
 
 ### 2. 配置权限 (重要)
