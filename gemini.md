@@ -1,2 +1,3 @@
-mei ci gai le yihou, jide yong git baocun
-plan mode, zhijiang silu, budong daima
+每次修改之后，记得用 git 保存。
+计划模式，只讲思路，不动代码。
+每次都要在 cargo build 成功之后再给我

@@ -8,5 +8,6 @@ evdev = "0.12.1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 walkdir = "2.3"
-arboard = "3.2" # 新增剪贴板支持
 notify-rust = "4"
+arboard = "3.2"
+users = "0.11"

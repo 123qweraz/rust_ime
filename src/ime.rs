@@ -159,25 +159,29 @@ impl Ime {
     }
 
     pub fn handle_key(&mut self, key: Key, is_press: bool) -> Action {
-        if key == Key::KEY_LEFTSHIFT || key == Key::KEY_RIGHTSHIFT {
-            if is_press { self.toggle(); }
-            return Action::Consume;
-        }
-
-        if !self.chinese_enabled {
-            return Action::PassThrough;
-        }
-
-        if !is_press {
-            if self.state != ImeState::Direct {
-                return Action::Consume;
+        if is_press {
+            if !self.buffer.is_empty() {
+                return self.handle_composing(key);
             }
-            return Action::PassThrough;
-        }
 
-        match self.state {
-            ImeState::Direct => self.handle_direct(key),
-            _ => self.handle_composing(key),
+            match self.state {
+                ImeState::Direct => self.handle_direct(key),
+                _ => self.handle_composing(key),
+            }
+        } else {
+            // 处理按键释放
+            if self.buffer.is_empty() {
+                // 如果当前没有在输入拼音，所有释放都应该放行
+                Action::PassThrough
+            } else {
+                // 如果正在输入拼音，只拦截那些我们感兴趣的按键释放
+                // 这样像 Shift 这种修饰键的释放就不会被拦截
+                if is_letter(key) || is_digit(key) || matches!(key, Key::KEY_BACKSPACE | Key::KEY_SPACE | Key::KEY_ENTER | Key::KEY_TAB | Key::KEY_ESC) {
+                    Action::Consume
+                } else {
+                    Action::PassThrough
+                }
+            }
         }
     }
 
@@ -263,7 +267,7 @@ impl Ime {
                 Action::Consume
             }
 
-            _ => Action::Consume,
+            _ => Action::PassThrough,
         }
     }
 }

@@ -1,11 +1,10 @@
 use evdev::uinput::{VirtualDevice, VirtualDeviceBuilder};
 use evdev::{AttributeSet, InputEvent, Key, Device, EventType};
 use std::{thread, time::Duration};
-use arboard::Clipboard;
+use std::process::Command;
 
 pub struct Vkbd {
     pub dev: VirtualDevice,
-    clipboard: Clipboard,
 }
 
 impl Vkbd {
@@ -26,16 +25,21 @@ impl Vkbd {
             .with_keys(&keys)?
             .build()?;
 
-        let clipboard = Clipboard::new()?;
-
-        Ok(Self { dev, clipboard })
+        Ok(Self { dev })
     }
 
     pub fn send_text(&mut self, text: &str) {
         if text.is_empty() { return; }
 
-        // 如果是纯英文，且长度很短，直接打字（体感更自然）
-        if text.is_ascii() && text.len() < 5 {
+        println!("[IME] Emitting text: {}", text);
+
+        // 1. 尝试使用剪贴板方案 (针对中文更稳定)
+        if self.send_via_clipboard(text) {
+            return;
+        }
+
+        // 2. 备选方案：如果是纯英文，且长度很短，直接通过虚拟键盘打字
+        if text.is_ascii() && text.len() < 10 {
             for ch in text.chars() {
                 if let Some(key) = char_to_key_raw(ch) {
                     self.tap(key);
@@ -44,16 +48,44 @@ impl Vkbd {
             return;
         }
 
-        // 否则，使用剪贴板粘贴
-        if let Ok(_) = self.clipboard.set_text(text.to_string()) {
-            // 模拟 Ctrl + V
-            self.emit(Key::KEY_LEFTCTRL, true);
-            self.tap(Key::KEY_V);
-            self.emit(Key::KEY_LEFTCTRL, false);
-            
-            // 给系统一点响应时间
-            thread::sleep(Duration::from_millis(10));
+        // 3. 最后的手段：ydotool
+        let _ = Command::new("ydotool")
+            .env("YDOTOOL_SOCKET", "/tmp/ydotool.socket")
+            .arg("type")
+            .arg("--key-delay")
+            .arg("1")
+            .arg(text)
+            .output();
+    }
+
+    fn send_via_clipboard(&mut self, text: &str) -> bool {
+        use arboard::Clipboard;
+        
+        // 使用 arboard 设置剪贴板内容
+        let mut cb = match Clipboard::new() {
+            Ok(c) => c,
+            Err(e) => {
+                eprintln!("[Error] Failed to initialize clipboard (arboard): {}", e);
+                return false;
+            }
+        };
+
+        if let Err(e) = cb.set_text(text.to_string()) {
+            eprintln!("[Error] Failed to set clipboard text: {}", e);
+            return false;
         }
+
+        // 给系统一点时间同步剪贴板，稍微长一点
+        thread::sleep(Duration::from_millis(150));
+        
+        // 模拟 Ctrl+V
+        self.emit(Key::KEY_LEFTCTRL, true);
+        thread::sleep(Duration::from_millis(20));
+        self.tap(Key::KEY_V);
+        thread::sleep(Duration::from_millis(20));
+        self.emit(Key::KEY_LEFTCTRL, false);
+        
+        true
     }
 
     pub fn tap(&mut self, key: Key) {
@@ -61,11 +93,29 @@ impl Vkbd {
         self.emit(key, false);
     }
 
+    pub fn emit_raw(&mut self, key: Key, value: i32) {
+        let ev = InputEvent::new(EventType::KEY, key.code(), value);
+        let _ = self.dev.emit(&[ev]);
+        // 稍微缩短同步时间，提高响应速度
+        thread::sleep(Duration::from_micros(100));
+    }
+
     pub fn emit(&mut self, key: Key, down: bool) {
         let val = if down { 1 } else { 0 };
-        let ev = InputEvent::new(EventType::KEY, key.code(), val);
-        let _ = self.dev.emit(&[ev]);
-        thread::sleep(Duration::from_millis(2));
+        self.emit_raw(key, val);
+    }
+
+    pub fn release_all(&mut self) {
+        // 释放常见的修饰键，防止切换模式时状态卡死
+        let modifiers = [
+            Key::KEY_LEFTSHIFT, Key::KEY_RIGHTSHIFT,
+            Key::KEY_LEFTCTRL, Key::KEY_RIGHTCTRL,
+            Key::KEY_LEFTALT, Key::KEY_RIGHTALT,
+            Key::KEY_LEFTMETA, Key::KEY_RIGHTMETA,
+        ];
+        for k in modifiers {
+            self.emit(k, false);
+        }
     }
 }
 
