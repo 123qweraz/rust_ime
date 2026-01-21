@@ -4,20 +4,24 @@
 
 Since this program accesses input devices (`/dev/input/`), it requires root privileges.
 
-### Option 1: Using cargo with user PATH (Recommended)
+### Option 1: Run the compiled binary directly (Recommended)
+This is the most reliable method if `cargo` is not in the root path.
+```bash
+# First, build the project as a normal user
+cargo build
+
+# Then, run the binary with sudo
+sudo ./target/debug/blind-ime
+```
+
+### Option 2: Using cargo with user PATH
 ```bash
 sudo env "PATH=$PATH" cargo run
 ```
 
-### Option 2: Build and run the binary directly
-```bash
-cargo build
-sudo ./target/debug/blind-ime
-```
-
 ### Enable Level-3 Dictionary
 ```bash
-sudo env "PATH=$PATH" cargo run -- --level3
+sudo ./target/debug/blind-ime --level3
 ```
 
 ---
