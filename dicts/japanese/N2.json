@@ -1,0 +1,10658 @@
+{
+  "kazuhide": [
+    {
+      "char": "和英",
+      "en": "Japanese-English"
+    }
+  ],
+  "teire": [
+    {
+      "char": "手入れ",
+      "en": "repairs,maintenance"
+    }
+  ],
+  "temae": [
+    {
+      "char": "手前",
+      "en": "before,this side,we,you"
+    }
+  ],
+  "nigasu": [
+    {
+      "char": "逃がす",
+      "en": "to let loose,to set free,to let escape"
+    }
+  ],
+  "matomeru": [
+    {
+      "char": "纏める",
+      "en": "to put in order,to collect,to bring to a conclusion"
+    }
+  ],
+  "zunou": [
+    {
+      "char": "頭脳",
+      "en": "head,brains,intellect"
+    }
+  ],
+  "teishi": [
+    {
+      "char": "停止",
+      "en": "suspension,interruption,stoppage,ban"
+    }
+  ],
+  "oodoori": [
+    {
+      "char": "大通り",
+      "en": "main street"
+    }
+  ],
+  "outomeeshon": [
+    {
+      "char": "オートメーション",
+      "en": "automation"
+    }
+  ],
+  "gouryuu": [
+    {
+      "char": "合流",
+      "en": "confluence,union,linking up,merge"
+    }
+  ],
+  "shouyu": [
+    {
+      "char": "醤油",
+      "en": "soy sauce"
+    }
+  ],
+  "kakine": [
+    {
+      "char": "垣根",
+      "en": "hedge"
+    }
+  ],
+  "konsento": [
+    {
+      "char": "コンセント",
+      "en": "(1) consent,(2) concentric"
+    }
+  ],
+  "taki": [
+    {
+      "char": "滝",
+      "en": "waterfall"
+    }
+  ],
+  "youryou": [
+    {
+      "char": "要領",
+      "en": "point,gist,essentials,outline"
+    }
+  ],
+  "mafuraa": [
+    {
+      "char": "マフラー",
+      "en": "muffler,scarf"
+    }
+  ],
+  "tenisukouto": [
+    {
+      "char": "テニスコート",
+      "en": "tennis court"
+    }
+  ],
+  "pikapika": [
+    {
+      "char": "ぴかぴか",
+      "en": "glitter,sparkle"
+    }
+  ],
+  "bon": [
+    {
+      "char": "盆",
+      "en": "Lantern Festival,Festival of the Dead,tray"
+    }
+  ],
+  "moukeru": [
+    {
+      "char": "儲ける",
+      "en": "to get,to earn,to gain,to have (bear, beget) a child"
+    }
+  ],
+  "tsukeru": [
+    {
+      "char": "着ける",
+      "en": "(1) to attach,to join,to add,to append"
+    }
+  ],
+  "sakasa": [
+    {
+      "char": "逆さ",
+      "en": "reverse,inversion,upside down"
+    }
+  ],
+  "kouyou": [
+    {
+      "char": "紅葉",
+      "en": "(1) (Japanese) maple"
+    }
+  ],
+  "kyakuseki": [
+    {
+      "char": "客席",
+      "en": "guest seating"
+    }
+  ],
+  "kazei": [
+    {
+      "char": "課税",
+      "en": "taxation"
+    }
+  ],
+  "zuutto": [
+    {
+      "char": "ずうっと",
+      "en": ""
+    }
+  ],
+  "toriireru": [
+    {
+      "char": "取り入れる",
+      "en": "to harvest,to take in,to adopt"
+    }
+  ],
+  "gisshiri": [
+    {
+      "char": "ぎっしり",
+      "en": "tightly,fully"
+    }
+  ],
+  "uyamau": [
+    {
+      "char": "敬う",
+      "en": "to show respect,to honour"
+    }
+  ],
+  "mabuta": [
+    {
+      "char": "まぶた",
+      "en": "eyelids"
+    }
+  ],
+  "youji": [
+    {
+      "char": "幼児",
+      "en": "infant,baby,child"
+    }
+  ],
+  "reitou": [
+    {
+      "char": "冷凍",
+      "en": "freezing,cold storage,refrigeration"
+    }
+  ],
+  "nyuusha": [
+    {
+      "char": "入社",
+      "en": "entry to a company"
+    }
+  ],
+  "shishagonyuu": [
+    {
+      "char": "四捨五入",
+      "en": "rounding up (fractions)"
+    }
+  ],
+  "hibiku": [
+    {
+      "char": "響く",
+      "en": "to resound"
+    }
+  ],
+  "jumyou": [
+    {
+      "char": "寿命",
+      "en": "life span"
+    }
+  ],
+  "katai": [
+    {
+      "char": "堅い",
+      "en": "hard (esp. wood),steadfast,honorable,stuffy writing"
+    }
+  ],
+  "utsu": [
+    {
+      "char": "討つ",
+      "en": "to attack,to avenge"
+    }
+  ],
+  "tansho": [
+    {
+      "char": "短所",
+      "en": "(1) defect,demerit,weak point,(2) disadvantage"
+    }
+  ],
+  "ousetsu": [
+    {
+      "char": "応接",
+      "en": "reception"
+    }
+  ],
+  "tomokaku": [
+    {
+      "char": "ともかく",
+      "en": "anyhow,anyway,somehow or other,generally speaking,in any case"
+    }
+  ],
+  "kegasu": [
+    {
+      "char": "汚す",
+      "en": "(1) to disgrace,to dishonour,(2) to pollute,to contaminate,to soil,to make dirty,to stain"
+    }
+  ],
+  "shippo": [
+    {
+      "char": "しっぽ",
+      "en": "tail (animal)"
+    }
+  ],
+  "mukou": [
+    {
+      "char": "向う",
+      "en": "(v5u) to face,to go towards"
+    }
+  ],
+  "minoru": [
+    {
+      "char": "実る",
+      "en": "to bear fruit,to ripen"
+    }
+  ],
+  "shoumou": [
+    {
+      "char": "消耗",
+      "en": "exhaustion,consumption"
+    }
+  ],
+  "enshuu": [
+    {
+      "char": "円周",
+      "en": "circumference"
+    }
+  ],
+  "aojiroi": [
+    {
+      "char": "青白い",
+      "en": "pale,pallid"
+    }
+  ],
+  "yawarakai": [
+    {
+      "char": "軟らかい",
+      "en": "soft,tender,limp"
+    }
+  ],
+  "kenshuu": [
+    {
+      "char": "研修",
+      "en": "training"
+    }
+  ],
+  "tenpo": [
+    {
+      "char": "テンポ",
+      "en": "tempo"
+    }
+  ],
+  "mihon": [
+    {
+      "char": "見本",
+      "en": "sample"
+    }
+  ],
+  "bouenkyou": [
+    {
+      "char": "望遠鏡",
+      "en": "telescope"
+    }
+  ],
+  "tsuika": [
+    {
+      "char": "追加",
+      "en": "addition,supplement,appendix"
+    }
+  ],
+  "shoutousan": [
+    {
+      "char": "小父さん",
+      "en": "middle-aged gentleman,uncle"
+    }
+  ],
+  "tadashi": [
+    {
+      "char": "但し",
+      "en": "but,however,provided that"
+    }
+  ],
+  "kokoroeru": [
+    {
+      "char": "心得る",
+      "en": "to be informed,to have thorough knowledge"
+    }
+  ],
+  "hakaru": [
+    {
+      "char": "測る",
+      "en": "to measure,to weigh,to survey"
+    }
+  ],
+  "shinnyuu": [
+    {
+      "char": "侵入",
+      "en": "penetration,invasion,raid,aggression,trespass"
+    }
+  ],
+  "tokuchou": [
+    {
+      "char": "特長",
+      "en": "forte,merit"
+    }
+  ],
+  "nozoku": [
+    {
+      "char": "覗く",
+      "en": "to peep in,to look in,to peek in,to stick out"
+    }
+  ],
+  "gesui": [
+    {
+      "char": "下水",
+      "en": "drainage,sewage,ditch,gutter,sewerage"
+    }
+  ],
+  "chuushou": [
+    {
+      "char": "抽象",
+      "en": "abstract"
+    }
+  ],
+  "osaeru": [
+    {
+      "char": "押える",
+      "en": "to stop,to restrain,to seize,to repress,to suppress,to press down"
+    }
+  ],
+  "utsuru": [
+    {
+      "char": "映る",
+      "en": "to be reflected,to harmonize with,to come out (photo)"
+    }
+  ],
+  "kaneru": [
+    {
+      "char": "兼ねる",
+      "en": "to hold (position),to serve,to be unable"
+    }
+  ],
+  "kajiru": [
+    {
+      "char": "かじる",
+      "en": "to chew,to bite (at),to gnaw,to nibble"
+    }
+  ],
+  "kisu": [
+    {
+      "char": "帰す",
+      "en": "to send back"
+    }
+  ],
+  "suiso": [
+    {
+      "char": "水素",
+      "en": "hydrogen"
+    }
+  ],
+  "okawari": [
+    {
+      "char": "お代わり",
+      "en": "second helping,another cup"
+    }
+  ],
+  "nokorazu": [
+    {
+      "char": "残らず",
+      "en": "all,entirely,completely,without exception"
+    }
+  ],
+  "dansui": [
+    {
+      "char": "断水",
+      "en": "water outage"
+    }
+  ],
+  "chokusen": [
+    {
+      "char": "直線",
+      "en": "straight line"
+    }
+  ],
+  "handoru": [
+    {
+      "char": "ハンドル",
+      "en": "handle,steering wheel"
+    }
+  ],
+  "chouten": [
+    {
+      "char": "頂点",
+      "en": "top,summit"
+    }
+  ],
+  "shokuen": [
+    {
+      "char": "食塩",
+      "en": "table salt"
+    }
+  ],
+  "jitsuyou": [
+    {
+      "char": "実用",
+      "en": "practical use,utility"
+    }
+  ],
+  "tsukuru/tsukuru": [
+    {
+      "char": "作る/造る",
+      "en": "to make,to create"
+    }
+  ],
+  "kutouten": [
+    {
+      "char": "句読点",
+      "en": "punctuation marks"
+    }
+  ],
+  "doukaku": [
+    {
+      "char": "同格",
+      "en": "the same rank,equality,apposition"
+    }
+  ],
+  "wariaini": [
+    {
+      "char": "わりあいに",
+      "en": "comparatively"
+    }
+  ],
+  "shuukin": [
+    {
+      "char": "集金",
+      "en": "money collection"
+    }
+  ],
+  "heitai": [
+    {
+      "char": "兵隊",
+      "en": "soldier,sailor"
+    }
+  ],
+  "chishitsu": [
+    {
+      "char": "地質",
+      "en": "geological features"
+    }
+  ],
+  "katei": [
+    {
+      "char": "過程",
+      "en": "process"
+    }
+  ],
+  "ekitai": [
+    {
+      "char": "液体",
+      "en": "liquid,fluid"
+    }
+  ],
+  "katamari": [
+    {
+      "char": "塊",
+      "en": "lump,mass,clod,cluster"
+    }
+  ],
+  "heiki": [
+    {
+      "char": "平気",
+      "en": "coolness,calmness,composure,unconcern"
+    }
+  ],
+  "oubei": [
+    {
+      "char": "欧米",
+      "en": "Europe and America,the West"
+    }
+  ],
+  "sakujo": [
+    {
+      "char": "削除",
+      "en": "elimination,cancellation,deletion,erasure"
+    }
+  ],
+  "daen": [
+    {
+      "char": "楕円",
+      "en": "ellipse"
+    }
+  ],
+  "reiten": [
+    {
+      "char": "零点",
+      "en": "zero,no marks"
+    }
+  ],
+  "hayakuchi": [
+    {
+      "char": "早口",
+      "en": "fast-talking"
+    }
+  ],
+  "soubetsu": [
+    {
+      "char": "送別",
+      "en": "farewell,send-off"
+    }
+  ],
+  "moshikasuruto": [
+    {
+      "char": "もしかすると",
+      "en": "perhaps,maybe,by some chance"
+    }
+  ],
+  "miri": [
+    {
+      "char": "ミリ",
+      "en": "milli-,10^-3"
+    }
+  ],
+  "kabuseru": [
+    {
+      "char": "被せる",
+      "en": "to cover (with something)"
+    }
+  ],
+  "kuttsuku": [
+    {
+      "char": "くっつく",
+      "en": "to adhere to,to keep close to"
+    }
+  ],
+  "taikei": [
+    {
+      "char": "体系",
+      "en": "system,organization"
+    }
+  ],
+  "osameru": [
+    {
+      "char": "納める",
+      "en": "to obtain,to reap,to pay,to supply,to accept"
+    }
+  ],
+  "shuuzen": [
+    {
+      "char": "修繕",
+      "en": "repair,mending"
+    }
+  ],
+  "hitosashiyubi": [
+    {
+      "char": "人差指",
+      "en": "index finger"
+    }
+  ],
+  "usugurai": [
+    {
+      "char": "薄暗い",
+      "en": "dim,gloomy"
+    }
+  ],
+  "tameru": [
+    {
+      "char": "溜める",
+      "en": "to amass,to accumulate"
+    }
+  ],
+  "shinkuu": [
+    {
+      "char": "真空",
+      "en": "vacuum,hollow,empty"
+    }
+  ],
+  "ouzuru": [
+    {
+      "char": "応ずる",
+      "en": "to answer,to respond,to meet,to satisfy,to accept"
+    }
+  ],
+  "sumi": [
+    {
+      "char": "墨",
+      "en": "ink"
+    }
+  ],
+  "hikyou": [
+    {
+      "char": "卑怯",
+      "en": "cowardice,meanness,unfairness"
+    }
+  ],
+  "tansuu": [
+    {
+      "char": "単数",
+      "en": "singular (number)"
+    }
+  ],
+  "rekurieeshon": [
+    {
+      "char": "レクリェーション",
+      "en": "recreation"
+    }
+  ],
+  "sukkiri": [
+    {
+      "char": "すっきり",
+      "en": "shapely,clear,neat"
+    }
+  ],
+  "kanchou": [
+    {
+      "char": "官庁",
+      "en": "government office,authorities"
+    }
+  ],
+  "uketamawaru": [
+    {
+      "char": "承る",
+      "en": "(hum) to hear,to be told,to know"
+    }
+  ],
+  "kanwa": [
+    {
+      "char": "漢和",
+      "en": "Chinese Character-Japanese (e.g. dictionary)"
+    }
+  ],
+  "chousho": [
+    {
+      "char": "長所",
+      "en": "(1) strong point,merit,(2) advantage"
+    }
+  ],
+  "namiki": [
+    {
+      "char": "並木",
+      "en": "roadside tree,row of trees"
+    }
+  ],
+  "wanpiisu": [
+    {
+      "char": "ワンピース",
+      "en": "one-piece dress"
+    }
+  ],
+  "tsuku": [
+    {
+      "char": "突く",
+      "en": "(1) to thrust,to strike,(2) to poke"
+    }
+  ],
+  "shokyuu": [
+    {
+      "char": "初級",
+      "en": "elementary level"
+    }
+  ],
+  "hikkomu": [
+    {
+      "char": "引っ込む",
+      "en": "to draw back,to sink,to cave in"
+    }
+  ],
+  "take": [
+    {
+      "char": "竹",
+      "en": "bamboo,middle (of a three-tier ranking system)"
+    }
+  ],
+  "makkura": [
+    {
+      "char": "真っ暗",
+      "en": "total darkness,shortsightedness,pitch dark"
+    }
+  ],
+  "meibutsu": [
+    {
+      "char": "名物",
+      "en": "famous product,special product,speciality"
+    }
+  ],
+  "fuyasu": [
+    {
+      "char": "増やす",
+      "en": "to increase,to add to,to augment"
+    }
+  ],
+  "fuku": [
+    {
+      "char": "拭く",
+      "en": "to wipe,to dry"
+    }
+  ],
+  "kawara": [
+    {
+      "char": "瓦",
+      "en": "roof tile"
+    }
+  ],
+  "gekkyuu": [
+    {
+      "char": "月給",
+      "en": "monthly salary"
+    }
+  ],
+  "kanzume": [
+    {
+      "char": "缶詰",
+      "en": "packing (in cans),canning,canned goods,tin can"
+    }
+  ],
+  "sukima": [
+    {
+      "char": "隙間",
+      "en": "crevice,crack,gap,opening"
+    }
+  ],
+  "tsuuka": [
+    {
+      "char": "通貨",
+      "en": "currency"
+    }
+  ],
+  "aratameru": [
+    {
+      "char": "改める",
+      "en": "to change,to alter,to reform,to revise"
+    }
+  ],
+  "oginau": [
+    {
+      "char": "補う",
+      "en": "to compensate for"
+    }
+  ],
+  "gyouji": [
+    {
+      "char": "行事",
+      "en": "event,function"
+    }
+  ],
+  "yakusu": [
+    {
+      "char": "訳す",
+      "en": "to translate"
+    }
+  ],
+  "shoukin": [
+    {
+      "char": "賞金",
+      "en": "prize,monetary award"
+    }
+  ],
+  "daigakuin": [
+    {
+      "char": "大学院",
+      "en": "graduate school"
+    }
+  ],
+  "tekubi": [
+    {
+      "char": "手首",
+      "en": "wrist"
+    }
+  ],
+  "minikui": [
+    {
+      "char": "醜い",
+      "en": "ugly"
+    }
+  ],
+  "koeru": [
+    {
+      "char": "超える",
+      "en": "to exceed,to cross over,to cross"
+    }
+  ],
+  "shima": [
+    {
+      "char": "縞",
+      "en": "stripe"
+    }
+  ],
+  "yuuenchi": [
+    {
+      "char": "遊園地",
+      "en": "amusement park"
+    }
+  ],
+  "zenshin": [
+    {
+      "char": "全身",
+      "en": "the whole body,full-length (portrait)"
+    }
+  ],
+  "yakusha": [
+    {
+      "char": "役者",
+      "en": "actor,actress"
+    }
+  ],
+  "donburi": [
+    {
+      "char": "丼",
+      "en": "porcelain bowl,bowl of rice with food on top"
+    }
+  ],
+  "kikin": [
+    {
+      "char": "飢饉",
+      "en": "famine"
+    }
+  ],
+  "kasen": [
+    {
+      "char": "下線",
+      "en": "underline,underscore"
+    }
+  ],
+  "koukou": [
+    {
+      "char": "孝行",
+      "en": "filial piety"
+    }
+  ],
+  "ani": [
+    {
+      "char": "安易",
+      "en": "easy-going"
+    }
+  ],
+  "hitodoori": [
+    {
+      "char": "人通り",
+      "en": "pedestrian traffic"
+    }
+  ],
+  "shougakusei": [
+    {
+      "char": "小学生",
+      "en": "grade school student"
+    }
+  ],
+  "yakuhin": [
+    {
+      "char": "薬品",
+      "en": "medicine(s),chemical(s)"
+    }
+  ],
+  "genjuu": [
+    {
+      "char": "厳重",
+      "en": "strict,rigour,severe,firm"
+    }
+  ],
+  "kushin": [
+    {
+      "char": "苦心",
+      "en": "pain,trouble"
+    }
+  ],
+  "junjou": [
+    {
+      "char": "純情",
+      "en": "pure heart,naivete,self-sacrificing devotion"
+    }
+  ],
+  "yorokobi": [
+    {
+      "char": "慶び",
+      "en": "(n) (a) joy,(a) delight,rapture,pleasure,gratification,rejoicing,congratulations,felicitations"
+    }
+  ],
+  "sunpou": [
+    {
+      "char": "寸法",
+      "en": "measurement,size,dimension"
+    }
+  ],
+  "gesha": [
+    {
+      "char": "下車",
+      "en": "alighting,getting off"
+    }
+  ],
+  "sujiru": [
+    {
+      "char": "捩る",
+      "en": "to twist"
+    }
+  ],
+  "mochi": [
+    {
+      "char": "餅",
+      "en": "sticky rice cake"
+    }
+  ],
+  "kakou": [
+    {
+      "char": "下降",
+      "en": "downward,descent,fall,drop,subsidence"
+    }
+  ],
+  "suppai": [
+    {
+      "char": "すっぱい",
+      "en": "sour,acid"
+    }
+  ],
+  "niji": [
+    {
+      "char": "虹",
+      "en": "rainbow"
+    }
+  ],
+  "kakuu": [
+    {
+      "char": "架空",
+      "en": "aerial,overhead,fiction,fanciful"
+    }
+  ],
+  "fuun": [
+    {
+      "char": "不運",
+      "en": "unlucky,misfortune,bad luck,fate"
+    }
+  ],
+  "modan": [
+    {
+      "char": "モダン",
+      "en": "modern"
+    }
+  ],
+  "houru": [
+    {
+      "char": "放る",
+      "en": "to let go"
+    }
+  ],
+  "sabiru": [
+    {
+      "char": "錆びる",
+      "en": "to rust,to become rusty"
+    }
+  ],
+  "suitou": [
+    {
+      "char": "水筒",
+      "en": "canteen,flask,water bottle"
+    }
+  ],
+  "uragaesu": [
+    {
+      "char": "裏返す",
+      "en": "to turn inside out,to turn (something) over"
+    }
+  ],
+  "urayamashii": [
+    {
+      "char": "羨ましい",
+      "en": "envious,enviable"
+    }
+  ],
+  "sontoku": [
+    {
+      "char": "損得",
+      "en": "loss and gain,advantage and disadvantage"
+    }
+  ],
+  "go": [
+    {
+      "char": "碁",
+      "en": "Go (board game of capturing territory)"
+    }
+  ],
+  "meyasu": [
+    {
+      "char": "目安",
+      "en": "criterion,aim"
+    }
+  ],
+  "housou": [
+    {
+      "char": "包装",
+      "en": "packing,wrapping"
+    }
+  ],
+  "heijitsu": [
+    {
+      "char": "平日",
+      "en": "weekday,ordinary days"
+    }
+  ],
+  "odorokasu": [
+    {
+      "char": "驚かす",
+      "en": "to surprise,to frighten,to create a stir"
+    }
+  ],
+  "narasu": [
+    {
+      "char": "鳴らす",
+      "en": "to ring,to sound,to chime,to beat,to snort (nose)"
+    }
+  ],
+  "hasamu": [
+    {
+      "char": "挟む",
+      "en": "to interpose,to hold between,to insert"
+    }
+  ],
+  "kingyo": [
+    {
+      "char": "金魚",
+      "en": "goldfish"
+    }
+  ],
+  "toshin": [
+    {
+      "char": "都心",
+      "en": "heart (of city)"
+    }
+  ],
+  "madoguchi": [
+    {
+      "char": "窓口",
+      "en": "ticket window"
+    }
+  ],
+  "chiten": [
+    {
+      "char": "地点",
+      "en": "site,point on a map"
+    }
+  ],
+  "shitei": [
+    {
+      "char": "指定",
+      "en": "designation,specification,assignment,pointing at"
+    }
+  ],
+  "michijun": [
+    {
+      "char": "道順",
+      "en": "itinerary,route"
+    }
+  ],
+  "wakawakashii": [
+    {
+      "char": "若々しい",
+      "en": "youthful,young"
+    }
+  ],
+  "kouin": [
+    {
+      "char": "工員",
+      "en": "factory worker"
+    }
+  ],
+  "hirogeru": [
+    {
+      "char": "広げる",
+      "en": "to spread,to extend,to expand,to enlarge"
+    }
+  ],
+  "koushi": [
+    {
+      "char": "講師",
+      "en": "lecturer"
+    }
+  ],
+  "niru": [
+    {
+      "char": "煮る",
+      "en": "to boil,to cook"
+    }
+  ],
+  "monooki": [
+    {
+      "char": "物置",
+      "en": "storage room"
+    }
+  ],
+  "tounan": [
+    {
+      "char": "盗難",
+      "en": "theft,robbery"
+    }
+  ],
+  "zouri": [
+    {
+      "char": "草履",
+      "en": "zoori (Japanese footwear),sandals"
+    }
+  ],
+  "mure": [
+    {
+      "char": "群れ",
+      "en": "group,crowd,flock,herd"
+    }
+  ],
+  "kuyashii": [
+    {
+      "char": "悔しい",
+      "en": "regrettable,mortifying,vexing"
+    }
+  ],
+  "toujou": [
+    {
+      "char": "登場",
+      "en": "entry (on stage)"
+    }
+  ],
+  "mainasu": [
+    {
+      "char": "マイナス",
+      "en": "minus"
+    }
+  ],
+  "kakezan": [
+    {
+      "char": "掛け算",
+      "en": "multiplication"
+    }
+  ],
+  "sutaato": [
+    {
+      "char": "スタート",
+      "en": "start"
+    }
+  ],
+  "shitagaki": [
+    {
+      "char": "下書き",
+      "en": "rough copy,draft"
+    }
+  ],
+  "souieba": [
+    {
+      "char": "そういえば",
+      "en": "which reminds me .."
+    }
+  ],
+  "tokoya": [
+    {
+      "char": "床屋",
+      "en": "barber"
+    }
+  ],
+  "onkei": [
+    {
+      "char": "恩恵",
+      "en": "grace,favor,blessing,benefit"
+    }
+  ],
+  "hitomi": [
+    {
+      "char": "瞳",
+      "en": "pupil (of eye)"
+    }
+  ],
+  "hori": [
+    {
+      "char": "堀",
+      "en": "moat,canal"
+    }
+  ],
+  "ryoushi": [
+    {
+      "char": "漁師",
+      "en": "fisherman"
+    }
+  ],
+  "kaku": [
+    {
+      "char": "掻く",
+      "en": "to scratch,to perspire"
+    }
+  ],
+  "buhin": [
+    {
+      "char": "部品",
+      "en": "parts,accessories"
+    }
+  ],
+  "kakitome": [
+    {
+      "char": "書留",
+      "en": "writing down,putting on record,recording,making a note of,registration (of mail)"
+    }
+  ],
+  "koutsuukikan": [
+    {
+      "char": "交通機関",
+      "en": "transportation facilities"
+    }
+  ],
+  "kaisei": [
+    {
+      "char": "快晴",
+      "en": "good weather"
+    }
+  ],
+  "akusento": [
+    {
+      "char": "アクセント",
+      "en": "accent"
+    }
+  ],
+  "yakunin": [
+    {
+      "char": "役人",
+      "en": "government official"
+    }
+  ],
+  "karorii": [
+    {
+      "char": "カロリー",
+      "en": "calorie"
+    }
+  ],
+  "otetsudaisan": [
+    {
+      "char": "お手伝いさん",
+      "en": "maid"
+    }
+  ],
+  "jitsurei": [
+    {
+      "char": "実例",
+      "en": "example,illustration"
+    }
+  ],
+  "kaisetsu": [
+    {
+      "char": "解説",
+      "en": "explanation,commentary"
+    }
+  ],
+  "chijireru": [
+    {
+      "char": "縮れる",
+      "en": "to be wavy,to be curled"
+    }
+  ],
+  "kakudo": [
+    {
+      "char": "角度",
+      "en": "angle"
+    }
+  ],
+  "shougi": [
+    {
+      "char": "将棋",
+      "en": "Japanese chess"
+    }
+  ],
+  "betsubetsu": [
+    {
+      "char": "別々",
+      "en": "separately,individually"
+    }
+  ],
+  "kousa": [
+    {
+      "char": "交差",
+      "en": "cross"
+    }
+  ],
+  "chikazukeru": [
+    {
+      "char": "近付ける",
+      "en": "to bring near,to put close,to let come near,to associate with"
+    }
+  ],
+  "narau": [
+    {
+      "char": "倣う",
+      "en": "to imitate,to follow,to emulate"
+    }
+  ],
+  "oiru": [
+    {
+      "char": "オイル",
+      "en": "oil,engine oil,kerosene"
+    }
+  ],
+  "tsunagari": [
+    {
+      "char": "繋がり",
+      "en": "connection,link,relationship"
+    }
+  ],
+  "hiatari": [
+    {
+      "char": "日当たり",
+      "en": "exposure to the sun,sunny place"
+    }
+  ],
+  "kamisori": [
+    {
+      "char": "剃刀",
+      "en": "razor"
+    }
+  ],
+  "chitai": [
+    {
+      "char": "地帯",
+      "en": "area,zone"
+    }
+  ],
+  "kamisama": [
+    {
+      "char": "神様",
+      "en": "god"
+    }
+  ],
+  "zougen": [
+    {
+      "char": "増減",
+      "en": "increase and decrease,fluctuation"
+    }
+  ],
+  "chakuchaku": [
+    {
+      "char": "着々",
+      "en": "steadily"
+    }
+  ],
+  "katsuji": [
+    {
+      "char": "活字",
+      "en": "printing type"
+    }
+  ],
+  "kessaku": [
+    {
+      "char": "傑作",
+      "en": "masterpiece,best work,boner,blunder"
+    }
+  ],
+  "aimai": [
+    {
+      "char": "あいまい",
+      "en": "vague,ambiguous"
+    }
+  ],
+  "kehai": [
+    {
+      "char": "気配",
+      "en": "indication,market trend,worry"
+    }
+  ],
+  "tsukiau": [
+    {
+      "char": "付合う",
+      "en": "to associate with,to keep company with,to get on with"
+    }
+  ],
+  "teiin": [
+    {
+      "char": "定員",
+      "en": "fixed number of regular personnel,capacity (of boat, etc.)"
+    }
+  ],
+  "nakanaori": [
+    {
+      "char": "仲直り",
+      "en": "reconciliation,make peace with"
+    }
+  ],
+  "zashiki": [
+    {
+      "char": "座敷",
+      "en": "tatami room"
+    }
+  ],
+  "zaigaku": [
+    {
+      "char": "在学",
+      "en": "(enrolled) in school"
+    }
+  ],
+  "moguru": [
+    {
+      "char": "潜る",
+      "en": "(1) to drive,to pass through,(2) to evade,to hide,(3) to dive (into or under water),to go undergroun"
+    }
+  ],
+  "kikansha": [
+    {
+      "char": "機関車",
+      "en": "locomotive,engine"
+    }
+  ],
+  "ogenkide": [
+    {
+      "char": "おげんきで",
+      "en": ""
+    }
+  ],
+  "tokeru": [
+    {
+      "char": "溶ける",
+      "en": "to melt,to thaw,to fuse,to dissolve"
+    }
+  ],
+  "osakini": [
+    {
+      "char": "おさきに",
+      "en": "before,ahead,previously"
+    }
+  ],
+  "jukugo": [
+    {
+      "char": "熟語",
+      "en": "idiom,idiomatic phrase,kanji compound"
+    }
+  ],
+  "shinzuru": [
+    {
+      "char": "信ずる",
+      "en": "to believe,to believe in,to place trust in"
+    }
+  ],
+  "menseki": [
+    {
+      "char": "面積",
+      "en": "area"
+    }
+  ],
+  "koudo": [
+    {
+      "char": "高度",
+      "en": "altitude,height,advanced"
+    }
+  ],
+  "kansai": [
+    {
+      "char": "関西",
+      "en": ""
+    }
+  ],
+  "zenshuu": [
+    {
+      "char": "全集",
+      "en": "complete works"
+    }
+  ],
+  "suiteki": [
+    {
+      "char": "水滴",
+      "en": "drop of water"
+    }
+  ],
+  "kasetto": [
+    {
+      "char": "カセット",
+      "en": "cassette (tape)"
+    }
+  ],
+  "kumu": [
+    {
+      "char": "汲む",
+      "en": "(1) to draw (water),to dip,to scoop,to pump"
+    }
+  ],
+  "zukan": [
+    {
+      "char": "図鑑",
+      "en": "picture book"
+    }
+  ],
+  "awateru": [
+    {
+      "char": "あわてる",
+      "en": "to become confused"
+    }
+  ],
+  "nouson": [
+    {
+      "char": "農村",
+      "en": "agricultural community,farm village,rural"
+    }
+  ],
+  "koshikake": [
+    {
+      "char": "腰掛け",
+      "en": "seat,bench"
+    }
+  ],
+  "keiko": [
+    {
+      "char": "稽古",
+      "en": "practice,training,study"
+    }
+  ],
+  "sashimi": [
+    {
+      "char": "刺身",
+      "en": "sliced raw fish"
+    }
+  ],
+  "kouseki": [
+    {
+      "char": "功績",
+      "en": "achievements,merit,meritorious service,meritorious deed"
+    }
+  ],
+  "suzu": [
+    {
+      "char": "鈴",
+      "en": "bell"
+    }
+  ],
+  "horu": [
+    {
+      "char": "彫る",
+      "en": "to carve,to engrave,to sculpture,to chisel"
+    }
+  ],
+  "chiru": [
+    {
+      "char": "散る",
+      "en": "to fall,to scatter (e.g. blossoms)"
+    }
+  ],
+  "mitarashi": [
+    {
+      "char": "御手洗",
+      "en": "font of purifying water placed at entrance of shrine"
+    }
+  ],
+  "juuyaku": [
+    {
+      "char": "重役",
+      "en": "director,high executive"
+    }
+  ],
+  "kawaku": [
+    {
+      "char": "渇く",
+      "en": "to be thirsty"
+    }
+  ],
+  "pen": [
+    {
+      "char": "ぺん",
+      "en": "pen"
+    }
+  ],
+  "sei": [
+    {
+      "char": "姓",
+      "en": "surname,family name"
+    }
+  ],
+  "fukushi": [
+    {
+      "char": "副詞",
+      "en": "adverb"
+    }
+  ],
+  "funsui": [
+    {
+      "char": "噴水",
+      "en": "water fountain"
+    }
+  ],
+  "enchou": [
+    {
+      "char": "延長",
+      "en": "extension,elongation,prolongation,lengthening"
+    }
+  ],
+  "moyooshi": [
+    {
+      "char": "催し",
+      "en": "event,festivities,function"
+    }
+  ],
+  "hanayome": [
+    {
+      "char": "花嫁",
+      "en": "bride"
+    }
+  ],
+  "tenkai": [
+    {
+      "char": "展開",
+      "en": "develop,expansion (opposite of compression)"
+    }
+  ],
+  "kashou": [
+    {
+      "char": "火傷",
+      "en": "burn,scald"
+    }
+  ],
+  "kagu": [
+    {
+      "char": "嗅ぐ",
+      "en": "to sniff,to smell"
+    }
+  ],
+  "hanji": [
+    {
+      "char": "判事",
+      "en": "judge,judiciary"
+    }
+  ],
+  "chikau": [
+    {
+      "char": "誓う",
+      "en": "to swear,to vow,to take an oath,to pledge"
+    }
+  ],
+  "housoku": [
+    {
+      "char": "法則",
+      "en": "law,rule"
+    }
+  ],
+  "zokusuru": [
+    {
+      "char": "属する",
+      "en": "to belong to,to come under,to be affiliated with,to be subject to"
+    }
+  ],
+  "seisho": [
+    {
+      "char": "清書",
+      "en": "clean copy"
+    }
+  ],
+  "chigiru": [
+    {
+      "char": "ちぎる",
+      "en": "to cut up fine,to pick (fruit)"
+    }
+  ],
+  "touitsu": [
+    {
+      "char": "統一",
+      "en": "unity,consolidation,uniformity"
+    }
+  ],
+  "suri": [
+    {
+      "char": "掏摸",
+      "en": "pickpocket"
+    }
+  ],
+  "robii": [
+    {
+      "char": "ロビー",
+      "en": "lobby"
+    }
+  ],
+  "daiku": [
+    {
+      "char": "大工",
+      "en": "carpenter"
+    }
+  ],
+  "shikke": [
+    {
+      "char": "湿気",
+      "en": "moisture,humidity,dampness"
+    }
+  ],
+  "taishite": [
+    {
+      "char": "大して",
+      "en": "(not so) much,(not) very"
+    }
+  ],
+  "tansu": [
+    {
+      "char": "たんす",
+      "en": "chest of drawers"
+    }
+  ],
+  "sainan": [
+    {
+      "char": "災難",
+      "en": "calamity,misfortune"
+    }
+  ],
+  "bakarashii": [
+    {
+      "char": "ばからしい",
+      "en": "absurd"
+    }
+  ],
+  "sumu": [
+    {
+      "char": "澄む",
+      "en": "to clear (e.g. weather),to become transparent"
+    }
+  ],
+  "kantou": [
+    {
+      "char": "関東",
+      "en": "eastern half of Japan, including Tokyo"
+    }
+  ],
+  "seisuu": [
+    {
+      "char": "整数",
+      "en": "integer"
+    }
+  ],
+  "-kajou": [
+    {
+      "char": "-過剰",
+      "en": "excess,over"
+    }
+  ],
+  "kiseru": [
+    {
+      "char": "着せる",
+      "en": "to put on clothes"
+    }
+  ],
+  "kabaa": [
+    {
+      "char": "カバー",
+      "en": "cover (ex. book)"
+    }
+  ],
+  "sakizakitsuki": [
+    {
+      "char": "先々月",
+      "en": "month before last"
+    }
+  ],
+  "shakkuri": [
+    {
+      "char": "しゃっくり",
+      "en": "hiccough,hiccup"
+    }
+  ],
+  "nousanbutsu": [
+    {
+      "char": "農産物",
+      "en": "agricultural produce"
+    }
+  ],
+  "jikkan": [
+    {
+      "char": "実感",
+      "en": "feelings (actual, true)"
+    }
+  ],
+  "atehamaru": [
+    {
+      "char": "あてはまる",
+      "en": "to be applicable,to come under (a category),to fulfill"
+    }
+  ],
+  "sukunakutomo": [
+    {
+      "char": "すくなくとも",
+      "en": "at least"
+    }
+  ],
+  "sasu": [
+    {
+      "char": "刺す",
+      "en": "to pierce,to stab,to prick,to thrust"
+    }
+  ],
+  "uchikesu": [
+    {
+      "char": "打ち消す",
+      "en": "to deny,to negate,to contradict"
+    }
+  ],
+  "zoukin": [
+    {
+      "char": "雑巾",
+      "en": "house-cloth,dust cloth"
+    }
+  ],
+  "nichiji": [
+    {
+      "char": "日時",
+      "en": "date and time"
+    }
+  ],
+  "machiaishitsu": [
+    {
+      "char": "待合室",
+      "en": "waiting room"
+    }
+  ],
+  "jisshuu": [
+    {
+      "char": "実習",
+      "en": "practice,training"
+    }
+  ],
+  "kossori": [
+    {
+      "char": "こっそり",
+      "en": "stealthily,secretly"
+    }
+  ],
+  "kuusou": [
+    {
+      "char": "空想",
+      "en": "daydream,fantasy,fancy,vision"
+    }
+  ],
+  "kouzou": [
+    {
+      "char": "構造",
+      "en": "structure,construction"
+    }
+  ],
+  "engei": [
+    {
+      "char": "園芸",
+      "en": "horticulture,gardening"
+    }
+  ],
+  "takameru": [
+    {
+      "char": "高める",
+      "en": "to raise,to lift,to boost"
+    }
+  ],
+  "futa": [
+    {
+      "char": "蓋",
+      "en": "cover,lid,cap"
+    }
+  ],
+  "tameiki": [
+    {
+      "char": "溜息",
+      "en": "a sigh"
+    }
+  ],
+  "shakaikagaku": [
+    {
+      "char": "社会科学",
+      "en": "social science"
+    }
+  ],
+  "kawakasu": [
+    {
+      "char": "乾かす",
+      "en": "to dry (clothes, etc.),to desiccate"
+    }
+  ],
+  "rinji": [
+    {
+      "char": "臨時",
+      "en": "temporary,special,extraordinary"
+    }
+  ],
+  "arigatai": [
+    {
+      "char": "有難い",
+      "en": "grateful,thankful,welcome,appreciated,evoking gratitude"
+    }
+  ],
+  "kengaku": [
+    {
+      "char": "見学",
+      "en": "inspection,study by observation,field trip"
+    }
+  ],
+  "harigane": [
+    {
+      "char": "針金",
+      "en": "wire"
+    }
+  ],
+  "kuriiningu": [
+    {
+      "char": "クリーニング",
+      "en": "cleaning,dry cleaning,laundry service"
+    }
+  ],
+  "meishin": [
+    {
+      "char": "迷信",
+      "en": "superstition"
+    }
+  ],
+  "sharin": [
+    {
+      "char": "車輪",
+      "en": "(car) wheel"
+    }
+  ],
+  "rasshuawaa": [
+    {
+      "char": "ラッシュアワー",
+      "en": "rush hour"
+    }
+  ],
+  "onegaishimasu": [
+    {
+      "char": "おねがいします",
+      "en": "please"
+    }
+  ],
+  "shibireru": [
+    {
+      "char": "しびれる",
+      "en": "to become numb,to go to sleep (i.e., a limb)"
+    }
+  ],
+  "kyoushuku": [
+    {
+      "char": "恐縮",
+      "en": "shame,very kind of you,sorry to trouble"
+    }
+  ],
+  "noseru": [
+    {
+      "char": "載せる",
+      "en": "to place on (something),to take on board,to give a ride"
+    }
+  ],
+  "shiriai": [
+    {
+      "char": "知合い",
+      "en": "acquaintance"
+    }
+  ],
+  "nyoubou": [
+    {
+      "char": "女房",
+      "en": "wife"
+    }
+  ],
+  "bunrui": [
+    {
+      "char": "分類",
+      "en": "classification"
+    }
+  ],
+  "hiragana": [
+    {
+      "char": "平仮名",
+      "en": "hiragana,47 syllables,the cursive syllabary"
+    }
+  ],
+  "furii": [
+    {
+      "char": "フリー",
+      "en": "free"
+    }
+  ],
+  "sokuryou": [
+    {
+      "char": "測量",
+      "en": "measurement,surveying"
+    }
+  ],
+  "sonaeru": [
+    {
+      "char": "具える",
+      "en": "to be furnished with"
+    }
+  ],
+  "kureguremo": [
+    {
+      "char": "くれぐれも",
+      "en": "repeatedly,sincerely,earnestly"
+    }
+  ],
+  "yappari": [
+    {
+      "char": "やっぱり",
+      "en": "also,as I thought,still,in spite of,absolutely,of course"
+    }
+  ],
+  "kokku": [
+    {
+      "char": "コック",
+      "en": "(1) cook (nl:),(2) tap,spigot,faucet,cock"
+    }
+  ],
+  "kazari": [
+    {
+      "char": "飾り",
+      "en": "decoration"
+    }
+  ],
+  "kaisuiyoku": [
+    {
+      "char": "海水浴",
+      "en": "sea bathing,seawater bath"
+    }
+  ],
+  "ohayou": [
+    {
+      "char": "おはよう",
+      "en": "(abbr) Good morning"
+    }
+  ],
+  "yomigaeru": [
+    {
+      "char": "蘇る",
+      "en": "to be resurrected,to be revived,to be resuscitated,to be rehabilitated"
+    }
+  ],
+  "amado": [
+    {
+      "char": "雨戸",
+      "en": "sliding storm door"
+    }
+  ],
+  "nobiru": [
+    {
+      "char": "延びる",
+      "en": "to be prolonged"
+    }
+  ],
+  "ojamashimasu": [
+    {
+      "char": "おじゃまします",
+      "en": "Excuse me for disturbing you"
+    }
+  ],
+  "shouji": [
+    {
+      "char": "障子",
+      "en": "paper sliding door"
+    }
+  ],
+  "ketsueki": [
+    {
+      "char": "血液",
+      "en": "blood"
+    }
+  ],
+  "ageru (=yaru)": [
+    {
+      "char": "あげる",
+      "en": "to do for"
+    }
+  ],
+  "hiyakkajiten": [
+    {
+      "char": "ひゃっかじてん",
+      "en": "encyclopedia"
+    }
+  ],
+  "meguru": [
+    {
+      "char": "巡る",
+      "en": "to go around"
+    }
+  ],
+  "yoseru": [
+    {
+      "char": "寄せる",
+      "en": "to collect,to gather,to add,to put aside"
+    }
+  ],
+  "baketsu": [
+    {
+      "char": "バケツ",
+      "en": "bucket,pail"
+    }
+  ],
+  "hyouhon": [
+    {
+      "char": "標本",
+      "en": "example,specimen"
+    }
+  ],
+  "ageru": [
+    {
+      "char": "挙げる",
+      "en": "to raise,to fly"
+    }
+  ],
+  "tetsuzuki": [
+    {
+      "char": "手続き",
+      "en": "procedure,(legal) process,formalities"
+    }
+  ],
+  "junsui": [
+    {
+      "char": "純粋",
+      "en": "pure,true,genuine,unmixed"
+    }
+  ],
+  "monosashi": [
+    {
+      "char": "物差し",
+      "en": "ruler,measure"
+    }
+  ],
+  "kousou": [
+    {
+      "char": "高層",
+      "en": "upper"
+    }
+  ],
+  "shousuu": [
+    {
+      "char": "小数",
+      "en": "fraction (part of),decimal"
+    }
+  ],
+  "dokidoki": [
+    {
+      "char": "どきどき",
+      "en": "throb,beat (fast)"
+    }
+  ],
+  "senro": [
+    {
+      "char": "線路",
+      "en": "line,track,roadbed"
+    }
+  ],
+  "shodou": [
+    {
+      "char": "書道",
+      "en": "calligraphy"
+    }
+  ],
+  "soru": [
+    {
+      "char": "剃る",
+      "en": "to shave"
+    }
+  ],
+  "shouhai": [
+    {
+      "char": "勝敗",
+      "en": "victory or defeat,issue (of battle)"
+    }
+  ],
+  "achirakochira": [
+    {
+      "char": "あちらこちら",
+      "en": "here and there"
+    }
+  ],
+  "soroban": [
+    {
+      "char": "算盤",
+      "en": "abacus"
+    }
+  ],
+  "hanei": [
+    {
+      "char": "反映",
+      "en": "reflection,influence"
+    }
+  ],
+  "hiromeru": [
+    {
+      "char": "広める",
+      "en": "to broaden,to propagate"
+    }
+  ],
+  "binzume": [
+    {
+      "char": "瓶詰",
+      "en": "bottling,bottled"
+    }
+  ],
+  "kugiru": [
+    {
+      "char": "区切る",
+      "en": "to punctuate,to cut off,to mark off,to stop,to put an end to"
+    }
+  ],
+  "ronzuru": [
+    {
+      "char": "論ずる",
+      "en": "to argue,to discuss,to debate"
+    }
+  ],
+  "moushiwakenai": [
+    {
+      "char": "申し訳ない",
+      "en": "inexcusable"
+    }
+  ],
+  "erai": [
+    {
+      "char": "偉い",
+      "en": "great,celebrated,eminent,terrible,awful,famous,remarkable,excellent"
+    }
+  ],
+  "natsukashii": [
+    {
+      "char": "懐かしい",
+      "en": "dear,desired,missed"
+    }
+  ],
+  "henshuu": [
+    {
+      "char": "編集",
+      "en": "editing,compilation,editorial (e.g. committee)"
+    }
+  ],
+  "shuyaku": [
+    {
+      "char": "主役",
+      "en": "leading part,leading actor (actress)"
+    }
+  ],
+  "urami": [
+    {
+      "char": "恨み",
+      "en": "resentment"
+    }
+  ],
+  "gojigi": [
+    {
+      "char": "御辞儀",
+      "en": "bow"
+    }
+  ],
+  "kakitori": [
+    {
+      "char": "書取",
+      "en": "dictation"
+    }
+  ],
+  "chuuto": [
+    {
+      "char": "中途",
+      "en": "in the middle,half-way"
+    }
+  ],
+  "hiji": [
+    {
+      "char": "肘",
+      "en": "elbow"
+    }
+  ],
+  "ueru": [
+    {
+      "char": "飢える",
+      "en": "to starve"
+    }
+  ],
+  "machikado": [
+    {
+      "char": "街角",
+      "en": "street corner"
+    }
+  ],
+  "atatameru": [
+    {
+      "char": "暖める",
+      "en": "to warm,to heat"
+    }
+  ],
+  "higaeri": [
+    {
+      "char": "日帰り",
+      "en": "day trip"
+    }
+  ],
+  "shikakui": [
+    {
+      "char": "四角い",
+      "en": "square"
+    }
+  ],
+  "orugan": [
+    {
+      "char": "オルガン",
+      "en": "organ"
+    }
+  ],
+  "onshitsu": [
+    {
+      "char": "温室",
+      "en": "greenhouse"
+    }
+  ],
+  "hibiki": [
+    {
+      "char": "響き",
+      "en": "echo,sound,reverberation,noise"
+    }
+  ],
+  "yuderu": [
+    {
+      "char": "ゆでる",
+      "en": "to boil"
+    }
+  ],
+  "hikidasu": [
+    {
+      "char": "引出す",
+      "en": "to pull out,to take out,to draw out,to withdraw"
+    }
+  ],
+  "shiasatte": [
+    {
+      "char": "しあさって",
+      "en": "two days after tomorrow"
+    }
+  ],
+  "taku": [
+    {
+      "char": "炊く",
+      "en": "to boil,to cook"
+    }
+  ],
+  "kaisuu": [
+    {
+      "char": "回数",
+      "en": "number of times,frequency"
+    }
+  ],
+  "gishiki": [
+    {
+      "char": "儀式",
+      "en": "ceremony,rite,ritual,service"
+    }
+  ],
+  "kaizou": [
+    {
+      "char": "改造",
+      "en": "(1) remodeling,(2) modding (comp)"
+    }
+  ],
+  "banchi": [
+    {
+      "char": "番地",
+      "en": "house number,address"
+    }
+  ],
+  "asshuku": [
+    {
+      "char": "圧縮",
+      "en": "compression,condensation,pressure"
+    }
+  ],
+  "shinrin": [
+    {
+      "char": "森林",
+      "en": "forest,woods"
+    }
+  ],
+  "daiyaguramu": [
+    {
+      "char": "ダイヤグラム",
+      "en": "diagram"
+    }
+  ],
+  "senchi": [
+    {
+      "char": "センチ",
+      "en": "centimeter,centi-,10^-2"
+    }
+  ],
+  "yokubari": [
+    {
+      "char": "欲張り",
+      "en": "avarice,covetousness,greed"
+    }
+  ],
+  "kaeru": [
+    {
+      "char": "代える",
+      "en": "to exchange,to interchange,to substitute,to replace"
+    }
+  ],
+  "kajitsu": [
+    {
+      "char": "果実",
+      "en": "fruit,nut,berry."
+    }
+  ],
+  "jishuu": [
+    {
+      "char": "自習",
+      "en": "self-study"
+    }
+  ],
+  "yoru": [
+    {
+      "char": "因る",
+      "en": "to come from"
+    }
+  ],
+  "epuron": [
+    {
+      "char": "エプロン",
+      "en": "apron"
+    }
+  ],
+  "saguru": [
+    {
+      "char": "探る",
+      "en": "to search,to look for,to sound out"
+    }
+  ],
+  "chouku": [
+    {
+      "char": "チョーク",
+      "en": "chock,chalk"
+    }
+  ],
+  "jaanarisuto": [
+    {
+      "char": "ジャーナリスト",
+      "en": "journalist"
+    }
+  ],
+  "onoono": [
+    {
+      "char": "各々",
+      "en": "each,every,either,respectively,severally"
+    }
+  ],
+  "sakanoboru": [
+    {
+      "char": "遡る",
+      "en": "to go back,to go upstream,to make retroactive"
+    }
+  ],
+  "obasan": [
+    {
+      "char": "伯母さん",
+      "en": "(hon) aunt"
+    }
+  ],
+  "douse": [
+    {
+      "char": "どうせ",
+      "en": "anyhow,in any case,at any rate"
+    }
+  ],
+  "kyokusen": [
+    {
+      "char": "曲線",
+      "en": "curve"
+    }
+  ],
+  "hikkoshi": [
+    {
+      "char": "引越し",
+      "en": "moving (dwelling etc.),changing residence"
+    }
+  ],
+  "nanbaa": [
+    {
+      "char": "ナンバー",
+      "en": "number"
+    }
+  ],
+  "suteeji": [
+    {
+      "char": "ステージ",
+      "en": "(1) stage,(2) performance"
+    }
+  ],
+  "guusuu": [
+    {
+      "char": "偶数",
+      "en": "even number"
+    }
+  ],
+  "shinya": [
+    {
+      "char": "深夜",
+      "en": "late at night"
+    }
+  ],
+  "suibun": [
+    {
+      "char": "水分",
+      "en": "moisture"
+    }
+  ],
+  "omairi": [
+    {
+      "char": "お参り",
+      "en": "worship,shrine visit"
+    }
+  ],
+  "ittei": [
+    {
+      "char": "一定",
+      "en": "fixed,settled,definite"
+    }
+  ],
+  "touyu": [
+    {
+      "char": "灯油",
+      "en": "lamp oil,kerosene"
+    }
+  ],
+  "dekiagaru": [
+    {
+      "char": "出来上がる",
+      "en": "(1) to be finished,to be ready,by definition,(2) to be very drunk"
+    }
+  ],
+  "tekkyou": [
+    {
+      "char": "鉄橋",
+      "en": "railway bridge,iron bridge"
+    }
+  ],
+  "omoikomu": [
+    {
+      "char": "思い込む",
+      "en": "to be under impression that,to be convinced that"
+    }
+  ],
+  "urikire": [
+    {
+      "char": "売り切れ",
+      "en": "sold-out"
+    }
+  ],
+  "ikinari": [
+    {
+      "char": "いきなり",
+      "en": "(uk) abruptly,suddenly,all of a sudden,without warning"
+    }
+  ],
+  "yokei": [
+    {
+      "char": "余計",
+      "en": "too much,unnecessary,abundance,surplus,excess,superfluity"
+    }
+  ],
+  "bunmyaku": [
+    {
+      "char": "文脈",
+      "en": "context"
+    }
+  ],
+  "manshon": [
+    {
+      "char": "マンション",
+      "en": "large apartment,apartment house"
+    }
+  ],
+  "kaoku": [
+    {
+      "char": "家屋",
+      "en": "house,building"
+    }
+  ],
+  "nareru": [
+    {
+      "char": "馴れる",
+      "en": "to become domesticated,to become tame"
+    }
+  ],
+  "yobidasu": [
+    {
+      "char": "呼び出す",
+      "en": "to summon,to call (e.g. phone)"
+    }
+  ],
+  "soroeru": [
+    {
+      "char": "揃える",
+      "en": "to put things in order,to arrange,to make uniform,to get something ready"
+    }
+  ],
+  "gomenkudasai": [
+    {
+      "char": "ごめんください",
+      "en": "May I come in?"
+    }
+  ],
+  "chokuryuu": [
+    {
+      "char": "直流",
+      "en": "direct current"
+    }
+  ],
+  "taiin": [
+    {
+      "char": "退院",
+      "en": "leaving hospital"
+    }
+  ],
+  "mezamashi": [
+    {
+      "char": "目覚し",
+      "en": "(abbr) alarm-clock"
+    }
+  ],
+  "sawayaka": [
+    {
+      "char": "さわやか",
+      "en": "fresh,refreshing,invigorating"
+    }
+  ],
+  "sousaku": [
+    {
+      "char": "創作",
+      "en": "production,literary creation,work"
+    }
+  ],
+  "rakuchakuku": [
+    {
+      "char": "落着く",
+      "en": "to calm down,to settle down"
+    }
+  ],
+  "koushiki": [
+    {
+      "char": "公式",
+      "en": "formula,formality,official"
+    }
+  ],
+  "douwa": [
+    {
+      "char": "童話",
+      "en": "fairy tale"
+    }
+  ],
+  "yunomi": [
+    {
+      "char": "湯飲み",
+      "en": "teacup"
+    }
+  ],
+  "soshitsu": [
+    {
+      "char": "素質",
+      "en": "character,qualities,genius"
+    }
+  ],
+  "harikiru": [
+    {
+      "char": "張り切る",
+      "en": "to be in high spirits,to be full of vigor"
+    }
+  ],
+  "koraeru": [
+    {
+      "char": "こらえる",
+      "en": "to bear,to stand,to endure,to put up with"
+    }
+  ],
+  "katazuku": [
+    {
+      "char": "片付く",
+      "en": "to put in order,to dispose of,to solve"
+    }
+  ],
+  "goraku": [
+    {
+      "char": "娯楽",
+      "en": "pleasure,amusement"
+    }
+  ],
+  "hanareru": [
+    {
+      "char": "放れる",
+      "en": "to leave,to get free,to cut oneself off"
+    }
+  ],
+  "shitai": [
+    {
+      "char": "死体",
+      "en": "corpse"
+    }
+  ],
+  "bando": [
+    {
+      "char": "バンド",
+      "en": "band"
+    }
+  ],
+  "reigai": [
+    {
+      "char": "例外",
+      "en": "exception"
+    }
+  ],
+  "akaki": [
+    {
+      "char": "明き",
+      "en": "room,time to spare,emptiness"
+    }
+  ],
+  "nairon": [
+    {
+      "char": "ナイロン",
+      "en": "nylon"
+    }
+  ],
+  "ogamu": [
+    {
+      "char": "拝む",
+      "en": "to worship,to beg,to make a supplication"
+    }
+  ],
+  "jisoku": [
+    {
+      "char": "時速",
+      "en": "speed (per hour)"
+    }
+  ],
+  "shibomu": [
+    {
+      "char": "しぼむ",
+      "en": "to wither,to fade (away),to shrivel,to wilt"
+    }
+  ],
+  "yotsukado": [
+    {
+      "char": "四つ角",
+      "en": "four corners,crossroads"
+    }
+  ],
+  "seireki": [
+    {
+      "char": "西暦",
+      "en": "Christian Era,anno domini (A.D.)"
+    }
+  ],
+  "samatageru": [
+    {
+      "char": "妨げる",
+      "en": "to disturb,to prevent"
+    }
+  ],
+  "massao": [
+    {
+      "char": "真っ青",
+      "en": "deep blue,ghastly pale"
+    }
+  ],
+  "toukei": [
+    {
+      "char": "統計",
+      "en": "scattering,a scatter,dispersion"
+    }
+  ],
+  "bouhan": [
+    {
+      "char": "防犯",
+      "en": "prevention of crime"
+    }
+  ],
+  "koutei": [
+    {
+      "char": "肯定",
+      "en": "positive,affirmation"
+    }
+  ],
+  "kuwaeru": [
+    {
+      "char": "咥える",
+      "en": ""
+    }
+  ],
+  "shokunin": [
+    {
+      "char": "職人",
+      "en": "worker,mechanic,artisan,craftsman"
+    }
+  ],
+  "tsuuzuru": [
+    {
+      "char": "通ずる",
+      "en": ""
+    }
+  ],
+  "yudan": [
+    {
+      "char": "油断",
+      "en": "negligence,unpreparedness"
+    }
+  ],
+  "shindan": [
+    {
+      "char": "診断",
+      "en": "diagnosis"
+    }
+  ],
+  "youseki": [
+    {
+      "char": "容積",
+      "en": "capacity,volume"
+    }
+  ],
+  "juuryou": [
+    {
+      "char": "重量",
+      "en": "(1) weight,(2) heavyweight boxer"
+    }
+  ],
+  "miman": [
+    {
+      "char": "未満",
+      "en": "less than,insufficient"
+    }
+  ],
+  "honrai": [
+    {
+      "char": "本来",
+      "en": "essentially,naturally,by nature"
+    }
+  ],
+  "jishaku": [
+    {
+      "char": "磁石",
+      "en": "magnet"
+    }
+  ],
+  "semeru": [
+    {
+      "char": "攻める",
+      "en": "to attack,to assault"
+    }
+  ],
+  "shougyou": [
+    {
+      "char": "商業",
+      "en": "commerce,trade,business"
+    }
+  ],
+  "issakunen": [
+    {
+      "char": "一昨年",
+      "en": "year before last"
+    }
+  ],
+  "kakuritsu": [
+    {
+      "char": "確率",
+      "en": "probability"
+    }
+  ],
+  "arekore": [
+    {
+      "char": "あれこれ",
+      "en": "one thing or another,this and that,this or that"
+    }
+  ],
+  "kanpai": [
+    {
+      "char": "乾杯",
+      "en": "toast (drink)"
+    }
+  ],
+  "ukabu": [
+    {
+      "char": "浮ぶ",
+      "en": "to float,to rise to surface,to come to mind"
+    }
+  ],
+  "hikkakaru": [
+    {
+      "char": "引っ掛かる",
+      "en": "to be caught in,to be stuck in,to be cheated"
+    }
+  ],
+  "seinou": [
+    {
+      "char": "性能",
+      "en": "ability,efficiency"
+    }
+  ],
+  "mimau": [
+    {
+      "char": "見舞う",
+      "en": "to ask after (health),to visit"
+    }
+  ],
+  "sanpuru": [
+    {
+      "char": "サンプル",
+      "en": "sample"
+    }
+  ],
+  "penchi": [
+    {
+      "char": "ペンチ",
+      "en": "(abbr) pliers (lit: pinchers)"
+    }
+  ],
+  "reinkouto": [
+    {
+      "char": "レインコート",
+      "en": "raincoat"
+    }
+  ],
+  "burouchi": [
+    {
+      "char": "ブローチ",
+      "en": "brooch"
+    }
+  ],
+  "teru": [
+    {
+      "char": "照る",
+      "en": "to shine"
+    }
+  ],
+  "shin": [
+    {
+      "char": "芯",
+      "en": "core,heart,wick,marrow"
+    }
+  ],
+  "kichi": [
+    {
+      "char": "基地",
+      "en": "base"
+    }
+  ],
+  "oyayubi": [
+    {
+      "char": "親指",
+      "en": "thumb"
+    }
+  ],
+  "hodoku": [
+    {
+      "char": "ほどく",
+      "en": "to unfasten"
+    }
+  ],
+  "kareru": [
+    {
+      "char": "枯れる",
+      "en": "to wither,to die (plant),to be blasted (plant)"
+    }
+  ],
+  "jitsuryoku": [
+    {
+      "char": "実力",
+      "en": "merit,efficiency,arms,force"
+    }
+  ],
+  "nouyaku": [
+    {
+      "char": "農薬",
+      "en": "agricultural chemicals"
+    }
+  ],
+  "medatsu": [
+    {
+      "char": "目立つ",
+      "en": "to be conspicuous,to stand out"
+    }
+  ],
+  "kashima": [
+    {
+      "char": "貸間",
+      "en": "room to let"
+    }
+  ],
+  "taue": [
+    {
+      "char": "田植え",
+      "en": "rice planting"
+    }
+  ],
+  "soushiki": [
+    {
+      "char": "葬式",
+      "en": "funeral"
+    }
+  ],
+  "zokuzoku": [
+    {
+      "char": "続々",
+      "en": "successively,one after another"
+    }
+  ],
+  "kara": [
+    {
+      "char": "殻",
+      "en": "shell,husk,hull,chaff"
+    }
+  ],
+  "suru": [
+    {
+      "char": "刷る",
+      "en": "to print"
+    }
+  ],
+  "dassen": [
+    {
+      "char": "脱線",
+      "en": "derailment,digression"
+    }
+  ],
+  "biyou": [
+    {
+      "char": "美容",
+      "en": "beauty of figure or form"
+    }
+  ],
+  "dantei": [
+    {
+      "char": "断定",
+      "en": "conclusion,decision"
+    }
+  ],
+  "sokuryoku": [
+    {
+      "char": "速力",
+      "en": "speed"
+    }
+  ],
+  "kouji": [
+    {
+      "char": "工事",
+      "en": "construction work"
+    }
+  ],
+  "maku": [
+    {
+      "char": "蒔く",
+      "en": "to sow (seeds)"
+    }
+  ],
+  "onnanohito": [
+    {
+      "char": "女の人",
+      "en": "woman"
+    }
+  ],
+  "choujo": [
+    {
+      "char": "長女",
+      "en": "eldest daughter"
+    }
+  ],
+  "sokutei": [
+    {
+      "char": "測定",
+      "en": "measurement"
+    }
+  ],
+  "yukata": [
+    {
+      "char": "浴衣",
+      "en": "bathrobe,informal summer kimono,yukata"
+    }
+  ],
+  "sunao": [
+    {
+      "char": "素直",
+      "en": "obedient,meek,docile,unaffected"
+    }
+  ],
+  "medetai": [
+    {
+      "char": "めでたい",
+      "en": "happy,simple soul,propitious,joyous"
+    }
+  ],
+  "mugen": [
+    {
+      "char": "無限",
+      "en": "infinite"
+    }
+  ],
+  "ran": [
+    {
+      "char": "欄",
+      "en": "column of text (e.g. as in a newspaper)"
+    }
+  ],
+  "rejaa": [
+    {
+      "char": "レジャー",
+      "en": "leisure"
+    }
+  ],
+  "odokasu": [
+    {
+      "char": "おどかす",
+      "en": "to threaten,to coerce"
+    }
+  ],
+  "sekkaku": [
+    {
+      "char": "折角",
+      "en": "with trouble,at great pains,long-awaited"
+    }
+  ],
+  "muku": [
+    {
+      "char": "剥く",
+      "en": "to peel,to skin,to pare,to hull"
+    }
+  ],
+  "kiatsu": [
+    {
+      "char": "気圧",
+      "en": "atmospheric pressure"
+    }
+  ],
+  "souko": [
+    {
+      "char": "倉庫",
+      "en": "storehouse,warehouse,godown"
+    }
+  ],
+  "supiikaa": [
+    {
+      "char": "スピーカー",
+      "en": "speaker"
+    }
+  ],
+  "massaki": [
+    {
+      "char": "真っ先",
+      "en": "the head,the foremost,beginning"
+    }
+  ],
+  "iidasu": [
+    {
+      "char": "言い出す",
+      "en": "to start talking,to speak,to tell,to propose,to suggest,to break the ice"
+    }
+  ],
+  "ueetoresu": [
+    {
+      "char": "ウエートレス",
+      "en": "waitress"
+    }
+  ],
+  "okinodokuni": [
+    {
+      "char": "おきのどくに",
+      "en": ""
+    }
+  ],
+  "seou": [
+    {
+      "char": "背負う",
+      "en": "to be burdened with,to carry on back or shoulder"
+    }
+  ],
+  "sougo": [
+    {
+      "char": "相互",
+      "en": "mutual,reciprocal"
+    }
+  ],
+  "shouten": [
+    {
+      "char": "焦点",
+      "en": "focus,point"
+    }
+  ],
+  "meetaa": [
+    {
+      "char": "メーター",
+      "en": "meter (clock)"
+    }
+  ],
+  "shugo": [
+    {
+      "char": "主語",
+      "en": "(gram) subject"
+    }
+  ],
+  "chousetsu": [
+    {
+      "char": "調節",
+      "en": "regulation,adjustment,control"
+    }
+  ],
+  "shibaru": [
+    {
+      "char": "縛る",
+      "en": "to tie,to bind"
+    }
+  ],
+  "tensuu": [
+    {
+      "char": "点数",
+      "en": "marks,points,score,runs"
+    }
+  ],
+  "kudaranai": [
+    {
+      "char": "くだらない",
+      "en": "good-for-nothing,stupid,trivial,worthless"
+    }
+  ],
+  "tearai": [
+    {
+      "char": "手洗い",
+      "en": "restroom,lavatory,hand-washing"
+    }
+  ],
+  "kawaru": [
+    {
+      "char": "代る",
+      "en": "(v5r,vi) to take the place of,to relieve,to be substituted for"
+    }
+  ],
+  "hayaru": [
+    {
+      "char": "流行る",
+      "en": "to flourish,to thrive,to be popular,to come into fashion"
+    }
+  ],
+  "korogaru": [
+    {
+      "char": "転がる",
+      "en": "to roll,to tumble"
+    }
+  ],
+  "senden": [
+    {
+      "char": "宣伝",
+      "en": "propaganda,publicity"
+    }
+  ],
+  "gun": [
+    {
+      "char": "郡",
+      "en": "country,district"
+    }
+  ],
+  "chijimu": [
+    {
+      "char": "縮む",
+      "en": "to shrink,to be contracted"
+    }
+  ],
+  "hirobiro": [
+    {
+      "char": "広々",
+      "en": "extensive,spacious"
+    }
+  ],
+  "bessou": [
+    {
+      "char": "別荘",
+      "en": "holiday house,villa"
+    }
+  ],
+  "zuuzuushii": [
+    {
+      "char": "ずうずうしい",
+      "en": "impudent,shameless"
+    }
+  ],
+  "hitomazu": [
+    {
+      "char": "ひとまず",
+      "en": "for the present,once,in outline"
+    }
+  ],
+  "bungei": [
+    {
+      "char": "文芸",
+      "en": "literature,art and literature,belles-lettres"
+    }
+  ],
+  "sutoppu": [
+    {
+      "char": "ストップ",
+      "en": "stop"
+    }
+  ],
+  "bonchi": [
+    {
+      "char": "盆地",
+      "en": "basin (e.g. between mountains)"
+    }
+  ],
+  "fusagu": [
+    {
+      "char": "塞ぐ",
+      "en": "to stop up,to close up,to block (up)"
+    }
+  ],
+  "momu": [
+    {
+      "char": "揉む",
+      "en": "to rub,to crumple (up),to wrinkle"
+    }
+  ],
+  "yakan": [
+    {
+      "char": "薬缶",
+      "en": "kettle"
+    }
+  ],
+  "katamichi": [
+    {
+      "char": "片道",
+      "en": "one-way (trip)"
+    }
+  ],
+  "bushi": [
+    {
+      "char": "武士",
+      "en": "warrior,samurai"
+    }
+  ],
+  "tsuru": [
+    {
+      "char": "吊る",
+      "en": "to hang"
+    }
+  ],
+  "hasamaru": [
+    {
+      "char": "挟まる",
+      "en": "to get between,to be caught in"
+    }
+  ],
+  "nemaki": [
+    {
+      "char": "寝巻",
+      "en": "sleep-wear,nightclothes,pyjamas,nightgown,nightdress"
+    }
+  ],
+  "tomaru": [
+    {
+      "char": "留まる",
+      "en": "(1) to be fixed,(2) to abide,to stay (in the one place)"
+    }
+  ],
+  "ketsuatsu": [
+    {
+      "char": "血圧",
+      "en": "blood pressure"
+    }
+  ],
+  "youshi": [
+    {
+      "char": "要旨",
+      "en": "gist,essentials,summary,fundamentals"
+    }
+  ],
+  "taisaku": [
+    {
+      "char": "対策",
+      "en": "counter-plan,counter-measure"
+    }
+  ],
+  "hikkurikaesu": [
+    {
+      "char": "引っ繰り返す",
+      "en": "to turn over,to overturn,to knock over,to upset,to turn inside out"
+    }
+  ],
+  "daimei": [
+    {
+      "char": "題名",
+      "en": "title"
+    }
+  ],
+  "shizumaru": [
+    {
+      "char": "静まる",
+      "en": "to quieten down,to calm down,to subside"
+    }
+  ],
+  "juuten": [
+    {
+      "char": "重点",
+      "en": "important point,lay stress on,colon,emphasis"
+    }
+  ],
+  "shiboru": [
+    {
+      "char": "絞る",
+      "en": "to press,to wring,to squeeze"
+    }
+  ],
+  "tsubusu": [
+    {
+      "char": "潰す",
+      "en": "to smash,to waste"
+    }
+  ],
+  "tsubureru": [
+    {
+      "char": "潰れる",
+      "en": "to be smashed,to go bankrupt"
+    }
+  ],
+  "tatsu": [
+    {
+      "char": "建つ",
+      "en": "to erect,to be erected,to be built"
+    }
+  ],
+  "fusagaru": [
+    {
+      "char": "塞がる",
+      "en": "to be plugged up,to be shut up"
+    }
+  ],
+  "koishii": [
+    {
+      "char": "恋しい",
+      "en": "(1) dear,beloved,darling,(2) yearned for"
+    }
+  ],
+  "yobi": [
+    {
+      "char": "予備",
+      "en": "preparation,preliminaries,reserve,spare"
+    }
+  ],
+  "gakunen": [
+    {
+      "char": "学年",
+      "en": "year in school,grade in school"
+    }
+  ],
+  "tsuukin": [
+    {
+      "char": "通勤",
+      "en": "commuting to work"
+    }
+  ],
+  "akegata": [
+    {
+      "char": "明け方",
+      "en": "dawn"
+    }
+  ],
+  "chirakasu": [
+    {
+      "char": "散らかす",
+      "en": "to scatter around,to leave untidy"
+    }
+  ],
+  "kakuchi": [
+    {
+      "char": "各地",
+      "en": "every place,various places"
+    }
+  ],
+  "mezasu": [
+    {
+      "char": "目指す",
+      "en": "to aim at,to have an eye on"
+    }
+  ],
+  "teema": [
+    {
+      "char": "テーマ",
+      "en": "(n) theme,project,topic (de: Thema)"
+    }
+  ],
+  "burausu": [
+    {
+      "char": "ブラウス",
+      "en": "blouse"
+    }
+  ],
+  "seinengappi": [
+    {
+      "char": "生年月日",
+      "en": "birth date"
+    }
+  ],
+  "karaa": [
+    {
+      "char": "カラー",
+      "en": "collar,color,colour"
+    }
+  ],
+  "nokogiri": [
+    {
+      "char": "のこぎり",
+      "en": "saw"
+    }
+  ],
+  "kusuriyubi": [
+    {
+      "char": "薬指",
+      "en": "ring finger"
+    }
+  ],
+  "kokoroatari": [
+    {
+      "char": "心当たり",
+      "en": "having some knowledge of,happening to know"
+    }
+  ],
+  "monoreeru": [
+    {
+      "char": "モノレール",
+      "en": "monorail"
+    }
+  ],
+  "ouen": [
+    {
+      "char": "応援",
+      "en": "aid,assistance,help,reinforcement"
+    }
+  ],
+  "katamuku": [
+    {
+      "char": "傾く",
+      "en": "to incline toward,to slant,to lurch"
+    }
+  ],
+  "hansei": [
+    {
+      "char": "反省",
+      "en": "reflection,reconsideration,introspection,meditation,contemplation"
+    }
+  ],
+  "shuunin": [
+    {
+      "char": "就任",
+      "en": "inauguration,assumption of office"
+    }
+  ],
+  "houchou": [
+    {
+      "char": "庖丁",
+      "en": "kitchen knife,carving knife"
+    }
+  ],
+  "koukyou": [
+    {
+      "char": "公共",
+      "en": "public,community,public service,society,communal"
+    }
+  ],
+  "kane": [
+    {
+      "char": "鐘",
+      "en": "bell,chime"
+    }
+  ],
+  "toridasu": [
+    {
+      "char": "取り出す",
+      "en": "to take out,to produce,to pick out"
+    }
+  ],
+  "nendo": [
+    {
+      "char": "年度",
+      "en": "year,fiscal year,school year,term"
+    }
+  ],
+  "nikoniko": [
+    {
+      "char": "にこにこ",
+      "en": ""
+    }
+  ],
+  "katsuyaku": [
+    {
+      "char": "活躍",
+      "en": "activity"
+    }
+  ],
+  "deai": [
+    {
+      "char": "出合い",
+      "en": "an encounter"
+    }
+  ],
+  "sukejuuru": [
+    {
+      "char": "スケジュール",
+      "en": "schedule"
+    }
+  ],
+  "yamuwoenai": [
+    {
+      "char": "やむをえない",
+      "en": "cannot be helped,unavoidable"
+    }
+  ],
+  "buntai": [
+    {
+      "char": "文体",
+      "en": "literary style"
+    }
+  ],
+  "yakume": [
+    {
+      "char": "役目",
+      "en": "duty,business"
+    }
+  ],
+  "zenpan": [
+    {
+      "char": "全般",
+      "en": "(the) whole,universal,wholly,general"
+    }
+  ],
+  "hokkyoku": [
+    {
+      "char": "北極",
+      "en": "North Pole"
+    }
+  ],
+  "pinku": [
+    {
+      "char": "ピンク",
+      "en": "pink"
+    }
+  ],
+  "taisou": [
+    {
+      "char": "大層",
+      "en": "very much,exaggerated,very fine"
+    }
+  ],
+  "joujun": [
+    {
+      "char": "上旬",
+      "en": "first 10 days of month"
+    }
+  ],
+  "renzu": [
+    {
+      "char": "レンズ",
+      "en": "lens"
+    }
+  ],
+  "rengou": [
+    {
+      "char": "連合",
+      "en": "union,alliance"
+    }
+  ],
+  "ikuji": [
+    {
+      "char": "育児",
+      "en": "childcare,nursing,upbringing"
+    }
+  ],
+  "geta": [
+    {
+      "char": "下駄",
+      "en": "geta (Japanese footwear),wooden clogs"
+    }
+  ],
+  "sentan": [
+    {
+      "char": "先端",
+      "en": "pointed end,tip,fine point"
+    }
+  ],
+  "kyouyou": [
+    {
+      "char": "教養",
+      "en": "culture,education,refinement,cultivation"
+    }
+  ],
+  "mare": [
+    {
+      "char": "稀",
+      "en": "rare,seldom"
+    }
+  ],
+  "sassoku": [
+    {
+      "char": "早速",
+      "en": "at once,immediately,without delay,promptly"
+    }
+  ],
+  "ripouto": [
+    {
+      "char": "リポート",
+      "en": "report,paper"
+    }
+  ],
+  "burashi": [
+    {
+      "char": "ブラシ",
+      "en": "brushy,brush"
+    }
+  ],
+  "kyuuyou": [
+    {
+      "char": "休養",
+      "en": "rest,break,recreation"
+    }
+  ],
+  "fukumeru": [
+    {
+      "char": "含める",
+      "en": "to include,to instruct,to make one understand"
+    }
+  ],
+  "ahira": [
+    {
+      "char": "あひら",
+      "en": ""
+    }
+  ],
+  "youchien": [
+    {
+      "char": "幼稚園",
+      "en": "kindergarten"
+    }
+  ],
+  "kougei": [
+    {
+      "char": "工芸",
+      "en": "industrial arts"
+    }
+  ],
+  "iitsukeru": [
+    {
+      "char": "言付ける",
+      "en": "to send word,to send a message"
+    }
+  ],
+  "nieru": [
+    {
+      "char": "煮える",
+      "en": "to boil,to cook,to be cooked"
+    }
+  ],
+  "oikakeru": [
+    {
+      "char": "追い掛ける",
+      "en": "to chase or run after someone,to run down,to pursue"
+    }
+  ],
+  "kyuusoku": [
+    {
+      "char": "休息",
+      "en": "rest,relief,relaxation"
+    }
+  ],
+  "chokkaku": [
+    {
+      "char": "直角",
+      "en": "right angle"
+    }
+  ],
+  "ka": [
+    {
+      "char": "蚊",
+      "en": "mosquito"
+    }
+  ],
+  "mushiatsui": [
+    {
+      "char": "蒸し暑い",
+      "en": "humid,sultry"
+    }
+  ],
+  "keiyoushi": [
+    {
+      "char": "形容詞",
+      "en": "true adjective"
+    }
+  ],
+  "tatamu": [
+    {
+      "char": "畳む",
+      "en": "to fold (clothes)"
+    }
+  ],
+  "angai": [
+    {
+      "char": "案外",
+      "en": "unexpectedly"
+    }
+  ],
+  "youto": [
+    {
+      "char": "用途",
+      "en": "use,usefulness"
+    }
+  ],
+  "hougen": [
+    {
+      "char": "方言",
+      "en": "dialect"
+    }
+  ],
+  "ouyou": [
+    {
+      "char": "応用",
+      "en": "application,put to practical use"
+    }
+  ],
+  "jinmei": [
+    {
+      "char": "人命",
+      "en": "(human) life"
+    }
+  ],
+  "bane": [
+    {
+      "char": "ばね",
+      "en": "spring (e.g. coil, leaf)"
+    }
+  ],
+  "ribon": [
+    {
+      "char": "リボン",
+      "en": "ribbon"
+    }
+  ],
+  "ryou": [
+    {
+      "char": "寮",
+      "en": "hostel,dormitory"
+    }
+  ],
+  "tansui": [
+    {
+      "char": "淡水",
+      "en": "fresh water"
+    }
+  ],
+  "jakuten": [
+    {
+      "char": "弱点",
+      "en": "weak point,weakness"
+    }
+  ],
+  "ayashii": [
+    {
+      "char": "怪しい",
+      "en": "suspicious,dubious,doubtful"
+    }
+  ],
+  "itteirasshai": [
+    {
+      "char": "いっていらっしゃい",
+      "en": ""
+    }
+  ],
+  "keizoku": [
+    {
+      "char": "継続",
+      "en": "continuation"
+    }
+  ],
+  "ryakusu": [
+    {
+      "char": "略す",
+      "en": "to abbreviate"
+    }
+  ],
+  "shukkin": [
+    {
+      "char": "出勤",
+      "en": "going to work,at work"
+    }
+  ],
+  "keigo": [
+    {
+      "char": "敬語",
+      "en": "honorific,term of respect"
+    }
+  ],
+  "tsume": [
+    {
+      "char": "爪",
+      "en": "fingernail or toenail,claw,talon,hoof"
+    }
+  ],
+  "denryoku": [
+    {
+      "char": "電力",
+      "en": "electric power"
+    }
+  ],
+  "kasaneru": [
+    {
+      "char": "重ねる",
+      "en": "to pile up,to put something on another,to heap up,to add,to repeat"
+    }
+  ],
+  "taiko": [
+    {
+      "char": "太鼓",
+      "en": "drum,tambourine"
+    }
+  ],
+  "uramu": [
+    {
+      "char": "恨む",
+      "en": "to curse,to feel bitter"
+    }
+  ],
+  "zuihitsu": [
+    {
+      "char": "随筆",
+      "en": "essays,miscellaneous writings"
+    }
+  ],
+  "chuunen": [
+    {
+      "char": "中年",
+      "en": "middle-aged"
+    }
+  ],
+  "amaru": [
+    {
+      "char": "余る",
+      "en": "to remain,to be left over,to be in excess,to be too many"
+    }
+  ],
+  "tsukiatari": [
+    {
+      "char": "突き当たり",
+      "en": "end (e.g. of street)"
+    }
+  ],
+  "senpuuki": [
+    {
+      "char": "扇風機",
+      "en": "electric fan"
+    }
+  ],
+  "seishitsu": [
+    {
+      "char": "性質",
+      "en": "nature,property,disposition"
+    }
+  ],
+  "iyagaru": [
+    {
+      "char": "嫌がる",
+      "en": "to hate,to dislike"
+    }
+  ],
+  "nanboku": [
+    {
+      "char": "南北",
+      "en": "south and north"
+    }
+  ],
+  "tsuna": [
+    {
+      "char": "綱",
+      "en": "rope"
+    }
+  ],
+  "kushami": [
+    {
+      "char": "くしゃみ",
+      "en": "sneeze"
+    }
+  ],
+  "wabiru": [
+    {
+      "char": "詫びる",
+      "en": "to apologize"
+    }
+  ],
+  "kugi": [
+    {
+      "char": "釘",
+      "en": "nail"
+    }
+  ],
+  "jidou": [
+    {
+      "char": "児童",
+      "en": "children,juvenile"
+    }
+  ],
+  "juukyo": [
+    {
+      "char": "住居",
+      "en": "dwelling,house,residence,address"
+    }
+  ],
+  "saijitsu": [
+    {
+      "char": "祭日",
+      "en": "national holiday,festival day"
+    }
+  ],
+  "geinou": [
+    {
+      "char": "芸能",
+      "en": "public entertainment,accomplishments,attainments"
+    }
+  ],
+  "shizenkagaku": [
+    {
+      "char": "自然科学",
+      "en": "natural science"
+    }
+  ],
+  "hadagi": [
+    {
+      "char": "肌着",
+      "en": "underwear"
+    }
+  ],
+  "sawagashii": [
+    {
+      "char": "騒がしい",
+      "en": "noisy"
+    }
+  ],
+  "akubi": [
+    {
+      "char": "あくび",
+      "en": "yawn"
+    }
+  ],
+  "kouchi": [
+    {
+      "char": "耕地",
+      "en": "arable land"
+    }
+  ],
+  "kansou": [
+    {
+      "char": "乾燥",
+      "en": "dry,arid,insipid,dehydrated"
+    }
+  ],
+  "iru": [
+    {
+      "char": "炒る",
+      "en": ""
+    }
+  ],
+  "hitorideni": [
+    {
+      "char": "ひとりでに",
+      "en": "by itself,automatically,naturally"
+    }
+  ],
+  "bunryou": [
+    {
+      "char": "分量",
+      "en": "amount,quantity"
+    }
+  ],
+  "kondate": [
+    {
+      "char": "献立",
+      "en": "menu,program,schedule"
+    }
+  ],
+  "ichiou": [
+    {
+      "char": "一応",
+      "en": "once,tentatively,in outline,for the time being"
+    }
+  ],
+  "tagayasu": [
+    {
+      "char": "耕す",
+      "en": "to till,to plow,to cultivate"
+    }
+  ],
+  "saji": [
+    {
+      "char": "匙",
+      "en": "spoon"
+    }
+  ],
+  "oikosu": [
+    {
+      "char": "追い越す",
+      "en": "to pass (e.g. car),to outdistance,to outstrip"
+    }
+  ],
+  "hifu": [
+    {
+      "char": "皮膚",
+      "en": "skin"
+    }
+  ],
+  "shitsuren": [
+    {
+      "char": "失恋",
+      "en": "disappointed love,broken heart,unrequited love,be lovelorn"
+    }
+  ],
+  "intabyuu": [
+    {
+      "char": "インタビュー",
+      "en": "interview"
+    }
+  ],
+  "kotobazukai": [
+    {
+      "char": "言葉遣い",
+      "en": "speech,expression,wording"
+    }
+  ],
+  "kasoku": [
+    {
+      "char": "加速",
+      "en": "acceleration"
+    }
+  ],
+  "densen": [
+    {
+      "char": "伝染",
+      "en": "contagion"
+    }
+  ],
+  "kannen": [
+    {
+      "char": "観念",
+      "en": "(1) idea,notion,conception,(2) sense (e.g. of duty)"
+    }
+  ],
+  "sumaato": [
+    {
+      "char": "スマート",
+      "en": "smart,stylish,slim"
+    }
+  ],
+  "suzumu": [
+    {
+      "char": "涼む",
+      "en": "to cool oneself,to cool off,to enjoy evening cool"
+    }
+  ],
+  "burasageru": [
+    {
+      "char": "ぶらさげる",
+      "en": "to hang,to suspend,to dangle,to swing"
+    }
+  ],
+  "kuuchuu": [
+    {
+      "char": "空中",
+      "en": "sky,air"
+    }
+  ],
+  "urikireru": [
+    {
+      "char": "売り切れる",
+      "en": "to be sold out"
+    }
+  ],
+  "kanki": [
+    {
+      "char": "換気",
+      "en": "ventilation"
+    }
+  ],
+  "hibi": [
+    {
+      "char": "日日",
+      "en": "every day,daily,day after day"
+    }
+  ],
+  "hikakuteki": [
+    {
+      "char": "比較的",
+      "en": "comparatively,relatively"
+    }
+  ],
+  "surechigau": [
+    {
+      "char": "すれちがう",
+      "en": "to pass by one another,to disagree"
+    }
+  ],
+  "sukuuru": [
+    {
+      "char": "スクール",
+      "en": "school"
+    }
+  ],
+  "hiniku": [
+    {
+      "char": "皮肉",
+      "en": "cynicism,sarcasm"
+    }
+  ],
+  "semete": [
+    {
+      "char": "せめて",
+      "en": "offense,method of attack"
+    }
+  ],
+  "arasuji": [
+    {
+      "char": "あらすじ",
+      "en": "outline,summary"
+    }
+  ],
+  "shuukai": [
+    {
+      "char": "集会",
+      "en": "meeting,assembly"
+    }
+  ],
+  "atena": [
+    {
+      "char": "宛名",
+      "en": "address,direction"
+    }
+  ],
+  "atarimae": [
+    {
+      "char": "あたりまえ",
+      "en": "usual,common,ordinary"
+    }
+  ],
+  "takuwaeru": [
+    {
+      "char": "蓄える",
+      "en": "to store,to lay in stock"
+    }
+  ],
+  "chouka": [
+    {
+      "char": "超過",
+      "en": "excess,being more than"
+    }
+  ],
+  "kuzureru": [
+    {
+      "char": "崩れる",
+      "en": "to collapse,to crumble"
+    }
+  ],
+  "engeki": [
+    {
+      "char": "演劇",
+      "en": "play (theatrical)"
+    }
+  ],
+  "kantai": [
+    {
+      "char": "寒帯",
+      "en": "frigid zone"
+    }
+  ],
+  "motomoto": [
+    {
+      "char": "元々",
+      "en": "originally,by nature,from the start"
+    }
+  ],
+  "sakusha": [
+    {
+      "char": "作者",
+      "en": "author,authoress"
+    }
+  ],
+  "senzo": [
+    {
+      "char": "先祖",
+      "en": "ancestor"
+    }
+  ],
+  "gozonjidesuka": [
+    {
+      "char": "ごぞんじですか",
+      "en": ""
+    }
+  ],
+  "tokkuni": [
+    {
+      "char": "とっくに",
+      "en": "long ago,already,a long time ago"
+    }
+  ],
+  "sasaru": [
+    {
+      "char": "刺さる",
+      "en": "to stick,to be stuck"
+    }
+  ],
+  "sairen": [
+    {
+      "char": "サイレン",
+      "en": "siren"
+    }
+  ],
+  "tsukkomu": [
+    {
+      "char": "突っ込む",
+      "en": "to plunge into,to go into deeply"
+    }
+  ],
+  "shukushou": [
+    {
+      "char": "縮小",
+      "en": "reduction,curtailment"
+    }
+  ],
+  "yuukou": [
+    {
+      "char": "友好",
+      "en": "friendship"
+    }
+  ],
+  "joukyuu": [
+    {
+      "char": "上級",
+      "en": "advanced level,high grade,senior"
+    }
+  ],
+  "chichihaha": [
+    {
+      "char": "父母",
+      "en": "father and mother,parents"
+    }
+  ],
+  "kakawaru": [
+    {
+      "char": "係わる",
+      "en": "to concern oneself in,to have to do with,to affect,to influence,to stick to (opinions)"
+    }
+  ],
+  "sokutatsu": [
+    {
+      "char": "速達",
+      "en": "express,special delivery"
+    }
+  ],
+  "koutou": [
+    {
+      "char": "高等",
+      "en": "high class,high grade"
+    }
+  ],
+  "nantonaku": [
+    {
+      "char": "なんとなく",
+      "en": "somehow or other,for some reason or another"
+    }
+  ],
+  "entotsu": [
+    {
+      "char": "煙突",
+      "en": "chimney"
+    }
+  ],
+  "zatsuon": [
+    {
+      "char": "雑音",
+      "en": "noise (jarring, grating)"
+    }
+  ],
+  "sagasu": [
+    {
+      "char": "捜す",
+      "en": "to search,to seek,to look for"
+    }
+  ],
+  "umu": [
+    {
+      "char": "有無",
+      "en": "yes or no,existence,flag indicator (comp),presence or absence marker"
+    }
+  ],
+  "pantsu": [
+    {
+      "char": "パンツ",
+      "en": "underpants"
+    }
+  ],
+  "shucchou": [
+    {
+      "char": "出張",
+      "en": "official tour,business trip"
+    }
+  ],
+  "shinwa": [
+    {
+      "char": "神話",
+      "en": "myth,legend"
+    }
+  ],
+  "demukae": [
+    {
+      "char": "出迎え",
+      "en": "meeting,reception"
+    }
+  ],
+  "seizon": [
+    {
+      "char": "生存",
+      "en": "existence,being,survival"
+    }
+  ],
+  "fusuma": [
+    {
+      "char": "襖",
+      "en": "sliding screen"
+    }
+  ],
+  "getsumatsu": [
+    {
+      "char": "月末",
+      "en": "end of the month"
+    }
+  ],
+  "fukuramasu": [
+    {
+      "char": "膨らます",
+      "en": "to swell,to expand,to inflate,to bulge"
+    }
+  ],
+  "shinro": [
+    {
+      "char": "針路",
+      "en": "course,direction,compass bearing"
+    }
+  ],
+  "okazu": [
+    {
+      "char": "おかず",
+      "en": "side dish,accompaniment for rice dishes"
+    }
+  ],
+  "masshiro": [
+    {
+      "char": "真っ白",
+      "en": "pure white"
+    }
+  ],
+  "sekken": [
+    {
+      "char": "石鹸",
+      "en": "soap"
+    }
+  ],
+  "bitamin": [
+    {
+      "char": "ビタミン",
+      "en": "vitamin"
+    }
+  ],
+  "konkuriito": [
+    {
+      "char": "コンクリート",
+      "en": "concrete"
+    }
+  ],
+  "jisseki": [
+    {
+      "char": "実績",
+      "en": "achievements,actual results"
+    }
+  ],
+  "souryou": [
+    {
+      "char": "送料",
+      "en": "postage,carriage"
+    }
+  ],
+  "gyogyou": [
+    {
+      "char": "漁業",
+      "en": "fishing (industry)"
+    }
+  ],
+  "gomen": [
+    {
+      "char": "御免",
+      "en": "your pardon,declining (something),dismissal,permission"
+    }
+  ],
+  "shiku": [
+    {
+      "char": "敷く",
+      "en": "to spread out,to lay out"
+    }
+  ],
+  "kou": [
+    {
+      "char": "請う",
+      "en": "to ask,to request"
+    }
+  ],
+  "denki": [
+    {
+      "char": "伝記",
+      "en": "biography,life story"
+    }
+  ],
+  "fumikiri": [
+    {
+      "char": "踏切",
+      "en": "railway crossing,level crossing,starting line,scratch,crossover"
+    }
+  ],
+  "kawase": [
+    {
+      "char": "為替",
+      "en": "money order,exchange"
+    }
+  ],
+  "itsu": [
+    {
+      "char": "佚",
+      "en": "be lost,peace,hide,mistake,beautiful,in turn"
+    }
+  ],
+  "roumaji": [
+    {
+      "char": "ローマじ",
+      "en": "romanization,Roman letters"
+    }
+  ],
+  "ikou": [
+    {
+      "char": "以降",
+      "en": "on and after,hereafter,thereafter"
+    }
+  ],
+  "ojisan": [
+    {
+      "char": "叔父さん",
+      "en": "middle-aged gentleman,uncle"
+    }
+  ],
+  "kazan": [
+    {
+      "char": "火山",
+      "en": "volcano"
+    }
+  ],
+  "tada": [
+    {
+      "char": "只",
+      "en": "free of charge,mere,sole,only,usual,common"
+    }
+  ],
+  "gakkai": [
+    {
+      "char": "学会",
+      "en": "scientific society,academic meeting"
+    }
+  ],
+  "tenkeru": [
+    {
+      "char": "点ける",
+      "en": "to turn on,to switch on,to light up"
+    }
+  ],
+  "tsurusu": [
+    {
+      "char": "吊す",
+      "en": "to hang"
+    }
+  ],
+  "wan": [
+    {
+      "char": "椀",
+      "en": "Japanese soup bowl,wooden bowl"
+    }
+  ],
+  "chikasui": [
+    {
+      "char": "地下水",
+      "en": "underground water"
+    }
+  ],
+  "kashidashi": [
+    {
+      "char": "貸し出し",
+      "en": "lending,loaning"
+    }
+  ],
+  "onsen": [
+    {
+      "char": "温泉",
+      "en": "spa,hot spring,onsen"
+    }
+  ],
+  "shisei": [
+    {
+      "char": "姿勢",
+      "en": "attitude,posture"
+    }
+  ],
+  "keta": [
+    {
+      "char": "桁",
+      "en": "column,beam,digit"
+    }
+  ],
+  "nikurashii": [
+    {
+      "char": "憎らしい",
+      "en": "odious,hateful"
+    }
+  ],
+  "keredo/keredomo": [
+    {
+      "char": "けれど/けれども",
+      "en": "but,however"
+    }
+  ],
+  "katsugu": [
+    {
+      "char": "担ぐ",
+      "en": "to shoulder,to carry on shoulder"
+    }
+  ],
+  "genri": [
+    {
+      "char": "原理",
+      "en": "principle,theory,fundamental truth"
+    }
+  ],
+  "taisei": [
+    {
+      "char": "体制",
+      "en": "order,system,structure,set-up,organization"
+    }
+  ],
+  "kokuou": [
+    {
+      "char": "国王",
+      "en": "king"
+    }
+  ],
+  "okusan": [
+    {
+      "char": "おくさん",
+      "en": "(hon) wife,your wife,madam"
+    }
+  ],
+  "denpa": [
+    {
+      "char": "電波",
+      "en": "electro-magnetic wave"
+    }
+  ],
+  "shiagaru": [
+    {
+      "char": "仕上がる",
+      "en": "to be finished"
+    }
+  ],
+  "dekiagari": [
+    {
+      "char": "出来上がり",
+      "en": "be finished,ready,made for,cut out"
+    }
+  ],
+  "heru": [
+    {
+      "char": "へる",
+      "en": "to decrease (in size or number),to diminish,to abate"
+    }
+  ],
+  "suijouki": [
+    {
+      "char": "水蒸気",
+      "en": "water vapour,steam"
+    }
+  ],
+  "shiitsu": [
+    {
+      "char": "シーツ",
+      "en": "sheet"
+    }
+  ],
+  "jousha": [
+    {
+      "char": "乗車",
+      "en": "taking a train,entraining"
+    }
+  ],
+  "hanashichuu": [
+    {
+      "char": "話中",
+      "en": "while talking,the line is busy"
+    }
+  ],
+  "kansetsu": [
+    {
+      "char": "間接",
+      "en": "indirection,indirectness"
+    }
+  ],
+  "keru": [
+    {
+      "char": "蹴る",
+      "en": "to kick"
+    }
+  ],
+  "chirakaru": [
+    {
+      "char": "散らかる",
+      "en": "to be in disorder,to lie scattered around"
+    }
+  ],
+  "meimei": [
+    {
+      "char": "銘々",
+      "en": "each,individual"
+    }
+  ],
+  "unto": [
+    {
+      "char": "うんと",
+      "en": "a great deal,very much"
+    }
+  ],
+  "gaibu": [
+    {
+      "char": "外部",
+      "en": "the outside,external"
+    }
+  ],
+  "uranau": [
+    {
+      "char": "占う",
+      "en": "to forecast,to predict"
+    }
+  ],
+  "touzai": [
+    {
+      "char": "東西",
+      "en": "East and West,whole country"
+    }
+  ],
+  "kaikai": [
+    {
+      "char": "開会",
+      "en": "opening of a meeting"
+    }
+  ],
+  "genryou": [
+    {
+      "char": "原料",
+      "en": "raw materials"
+    }
+  ],
+  "chounan": [
+    {
+      "char": "長男",
+      "en": "eldest son"
+    }
+  ],
+  "menzei": [
+    {
+      "char": "免税",
+      "en": "tax exemption,duty exemption"
+    }
+  ],
+  "juutai": [
+    {
+      "char": "重体",
+      "en": "seriously ill,serious condition,critical state"
+    }
+  ],
+  "soba": [
+    {
+      "char": "蕎麦",
+      "en": "soba (buckwheat noodles)"
+    }
+  ],
+  "ryuuiki": [
+    {
+      "char": "流域",
+      "en": "(river) basin"
+    }
+  ],
+  "jitsubutsu": [
+    {
+      "char": "実物",
+      "en": "real thing,original"
+    }
+  ],
+  "shitsukoi": [
+    {
+      "char": "しつこい",
+      "en": "insistent,obstinate"
+    }
+  ],
+  "oyatsu": [
+    {
+      "char": "おやつ",
+      "en": "(1) between meal snack,afternoon refreshment"
+    }
+  ],
+  "jisan": [
+    {
+      "char": "持参",
+      "en": "bringing,taking,carrying"
+    }
+  ],
+  "hanashikakeru": [
+    {
+      "char": "話し掛ける",
+      "en": "to accost a person,to talk (to someone)"
+    }
+  ],
+  "shitetsu": [
+    {
+      "char": "私鉄",
+      "en": "private railway"
+    }
+  ],
+  "jikanwari": [
+    {
+      "char": "時間割",
+      "en": "timetable,schedule"
+    }
+  ],
+  "atsukamashii": [
+    {
+      "char": "厚かましい",
+      "en": "impudent,shameless,brazen"
+    }
+  ],
+  "rittoru": [
+    {
+      "char": "リットル",
+      "en": "litre"
+    }
+  ],
+  "hyoushi": [
+    {
+      "char": "表紙",
+      "en": "front cover,binding"
+    }
+  ],
+  "aogu": [
+    {
+      "char": "扇ぐ",
+      "en": "to fan,to flap"
+    }
+  ],
+  "sakaba": [
+    {
+      "char": "酒場",
+      "en": "bar,bar-room"
+    }
+  ],
+  "oufuku": [
+    {
+      "char": "往復",
+      "en": "(col) round trip,coming and going,return ticket"
+    }
+  ],
+  "heikai": [
+    {
+      "char": "閉会",
+      "en": "closure"
+    }
+  ],
+  "hikiwakeke": [
+    {
+      "char": "引分け",
+      "en": "a draw (in competition),tie game"
+    }
+  ],
+  "kogoeru": [
+    {
+      "char": "凍える",
+      "en": "to freeze,to be chilled,to be frozen"
+    }
+  ],
+  "moshikashitara": [
+    {
+      "char": "もしかしたら",
+      "en": "perhaps,maybe,by some chance"
+    }
+  ],
+  "kitai": [
+    {
+      "char": "気体",
+      "en": "vapour,gas"
+    }
+  ],
+  "eibun": [
+    {
+      "char": "英文",
+      "en": "sentence in English"
+    }
+  ],
+  "kijun": [
+    {
+      "char": "規準",
+      "en": "standard,basis,criteria,norm"
+    }
+  ],
+  "tobikomu": [
+    {
+      "char": "飛び込む",
+      "en": "to jump in,to leap in,to plunge into,to dive"
+    }
+  ],
+  "gekizou": [
+    {
+      "char": "激増",
+      "en": "sudden increase"
+    }
+  ],
+  "heikou": [
+    {
+      "char": "並行",
+      "en": "(going) side by side,concurrent,abreast,at the same time"
+    }
+  ],
+  "seisaku": [
+    {
+      "char": "制作",
+      "en": "work (film, book)"
+    }
+  ],
+  "akogareru": [
+    {
+      "char": "憧れる",
+      "en": "to long for,to yearn after,to admire"
+    }
+  ],
+  "kouryuu": [
+    {
+      "char": "交流",
+      "en": "alternating current,intercourse,(cultural) exchange,intermingling"
+    }
+  ],
+  "tsutawaru": [
+    {
+      "char": "伝わる",
+      "en": "to be handed down,to be introduced,to be transmitted"
+    }
+  ],
+  "oujo": [
+    {
+      "char": "王女",
+      "en": "princess"
+    }
+  ],
+  "kanshou": [
+    {
+      "char": "鑑賞",
+      "en": "appreciation"
+    }
+  ],
+  "tsutomeru": [
+    {
+      "char": "務める",
+      "en": "(1) to serve,to fill a post,to serve under,to work (for)"
+    }
+  ],
+  "fuusen": [
+    {
+      "char": "風船",
+      "en": "balloon"
+    }
+  ],
+  "chozou": [
+    {
+      "char": "貯蔵",
+      "en": "storage,preservation"
+    }
+  ],
+  "shukujitsu": [
+    {
+      "char": "祝日",
+      "en": "national holiday"
+    }
+  ],
+  "maneru": [
+    {
+      "char": "真似る",
+      "en": "to mimic,to imitate"
+    }
+  ],
+  "fukeru": [
+    {
+      "char": "更ける",
+      "en": "to get late,to advance,to wear on"
+    }
+  ],
+  "koshiraeru": [
+    {
+      "char": "こしらえる",
+      "en": "to make,to manufacture"
+    }
+  ],
+  "togaru": [
+    {
+      "char": "尖る",
+      "en": "to taper to a point,to become sharp,to be sour,to look displeased"
+    }
+  ],
+  "tsunagaru": [
+    {
+      "char": "繋がる",
+      "en": "to be tied together,to be connected to,to be related to"
+    }
+  ],
+  "kandenchi": [
+    {
+      "char": "乾電池",
+      "en": "dry cell,battery"
+    }
+  ],
+  "wareru": [
+    {
+      "char": "破れる",
+      "en": "to get torn,to wear out"
+    }
+  ],
+  "zurasu": [
+    {
+      "char": "ずらす",
+      "en": "to put off,to delay"
+    }
+  ],
+  "shiriizu": [
+    {
+      "char": "シリーズ",
+      "en": "series"
+    }
+  ],
+  "kyuugyou": [
+    {
+      "char": "休業",
+      "en": "closed (e.g. store),business suspended,shutdown,holiday"
+    }
+  ],
+  "yuuhi": [
+    {
+      "char": "夕日",
+      "en": "(in) the evening sun,setting sun"
+    }
+  ],
+  "orosu": [
+    {
+      "char": "卸す",
+      "en": "to sell wholesale,grated (vegetables)"
+    }
+  ],
+  "houteishiki": [
+    {
+      "char": "方程式",
+      "en": "equation"
+    }
+  ],
+  "damasu": [
+    {
+      "char": "だます",
+      "en": "to trick,to cheat,to deceive"
+    }
+  ],
+  "ryouji": [
+    {
+      "char": "領事",
+      "en": "consul"
+    }
+  ],
+  "haguruma": [
+    {
+      "char": "歯車",
+      "en": "gear,cog-wheel"
+    }
+  ],
+  "kanzuru": [
+    {
+      "char": "感ずる",
+      "en": "to feel,to sense"
+    }
+  ],
+  "meizuru": [
+    {
+      "char": "命ずる",
+      "en": "to command,to appoint"
+    }
+  ],
+  "tsumu": [
+    {
+      "char": "積む",
+      "en": "to pile up,to stack"
+    }
+  ],
+  "tennou": [
+    {
+      "char": "天皇",
+      "en": "Emperor of Japan"
+    }
+  ],
+  "suekko": [
+    {
+      "char": "末っ子",
+      "en": "youngest child"
+    }
+  ],
+  "kakko": [
+    {
+      "char": "括弧",
+      "en": "parenthesis,brackets"
+    }
+  ],
+  "youhinten": [
+    {
+      "char": "洋品店",
+      "en": "shop which handles Western-style apparel and accessories"
+    }
+  ],
+  "tsuriau": [
+    {
+      "char": "釣り合う",
+      "en": "to balance,to be in harmony,to suit"
+    }
+  ],
+  "ototoi": [
+    {
+      "char": "一昨日",
+      "en": "day before yesterday"
+    }
+  ],
+  "daishou": [
+    {
+      "char": "大小",
+      "en": "size"
+    }
+  ],
+  "tenten": [
+    {
+      "char": "点々",
+      "en": "here and there,little by little"
+    }
+  ],
+  "hougaku": [
+    {
+      "char": "方角",
+      "en": "direction,way,compass point"
+    }
+  ],
+  "nori": [
+    {
+      "char": "糊",
+      "en": "paste,starch"
+    }
+  ],
+  "omoitsuku": [
+    {
+      "char": "思い付く",
+      "en": "to think of,to hit upon"
+    }
+  ],
+  "teika": [
+    {
+      "char": "低下",
+      "en": "fall,decline,lowering,deterioration"
+    }
+  ],
+  "kewashii": [
+    {
+      "char": "険しい",
+      "en": "inaccessible place,sharp eyes"
+    }
+  ],
+  "sasuga": [
+    {
+      "char": "流石",
+      "en": "clever,adept,good,expectations,as one would expect"
+    }
+  ],
+  "fumoto": [
+    {
+      "char": "麓",
+      "en": "the foot,the bottom,the base (of a mountain)"
+    }
+  ],
+  "kaitou": [
+    {
+      "char": "回答",
+      "en": "reply,answer"
+    }
+  ],
+  "shoudoku": [
+    {
+      "char": "消毒",
+      "en": "disinfection,sterilization"
+    }
+  ],
+  "sakizakishuu": [
+    {
+      "char": "先々週",
+      "en": ""
+    }
+  ],
+  "toubun": [
+    {
+      "char": "等分",
+      "en": "division into equal parts"
+    }
+  ],
+  "tsubu": [
+    {
+      "char": "粒",
+      "en": "grain"
+    }
+  ],
+  "saisoku": [
+    {
+      "char": "催促",
+      "en": "request,demand,claim,urge (action),press for"
+    }
+  ],
+  "shoseki": [
+    {
+      "char": "書籍",
+      "en": "book,publication"
+    }
+  ],
+  "hakuhatsu": [
+    {
+      "char": "白髪",
+      "en": "white or grey hair,trendy hair bleaching"
+    }
+  ],
+  "dotto": [
+    {
+      "char": "どっと",
+      "en": "suddenly"
+    }
+  ],
+  "setomono": [
+    {
+      "char": "瀬戸物",
+      "en": "earthenware,crockery,china"
+    }
+  ],
+  "totonou": [
+    {
+      "char": "整う",
+      "en": "to be prepared,to be in order,to be put in order,to be arranged"
+    }
+  ],
+  "tachidomaru": [
+    {
+      "char": "立ち止まる",
+      "en": "to stop,to halt,to stand still"
+    }
+  ],
+  "keikoutou": [
+    {
+      "char": "蛍光灯",
+      "en": "fluorescent lamp,person who is slow to react"
+    }
+  ],
+  "yokosu": [
+    {
+      "char": "よこす",
+      "en": "(1) to send,to forward,(2) to hand over (e.g. money)"
+    }
+  ],
+  "nakayoshi": [
+    {
+      "char": "仲良し",
+      "en": "intimate friend,bosom buddy,chum"
+    }
+  ],
+  "kuchibiru": [
+    {
+      "char": "唇",
+      "en": "lips"
+    }
+  ],
+  "sakuin": [
+    {
+      "char": "索引",
+      "en": "index,indices"
+    }
+  ],
+  "toorikakaru": [
+    {
+      "char": "通り掛かる",
+      "en": "to happen to pass by"
+    }
+  ],
+  "makkuro": [
+    {
+      "char": "真っ黒",
+      "en": "pitch black"
+    }
+  ],
+  "sakasama": [
+    {
+      "char": "逆様",
+      "en": "inversion,upside down"
+    }
+  ],
+  "zuhyou": [
+    {
+      "char": "図表",
+      "en": "chart,diagram,graph"
+    }
+  ],
+  "yorokobu": [
+    {
+      "char": "慶ぶ",
+      "en": ""
+    }
+  ],
+  "chijimeru": [
+    {
+      "char": "縮める",
+      "en": "to shorten,to reduce,to boil down,to shrink"
+    }
+  ],
+  "ranbou": [
+    {
+      "char": "乱暴",
+      "en": "rude,violent,rough,lawless,unreasonable,reckless"
+    }
+  ],
+  "oubaakouto": [
+    {
+      "char": "オーバーコート",
+      "en": ""
+    }
+  ],
+  "tsuuyou": [
+    {
+      "char": "通用",
+      "en": "popular use,circulation"
+    }
+  ],
+  "mokka": [
+    {
+      "char": "目下",
+      "en": "at present,now"
+    }
+  ],
+  "toru": [
+    {
+      "char": "採る",
+      "en": "(1) to adopt (measure, proposal),(2) to pick (fruit)"
+    }
+  ],
+  "naninani": [
+    {
+      "char": "何々",
+      "en": "such and such,What?"
+    }
+  ],
+  "shousha": [
+    {
+      "char": "商社",
+      "en": "trading company,firm"
+    }
+  ],
+  "rusuban": [
+    {
+      "char": "留守番",
+      "en": "care-taking,caretaker,house-watching"
+    }
+  ],
+  "kubun": [
+    {
+      "char": "区分",
+      "en": "division,section,classification"
+    }
+  ],
+  "ashiato": [
+    {
+      "char": "足跡",
+      "en": "footprints"
+    }
+  ],
+  "hirune": [
+    {
+      "char": "昼寝",
+      "en": "nap (at home),siesta"
+    }
+  ],
+  "kouhai": [
+    {
+      "char": "後輩",
+      "en": "junior (at work or school)"
+    }
+  ],
+  "warito": [
+    {
+      "char": "割と",
+      "en": "relatively, comparitively"
+    }
+  ],
+  "chokuzen": [
+    {
+      "char": "直前",
+      "en": "just before"
+    }
+  ],
+  "teikyuubi": [
+    {
+      "char": "定休日",
+      "en": "regular holiday"
+    }
+  ],
+  "yoso": [
+    {
+      "char": "余所",
+      "en": "another place,somewhere else,strange parts"
+    }
+  ],
+  "moukaru": [
+    {
+      "char": "儲かる",
+      "en": "to be profitable,to yield a profit"
+    }
+  ],
+  "shasetsu": [
+    {
+      "char": "社説",
+      "en": "editorial,leading article"
+    }
+  ],
+  "niwaka": [
+    {
+      "char": "俄",
+      "en": "sudden,abrupt,unexpected,improvised,offhand"
+    }
+  ],
+  "tabi": [
+    {
+      "char": "足袋",
+      "en": "tabi,Japanese socks (with split toe)"
+    }
+  ],
+  "fukusuu": [
+    {
+      "char": "複数",
+      "en": "plural,multiple"
+    }
+  ],
+  "nakayubi": [
+    {
+      "char": "中指",
+      "en": "middle finger"
+    }
+  ],
+  "gouri": [
+    {
+      "char": "合理",
+      "en": "rational"
+    }
+  ],
+  "sorou": [
+    {
+      "char": "揃う",
+      "en": "to become complete,to be equal,to be all present,to gather"
+    }
+  ],
+  "rousoku": [
+    {
+      "char": "蝋燭",
+      "en": "candle"
+    }
+  ],
+  "sessuru": [
+    {
+      "char": "接する",
+      "en": "to come in contact with,to connect,to attend,to receive"
+    }
+  ],
+  "soui": [
+    {
+      "char": "相違",
+      "en": "difference,discrepancy,variation"
+    }
+  ],
+  "nikumu": [
+    {
+      "char": "憎む",
+      "en": "to hate,to detest"
+    }
+  ],
+  "mottainai": [
+    {
+      "char": "もったいない",
+      "en": "too good,more than one deserves,wasteful,sacrilegious,unworthy of"
+    }
+  ],
+  "issei": [
+    {
+      "char": "一斉",
+      "en": "simultaneous,all at once"
+    }
+  ],
+  "rainichi": [
+    {
+      "char": "来日",
+      "en": "arrival in Japan,coming to Japan,visit to Japan"
+    }
+  ],
+  "gakuryoku": [
+    {
+      "char": "学力",
+      "en": "scholarship,knowledge,literary ability"
+    }
+  ],
+  "uku": [
+    {
+      "char": "浮く",
+      "en": "to float,to become merry,to become loose"
+    }
+  ],
+  "kigou": [
+    {
+      "char": "記号",
+      "en": "symbol,code"
+    }
+  ],
+  "matsuru": [
+    {
+      "char": "祭る",
+      "en": "to deify,to enshrine"
+    }
+  ],
+  "kakubetsu": [
+    {
+      "char": "格別",
+      "en": "exceptional"
+    }
+  ],
+  "hatsuden": [
+    {
+      "char": "発電",
+      "en": "generation (e.g. power)"
+    }
+  ],
+  "meisaku": [
+    {
+      "char": "名作",
+      "en": "masterpiece"
+    }
+  ],
+  "genkou": [
+    {
+      "char": "原稿",
+      "en": "manuscript,copy"
+    }
+  ],
+  "hyoushiki": [
+    {
+      "char": "標識",
+      "en": "sign,mark"
+    }
+  ],
+  "nichiyouhin": [
+    {
+      "char": "日用品",
+      "en": "daily necessities"
+    }
+  ],
+  "demukaeru": [
+    {
+      "char": "出迎える",
+      "en": "to meet,to greet"
+    }
+  ],
+  "shirizoku": [
+    {
+      "char": "退く",
+      "en": "(1) to retreat,to recede,to withdraw"
+    }
+  ],
+  "kokuseki": [
+    {
+      "char": "国籍",
+      "en": "nationality"
+    }
+  ],
+  "jouka": [
+    {
+      "char": "上下",
+      "en": "high and low,up and down,unloading and loading,praising and blaming"
+    }
+  ],
+  "iyoiyo": [
+    {
+      "char": "いよいよ",
+      "en": "more and more,all the more,increasingly,at last,beyond doubt"
+    }
+  ],
+  "kurumu": [
+    {
+      "char": "くるむ",
+      "en": "to be engulfed in,to be enveloped by,to wrap up"
+    }
+  ],
+  "machiawaseru": [
+    {
+      "char": "待ち合わせる",
+      "en": "to rendezvous,to meet at a prearranged place and time"
+    }
+  ],
+  "toraeru": [
+    {
+      "char": "捕える",
+      "en": "to seize,to grasp,to capture,to arrest"
+    }
+  ],
+  "kenkyo": [
+    {
+      "char": "謙虚",
+      "en": "modesty,humility"
+    }
+  ],
+  "shikichi": [
+    {
+      "char": "敷地",
+      "en": "site"
+    }
+  ],
+  "yougan": [
+    {
+      "char": "溶岩",
+      "en": "lava"
+    }
+  ],
+  "daiichi": [
+    {
+      "char": "だいいち",
+      "en": "first,foremost,# 1"
+    }
+  ],
+  "ishokujuu": [
+    {
+      "char": "衣食住",
+      "en": "necessities of life (food, clothing, etc.)"
+    }
+  ],
+  "fukuramu": [
+    {
+      "char": "膨らむ",
+      "en": "to expand,to swell (out),to get big,to become inflated"
+    }
+  ],
+  "shattaa": [
+    {
+      "char": "シャッター",
+      "en": "shutter"
+    }
+  ],
+  "sumanai": [
+    {
+      "char": "すまない",
+      "en": "sorry (phrase)"
+    }
+  ],
+  "meishi": [
+    {
+      "char": "名詞",
+      "en": "noun"
+    }
+  ],
+  "sekkin": [
+    {
+      "char": "接近",
+      "en": "getting closer,drawing nearer,approaching"
+    }
+  ],
+  "kigae": [
+    {
+      "char": "着替え",
+      "en": "changing clothes,change of clothes"
+    }
+  ],
+  "yanushi": [
+    {
+      "char": "家主",
+      "en": "landlord"
+    }
+  ],
+  "shigeru": [
+    {
+      "char": "茂る",
+      "en": "to grow thick,to luxuriate,to be luxurious"
+    }
+  ],
+  "kikai": [
+    {
+      "char": "器械",
+      "en": "instrument"
+    }
+  ],
+  "teikiken": [
+    {
+      "char": "定期券",
+      "en": "commuter pass,season ticket"
+    }
+  ],
+  "soushite": [
+    {
+      "char": "そうして",
+      "en": "and,like that"
+    }
+  ],
+  "magomago": [
+    {
+      "char": "まごまご",
+      "en": "confused"
+    }
+  ],
+  "fubuki": [
+    {
+      "char": "吹雪",
+      "en": "snow storm"
+    }
+  ],
+  "hosu": [
+    {
+      "char": "干す",
+      "en": "to air,to dry,to desiccate,to drain (off),to drink up"
+    }
+  ],
+  "karakau": [
+    {
+      "char": "からかう",
+      "en": "to ridicule,to tease,to banter with,to make fun of"
+    }
+  ],
+  "chokkei": [
+    {
+      "char": "直径",
+      "en": "diameter"
+    }
+  ],
+  "kuuraa": [
+    {
+      "char": "クーラー",
+      "en": "cooler,air conditioner"
+    }
+  ],
+  "sekidou": [
+    {
+      "char": "赤道",
+      "en": "equator"
+    }
+  ],
+  "mondou": [
+    {
+      "char": "問答",
+      "en": "questions and answers,dialogue"
+    }
+  ],
+  "hashigo": [
+    {
+      "char": "梯子",
+      "en": "ladder,stairs"
+    }
+  ],
+  "tsuyoki": [
+    {
+      "char": "強気",
+      "en": "firm,strong"
+    }
+  ],
+  "hankei": [
+    {
+      "char": "半径",
+      "en": "radius"
+    }
+  ],
+  "deiri": [
+    {
+      "char": "出入り",
+      "en": "in and out,coming and going,free association,income and expenditure,debits and credit"
+    }
+  ],
+  "kuttsukeru": [
+    {
+      "char": "くっつける",
+      "en": "to attach"
+    }
+  ],
+  "gakka": [
+    {
+      "char": "学科",
+      "en": "study subject,course of study"
+    }
+  ],
+  "baiten": [
+    {
+      "char": "売店",
+      "en": "shop,stand"
+    }
+  ],
+  "hantou": [
+    {
+      "char": "半島",
+      "en": "peninsula"
+    }
+  ],
+  "maamaa": [
+    {
+      "char": "まあまあ",
+      "en": "so-so"
+    }
+  ],
+  "myouji": [
+    {
+      "char": "名字",
+      "en": "surname,family name"
+    }
+  ],
+  "kutabireru": [
+    {
+      "char": "くたびれる",
+      "en": "to get tired,to wear out"
+    }
+  ],
+  "moutaa": [
+    {
+      "char": "モーター",
+      "en": "motor"
+    }
+  ],
+  "ranningu": [
+    {
+      "char": "ランニング",
+      "en": "(1) running,(2) tank top"
+    }
+  ],
+  "jougi": [
+    {
+      "char": "定規",
+      "en": "(measuring) ruler"
+    }
+  ],
+  "semento": [
+    {
+      "char": "セメント",
+      "en": "cement"
+    }
+  ],
+  "niou": [
+    {
+      "char": "匂う",
+      "en": "to be fragrant,to smell,to stink"
+    }
+  ],
+  "kizamu": [
+    {
+      "char": "刻む",
+      "en": "to mince,to carve,to engrave"
+    }
+  ],
+  "hyoujun": [
+    {
+      "char": "標準",
+      "en": "standard,level"
+    }
+  ],
+  "udon": [
+    {
+      "char": "うどん",
+      "en": "noodles (Japanese)"
+    }
+  ],
+  "damu": [
+    {
+      "char": "ダム",
+      "en": "dumb"
+    }
+  ],
+  "omachikudasai": [
+    {
+      "char": "おまちください",
+      "en": "Please wait a moment"
+    }
+  ],
+  "sakusei": [
+    {
+      "char": "作成",
+      "en": "frame,draw up,make,producing"
+    }
+  ],
+  "arasou": [
+    {
+      "char": "争う",
+      "en": "to dispute,to argue,to be at variance,to compete"
+    }
+  ],
+  "sabi": [
+    {
+      "char": "錆",
+      "en": "rust (colour)"
+    }
+  ],
+  "azukaru": [
+    {
+      "char": "預かる",
+      "en": "to keep in custody,to receive on deposit,to take charge of"
+    }
+  ],
+  "gochisou": [
+    {
+      "char": "御馳走",
+      "en": "feast,treating (someone)"
+    }
+  ],
+  "memai": [
+    {
+      "char": "めまい",
+      "en": "dizziness,giddiness"
+    }
+  ],
+  "danchi": [
+    {
+      "char": "団地",
+      "en": "multi-unit apartments"
+    }
+  ],
+  "kousui": [
+    {
+      "char": "香水",
+      "en": "perfume"
+    }
+  ],
+  "bunken": [
+    {
+      "char": "文献",
+      "en": "literature,books (reference)"
+    }
+  ],
+  "nekkuresu": [
+    {
+      "char": "ネックレス",
+      "en": "necklace"
+    }
+  ],
+  "koushite": [
+    {
+      "char": "こうして",
+      "en": "thus"
+    }
+  ],
+  "ontai": [
+    {
+      "char": "温帯",
+      "en": "temperate zone"
+    }
+  ],
+  "seiritsu": [
+    {
+      "char": "成立",
+      "en": "coming into existence,arrangements,establishment,completion"
+    }
+  ],
+  "nanibun": [
+    {
+      "char": "何分",
+      "en": "what minute?,how many minutes?"
+    }
+  ],
+  "hanabi": [
+    {
+      "char": "花火",
+      "en": "fireworks"
+    }
+  ],
+  "sasayaku": [
+    {
+      "char": "囁く",
+      "en": "to whisper,to murmur"
+    }
+  ],
+  "saisan": [
+    {
+      "char": "再三",
+      "en": "again and again,repeatedly"
+    }
+  ],
+  "hikizan": [
+    {
+      "char": "引算",
+      "en": "subtraction"
+    }
+  ],
+  "shiizun": [
+    {
+      "char": "シーズン",
+      "en": "season (sporting)"
+    }
+  ],
+  "aikawarazu": [
+    {
+      "char": "あいかわらず",
+      "en": "as ever,as usual,the same"
+    }
+  ],
+  "haiken": [
+    {
+      "char": "拝見",
+      "en": "(hum) (pol) seeing,look at"
+    }
+  ],
+  "shuuryou": [
+    {
+      "char": "終了",
+      "en": "end,close,termination"
+    }
+  ],
+  "inryoku": [
+    {
+      "char": "引力",
+      "en": "gravity"
+    }
+  ],
+  "mensetsu": [
+    {
+      "char": "面接",
+      "en": "interview"
+    }
+  ],
+  "mishin": [
+    {
+      "char": "ミシン",
+      "en": "sewing machine"
+    }
+  ],
+  "kamei": [
+    {
+      "char": "仮名",
+      "en": "(n) alias,pseudonym,pen name"
+    }
+  ],
+  "gyouretsu": [
+    {
+      "char": "行列",
+      "en": "(1) line,procession,(2) matrix (math)"
+    }
+  ],
+  "sashihiki": [
+    {
+      "char": "差し引き",
+      "en": "deduction,subtraction,balance,ebb and flow,rise and fall"
+    }
+  ],
+  "denchuu": [
+    {
+      "char": "電柱",
+      "en": "telephone pole,telegraph pole,lightpole"
+    }
+  ],
+  "shiki": [
+    {
+      "char": "四季",
+      "en": "four seasons"
+    }
+  ],
+  "kiso": [
+    {
+      "char": "基礎",
+      "en": "foundation,basis"
+    }
+  ],
+  "oyasumi": [
+    {
+      "char": "おやすみ",
+      "en": "(1) holiday,absence,rest,(2) (exp) Good night"
+    }
+  ],
+  "katayoru": [
+    {
+      "char": "片寄る",
+      "en": "to be one-sided,to incline,to be partial"
+    }
+  ],
+  "hirosa": [
+    {
+      "char": "広さ",
+      "en": "extent"
+    }
+  ],
+  "saku": [
+    {
+      "char": "裂く",
+      "en": "to tear,to split"
+    }
+  ],
+  "houmen": [
+    {
+      "char": "方面",
+      "en": "direction,district,field (e.g., of study)"
+    }
+  ],
+  "ranchi": [
+    {
+      "char": "ランチ",
+      "en": "launch,lunch"
+    }
+  ],
+  "okaeri": [
+    {
+      "char": "お帰り",
+      "en": "return,welcome"
+    }
+  ],
+  "shison": [
+    {
+      "char": "子孫",
+      "en": "descendants,posterity,offspring"
+    }
+  ],
+  "tankou": [
+    {
+      "char": "炭鉱",
+      "en": "coal mine,coal pit"
+    }
+  ],
+  "mitsukeru": [
+    {
+      "char": "見付ける",
+      "en": "to be familiar,to discover,to detect"
+    }
+  ],
+  "korogasu": [
+    {
+      "char": "転がす",
+      "en": "to roll"
+    }
+  ],
+  "boudai": [
+    {
+      "char": "膨大",
+      "en": "huge,bulky,enormous,extensive,swelling,expansion"
+    }
+  ],
+  "chokugo": [
+    {
+      "char": "直後",
+      "en": "immediately following"
+    }
+  ],
+  "kenson": [
+    {
+      "char": "謙遜",
+      "en": "humble,humility,modesty"
+    }
+  ],
+  "koumoku": [
+    {
+      "char": "項目",
+      "en": "item"
+    }
+  ],
+  "kamikuzu": [
+    {
+      "char": "紙屑",
+      "en": "wastepaper"
+    }
+  ],
+  "umeru": [
+    {
+      "char": "埋める",
+      "en": "to bury,to fill up,to fill (a seat, a vacant position)"
+    }
+  ],
+  "sugi": [
+    {
+      "char": "杉",
+      "en": "Japanese cedar"
+    }
+  ],
+  "ototoshi": [
+    {
+      "char": "おととし",
+      "en": "year before last"
+    }
+  ],
+  "taezu": [
+    {
+      "char": "絶えず",
+      "en": "constantly"
+    }
+  ],
+  "seitou": [
+    {
+      "char": "政党",
+      "en": "(member of) political party"
+    }
+  ],
+  "chikayoru": [
+    {
+      "char": "近寄る",
+      "en": "to approach,to draw near"
+    }
+  ],
+  "touban": [
+    {
+      "char": "当番",
+      "en": "being on duty"
+    }
+  ],
+  "waribiki": [
+    {
+      "char": "割引",
+      "en": "discount,reduction,rebate"
+    }
+  ],
+  "wakareru": [
+    {
+      "char": "分かれる",
+      "en": "to branch off,to diverge from,to fork,to split,to dispense,to scatter,to divide into"
+    }
+  ],
+  "suteru": [
+    {
+      "char": "棄てる",
+      "en": ""
+    }
+  ],
+  "kaette": [
+    {
+      "char": "却って",
+      "en": "on the contrary,rather,all the more,instead"
+    }
+  ],
+  "inki": [
+    {
+      "char": "インキ",
+      "en": "ink"
+    }
+  ],
+  "kigen": [
+    {
+      "char": "期限",
+      "en": "term,period"
+    }
+  ],
+  "hitotoori": [
+    {
+      "char": "一通り(ひととおり",
+      "en": "ordinary,usual,in general,briefly"
+    }
+  ],
+  "chimei": [
+    {
+      "char": "地名",
+      "en": "place name"
+    }
+  ],
+  "senzai": [
+    {
+      "char": "洗剤",
+      "en": "detergent,washing material"
+    }
+  ],
+  "uriage": [
+    {
+      "char": "売上",
+      "en": "amount sold,proceeds"
+    }
+  ],
+  "naguru": [
+    {
+      "char": "なぐる",
+      "en": "to strike,to hit"
+    }
+  ],
+  "nakami": [
+    {
+      "char": "中身",
+      "en": "contents,interior,substance,filling,(sword) blade"
+    }
+  ],
+  "gensan": [
+    {
+      "char": "原産",
+      "en": "place of origin,habitat"
+    }
+  ],
+  "ryougawa": [
+    {
+      "char": "両側",
+      "en": "both sides"
+    }
+  ],
+  "oshare": [
+    {
+      "char": "おしゃれ",
+      "en": "smartly dressed,someone smartly dressed,fashion-conscious"
+    }
+  ],
+  "kousei": [
+    {
+      "char": "公正",
+      "en": "justice,fairness,impartiality"
+    }
+  ],
+  "okagesamade": [
+    {
+      "char": "おかげさまで",
+      "en": "Thanks to god,thanks to you"
+    }
+  ],
+  "aru": [
+    {
+      "char": "在る",
+      "en": "to live,to be"
+    }
+  ],
+  "zukei": [
+    {
+      "char": "図形",
+      "en": "figure"
+    }
+  ],
+  "tsumazuku": [
+    {
+      "char": "つまずく",
+      "en": "to stumble,to trip"
+    }
+  ],
+  "norikae": [
+    {
+      "char": "乗換",
+      "en": "(n) transfer (trains, buses, etc.)"
+    }
+  ],
+  "toku": [
+    {
+      "char": "溶く",
+      "en": "to dissolve (paint)"
+    }
+  ],
+  "konbanha": [
+    {
+      "char": "こんばんは",
+      "en": "good evening"
+    }
+  ],
+  "sansuu": [
+    {
+      "char": "算数",
+      "en": "arithmetic"
+    }
+  ],
+  "tokushoku": [
+    {
+      "char": "特色",
+      "en": "characteristic,feature"
+    }
+  ],
+  "nibui": [
+    {
+      "char": "鈍い",
+      "en": "dull (e.g. a knife),thickheaded,slow (opposite of fast),stupid"
+    }
+  ],
+  "hazureru": [
+    {
+      "char": "外れる",
+      "en": "to be disconnected,to get out of place,to be off,to be out (e.g. of gear)"
+    }
+  ],
+  "hitsujuhin": [
+    {
+      "char": "必需品",
+      "en": "necessities,necessary article,requisite,essential"
+    }
+  ],
+  "hanashiai": [
+    {
+      "char": "話合い",
+      "en": "discussion,conference"
+    }
+  ],
+  "choumiryou": [
+    {
+      "char": "調味料",
+      "en": "condiment,seasoning"
+    }
+  ],
+  "youki": [
+    {
+      "char": "容器",
+      "en": "container,vessel"
+    }
+  ],
+  "zeikan": [
+    {
+      "char": "税関",
+      "en": "customs house"
+    }
+  ],
+  "nerai": [
+    {
+      "char": "狙い",
+      "en": "aim"
+    }
+  ],
+  "hineru": [
+    {
+      "char": "捻る",
+      "en": "to turn (a switch) on or off,to twist,to puzzle over"
+    }
+  ],
+  "boushi": [
+    {
+      "char": "防止",
+      "en": "prevention,check"
+    }
+  ],
+  "kanazukai": [
+    {
+      "char": "仮名遣い",
+      "en": "kana orthography,syllabary spelling"
+    }
+  ],
+  "kanbyou": [
+    {
+      "char": "看病",
+      "en": "nursing (a patient)"
+    }
+  ],
+  "gojuuon": [
+    {
+      "char": "五十音",
+      "en": "the Japanese syllabary"
+    }
+  ],
+  "shinrui": [
+    {
+      "char": "親類",
+      "en": "relation,kin"
+    }
+  ],
+  "kayui": [
+    {
+      "char": "かゆい",
+      "en": "itchy,itching"
+    }
+  ],
+  "hogaraka": [
+    {
+      "char": "朗らか",
+      "en": "brightness,cheerfulness,melodious"
+    }
+  ],
+  "baibai": [
+    {
+      "char": "バイバイ",
+      "en": ""
+    }
+  ],
+  "kanban": [
+    {
+      "char": "看板",
+      "en": "sign,signboard,doorplate,poster"
+    }
+  ],
+  "ukemotsu": [
+    {
+      "char": "受け持つ",
+      "en": "to take (be in) charge of"
+    }
+  ],
+  "youbun": [
+    {
+      "char": "養分",
+      "en": "nourishment,nutrient"
+    }
+  ],
+  "niramu": [
+    {
+      "char": "睨む",
+      "en": "to glare at,to scowl at,to keep an eye on"
+    }
+  ],
+  "mibun": [
+    {
+      "char": "身分",
+      "en": "social position,social status"
+    }
+  ],
+  "heso": [
+    {
+      "char": "へそ",
+      "en": "navel,belly-button"
+    }
+  ],
+  "mokuzai": [
+    {
+      "char": "木材",
+      "en": "lumber,timber,wood"
+    }
+  ],
+  "shitamachi": [
+    {
+      "char": "下町",
+      "en": "Shitamachi,lower parts of town"
+    }
+  ],
+  "atehameru": [
+    {
+      "char": "あてはめる",
+      "en": "to apply,to adapt"
+    }
+  ],
+  "yabuku": [
+    {
+      "char": "破く",
+      "en": ""
+    }
+  ],
+  "bousan": [
+    {
+      "char": "坊さん",
+      "en": "Buddhist priest,monk"
+    }
+  ],
+  "sumai": [
+    {
+      "char": "住まい",
+      "en": "dwelling,house,residence,address"
+    }
+  ],
+  "nagai": [
+    {
+      "char": "永い",
+      "en": "long,lengthy"
+    }
+  ],
+  "yuusou": [
+    {
+      "char": "郵送",
+      "en": "mailing"
+    }
+  ],
+  "kochirakoso": [
+    {
+      "char": "こちらこそ",
+      "en": "it is I who should say so"
+    }
+  ],
+  "kousu": [
+    {
+      "char": "コース",
+      "en": "course"
+    }
+  ],
+  "tekikaku": [
+    {
+      "char": "的確",
+      "en": "precise,accurate"
+    }
+  ],
+  "suichoku": [
+    {
+      "char": "垂直",
+      "en": "vertical,perpendicular"
+    }
+  ],
+  "tsukihi": [
+    {
+      "char": "月日",
+      "en": "time,years,days"
+    }
+  ],
+  "aidea/aidia": [
+    {
+      "char": "アイデア/アイディア",
+      "en": "idea"
+    }
+  ],
+  "gyangu": [
+    {
+      "char": "ギャング",
+      "en": "gang"
+    }
+  ],
+  "choukoku": [
+    {
+      "char": "彫刻",
+      "en": "carving,engraving,sculpture"
+    }
+  ],
+  "shaburu": [
+    {
+      "char": "しゃぶる",
+      "en": "to suck,to chew"
+    }
+  ],
+  "shoumi": [
+    {
+      "char": "正味",
+      "en": "net (weight)"
+    }
+  ],
+  "haraikomu": [
+    {
+      "char": "払い込む",
+      "en": "to deposit,to pay in"
+    }
+  ],
+  "kudaku": [
+    {
+      "char": "砕く",
+      "en": "to break,to smash"
+    }
+  ],
+  "tanomoshii": [
+    {
+      "char": "頼もしい",
+      "en": "reliable,trustworthy,hopeful,promising"
+    }
+  ],
+  "bouya": [
+    {
+      "char": "坊や",
+      "en": "boy"
+    }
+  ],
+  "tasukaru": [
+    {
+      "char": "助かる",
+      "en": "to be saved,to be rescued,to survive,to be helpful"
+    }
+  ],
+  "kumitateru": [
+    {
+      "char": "組み立てる",
+      "en": "to assemble,to set up,to construct"
+    }
+  ],
+  "suiji": [
+    {
+      "char": "炊事",
+      "en": "cooking,culinary arts"
+    }
+  ],
+  "hau": [
+    {
+      "char": "這う",
+      "en": "to creep,to crawl"
+    }
+  ],
+  "megumareru": [
+    {
+      "char": "恵まれる",
+      "en": "to be blessed with,to be rich in"
+    }
+  ],
+  "daiyaru": [
+    {
+      "char": "ダイヤル",
+      "en": "dial"
+    }
+  ],
+  "omoikkiri": [
+    {
+      "char": "思いっ切り",
+      "en": ""
+    }
+  ],
+  "keiyoudoushi": [
+    {
+      "char": "形容動詞",
+      "en": "adjectival noun,quasi-adjective"
+    }
+  ],
+  "ikubun": [
+    {
+      "char": "幾分",
+      "en": "somewhat"
+    }
+  ],
+  "share": [
+    {
+      "char": "洒落",
+      "en": "joke,pun,witticism"
+    }
+  ],
+  "urayamu": [
+    {
+      "char": "羨む",
+      "en": "to envy"
+    }
+  ],
+  "tamaru": [
+    {
+      "char": "溜まる",
+      "en": "to collect,to gather,to save"
+    }
+  ],
+  "hikage": [
+    {
+      "char": "日陰",
+      "en": "shadow"
+    }
+  ],
+  "hashi": [
+    {
+      "char": "箸",
+      "en": "chopsticks"
+    }
+  ],
+  "sumou": [
+    {
+      "char": "相撲",
+      "en": "sumo wrestling"
+    }
+  ],
+  "karuta": [
+    {
+      "char": "かるた",
+      "en": "(n) playing cards (pt: carta)"
+    }
+  ],
+  "sankaku": [
+    {
+      "char": "三角",
+      "en": "triangle,triangular"
+    }
+  ],
+  "ikiiki": [
+    {
+      "char": "生き生き",
+      "en": "vividly,lively"
+    }
+  ],
+  "ikouru": [
+    {
+      "char": "イコール",
+      "en": "equal"
+    }
+  ],
+  "fukyuu": [
+    {
+      "char": "普及",
+      "en": "diffusion,spread"
+    }
+  ],
+  "chokutsuu": [
+    {
+      "char": "直通",
+      "en": "direct communication"
+    }
+  ],
+  "mawarimichi": [
+    {
+      "char": "回り道",
+      "en": "detour"
+    }
+  ],
+  "koukyuu": [
+    {
+      "char": "高級",
+      "en": "high class,high grade"
+    }
+  ],
+  "nazonazo": [
+    {
+      "char": "謎謎",
+      "en": "riddle,puzzle,enigma"
+    }
+  ],
+  "naderu": [
+    {
+      "char": "撫でる",
+      "en": "to brush gently,to stroke"
+    }
+  ],
+  "kiritsu": [
+    {
+      "char": "規律",
+      "en": "order,rules,law"
+    }
+  ],
+  "warizan": [
+    {
+      "char": "割算",
+      "en": "division (math)"
+    }
+  ],
+  "akumade": [
+    {
+      "char": "飽くまで",
+      "en": "to the end,to the last,stubbornly"
+    }
+  ],
+  "shasei": [
+    {
+      "char": "写生",
+      "en": "sketching,drawing from nature"
+    }
+  ],
+  "hikiukeru": [
+    {
+      "char": "引受る",
+      "en": "to undertake,to take up,to take over"
+    }
+  ],
+  "itoko": [
+    {
+      "char": "従姉妹",
+      "en": "cousin (female)"
+    }
+  ],
+  "hassha": [
+    {
+      "char": "発射",
+      "en": "firing,shooting,discharge,catapult"
+    }
+  ],
+  "noudo": [
+    {
+      "char": "濃度",
+      "en": "concentration,brightness"
+    }
+  ],
+  "shindai": [
+    {
+      "char": "寝台",
+      "en": "bed,couch"
+    }
+  ],
+  "hige": [
+    {
+      "char": "髭",
+      "en": "moustache,beard,whiskers"
+    }
+  ],
+  "katsuryoku": [
+    {
+      "char": "活力",
+      "en": "vitality,energy"
+    }
+  ],
+  "yajirushi": [
+    {
+      "char": "矢印",
+      "en": "directing arrow"
+    }
+  ],
+  "tokutei": [
+    {
+      "char": "特定",
+      "en": "specific,special,particular"
+    }
+  ],
+  "koubutsu": [
+    {
+      "char": "鉱物",
+      "en": "mineral"
+    }
+  ],
+  "hinoiri": [
+    {
+      "char": "日の入り",
+      "en": "sunset"
+    }
+  ],
+  "koshikakeru": [
+    {
+      "char": "腰掛ける",
+      "en": "to sit (down)"
+    }
+  ],
+  "matagu": [
+    {
+      "char": "またぐ",
+      "en": "to straddle"
+    }
+  ],
+  "abareru": [
+    {
+      "char": "暴れる",
+      "en": "to act violently,to rage,to struggle,to be riotous"
+    }
+  ],
+  "zonzuru": [
+    {
+      "char": "存ずる",
+      "en": ""
+    }
+  ],
+  "mijime": [
+    {
+      "char": "みじめ",
+      "en": "(arch) sad,pitiful,wretched"
+    }
+  ],
+  "okotaru": [
+    {
+      "char": "怠る",
+      "en": "to neglect,to be off guard,to be feeling better"
+    }
+  ],
+  "mittomonai": [
+    {
+      "char": "みっともない",
+      "en": "shameful,indecent"
+    }
+  ],
+  "mazeru": [
+    {
+      "char": "混ぜる",
+      "en": "to mix,to stir"
+    }
+  ],
+  "uuru": [
+    {
+      "char": "ウール",
+      "en": "wool"
+    }
+  ],
+  "yuuryou": [
+    {
+      "char": "有料",
+      "en": "admission-paid,toll"
+    }
+  ],
+  "souzoushii": [
+    {
+      "char": "騒々しい",
+      "en": "noisy,boisterous"
+    }
+  ],
+  "hassou": [
+    {
+      "char": "発想",
+      "en": "expression (music),conceptualization"
+    }
+  ],
+  "koten": [
+    {
+      "char": "古典",
+      "en": "old book,classics,classic"
+    }
+  ],
+  "uchiawase": [
+    {
+      "char": "打合せ",
+      "en": "business meeting,previous arrangement,appointment"
+    }
+  ],
+  "tanki": [
+    {
+      "char": "短期",
+      "en": "short term"
+    }
+  ],
+  "shashou": [
+    {
+      "char": "車掌",
+      "en": "(train) conductor"
+    }
+  ],
+  "hinode": [
+    {
+      "char": "日の出",
+      "en": "sunrise"
+    }
+  ],
+  "kogasu": [
+    {
+      "char": "焦がす",
+      "en": "to burn,to scorch,to singe,to char"
+    }
+  ],
+  "kujou": [
+    {
+      "char": "苦情",
+      "en": "complaint,troubles,objection"
+    }
+  ],
+  "nantomo": [
+    {
+      "char": "なんとも",
+      "en": "nothing (with neg. verb),quite,not a bit"
+    }
+  ],
+  "kuyamu": [
+    {
+      "char": "悔やむ",
+      "en": "to mourn"
+    }
+  ],
+  "akireru": [
+    {
+      "char": "あきれる",
+      "en": "to be amazed,to be shocked"
+    }
+  ],
+  "fukisoku": [
+    {
+      "char": "不規則",
+      "en": "irregularity,unsteadiness,disorderly"
+    }
+  ],
+  "kaabu": [
+    {
+      "char": "カーブ",
+      "en": "(1) curve,(2) curve ball (baseball)"
+    }
+  ],
+  "rokkaa": [
+    {
+      "char": "ロッカー",
+      "en": "locker"
+    }
+  ],
+  "genshi": [
+    {
+      "char": "原始",
+      "en": "origin,primeval"
+    }
+  ],
+  "tokubai": [
+    {
+      "char": "特売",
+      "en": "special sale"
+    }
+  ],
+  "omotai": [
+    {
+      "char": "重たい",
+      "en": "heavy,massive,serious"
+    }
+  ],
+  "aburu": [
+    {
+      "char": "あぶる",
+      "en": "to scorch"
+    }
+  ],
+  "zoudai": [
+    {
+      "char": "増大",
+      "en": "enlargement"
+    }
+  ],
+  "kaisuuken": [
+    {
+      "char": "回数券",
+      "en": "book of tickets"
+    }
+  ],
+  "seibetsu": [
+    {
+      "char": "性別",
+      "en": "distinction by sex,sex,gender"
+    }
+  ],
+  "shijuu": [
+    {
+      "char": "始終",
+      "en": "continuously,from beginning to end"
+    }
+  ],
+  "okugai": [
+    {
+      "char": "屋外",
+      "en": "outdoors"
+    }
+  ],
+  "masatsu": [
+    {
+      "char": "摩擦",
+      "en": "friction,rubbing,rubdown,chafe"
+    }
+  ],
+  "tsuuchi": [
+    {
+      "char": "通知",
+      "en": "notice,notification"
+    }
+  ],
+  "ukaberu": [
+    {
+      "char": "浮かべる",
+      "en": "to float,to express,to look (sad, glad)"
+    }
+  ],
+  "itterasshai": [
+    {
+      "char": "いってらっしゃい",
+      "en": ""
+    }
+  ],
+  "mikazuki": [
+    {
+      "char": "三日月",
+      "en": "new moon,crescent moon"
+    }
+  ],
+  "zehitomo": [
+    {
+      "char": "ぜひとも",
+      "en": "by all means (with sense of not taking no for an answer)"
+    }
+  ],
+  "hakike": [
+    {
+      "char": "吐き気",
+      "en": "nausea,sickness in the stomach"
+    }
+  ],
+  "kotai": [
+    {
+      "char": "個体",
+      "en": "an individual"
+    }
+  ],
+  "sonokoro": [
+    {
+      "char": "そのころ",
+      "en": ""
+    }
+  ],
+  "rizumu": [
+    {
+      "char": "リズム",
+      "en": "rhythm"
+    }
+  ],
+  "moru": [
+    {
+      "char": "盛る",
+      "en": "(1) to serve (food, etc.),(2) to fill up,(3) to prescribe"
+    }
+  ],
+  "shoten": [
+    {
+      "char": "書店",
+      "en": "bookshop"
+    }
+  ],
+  "sonoue": [
+    {
+      "char": "そのうえ",
+      "en": "in addition,furthermore"
+    }
+  ],
+  "motareru": [
+    {
+      "char": "もたれる",
+      "en": "to lean against,to lean on,to recline on,to lie heavy (on the stomach)"
+    }
+  ],
+  "chawan": [
+    {
+      "char": "茶碗",
+      "en": "rice bowl,tea cup,teacup"
+    }
+  ],
+  "jinbunkagaku": [
+    {
+      "char": "人文科学",
+      "en": "social sciences,humanities"
+    }
+  ],
+  "seichou": [
+    {
+      "char": "生長",
+      "en": "growth,increment"
+    }
+  ],
+  "hikikaesu": [
+    {
+      "char": "引返す",
+      "en": "to repeat,to send back,to bring back"
+    }
+  ],
+  "suitei": [
+    {
+      "char": "推定",
+      "en": "presumption,assumption,estimation"
+    }
+  ],
+  "minareru": [
+    {
+      "char": "見慣れる",
+      "en": "to become used to seeing,to be familiar with"
+    }
+  ],
+  "chikarazuyoi": [
+    {
+      "char": "力強い",
+      "en": "reassuring,emboldened"
+    }
+  ],
+  "sukisuki": [
+    {
+      "char": "好き好き",
+      "en": "matter of taste"
+    }
+  ],
+  "gejun": [
+    {
+      "char": "下旬",
+      "en": "month (last third of)"
+    }
+  ],
+  "kongou": [
+    {
+      "char": "混合",
+      "en": "mixing,mixture"
+    }
+  ],
+  "subereru": [
+    {
+      "char": "滑れる",
+      "en": ""
+    }
+  ],
+  "yopparai": [
+    {
+      "char": "酔っ払い",
+      "en": "drunkard"
+    }
+  ],
+  "kokuritsu": [
+    {
+      "char": "国立",
+      "en": "national"
+    }
+  ],
+  "houtai": [
+    {
+      "char": "包帯",
+      "en": "bandage,dressing"
+    }
+  ],
+  "nobasu": [
+    {
+      "char": "延ばす",
+      "en": "to lengthen,to stretch,to reach out,to grow (beard)"
+    }
+  ],
+  "teisha": [
+    {
+      "char": "停車",
+      "en": "stopping (e.g. train)"
+    }
+  ],
+  "katamaru": [
+    {
+      "char": "固まる",
+      "en": "to harden,to solidify,to become firm,to become certain"
+    }
+  ],
+  "oukesutora": [
+    {
+      "char": "オーケストラ",
+      "en": "orchestra"
+    }
+  ],
+  "posutaa": [
+    {
+      "char": "ポスター",
+      "en": "poster"
+    }
+  ],
+  "amu": [
+    {
+      "char": "編む",
+      "en": "to knit"
+    }
+  ],
+  "touge": [
+    {
+      "char": "峠",
+      "en": "ridge,(mountain) pass,difficult part"
+    }
+  ],
+  "hatashite": [
+    {
+      "char": "果して",
+      "en": "as was expected,really"
+    }
+  ],
+  "chuusei": [
+    {
+      "char": "中世",
+      "en": "Middle Ages,mediaeval times"
+    }
+  ],
+  "ichidanto": [
+    {
+      "char": "一段と",
+      "en": "greater,more,further,still more"
+    }
+  ],
+  "kangeki": [
+    {
+      "char": "感激",
+      "en": "deep emotion,impression,inspiration"
+    }
+  ],
+  "daimeishi": [
+    {
+      "char": "代名詞",
+      "en": "pronoun"
+    }
+  ],
+  "shuugou": [
+    {
+      "char": "集合",
+      "en": "gathering,assembly,meeting,set (math)"
+    }
+  ],
+  "fuketsu": [
+    {
+      "char": "不潔",
+      "en": "unclean,dirty,filthy,impure"
+    }
+  ],
+  "shouzuru": [
+    {
+      "char": "生ずる",
+      "en": "to cause,to arise,to be generated"
+    }
+  ],
+  "ichiichi": [
+    {
+      "char": "いちいち",
+      "en": "one by one,separately"
+    }
+  ],
+  "gokurousama": [
+    {
+      "char": "ごくろうさま",
+      "en": "Thank you very much for your...."
+    }
+  ],
+  "omachidoosama": [
+    {
+      "char": "おまちどおさま",
+      "en": "Sorry to have kept you waiting"
+    }
+  ],
+  "maido": [
+    {
+      "char": "毎度",
+      "en": "each time,common service-sector greeting"
+    }
+  ],
+  "mechakucha": [
+    {
+      "char": "めちゃくちゃ",
+      "en": "absurd,unreasonable,excessive,messed up,spoiled,wreaked"
+    }
+  ],
+  "fasunaa": [
+    {
+      "char": "ファスナー",
+      "en": "fastener,zipper"
+    }
+  ],
+  "daburu": [
+    {
+      "char": "ダブル",
+      "en": "double"
+    }
+  ],
+  "tairitsu": [
+    {
+      "char": "対立",
+      "en": "confrontation,opposition,antagonism"
+    }
+  ],
+  "sensu": [
+    {
+      "char": "扇子",
+      "en": "folding fan"
+    }
+  ],
+  "okakekudasai": [
+    {
+      "char": "おかけください",
+      "en": ""
+    }
+  ],
+  "kyuuyo": [
+    {
+      "char": "給与",
+      "en": "allowance,grant,supply"
+    }
+  ],
+  "itsunomanika": [
+    {
+      "char": "いつのまにか",
+      "en": "before one knows,unnoticed,unawares"
+    }
+  ],
+  "afureru": [
+    {
+      "char": "あふれる",
+      "en": "to flood,to overflow,to brim over"
+    }
+  ],
+  "darashinai": [
+    {
+      "char": "だらしない",
+      "en": "slovenly,loose,a slut"
+    }
+  ],
+  "juwaki": [
+    {
+      "char": "受話器",
+      "en": "(telephone) receiver"
+    }
+  ],
+  "hagasu": [
+    {
+      "char": "剥す",
+      "en": "(v5s) to tear off,to peel off,to rip off"
+    }
+  ],
+  "keito": [
+    {
+      "char": "毛糸",
+      "en": "knitting wool"
+    }
+  ],
+  "houki": [
+    {
+      "char": "箒",
+      "en": "(n) broom"
+    }
+  ],
+  "kudaru": [
+    {
+      "char": "下る",
+      "en": "to get down,to descend"
+    }
+  ],
+  "kyanpasu": [
+    {
+      "char": "キャンパス",
+      "en": "campus"
+    }
+  ],
+  "eeto": [
+    {
+      "char": "ええと",
+      "en": "let me see,well,er...."
+    }
+  ],
+  "taru": [
+    {
+      "char": "足る",
+      "en": "to be sufficient,to be enough"
+    }
+  ],
+  "tsumaru": [
+    {
+      "char": "詰まる",
+      "en": "to be blocked,to be packed"
+    }
+  ],
+  "suihei": [
+    {
+      "char": "水平",
+      "en": "water level,horizon"
+    }
+  ],
+  "sentou": [
+    {
+      "char": "先頭",
+      "en": "head,lead,vanguard,first"
+    }
+  ],
+  "tsuuyaku": [
+    {
+      "char": "通訳",
+      "en": "interpretation"
+    }
+  ],
+  "shirizokeru": [
+    {
+      "char": "退ける",
+      "en": "to remove,to take away,to dislodge,to put something out of the way"
+    }
+  ],
+  "shinsei": [
+    {
+      "char": "申請",
+      "en": "application,request,petition"
+    }
+  ],
+  "tokorodokoro": [
+    {
+      "char": "所々",
+      "en": "here and there,some parts (of something)"
+    }
+  ],
+  "kougai": [
+    {
+      "char": "公害",
+      "en": "public nuisance,pollution"
+    }
+  ],
+  "ayaui": [
+    {
+      "char": "危うい",
+      "en": "dangerous,critical,grave"
+    }
+  ],
+  "kezuru": [
+    {
+      "char": "削る",
+      "en": "to cut down little by little,to take a percentage"
+    }
+  ],
+  "kyuukou": [
+    {
+      "char": "休講",
+      "en": "lecture cancelled"
+    }
+  ],
+  "haiku": [
+    {
+      "char": "俳句",
+      "en": "haiku poetry"
+    }
+  ],
+  "konkuuru": [
+    {
+      "char": "コンクール",
+      "en": "contest (fr: concours)"
+    }
+  ],
+  "korekushon": [
+    {
+      "char": "コレクション",
+      "en": "(1) collection,(2) correction"
+    }
+  ],
+  "gobusata": [
+    {
+      "char": "御無沙汰",
+      "en": "not writing or contacting for a while"
+    }
+  ],
+  "kushi": [
+    {
+      "char": "櫛",
+      "en": "comb"
+    }
+  ],
+  "iten": [
+    {
+      "char": "移転",
+      "en": "moving,transfer,demise"
+    }
+  ],
+  "jokyouju": [
+    {
+      "char": "助教授",
+      "en": "assistant professor"
+    }
+  ],
+  "kayou": [
+    {
+      "char": "歌謡",
+      "en": "song,ballad"
+    }
+  ],
+  "shikyuu": [
+    {
+      "char": "至急",
+      "en": "urgent,pressing"
+    }
+  ],
+  "murasaki": [
+    {
+      "char": "紫",
+      "en": "purple colour,violet"
+    }
+  ],
+  "shoubu": [
+    {
+      "char": "勝負",
+      "en": "victory or defeat,match,contest,game,bout"
+    }
+  ],
+  "sosokkashii": [
+    {
+      "char": "そそっかしい",
+      "en": "careless,thoughtless"
+    }
+  ],
+  "nerau": [
+    {
+      "char": "狙う",
+      "en": "to aim at"
+    }
+  ],
+  "kon": [
+    {
+      "char": "紺",
+      "en": "navy blue,deep blue"
+    }
+  ],
+  "kegawa": [
+    {
+      "char": "毛皮",
+      "en": "fur,skin,pelt"
+    }
+  ],
+  "bocchan": [
+    {
+      "char": "坊っちゃん",
+      "en": "son (of others)"
+    }
+  ],
+  "kaiyou": [
+    {
+      "char": "海洋",
+      "en": "ocean"
+    }
+  ],
+  "nikui": [
+    {
+      "char": "憎い",
+      "en": "hateful,abominable,poor-looking,detestable"
+    }
+  ],
+  "shako": [
+    {
+      "char": "車庫",
+      "en": "garage,car shed"
+    }
+  ],
+  "gouin": [
+    {
+      "char": "強引",
+      "en": "overbearing,coercive,pushy,forcible,high-handed"
+    }
+  ],
+  "arawasu": [
+    {
+      "char": "著す",
+      "en": "to write,to publish"
+    }
+  ],
+  "yakkyoku": [
+    {
+      "char": "薬局",
+      "en": "pharmacy,drugstore"
+    }
+  ],
+  "seibun": [
+    {
+      "char": "成分",
+      "en": "ingredient,component,composition"
+    }
+  ],
+  "bunpu": [
+    {
+      "char": "分布",
+      "en": "distribution"
+    }
+  ],
+  "makura": [
+    {
+      "char": "枕",
+      "en": "pillow,bolster"
+    }
+  ],
+  "janken": [
+    {
+      "char": "じゃんけん",
+      "en": "(n) rock-scissors-paper game"
+    }
+  ],
+  "kiyoshimu": [
+    {
+      "char": "清む",
+      "en": ""
+    }
+  ],
+  "bunsuu": [
+    {
+      "char": "分数",
+      "en": "fraction (in math)"
+    }
+  ],
+  "gakki": [
+    {
+      "char": "楽器",
+      "en": "musical instrument"
+    }
+  ],
+  "kai": [
+    {
+      "char": "貝",
+      "en": "shell,shellfish"
+    }
+  ],
+  "hade": [
+    {
+      "char": "派手",
+      "en": "showy,loud,gay,flashy,gaudy"
+    }
+  ],
+  "kuzusu": [
+    {
+      "char": "崩す",
+      "en": "to destroy,to pull down,to make change (money)"
+    }
+  ],
+  "ureyuki": [
+    {
+      "char": "売行き",
+      "en": "sales"
+    }
+  ],
+  "sen": [
+    {
+      "char": "栓",
+      "en": "stopper,cork,stopcock"
+    }
+  ],
+  "odaijini": [
+    {
+      "char": "おだいじに",
+      "en": "Take care of yourself"
+    }
+  ],
+  "neji": [
+    {
+      "char": "ねじ",
+      "en": "(a) screw"
+    }
+  ],
+  "kaikan": [
+    {
+      "char": "会館",
+      "en": "meeting hall,assembly hall"
+    }
+  ],
+  "purasuchikku": [
+    {
+      "char": "プラスチック",
+      "en": "plastic"
+    }
+  ],
+  "gomu": [
+    {
+      "char": "ゴム",
+      "en": "gum,rubber,eraser"
+    }
+  ],
+  "suraido": [
+    {
+      "char": "スライド",
+      "en": "slide"
+    }
+  ],
+  "kigu": [
+    {
+      "char": "器具",
+      "en": "utensil"
+    }
+  ],
+  "shouganai": [
+    {
+      "char": "しょうがない",
+      "en": ""
+    }
+  ],
+  "kyoukai": [
+    {
+      "char": "境界",
+      "en": "boundary"
+    }
+  ],
+  "hanahadashii": [
+    {
+      "char": "甚だしい",
+      "en": "extreme,excessive,terrible"
+    }
+  ],
+  "haneru": [
+    {
+      "char": "跳ねる",
+      "en": "to jump,to leap"
+    }
+  ],
+  "shiryou": [
+    {
+      "char": "資料",
+      "en": "materials,data"
+    }
+  ],
+  "minkan": [
+    {
+      "char": "民間",
+      "en": "private,civilian,civil,popular,folk,unofficial"
+    }
+  ],
+  "ido": [
+    {
+      "char": "緯度",
+      "en": "latitude (nav.)"
+    }
+  ],
+  "karappo": [
+    {
+      "char": "空っぽ",
+      "en": "empty,vacant,hollow"
+    }
+  ],
+  "bounasu": [
+    {
+      "char": "ボーナス",
+      "en": "bonus"
+    }
+  ],
+  "hikitomeru": [
+    {
+      "char": "引き止める",
+      "en": "to detain,to check,to restrain"
+    }
+  ],
+  "sakihodo": [
+    {
+      "char": "先程",
+      "en": "some time ago"
+    }
+  ],
+  "minyou": [
+    {
+      "char": "民謡",
+      "en": "folk song,popular song"
+    }
+  ],
+  "shagamu": [
+    {
+      "char": "しゃがむ",
+      "en": "to squat"
+    }
+  ],
+  "hiroba": [
+    {
+      "char": "広場",
+      "en": "plaza"
+    }
+  ],
+  "nakusu": [
+    {
+      "char": "亡くす",
+      "en": "to lose someone, wife, child, etc"
+    }
+  ],
+  "fueru": [
+    {
+      "char": "殖える",
+      "en": "to increase,to multiply"
+    }
+  ],
+  "fugou": [
+    {
+      "char": "符号",
+      "en": "sign,mark,symbol"
+    }
+  ],
+  "dou": [
+    {
+      "char": "銅",
+      "en": "copper"
+    }
+  ],
+  "hahen": [
+    {
+      "char": "破片",
+      "en": "fragment,splinter,broken piece"
+    }
+  ],
+  "kashikomarimashita": [
+    {
+      "char": "かしこまりました",
+      "en": "certainly!"
+    }
+  ],
+  "yuketsu": [
+    {
+      "char": "輸血",
+      "en": "blood transfusion"
+    }
+  ],
+  "zonjiru": [
+    {
+      "char": "存じる",
+      "en": "(hum) to know"
+    }
+  ],
+  "konaida": [
+    {
+      "char": "こないだ",
+      "en": "the other day,lately,recently"
+    }
+  ],
+  "tokekomu": [
+    {
+      "char": "溶け込む",
+      "en": "to melt into"
+    }
+  ],
+  "furaipan": [
+    {
+      "char": "フライパン",
+      "en": "fry pan,frying pan"
+    }
+  ],
+  "kousha": [
+    {
+      "char": "校舎",
+      "en": "school building"
+    }
+  ],
+  "tousho": [
+    {
+      "char": "投書",
+      "en": "letter to the editor,letter from a reader,contribution"
+    }
+  ],
+  "kourasu": [
+    {
+      "char": "コーラス",
+      "en": "chorus"
+    }
+  ],
+  "outotsu": [
+    {
+      "char": "凸凹",
+      "en": "unevenness,roughness,ruggedness"
+    }
+  ],
+  "yatarani": [
+    {
+      "char": "やたらに",
+      "en": "randomly,recklessly,blindly"
+    }
+  ],
+  "sayounara": [
+    {
+      "char": "さようなら",
+      "en": "good-bye"
+    }
+  ],
+  "outai": [
+    {
+      "char": "応対",
+      "en": "receiving,dealing with"
+    }
+  ],
+  "kikkake": [
+    {
+      "char": "きっかけ",
+      "en": "chance,start,cue,excuse"
+    }
+  ],
+  "tomeru": [
+    {
+      "char": "泊める",
+      "en": "to give shelter to,to lodge"
+    }
+  ],
+  "datou": [
+    {
+      "char": "妥当",
+      "en": "valid,proper,right,appropriate"
+    }
+  ],
+  "honbu": [
+    {
+      "char": "本部",
+      "en": "headquarters"
+    }
+  ],
+  "manten": [
+    {
+      "char": "満点",
+      "en": "perfect score"
+    }
+  ],
+  "kobosu": [
+    {
+      "char": "こぼす",
+      "en": "to spill"
+    }
+  ],
+  "majiru": [
+    {
+      "char": "交じる",
+      "en": "to be mixed,to be blended with,to associate with"
+    }
+  ],
+  "beteran": [
+    {
+      "char": "ベテラン",
+      "en": "veteran"
+    }
+  ],
+  "otoshimono": [
+    {
+      "char": "落し物",
+      "en": "lost property"
+    }
+  ],
+  "kaketsu": [
+    {
+      "char": "可決",
+      "en": "approval,adoption (e.g. motion, bill),passage"
+    }
+  ],
+  "kanmuri": [
+    {
+      "char": "冠",
+      "en": "crown,diadem,first,best"
+    }
+  ],
+  "saraishuu": [
+    {
+      "char": "再来週",
+      "en": "week after next"
+    }
+  ],
+  "chouhoukei": [
+    {
+      "char": "長方形",
+      "en": "rectangle,oblong"
+    }
+  ],
+  "katamukeraka": [
+    {
+      "char": "傾けらか",
+      "en": ""
+    }
+  ],
+  "urouro": [
+    {
+      "char": "うろうろ",
+      "en": "loiteringly,aimless wandering"
+    }
+  ],
+  "ooyoso": [
+    {
+      "char": "大凡",
+      "en": "about,roughly,as a rule,approximately"
+    }
+  ],
+  "shikai": [
+    {
+      "char": "司会",
+      "en": "chairmanship"
+    }
+  ],
+  "chikajika": [
+    {
+      "char": "近々",
+      "en": "nearness,before long"
+    }
+  ],
+  "yuukan": [
+    {
+      "char": "夕刊",
+      "en": "evening paper"
+    }
+  ],
+  "shokki": [
+    {
+      "char": "食器",
+      "en": "tableware"
+    }
+  ],
+  "kama": [
+    {
+      "char": "釜",
+      "en": "iron pot,kettle"
+    }
+  ],
+  "jouhatsu": [
+    {
+      "char": "蒸発",
+      "en": "evaporation,unexplained disappearance"
+    }
+  ],
+  "tachimachi": [
+    {
+      "char": "たちまち",
+      "en": "at once,in a moment,suddenly,all at once"
+    }
+  ],
+  "haraimodosu": [
+    {
+      "char": "払い戻す",
+      "en": "to repay,to pay back"
+    }
+  ],
+  "ittemairimasu": [
+    {
+      "char": "いってまいります",
+      "en": ""
+    }
+  ],
+  "rettou": [
+    {
+      "char": "列島",
+      "en": "chain of islands"
+    }
+  ],
+  "bokujou": [
+    {
+      "char": "牧場",
+      "en": "(1) farm (livestock),(2) pasture land,meadow,grazing land"
+    }
+  ],
+  "miorosu": [
+    {
+      "char": "見下ろす",
+      "en": "to overlook,to command a view of,to look down on something"
+    }
+  ],
+  "kudoi": [
+    {
+      "char": "くどい",
+      "en": "verbose,importunate,heavy (taste)"
+    }
+  ],
+  "-choutan": [
+    {
+      "char": "-長短",
+      "en": "length,long and short,+"
+    }
+  ],
+  "matomaru": [
+    {
+      "char": "纏まる",
+      "en": "to be collected,to be settled,to be in order"
+    }
+  ],
+  "douzoyoroshiku": [
+    {
+      "char": "どうぞよろしく",
+      "en": "pleased to meet you"
+    }
+  ],
+  "keitou": [
+    {
+      "char": "系統",
+      "en": "system,family line,geological formation"
+    }
+  ],
+  "birudingu": [
+    {
+      "char": "ビルディング",
+      "en": "building"
+    }
+  ],
+  "sosen": [
+    {
+      "char": "祖先",
+      "en": "ancestor"
+    }
+  ],
+  "keiba": [
+    {
+      "char": "競馬",
+      "en": "horse racing"
+    }
+  ],
+  "goran": [
+    {
+      "char": "御覧",
+      "en": "(hon) look,inspection,try"
+    }
+  ],
+  "baransu": [
+    {
+      "char": "バランス",
+      "en": "balance"
+    }
+  ],
+  "yougo": [
+    {
+      "char": "用語",
+      "en": "term,terminology"
+    }
+  ],
+  "saihou": [
+    {
+      "char": "裁縫",
+      "en": "sewing"
+    }
+  ],
+  "ryoushuu": [
+    {
+      "char": "領収",
+      "en": "receipt,voucher"
+    }
+  ],
+  "kiwotsukeru": [
+    {
+      "char": "気を付ける",
+      "en": "to be careful,to pay attention,to take care"
+    }
+  ],
+  "denryuu": [
+    {
+      "char": "電流",
+      "en": "electric current"
+    }
+  ],
+  "tamerau": [
+    {
+      "char": "ためらう",
+      "en": "to hesitate"
+    }
+  ],
+  "mei": [
+    {
+      "char": "姪",
+      "en": "niece"
+    }
+  ],
+  "ikebana": [
+    {
+      "char": "生け花",
+      "en": "(1) flower arrangement"
+    }
+  ],
+  "sarariiman": [
+    {
+      "char": "サラリーマン",
+      "en": "salary man,company employee"
+    }
+  ],
+  "fukamaru": [
+    {
+      "char": "深まる",
+      "en": "to deepen,to heighten,to intensify"
+    }
+  ],
+  "sassato": [
+    {
+      "char": "さっさと",
+      "en": "quickly"
+    }
+  ],
+  "juken": [
+    {
+      "char": "受験",
+      "en": "taking an examination"
+    }
+  ],
+  "koyubi": [
+    {
+      "char": "小指",
+      "en": "little finger"
+    }
+  ],
+  "naika": [
+    {
+      "char": "内科",
+      "en": "internist clinic,internal medicine"
+    }
+  ],
+  "seibi": [
+    {
+      "char": "整備",
+      "en": "adjustment,completion,consolidation"
+    }
+  ],
+  "kamotsu": [
+    {
+      "char": "貨物",
+      "en": "cargo,freight"
+    }
+  ],
+  "sonohoka": [
+    {
+      "char": "そのほか",
+      "en": "otherwise"
+    }
+  ],
+  "nonki": [
+    {
+      "char": "呑気",
+      "en": "carefree,optimistic,careless,reckless,heedless"
+    }
+  ],
+  "kiyoi": [
+    {
+      "char": "清い",
+      "en": "clear,pure,noble"
+    }
+  ],
+  "shitsudo": [
+    {
+      "char": "湿度",
+      "en": "level of humidity"
+    }
+  ],
+  "abura": [
+    {
+      "char": "脂",
+      "en": "fat,tallow,lard"
+    }
+  ],
+  "shippitsu": [
+    {
+      "char": "執筆",
+      "en": "writing"
+    }
+  ],
+  "hikkurikaeru": [
+    {
+      "char": "引っ繰り返る",
+      "en": "to be overturned,to be upset,to topple over,to be reversed"
+    }
+  ],
+  "rakudai": [
+    {
+      "char": "落第",
+      "en": "failure,dropping out of a class"
+    }
+  ],
+  "koumu": [
+    {
+      "char": "公務",
+      "en": "official business,public business"
+    }
+  ],
+  "touyou": [
+    {
+      "char": "東洋",
+      "en": "Orient"
+    }
+  ],
+  "todana": [
+    {
+      "char": "戸棚",
+      "en": "cupboard,locker,closet,wardrobe"
+    }
+  ],
+  "rigai": [
+    {
+      "char": "利害",
+      "en": "advantages and disadvantages,interest"
+    }
+  ],
+  "heibon": [
+    {
+      "char": "平凡",
+      "en": "common,commonplace,ordinary,mediocre"
+    }
+  ],
+  "igo": [
+    {
+      "char": "以後",
+      "en": "after this,from now on,hereafter,thereafter"
+    }
+  ],
+  "shiokarai": [
+    {
+      "char": "塩辛い",
+      "en": "salty (taste)"
+    }
+  ],
+  "fukusha": [
+    {
+      "char": "複写",
+      "en": "copy,duplicate"
+    }
+  ],
+  "fukasu": [
+    {
+      "char": "蒸す",
+      "en": "to steam,to poultice,to be sultry"
+    }
+  ],
+  "junjun": [
+    {
+      "char": "順々",
+      "en": "in order,in turn"
+    }
+  ],
+  "herikoputaa": [
+    {
+      "char": "ヘリコプター",
+      "en": "helicopter"
+    }
+  ],
+  "hyouron": [
+    {
+      "char": "評論",
+      "en": "criticism,critique"
+    }
+  ],
+  "muji": [
+    {
+      "char": "無地",
+      "en": "plain,unfigured"
+    }
+  ],
+  "koutai": [
+    {
+      "char": "交替",
+      "en": "alternation,change,relief,relay,shift"
+    }
+  ],
+  "shoukyokuteki": [
+    {
+      "char": "消極的",
+      "en": "passive"
+    }
+  ],
+  "omedetai": [
+    {
+      "char": "おめでたい",
+      "en": "happy event,matter for congratulation,auspicious event,pregnancy"
+    }
+  ],
+  "geka": [
+    {
+      "char": "外科",
+      "en": "surgical department"
+    }
+  ],
+  "taia": [
+    {
+      "char": "タイア",
+      "en": "tire,tyre"
+    }
+  ],
+  "bunkai": [
+    {
+      "char": "分解",
+      "en": "analysis,disassembly"
+    }
+  ],
+  "gakujutsu": [
+    {
+      "char": "学術",
+      "en": "science,learning,scholarship"
+    }
+  ],
+  "kouhyou": [
+    {
+      "char": "公表",
+      "en": "official announcement,proclamation"
+    }
+  ],
+  "hakari": [
+    {
+      "char": "秤",
+      "en": "scales,weighing machine"
+    }
+  ],
+  "antena": [
+    {
+      "char": "アンテナ",
+      "en": "antenna"
+    }
+  ],
+  "suiyou": [
+    {
+      "char": "水曜",
+      "en": "Wednesday"
+    }
+  ],
+  "mataha": [
+    {
+      "char": "又は",
+      "en": "or,otherwise"
+    }
+  ],
+  "kozukai": [
+    {
+      "char": "小遣い",
+      "en": "personal expenses,pocket money,spending money,incidental expenses,allowance"
+    }
+  ],
+  "satsuei": [
+    {
+      "char": "撮影",
+      "en": "photographing"
+    }
+  ],
+  "hane": [
+    {
+      "char": "羽根",
+      "en": "shuttlecock"
+    }
+  ],
+  "butsukaru": [
+    {
+      "char": "ぶつかる",
+      "en": "to strike,to collide with"
+    }
+  ],
+  "jiei": [
+    {
+      "char": "自衛",
+      "en": "self-defense"
+    }
+  ],
+  "hakki": [
+    {
+      "char": "発揮",
+      "en": "exhibition,demonstration,utilization,display"
+    }
+  ],
+  "houshin": [
+    {
+      "char": "方針",
+      "en": "objective,plan,policy"
+    }
+  ],
+  "waku": [
+    {
+      "char": "湧く",
+      "en": "to boil,to grow hot,to get excited,to gush forth"
+    }
+  ],
+  "kuzu": [
+    {
+      "char": "屑",
+      "en": "waste,scrap"
+    }
+  ],
+  "kankaku": [
+    {
+      "char": "間隔",
+      "en": "space,interval,SPC"
+    }
+  ],
+  "toreeningu": [
+    {
+      "char": "トレーニング",
+      "en": "training"
+    }
+  ],
+  "koujitsu": [
+    {
+      "char": "口実",
+      "en": "excuse"
+    }
+  ],
+  "ajiwau": [
+    {
+      "char": "味わう",
+      "en": "to taste,to savor,to relish"
+    }
+  ],
+  "chijin": [
+    {
+      "char": "知人",
+      "en": "friend,acquaintance"
+    }
+  ],
+  "mendoukusai": [
+    {
+      "char": "面倒臭い",
+      "en": "bother to do,tiresome"
+    }
+  ],
+  "kaiten": [
+    {
+      "char": "回転",
+      "en": "rotation,revolution,turning"
+    }
+  ],
+  "mitsukaru": [
+    {
+      "char": "見付かる",
+      "en": "to be found,to be discovered"
+    }
+  ],
+  "nuu": [
+    {
+      "char": "縫う",
+      "en": "to sew"
+    }
+  ],
+  "misaki": [
+    {
+      "char": "岬",
+      "en": "cape (on coast)"
+    }
+  ],
+  "junkan": [
+    {
+      "char": "循環",
+      "en": "circulation,rotation,cycle"
+    }
+  ],
+  "hoken": [
+    {
+      "char": "保健",
+      "en": "health preservation,hygiene,sanitation"
+    }
+  ],
+  "arai": [
+    {
+      "char": "荒い",
+      "en": "rough,rude,wild"
+    }
+  ],
+  "kishou": [
+    {
+      "char": "起床",
+      "en": "rising,getting out of bed"
+    }
+  ],
+  "yurui": [
+    {
+      "char": "緩い",
+      "en": "loose,lenient,slow"
+    }
+  ],
+  "ijiwaru": [
+    {
+      "char": "意地悪",
+      "en": "malicious,ill-tempered,unkind"
+    }
+  ],
+  "furumau": [
+    {
+      "char": "振舞う",
+      "en": "to behave,to conduct oneself,to entertain (vt)"
+    }
+  ],
+  "marason": [
+    {
+      "char": "マラソン",
+      "en": "marathon"
+    }
+  ],
+  "kaihou": [
+    {
+      "char": "開放",
+      "en": "open,throw open,liberalization"
+    }
+  ],
+  "hakihaki": [
+    {
+      "char": "はきはき",
+      "en": "lucidly"
+    }
+  ],
+  "boro": [
+    {
+      "char": "ぼろ",
+      "en": "rag,scrap,tattered clothes,fault (esp. in a pretense)"
+    }
+  ],
+  "dousa": [
+    {
+      "char": "動作",
+      "en": "action,movements,motions,bearing,behaviour,manners"
+    }
+  ],
+  "menyuu": [
+    {
+      "char": "メニュー",
+      "en": "menu"
+    }
+  ],
+  "kouryoku": [
+    {
+      "char": "効力",
+      "en": "effect,efficacy,validity,potency"
+    }
+  ],
+  "yattsukeru": [
+    {
+      "char": "やっつける",
+      "en": "to attack (an enemy),to beat,to do away with,to finish off"
+    }
+  ],
+  "juuryoku": [
+    {
+      "char": "重力",
+      "en": "gravity"
+    }
+  ],
+  "gochisousama": [
+    {
+      "char": "ごちそうさま",
+      "en": "feast"
+    }
+  ],
+  "youyaku": [
+    {
+      "char": "漸く",
+      "en": "gradually,finally,hardly"
+    }
+  ],
+  "tsukiataru": [
+    {
+      "char": "突き当たる",
+      "en": "to run into,to collide with"
+    }
+  ],
+  "katakana": [
+    {
+      "char": "片仮名",
+      "en": "katakana"
+    }
+  ],
+  "wafuku": [
+    {
+      "char": "和服",
+      "en": "Japanese clothes"
+    }
+  ],
+  "yuge": [
+    {
+      "char": "湯気",
+      "en": "steam,vapour"
+    }
+  ],
+  "binsen": [
+    {
+      "char": "便箋",
+      "en": "writing paper,stationery"
+    }
+  ],
+  "aratamete": [
+    {
+      "char": "改めて",
+      "en": "another time,again,over again,anew,formally"
+    }
+  ],
+  "onchuu": [
+    {
+      "char": "御中",
+      "en": "and Company,Messrs."
+    }
+  ],
+  "shimeru": [
+    {
+      "char": "湿る",
+      "en": "to be wet,to become wet,to be damp"
+    }
+  ],
+  "kakuji": [
+    {
+      "char": "各自",
+      "en": "individual,each"
+    }
+  ],
+  "omataseshimashita": [
+    {
+      "char": "おまたせしました",
+      "en": "Sorry to have kept you waiting"
+    }
+  ],
+  "soreru": [
+    {
+      "char": "逸れる",
+      "en": "to stray (turn) from subject,to get lost,to go astray"
+    }
+  ],
+  "nurasu": [
+    {
+      "char": "濡らす",
+      "en": "to wet,to soak,to dip"
+    }
+  ],
+  "mazaru": [
+    {
+      "char": "混ざる",
+      "en": "to be mixed,to be blended with,to associate with,to mingle with,to join"
+    }
+  ],
+  "kosu": [
+    {
+      "char": "超す",
+      "en": "to cross,to pass,to tide over"
+    }
+  ],
+  "kiru": [
+    {
+      "char": "斬る",
+      "en": "(v5r) to behead,to murder"
+    }
+  ],
+  "noru": [
+    {
+      "char": "載る",
+      "en": "to appear (in print),to be recorded"
+    }
+  ],
+  "jouki": [
+    {
+      "char": "蒸気",
+      "en": "steam,vapour"
+    }
+  ],
+  "suchuwaadesu": [
+    {
+      "char": "スチュワーデス",
+      "en": "stewardess"
+    }
+  ],
+  "dankai": [
+    {
+      "char": "段階",
+      "en": "gradation,grade,stage"
+    }
+  ],
+  "nigoru": [
+    {
+      "char": "濁る",
+      "en": "to become muddy,to get impure"
+    }
+  ],
+  "hatsubai": [
+    {
+      "char": "発売",
+      "en": "sale"
+    }
+  ],
+  "kosuru": [
+    {
+      "char": "擦る",
+      "en": "to rub,to chafe,to file,to frost (glass),to strike (match)"
+    }
+  ],
+  "kasho": [
+    {
+      "char": "個所",
+      "en": "passage,place,point,part"
+    }
+  ],
+  "masuku": [
+    {
+      "char": "マスク",
+      "en": "mask"
+    }
+  ],
+  "dekakeru": [
+    {
+      "char": "出掛ける",
+      "en": "to depart,to set out,to start,to be going out"
+    }
+  ],
+  "tokonoma": [
+    {
+      "char": "床の間",
+      "en": "alcove"
+    }
+  ],
+  "kaitsuu": [
+    {
+      "char": "開通",
+      "en": "opening,open"
+    }
+  ],
+  "okurikamei": [
+    {
+      "char": "送り仮名",
+      "en": "part of word written in kana"
+    }
+  ],
+  "mekkiri": [
+    {
+      "char": "めっきり",
+      "en": "remarkably"
+    }
+  ],
+  "kasanaru": [
+    {
+      "char": "重なる",
+      "en": "to be piled up,lie on top of one another,overlap each other"
+    }
+  ],
+  "naru": [
+    {
+      "char": "生る",
+      "en": "to bear fruit"
+    }
+  ],
+  "mujun": [
+    {
+      "char": "矛盾",
+      "en": "contradiction,inconsistency"
+    }
+  ],
+  "jaguchi": [
+    {
+      "char": "蛇口",
+      "en": "faucet,tap"
+    }
+  ],
+  "kudakeru": [
+    {
+      "char": "砕ける",
+      "en": "to break,to be broken"
+    }
+  ],
+  "tobu": [
+    {
+      "char": "跳ぶ",
+      "en": "to jump,to fly,to leap"
+    }
+  ],
+  "chirigami": [
+    {
+      "char": "塵紙",
+      "en": "tissue paper,toilet paper"
+    }
+  ],
+  "shouka": [
+    {
+      "char": "消化",
+      "en": "digestion"
+    }
+  ],
+  "naname": [
+    {
+      "char": "斜め",
+      "en": "obliqueness"
+    }
+  ],
+  "ooita": [
+    {
+      "char": "大分",
+      "en": "considerably,greatly,a lot"
+    }
+  ],
+  "hamigaki": [
+    {
+      "char": "歯磨き",
+      "en": "dentifrice,toothpaste"
+    }
+  ],
+  "purinto": [
+    {
+      "char": "プリント",
+      "en": "print,handout"
+    }
+  ],
+  "hissha": [
+    {
+      "char": "筆者",
+      "en": "writer,author"
+    }
+  ],
+  "osowaru": [
+    {
+      "char": "教わる",
+      "en": "to be taught"
+    }
+  ],
+  "shuuji": [
+    {
+      "char": "習字",
+      "en": "penmanship"
+    }
+  ],
+  "shimekiru": [
+    {
+      "char": "締め切る",
+      "en": "to shut up"
+    }
+  ],
+  "yobikakeru": [
+    {
+      "char": "呼び掛ける",
+      "en": "to call out to,to accost,to address (crowd),to appeal"
+    }
+  ],
+  "genni": [
+    {
+      "char": "現に",
+      "en": "actually,really"
+    }
+  ],
+  "fuzakeru": [
+    {
+      "char": "ふざける",
+      "en": "to romp,to gambol,to frolic,to joke"
+    }
+  ],
+  "unga": [
+    {
+      "char": "運河",
+      "en": "canal,waterway"
+    }
+  ],
+  "nikka": [
+    {
+      "char": "日課",
+      "en": "daily lesson,daily work,daily routine"
+    }
+  ],
+  "nagabiku": [
+    {
+      "char": "長引く",
+      "en": "to be prolonged,to drag on"
+    }
+  ],
+  "noronoro": [
+    {
+      "char": "のろのろ",
+      "en": "slowly,sluggishly"
+    }
+  ],
+  "hameru": [
+    {
+      "char": "はめる",
+      "en": "(col) to get in,to insert,to put on,to make love"
+    }
+  ],
+  "kuiki": [
+    {
+      "char": "区域",
+      "en": "limits,boundary,domain,zone,sphere,territory"
+    }
+  ],
+  "tanpen": [
+    {
+      "char": "短編",
+      "en": "short (e.g. story, film)"
+    }
+  ],
+  "shiinto-suru": [
+    {
+      "char": "しいんと-する",
+      "en": "silent (as the grave),(deathly) quiet"
+    }
+  ],
+  "zurari": [
+    {
+      "char": "ずらり",
+      "en": ""
+    }
+  ],
+  "jiin": [
+    {
+      "char": "寺院",
+      "en": "temple"
+    }
+  ],
+  "shojun": [
+    {
+      "char": "初旬",
+      "en": "first 10 days of the month"
+    }
+  ],
+  "souridaijin": [
+    {
+      "char": "総理大臣",
+      "en": "Prime Minister"
+    }
+  ],
+  "shikaku": [
+    {
+      "char": "四角",
+      "en": "square"
+    }
+  ],
+  "gakkyuu": [
+    {
+      "char": "学級",
+      "en": "grade in school"
+    }
+  ],
+  "hachi": [
+    {
+      "char": "鉢",
+      "en": "a bowl,a pot"
+    }
+  ],
+  "meue": [
+    {
+      "char": "目上",
+      "en": "superior(s),senior"
+    }
+  ],
+  "hasu": [
+    {
+      "char": "斜",
+      "en": ""
+    }
+  ],
+  "yuudachi": [
+    {
+      "char": "夕立",
+      "en": "(sudden) evening shower (rain)"
+    }
+  ],
+  "shuuten": [
+    {
+      "char": "終点",
+      "en": "terminus,last stop (e.g train)"
+    }
+  ],
+  "gendo": [
+    {
+      "char": "限度",
+      "en": "limit,bounds"
+    }
+  ],
+  "kousen": [
+    {
+      "char": "光線",
+      "en": "beam,light ray"
+    }
+  ],
+  "shinkansen": [
+    {
+      "char": "新幹線",
+      "en": "bullet train (very high speed),shinkansen"
+    }
+  ],
+  "techou": [
+    {
+      "char": "手帳",
+      "en": "notebook"
+    }
+  ],
+  "kufuu": [
+    {
+      "char": "工夫",
+      "en": "labourer,worker"
+    }
+  ],
+  "sameru": [
+    {
+      "char": "冷める",
+      "en": "to become cool,to wear off,to abate,to subside"
+    }
+  ],
+  "tsugu": [
+    {
+      "char": "次ぐ",
+      "en": "to rank next to,to come after"
+    }
+  ],
+  "boshuu": [
+    {
+      "char": "募集",
+      "en": "recruiting,taking applications"
+    }
+  ],
+  "utsusu": [
+    {
+      "char": "映す",
+      "en": "to project,to reflect,to cast (shadow)"
+    }
+  ],
+  "seishounen": [
+    {
+      "char": "青少年",
+      "en": "youth,young person"
+    }
+  ],
+  "youmou": [
+    {
+      "char": "羊毛",
+      "en": "wool"
+    }
+  ],
+  "enogu": [
+    {
+      "char": "絵の具",
+      "en": "colors,paints"
+    }
+  ],
+  "kashiya": [
+    {
+      "char": "貸家",
+      "en": "house for rent"
+    }
+  ],
+  "nankyoku": [
+    {
+      "char": "南極",
+      "en": "south pole,Antarctic"
+    }
+  ],
+  "kanetsu": [
+    {
+      "char": "加熱",
+      "en": "heating"
+    }
+  ],
+  "meisho": [
+    {
+      "char": "名所",
+      "en": "famous place"
+    }
+  ],
+  "kasokudo": [
+    {
+      "char": "加速度",
+      "en": "acceleration"
+    }
+  ],
+  "musuu": [
+    {
+      "char": "無数",
+      "en": "countless number,infinite number"
+    }
+  ],
+  "taiseki": [
+    {
+      "char": "体積",
+      "en": "capacity,volume"
+    }
+  ],
+  "shirouto": [
+    {
+      "char": "素人",
+      "en": "amateur,novice"
+    }
+  ],
+  "bokuchiku": [
+    {
+      "char": "牧畜",
+      "en": "stock-farming"
+    }
+  ],
+  "nasu": [
+    {
+      "char": "為す",
+      "en": "to accomplish,to do"
+    }
+  ],
+  "haku": [
+    {
+      "char": "掃く",
+      "en": "to sweep,to brush,to gather up"
+    }
+  ],
+  "nagusameru": [
+    {
+      "char": "慰める",
+      "en": "to comfort,to console"
+    }
+  ],
+  "shiru": [
+    {
+      "char": "汁",
+      "en": "juice,sap,soup,broth"
+    }
+  ],
+  "terasu": [
+    {
+      "char": "照らす",
+      "en": "to shine on,to illuminate"
+    }
+  ],
+  "echiketto": [
+    {
+      "char": "エチケット",
+      "en": "etiquette"
+    }
+  ],
+  "iremono": [
+    {
+      "char": "入れ物",
+      "en": "container,case,receptacle"
+    }
+  ],
+  "toumei": [
+    {
+      "char": "透明",
+      "en": "transparency,cleanness"
+    }
+  ],
+  "usumeru": [
+    {
+      "char": "薄める",
+      "en": "to dilute,to water down"
+    }
+  ],
+  "kayoichou": [
+    {
+      "char": "通帳",
+      "en": "passbook"
+    }
+  ],
+  "nittei": [
+    {
+      "char": "日程",
+      "en": "agenda"
+    }
+  ],
+  "sensei": [
+    {
+      "char": "専制",
+      "en": "despotism,autocracy"
+    }
+  ],
+  "bakku": [
+    {
+      "char": "バック",
+      "en": "back"
+    }
+  ],
+  "kahansuu": [
+    {
+      "char": "過半数",
+      "en": "majority"
+    }
+  ],
+  "setsuzoku": [
+    {
+      "char": "接続",
+      "en": "(1) connection,union,join,link,(2) changing trains"
+    }
+  ],
+  "kumiawase": [
+    {
+      "char": "組合せ",
+      "en": "combination"
+    }
+  ],
+  "toiawase": [
+    {
+      "char": "問い合わせ",
+      "en": "enquiry,ENQ"
+    }
+  ],
+  "shoubousho": [
+    {
+      "char": "消防署",
+      "en": "fire station"
+    }
+  ],
+  "amayakasu": [
+    {
+      "char": "甘やかす",
+      "en": "to pamper,to spoil"
+    }
+  ],
+  "mokuji": [
+    {
+      "char": "目次",
+      "en": "table of contents"
+    }
+  ],
+  "kakujuu": [
+    {
+      "char": "拡充",
+      "en": "expansion"
+    }
+  ],
+  "sarainen": [
+    {
+      "char": "再来年",
+      "en": "year after next"
+    }
+  ],
+  "jichi": [
+    {
+      "char": "自治",
+      "en": "self-government,autonomy"
+    }
+  ],
+  "junjo": [
+    {
+      "char": "順序",
+      "en": "order,sequence,procedure"
+    }
+  ],
+  "zengo": [
+    {
+      "char": "前後",
+      "en": "around,throughout,front and back,before and behind,before and after"
+    }
+  ],
+  "zaimoku": [
+    {
+      "char": "材木",
+      "en": "lumber,timber"
+    }
+  ],
+  "rika": [
+    {
+      "char": "理科",
+      "en": "science"
+    }
+  ],
+  "toudai": [
+    {
+      "char": "灯台",
+      "en": "lighthouse"
+    }
+  ],
+  "furoshiki": [
+    {
+      "char": "風呂敷",
+      "en": "wrapping cloth,cloth wrapper"
+    }
+  ],
+  "hitorigoto": [
+    {
+      "char": "独り言",
+      "en": "a soliloquy,a monologue,speaking to oneself"
+    }
+  ],
+  "sutokkingu": [
+    {
+      "char": "ストッキング",
+      "en": "stockings"
+    }
+  ],
+  "hisha": [
+    {
+      "char": "陽射",
+      "en": "sunlight,rays of the sun"
+    }
+  ],
+  "semaru": [
+    {
+      "char": "迫る",
+      "en": "to draw near,to press"
+    }
+  ],
+  "chirasu": [
+    {
+      "char": "散らす",
+      "en": "to scatter,to disperse,to distribute"
+    }
+  ],
+  "chippu": [
+    {
+      "char": "チップ",
+      "en": "(1) gratuity,tip,(2) chip"
+    }
+  ],
+  "keibi": [
+    {
+      "char": "警備",
+      "en": "defense,guard,policing,security"
+    }
+  ],
+  "kyouka": [
+    {
+      "char": "強化",
+      "en": "strengthen,intensify,reinforce,solidify"
+    }
+  ],
+  "pisutoru": [
+    {
+      "char": "ピストル",
+      "en": "pistol"
+    }
+  ],
+  "kiban": [
+    {
+      "char": "基盤",
+      "en": "foundation,basis"
+    }
+  ],
+  "kenbikyou": [
+    {
+      "char": "顕微鏡",
+      "en": "microscope"
+    }
+  ],
+  "jutsugo": [
+    {
+      "char": "述語",
+      "en": "predicate"
+    }
+  ],
+  "shoumen": [
+    {
+      "char": "正面",
+      "en": "the front,honesty"
+    }
+  ],
+  "butsubutsu": [
+    {
+      "char": "ぶつぶつ",
+      "en": "grumbling,complaining in a small voice"
+    }
+  ],
+  "kenchou": [
+    {
+      "char": "県庁",
+      "en": "prefectural office"
+    }
+  ],
+  "su": [
+    {
+      "char": "酢",
+      "en": "vinegar"
+    }
+  ],
+  "yakou": [
+    {
+      "char": "夜行",
+      "en": "walking around at night,night train,night travel"
+    }
+  ],
+  "ittan": [
+    {
+      "char": "一旦",
+      "en": "once,for a moment,one morning,temporarily"
+    }
+  ],
+  "sukitooru": [
+    {
+      "char": "透き通る",
+      "en": "to be(come) transparent"
+    }
+  ],
+  "kin": [
+    {
+      "char": "琴",
+      "en": "Koto (Japanese harp)"
+    }
+  ],
+  "deiriguchi": [
+    {
+      "char": "出入口",
+      "en": "exit and entrance"
+    }
+  ],
+  "miseya": [
+    {
+      "char": "店屋",
+      "en": "store,shop"
+    }
+  ],
+  "tokasu": [
+    {
+      "char": "溶かす",
+      "en": "to melt,to dissolve"
+    }
+  ],
+  "oshii": [
+    {
+      "char": "惜しい",
+      "en": "regrettable,disappointing,precious"
+    }
+  ],
+  "hitoyasumi": [
+    {
+      "char": "一休み",
+      "en": "a rest"
+    }
+  ],
+  "oozappa": [
+    {
+      "char": "おおざっぱ",
+      "en": "rough (not precise),broad,sketchy"
+    }
+  ],
+  "bunbougu": [
+    {
+      "char": "文房具",
+      "en": "stationery"
+    }
+  ],
+  "mikake": [
+    {
+      "char": "見掛け",
+      "en": "outward appearance"
+    }
+  ],
+  "haiiro": [
+    {
+      "char": "灰色",
+      "en": "grey,gray,ashen"
+    }
+  ],
+  "moyasu": [
+    {
+      "char": "燃やす",
+      "en": "to burn"
+    }
+  ],
+  "samasu": [
+    {
+      "char": "冷ます",
+      "en": "to cool,to dampen,to let cool"
+    }
+  ],
+  "gehin": [
+    {
+      "char": "下品",
+      "en": "vulgarity,meanness,indecency,coarseness"
+    }
+  ],
+  "furikamei": [
+    {
+      "char": "振り仮名",
+      "en": ",pronunciation key"
+    }
+  ],
+  "ichiryuu": [
+    {
+      "char": "一流",
+      "en": "first class,top grade,foremost,top-notch"
+    }
+  ],
+  "zemi": [
+    {
+      "char": "ゼミ",
+      "en": "(n) seminar"
+    }
+  ],
+  "mageru": [
+    {
+      "char": "曲げる",
+      "en": "to bend,to crook,to lean"
+    }
+  ],
+  "ibaru": [
+    {
+      "char": "威張る",
+      "en": "to be proud,to swagger"
+    }
+  ],
+  "yakamashii": [
+    {
+      "char": "やかましい",
+      "en": "(1) noisy,(2) strict,fussy"
+    }
+  ],
+  "jimi": [
+    {
+      "char": "地味",
+      "en": "plain,simple"
+    }
+  ],
+  "saiten": [
+    {
+      "char": "採点",
+      "en": "marking,grading,looking over"
+    }
+  ],
+  "shimei": [
+    {
+      "char": "氏名",
+      "en": "full name,identity"
+    }
+  ],
+  "manin": [
+    {
+      "char": "満員",
+      "en": "full house,no vacancy,sold out"
+    }
+  ],
+  "mejirushi": [
+    {
+      "char": "目印",
+      "en": "mark,sign,landmark"
+    }
+  ],
+  "hanko": [
+    {
+      "char": "判子",
+      "en": "seal (used for signature)"
+    }
+  ],
+  "namaiki": [
+    {
+      "char": "生意気",
+      "en": "impertinent,saucy,cheeky,conceit,audacious,brazen"
+    }
+  ],
+  "koushuu": [
+    {
+      "char": "公衆",
+      "en": "the public"
+    }
+  ],
+  "shouben": [
+    {
+      "char": "小便",
+      "en": "(col) urine,piss"
+    }
+  ],
+  "tabo": [
+    {
+      "char": "田ぼ",
+      "en": "paddy field,farm"
+    }
+  ],
+  "chuujun": [
+    {
+      "char": "中旬",
+      "en": "second third of a month"
+    }
+  ],
+  "minaosu": [
+    {
+      "char": "見直す",
+      "en": "to look again,to get a better opinion of"
+    }
+  ],
+  "naisen": [
+    {
+      "char": "内線",
+      "en": "phone extension,indoor wiring,inner line"
+    }
+  ],
+  "ukkari": [
+    {
+      "char": "うっかり",
+      "en": "carelessly,thoughtlessly,inadvertently"
+    }
+  ],
+  "shinshin": [
+    {
+      "char": "心身",
+      "en": "mind and body"
+    }
+  ],
+  "sanrin": [
+    {
+      "char": "山林",
+      "en": "mountain forest,mountains and forest"
+    }
+  ],
+  "taiboku": [
+    {
+      "char": "大木",
+      "en": "large tree"
+    }
+  ],
+  "chuukan": [
+    {
+      "char": "中間",
+      "en": "middle,midway,interim"
+    }
+  ],
+  "ensoku": [
+    {
+      "char": "遠足",
+      "en": "trip,hike,picnic"
+    }
+  ],
+  "hajimeni": [
+    {
+      "char": "初めに",
+      "en": ""
+    }
+  ],
+  "sakiototoi": [
+    {
+      "char": "さきおととい",
+      "en": "two days before yesterday"
+    }
+  ],
+  "zousen": [
+    {
+      "char": "造船",
+      "en": "shipbuilding"
+    }
+  ],
+  "goudou": [
+    {
+      "char": "合同",
+      "en": "combination,incorporation,union,amalgamation"
+    }
+  ],
+  "tegoro": [
+    {
+      "char": "手頃",
+      "en": "moderate,handy"
+    }
+  ],
+  "sanchi": [
+    {
+      "char": "産地",
+      "en": "producing area"
+    }
+  ],
+  "sansei": [
+    {
+      "char": "酸性",
+      "en": "acidity"
+    }
+  ],
+  "yusou": [
+    {
+      "char": "輸送",
+      "en": "transport,transportation"
+    }
+  ],
+  "yakusho": [
+    {
+      "char": "役所",
+      "en": "government office,public office"
+    }
+  ],
+  "tsuide": [
+    {
+      "char": "ついで",
+      "en": "opportunity,occasion"
+    }
+  ],
+  "jiban": [
+    {
+      "char": "地盤",
+      "en": "(the) ground"
+    }
+  ],
+  "kawaigaru": [
+    {
+      "char": "かわいがる",
+      "en": "to love,to be affectionate"
+    }
+  ],
+  "seimon": [
+    {
+      "char": "正門",
+      "en": "main gate,main entrance"
+    }
+  ],
+  "nanishiro": [
+    {
+      "char": "なにしろ",
+      "en": "at any rate,anyhow,anyway,in any case"
+    }
+  ],
+  "omoikakenai": [
+    {
+      "char": "思い掛けない",
+      "en": "unexpected,casual"
+    }
+  ],
+  "sashitsukae": [
+    {
+      "char": "差し支え",
+      "en": "hindrance,impediment"
+    }
+  ],
+  "toujitsu": [
+    {
+      "char": "当日",
+      "en": "appointed day,very day"
+    }
+  ],
+  "futsuu": [
+    {
+      "char": "不通",
+      "en": "suspension,interruption,stoppage,tie-up,cessation"
+    }
+  ],
+  "nobori": [
+    {
+      "char": "上り",
+      "en": "up-train (going to Tokyo),ascent"
+    }
+  ],
+  "keishiki": [
+    {
+      "char": "形式",
+      "en": "form,formality,format,math expression"
+    }
+  ],
+  "shiritsu": [
+    {
+      "char": "私立",
+      "en": "private (establishment)"
+    }
+  ],
+  "awatadashii": [
+    {
+      "char": "あわただしい",
+      "en": "busy,hurried,confused,flurried"
+    }
+  ],
+  "uuman": [
+    {
+      "char": "ウーマン",
+      "en": "woman"
+    }
+  ],
+  "zurui": [
+    {
+      "char": "狡い",
+      "en": "sly,cunning"
+    }
+  ],
+  "funabin": [
+    {
+      "char": "船便",
+      "en": "surface mail (ship)"
+    }
+  ],
+  "purattohoumu": [
+    {
+      "char": "プラットホーム",
+      "en": "platform"
+    }
+  ],
+  "shimijimi": [
+    {
+      "char": "しみじみ",
+      "en": "keenly,deeply,heartily"
+    }
+  ],
+  "mamonaku": [
+    {
+      "char": "間も無く",
+      "en": "soon,before long,in a short time"
+    }
+  ],
+  "shouryaku": [
+    {
+      "char": "省略",
+      "en": "omission,abbreviation,abridgment"
+    }
+  ],
+  "kuchibeni": [
+    {
+      "char": "口紅",
+      "en": "lipstick"
+    }
+  ],
+  "otonashii": [
+    {
+      "char": "おとなしい",
+      "en": "obedient,docile,quiet"
+    }
+  ],
+  "gakubu": [
+    {
+      "char": "学部",
+      "en": "department of a university,undergraduate"
+    }
+  ],
+  "reberu": [
+    {
+      "char": "レベル",
+      "en": "level"
+    }
+  ],
+  "tsuuro": [
+    {
+      "char": "通路",
+      "en": "passage,pathway"
+    }
+  ],
+  "uraguchi": [
+    {
+      "char": "裏口",
+      "en": "backdoor,rear entrance"
+    }
+  ],
+  "shihei": [
+    {
+      "char": "紙幣",
+      "en": "paper money,notes,bills"
+    }
+  ],
+  "torikesu": [
+    {
+      "char": "取り消す",
+      "en": "to cancel"
+    }
+  ],
+  "nanbei": [
+    {
+      "char": "南米",
+      "en": "South America"
+    }
+  ],
+  "juutan": [
+    {
+      "char": "じゅうたん",
+      "en": "carpet"
+    }
+  ],
+  "haeru": [
+    {
+      "char": "生える",
+      "en": "(1) to grow,to spring up,(2) to cut (teeth)"
+    }
+  ],
+  "denchi": [
+    {
+      "char": "電池",
+      "en": "battery"
+    }
+  ],
+  "renga": [
+    {
+      "char": "煉瓦",
+      "en": "brick"
+    }
+  ],
+  "monogataru": [
+    {
+      "char": "物語る",
+      "en": "to tell,to indicate"
+    }
+  ],
+  "benjo": [
+    {
+      "char": "便所",
+      "en": "toilet,lavatory,rest room,latrine,comfort station"
+    }
+  ],
+  "bussou": [
+    {
+      "char": "物騒",
+      "en": "dangerous,disturbed,insecure"
+    }
+  ],
+  "shimekiri": [
+    {
+      "char": "締切",
+      "en": "closing,cut-off,end,deadline,Closed,No Entrance"
+    }
+  ],
+  "saraigetsu": [
+    {
+      "char": "再来月",
+      "en": "month after next"
+    }
+  ],
+  "detarame": [
+    {
+      "char": "でたらめ",
+      "en": "(1) irresponsible utterance,nonsense,nonsensical,(2) random"
+    }
+  ],
+  "funka": [
+    {
+      "char": "噴火",
+      "en": "eruption"
+    }
+  ],
+  "hekomu": [
+    {
+      "char": "凹む",
+      "en": "to be dented,to be indented,to yield to,to give,to sink,to collapse,to cave in,to be snubbed"
+    }
+  ],
+  "netsusuru": [
+    {
+      "char": "熱する",
+      "en": "to heat"
+    }
+  ],
+  "isamashii": [
+    {
+      "char": "勇ましい",
+      "en": "brave,valiant,gallant,courageous"
+    }
+  ],
+  "tsuya": [
+    {
+      "char": "艶",
+      "en": "gloss,glaze"
+    }
+  ],
+  "mabushii": [
+    {
+      "char": "まぶしい",
+      "en": "dazzling,radiant"
+    }
+  ],
+  "junsa": [
+    {
+      "char": "巡査",
+      "en": "police,policeman"
+    }
+  ],
+  "yuuyuu": [
+    {
+      "char": "悠々",
+      "en": "quiet,calm,leisurely"
+    }
+  ],
+  "gairon": [
+    {
+      "char": "概論",
+      "en": "intro,outline,general remarks"
+    }
+  ],
+  "monosugoi": [
+    {
+      "char": "物凄い",
+      "en": "earth-shattering,staggering,to a very great extent"
+    }
+  ],
+  "fusai": [
+    {
+      "char": "夫妻",
+      "en": "man and wife,married couple"
+    }
+  ],
+  "donaru": [
+    {
+      "char": "どなる",
+      "en": "to shout,to yell"
+    }
+  ],
+  "tokushu": [
+    {
+      "char": "特殊",
+      "en": "special,unique"
+    }
+  ],
+  "naosu": [
+    {
+      "char": "治す",
+      "en": "to cure,to heal,to fix,to correct,to repair"
+    }
+  ],
+  "koboreru": [
+    {
+      "char": "こぼれる",
+      "en": "to overflow,to spill"
+    }
+  ],
+  "maisuu": [
+    {
+      "char": "枚数",
+      "en": "the number of flat things"
+    }
+  ],
+  "igi": [
+    {
+      "char": "意義",
+      "en": "meaning,significance"
+    }
+  ],
+  "pitari": [
+    {
+      "char": "ぴたり",
+      "en": ""
+    }
+  ],
+  "amimono": [
+    {
+      "char": "編物",
+      "en": "knitting,web"
+    }
+  ],
+  "saakuru": [
+    {
+      "char": "サークル",
+      "en": "circle,sports club (i.e. at a company)"
+    }
+  ],
+  "sukaafu": [
+    {
+      "char": "スカーフ",
+      "en": "scarf"
+    }
+  ],
+  "biniiru": [
+    {
+      "char": "ビニール",
+      "en": "vinyl"
+    }
+  ],
+  "miokuru": [
+    {
+      "char": "見送る",
+      "en": "(1) to see off,to farewell,(2) to escort,(3) to let pass"
+    }
+  ],
+  "musata": [
+    {
+      "char": "無沙汰",
+      "en": "neglecting to stay in contact"
+    }
+  ],
+  "au": [
+    {
+      "char": "遭う",
+      "en": "to meet,to encounter (undesirable nuance)"
+    }
+  ],
+  "eiwa": [
+    {
+      "char": "英和",
+      "en": "English-Japanese (e.g. dictionary)"
+    }
+  ],
+  "tatoeru": [
+    {
+      "char": "例える",
+      "en": "to compare,to liken,to speak figuratively,to illustrate,to use a simile"
+    }
+  ],
+  "noboru": [
+    {
+      "char": "上る",
+      "en": "to ascend,to go up,to climb"
+    }
+  ],
+  "gomi": [
+    {
+      "char": "塵芥",
+      "en": "trash,rubbish"
+    }
+  ],
+  "soutto": [
+    {
+      "char": "そうっと",
+      "en": ""
+    }
+  ],
+  "miru": [
+    {
+      "char": "診る",
+      "en": "to examine (medical)"
+    }
+  ],
+  "sesseto": [
+    {
+      "char": "せっせと",
+      "en": ""
+    }
+  ],
+  "fukin": [
+    {
+      "char": "付近",
+      "en": "neighbourhood,vicinity,environs"
+    }
+  ],
+  "pataan": [
+    {
+      "char": "パターン",
+      "en": "pattern"
+    }
+  ],
+  "puroguramu": [
+    {
+      "char": "プログラム",
+      "en": "program"
+    }
+  ],
+  "denkyuu": [
+    {
+      "char": "電球",
+      "en": "light bulb"
+    }
+  ],
+  "hiyasu": [
+    {
+      "char": "冷やす",
+      "en": "to cool,to refrigerate"
+    }
+  ],
+  "moderu": [
+    {
+      "char": "モデル",
+      "en": "model"
+    }
+  ],
+  "sotsutadashi": [
+    {
+      "char": "卒直",
+      "en": "frankness,candour,openheartedness"
+    }
+  ],
+  "hedateru": [
+    {
+      "char": "隔てる",
+      "en": "to be shut out"
+    }
+  ],
+  "keido": [
+    {
+      "char": "経度",
+      "en": "longitude"
+    }
+  ],
+  "uketori": [
+    {
+      "char": "受取",
+      "en": "receipt"
+    }
+  ],
+  "chousei": [
+    {
+      "char": "調整",
+      "en": "regulation,adjustment,tuning"
+    }
+  ],
+  "kaisan": [
+    {
+      "char": "解散",
+      "en": "breakup,dissolution"
+    }
+  ],
+  "sukikirai": [
+    {
+      "char": "好き嫌い",
+      "en": "likes and dislikes,taste"
+    }
+  ],
+  "butsukeru": [
+    {
+      "char": "ぶつける",
+      "en": "to knock,to run into,to nail on,to strike hard,to hit and attack"
+    }
+  ],
+  "heiya": [
+    {
+      "char": "平野",
+      "en": "plain,open field"
+    }
+  ],
+  "taishou": [
+    {
+      "char": "対照",
+      "en": "contrast,antithesis,comparison"
+    }
+  ],
+  "shouhin": [
+    {
+      "char": "賞品",
+      "en": "prize,trophy"
+    }
+  ],
+  "kanchigai": [
+    {
+      "char": "勘違い",
+      "en": "misunderstanding,wrong guess"
+    }
+  ],
+  "shuuhen": [
+    {
+      "char": "周辺",
+      "en": "circumference,outskirts,environs,(computer) peripheral"
+    }
+  ],
+  "kansoku": [
+    {
+      "char": "観測",
+      "en": "observation"
+    }
+  ],
+  "rokuon": [
+    {
+      "char": "録音",
+      "en": "(audio) recording"
+    }
+  ],
+  "sorenanoni": [
+    {
+      "char": "それなのに",
+      "en": ""
+    }
+  ],
+  "daiyamondo": [
+    {
+      "char": "ダイヤモンド",
+      "en": "diamond"
+    }
+  ],
+  "kubaru": [
+    {
+      "char": "配る",
+      "en": "to distribute,to deliver"
+    }
+  ],
+  "teppou": [
+    {
+      "char": "鉄砲",
+      "en": "gun"
+    }
+  ],
+  "kyakuma": [
+    {
+      "char": "客間",
+      "en": "parlor,guest room"
+    }
+  ],
+  "nouritsu": [
+    {
+      "char": "能率",
+      "en": "efficiency"
+    }
+  ],
+  "suiheisen": [
+    {
+      "char": "水平線",
+      "en": "horizon"
+    }
+  ],
+  "wakaru": [
+    {
+      "char": "分る",
+      "en": "to be understood"
+    }
+  ],
+  "fuzoku": [
+    {
+      "char": "附属",
+      "en": "attached,belonging,affiliated"
+    }
+  ],
+  "hajimemashite": [
+    {
+      "char": "はじめまして",
+      "en": "How do you do?,I am glad to meet you"
+    }
+  ],
+  "youchi": [
+    {
+      "char": "幼稚",
+      "en": "infancy,childish,infantile"
+    }
+  ],
+  "bushu": [
+    {
+      "char": "部首",
+      "en": "radical (of a kanji character)"
+    }
+  ],
+  "shoppu": [
+    {
+      "char": "ショップ",
+      "en": "a shop"
+    }
+  ],
+  "marui": [
+    {
+      "char": "円い",
+      "en": "round,circular,spherical"
+    }
+  ],
+  "hikki": [
+    {
+      "char": "筆記",
+      "en": "(taking) notes,copying"
+    }
+  ],
+  "kashitsu": [
+    {
+      "char": "過失",
+      "en": "error,blunder,accident"
+    }
+  ],
+  "tsunageru": [
+    {
+      "char": "繋げる",
+      "en": "to connect"
+    }
+  ],
+  "banzai": [
+    {
+      "char": "万歳",
+      "en": "hurrah, cheers"
+    }
+  ],
+  "kemui": [
+    {
+      "char": "煙い",
+      "en": "smoky"
+    }
+  ],
+  "gamu": [
+    {
+      "char": "ガム",
+      "en": "chewing gum"
+    }
+  ],
+  "odekake": [
+    {
+      "char": "お出掛け",
+      "en": ""
+    }
+  ],
+  "enkai": [
+    {
+      "char": "宴会",
+      "en": "party,banquet"
+    }
+  ],
+  "fuwafuwa": [
+    {
+      "char": "ふわふわ",
+      "en": "light,soft"
+    }
+  ],
+  "zabuton": [
+    {
+      "char": "座布団",
+      "en": "cushion (Japanese)"
+    }
+  ],
+  "koshou": [
+    {
+      "char": "胡椒",
+      "en": "pepper"
+    }
+  ],
+  "teiden": [
+    {
+      "char": "停電",
+      "en": "failure of electricity"
+    }
+  ],
+  "chairoi": [
+    {
+      "char": "茶色い",
+      "en": ""
+    }
+  ],
+  "akanbou": [
+    {
+      "char": "あかんぼう",
+      "en": "baby"
+    }
+  ],
+  "seisou": [
+    {
+      "char": "清掃",
+      "en": "cleaning"
+    }
+  ],
+  "kaisatsu": [
+    {
+      "char": "改札",
+      "en": "examination of tickets"
+    }
+  ],
+  "atatamaru": [
+    {
+      "char": "暖まる",
+      "en": "to warm up,to get warm"
+    }
+  ],
+  "kogeru": [
+    {
+      "char": "焦げる",
+      "en": "to burn,to be burned"
+    }
+  ],
+  "suisan": [
+    {
+      "char": "水産",
+      "en": "marine products,fisheries"
+    }
+  ],
+  "ueki": [
+    {
+      "char": "植木",
+      "en": "garden shrubs,trees,potted plant"
+    }
+  ],
+  "tenugui": [
+    {
+      "char": "手拭い",
+      "en": "(hand) towel"
+    }
+  ],
+  "midashi": [
+    {
+      "char": "見出し",
+      "en": "heading,caption,subtitle,index"
+    }
+  ],
+  "jinzou": [
+    {
+      "char": "人造",
+      "en": "man-made,synthetic,artificial"
+    }
+  ],
+  "kakuchou": [
+    {
+      "char": "拡張",
+      "en": "expansion,extension,enlargement,escape (ESC)"
+    }
+  ],
+  "sonotame": [
+    {
+      "char": "そのため",
+      "en": "hence,for that reason"
+    }
+  ],
+  "seihoukei": [
+    {
+      "char": "正方形",
+      "en": "square"
+    }
+  ]
+}

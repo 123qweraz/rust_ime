@@ -1,0 +1,3946 @@
+{
+    "donata": [
+        {
+            "char": "どなた",
+            "en": "who"
+        }
+    ],
+    "otokonoko": [
+        {
+            "char": "男の子",
+            "en": "Boy"
+        }
+    ],
+    "nana": [
+        {
+            "char": "七",
+            "en": "Seven"
+        }
+    ],
+    "bangou": [
+        {
+            "char": "番号",
+            "en": "number"
+        }
+    ],
+    "docchi": [
+        {
+            "char": "どっち",
+            "en": "which"
+        }
+    ],
+    "shio": [
+        {
+            "char": "塩",
+            "en": "Salt"
+        }
+    ],
+    "nado": [
+        {
+            "char": "など",
+            "en": "et cetera"
+        }
+    ],
+    "furui": [
+        {
+            "char": "古い",
+            "en": "old (not used for people)"
+        }
+    ],
+    "resutoran": [
+        {
+            "char": "レストラン",
+            "en": "restaurant"
+        }
+    ],
+    "sukunai": [
+        {
+            "char": "少ない",
+            "en": "few, little"
+        }
+    ],
+    "tsuyoi": [
+        {
+            "char": "強い",
+            "en": "powerful"
+        }
+    ],
+    "yobu": [
+        {
+            "char": "呼ぶ",
+            "en": "to call out,to invite"
+        }
+    ],
+    "kakekakaru": [
+        {
+            "char": "掛かかる",
+            "en": "to take time or money"
+        }
+    ],
+    "kouban": [
+        {
+            "char": "交番",
+            "en": "police box"
+        }
+    ],
+    "atama": [
+        {
+            "char": "頭",
+            "en": "head"
+        }
+    ],
+    "doko": [
+        {
+            "char": "どこ",
+            "en": "where"
+        }
+    ],
+    "jisho": [
+        {
+            "char": "辞書",
+            "en": "Dictionary"
+        }
+    ],
+    "ookina": [
+        {
+            "char": "大きな",
+            "en": "big"
+        }
+    ],
+    "maitsuki": [
+        {
+            "char": "毎月",
+            "en": "every month"
+        }
+    ],
+    "taisei": [
+        {
+            "char": "大勢",
+            "en": "great number of people"
+        }
+    ],
+    "marui/marui": [
+        {
+            "char": "丸い",
+            "en": "round,circular"
+        }
+    ],
+    "kaku": [
+        {
+            "char": "角",
+            "en": "a corner"
+        },
+        {
+            "char": "書く",
+            "en": "to write"
+        }
+    ],
+    "daisuki": [
+        {
+            "char": "大好き",
+            "en": "to be very likeable"
+        }
+    ],
+    "takusan": [
+        {
+            "char": "たくさん",
+            "en": "many"
+        }
+    ],
+    "watashi": [
+        {
+            "char": "私",
+            "en": "(humble) I,myself"
+        }
+    ],
+    "mono": [
+        {
+            "char": "物",
+            "en": "thing"
+        }
+    ],
+    "yama": [
+        {
+            "char": "山",
+            "en": "mountain"
+        }
+    ],
+    "tori": [
+        {
+            "char": "鳥",
+            "en": "bird"
+        }
+    ],
+    "ageru": [
+        {
+            "char": "上げる",
+            "en": "to give"
+        }
+    ],
+    "taihen": [
+        {
+            "char": "大変",
+            "en": "difficult situation"
+        },
+        {
+            "char": "たいへん",
+            "en": "very"
+        }
+    ],
+    "oishii": [
+        {
+            "char": "おいしい",
+            "en": "delicious"
+        }
+    ],
+    "gaikoku": [
+        {
+            "char": "外国",
+            "en": "foreign country"
+        }
+    ],
+    "kaze": [
+        {
+            "char": "風邪",
+            "en": "a cold"
+        },
+        {
+            "char": "風",
+            "en": "Wind"
+        }
+    ],
+    "onnanoko": [
+        {
+            "char": "女の子",
+            "en": "Girl"
+        }
+    ],
+    "oriru": [
+        {
+            "char": "降りる",
+            "en": "to get off, to descend"
+        }
+    ],
+    "ushiro": [
+        {
+            "char": "後ろ",
+            "en": "behind"
+        }
+    ],
+    "tanomu": [
+        {
+            "char": "頼む",
+            "en": "to ask, to request"
+        }
+    ],
+    "atsui": [
+        {
+            "char": "熱い",
+            "en": "hot to the touch"
+        },
+        {
+            "char": "暑い",
+            "en": "hot"
+        },
+        {
+            "char": "厚い",
+            "en": "kind, deep, thick"
+        }
+    ],
+    "okiru": [
+        {
+            "char": "起きる",
+            "en": "to get up"
+        }
+    ],
+    "depaato": [
+        {
+            "char": "デパート",
+            "en": "department store"
+        }
+    ],
+    "nananichi": [
+        {
+            "char": "七日",
+            "en": "seven days,the seventh day"
+        }
+    ],
+    "kiru": [
+        {
+            "char": "切る",
+            "en": "to cut"
+        },
+        {
+            "char": "着る",
+            "en": "to put on from the shoulders down"
+        }
+    ],
+    "minami": [
+        {
+            "char": "南",
+            "en": "south"
+        }
+    ],
+    "hashi": [
+        {
+            "char": "箸",
+            "en": "chopsticks"
+        },
+        {
+            "char": "橋",
+            "en": "bridge"
+        }
+    ],
+    "takushii": [
+        {
+            "char": "タクシー",
+            "en": "taxi"
+        }
+    ],
+    "yuubinkyoku": [
+        {
+            "char": "郵便局",
+            "en": "post office"
+        }
+    ],
+    "kami": [
+        {
+            "char": "紙",
+            "en": "paper"
+        }
+    ],
+    "tsutomeru": [
+        {
+            "char": "勤める",
+            "en": "to work for someone"
+        }
+    ],
+    "hashiru": [
+        {
+            "char": "走る",
+            "en": "to run"
+        }
+    ],
+    "teepu": [
+        {
+            "char": "テープ",
+            "en": "tape"
+        }
+    ],
+    "uwagi": [
+        {
+            "char": "上着",
+            "en": "jacket"
+        }
+    ],
+    "miseru": [
+        {
+            "char": "見せる",
+            "en": "to show"
+        }
+    ],
+    "watasu": [
+        {
+            "char": "渡す",
+            "en": "to hand over"
+        }
+    ],
+    "zenbu": [
+        {
+            "char": "全部",
+            "en": "All"
+        }
+    ],
+    "ototoi": [
+        {
+            "char": "一昨日",
+            "en": "day before yesterday"
+        }
+    ],
+    "osara": [
+        {
+            "char": "お皿",
+            "en": "plate, dish"
+        }
+    ],
+    "maiasa": [
+        {
+            "char": "毎朝",
+            "en": "every morning"
+        }
+    ],
+    "asatte": [
+        {
+            "char": "あさって",
+            "en": "day after tomorrow"
+        }
+    ],
+    "kagi": [
+        {
+            "char": "鍵",
+            "en": "Key"
+        }
+    ],
+    "ojunmawarisan": [
+        {
+            "char": "お巡まわりさん",
+            "en": "friendly term for policeman"
+        }
+    ],
+    "jitensha": [
+        {
+            "char": "自転車",
+            "en": "Bicycle"
+        }
+    ],
+    "kumori": [
+        {
+            "char": "曇り",
+            "en": "cloudy weather"
+        }
+    ],
+    "kawaii": [
+        {
+            "char": "可愛い",
+            "en": "Cute"
+        }
+    ],
+    "sore": [
+        {
+            "char": "それ",
+            "en": "that"
+        }
+    ],
+    "kyoushitsu": [
+        {
+            "char": "教室",
+            "en": "Classroom"
+        }
+    ],
+    "puuru": [
+        {
+            "char": "プール",
+            "en": "swimming pool"
+        }
+    ],
+    "mimi": [
+        {
+            "char": "耳",
+            "en": "ear"
+        }
+    ],
+    "dasu": [
+        {
+            "char": "出す",
+            "en": "to put out"
+        }
+    ],
+    "konna": [
+        {
+            "char": "こんな",
+            "en": "Such"
+        }
+    ],
+    "hanbun": [
+        {
+            "char": "半分",
+            "en": "half"
+        }
+    ],
+    "futoi": [
+        {
+            "char": "太い",
+            "en": "fat, thick"
+        }
+    ],
+    "mokuyoubi": [
+        {
+            "char": "木曜日",
+            "en": "Thursday"
+        }
+    ],
+    "ryuugakusei": [
+        {
+            "char": "留学生",
+            "en": "overseas student"
+        }
+    ],
+    "suiyoubi": [
+        {
+            "char": "水曜日",
+            "en": "Wednesday"
+        }
+    ],
+    "tsukuru": [
+        {
+            "char": "作る",
+            "en": "to make"
+        }
+    ],
+    "bataa": [
+        {
+            "char": "バター",
+            "en": "butter"
+        }
+    ],
+    "hagaki": [
+        {
+            "char": "葉書",
+            "en": "postcard"
+        }
+    ],
+    "ichinichi": [
+        {
+            "char": "一日",
+            "en": "first of the month"
+        }
+    ],
+    "fouku": [
+        {
+            "char": "フォーク",
+            "en": "fork"
+        }
+    ],
+    "toru": [
+        {
+            "char": "取る",
+            "en": "to take something"
+        },
+        {
+            "char": "撮る",
+            "en": "to take a photo or record a film"
+        }
+    ],
+    "saa": [
+        {
+            "char": "さあ",
+            "en": "well…"
+        }
+    ],
+    "niku": [
+        {
+            "char": "肉",
+            "en": "meat"
+        }
+    ],
+    "toshokan": [
+        {
+            "char": "図書館",
+            "en": "library"
+        }
+    ],
+    "nichiyoubi": [
+        {
+            "char": "日曜日",
+            "en": "Sunday"
+        }
+    ],
+    "shita": [
+        {
+            "char": "下",
+            "en": "Below"
+        }
+    ],
+    "heta": [
+        {
+            "char": "下手",
+            "en": "unskillful"
+        }
+    ],
+    "usui": [
+        {
+            "char": "薄い",
+            "en": "thin,weak"
+        }
+    ],
+    "kocchi": [
+        {
+            "char": "こっち",
+            "en": "this person or way"
+        }
+    ],
+    "sasu": [
+        {
+            "char": "差す",
+            "en": "to stretch out hands, to raise an umbrella"
+        }
+    ],
+    "tamago": [
+        {
+            "char": "卵",
+            "en": "egg"
+        }
+    ],
+    "choudo": [
+        {
+            "char": "ちょうど",
+            "en": "exactly"
+        }
+    ],
+    "yuuhan": [
+        {
+            "char": "夕飯",
+            "en": "dinner"
+        }
+    ],
+    "shitsumon": [
+        {
+            "char": "質問",
+            "en": "Question"
+        }
+    ],
+    "achira": [
+        {
+            "char": "あちら",
+            "en": "there"
+        }
+    ],
+    "ue": [
+        {
+            "char": "上",
+            "en": "on top of"
+        }
+    ],
+    "dekakeru": [
+        {
+            "char": "出かける",
+            "en": "to go out"
+        }
+    ],
+    "rainen": [
+        {
+            "char": "来年",
+            "en": "next year"
+        }
+    ],
+    "naku": [
+        {
+            "char": "鳴く",
+            "en": "animal noise. to chirp, roar or croak etc."
+        }
+    ],
+    "naifu": [
+        {
+            "char": "ナイフ",
+            "en": "knife"
+        }
+    ],
+    "yaru": [
+        {
+            "char": "やる",
+            "en": "to do"
+        }
+    ],
+    "sekken": [
+        {
+            "char": "せっけん",
+            "en": "soap"
+        }
+    ],
+    "iro": [
+        {
+            "char": "色",
+            "en": "colour"
+        }
+    ],
+    "nyuusu": [
+        {
+            "char": "ニュース",
+            "en": "news"
+        }
+    ],
+    "iya": [
+        {
+            "char": "嫌",
+            "en": "unpleasant"
+        }
+    ],
+    "benkyou": [
+        {
+            "char": "勉強",
+            "en": "to study"
+        }
+    ],
+    "doubutsu": [
+        {
+            "char": "動物",
+            "en": "animal"
+        }
+    ],
+    "wasureru": [
+        {
+            "char": "忘れる",
+            "en": "to forget"
+        }
+    ],
+    "chigau": [
+        {
+            "char": "違う",
+            "en": "to differ"
+        }
+    ],
+    "koe": [
+        {
+            "char": "声",
+            "en": "Voice"
+        }
+    ],
+    "higashi": [
+        {
+            "char": "東",
+            "en": "east"
+        }
+    ],
+    "chizu": [
+        {
+            "char": "地図",
+            "en": "map"
+        }
+    ],
+    "hako": [
+        {
+            "char": "箱",
+            "en": "box"
+        }
+    ],
+    "mouichido": [
+        {
+            "char": "もう一度",
+            "en": "again"
+        }
+    ],
+    "ashita": [
+        {
+            "char": "明日",
+            "en": "tomorrow"
+        }
+    ],
+    "ikaga": [
+        {
+            "char": "いかが",
+            "en": "how"
+        }
+    ],
+    "maitoshi": [
+        {
+            "char": "毎年",
+            "en": "every year"
+        }
+    ],
+    "tabako": [
+        {
+            "char": "煙草",
+            "en": "tobacco,cigarettes"
+        }
+    ],
+    "kabin": [
+        {
+            "char": "花瓶",
+            "en": "a vase"
+        }
+    ],
+    "hana": [
+        {
+            "char": "鼻",
+            "en": "nose"
+        },
+        {
+            "char": "花",
+            "en": "flower"
+        }
+    ],
+    "tsugi": [
+        {
+            "char": "次",
+            "en": "next"
+        }
+    ],
+    "daijoubu": [
+        {
+            "char": "大丈夫",
+            "en": "all right"
+        }
+    ],
+    "ban": [
+        {
+            "char": "晩",
+            "en": "evening"
+        },
+        {
+            "char": "万",
+            "en": "ten thousand"
+        }
+    ],
+    "eigo": [
+        {
+            "char": "英語",
+            "en": "English language"
+        }
+    ],
+    "oru": [
+        {
+            "char": "居る",
+            "en": "to be, to have (used for people and animals)"
+        }
+    ],
+    "ki": [
+        {
+            "char": "木",
+            "en": "tree, wood"
+        }
+    ],
+    "kiro/kiroguramu": [
+        {
+            "char": "キロ",
+            "en": "Kilogram"
+        }
+    ],
+    "motsu": [
+        {
+            "char": "持つ",
+            "en": "to hold"
+        }
+    ],
+    "nukui": [
+        {
+            "char": "温い",
+            "en": "lukewarm"
+        }
+    ],
+    "miru/miru": [
+        {
+            "char": "見る",
+            "en": "to see, to watch"
+        }
+    ],
+    "kiiroi": [
+        {
+            "char": "黄色い",
+            "en": "yellow"
+        }
+    ],
+    "denki": [
+        {
+            "char": "電気",
+            "en": "electricity,electric light"
+        }
+    ],
+    "acchi": [
+        {
+            "char": "あっち",
+            "en": "over there"
+        }
+    ],
+    "kesa": [
+        {
+            "char": "今朝",
+            "en": "this morning"
+        }
+    ],
+    "haru": [
+        {
+            "char": "春",
+            "en": "spring"
+        },
+        {
+            "char": "貼る",
+            "en": "to stick"
+        }
+    ],
+    "natsu": [
+        {
+            "char": "夏",
+            "en": "summer"
+        }
+    ],
+    "hontou": [
+        {
+            "char": "本当",
+            "en": "truth"
+        }
+    ],
+    "ichi": [
+        {
+            "char": "一",
+            "en": "one"
+        }
+    ],
+    "denwa": [
+        {
+            "char": "電話",
+            "en": "telephone"
+        }
+    ],
+    "amai": [
+        {
+            "char": "甘い",
+            "en": "sweet"
+        }
+    ],
+    "mado": [
+        {
+            "char": "窓",
+            "en": "window"
+        }
+    ],
+    "abunai": [
+        {
+            "char": "危ない",
+            "en": "dangerous"
+        }
+    ],
+    "ja/jaa": [
+        {
+            "char": "じゃ",
+            "en": "well then…"
+        }
+    ],
+    "fuku": [
+        {
+            "char": "吹く",
+            "en": "to blow"
+        },
+        {
+            "char": "服",
+            "en": "clothes"
+        }
+    ],
+    "reizouko": [
+        {
+            "char": "冷蔵庫",
+            "en": "refrigerator"
+        }
+    ],
+    "jikan": [
+        {
+            "char": "時間",
+            "en": "Time"
+        }
+    ],
+    "byouin": [
+        {
+            "char": "病院",
+            "en": "hospital"
+        }
+    ],
+    "fuyu": [
+        {
+            "char": "冬",
+            "en": "winter"
+        }
+    ],
+    "kopiisuru": [
+        {
+            "char": "コピーする",
+            "en": "to copy"
+        }
+    ],
+    "rajio": [
+        {
+            "char": "ラジオ",
+            "en": "radio"
+        }
+    ],
+    "akai": [
+        {
+            "char": "明い",
+            "en": "bright"
+        },
+        {
+            "char": "赤い",
+            "en": "red"
+        }
+    ],
+    "mise": [
+        {
+            "char": "店",
+            "en": "shop"
+        }
+    ],
+    "gaikokujin": [
+        {
+            "char": "外国人",
+            "en": "Foreigner"
+        }
+    ],
+    "hidari": [
+        {
+            "char": "左",
+            "en": "left hand side"
+        }
+    ],
+    "hankachi": [
+        {
+            "char": "ハンカチ",
+            "en": "handkerchief"
+        }
+    ],
+    "karendaa": [
+        {
+            "char": "カレンダー",
+            "en": "calendar"
+        }
+    ],
+    "mukou": [
+        {
+            "char": "向こう",
+            "en": "over there"
+        }
+    ],
+    "yuki": [
+        {
+            "char": "雪",
+            "en": "snow"
+        }
+    ],
+    "shigoto": [
+        {
+            "char": "仕事",
+            "en": "Job"
+        }
+    ],
+    "okane": [
+        {
+            "char": "お金",
+            "en": "money"
+        }
+    ],
+    "waishatsu": [
+        {
+            "char": "ワイシャツ",
+            "en": "business shirt"
+        }
+    ],
+    "chiisai": [
+        {
+            "char": "小さい",
+            "en": "little"
+        }
+    ],
+    "toriniku": [
+        {
+            "char": "とり肉",
+            "en": "chicken meat"
+        }
+    ],
+    "gogo": [
+        {
+            "char": "午後",
+            "en": "afternoon"
+        }
+    ],
+    "hare": [
+        {
+            "char": "晴れ",
+            "en": "clear weather"
+        }
+    ],
+    "ikura": [
+        {
+            "char": "いくら",
+            "en": "how much?"
+        }
+    ],
+    "paatii": [
+        {
+            "char": "パーティー",
+            "en": "party"
+        }
+    ],
+    "tanoshii": [
+        {
+            "char": "楽しい",
+            "en": "enjoyable"
+        }
+    ],
+    "nouto": [
+        {
+            "char": "ノート",
+            "en": "notebook,exercise book"
+        }
+    ],
+    "aka": [
+        {
+            "char": "赤",
+            "en": "red"
+        }
+    ],
+    "hajimaru": [
+        {
+            "char": "始まる",
+            "en": "to begin"
+        }
+    ],
+    "yasumi": [
+        {
+            "char": "休み",
+            "en": "rest,holiday"
+        }
+    ],
+    "dochira": [
+        {
+            "char": "どちら",
+            "en": "which of two"
+        }
+    ],
+    "hiraku": [
+        {
+            "char": "開く",
+            "en": "to open, to become open"
+        }
+    ],
+    "ie": [
+        {
+            "char": "家",
+            "en": "house"
+        }
+    ],
+    "neko": [
+        {
+            "char": "猫",
+            "en": "cat"
+        }
+    ],
+    "hayai": [
+        {
+            "char": "早い",
+            "en": "early"
+        },
+        {
+            "char": "速い",
+            "en": "quick"
+        }
+    ],
+    "mina": [
+        {
+            "char": "皆",
+            "en": "everyone"
+        }
+    ],
+    "migaku": [
+        {
+            "char": "磨く",
+            "en": "to brush teeth, to polish"
+        }
+    ],
+    "oniisan": [
+        {
+            "char": "お兄さん",
+            "en": "(honorable) older brother"
+        }
+    ],
+    "suguni": [
+        {
+            "char": "すぐに",
+            "en": "Instantly"
+        }
+    ],
+    "bangohan": [
+        {
+            "char": "晩御飯",
+            "en": "evening meal"
+        }
+    ],
+    "asagohan": [
+        {
+            "char": "朝御飯",
+            "en": "breakfast"
+        }
+    ],
+    "tesuto": [
+        {
+            "char": "テスト",
+            "en": "test"
+        }
+    ],
+    "nani": [
+        {
+            "char": "何",
+            "en": "what"
+        }
+    ],
+    "totemo": [
+        {
+            "char": "とても",
+            "en": "very"
+        }
+    ],
+    "ao": [
+        {
+            "char": "青",
+            "en": "blue"
+        }
+    ],
+    "oyogu": [
+        {
+            "char": "泳ぐ",
+            "en": "to swim"
+        }
+    ],
+    "issho": [
+        {
+            "char": "一緒",
+            "en": "together"
+        }
+    ],
+    "naraberu": [
+        {
+            "char": "並べる",
+            "en": "to line up,to set up"
+        }
+    ],
+    "sebiro": [
+        {
+            "char": "背広",
+            "en": "business suit"
+        }
+    ],
+    "hai": [
+        {
+            "char": "はい",
+            "en": "yes"
+        }
+    ],
+    "koucha": [
+        {
+            "char": "紅茶",
+            "en": "black tea"
+        }
+    ],
+    "ane": [
+        {
+            "char": "姉",
+            "en": "(humble) older sister"
+        }
+    ],
+    "satou": [
+        {
+            "char": "砂糖",
+            "en": "Sugar"
+        }
+    ],
+    "shiro": [
+        {
+            "char": "白",
+            "en": "White"
+        }
+    ],
+    "soushite/soshite": [
+        {
+            "char": "そうして",
+            "en": "And"
+        }
+    ],
+    "wakaru": [
+        {
+            "char": "分かる",
+            "en": "to be understood"
+        }
+    ],
+    "haku": [
+        {
+            "char": "はく",
+            "en": "to wear,to put on trousers"
+        }
+    ],
+    "ryoushin": [
+        {
+            "char": "両親",
+            "en": "both parents"
+        }
+    ],
+    "asa": [
+        {
+            "char": "朝",
+            "en": "morning"
+        }
+    ],
+    "doa": [
+        {
+            "char": "ドア",
+            "en": "Western style door"
+        }
+    ],
+    "sensei": [
+        {
+            "char": "先生",
+            "en": "teacher, doctor"
+        }
+    ],
+    "ookii": [
+        {
+            "char": "大きい",
+            "en": "big"
+        }
+    ],
+    "gitaa": [
+        {
+            "char": "ギター",
+            "en": "Guitar"
+        }
+    ],
+    "shouyu": [
+        {
+            "char": "醤油",
+            "en": "soy sauce"
+        }
+    ],
+    "koppu": [
+        {
+            "char": "コップ",
+            "en": "cup, glass"
+        }
+    ],
+    "keikan": [
+        {
+            "char": "警官",
+            "en": "policeman"
+        }
+    ],
+    "kyuu": [
+        {
+            "char": "九",
+            "en": "Nine"
+        }
+    ],
+    "kau": [
+        {
+            "char": "買う",
+            "en": "to buy"
+        }
+    ],
+    "macchi": [
+        {
+            "char": "マッチ",
+            "en": "match"
+        }
+    ],
+    "deru": [
+        {
+            "char": "出る",
+            "en": "to appear,to leave"
+        }
+    ],
+    "narabu": [
+        {
+            "char": "並ぶ",
+            "en": "to line up,to stand in a line"
+        }
+    ],
+    "souji": [
+        {
+            "char": "掃除",
+            "en": "to clean, to sweep"
+        }
+    ],
+    "ongaku": [
+        {
+            "char": "音楽",
+            "en": "Music"
+        }
+    ],
+    "rajikase / rajiokasetto": [
+        {
+            "char": "ラジカセ ",
+            "en": "radio cassette player"
+        }
+    ],
+    "nomimono": [
+        {
+            "char": "飲み物",
+            "en": "a drink"
+        }
+    ],
+    "itsumo": [
+        {
+            "char": "いつも",
+            "en": "always"
+        }
+    ],
+    "ike": [
+        {
+            "char": "池",
+            "en": "pond"
+        }
+    ],
+    "kaimono": [
+        {
+            "char": "買い物",
+            "en": "Shopping"
+        }
+    ],
+    "youfuku": [
+        {
+            "char": "洋服",
+            "en": "western-style clothes"
+        }
+    ],
+    "soko": [
+        {
+            "char": "そこ",
+            "en": "that place"
+        }
+    ],
+    "sutoubu": [
+        {
+            "char": "ストーブ",
+            "en": "Heater"
+        }
+    ],
+    "sakuya": [
+        {
+            "char": "昨夜",
+            "en": "last night"
+        }
+    ],
+    "raigetsu": [
+        {
+            "char": "来月",
+            "en": "next month"
+        }
+    ],
+    "umi": [
+        {
+            "char": "海",
+            "en": "sea"
+        }
+    ],
+    "kippu": [
+        {
+            "char": "切符",
+            "en": "Ticket"
+        }
+    ],
+    "yonnichi": [
+        {
+            "char": "四日",
+            "en": "four days, fouth day of the month"
+        }
+    ],
+    "tooi": [
+        {
+            "char": "遠い",
+            "en": "far"
+        }
+    ],
+    "sono": [
+        {
+            "char": "その",
+            "en": "That"
+        }
+    ],
+    "getsuyoubi": [
+        {
+            "char": "月曜日",
+            "en": "Monday"
+        }
+    ],
+    "sanpo": [
+        {
+            "char": "散歩",
+            "en": "to stroll"
+        }
+    ],
+    "chikatetsu": [
+        {
+            "char": "地下鉄",
+            "en": "underground train"
+        }
+    ],
+    "oji/oji": [
+        {
+            "char": "伯父",
+            "en": "uncle, middle aged gentleman"
+        }
+    ],
+    "itai": [
+        {
+            "char": "痛い",
+            "en": "painful"
+        }
+    ],
+    "isu": [
+        {
+            "char": "いす",
+            "en": "chair"
+        }
+    ],
+    "tobu": [
+        {
+            "char": "飛ぶ",
+            "en": "to fly,to hop"
+        }
+    ],
+    "hachinichi": [
+        {
+            "char": "八日",
+            "en": "eight days, eighth day of the month"
+        }
+    ],
+    "jibun": [
+        {
+            "char": "自分",
+            "en": "Oneself"
+        }
+    ],
+    "narau": [
+        {
+            "char": "習う",
+            "en": "to learn"
+        }
+    ],
+    "sen": [
+        {
+            "char": "千",
+            "en": "Thousand"
+        }
+    ],
+    "samui": [
+        {
+            "char": "寒い",
+            "en": "Cold"
+        }
+    ],
+    "ii/yoi": [
+        {
+            "char": "いい",
+            "en": "good"
+        }
+    ],
+    "tokei": [
+        {
+            "char": "時計",
+            "en": "watch,clock"
+        }
+    ],
+    "kouto": [
+        {
+            "char": "コート",
+            "en": "coat, tennis court"
+        }
+    ],
+    "ryokou": [
+        {
+            "char": "旅行",
+            "en": "travel"
+        }
+    ],
+    "konban": [
+        {
+            "char": "今晩",
+            "en": "this evening"
+        }
+    ],
+    "hareru": [
+        {
+            "char": "晴れる",
+            "en": "to be sunny"
+        }
+    ],
+    "petto": [
+        {
+            "char": "ペット",
+            "en": "pet"
+        }
+    ],
+    "renshuu": [
+        {
+            "char": "練習",
+            "en": "to practice"
+        }
+    ],
+    "sorekara": [
+        {
+            "char": "それから",
+            "en": "after that"
+        }
+    ],
+    "oshieru": [
+        {
+            "char": "教える",
+            "en": "to teach, to tell"
+        }
+    ],
+    "tokidoki": [
+        {
+            "char": "時々",
+            "en": "sometimes"
+        }
+    ],
+    "poketto": [
+        {
+            "char": "ポケット",
+            "en": "pocket"
+        }
+    ],
+    "koko": [
+        {
+            "char": "ここ",
+            "en": "Here"
+        }
+    ],
+    "kiro/kiromeetoru": [
+        {
+            "char": "キロ",
+            "en": "Kilometer"
+        }
+    ],
+    "kongetsu": [
+        {
+            "char": "今月",
+            "en": "this month"
+        }
+    ],
+    "hiku": [
+        {
+            "char": "弾く",
+            "en": "to play an instrument with strings, including piano"
+        },
+        {
+            "char": "引く",
+            "en": "to pull"
+        }
+    ],
+    "hon": [
+        {
+            "char": "本",
+            "en": "book"
+        }
+    ],
+    "me": [
+        {
+            "char": "目",
+            "en": "eye"
+        }
+    ],
+    "ikutsu": [
+        {
+            "char": "いくつ",
+            "en": "how many?,how old?"
+        }
+    ],
+    "yukkurito": [
+        {
+            "char": "ゆっくりと",
+            "en": "slowly"
+        }
+    ],
+    "ichigatsu": [
+        {
+            "char": "一月",
+            "en": "January"
+        }
+    ],
+    "kyonen": [
+        {
+            "char": "去年",
+            "en": "last year"
+        }
+    ],
+    "tate": [
+        {
+            "char": "たて",
+            "en": "length,height"
+        }
+    ],
+    "kappu": [
+        {
+            "char": "カップ",
+            "en": "Cup"
+        }
+    ],
+    "kochira": [
+        {
+            "char": "こちら",
+            "en": "this person or way"
+        }
+    ],
+    "natsuyasumi": [
+        {
+            "char": "夏休み",
+            "en": "summer holiday"
+        }
+    ],
+    "iroiro": [
+        {
+            "char": "いろいろ",
+            "en": "various"
+        }
+    ],
+    "kuru": [
+        {
+            "char": "来る",
+            "en": "to come"
+        }
+    ],
+    "sannichi": [
+        {
+            "char": "三日",
+            "en": "three days, third day of the month"
+        }
+    ],
+    "osoi": [
+        {
+            "char": "遅い",
+            "en": "late, slow"
+        }
+    ],
+    "owaru": [
+        {
+            "char": "終る",
+            "en": "to finish"
+        }
+    ],
+    "shawaa": [
+        {
+            "char": "シャワー",
+            "en": "Shower"
+        }
+    ],
+    "ooi": [
+        {
+            "char": "多い",
+            "en": "many"
+        }
+    ],
+    "otousan": [
+        {
+            "char": "お父さん",
+            "en": "(honorable) father"
+        }
+    ],
+    "seito": [
+        {
+            "char": "生徒",
+            "en": "Pupil"
+        }
+    ],
+    "kariru": [
+        {
+            "char": "借りる",
+            "en": "to borrow"
+        }
+    ],
+    "daigaku": [
+        {
+            "char": "大学",
+            "en": "university"
+        }
+    ],
+    "doyoubi": [
+        {
+            "char": "土曜日",
+            "en": "Saturday"
+        }
+    ],
+    "nishi": [
+        {
+            "char": "西",
+            "en": "west"
+        }
+    ],
+    "kayoubi": [
+        {
+            "char": "火曜日",
+            "en": "Tuesday"
+        }
+    ],
+    "joubu": [
+        {
+            "char": "丈夫",
+            "en": "strong, durable"
+        }
+    ],
+    "doumo": [
+        {
+            "char": "どうも",
+            "en": "thanks"
+        }
+    ],
+    "yasai": [
+        {
+            "char": "野菜",
+            "en": "vegetable"
+        }
+    ],
+    "otearai": [
+        {
+            "char": "お手洗い",
+            "en": "bathroom, toilet"
+        }
+    ],
+    "kanji": [
+        {
+            "char": "漢字",
+            "en": "Chinese character"
+        }
+    ],
+    "nigiyaka": [
+        {
+            "char": "賑やか",
+            "en": "bustling,busy"
+        }
+    ],
+    "otoko": [
+        {
+            "char": "男",
+            "en": "Man"
+        }
+    ],
+    "ryouri": [
+        {
+            "char": "料理",
+            "en": "cuisine"
+        }
+    ],
+    "shimaru": [
+        {
+            "char": "閉まる",
+            "en": "to close, to be closed"
+        }
+    ],
+    "muttsu": [
+        {
+            "char": "六つ",
+            "en": "six"
+        }
+    ],
+    "furo": [
+        {
+            "char": "ふろ",
+            "en": "bath"
+        }
+    ],
+    "rippa": [
+        {
+            "char": "立派",
+            "en": "splendid"
+        }
+    ],
+    "karui": [
+        {
+            "char": "軽い",
+            "en": "Light"
+        }
+    ],
+    "toire": [
+        {
+            "char": "トイレ",
+            "en": "toilet"
+        }
+    ],
+    "hyaku": [
+        {
+            "char": "百",
+            "en": "hundred"
+        }
+    ],
+    "hou": [
+        {
+            "char": "方",
+            "en": "person, way of doing"
+        }
+    ],
+    "kutsu": [
+        {
+            "char": "靴",
+            "en": "Shoes"
+        }
+    ],
+    "shizuka": [
+        {
+            "char": "静か",
+            "en": "Quiet"
+        }
+    ],
+    "shatsu": [
+        {
+            "char": "シャツ",
+            "en": "Shirt"
+        }
+    ],
+    "kusuri": [
+        {
+            "char": "薬",
+            "en": "medicine"
+        }
+    ],
+    "omoshiroi": [
+        {
+            "char": "面白い",
+            "en": "Interesting"
+        }
+    ],
+    "itsu": [
+        {
+            "char": "いつ",
+            "en": "when"
+        }
+    ],
+    "komaru": [
+        {
+            "char": "困る",
+            "en": "to be worried"
+        }
+    ],
+    "osake": [
+        {
+            "char": "お酒",
+            "en": "alcohol, rice wine"
+        }
+    ],
+    "okashi": [
+        {
+            "char": "お菓子",
+            "en": "sweets, candy"
+        }
+    ],
+    "kurai": [
+        {
+            "char": "暗い",
+            "en": "gloomy"
+        }
+    ],
+    "tenki": [
+        {
+            "char": "天気",
+            "en": "weather"
+        }
+    ],
+    "tsukue": [
+        {
+            "char": "机",
+            "en": "desk"
+        }
+    ],
+    "surippa": [
+        {
+            "char": "スリッパ",
+            "en": "slippers"
+        }
+    ],
+    "utau": [
+        {
+            "char": "歌う",
+            "en": "to sing"
+        }
+    ],
+    "hanasu": [
+        {
+            "char": "話す",
+            "en": "to speak"
+        }
+    ],
+    "e": [
+        {
+            "char": "絵",
+            "en": "picture"
+        }
+    ],
+    "ee": [
+        {
+            "char": "ええ",
+            "en": "yes"
+        }
+    ],
+    "yattsu": [
+        {
+            "char": "八つ",
+            "en": "eight"
+        }
+    ],
+    "mazui": [
+        {
+            "char": "不味い",
+            "en": "unpleasant"
+        }
+    ],
+    "boushi": [
+        {
+            "char": "帽子",
+            "en": "hat"
+        }
+    ],
+    "noboru": [
+        {
+            "char": "登る",
+            "en": "to climb"
+        }
+    ],
+    "roku": [
+        {
+            "char": "六",
+            "en": "six"
+        }
+    ],
+    "ni": [
+        {
+            "char": "二",
+            "en": "two"
+        }
+    ],
+    "chikaku": [
+        {
+            "char": "近く",
+            "en": "near"
+        }
+    ],
+    "kuni": [
+        {
+            "char": "国",
+            "en": "Country"
+        }
+    ],
+    "kirei": [
+        {
+            "char": "綺麗",
+            "en": "pretty, clean"
+        }
+    ],
+    "teepurekoudaa": [
+        {
+            "char": "テープレコーダー",
+            "en": "tape recorder"
+        }
+    ],
+    "hoteru": [
+        {
+            "char": "ホテル",
+            "en": "hotel"
+        }
+    ],
+    "atatakai": [
+        {
+            "char": "暖かい",
+            "en": "warm"
+        }
+    ],
+    "soredeha": [
+        {
+            "char": "それでは",
+            "en": "in that situation"
+        }
+    ],
+    "osu": [
+        {
+            "char": "押す",
+            "en": "to push, to stamp something"
+        }
+    ],
+    "shokudou": [
+        {
+            "char": "食堂",
+            "en": "dining hall"
+        }
+    ],
+    "kiiro": [
+        {
+            "char": "黄色",
+            "en": "yellow"
+        }
+    ],
+    "kiku": [
+        {
+            "char": "聞く",
+            "en": "to hear, to listen to, to ask"
+        }
+    ],
+    "suki": [
+        {
+            "char": "好き",
+            "en": "like"
+        }
+    ],
+    "gonichi": [
+        {
+            "char": "五日",
+            "en": "five days, fifth day"
+        }
+    ],
+    "saku": [
+        {
+            "char": "咲く",
+            "en": "to bloom"
+        }
+    ],
+    "kesu": [
+        {
+            "char": "消す",
+            "en": "to erase, to turn off power"
+        }
+    ],
+    "nimotsu": [
+        {
+            "char": "荷物",
+            "en": "luggage"
+        }
+    ],
+    "mainichi": [
+        {
+            "char": "毎日",
+            "en": "every day"
+        }
+    ],
+    "isha": [
+        {
+            "char": "医者",
+            "en": "medical doctor"
+        }
+    ],
+    "nagai": [
+        {
+            "char": "長い",
+            "en": "long"
+        }
+    ],
+    "gyuunyuu": [
+        {
+            "char": "牛乳",
+            "en": "Milk"
+        }
+    ],
+    "ocha": [
+        {
+            "char": "お茶",
+            "en": "green tea"
+        }
+    ],
+    "takai": [
+        {
+            "char": "高い",
+            "en": "tall, expensive"
+        }
+    ],
+    "issakunen": [
+        {
+            "char": "一昨年",
+            "en": "year before last"
+        }
+    ],
+    "shukudai": [
+        {
+            "char": "宿題",
+            "en": "homework"
+        }
+    ],
+    "aru": [
+        {
+            "char": "ある",
+            "en": "to be,to have (used for inanimate objects)"
+        }
+    ],
+    "ideguchi": [
+        {
+            "char": "出口",
+            "en": "exit"
+        }
+    ],
+    "saki": [
+        {
+            "char": "先",
+            "en": "the future, previous"
+        }
+    ],
+    "ame": [
+        {
+            "char": "雨",
+            "en": "rain"
+        },
+        {
+            "char": "飴",
+            "en": "candy"
+        }
+    ],
+    "noru": [
+        {
+            "char": "乗る",
+            "en": "to get on,to ride"
+        }
+    ],
+    "byouki": [
+        {
+            "char": "病気",
+            "en": "illness"
+        }
+    ],
+    "tokoro": [
+        {
+            "char": "所",
+            "en": "place"
+        }
+    ],
+    "aruku": [
+        {
+            "char": "歩く",
+            "en": "to walk"
+        }
+    ],
+    "tsumetai": [
+        {
+            "char": "冷たい",
+            "en": "cold to the touch"
+        }
+    ],
+    "kitanai": [
+        {
+            "char": "汚い",
+            "en": "Dirty"
+        }
+    ],
+    "kouen": [
+        {
+            "char": "公園",
+            "en": "Park"
+        }
+    ],
+    "kumoru": [
+        {
+            "char": "曇る",
+            "en": "to become cloudy, to become dim"
+        }
+    ],
+    "shiru": [
+        {
+            "char": "知る",
+            "en": "to know"
+        }
+    ],
+    "ha": [
+        {
+            "char": "歯",
+            "en": "tooth"
+        }
+    ],
+    "onna": [
+        {
+            "char": "女",
+            "en": "Woman"
+        }
+    ],
+    "taishikan": [
+        {
+            "char": "大使館",
+            "en": "embassy"
+        }
+    ],
+    "supuun": [
+        {
+            "char": "スプーン",
+            "en": "Spoon"
+        }
+    ],
+    "hondana": [
+        {
+            "char": "本棚",
+            "en": "bookshelves"
+        }
+    ],
+    "zero": [
+        {
+            "char": "ゼロ",
+            "en": "Zero"
+        }
+    ],
+    "terebi": [
+        {
+            "char": "テレビ",
+            "en": "television"
+        }
+    ],
+    "warui": [
+        {
+            "char": "悪い",
+            "en": "bad"
+        }
+    ],
+    "tsukeru": [
+        {
+            "char": "つける",
+            "en": "to turn on"
+        }
+    ],
+    "isogashii": [
+        {
+            "char": "忙しい",
+            "en": "busy, irritated"
+        }
+    ],
+    "anata": [
+        {
+            "char": "あなた",
+            "en": "you"
+        }
+    ],
+    "to": [
+        {
+            "char": "戸",
+            "en": "Japanese style door"
+        }
+    ],
+    "doushite": [
+        {
+            "char": "どうして",
+            "en": "for what reason"
+        }
+    ],
+    "okaasan": [
+        {
+            "char": "お母さん",
+            "en": "(honorable) mother"
+        }
+    ],
+    "kamera": [
+        {
+            "char": "カメラ",
+            "en": "camera"
+        }
+    ],
+    "kodomo": [
+        {
+            "char": "子供",
+            "en": "Child"
+        }
+    ],
+    "sora": [
+        {
+            "char": "空",
+            "en": "Sky"
+        }
+    ],
+    "tegami": [
+        {
+            "char": "手紙",
+            "en": "letter"
+        }
+    ],
+    "uta": [
+        {
+            "char": "歌",
+            "en": "song"
+        }
+    ],
+    "kekkon": [
+        {
+            "char": "結婚",
+            "en": "Marriage"
+        }
+    ],
+    "kirai": [
+        {
+            "char": "嫌い",
+            "en": "Hate"
+        }
+    ],
+    "mou": [
+        {
+            "char": "もう",
+            "en": "already"
+        }
+    ],
+    "rekoudo": [
+        {
+            "char": "レコード",
+            "en": "record"
+        }
+    ],
+    "taberu": [
+        {
+            "char": "食べる",
+            "en": "to eat"
+        }
+    ],
+    "dare": [
+        {
+            "char": "誰",
+            "en": "somebody"
+        }
+    ],
+    "kaeru": [
+        {
+            "char": "帰る",
+            "en": "to go back"
+        }
+    ],
+    "kaisha": [
+        {
+            "char": "会社",
+            "en": "Company"
+        }
+    ],
+    "chotto": [
+        {
+            "char": "ちょっと",
+            "en": "somewhat"
+        }
+    ],
+    "yuugata": [
+        {
+            "char": "夕方",
+            "en": "evening"
+        }
+    ],
+    "are": [
+        {
+            "char": "あれ",
+            "en": "that"
+        }
+    ],
+    "nugu": [
+        {
+            "char": "脱ぐ",
+            "en": "to take off clothes"
+        }
+    ],
+    "hikouki": [
+        {
+            "char": "飛行機",
+            "en": "aeroplane"
+        }
+    ],
+    "wakai": [
+        {
+            "char": "若い",
+            "en": "young"
+        }
+    ],
+    "hosoi": [
+        {
+            "char": "細い",
+            "en": "thin"
+        }
+    ],
+    "sukaato": [
+        {
+            "char": "スカート",
+            "en": "Skirt"
+        }
+    ],
+    "yottsu": [
+        {
+            "char": "四つ",
+            "en": "four"
+        }
+    ],
+    "hataraku": [
+        {
+            "char": "働く",
+            "en": "to work"
+        }
+    ],
+    "kawa/kawa": [
+        {
+            "char": "川",
+            "en": "River"
+        }
+    ],
+    "guramu": [
+        {
+            "char": "グラム",
+            "en": "Gram"
+        }
+    ],
+    "hikui": [
+        {
+            "char": "低い",
+            "en": "short,low"
+        }
+    ],
+    "kaidan": [
+        {
+            "char": "階段",
+            "en": "Stairs"
+        }
+    ],
+    "atari": [
+        {
+            "char": "辺",
+            "en": "area"
+        }
+    ],
+    "mon": [
+        {
+            "char": "門",
+            "en": "gate"
+        }
+    ],
+    "kinyoubi": [
+        {
+            "char": "金曜日",
+            "en": "Friday"
+        }
+    ],
+    "basu": [
+        {
+            "char": "バス",
+            "en": "bus"
+        }
+    ],
+    "jibiki": [
+        {
+            "char": "字引",
+            "en": "Dictionary"
+        }
+    ],
+    "hachi": [
+        {
+            "char": "八",
+            "en": "eight"
+        }
+    ],
+    "tatemono": [
+        {
+            "char": "建物",
+            "en": "building"
+        }
+    ],
+    "obasan/obasan": [
+        {
+            "char": "伯母さん",
+            "en": "Aunt"
+        }
+    ],
+    "jugyou": [
+        {
+            "char": "授業",
+            "en": "lesson, class work"
+        }
+    ],
+    "oku": [
+        {
+            "char": "置く",
+            "en": "to put"
+        }
+    ],
+    "eki": [
+        {
+            "char": "駅",
+            "en": "station"
+        }
+    ],
+    "ginkou": [
+        {
+            "char": "銀行",
+            "en": "Bank"
+        }
+    ],
+    "kyuunichi": [
+        {
+            "char": "九日",
+            "en": "nine days, ninth day"
+        }
+    ],
+    "magaru": [
+        {
+            "char": "曲る",
+            "en": "to turn,to bend"
+        }
+    ],
+    "yoko": [
+        {
+            "char": "横",
+            "en": "beside,side,width"
+        }
+    ],
+    "bunshou": [
+        {
+            "char": "文章",
+            "en": "sentence,text"
+        }
+    ],
+    "beddo": [
+        {
+            "char": "ベッド",
+            "en": "bed"
+        }
+    ],
+    "kita": [
+        {
+            "char": "北",
+            "en": "North"
+        }
+    ],
+    "kakeru": [
+        {
+            "char": "かける",
+            "en": "to call by phone"
+        }
+    ],
+    "suwaru": [
+        {
+            "char": "座る",
+            "en": "to sit"
+        }
+    ],
+    "ninichi": [
+        {
+            "char": "二日",
+            "en": "two days, second day of the month"
+        }
+    ],
+    "gohan": [
+        {
+            "char": "御飯",
+            "en": "cooked rice, meal"
+        }
+    ],
+    "obentou": [
+        {
+            "char": "お弁当",
+            "en": "boxed lunch"
+        }
+    ],
+    "kuruma": [
+        {
+            "char": "車",
+            "en": "car, vehicle"
+        }
+    ],
+    "yori,hou": [
+        {
+            "char": "より、ほう",
+            "en": "Used for comparison."
+        }
+    ],
+    "maiban": [
+        {
+            "char": "毎晩",
+            "en": "every night"
+        }
+    ],
+    "tsuku": [
+        {
+            "char": "着く",
+            "en": "to arrive at"
+        }
+    ],
+    "wataru": [
+        {
+            "char": "渡る",
+            "en": "to go across"
+        }
+    ],
+    "sakubun": [
+        {
+            "char": "作文",
+            "en": "composition, writing"
+        }
+    ],
+    "chikai": [
+        {
+            "char": "近い",
+            "en": "near"
+        }
+    ],
+    "michi": [
+        {
+            "char": "道",
+            "en": "street"
+        }
+    ],
+    "itsutsu": [
+        {
+            "char": "五つ",
+            "en": "five"
+        }
+    ],
+    "dore": [
+        {
+            "char": "どれ",
+            "en": "which (of three or more)"
+        }
+    ],
+    "genkan": [
+        {
+            "char": "玄関",
+            "en": "entry hall"
+        }
+    ],
+    "kieru": [
+        {
+            "char": "消える",
+            "en": "to disappear"
+        }
+    ],
+    "daidokoro": [
+        {
+            "char": "台所",
+            "en": "kitchen"
+        }
+    ],
+    "massugu": [
+        {
+            "char": "真っ直ぐ",
+            "en": "straight ahead,direct"
+        }
+    ],
+    "jidousha": [
+        {
+            "char": "自動車",
+            "en": "Automobile"
+        }
+    ],
+    "peeji": [
+        {
+            "char": "ページ",
+            "en": "page"
+        }
+    ],
+    "raishuu": [
+        {
+            "char": "来週",
+            "en": "next week"
+        }
+    ],
+    "te": [
+        {
+            "char": "手",
+            "en": "hand"
+        }
+    ],
+    "hirugohan": [
+        {
+            "char": "昼御飯",
+            "en": "midday meal"
+        }
+    ],
+    "suru": [
+        {
+            "char": "する",
+            "en": "to do"
+        }
+    ],
+    "rouka": [
+        {
+            "char": "廊下",
+            "en": "corridor"
+        }
+    ],
+    "kuro": [
+        {
+            "char": "黒",
+            "en": "Black"
+        }
+    ],
+    "ima": [
+        {
+            "char": "今",
+            "en": "now"
+        }
+    ],
+    "sochira": [
+        {
+            "char": "そちら",
+            "en": "over there"
+        }
+    ],
+    "mata": [
+        {
+            "char": "また",
+            "en": "again,and"
+        }
+    ],
+    "dou": [
+        {
+            "char": "どう",
+            "en": "how,in what way"
+        }
+    ],
+    "botan": [
+        {
+            "char": "ボタン",
+            "en": "button"
+        }
+    ],
+    "gakusei": [
+        {
+            "char": "学生",
+            "en": "Student"
+        }
+    ],
+    "kurasu": [
+        {
+            "char": "クラス",
+            "en": "Class"
+        }
+    ],
+    "shikashi": [
+        {
+            "char": "しかし",
+            "en": "However"
+        }
+    ],
+    "yoku": [
+        {
+            "char": "よく",
+            "en": "often, well"
+        }
+    ],
+    "ofuro": [
+        {
+            "char": "お風呂",
+            "en": "Bath"
+        }
+    ],
+    "nakusu": [
+        {
+            "char": "無くす",
+            "en": "to lose something"
+        }
+    ],
+    "asobu": [
+        {
+            "char": "遊ぶ",
+            "en": "to play, to make a visit"
+        }
+    ],
+    "yuumei": [
+        {
+            "char": "有名",
+            "en": "famous"
+        }
+    ],
+    "hito": [
+        {
+            "char": "人",
+            "en": "person"
+        }
+    ],
+    "kutsushita": [
+        {
+            "char": "靴下",
+            "en": "Socks"
+        }
+    ],
+    "iie": [
+        {
+            "char": "いいえ",
+            "en": "no"
+        }
+    ],
+    "genki": [
+        {
+            "char": "元気",
+            "en": "health, vitality"
+        }
+    ],
+    "hitotsu": [
+        {
+            "char": "一つ",
+            "en": "one"
+        }
+    ],
+    "katei": [
+        {
+            "char": "家庭",
+            "en": "Household"
+        }
+    ],
+    "mittsu": [
+        {
+            "char": "三つ",
+            "en": "three"
+        }
+    ],
+    "yasumu": [
+        {
+            "char": "休む",
+            "en": "to rest"
+        }
+    ],
+    "kuchi": [
+        {
+            "char": "口",
+            "en": "mouth, opening"
+        }
+    ],
+    "benri": [
+        {
+            "char": "便利",
+            "en": "useful, convenient"
+        }
+    ],
+    "kotoba": [
+        {
+            "char": "言葉",
+            "en": "word, language"
+        }
+    ],
+    "chawan": [
+        {
+            "char": "茶碗",
+            "en": "rice bowl"
+        }
+    ],
+    "toshi": [
+        {
+            "char": "年",
+            "en": "year"
+        }
+    ],
+    "hairu": [
+        {
+            "char": "入る",
+            "en": "to enter,to contain"
+        }
+    ],
+    "kasu": [
+        {
+            "char": "貸す",
+            "en": "to lend"
+        }
+    ],
+    "juunichi": [
+        {
+            "char": "十日",
+            "en": "ten days,the tenth day"
+        }
+    ],
+    "shimeru": [
+        {
+            "char": "閉める",
+            "en": "to close something"
+        },
+        {
+            "char": "締める",
+            "en": "to tie"
+        }
+    ],
+    "hajimete": [
+        {
+            "char": "初めて",
+            "en": "for the first time"
+        }
+    ],
+    "futatsu": [
+        {
+            "char": "二つ",
+            "en": "two"
+        }
+    ],
+    "okusan": [
+        {
+            "char": "奥さん",
+            "en": "(honorable) wife"
+        }
+    ],
+    "rokunichi": [
+        {
+            "char": "六日",
+            "en": "six days, sixth day of the month"
+        }
+    ],
+    "kousaten": [
+        {
+            "char": "交差点",
+            "en": "intersection"
+        }
+    ],
+    "inu": [
+        {
+            "char": "犬",
+            "en": "dog"
+        }
+    ],
+    "kinou": [
+        {
+            "char": "昨日",
+            "en": "Yesterday"
+        }
+    ],
+    "yaoya": [
+        {
+            "char": "八百屋",
+            "en": "greengrocer"
+        }
+    ],
+    "dandan": [
+        {
+            "char": "だんだん",
+            "en": "gradually"
+        }
+    ],
+    "hiru": [
+        {
+            "char": "昼",
+            "en": "noon, daytime"
+        }
+    ],
+    "amari": [
+        {
+            "char": "あまり",
+            "en": "not very"
+        }
+    ],
+    "omoi": [
+        {
+            "char": "重い",
+            "en": "Heavy"
+        }
+    ],
+    "taisetsu": [
+        {
+            "char": "大切",
+            "en": "important"
+        }
+    ],
+    "naka": [
+        {
+            "char": "中",
+            "en": "middle"
+        }
+    ],
+    "iku": [
+        {
+            "char": "行く",
+            "en": "to go"
+        }
+    ],
+    "migi": [
+        {
+            "char": "右",
+            "en": "right side"
+        }
+    ],
+    "pan": [
+        {
+            "char": "パン",
+            "en": "bread"
+        }
+    ],
+    "ani": [
+        {
+            "char": "兄",
+            "en": "(humble) older brother"
+        }
+    ],
+    "asoko": [
+        {
+            "char": "あそこ",
+            "en": "over there"
+        }
+    ],
+    "suu": [
+        {
+            "char": "吸う",
+            "en": "to smoke, to suck"
+        }
+    ],
+    "mijikai": [
+        {
+            "char": "短い",
+            "en": "short"
+        }
+    ],
+    "nomu": [
+        {
+            "char": "飲む",
+            "en": "to drink"
+        }
+    ],
+    "imouto": [
+        {
+            "char": "妹",
+            "en": "(humble) younger sister"
+        }
+    ],
+    "hiroi": [
+        {
+            "char": "広い",
+            "en": "spacious,wide"
+        }
+    ],
+    "yowai": [
+        {
+            "char": "弱い",
+            "en": "weak"
+        }
+    ],
+    "hoshii": [
+        {
+            "char": "欲しい",
+            "en": "want"
+        }
+    ],
+    "tonari": [
+        {
+            "char": "隣",
+            "en": "next door to"
+        }
+    ],
+    "naru": [
+        {
+            "char": "なる",
+            "en": "to become"
+        }
+    ],
+    "arau": [
+        {
+            "char": "洗う",
+            "en": "to wash"
+        }
+    ],
+    "rei": [
+        {
+            "char": "零",
+            "en": "zero"
+        }
+    ],
+    "kaban": [
+        {
+            "char": "鞄",
+            "en": "bag, briefcase"
+        }
+    ],
+    "erebeetaa": [
+        {
+            "char": "エレベーター",
+            "en": "elevator"
+        }
+    ],
+    "gozen": [
+        {
+            "char": "午前",
+            "en": "morning"
+        }
+    ],
+    "uru": [
+        {
+            "char": "売る",
+            "en": "to sell"
+        }
+    ],
+    "seetaa": [
+        {
+            "char": "セーター",
+            "en": "sweater, jumper"
+        }
+    ],
+    "hanashi": [
+        {
+            "char": "話",
+            "en": "talk,story"
+        }
+    ],
+    "aki": [
+        {
+            "char": "秋",
+            "en": "autumn"
+        }
+    ],
+    "senshuu": [
+        {
+            "char": "先週",
+            "en": "last week"
+        }
+    ],
+    "akeru": [
+        {
+            "char": "開ける",
+            "en": "to open"
+        }
+    ],
+    "ano": [
+        {
+            "char": "あの",
+            "en": "that over there"
+        }
+    ],
+    "se": [
+        {
+            "char": "背",
+            "en": "height, stature"
+        }
+    ],
+    "furu": [
+        {
+            "char": "降る",
+            "en": "to fall, e.g. rain or snow"
+        }
+    ],
+    "muzukashii": [
+        {
+            "char": "難しい",
+            "en": "difficult"
+        }
+    ],
+    "otona": [
+        {
+            "char": "大人",
+            "en": "Adult"
+        }
+    ],
+    "machi": [
+        {
+            "char": "町",
+            "en": "town,city"
+        }
+    ],
+    "kuroi": [
+        {
+            "char": "黒い",
+            "en": "black"
+        }
+    ],
+    "minasan": [
+        {
+            "char": "皆さん",
+            "en": "everyone"
+        }
+    ],
+    "san": [
+        {
+            "char": "三",
+            "en": "Three"
+        }
+    ],
+    "kore": [
+        {
+            "char": "これ",
+            "en": "This"
+        }
+    ],
+    "kotaeru": [
+        {
+            "char": "答える",
+            "en": "to answer"
+        }
+    ],
+    "kissaten": [
+        {
+            "char": "喫茶店",
+            "en": "coffee lounge"
+        }
+    ],
+    "sukoshi": [
+        {
+            "char": "少し",
+            "en": "Few"
+        }
+    ],
+    "soba": [
+        {
+            "char": "そば",
+            "en": "near, beside"
+        }
+    ],
+    "mannenhitsu": [
+        {
+            "char": "万年筆",
+            "en": "fountain pen"
+        }
+    ],
+    "onaka": [
+        {
+            "char": "おなか",
+            "en": "stomach"
+        }
+    ],
+    "eigakan": [
+        {
+            "char": "映画館",
+            "en": "cinema"
+        }
+    ],
+    "kyoudai": [
+        {
+            "char": "兄弟",
+            "en": "(humble) siblings"
+        }
+    ],
+    "ireru": [
+        {
+            "char": "入れる",
+            "en": "to put in"
+        }
+    ],
+    "mada": [
+        {
+            "char": "まだ",
+            "en": "yet,still"
+        }
+    ],
+    "densha": [
+        {
+            "char": "電車",
+            "en": "electric train"
+        }
+    ],
+    "tatsu": [
+        {
+            "char": "立つ",
+            "en": "to stand"
+        }
+    ],
+    "posuto": [
+        {
+            "char": "ポスト",
+            "en": "post"
+        }
+    ],
+    "naze": [
+        {
+            "char": "なぜ",
+            "en": "why"
+        }
+    ],
+    "dekiru": [
+        {
+            "char": "できる",
+            "en": "to be able to"
+        }
+    ],
+    "zubon": [
+        {
+            "char": "ズボン",
+            "en": "Trousers"
+        }
+    ],
+    "nekutai": [
+        {
+            "char": "ネクタイ",
+            "en": "tie,necktie"
+        }
+    ],
+    "sakana": [
+        {
+            "char": "魚",
+            "en": "Fish"
+        }
+    ],
+    "teeburu": [
+        {
+            "char": "テーブル",
+            "en": "table"
+        }
+    ],
+    "kokonotsu": [
+        {
+            "char": "九つ",
+            "en": "Nine"
+        }
+    ],
+    "kasa": [
+        {
+            "char": "傘",
+            "en": "Umbrella"
+        }
+    ],
+    "maishuu": [
+        {
+            "char": "毎週",
+            "en": "every week"
+        }
+    ],
+    "yasui": [
+        {
+            "char": "安い",
+            "en": "cheap"
+        }
+    ],
+    "megane": [
+        {
+            "char": "眼鏡",
+            "en": "glasses"
+        }
+    ],
+    "shiroi": [
+        {
+            "char": "白い",
+            "en": "White"
+        }
+    ],
+    "enpitsu": [
+        {
+            "char": "鉛筆",
+            "en": "pencil"
+        }
+    ],
+    "kaesu": [
+        {
+            "char": "返す",
+            "en": "to return something"
+        }
+    ],
+    "soto": [
+        {
+            "char": "外",
+            "en": "Outside"
+        }
+    ],
+    "hajime/hajime": [
+        {
+            "char": "初め",
+            "en": "beginning"
+        }
+    ],
+    "tabemono": [
+        {
+            "char": "食べ物",
+            "en": "food"
+        }
+    ],
+    "douzo": [
+        {
+            "char": "どうぞ",
+            "en": "please"
+        }
+    ],
+    "aoi": [
+        {
+            "char": "青い",
+            "en": "blue"
+        }
+    ],
+    "kono": [
+        {
+            "char": "この",
+            "en": "This"
+        }
+    ],
+    "nijuunichi": [
+        {
+            "char": "二十日",
+            "en": "twenty days,twentieth"
+        }
+    ],
+    "saifu": [
+        {
+            "char": "財布",
+            "en": "Wallet"
+        }
+    ],
+    "gakkou": [
+        {
+            "char": "学校",
+            "en": "School"
+        }
+    ],
+    "tsukareru": [
+        {
+            "char": "疲れる",
+            "en": "to get tired"
+        }
+    ],
+    "sengetsu": [
+        {
+            "char": "先月",
+            "en": "last month"
+        }
+    ],
+    "bourupen": [
+        {
+            "char": "ボールペン",
+            "en": "ball-point pen"
+        }
+    ],
+    "oneesan": [
+        {
+            "char": "お姉さん",
+            "en": "(honorable) older sister"
+        }
+    ],
+    "suzushii": [
+        {
+            "char": "涼しい",
+            "en": "Refreshing"
+        }
+    ],
+    "atarashii": [
+        {
+            "char": "新しい",
+            "en": "new"
+        }
+    ],
+    "meetoru": [
+        {
+            "char": "メートル",
+            "en": "metre"
+        }
+    ],
+    "kouhii": [
+        {
+            "char": "コーヒー",
+            "en": "Coffee"
+        }
+    ],
+    "yon": [
+        {
+            "char": "四",
+            "en": "Four"
+        }
+    ],
+    "hima": [
+        {
+            "char": "暇",
+            "en": "free time"
+        }
+    ],
+    "demo": [
+        {
+            "char": "でも",
+            "en": "but"
+        }
+    ],
+    "ichinin": [
+        {
+            "char": "一人",
+            "en": "one person"
+        }
+    ],
+    "yomu": [
+        {
+            "char": "読む",
+            "en": "to read"
+        }
+    ],
+    "apaato": [
+        {
+            "char": "アパート",
+            "en": "apartment"
+        }
+    ],
+    "iu": [
+        {
+            "char": "言う",
+            "en": "to say"
+        }
+    ],
+    "mae": [
+        {
+            "char": "前",
+            "en": "before"
+        }
+    ],
+    "butaniku": [
+        {
+            "char": "豚肉",
+            "en": "pork"
+        }
+    ],
+    "kudasai": [
+        {
+            "char": "ください",
+            "en": "Please"
+        }
+    ],
+    "sentaku": [
+        {
+            "char": "洗濯",
+            "en": "Washing"
+        }
+    ],
+    "niwa": [
+        {
+            "char": "庭",
+            "en": "garden"
+        }
+    ],
+    "sumu": [
+        {
+            "char": "住む",
+            "en": "to live in"
+        }
+    ],
+    "imi": [
+        {
+            "char": "意味",
+            "en": "meaning"
+        }
+    ],
+    "hoka": [
+        {
+            "char": "ほか",
+            "en": "other, the rest"
+        }
+    ],
+    "semai": [
+        {
+            "char": "狭い",
+            "en": "Narrow"
+        }
+    ],
+    "kyou": [
+        {
+            "char": "今日",
+            "en": "Today"
+        }
+    ],
+    "matsu": [
+        {
+            "char": "待つ",
+            "en": "to wait"
+        }
+    ],
+    "namae": [
+        {
+            "char": "名前",
+            "en": "name"
+        }
+    ],
+    "go": [
+        {
+            "char": "五",
+            "en": "Five"
+        }
+    ],
+    "deha": [
+        {
+            "char": "では",
+            "en": "with that..."
+        }
+    ],
+    "konshuu": [
+        {
+            "char": "今週",
+            "en": "this week"
+        }
+    ],
+    "tabun": [
+        {
+            "char": "多分",
+            "en": "probably"
+        }
+    ],
+    "tomaru": [
+        {
+            "char": "止まる",
+            "en": "to come to a halt"
+        }
+    ],
+    "sarainen": [
+        {
+            "char": "さ来年",
+            "en": "year after next"
+        }
+    ],
+    "supoutsu": [
+        {
+            "char": "スポーツ",
+            "en": "Sport"
+        }
+    ],
+    "mizu": [
+        {
+            "char": "水",
+            "en": "water"
+        }
+    ],
+    "han": [
+        {
+            "char": "半",
+            "en": "half"
+        }
+    ],
+    "tanjoubi": [
+        {
+            "char": "誕生日",
+            "en": "birthday"
+        }
+    ],
+    "karee": [
+        {
+            "char": "カレー",
+            "en": "Curry"
+        }
+    ],
+    "firumu": [
+        {
+            "char": "フィルム",
+            "en": "roll of film"
+        }
+    ],
+    "tsukau": [
+        {
+            "char": "使う",
+            "en": "to use"
+        }
+    ],
+    "pen": [
+        {
+            "char": "ペン",
+            "en": "pen"
+        }
+    ],
+    "heya": [
+        {
+            "char": "部屋",
+            "en": "room"
+        }
+    ],
+    "juu": [
+        {
+            "char": "十",
+            "en": "Ten"
+        }
+    ],
+    "otouto": [
+        {
+            "char": "弟",
+            "en": "younger brother"
+        }
+    ],
+    "iriguchi": [
+        {
+            "char": "入口",
+            "en": "entrance"
+        }
+    ],
+    "socchi": [
+        {
+            "char": "そっち",
+            "en": "over there"
+        }
+    ],
+    "gyuuniku": [
+        {
+            "char": "牛肉",
+            "en": "Beef"
+        }
+    ],
+    "jouzu": [
+        {
+            "char": "上手",
+            "en": "Skillful"
+        }
+    ],
+    "kekkou": [
+        {
+            "char": "結構",
+            "en": "splendid, enough"
+        }
+    ],
+    "oboeru": [
+        {
+            "char": "覚える",
+            "en": "to remember"
+        }
+    ],
+    "chiisana": [
+        {
+            "char": "小さな",
+            "en": "little"
+        }
+    ],
+    "umareru": [
+        {
+            "char": "生まれる",
+            "en": "to be born"
+        }
+    ],
+    "karada": [
+        {
+            "char": "体",
+            "en": "Body"
+        }
+    ],
+    "dono": [
+        {
+            "char": "どの",
+            "en": "which"
+        }
+    ],
+    "mondai": [
+        {
+            "char": "問題",
+            "en": "problem"
+        }
+    ],
+    "ninin": [
+        {
+            "char": "二人",
+            "en": "two people"
+        }
+    ],
+    "tomodachi": [
+        {
+            "char": "友達",
+            "en": "friend"
+        }
+    ],
+    "kazoku": [
+        {
+            "char": "家族",
+            "en": "Family"
+        }
+    ],
+    "yoru": [
+        {
+            "char": "夜",
+            "en": "evening,night"
+        }
+    ],
+    "ashi": [
+        {
+            "char": "足",
+            "en": "foot, leg"
+        }
+    ],
+    "kudamono": [
+        {
+            "char": "果物",
+            "en": "Fruit"
+        }
+    ],
+    "kitte": [
+        {
+            "char": "切手",
+            "en": "postage stamp"
+        }
+    ],
+    "fuutou": [
+        {
+            "char": "封筒",
+            "en": "envelope"
+        }
+    ],
+    "ichiban": [
+        {
+            "char": "いちばん",
+            "en": "best, first"
+        }
+    ],
+    "najiranai": [
+        {
+            "char": "詰らない",
+            "en": "boring"
+        }
+    ],
+    "shinu": [
+        {
+            "char": "死ぬ",
+            "en": "to die"
+        }
+    ],
+    "nochi": [
+        {
+            "char": "後",
+            "en": "afterwards"
+        }
+    ],
+    "chairo": [
+        {
+            "char": "茶色",
+            "en": "brown"
+        }
+    ],
+    "nanatsu": [
+        {
+            "char": "七つ",
+            "en": "seven"
+        }
+    ],
+    "shinbun": [
+        {
+            "char": "新聞",
+            "en": "newspaper"
+        }
+    ],
+    "yasashii": [
+        {
+            "char": "易しい",
+            "en": "easy, simple"
+        }
+    ],
+    "eiga": [
+        {
+            "char": "映画",
+            "en": "movie"
+        }
+    ],
+    "urusai": [
+        {
+            "char": "煩い",
+            "en": "noisy, annoying"
+        }
+    ],
+    "mura": [
+        {
+            "char": "村",
+            "en": "village"
+        }
+    ],
+    "abiru": [
+        {
+            "char": "あびる",
+            "en": "to bathe, to shower"
+        }
+    ],
+    "tsurai": [
+        {
+            "char": "辛い",
+            "en": "painful"
+        }
+    ],
+    "obaasan": [
+        {
+            "char": "おばあさん",
+            "en": "grandmother, female senior-citizen"
+        }
+    ],
+    "onaji": [
+        {
+            "char": "同じ",
+            "en": "same"
+        }
+    ],
+    "neru": [
+        {
+            "char": "寝る",
+            "en": "to go to bed,to sleep"
+        }
+    ],
+    "motto": [
+        {
+            "char": "もっと",
+            "en": "more"
+        }
+    ],
+    "zasshi": [
+        {
+            "char": "雑誌",
+            "en": "Magazine"
+        }
+    ],
+    "au": [
+        {
+            "char": "会う",
+            "en": "to meet"
+        }
+    ],
+    "iru": [
+        {
+            "char": "要る",
+            "en": "to need"
+        }
+    ],
+    "midori": [
+        {
+            "char": "緑",
+            "en": "green"
+        }
+    ],
+    "shashin": [
+        {
+            "char": "写真",
+            "en": "photograph"
+        }
+    ],
+    "kotoshi": [
+        {
+            "char": "今年",
+            "en": "this year"
+        }
+    ],
+    "haizara": [
+        {
+            "char": "灰皿",
+            "en": "ashtray"
+        }
+    ],
+    "nijuusai": [
+        {
+            "char": "二十歳",
+            "en": "20 years old,20th year"
+        }
+    ]
+}
