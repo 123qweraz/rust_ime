@@ -87,29 +87,33 @@ impl Vkbd {
 
         thread::sleep(Duration::from_millis(100));
 
-        // 2. Detect if active window is a terminal
+        // 2. Detect if active window is a terminal (check both name and class)
         let is_terminal = if let Ok(output) = Command::new("xdotool")
             .arg("getactivewindow")
-            .arg("getwindowname")
+            .arg("getwindowclassname")
             .output() 
         {
-            let name = String::from_utf8_lossy(&output.stdout).to_lowercase();
-            name.contains("terminal") || name.contains("konsole") || name.contains("sh") || name.contains("tui")
+            let class = String::from_utf8_lossy(&output.stdout).to_lowercase();
+            class.contains("terminal") || class.contains("konsole") || class.contains("uxterm") || class.contains("alacritty")
         } else {
-            false
+            // Fallback to name if class check fails
+            if let Ok(output) = Command::new("xdotool").arg("getactivewindow").arg("getwindowname").output() {
+                let name = String::from_utf8_lossy(&output.stdout).to_lowercase();
+                name.contains("terminal") || name.contains("konsole")
+            } else {
+                false
+            }
         };
         
         if is_terminal {
-            // Send Ctrl + Shift + V for Terminals
-            self.emit(Key::KEY_LEFTCTRL, 1);
+            // Send Shift + Insert for Terminals
             self.emit(Key::KEY_LEFTSHIFT, 1);
             self.sync();
-            self.emit(Key::KEY_V, 1);
+            self.emit(Key::KEY_INSERT, 1);
             self.sync();
-            self.emit(Key::KEY_V, 0);
+            self.emit(Key::KEY_INSERT, 0);
             self.sync();
             self.emit(Key::KEY_LEFTSHIFT, 0);
-            self.emit(Key::KEY_LEFTCTRL, 0);
             self.sync();
         } else {
             // Send Ctrl + V for GUI Apps
