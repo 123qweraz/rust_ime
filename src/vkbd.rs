@@ -26,6 +26,7 @@ impl Vkbd {
         keys.insert(Key::KEY_RIGHTSHIFT);
         keys.insert(Key::KEY_LEFTCTRL);
         keys.insert(Key::KEY_V);
+        keys.insert(Key::KEY_INSERT); // For Shift+Insert
 
         let dev = VirtualDeviceBuilder::new()? 
             .name("blind-ime")
@@ -72,13 +73,14 @@ impl Vkbd {
             }
             thread::sleep(Duration::from_millis(50));
             
-            self.emit(Key::KEY_LEFTCTRL, 1);
+            // Send Shift + Insert
+            self.emit(Key::KEY_LEFTSHIFT, 1);
             self.sync();
-            self.emit(Key::KEY_V, 1);
+            self.emit(Key::KEY_INSERT, 1);
             self.sync();
-            self.emit(Key::KEY_V, 0);
+            self.emit(Key::KEY_INSERT, 0);
             self.sync();
-            self.emit(Key::KEY_LEFTCTRL, 0);
+            self.emit(Key::KEY_LEFTSHIFT, 0);
             self.sync();
         }
     }

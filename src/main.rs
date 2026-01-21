@@ -146,29 +146,51 @@ fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
     Err("No keyboard found".into())
 }
 
+use walkdir::WalkDir;
+
 fn load_dict() -> HashMap<String, Vec<String>> {
     let mut dict = HashMap::new();
-    let paths = vec![
-        "dicts/chinese/character/level-1_char_en.json",
-        "dicts/chinese/character/level-2_char_en.json",
-        "dicts/chinese/character/level-3_char_en.json",
-    ];
+    let root = "dicts";
     
-    for path in paths {
-        if let Ok(file) = File::open(path) {
-            let reader = BufReader::new(file);
-            if let Ok(json) = serde_json::from_reader::<_, HashMap<String, Vec<DictEntry>>>(reader) {
-                for (k, v) in json {
-                    let chars: Vec<String> = v.into_iter().map(|e| e.char).collect();
-                    dict.entry(k).or_insert_with(Vec::new).extend(chars);
+    // Add CWD check for debugging
+    if let Ok(cwd) = std::env::current_dir() {
+        println!("Loading dicts from: {:?}/{}", cwd, root);
+    }
+
+    for entry in WalkDir::new(root).into_iter().filter_map(|e| e.ok()) {
+        let path = entry.path();
+        if path.extension().map_or(false, |ext| ext == "json") {
+            // println!("Loading: {:?}", path);
+            if let Ok(file) = File::open(path) {
+                let reader = BufReader::new(file);
+                let v: serde_json::Value = match serde_json::from_reader(reader) {
+                    Ok(v) => v,
+                    Err(_) => continue,
+                };
+
+                // Try Format 1: Map<String, Vec<DictEntry>>
+                if let Ok(entries) = serde_json::from_value::<HashMap<String, Vec<DictEntry>>>(v.clone()) {
+                     for (k, val) in entries {
+                        let chars: Vec<String> = val.into_iter().map(|e| e.char).collect();
+                        dict.entry(k).or_insert_with(Vec::new).extend(chars);
+                    }
+                } 
+                // Try Format 2: Map<String, Vec<String>>
+                else if let Ok(simple_entries) = serde_json::from_value::<HashMap<String, Vec<String>>>(v) {
+                    for (k, val) in simple_entries {
+                        dict.entry(k).or_insert_with(Vec::new).extend(val);
+                    }
                 }
             }
         }
     }
     
     if dict.is_empty() {
+        println!("Warning: No dictionaries loaded!");
         dict.insert("ni".into(), vec!["你".into()]);
         dict.insert("hao".into(), vec!["好".into()]);
+    } else {
+        println!("Total dictionary keys: {}", dict.len());
     }
     dict
 }
