@@ -89,14 +89,14 @@ impl Vkbd {
         // Delay to allow X11 to process the new selection
         thread::sleep(Duration::from_millis(100));
         
-        // Send Shift + Insert (Universal Linux Paste)
-        self.emit(Key::KEY_LEFTSHIFT, 1);
+        // Send Ctrl + V (Most universal for GUI apps)
+        self.emit(Key::KEY_LEFTCTRL, 1);
         self.sync();
-        self.emit(Key::KEY_INSERT, 1);
+        self.emit(Key::KEY_V, 1);
         self.sync();
-        self.emit(Key::KEY_INSERT, 0);
+        self.emit(Key::KEY_V, 0);
         self.sync();
-        self.emit(Key::KEY_LEFTSHIFT, 0);
+        self.emit(Key::KEY_LEFTCTRL, 0);
         self.sync();
     }
 }
