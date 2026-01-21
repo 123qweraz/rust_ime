@@ -1,9 +1,13 @@
 use evdev::{Device, InputEventKind, Key};
 use std::collections::HashMap;
 use std::fs::File;
-use std::io::BufReader;
+use std::io::{self, BufReader};
 use serde::Deserialize;
 use walkdir::WalkDir;
+use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
+use signal_hook::consts::signal::*;
+use signal_hook::flag;
 
 mod ime;
 mod vkbd;
@@ -112,6 +116,12 @@ fn detect_environment() {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     detect_environment();
     
+    // 注册信号处理
+    let should_exit = Arc::new(AtomicBool::new(false));
+    flag::register(SIGTERM, Arc::clone(&should_exit))?;
+    flag::register(SIGINT, Arc::clone(&should_exit))?;
+    flag::register(SIGHUP, Arc::clone(&should_exit))?;
+
     let config = load_config().unwrap_or(Config {
         dict_dirs: vec!["dicts".to_string()],
         extra_dicts: vec![],
@@ -141,12 +151,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut alt_held = false;
     let mut meta_held = false;
 
-    loop {
+    while !should_exit.load(Ordering::Relaxed) {
         let events: Vec<_> = match dev.fetch_events() {
             Ok(iterator) => iterator.collect(),
             Err(e) => {
+                if e.kind() == io::ErrorKind::Interrupted {
+                    continue;
+                }
                 eprintln!("Error fetching events: {}", e);
-                return Err(Box::new(e));
+                break;
             }
         };
 
@@ -172,7 +185,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                             dev.grab()?;
                             println!("\n[IME] 中文模式 (已拦截键盘)");
                         } else {
-                            dev.ungrab()?;
+                            let _ = dev.ungrab();
                             println!("\n[IME] 英文模式 (已释放键盘)");
                         }
                         // 切换后立即强制释放所有修饰键状态
@@ -201,6 +214,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
+
+    // 退出前清理
+    println!("\n[IME] 正在退出，释放所有按键并解除拦截...");
+    vkbd.release_all();
+    let _ = dev.ungrab();
+    println!("[IME] 已安全退出");
+
+    Ok(())
 }
 
 fn load_config() -> Option<Config> {
