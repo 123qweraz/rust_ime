@@ -66,66 +66,27 @@ impl Vkbd {
     }
 
     fn paste_text(&mut self, text: &str) {
-        use std::process::{Command, Stdio};
-        use std::io::Write;
+        use std::process::Command;
+        use std::env;
 
-        // 1. Set BOTH Clipboard and Primary selections
-        let selections = ["clipboard", "primary"];
-        for selection in selections {
-            if let Ok(mut child) = Command::new("xclip")
-                .arg("-selection")
-                .arg(selection)
-                .stdin(Stdio::piped())
-                .spawn() 
-            {
-                if let Some(mut stdin) = child.stdin.take() {
-                    let _ = stdin.write_all(text.as_bytes());
-                }
-                let _ = child.wait();
-            }
+        // Try to get the original user who ran sudo
+        let sudo_user = env::var("SUDO_USER").unwrap_or_else(|_| "root".to_string());
+
+        // Use xdotool type to inject text directly. 
+        // We run it as the original user to ensure it has access to the X session.
+        let status = Command::new("su")
+            .arg(&sudo_user)
+            .arg("-c")
+            .arg(format!("DISPLAY={} xdotool type --clearmodifiers \"{}\"", 
+                 env::var("DISPLAY").unwrap_or_else(|_| ":0".to_string()),
+                 text))
+            .status();
+
+        if let Err(e) = status {
+            eprintln!("xdotool type failed: {}", e);
         }
-
-        thread::sleep(Duration::from_millis(100));
-
-        // 2. Detect if active window is a terminal (check both name and class)
-        let is_terminal = if let Ok(output) = Command::new("xdotool")
-            .arg("getactivewindow")
-            .arg("getwindowclassname")
-            .output() 
-        {
-            let class = String::from_utf8_lossy(&output.stdout).to_lowercase();
-            class.contains("terminal") || class.contains("konsole") || class.contains("uxterm") || class.contains("alacritty")
-        } else {
-            // Fallback to name if class check fails
-            if let Ok(output) = Command::new("xdotool").arg("getactivewindow").arg("getwindowname").output() {
-                let name = String::from_utf8_lossy(&output.stdout).to_lowercase();
-                name.contains("terminal") || name.contains("konsole")
-            } else {
-                false
-            }
-        };
         
-        if is_terminal {
-            // Send Shift + Insert for Terminals
-            self.emit(Key::KEY_LEFTSHIFT, 1);
-            self.sync();
-            self.emit(Key::KEY_INSERT, 1);
-            self.sync();
-            self.emit(Key::KEY_INSERT, 0);
-            self.sync();
-            self.emit(Key::KEY_LEFTSHIFT, 0);
-            self.sync();
-        } else {
-            // Send Ctrl + V for GUI Apps
-            self.emit(Key::KEY_LEFTCTRL, 1);
-            self.sync();
-            self.emit(Key::KEY_V, 1);
-            self.sync();
-            self.emit(Key::KEY_V, 0);
-            self.sync();
-            self.emit(Key::KEY_LEFTCTRL, 0);
-            self.sync();
-        }
+        // No need for Ctrl+V or Shift+Insert anymore, xdotool handles it!
     }
 }
 
