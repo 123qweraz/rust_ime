@@ -66,11 +66,10 @@ impl Vkbd {
     }
 
     fn paste_text(&mut self, text: &str) {
-        // Use xclip to set BOTH Clipboard and Primary selections.
-        // This ensures Shift+Insert (usually Primary) and Ctrl+V (Clipboard) both work.
         use std::process::{Command, Stdio};
         use std::io::Write;
 
+        // 1. Set BOTH Clipboard and Primary selections
         let selections = ["clipboard", "primary"];
         for selection in selections {
             if let Ok(mut child) = Command::new("xclip")
@@ -86,20 +85,43 @@ impl Vkbd {
             }
         }
 
-        // Delay to allow X11 to process the new selection
         thread::sleep(Duration::from_millis(100));
+
+        // 2. Detect if active window is a terminal
+        let is_terminal = if let Ok(output) = Command::new("xdotool")
+            .arg("getactivewindow")
+            .arg("getwindowname")
+            .output() 
+        {
+            let name = String::from_utf8_lossy(&output.stdout).to_lowercase();
+            name.contains("terminal") || name.contains("konsole") || name.contains("sh") || name.contains("tui")
+        } else {
+            false
+        };
         
-        // Send Ctrl + Shift + V (Universal for Terminals, often works in GUI too)
-        self.emit(Key::KEY_LEFTCTRL, 1);
-        self.emit(Key::KEY_LEFTSHIFT, 1);
-        self.sync();
-        self.emit(Key::KEY_V, 1);
-        self.sync();
-        self.emit(Key::KEY_V, 0);
-        self.sync();
-        self.emit(Key::KEY_LEFTSHIFT, 0);
-        self.emit(Key::KEY_LEFTCTRL, 0);
-        self.sync();
+        if is_terminal {
+            // Send Ctrl + Shift + V for Terminals
+            self.emit(Key::KEY_LEFTCTRL, 1);
+            self.emit(Key::KEY_LEFTSHIFT, 1);
+            self.sync();
+            self.emit(Key::KEY_V, 1);
+            self.sync();
+            self.emit(Key::KEY_V, 0);
+            self.sync();
+            self.emit(Key::KEY_LEFTSHIFT, 0);
+            self.emit(Key::KEY_LEFTCTRL, 0);
+            self.sync();
+        } else {
+            // Send Ctrl + V for GUI Apps
+            self.emit(Key::KEY_LEFTCTRL, 1);
+            self.sync();
+            self.emit(Key::KEY_V, 1);
+            self.sync();
+            self.emit(Key::KEY_V, 0);
+            self.sync();
+            self.emit(Key::KEY_LEFTCTRL, 0);
+            self.sync();
+        }
     }
 }
 
