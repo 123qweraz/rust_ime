@@ -66,27 +66,69 @@ impl Vkbd {
     }
 
     fn paste_text(&mut self, text: &str) {
-        use std::process::Command;
+        use std::process::{Command, Stdio};
+        use std::io::Write;
         use std::env;
 
-        // Try to get the original user who ran sudo
-        let sudo_user = env::var("SUDO_USER").unwrap_or_else(|_| "root".to_string());
-
-        // Use xdotool type to inject text directly. 
-        // We run it as the original user to ensure it has access to the X session.
-        let status = Command::new("su")
-            .arg(&sudo_user)
-            .arg("-c")
-            .arg(format!("DISPLAY={} xdotool type --clearmodifiers \"{}\"", 
-                 env::var("DISPLAY").unwrap_or_else(|_| ":0".to_string()),
-                 text))
-            .status();
-
-        if let Err(e) = status {
-            eprintln!("xdotool type failed: {}", e);
+        // 1. Set BOTH Clipboard and Primary selections using UTF-8
+        let selections = ["clipboard", "primary"];
+        for selection in selections {
+            // We run xclip directly. sudo -E should provide the necessary DISPLAY/XAUTHORITY.
+            if let Ok(mut child) = Command::new("xclip")
+                .arg("-selection")
+                .arg(selection)
+                .arg("-t")
+                .arg("UTF8_STRING") // Force UTF-8 encoding
+                .stdin(Stdio::piped())
+                .spawn() 
+            {
+                if let Some(mut stdin) = child.stdin.take() {
+                    let _ = stdin.write_all(text.as_bytes());
+                }
+                let _ = child.wait();
+            }
         }
+
+        // Delay to allow the X server to acknowledge the new selection
+        thread::sleep(Duration::from_millis(100));
+
+        // 2. Detect Window Class for shortcut selection
+        let is_terminal = if let Ok(output) = Command::new("xdotool")
+            .arg("getactivewindow")
+            .arg("getwindowclassname")
+            .output() 
+        {
+            let class = String::from_utf8_lossy(&output.stdout).to_lowercase();
+            // Expanded list of terminal classes
+            class.contains("terminal") || class.contains("konsole") || 
+            class.contains("uxterm") || class.contains("alacritty") ||
+            class.contains("kitty") || class.contains("wezterm") ||
+            class.contains("term")
+        } else {
+            false
+        };
         
-        // No need for Ctrl+V or Shift+Insert anymore, xdotool handles it!
+        if is_terminal {
+            // Terminals: Shift+Insert is the safest "raw" paste
+            self.emit(Key::KEY_LEFTSHIFT, 1);
+            self.sync();
+            self.emit(Key::KEY_INSERT, 1);
+            self.sync();
+            self.emit(Key::KEY_INSERT, 0);
+            self.sync();
+            self.emit(Key::KEY_LEFTSHIFT, 0);
+            self.sync();
+        } else {
+            // GUI Apps: Ctrl+V is the standard
+            self.emit(Key::KEY_LEFTCTRL, 1);
+            self.sync();
+            self.emit(Key::KEY_V, 1);
+            self.sync();
+            self.emit(Key::KEY_V, 0);
+            self.sync();
+            self.emit(Key::KEY_LEFTCTRL, 0);
+            self.sync();
+        }
     }
 }
 
