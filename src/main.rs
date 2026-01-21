@@ -18,6 +18,9 @@ struct DictEntry {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let args: Vec<String> = std::env::args().collect();
+    let enable_level3 = args.contains(&"--level3".to_string());
+
     // 1. Find Keyboard
     let device_path = find_keyboard().unwrap_or_else(|_| "/dev/input/event3".to_string());
     println!("Opening device: {}", device_path);
@@ -30,7 +33,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("Virtual keyboard created.");
 
     // 3. Load Dictionary
-    let dict = load_dict();
+    let dict = load_dict(enable_level3);
     println!("Dictionary loaded: {} entries.", dict.len());
 
     // 4. Initialize State
@@ -148,43 +151,70 @@ fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
 
 use walkdir::WalkDir;
 
-fn load_dict() -> HashMap<String, Vec<String>> {
-    let mut dict = HashMap::new();
-    let root = "dicts";
-    
-    // Add CWD check for debugging
-    if let Ok(cwd) = std::env::current_dir() {
-        println!("Loading dicts from: {:?}/{}", cwd, root);
-    }
+fn load_file_into_dict(path: &str, dict: &mut HashMap<String, Vec<String>>) {
+    if let Ok(file) = File::open(path) {
+        let reader = BufReader::new(file);
+        let v: serde_json::Value = match serde_json::from_reader(reader) {
+            Ok(v) => v,
+            Err(_) => return,
+        };
 
-    for entry in WalkDir::new(root).into_iter().filter_map(|e| e.ok()) {
-        let path = entry.path();
-        if path.extension().map_or(false, |ext| ext == "json") {
-            // println!("Loading: {:?}", path);
-            if let Ok(file) = File::open(path) {
-                let reader = BufReader::new(file);
-                let v: serde_json::Value = match serde_json::from_reader(reader) {
-                    Ok(v) => v,
-                    Err(_) => continue,
-                };
-
-                // Try Format 1: Map<String, Vec<DictEntry>>
-                if let Ok(entries) = serde_json::from_value::<HashMap<String, Vec<DictEntry>>>(v.clone()) {
-                     for (k, val) in entries {
-                        let chars: Vec<String> = val.into_iter().map(|e| e.char).collect();
-                        dict.entry(k).or_insert_with(Vec::new).extend(chars);
-                    }
-                } 
-                // Try Format 2: Map<String, Vec<String>>
-                else if let Ok(simple_entries) = serde_json::from_value::<HashMap<String, Vec<String>>>(v) {
-                    for (k, val) in simple_entries {
-                        dict.entry(k).or_insert_with(Vec::new).extend(val);
-                    }
+        let mut process_entry = |k: String, chars: Vec<String>| {
+            let entry = dict.entry(k).or_insert_with(Vec::new);
+            for c in chars {
+                if !entry.contains(&c) {
+                    entry.push(c);
                 }
+            }
+        };
+
+        // Try Format 1: Map<String, Vec<DictEntry>>
+        if let Ok(entries) = serde_json::from_value::<HashMap<String, Vec<DictEntry>>>(v.clone()) {
+            for (k, val) in entries {
+                let chars: Vec<String> = val.into_iter().map(|e| e.char).collect();
+                process_entry(k, chars);
+            }
+        } 
+        // Try Format 2: Map<String, Vec<String>>
+        else if let Ok(simple_entries) = serde_json::from_value::<HashMap<String, Vec<String>>>(v) {
+            for (k, val) in simple_entries {
+                process_entry(k, val);
             }
         }
     }
+}
+
+fn load_dict(enable_level3: bool) -> HashMap<String, Vec<String>> {
+    let mut dict = HashMap::new();
+    let root = "dicts";
     
+    // Priority files
+    let level1 = "dicts/chinese/character/level-1_char_en.json";
+    let level2 = "dicts/chinese/character/level-2_char_en.json";
+    let level3 = "dicts/chinese/character/level-3_char_en.json";
+
+    println!("Loading priority dictionaries...");
+    load_file_into_dict(level1, &mut dict);
+    load_file_into_dict(level2, &mut dict);
+
+    // Load others
+    for entry in WalkDir::new(root).into_iter().filter_map(|e| e.ok()) {
+        let path = entry.path();
+        if path.extension().map_or(false, |ext| ext == "json") {
+            let path_str = path.to_str().unwrap_or("");
+            // Skip priority files and level3
+            if path_str == level1 || path_str == level2 || path_str == level3 {
+                continue;
+            }
+            load_file_into_dict(path_str, &mut dict);
+        }
+    }
+    
+    if enable_level3 {
+        println!("Loading Level-3 dictionary...");
+        load_file_into_dict(level3, &mut dict);
+    }
+
     if dict.is_empty() {
         println!("Warning: No dictionaries loaded!");
         dict.insert("ni".into(), vec!["你".into()]);
