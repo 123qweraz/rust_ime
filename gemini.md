@@ -2,16 +2,22 @@
 
 ## Instructions to Run
 
-Since this program accesses input devices (`/dev/input/`), it typically requires root privileges.
+Since this program accesses input devices (`/dev/input/`), it requires root privileges.
 
-### Standard Run
+### Option 1: Using cargo with user PATH (Recommended)
 ```bash
-sudo cargo run
+sudo env "PATH=$PATH" cargo run
+```
+
+### Option 2: Build and run the binary directly
+```bash
+cargo build
+sudo ./target/debug/blind-ime
 ```
 
 ### Enable Level-3 Dictionary
 ```bash
-sudo cargo run -- --level3
+sudo env "PATH=$PATH" cargo run -- --level3
 ```
 
 ---
