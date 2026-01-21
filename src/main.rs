@@ -53,37 +53,66 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 
                 if val == 1 { // Press
                     match key {
-                        Key::KEY_RIGHTSHIFT => {
-                            ime.toggle();
-                            // Swallow toggle key
+                        Key::KEY_RIGHTSHIFT | Key::KEY_LEFTSHIFT => {
+                            if ime.chinese && !ime.buffer.is_empty() {
+                                if let Some(ImeOutput::Commit(s)) = ime.commit() {
+                                    vkbd.send_text(&s);
+                                }
+                            } else {
+                                ime.toggle();
+                            }
+                        }
+                        Key::KEY_BACKSPACE => {
+                            if ime.backspace().is_none() {
+                                vkbd.send_key(Key::KEY_BACKSPACE);
+                            }
+                        }
+                        Key::KEY_ENTER => {
+                            if ime.chinese && !ime.buffer.is_empty() {
+                                let raw = ime.buffer.clone();
+                                ime.reset();
+                                vkbd.send_text(&raw);
+                            } else {
+                                vkbd.send_key(Key::KEY_ENTER);
+                            }
                         }
                         Key::KEY_SPACE => {
                             if ime.chinese && !ime.buffer.is_empty() {
                                 if let Some(ImeOutput::Commit(s)) = ime.commit() {
                                     vkbd.send_text(&s);
-                                } else {
-                                    vkbd.send_key(Key::KEY_SPACE);
                                 }
                             } else {
                                 vkbd.send_key(Key::KEY_SPACE);
                             }
                         }
-                        Key::KEY_BACKSPACE => {
-                            if let Some(_) = ime.backspace() {
-                                // Swallowed
+                        Key::KEY_MINUS => {
+                            if ime.chinese && !ime.buffer.is_empty() {
+                                ime.prev_page();
                             } else {
-                                vkbd.send_key(Key::KEY_BACKSPACE);
+                                vkbd.send_key(Key::KEY_MINUS);
                             }
                         }
-                        Key::KEY_ENTER => {
-                             if ime.chinese && !ime.buffer.is_empty() {
-                                 if let Some(ImeOutput::Commit(s)) = ime.commit() {
-                                     vkbd.send_text(&s);
-                                 }
-                                 vkbd.send_key(Key::KEY_ENTER);
-                             } else {
-                                 vkbd.send_key(Key::KEY_ENTER);
-                             }
+                        Key::KEY_EQUAL => {
+                            if ime.chinese && !ime.buffer.is_empty() {
+                                ime.next_page();
+                            } else {
+                                vkbd.send_key(Key::KEY_EQUAL);
+                            }
+                        }
+                        Key::KEY_1 | Key::KEY_2 | Key::KEY_3 | Key::KEY_4 | Key::KEY_5 |
+                        Key::KEY_6 | Key::KEY_7 | Key::KEY_8 | Key::KEY_9 | Key::KEY_0 => {
+                            if ime.chinese && !ime.buffer.is_empty() {
+                                let idx = match key {
+                                    Key::KEY_1 => 0, Key::KEY_2 => 1, Key::KEY_3 => 2, Key::KEY_4 => 3, Key::KEY_5 => 4,
+                                    Key::KEY_6 => 5, Key::KEY_7 => 6, Key::KEY_8 => 7, Key::KEY_9 => 8, Key::KEY_0 => 9,
+                                    _ => 0,
+                                };
+                                if let Some(s) = ime.select_candidate(idx) {
+                                    vkbd.send_text(&s);
+                                }
+                            } else {
+                                vkbd.send_key(key);
+                            }
                         }
                         _ => {
                             if let Some(c) = key_to_char(key) {
@@ -96,7 +125,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                         }
                     }
                 } else if val == 0 { // Release
-                     if key == Key::KEY_RIGHTSHIFT {
+                     if key == Key::KEY_RIGHTSHIFT || key == Key::KEY_LEFTSHIFT {
                          // Swallow
                      } else if ime.chinese && !ime.buffer.is_empty() && key_to_char(key).is_some() {
                          // Swallow release of buffered chars
@@ -130,6 +159,9 @@ fn key_to_char(key: Key) -> Option<char> {
         Key::KEY_Q => Some('q'), Key::KEY_R => Some('r'), Key::KEY_S => Some('s'), Key::KEY_T => Some('t'),
         Key::KEY_U => Some('u'), Key::KEY_V => Some('v'), Key::KEY_W => Some('w'), Key::KEY_X => Some('x'),
         Key::KEY_Y => Some('y'), Key::KEY_Z => Some('z'),
+        Key::KEY_1 => Some('1'), Key::KEY_2 => Some('2'), Key::KEY_3 => Some('3'), Key::KEY_4 => Some('4'),
+        Key::KEY_5 => Some('5'), Key::KEY_6 => Some('6'), Key::KEY_7 => Some('7'), Key::KEY_8 => Some('8'),
+        Key::KEY_9 => Some('9'), Key::KEY_0 => Some('0'),
         _ => None,
     }
 }
