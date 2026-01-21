@@ -1,5 +1,6 @@
 use std::collections::HashMap;
 use evdev::Key;
+use notify_rust::Notification;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ImeState {
@@ -40,7 +41,11 @@ impl Ime {
     pub fn toggle(&mut self) {
         self.chinese_enabled = !self.chinese_enabled;
         self.reset();
-        println!("IME Enabled: {}", self.chinese_enabled);
+        if self.chinese_enabled {
+            println!("\n[IME] 中文模式");
+        } else {
+            println!("\n[IME] 英文模式");
+        }
     }
 
     pub fn reset(&mut self) {
@@ -76,7 +81,7 @@ impl Ime {
             results.extend(exact.clone());
         }
 
-        // 2. 前缀搜索 (限制搜索范围以保证性能)
+        // 2. 前缀搜索
         let mut matching_keys: Vec<&String> = self.dict.keys()
             .filter(|k| k.starts_with(&self.buffer) && *k != &self.buffer)
             .collect();
@@ -99,9 +104,58 @@ impl Ime {
         self.selected = 0;
         self.update_state();
         
-        if !self.buffer.is_empty() {
-            println!("Buffer: {}, Candidates: {}", self.buffer, self.candidates.len());
+        // 打印预览界面
+        self.print_preview();
+        self.notify_preview();
+    }
+
+    fn notify_preview(&self) {
+        if self.buffer.is_empty() { return; }
+
+        let mut body = String::new();
+        if self.candidates.is_empty() {
+            body = "(无候选)".to_string();
+        } else {
+            for (i, cand) in self.candidates.iter().take(5).enumerate() {
+                let num = i + 1;
+                if i == self.selected {
+                    body.push_str(&format!("【{}.{}】 ", num, cand));
+                } else {
+                    body.push_str(&format!("{}.{} ", num, cand));
+                }
+            }
         }
+
+        Notification::new()
+            .summary(&format!("拼音: {}", self.buffer))
+            .body(&body)
+            .timeout(1000) // 1秒后消失
+            .show()
+            .ok();
+    }
+
+    fn print_preview(&self) {
+        if self.buffer.is_empty() { return; }
+        
+        // 使用 \r 回到行首，配合 print! 实现原地刷新
+        print!("\r\x1B[K"); // \x1B[K 是清除从光标到行末的内容
+        print!("拼音: {} | ", self.buffer);
+        
+        if self.candidates.is_empty() {
+            print!("(无候选)");
+        } else {
+            for (i, cand) in self.candidates.iter().take(9).enumerate() {
+                let num = i + 1;
+                if i == self.selected {
+                    // 对当前选中的词加一个背景色或方括号
+                    print!("\x1B[7m{}.{}\x1B[m ", num, cand);
+                } else {
+                    print!("{}.{} ", num, cand);
+                }
+            }
+        }
+        use std::io::{self, Write};
+        io::stdout().flush().unwrap();
     }
 
     pub fn handle_key(&mut self, key: Key, is_press: bool) -> Action {
@@ -114,7 +168,6 @@ impl Ime {
             return Action::PassThrough;
         }
 
-        // 只有按下和长按才处理逻辑
         if !is_press {
             if self.state != ImeState::Direct {
                 return Action::Consume;
@@ -143,13 +196,20 @@ impl Ime {
         match key {
             Key::KEY_BACKSPACE => {
                 self.buffer.pop();
-                self.lookup();
+                if self.buffer.is_empty() {
+                    print!("\r\x1B[K"); // 清除预览行
+                    self.reset();
+                } else {
+                    self.lookup();
+                }
                 Action::Consume
             }
 
             Key::KEY_TAB => {
                 if !self.candidates.is_empty() {
-                    self.selected = (self.selected + 1) % self.candidates.len();
+                    self.selected = (self.selected + 1) % self.candidates.len().min(9);
+                    self.print_preview();
+                    self.notify_preview();
                 }
                 Action::Consume
             }
@@ -157,10 +217,12 @@ impl Ime {
             Key::KEY_SPACE => {
                 if let Some(word) = self.candidates.get(self.selected) {
                     let out = word.clone();
+                    print!("\r\x1B[K"); // 上屏时清除预览
                     self.reset();
                     Action::Emit(out)
                 } else if !self.buffer.is_empty() {
                     let out = self.buffer.clone();
+                    print!("\r\x1B[K");
                     self.reset();
                     Action::Emit(out)
                 } else {
@@ -170,11 +232,13 @@ impl Ime {
 
             Key::KEY_ENTER => {
                 let out = self.buffer.clone();
+                print!("\r\x1B[K");
                 self.reset();
                 Action::Emit(out)
             }
 
             Key::KEY_ESC => {
+                print!("\r\x1B[K");
                 self.reset();
                 Action::Consume
             }
@@ -184,6 +248,7 @@ impl Ime {
                 let actual_idx = if idx == 0 { 9 } else { idx - 1 };
                 if let Some(word) = self.candidates.get(actual_idx) {
                     let out = word.clone();
+                    print!("\r\x1B[K");
                     self.reset();
                     return Action::Emit(out);
                 }
