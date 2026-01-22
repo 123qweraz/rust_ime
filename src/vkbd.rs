@@ -48,8 +48,7 @@ impl Vkbd {
     pub fn cycle_paste_mode(&mut self) -> String {
         self.paste_mode = match self.paste_mode {
             PasteMode::CtrlV => PasteMode::CtrlShiftV,
-            PasteMode::CtrlShiftV => PasteMode::ShiftInsert,
-            PasteMode::ShiftInsert => PasteMode::CtrlV,
+            _ => PasteMode::CtrlV,
         };
         
         println!("[Vkbd] Switched paste mode to: {:?}", self.paste_mode);
@@ -57,7 +56,7 @@ impl Vkbd {
         match self.paste_mode {
             PasteMode::CtrlV => "标准模式 (Ctrl+V)".to_string(),
             PasteMode::CtrlShiftV => "终端模式 (Ctrl+Shift+V)".to_string(),
-            PasteMode::ShiftInsert => "兼容模式 (Shift+Insert)".to_string(),
+            _ => "未知模式".to_string(),
         }
     }
 
