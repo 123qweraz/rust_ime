@@ -19,6 +19,7 @@ impl Vkbd {
         
         keys.insert(Key::KEY_LEFTCTRL);
         keys.insert(Key::KEY_V);
+        keys.insert(Key::KEY_INSERT); // For Shift+Insert paste
 
         let dev = VirtualDeviceBuilder::new()? 
             .name("blind-ime-v2")
@@ -33,20 +34,21 @@ impl Vkbd {
 
         println!("[IME] Emitting text: {}", text);
 
-        // 1. 尝试使用剪贴板方案 (针对中文更稳定)
+        // 1. 优先尝试剪贴板 (Shift + Insert)
+        // Shift+Insert 是 Linux 下兼容性最好的粘贴快捷键 (终端、GUI都支持)
         if self.send_via_clipboard(text) {
             return;
         }
 
-        // 2. 备选方案：如果是纯英文，且长度很短，直接通过虚拟键盘打字
-        if text.is_ascii() && text.len() < 10 {
-            for ch in text.chars() {
-                if let Some(key) = char_to_key_raw(ch) {
-                    self.tap(key);
-                }
-            }
-            return;
+        // 2. 如果剪贴板失败，尝试 Unicode Hex Input
+        let mut success = true;
+        for ch in text.chars() {
+             if !self.send_char_via_unicode(ch) {
+                 success = false;
+                 break;
+             }
         }
+        if success { return; }
 
         // 3. 最后的手段：ydotool
         let _ = Command::new("ydotool")
@@ -58,10 +60,35 @@ impl Vkbd {
             .output();
     }
 
+    fn send_char_via_unicode(&mut self, ch: char) -> bool {
+        // ISO 14755 Unicode Hex Input
+        // 流程: Ctrl+Shift+U -> 释放 -> 输入Hex -> Enter/Space
+        
+        self.emit(Key::KEY_LEFTCTRL, true);
+        self.emit(Key::KEY_LEFTSHIFT, true);
+        self.tap(Key::KEY_U);
+        self.emit(Key::KEY_LEFTCTRL, false);
+        self.emit(Key::KEY_LEFTSHIFT, false);
+
+        thread::sleep(Duration::from_millis(20)); // 增加一点延迟
+
+        let hex_str = format!("{:x}", ch as u32);
+        for hex_char in hex_str.chars() {
+             if let Some(key) = hex_char_to_key(hex_char) {
+                 self.tap(key);
+             } else {
+                 return false;
+             }
+        }
+
+        self.tap(Key::KEY_ENTER);
+        thread::sleep(Duration::from_millis(10));
+        true
+    }
+
     fn send_via_clipboard(&mut self, text: &str) -> bool {
         use arboard::Clipboard;
         
-        // 使用 arboard 设置剪贴板内容
         let mut cb = match Clipboard::new() {
             Ok(c) => c,
             Err(e) => {
@@ -75,15 +102,14 @@ impl Vkbd {
             return false;
         }
 
-        // 给系统一点时间同步剪贴板，稍微长一点
         thread::sleep(Duration::from_millis(150));
         
-        // 模拟 Ctrl+V
-        self.emit(Key::KEY_LEFTCTRL, true);
+        // 模拟 Shift + Insert (通用粘贴)
+        self.emit(Key::KEY_LEFTSHIFT, true);
         thread::sleep(Duration::from_millis(20));
-        self.tap(Key::KEY_V);
+        self.tap(Key::KEY_INSERT);
         thread::sleep(Duration::from_millis(20));
-        self.emit(Key::KEY_LEFTCTRL, false);
+        self.emit(Key::KEY_LEFTSHIFT, false);
         
         true
     }
@@ -135,6 +161,18 @@ fn char_to_key_raw(c: char) -> Option<Key> {
         'u' => Some(Key::KEY_U), 'v' => Some(Key::KEY_V), 'w' => Some(Key::KEY_W),
         'x' => Some(Key::KEY_X), 'y' => Some(Key::KEY_Y), 'z' => Some(Key::KEY_Z),
         ' ' => Some(Key::KEY_SPACE),
+        _ => None,
+    }
+}
+
+fn hex_char_to_key(c: char) -> Option<Key> {
+    match c.to_ascii_lowercase() {
+        '0' => Some(Key::KEY_0), '1' => Some(Key::KEY_1), '2' => Some(Key::KEY_2),
+        '3' => Some(Key::KEY_3), '4' => Some(Key::KEY_4), '5' => Some(Key::KEY_5),
+        '6' => Some(Key::KEY_6), '7' => Some(Key::KEY_7), '8' => Some(Key::KEY_8),
+        '9' => Some(Key::KEY_9),
+        'a' => Some(Key::KEY_A), 'b' => Some(Key::KEY_B), 'c' => Some(Key::KEY_C),
+        'd' => Some(Key::KEY_D), 'e' => Some(Key::KEY_E), 'f' => Some(Key::KEY_F),
         _ => None,
     }
 }
