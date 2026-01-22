@@ -23,10 +23,12 @@ pub enum NotifyEvent {
     Close,
 }
 
+use crate::trie::Trie;
+
 pub struct Ime {
     pub state: ImeState,
     pub buffer: String,
-    pub dict: HashMap<String, Vec<String>>,
+    pub dict: Trie,
     pub punctuation: HashMap<String, String>,
     pub candidates: Vec<String>,
     pub selected: usize,
@@ -36,7 +38,7 @@ pub struct Ime {
 }
 
 impl Ime {
-    pub fn new(dict: HashMap<String, Vec<String>>, punctuation: HashMap<String, String>, notification_tx: Sender<NotifyEvent>) -> Self {
+    pub fn new(dict: Trie, punctuation: HashMap<String, String>, notification_tx: Sender<NotifyEvent>) -> Self {
         Self {
             state: ImeState::Direct,
             buffer: String::new(),
@@ -91,33 +93,9 @@ impl Ime {
             return;
         }
 
-        let mut results = Vec::new();
+        // Use Trie BFS search to find candidates (limit 100)
+        self.candidates = self.dict.search_bfs(&self.buffer, 100);
 
-        // 1. 精确匹配
-        if let Some(exact) = self.dict.get(&self.buffer) {
-            results.extend(exact.clone());
-        }
-
-        // 2. 前缀搜索
-        let mut matching_keys: Vec<&String> = self.dict.keys()
-            .filter(|k| k.starts_with(&self.buffer) && *k != &self.buffer)
-            .collect();
-        
-        matching_keys.sort_by_key(|a| a.len());
-
-        for k in matching_keys.iter().take(10) {
-            if let Some(words) = self.dict.get(*k) {
-                for w in words {
-                    if !results.contains(w) {
-                        results.push(w.clone());
-                    }
-                    if results.len() > 100 { break; } // Increase limit for paging
-                }
-            }
-            if results.len() > 100 { break; }
-        }
-
-        self.candidates = results;
         self.selected = 0;
         self.page = 0;
         self.update_state();

@@ -15,11 +15,14 @@ mod vkbd;
 
 use ime::*;
 use vkbd::*;
+use trie::Trie;
 use users::{get_effective_uid, get_current_uid, get_user_by_uid, get_user_groups};
 use arboard::Clipboard;
 use std::process::Command;
 use std::env;
 use std::path::Path;
+
+mod trie;
 
 const PID_FILE: &str = "/tmp/blind-ime.pid";
 const LOG_FILE: &str = "/tmp/blind-ime.log";
@@ -131,17 +134,14 @@ fn detect_environment() {
 
 fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
     let exe_path = env::current_exe()?;
-    let exe_dir = exe_path.parent().unwrap();
+    // FIX: 使用当前工作目录作为程序运行目录，确保能找到 dicts
+    let working_dir = env::current_dir()?;
     
     // 构造 .desktop 文件内容
-    // 注意：Exec 中我们不需要加 --foreground，因为设计就是默认后台运行
-    // 但是我们需要确保工作目录正确，以便找到 dicts
-    // 简单起见，我们生成的文件直接运行程序（即默认后台模式）
-    
     let desktop_entry = format!(
         "[Desktop Entry]\nType=Application\nName=Blind IME\nComment=Blind IME Background Service\nExec={}\nPath={}\nTerminal=false\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\n",
         exe_path.display(),
-        exe_dir.display()
+        working_dir.display()
     );
 
     let home = env::var("HOME")?;
@@ -156,6 +156,7 @@ fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
     file.write_all(desktop_entry.as_bytes())?;
     
     println!("✓ 已创建自启动文件: {}", desktop_file.display());
+    println!("  工作目录设置为: {}", working_dir.display());
     println!("  下一次登录时程序将自动在后台启动。\n");
     
     Ok(())
@@ -300,7 +301,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let dict = load_all_dicts(&config);
     let punctuation = load_punctuation_dict("dicts/chinese/punctuation.json");
 
-    println!("Loaded dictionary with {} pinyin keys.", dict.len());
+    println!("Loaded dictionary with {} words.", dict.len());
     println!("Loaded punctuation map with {} entries.", punctuation.len());
     
     if dict.is_empty() {
@@ -469,8 +470,8 @@ fn load_config() -> Option<Config> {
     serde_json::from_reader(reader).ok()
 }
 
-fn load_all_dicts(config: &Config) -> HashMap<String, Vec<String>> {
-    let mut dict = HashMap::new();
+fn load_all_dicts(config: &Config) -> Trie {
+    let mut trie = Trie::new();
     
     println!("Scanning directories for dictionaries: {:?}", config.dict_dirs);
     for dir in &config.dict_dirs {
@@ -488,19 +489,19 @@ fn load_all_dicts(config: &Config) -> HashMap<String, Vec<String>> {
                 }
                 
                 println!("Loading: {}", path_str);
-                load_file_into_dict(path_str, &mut dict);
+                load_file_into_dict(path_str, &mut trie);
             }
         }
     }
 
     for file in &config.extra_dicts {
-        load_file_into_dict(file, &mut dict);
+        load_file_into_dict(file, &mut trie);
     }
 
-    dict
+    trie
 }
 
-fn load_file_into_dict(path: &str, dict: &mut HashMap<String, Vec<String>>) {
+fn load_file_into_dict(path: &str, trie: &mut Trie) {
     let file = match File::open(path) {
         Ok(f) => f,
         Err(_) => return,
@@ -518,24 +519,19 @@ fn load_file_into_dict(path: &str, dict: &mut HashMap<String, Vec<String>>) {
     if let Some(obj) = v.as_object() {
         for (py, val) in obj {
             let py_lower = py.to_lowercase();
-            let entry = dict.entry(py_lower).or_insert_with(Vec::new);
             
             // Handle Vec<DictEntry>
             if let Ok(entries) = serde_json::from_value::<Vec<DictEntry>>(val.clone()) {
                 for e in entries {
-                    if !entry.contains(&e.char) {
-                        entry.push(e.char);
-                        count += 1;
-                    }
+                    trie.insert(&py_lower, e.char);
+                    count += 1;
                 }
             } 
             // Handle Vec<String>
             else if let Ok(strings) = serde_json::from_value::<Vec<String>>(val.clone()) {
                 for s in strings {
-                    if !entry.contains(&s) {
-                        entry.push(s);
-                        count += 1;
-                    }
+                    trie.insert(&py_lower, s);
+                    count += 1;
                 }
             }
         }
