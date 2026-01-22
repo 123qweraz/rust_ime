@@ -21,19 +21,23 @@ pub struct Ime {
     pub state: ImeState,
     pub buffer: String,
     pub dict: HashMap<String, Vec<String>>,
+    pub punctuation: HashMap<String, String>,
     pub candidates: Vec<String>,
     pub selected: usize,
+    pub page: usize,
     pub chinese_enabled: bool,
 }
 
 impl Ime {
-    pub fn new(dict: HashMap<String, Vec<String>>) -> Self {
+    pub fn new(dict: HashMap<String, Vec<String>>, punctuation: HashMap<String, String>) -> Self {
         Self {
             state: ImeState::Direct,
             buffer: String::new(),
             dict,
+            punctuation,
             candidates: vec![],
             selected: 0,
+            page: 0,
             chinese_enabled: false,
         }
     }
@@ -52,6 +56,7 @@ impl Ime {
         self.buffer.clear();
         self.candidates.clear();
         self.selected = 0;
+        self.page = 0;
         self.state = ImeState::Direct;
     }
 
@@ -94,19 +99,24 @@ impl Ime {
                     if !results.contains(w) {
                         results.push(w.clone());
                     }
-                    if results.len() > 30 { break; }
+                    if results.len() > 100 { break; } // Increase limit for paging
                 }
             }
-            if results.len() > 30 { break; }
+            if results.len() > 100 { break; }
         }
 
         self.candidates = results;
         self.selected = 0;
+        self.page = 0;
         self.update_state();
         
         // 打印预览界面
         self.print_preview();
-        self.notify_preview();
+        
+        // 仅在无匹配候选（且有输入）时通知，作为错误提示
+        if self.candidates.is_empty() && !self.buffer.is_empty() {
+            self.notify_preview();
+        }
     }
 
     fn notify_preview(&self) {
@@ -114,16 +124,28 @@ impl Ime {
 
         let buffer = self.buffer.clone();
         let mut body = String::new();
+        
         if self.candidates.is_empty() {
             body = "(无候选)".to_string();
         } else {
-            for (i, cand) in self.candidates.iter().take(5).enumerate() {
+            let start = self.page * 5;
+            let end = (start + 5).min(self.candidates.len());
+            let current_page_candidates = &self.candidates[start..end];
+            
+            for (i, cand) in current_page_candidates.iter().enumerate() {
+                let abs_index = start + i;
                 let num = i + 1;
-                if i == self.selected {
+                if abs_index == self.selected {
                     body.push_str(&format!("【{}.{}】 ", num, cand));
                 } else {
                     body.push_str(&format!("{}.{} ", num, cand));
                 }
+            }
+            
+            // Show total pages
+            let total_pages = (self.candidates.len() + 4) / 5;
+            if total_pages > 1 {
+                body.push_str(&format!("\n[Page {}/{}]", self.page + 1, total_pages));
             }
         }
 
@@ -131,7 +153,8 @@ impl Ime {
             Notification::new()
                 .summary(&format!("拼音: {}", buffer))
                 .body(&body)
-                .timeout(1000)
+                .id(9999) // Use fixed ID to replace previous notification
+                .timeout(4000)
                 .show()
                 .ok();
         });
@@ -147,28 +170,37 @@ impl Ime {
         if self.candidates.is_empty() {
             print!("(无候选)");
         } else {
-            for (i, cand) in self.candidates.iter().take(9).enumerate() {
+            let start = self.page * 5;
+            let end = (start + 5).min(self.candidates.len());
+            
+            for (i, cand) in self.candidates[start..end].iter().enumerate() {
+                let abs_index = start + i;
                 let num = i + 1;
-                if i == self.selected {
+                if abs_index == self.selected {
                     // 对当前选中的词加一个背景色或方括号
                     print!("\x1B[7m{}.{}\x1B[m ", num, cand);
                 } else {
                     print!("{}.{} ", num, cand);
                 }
             }
+            
+             let total_pages = (self.candidates.len() + 4) / 5;
+             if total_pages > 1 {
+                 print!(" [Pg {}/{}]", self.page + 1, total_pages);
+             }
         }
         use std::io::{self, Write};
         io::stdout().flush().unwrap();
     }
 
-    pub fn handle_key(&mut self, key: Key, is_press: bool) -> Action {
+    pub fn handle_key(&mut self, key: Key, is_press: bool, shift_pressed: bool) -> Action {
         if is_press {
             if !self.buffer.is_empty() {
                 return self.handle_composing(key);
             }
 
             match self.state {
-                ImeState::Direct => self.handle_direct(key),
+                ImeState::Direct => self.handle_direct(key, shift_pressed),
                 _ => self.handle_composing(key),
             }
         } else {
@@ -179,7 +211,7 @@ impl Ime {
             } else {
                 // 如果正在输入拼音，只拦截那些我们感兴趣的按键释放
                 // 这样像 Shift 这种修饰键的释放就不会被拦截
-                if is_letter(key) || is_digit(key) || matches!(key, Key::KEY_BACKSPACE | Key::KEY_SPACE | Key::KEY_ENTER | Key::KEY_TAB | Key::KEY_ESC) {
+                if is_letter(key) || is_digit(key) || matches!(key, Key::KEY_BACKSPACE | Key::KEY_SPACE | Key::KEY_ENTER | Key::KEY_TAB | Key::KEY_ESC | Key::KEY_MINUS | Key::KEY_EQUAL) {
                     Action::Consume
                 } else {
                     Action::PassThrough
@@ -188,12 +220,26 @@ impl Ime {
         }
     }
 
-    fn handle_direct(&mut self, key: Key) -> Action {
+    fn handle_direct(&mut self, key: Key, shift_pressed: bool) -> Action {
         if let Some(c) = key_to_char(key) {
+            // 如果按下了 Shift 且是字母，通常意味着输入大写字母，这时候应该直接放行而不是进入拼音模式
+            // 除非我们想要支持 Shift+字母 依然进入拼音？通常输入法是 Shift 切换中英文，或者 Shift+A 输入 'A'
+            // 这里为了简单，如果 shift 按下，我们认为是英文输入
+            if shift_pressed {
+                return Action::PassThrough;
+            }
+            
             self.buffer.push(c);
             self.state = ImeState::Composing;
             self.lookup();
             Action::Consume
+        } else if let Some(punc_key) = get_punctuation_key(key, shift_pressed) {
+            // 检查是否有对应的标点映射
+            if let Some(zh_punc) = self.punctuation.get(punc_key) {
+                Action::Emit(zh_punc.clone())
+            } else {
+                Action::PassThrough
+            }
         } else {
             Action::PassThrough
         }
@@ -214,7 +260,31 @@ impl Ime {
 
             Key::KEY_TAB => {
                 if !self.candidates.is_empty() {
-                    self.selected = (self.selected + 1) % self.candidates.len().min(9);
+                    // Move to next candidate
+                    self.selected = (self.selected + 1) % self.candidates.len();
+                    // Update page if selected moves out of current page
+                    self.page = self.selected / 5;
+                    
+                    self.print_preview();
+                    self.notify_preview();
+                }
+                Action::Consume
+            }
+            
+            Key::KEY_MINUS => {
+                 if self.page > 0 {
+                     self.page -= 1;
+                     self.selected = self.page * 5;
+                     self.print_preview();
+                     self.notify_preview();
+                 }
+                 Action::Consume
+            }
+
+            Key::KEY_EQUAL => {
+                if (self.page + 1) * 5 < self.candidates.len() {
+                    self.page += 1;
+                    self.selected = self.page * 5;
                     self.print_preview();
                     self.notify_preview();
                 }
@@ -252,12 +322,15 @@ impl Ime {
 
             _ if is_digit(key) => {
                 let idx = key_to_digit(key).unwrap_or(0);
-                let actual_idx = if idx == 0 { 9 } else { idx - 1 };
-                if let Some(word) = self.candidates.get(actual_idx) {
-                    let out = word.clone();
-                    print!("\r\x1B[K");
-                    self.reset();
-                    return Action::Emit(out);
+                // 1-5 maps to index on CURRENT page
+                if idx >= 1 && idx <= 5 {
+                    let actual_idx = self.page * 5 + (idx - 1);
+                    if let Some(word) = self.candidates.get(actual_idx) {
+                        let out = word.clone();
+                        print!("\r\x1B[K");
+                        self.reset();
+                        return Action::Emit(out);
+                    }
                 }
                 Action::Consume
             }
@@ -303,6 +376,45 @@ pub fn key_to_char(key: Key) -> Option<char> {
         Key::KEY_J => Some('j'), Key::KEY_K => Some('k'), Key::KEY_L => Some('l'), Key::KEY_Z => Some('z'),
         Key::KEY_X => Some('x'), Key::KEY_C => Some('c'), Key::KEY_V => Some('v'), Key::KEY_B => Some('b'),
         Key::KEY_N => Some('n'), Key::KEY_M => Some('m'),
+        _ => None,
+    }
+}
+
+fn get_punctuation_key(key: Key, shift: bool) -> Option<&'static str> {
+    match (key, shift) {
+        (Key::KEY_GRAVE, false) => Some("`"),
+        (Key::KEY_GRAVE, true) => Some("~"),
+        (Key::KEY_MINUS, false) => Some("-"),
+        (Key::KEY_MINUS, true) => Some("_"),
+        (Key::KEY_EQUAL, false) => Some("="),
+        (Key::KEY_EQUAL, true) => Some("+"),
+        (Key::KEY_LEFTBRACE, false) => Some("["),
+        (Key::KEY_LEFTBRACE, true) => Some("{"),
+        (Key::KEY_RIGHTBRACE, false) => Some("]"),
+        (Key::KEY_RIGHTBRACE, true) => Some("}"),
+        (Key::KEY_BACKSLASH, false) => Some("\\"), // JSON key is "\\"
+        (Key::KEY_BACKSLASH, true) => Some("|"),
+        (Key::KEY_SEMICOLON, false) => Some(";"),
+        (Key::KEY_SEMICOLON, true) => Some(":"),
+        (Key::KEY_APOSTROPHE, false) => Some("'"),
+        (Key::KEY_APOSTROPHE, true) => Some("\""),
+        (Key::KEY_COMMA, false) => Some(","),
+        (Key::KEY_COMMA, true) => Some("<"),
+        (Key::KEY_DOT, false) => Some("."),
+        (Key::KEY_DOT, true) => Some(">"),
+        (Key::KEY_SLASH, false) => Some("/"),
+        (Key::KEY_SLASH, true) => Some("?"),
+        // Shift + Numbers
+        (Key::KEY_1, true) => Some("!"),
+        (Key::KEY_2, true) => Some("@"),
+        (Key::KEY_3, true) => Some("#"),
+        (Key::KEY_4, true) => Some("$"),
+        (Key::KEY_5, true) => Some("%"),
+        (Key::KEY_6, true) => Some("^"),
+        (Key::KEY_7, true) => Some("&"),
+        (Key::KEY_8, true) => Some("*"),
+        (Key::KEY_9, true) => Some("("),
+        (Key::KEY_0, true) => Some(")"),
         _ => None,
     }
 }

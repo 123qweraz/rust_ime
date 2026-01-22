@@ -76,15 +76,45 @@ sudo ./target/release/blind-ime
 }
 ```
 
-## 按键说明
+## Usage
 
-- **Shift**：切换中英文模式。
-- **字母键**：输入拼音。
-- **空格 (Space)**：确认首个候选词上屏。
-- **数字 (1-9)**：选择对应的候选词上屏。
-- **Tab**：在候选词之间循环切换。
-- **回车 (Enter)**：直接发送当前的拼音 Buffer。
-- **退格 (Backspace)**：删除拼音字符。
+1. Run the program:
+   ```bash
+   # Foreground mode (for testing)
+   sudo ./target/release/blind-ime --foreground
+
+   # Background mode (recommended)
+   ./target/release/blind-ime
+   ```
+
+2. Toggle Chinese mode: Press **Ctrl + Space**.
+3. Type pinyin to see candidates in the terminal.
+4. Select words using:
+   - `Space`: First candidate
+   - `Numbers 1-9`: Specific candidate
+   - `Enter`: Raw pinyin
+
+## Service Management (Auto-start & Background)
+
+Blind IME has built-in service management features.
+
+**1. Install Auto-start (Run once)**
+To make Blind IME start automatically when you log in:
+```bash
+./target/release/blind-ime --install
+```
+
+**2. Stop the Service**
+To stop the background process:
+```bash
+./target/release/blind-ime --stop
+```
+
+**3. View Logs**
+If you encounter issues, check the log file:
+```bash
+cat /tmp/blind-ime.log
+```
 
 ## 许可证
 

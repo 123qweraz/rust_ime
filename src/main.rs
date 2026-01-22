@@ -1,13 +1,14 @@
 use evdev::{Device, InputEventKind, Key};
 use std::collections::HashMap;
 use std::fs::File;
-use std::io::{self, BufReader};
+use std::io::{self, BufReader, Write};
 use serde::Deserialize;
 use walkdir::WalkDir;
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
 use signal_hook::consts::signal::*;
 use signal_hook::flag;
+use daemonize::Daemonize;
 
 mod ime;
 mod vkbd;
@@ -18,9 +19,18 @@ use users::{get_effective_uid, get_current_uid, get_user_by_uid, get_user_groups
 use arboard::Clipboard;
 use std::process::Command;
 use std::env;
+use std::path::Path;
+
+const PID_FILE: &str = "/tmp/blind-ime.pid";
+const LOG_FILE: &str = "/tmp/blind-ime.log";
 
 #[derive(Debug, Deserialize)]
 struct DictEntry {
+    char: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct PunctuationEntry {
     char: String,
 }
 
@@ -113,11 +123,142 @@ fn detect_environment() {
     println!("[环境检测] 检查完成\n");
 }
 
+fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
+    let exe_path = env::current_exe()?;
+    let exe_dir = exe_path.parent().unwrap();
+    
+    // 构造 .desktop 文件内容
+    // 注意：Exec 中我们不需要加 --foreground，因为设计就是默认后台运行
+    // 但是我们需要确保工作目录正确，以便找到 dicts
+    // 简单起见，我们生成的文件直接运行程序（即默认后台模式）
+    
+    let desktop_entry = format!(
+        "[Desktop Entry]\nType=Application\nName=Blind IME\nComment=Blind IME Background Service\nExec={}\nPath={}\nTerminal=false\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\n",
+        exe_path.display(),
+        exe_dir.display()
+    );
+
+    let home = env::var("HOME")?;
+    let autostart_dir = Path::new(&home).join(".config/autostart");
+    
+    if !autostart_dir.exists() {
+        std::fs::create_dir_all(&autostart_dir)?;
+    }
+    
+    let desktop_file = autostart_dir.join("blind-ime.desktop");
+    let mut file = File::create(&desktop_file)?;
+    file.write_all(desktop_entry.as_bytes())?;
+    
+    println!("✓ 已创建自启动文件: {}", desktop_file.display());
+    println!("  下一次登录时程序将自动在后台启动。\n");
+    
+    Ok(())
+}
+
+fn stop_daemon() -> Result<(), Box<dyn std::error::Error>> {
+    if !Path::new(PID_FILE).exists() {
+        println!("未检测到运行中的进程 (PID文件不存在: {})", PID_FILE);
+        return Ok(())
+    }
+
+    let pid_str = std::fs::read_to_string(PID_FILE)?;
+    let pid: i32 = pid_str.trim().parse()?;
+
+    println!("正在停止进程 PID: {} ...", pid);
+    
+    // 发送 SIGTERM
+    // 在 Rust 中没有直接 kill pid 的标准库函数，调用 kill 命令最简单
+    let status = Command::new("kill")
+        .arg("-15") // SIGTERM
+        .arg(pid.to_string())
+        .status()?;
+
+    if status.success() {
+        println!("✓ 进程已发送停止信号");
+        // 清理 PID 文件
+        if let Err(e) = std::fs::remove_file(PID_FILE) {
+            eprintln!("警告: 无法删除 PID 文件: {}", e);
+        }
+    } else {
+        eprintln!("✗ 停止进程失败");
+    }
+
+    Ok(())
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let args: Vec<String> = env::args().collect();
+    
+    if args.len() > 1 {
+        match args[1].as_str() {
+            "--install" => {
+                return install_autostart();
+            }
+            "--stop" => {
+                return stop_daemon();
+            }
+            "--foreground" => {
+                // 直接运行，不后台化
+                return run_ime();
+            }
+            "--help" | "-h" => {
+                println!("Usage: blind-ime [OPTIONS]");
+                println!("Options:");
+                println!("  (default)     后台运行 (Daemon mode)");
+                println!("  --foreground  前台运行 (调试用)");
+                println!("  --install     安装开机自启 (添加到 ~/.config/autostart)");
+                println!("  --stop        停止正在运行的后台进程");
+                return Ok(())
+            }
+            _ => {
+                // 未知参数，继续（或者报错），这里选择当作前台参数或忽略
+            }
+        }
+    }
+
+    // 默认进入后台模式
+    // 检查是否已经在运行
+    if Path::new(PID_FILE).exists() {
+        // 简单的检查，如果文件存在且进程真的在跑
+        // 这里为了简单，只提示用户
+        eprintln!("警告: {} 已存在。", PID_FILE);
+        eprintln!("程序可能已经在运行。如果是意外关闭残留，请先运行 --stop 清理，或手动删除该文件。");
+        // 为了防止重复启动导致两个进程抢键盘，这里最好退出，或者用户强制清理
+        eprintln!("如果确定未运行，请删除该文件后重试。\n");
+        return Ok(())
+    }
+
+    let log_file = File::create(LOG_FILE)?;
+    let cwd = env::current_dir()?;
+
+    println!("正在转入后台运行...");
+    println!("日志文件: {}", LOG_FILE);
+    println!("PID 文件: {}", PID_FILE);
+
+    let daemonize = Daemonize::new()
+        .pid_file(PID_FILE)
+        .working_directory(cwd) // 保持当前目录以便找到 dicts
+        .stdout(log_file.try_clone()?)
+        .stderr(log_file);
+
+    match daemonize.start() {
+        Ok(_) => {
+            // 我们现在是在后台进程中
+            run_ime()
+        }
+        Err(e) => {
+            eprintln!("Error, {}", e);
+            Err(e.into())
+        }
+    }
+}
+
+fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     detect_environment();
     
     // 注册信号处理
     let should_exit = Arc::new(AtomicBool::new(false));
+    // 注意：daemonize 后，SIGHUP 可能有不同行为，但这里主要处理 TERM/INT
     flag::register(SIGTERM, Arc::clone(&should_exit))?;
     flag::register(SIGINT, Arc::clone(&should_exit))?;
     flag::register(SIGHUP, Arc::clone(&should_exit))?;
@@ -130,26 +271,42 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let device_path = find_keyboard().unwrap_or_else(|_| "/dev/input/event3".to_string());
     println!("Opening device: {}", device_path);
-    let mut dev = Device::open(&device_path)?; 
+    
+    let mut dev = match Device::open(&device_path) {
+        Ok(d) => d,
+        Err(e) => {
+            eprintln!("Failed to open device {}: {}", device_path, e);
+            return Err(e.into());
+        }
+    };
     
     let mut vkbd = Vkbd::new(&dev)?;
     let dict = load_all_dicts(&config);
+    let punctuation = load_punctuation_dict("dicts/chinese/punctuation.json");
+
     println!("Loaded dictionary with {} pinyin keys.", dict.len());
+    println!("Loaded punctuation map with {} entries.", punctuation.len());
     
-    // 如果字典为空，打印警告
     if dict.is_empty() {
         println!("WARNING: No dictionary entries loaded! Check your 'dicts' folder.");
-    } else if let Some(first_key) = dict.keys().next() {
-        println!("Sample key: '{}' -> {:?}", first_key, dict.get(first_key).unwrap());
     }
-    let mut ime = Ime::new(dict);
 
-    println!("Blind-IME ready. [Right Shift] to toggle.");
-    println!("Current mode: English (System Keyboard)");
+    let mut ime = Ime::new(dict, punctuation);
+
+    // Grab the keyboard immediately to ensure we can intercept Ctrl+Space
+    // and manage modifier states consistently.
+    if let Err(e) = dev.grab() {
+        eprintln!("Failed to grab device: {}", e);
+        return Err(e.into());
+    }
+    println!("[IME] Keyboard grabbed. Blind-IME active.");
+    println!("[IME] Toggle: Ctrl + Space");
+    println!("Current mode: English");
     
     let mut ctrl_held = false;
     let mut alt_held = false;
     let mut meta_held = false;
+    let mut shift_held = false;
 
     while !should_exit.load(Ordering::Relaxed) {
         let events: Vec<_> = match dev.fetch_events() {
@@ -167,41 +324,49 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if let InputEventKind::Key(key) = ev.kind() {
                 let val = ev.value();
                 let is_press = val != 0; 
+                let _is_release = val == 0;
 
                 // 跟踪修饰键状态
                 match key {
                     Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL => ctrl_held = is_press,
                     Key::KEY_LEFTALT | Key::KEY_RIGHTALT => alt_held = is_press,
                     Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA => meta_held = is_press,
+                    Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT => shift_held = is_press,
                     _ => {}
                 }
 
-                if key == Key::KEY_RIGHTSHIFT {
-                    if val == 1 { // 仅在按下时切换
-                        ime.chinese_enabled = !ime.chinese_enabled;
-                        ime.reset();
-                        
-                        if ime.chinese_enabled {
-                            dev.grab()?;
-                            println!("\n[IME] 中文模式 (已拦截键盘)");
-                        } else {
-                            let _ = dev.ungrab();
-                            println!("\n[IME] 英文模式 (已释放键盘)");
-                        }
-                        // 切换后立即强制释放所有修饰键状态
-                        vkbd.release_all();
+                // Ctrl + Space Toggle
+                if ctrl_held && key == Key::KEY_SPACE && is_press {
+                    ime.chinese_enabled = !ime.chinese_enabled;
+                    ime.reset();
+                    
+                    if ime.chinese_enabled {
+                        println!("\n[IME] 中文模式");
+                    } else {
+                        println!("\n[IME] 英文模式");
                     }
+                    
+                    // Consume the Space press so it doesn't trigger system change
                     continue;
                 }
 
                 if ime.chinese_enabled {
-                    // 如果 Ctrl, Alt 或 Meta 被按下，放行按键以便快捷键工作
+                    // Pass through modifiers raw events to ensure shortcuts work
+                    if key == Key::KEY_LEFTCTRL || key == Key::KEY_RIGHTCTRL ||
+                       key == Key::KEY_LEFTALT || key == Key::KEY_RIGHTALT ||
+                       key == Key::KEY_LEFTMETA || key == Key::KEY_RIGHTMETA {
+                        vkbd.emit_raw(key, val);
+                        continue;
+                    }
+                    
+                    // If Ctrl/Alt/Meta held (but not the modifier key itself being pressed/released above),
+                    // pass through to support shortcuts like Ctrl+C
                     if ctrl_held || alt_held || meta_held {
                         vkbd.emit_raw(key, val);
                         continue;
                     }
 
-                    match ime.handle_key(key, val != 0) {
+                    match ime.handle_key(key, val != 0, shift_held) {
                         Action::Emit(s) => {
                             vkbd.send_text(&s);
                         }
@@ -210,16 +375,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                         }
                         Action::Consume => {}
                     }
+                } else {
+                    // English Mode: Just pass everything through
+                    vkbd.emit_raw(key, val);
                 }
             }
         }
     }
 
-    // 退出前清理
-    println!("\n[IME] 正在退出，释放所有按键并解除拦截...");
+    println!("\n[IME] 正在退出...");
     vkbd.release_all();
     let _ = dev.ungrab();
-    println!("[IME] 已安全退出");
+    
+    // 尝试删除 PID 文件
+    let _ = std::fs::remove_file(PID_FILE);
+    
+    println!("[IME] 已退出");
 
     Ok(())
 }
@@ -243,6 +414,11 @@ fn load_all_dicts(config: &Config) -> HashMap<String, Vec<String>> {
                 if !config.enable_level3 && path_str.contains("level-3") {
                     continue;
                 }
+                // Skip punctuation.json here to avoid polluting pinyin dict with symbols
+                if path_str.ends_with("punctuation.json") {
+                    continue;
+                }
+                
                 println!("Loading: {}", path_str);
                 load_file_into_dict(path_str, &mut dict);
             }
@@ -299,6 +475,39 @@ fn load_file_into_dict(path: &str, dict: &mut HashMap<String, Vec<String>>) {
     println!("Loaded {} entries from {}", count, path);
 }
 
+fn load_punctuation_dict(path: &str) -> HashMap<String, String> {
+    let mut map = HashMap::new();
+    let file = match File::open(path) {
+        Ok(f) => f,
+        Err(e) => {
+            eprintln!("Warning: Failed to open punctuation dict {}: {}", path, e);
+            return map;
+        }
+    };
+    let reader = BufReader::new(file);
+    let v: serde_json::Value = match serde_json::from_reader(reader) {
+        Ok(v) => v,
+        Err(e) => {
+            eprintln!("Failed to parse {}: {}", path, e);
+            return map;
+        }
+    };
+
+    // Expected format: { ".": [{"char": "。", ...}, ...], ... }
+    if let Some(obj) = v.as_object() {
+        for (key, val) in obj {
+            if let Ok(entries) = serde_json::from_value::<Vec<PunctuationEntry>>(val.clone()) {
+                if let Some(first) = entries.first() {
+                    map.insert(key.clone(), first.char.clone());
+                }
+            }
+        }
+    }
+    
+    println!("Loaded {} punctuation rules from {}", map.len(), path);
+    map
+}
+
 fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
     let paths = std::fs::read_dir("/dev/input")?;
     for entry in paths {
@@ -307,7 +516,6 @@ fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
         if let Ok(d) = Device::open(&path) {
             let name = d.name().unwrap_or("Unknown");
             
-            // 跳过我们自己的和 ydotool 的虚拟设备，防止无限循环或拦截失效
             if name.contains("blind-ime") || name.contains("ydotool") || name.contains("Virtual") {
                 continue;
             }
