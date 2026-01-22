@@ -34,21 +34,16 @@ impl Vkbd {
 
         println!("[IME] Emitting text: {}", text);
 
-        // 1. 优先尝试剪贴板 (Shift + Insert)
-        // Shift+Insert 是 Linux 下兼容性最好的粘贴快捷键 (终端、GUI都支持)
+        // 1. 优先尝试剪贴板 (Ctrl + Shift + V)
+        // 在 Linux 终端中，Ctrl+Shift+V 是标准粘贴键。
+        // 在浏览器中，它通常是 "Paste as plain text"，也能工作。
         if self.send_via_clipboard(text) {
             return;
         }
 
-        // 2. 如果剪贴板失败，尝试 Unicode Hex Input
-        let mut success = true;
-        for ch in text.chars() {
-             if !self.send_char_via_unicode(ch) {
-                 success = false;
-                 break;
-             }
-        }
-        if success { return; }
+        // 2. Unicode Hex Input 被禁用
+        // 因为用户反馈在 Cosmic 终端下会直接显示 Hex 码，体验极差。
+        // 如果剪贴板失败，我们直接降级到 ydotool 或放弃，而不是刷屏。
 
         // 3. 最后的手段：ydotool
         let _ = Command::new("ydotool")
@@ -61,6 +56,7 @@ impl Vkbd {
     }
 
     fn send_char_via_unicode(&mut self, ch: char) -> bool {
+        // ... (保留代码，但在 send_text 中不再调用) ...
         // ISO 14755 Unicode Hex Input
         // 流程: Ctrl+Shift+U -> 释放 -> 输入Hex -> Enter/Space
         
@@ -70,7 +66,7 @@ impl Vkbd {
         self.emit(Key::KEY_LEFTCTRL, false);
         self.emit(Key::KEY_LEFTSHIFT, false);
 
-        thread::sleep(Duration::from_millis(20)); // 增加一点延迟
+        thread::sleep(Duration::from_millis(20));
 
         let hex_str = format!("{:x}", ch as u32);
         for hex_char in hex_str.chars() {
@@ -104,12 +100,14 @@ impl Vkbd {
 
         thread::sleep(Duration::from_millis(150));
         
-        // 模拟 Shift + Insert (通用粘贴)
+        // 模拟 Ctrl + Shift + V (终端粘贴标准)
+        self.emit(Key::KEY_LEFTCTRL, true);
         self.emit(Key::KEY_LEFTSHIFT, true);
         thread::sleep(Duration::from_millis(20));
-        self.tap(Key::KEY_INSERT);
+        self.tap(Key::KEY_V);
         thread::sleep(Duration::from_millis(20));
         self.emit(Key::KEY_LEFTSHIFT, false);
+        self.emit(Key::KEY_LEFTCTRL, false);
         
         true
     }
