@@ -20,9 +20,25 @@ use users::{get_effective_uid, get_current_uid, get_user_by_uid, get_user_groups
 use arboard::Clipboard;
 use std::process::Command;
 use std::env;
-use std::path::Path;
+use std::path::{Path, PathBuf};
 
 mod trie;
+
+fn find_project_root() -> PathBuf {
+    let mut curr = env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
+    let original_cwd = curr.clone();
+
+    // Try to find a directory containing 'dicts' folder
+    for _ in 0..3 {
+        if curr.join("dicts").exists() {
+            return curr;
+        }
+        if !curr.pop() {
+            break;
+        }
+    }
+    original_cwd
+}
 
 const PID_FILE: &str = "/tmp/blind-ime.pid";
 const LOG_FILE: &str = "/tmp/blind-ime.log";
@@ -134,8 +150,8 @@ fn detect_environment() {
 
 fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
     let exe_path = env::current_exe()?;
-    // FIX: 使用当前工作目录作为程序运行目录，确保能找到 dicts
-    let working_dir = env::current_dir()?;
+    // 自动寻找包含 dicts 的目录作为工作目录
+    let working_dir = find_project_root();
     
     // 构造 .desktop 文件内容
     let desktop_entry = format!(
@@ -236,7 +252,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let log_file = File::create(LOG_FILE)?;
-    let cwd = env::current_dir()?;
+    let cwd = find_project_root();
 
     println!("正在转入后台运行...");
     println!("日志文件: {}", LOG_FILE);
@@ -244,7 +260,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let daemonize = Daemonize::new()
         .pid_file(PID_FILE)
-        .working_directory(cwd) // 保持当前目录以便找到 dicts
+        .working_directory(cwd) // 保持项目根目录以便找到 dicts
         .stdout(log_file.try_clone()?)
         .stderr(log_file);
 
@@ -261,6 +277,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
+    // 确保在项目根目录运行，以便找到 dicts 和 config.json
+    let root = find_project_root();
+    if let Err(e) = env::set_current_dir(&root) {
+        eprintln!("Warning: Failed to set working directory to {}: {}", root.display(), e);
+    }
+
     detect_environment();
     
     // 注册信号处理
