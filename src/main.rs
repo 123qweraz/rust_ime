@@ -291,7 +291,59 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         println!("WARNING: No dictionary entries loaded! Check your 'dicts' folder.");
     }
 
-    let mut ime = Ime::new(dict, punctuation);
+    // 初始化通知线程
+    let (notify_tx, notify_rx) = std::sync::mpsc::channel();
+    
+    std::thread::spawn(move || {
+        use notify_rust::{Notification, Timeout};
+        let mut handle: Option<notify_rust::NotificationHandle> = None;
+        
+        while let Ok(event) = notify_rx.recv() {
+            match event {
+                NotifyEvent::Update(summary, body) => {
+                    let res = Notification::new()
+                        .summary(&summary)
+                        .body(&body)
+                        .id(9999)
+                        .timeout(Timeout::Never) // 候选词不自动消失
+                        .show();
+                    
+                    match res {
+                        Ok(h) => handle = Some(h),
+                        Err(e) => eprintln!("Notification error: {}", e),
+                    }
+                },
+                NotifyEvent::Message(msg) => {
+                    let res = Notification::new()
+                        .summary("Blind IME")
+                        .body(&msg)
+                        .id(9999)
+                        .timeout(Timeout::Milliseconds(1500))
+                        .show();
+                        
+                    match res {
+                        Ok(h) => handle = Some(h),
+                        Err(e) => eprintln!("Notification error: {}", e),
+                    }
+                },
+                NotifyEvent::Close => {
+                    if let Some(h) = handle.take() {
+                        h.close();
+                    } else {
+                        // 尝试发送一个极短的通知来覆盖/关闭
+                        let _ = Notification::new()
+                            .summary(" ")
+                            .body(" ")
+                            .id(9999)
+                            .timeout(Timeout::Milliseconds(1))
+                            .show();
+                    }
+                }
+            }
+        }
+    });
+
+    let mut ime = Ime::new(dict, punctuation, notify_tx);
 
     // Grab the keyboard immediately to ensure we can intercept Ctrl+Space
     // and manage modifier states consistently.
@@ -337,14 +389,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
                 // Ctrl + Space Toggle
                 if ctrl_held && key == Key::KEY_SPACE && is_press {
-                    ime.chinese_enabled = !ime.chinese_enabled;
-                    ime.reset();
-                    
-                    if ime.chinese_enabled {
-                        println!("\n[IME] 中文模式");
-                    } else {
-                        println!("\n[IME] 英文模式");
-                    }
+                    ime.toggle();
                     
                     // Consume the Space press so it doesn't trigger system change
                     continue;

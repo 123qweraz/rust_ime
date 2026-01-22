@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use evdev::Key;
-use notify_rust::Notification;
+use std::sync::mpsc::Sender;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum ImeState {
@@ -17,6 +17,12 @@ pub enum Action {
     Consume,
 }
 
+pub enum NotifyEvent {
+    Update(String, String),
+    Message(String),
+    Close,
+}
+
 pub struct Ime {
     pub state: ImeState,
     pub buffer: String,
@@ -26,10 +32,11 @@ pub struct Ime {
     pub selected: usize,
     pub page: usize,
     pub chinese_enabled: bool,
+    pub notification_tx: Sender<NotifyEvent>,
 }
 
 impl Ime {
-    pub fn new(dict: HashMap<String, Vec<String>>, punctuation: HashMap<String, String>) -> Self {
+    pub fn new(dict: HashMap<String, Vec<String>>, punctuation: HashMap<String, String>, notification_tx: Sender<NotifyEvent>) -> Self {
         Self {
             state: ImeState::Direct,
             buffer: String::new(),
@@ -39,6 +46,7 @@ impl Ime {
             selected: 0,
             page: 0,
             chinese_enabled: false,
+            notification_tx,
         }
     }
 
@@ -47,8 +55,10 @@ impl Ime {
         self.reset();
         if self.chinese_enabled {
             println!("\n[IME] 中文模式");
+            let _ = self.notification_tx.send(NotifyEvent::Message("中文模式".to_string()));
         } else {
             println!("\n[IME] 英文模式");
+            let _ = self.notification_tx.send(NotifyEvent::Message("英文模式".to_string()));
         }
     }
 
@@ -58,6 +68,8 @@ impl Ime {
         self.selected = 0;
         self.page = 0;
         self.state = ImeState::Direct;
+        // 关闭通知
+        let _ = self.notification_tx.send(NotifyEvent::Close);
     }
 
     fn update_state(&mut self) {
@@ -113,10 +125,8 @@ impl Ime {
         // 打印预览界面
         self.print_preview();
         
-        // 仅在无匹配候选（且有输入）时通知，作为错误提示
-        if self.candidates.is_empty() && !self.buffer.is_empty() {
-            self.notify_preview();
-        }
+        // 通知更新
+        self.notify_preview();
     }
 
     fn notify_preview(&self) {
@@ -149,15 +159,7 @@ impl Ime {
             }
         }
 
-        std::thread::spawn(move || {
-            Notification::new()
-                .summary(&format!("拼音: {}", buffer))
-                .body(&body)
-                .id(9999) // Use fixed ID to replace previous notification
-                .timeout(4000)
-                .show()
-                .ok();
-        });
+        let _ = self.notification_tx.send(NotifyEvent::Update(format!("拼音: {}", buffer), body));
     }
 
     fn print_preview(&self) {
