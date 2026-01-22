@@ -3,11 +3,12 @@ use evdev::{AttributeSet, InputEvent, Key, Device, EventType};
 use std::{thread, time::Duration};
 use std::process::Command;
 
-#[derive(Debug, Clone, Copy)]
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub enum PasteMode {
     CtrlV,
     CtrlShiftV,
     ShiftInsert,
+    UnicodeHex, // Ctrl+Shift+U method
 }
 
 pub struct Vkbd {
@@ -25,9 +26,21 @@ impl Vkbd {
             }
         }
         
+        // Ensure keys required for all paste modes are available
         keys.insert(Key::KEY_LEFTCTRL);
+        keys.insert(Key::KEY_LEFTSHIFT);
         keys.insert(Key::KEY_V);
-        keys.insert(Key::KEY_INSERT); // For Shift+Insert paste
+        keys.insert(Key::KEY_INSERT); 
+        keys.insert(Key::KEY_U); 
+        keys.insert(Key::KEY_ENTER);
+        
+        // Digits and hex letters for unicode input
+        keys.insert(Key::KEY_0); keys.insert(Key::KEY_1); keys.insert(Key::KEY_2);
+        keys.insert(Key::KEY_3); keys.insert(Key::KEY_4); keys.insert(Key::KEY_5);
+        keys.insert(Key::KEY_6); keys.insert(Key::KEY_7); keys.insert(Key::KEY_8);
+        keys.insert(Key::KEY_9);
+        keys.insert(Key::KEY_A); keys.insert(Key::KEY_B); keys.insert(Key::KEY_C);
+        keys.insert(Key::KEY_D); keys.insert(Key::KEY_E); keys.insert(Key::KEY_F);
 
         let dev = VirtualDeviceBuilder::new()? 
             .name("blind-ime-v2")
@@ -48,7 +61,9 @@ impl Vkbd {
     pub fn cycle_paste_mode(&mut self) -> String {
         self.paste_mode = match self.paste_mode {
             PasteMode::CtrlV => PasteMode::CtrlShiftV,
-            _ => PasteMode::CtrlV,
+            PasteMode::CtrlShiftV => PasteMode::ShiftInsert,
+            PasteMode::ShiftInsert => PasteMode::UnicodeHex,
+            PasteMode::UnicodeHex => PasteMode::CtrlV,
         };
         
         println!("[Vkbd] Switched paste mode to: {:?}", self.paste_mode);
@@ -56,7 +71,8 @@ impl Vkbd {
         match self.paste_mode {
             PasteMode::CtrlV => "标准模式 (Ctrl+V)".to_string(),
             PasteMode::CtrlShiftV => "终端模式 (Ctrl+Shift+V)".to_string(),
-            _ => "未知模式".to_string(),
+            PasteMode::ShiftInsert => "X11模式 (Shift+Insert)".to_string(),
+            PasteMode::UnicodeHex => "Unicode编码输入 (Ctrl+Shift+U)".to_string(),
         }
     }
 
@@ -64,6 +80,14 @@ impl Vkbd {
         if text.is_empty() { return; }
 
         println!("[IME] Emitting text: {}", text);
+
+        // If using UnicodeHex mode, skip clipboard and type directly
+        if self.paste_mode == PasteMode::UnicodeHex {
+            for c in text.chars() {
+                self.send_char_via_unicode(c);
+            }
+            return;
+        }
 
         // 1. 优先尝试剪贴板
         if self.send_via_clipboard(text) {
@@ -148,6 +172,9 @@ impl Vkbd {
                 self.tap(Key::KEY_INSERT);
                 thread::sleep(Duration::from_millis(20));
                 self.emit(Key::KEY_LEFTSHIFT, false);
+            },
+            PasteMode::UnicodeHex => {
+                // Should not happen here if send_text handles it, but just in case
             }
         }
         
