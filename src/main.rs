@@ -39,6 +39,12 @@ struct Config {
     dict_dirs: Vec<String>,
     extra_dicts: Vec<String>,
     enable_level3: bool,
+    #[serde(default = "default_paste_shortcut")]
+    paste_shortcut: String,
+}
+
+fn default_paste_shortcut() -> String {
+    "ctrl_v".to_string()
 }
 
 fn detect_environment() {
@@ -267,6 +273,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         dict_dirs: vec!["dicts".to_string()],
         extra_dicts: vec![],
         enable_level3: false,
+        paste_shortcut: "ctrl_v".to_string(),
     });
 
     let device_path = find_keyboard().unwrap_or_else(|_| "/dev/input/event3".to_string());
@@ -281,6 +288,15 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     };
     
     let mut vkbd = Vkbd::new(&dev)?;
+    
+    // Set paste mode based on config
+    let mode = match config.paste_shortcut.as_str() {
+        "ctrl_shift_v" => PasteMode::CtrlShiftV,
+        "shift_insert" => PasteMode::ShiftInsert,
+        _ => PasteMode::CtrlV,
+    };
+    vkbd.set_paste_mode(mode);
+
     let dict = load_all_dicts(&config);
     let punctuation = load_punctuation_dict("dicts/chinese/punctuation.json");
 

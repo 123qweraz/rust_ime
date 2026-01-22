@@ -3,8 +3,16 @@ use evdev::{AttributeSet, InputEvent, Key, Device, EventType};
 use std::{thread, time::Duration};
 use std::process::Command;
 
+#[derive(Debug, Clone, Copy)]
+pub enum PasteMode {
+    CtrlV,
+    CtrlShiftV,
+    ShiftInsert,
+}
+
 pub struct Vkbd {
     pub dev: VirtualDevice,
+    pub paste_mode: PasteMode,
 }
 
 impl Vkbd {
@@ -26,7 +34,15 @@ impl Vkbd {
             .with_keys(&keys)?
             .build()?;
 
-        Ok(Self { dev })
+        Ok(Self { 
+            dev,
+            paste_mode: PasteMode::CtrlV, // Default standard
+        })
+    }
+
+    pub fn set_paste_mode(&mut self, mode: PasteMode) {
+        self.paste_mode = mode;
+        println!("[Vkbd] Paste mode set to: {:?}", mode);
     }
 
     pub fn send_text(&mut self, text: &str) {
@@ -34,18 +50,12 @@ impl Vkbd {
 
         println!("[IME] Emitting text: {}", text);
 
-        // 1. 优先尝试剪贴板 (Ctrl + Shift + V)
-        // 在 Linux 终端中，Ctrl+Shift+V 是标准粘贴键。
-        // 在浏览器中，它通常是 "Paste as plain text"，也能工作。
+        // 1. 优先尝试剪贴板
         if self.send_via_clipboard(text) {
             return;
         }
 
-        // 2. Unicode Hex Input 被禁用
-        // 因为用户反馈在 Cosmic 终端下会直接显示 Hex 码，体验极差。
-        // 如果剪贴板失败，我们直接降级到 ydotool 或放弃，而不是刷屏。
-
-        // 3. 最后的手段：ydotool
+        // 2. 失败处理 (ydotool)
         let _ = Command::new("ydotool")
             .env("YDOTOOL_SOCKET", "/tmp/ydotool.socket")
             .arg("type")
@@ -56,10 +66,7 @@ impl Vkbd {
     }
 
     fn send_char_via_unicode(&mut self, ch: char) -> bool {
-        // ... (保留代码，但在 send_text 中不再调用) ...
-        // ISO 14755 Unicode Hex Input
-        // 流程: Ctrl+Shift+U -> 释放 -> 输入Hex -> Enter/Space
-        
+        // ... (保留代码备用) ...
         self.emit(Key::KEY_LEFTCTRL, true);
         self.emit(Key::KEY_LEFTSHIFT, true);
         self.tap(Key::KEY_U);
@@ -100,14 +107,34 @@ impl Vkbd {
 
         thread::sleep(Duration::from_millis(150));
         
-        // 模拟 Ctrl + Shift + V (终端粘贴标准)
-        self.emit(Key::KEY_LEFTCTRL, true);
-        self.emit(Key::KEY_LEFTSHIFT, true);
-        thread::sleep(Duration::from_millis(20));
-        self.tap(Key::KEY_V);
-        thread::sleep(Duration::from_millis(20));
-        self.emit(Key::KEY_LEFTSHIFT, false);
-        self.emit(Key::KEY_LEFTCTRL, false);
+        match self.paste_mode {
+            PasteMode::CtrlV => {
+                // Standard: Ctrl + V
+                self.emit(Key::KEY_LEFTCTRL, true);
+                thread::sleep(Duration::from_millis(20));
+                self.tap(Key::KEY_V);
+                thread::sleep(Duration::from_millis(20));
+                self.emit(Key::KEY_LEFTCTRL, false);
+            },
+            PasteMode::CtrlShiftV => {
+                // Terminal: Ctrl + Shift + V
+                self.emit(Key::KEY_LEFTCTRL, true);
+                self.emit(Key::KEY_LEFTSHIFT, true);
+                thread::sleep(Duration::from_millis(20));
+                self.tap(Key::KEY_V);
+                thread::sleep(Duration::from_millis(20));
+                self.emit(Key::KEY_LEFTSHIFT, false);
+                self.emit(Key::KEY_LEFTCTRL, false);
+            },
+            PasteMode::ShiftInsert => {
+                // X11 Legacy: Shift + Insert
+                self.emit(Key::KEY_LEFTSHIFT, true);
+                thread::sleep(Duration::from_millis(20));
+                self.tap(Key::KEY_INSERT);
+                thread::sleep(Duration::from_millis(20));
+                self.emit(Key::KEY_LEFTSHIFT, false);
+            }
+        }
         
         true
     }
