@@ -359,7 +359,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    let mut ime = Ime::new(dict, punctuation, notify_tx);
+    let mut ime = Ime::new(dict, punctuation, notify_tx.clone());
 
     // Grab the keyboard immediately to ensure we can intercept Ctrl+Space
     // and manage modifier states consistently.
@@ -408,6 +408,13 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     ime.toggle();
                     
                     // Consume the Space press so it doesn't trigger system change
+                    continue;
+                }
+
+                // Ctrl + Alt + V: Cycle Paste Mode
+                if ctrl_held && alt_held && key == Key::KEY_V && is_press {
+                    let msg = vkbd.cycle_paste_mode();
+                    let _ = notify_tx.send(NotifyEvent::Message(format!("粘贴: {}", msg)));
                     continue;
                 }
 
