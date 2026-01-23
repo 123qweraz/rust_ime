@@ -29,7 +29,10 @@ use crate::trie::Trie;
 pub struct Ime {
     pub state: ImeState,
     pub buffer: String,
-    pub dict: Trie,
+    // Multi-profile support
+    pub tries: HashMap<String, Trie>, 
+    pub current_profile: String,
+    
     pub punctuation: HashMap<String, String>,
     pub candidates: Vec<String>,
     pub selected: usize,
@@ -43,11 +46,12 @@ pub struct Ime {
 }
 
 impl Ime {
-    pub fn new(dict: Trie, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>) -> Self {
+    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>) -> Self {
         Self {
             state: ImeState::Direct,
             buffer: String::new(),
-            dict,
+            tries,
+            current_profile: initial_profile,
             punctuation,
             candidates: vec![],
             selected: 0,
@@ -85,6 +89,31 @@ impl Ime {
             // 但这是一个设置切换，通常不在输入中途切换。为了安全，这里不做操作，
             // 或者用户如果正在输入中切换，可能会有残留。
             // 简单起见，假设用户只在空闲时切换。
+        }
+    }
+    
+    pub fn switch_profile(&mut self, profile_name: &str) {
+        if self.tries.contains_key(profile_name) {
+            self.current_profile = profile_name.to_string();
+            self.reset();
+            let msg = format!("切换词库: {}", profile_name);
+            println!("[IME] {}", msg);
+            let _ = self.notification_tx.send(NotifyEvent::Message(msg));
+        }
+    }
+
+    pub fn next_profile(&mut self) {
+        // Collect keys to find next
+        let mut profiles: Vec<String> = self.tries.keys().cloned().collect();
+        profiles.sort(); // Deterministic order
+        
+        if let Ok(idx) = profiles.binary_search(&self.current_profile) {
+            let next_idx = (idx + 1) % profiles.len();
+            let next_name = profiles[next_idx].clone();
+            self.switch_profile(&next_name);
+        } else if !profiles.is_empty() {
+            let first = profiles[0].clone();
+            self.switch_profile(&first);
         }
     }
 
@@ -139,8 +168,18 @@ impl Ime {
             return;
         }
 
+        // Get current dictionary
+        let dict = if let Some(d) = self.tries.get(&self.current_profile) {
+            d
+        } else {
+            // Should not happen if config is correct, but safe fallback
+            self.candidates.clear();
+            self.update_state();
+            return;
+        };
+
         // Use Trie BFS search to find candidates (limit 100)
-        let mut raw_candidates = self.dict.search_bfs(&self.buffer, 100);
+        let mut raw_candidates = dict.search_bfs(&self.buffer, 100);
 
         // Apply auxiliary filter if active
         if !self.aux_buffer.is_empty() {

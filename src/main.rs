@@ -53,11 +53,16 @@ struct PunctuationEntry {
     char: String,
 }
 
+#[derive(Debug, Deserialize, Clone)]
+struct Profile {
+    name: String,
+    dicts: Vec<String>,
+}
+
 #[derive(Debug, Deserialize)]
 struct Config {
-    dict_dirs: Vec<String>,
-    extra_dicts: Vec<String>,
-    enable_level3: bool,
+    profiles: Vec<Profile>,
+    active_profile: String,
     #[serde(default = "default_paste_shortcut")]
     paste_shortcut: String,
 }
@@ -292,12 +297,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     flag::register(SIGINT, Arc::clone(&should_exit))?;
     flag::register(SIGHUP, Arc::clone(&should_exit))?;
 
-    let config = load_config().unwrap_or(Config {
-        dict_dirs: vec!["dicts".to_string()],
-        extra_dicts: vec![],
-        enable_level3: false,
-        paste_shortcut: "ctrl_v".to_string(),
-    });
+    let config = load_config().unwrap_or_else(|| get_default_config());
 
     let device_path = find_keyboard().unwrap_or_else(|_| "/dev/input/event3".to_string());
     println!("Opening device: {}", device_path);
@@ -320,16 +320,22 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     };
     vkbd.set_paste_mode(mode);
 
-    let dict = load_all_dicts(&config);
+    // Load Dictionaries per Profile
+    let mut tries = HashMap::new();
+    for profile in &config.profiles {
+        let trie = load_dict_for_profile(&profile.dicts);
+        tries.insert(profile.name.clone(), trie);
+    }
+    
     let punctuation = load_punctuation_dict("dicts/chinese/punctuation.json");
     let word_en_map = load_char_en_map("dicts/chinese/character");
 
-    println!("Loaded dictionary with {} words.", dict.len());
+    println!("Loaded {} profiles.", tries.len());
     println!("Loaded punctuation map with {} entries.", punctuation.len());
     println!("Loaded char-en map with {} entries.", word_en_map.len());
     
-    if dict.is_empty() {
-        println!("WARNING: No dictionary entries loaded! Check your 'dicts' folder.");
+    if tries.is_empty() {
+        println!("WARNING: No profiles loaded!");
     }
 
     // 初始化通知线程
@@ -384,7 +390,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    let mut ime = Ime::new(dict, punctuation, word_en_map, notify_tx.clone());
+    let mut ime = Ime::new(tries, config.active_profile, punctuation, word_en_map, notify_tx.clone());
 
     // Grab the keyboard immediately to ensure we can intercept Ctrl+Space
     // and manage modifier states consistently.
@@ -446,6 +452,12 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                 // Ctrl + Alt + P: Toggle Phantom Mode (Ghost Text)
                 if ctrl_held && alt_held && key == Key::KEY_P && is_press {
                     ime.toggle_phantom();
+                    continue;
+                }
+
+                // Ctrl + Alt + S: Switch Dictionary Profile
+                if ctrl_held && alt_held && key == Key::KEY_S && is_press {
+                    ime.next_profile();
                     continue;
                 }
 
@@ -511,34 +523,55 @@ fn load_config() -> Option<Config> {
     serde_json::from_reader(reader).ok()
 }
 
-fn load_all_dicts(config: &Config) -> Trie {
+fn get_default_config() -> Config {
+    Config {
+        profiles: vec![
+            Profile {
+                name: "Chinese".to_string(),
+                dicts: vec![
+                    "dicts/chinese/punctuation.json".to_string(),
+                    "dicts/chinese/character".to_string(),
+                    "dicts/chinese/vocabulary/dict_cizu.json".to_string(),
+                    "dicts/chinese/vocabulary/chuzhongcihui".to_string(),
+                ],
+            },
+        ],
+        active_profile: "Chinese".to_string(),
+        paste_shortcut: "ctrl_v".to_string(),
+    }
+}
+
+fn load_dict_for_profile(paths: &[String]) -> Trie {
     let mut trie = Trie::new();
     
-    println!("Scanning directories for dictionaries: {:?}", config.dict_dirs);
-    for dir in &config.dict_dirs {
-        let walker = WalkDir::new(dir).into_iter();
-        for entry in walker.filter_map(|e| e.ok()) {
-            let path = entry.path();
-            if path.is_file() && path.extension().map_or(false, |ext| ext == "json") {
-                let path_str = path.to_str().unwrap_or("");
-                if !config.enable_level3 && path_str.contains("level-3") {
-                    continue;
+    println!("Loading dictionary profile with {} paths...", paths.len());
+    for path_str in paths {
+        let path = Path::new(path_str);
+        if path.is_dir() {
+             let walker = WalkDir::new(path).into_iter();
+             // Sort entries to ensure consistent loading order if needed, but WalkDir order is not guaranteed.
+             // For strict priority within a directory, we might want to collect and sort.
+             // But usually directory content priority is less critical than file vs directory priority.
+             for entry in walker.filter_map(|e| e.ok()) {
+                let sub_path = entry.path();
+                if sub_path.is_file() && sub_path.extension().map_or(false, |ext| ext == "json") {
+                    let sub_path_str = sub_path.to_str().unwrap_or("");
+                    // Skip punctuation within directories if it's loaded explicitly elsewhere?
+                    // But usually we just load everything.
+                    // Note: punctuation.json is usually loaded into 'punctuation' map, not Trie.
+                    // But if it's in the list, we might load it into Trie? No, punctuation is separate map.
+                    if sub_path_str.ends_with("punctuation.json") {
+                        continue;
+                    }
+                    load_file_into_dict(sub_path_str, &mut trie);
                 }
-                // Skip punctuation.json here to avoid polluting pinyin dict with symbols
-                if path_str.ends_with("punctuation.json") {
-                    continue;
-                }
-                
-                println!("Loading: {}", path_str);
-                load_file_into_dict(path_str, &mut trie);
-            }
+             }
+        } else if path.is_file() {
+             load_file_into_dict(path_str, &mut trie);
+        } else {
+            println!("Warning: Path not found or invalid: {}", path_str);
         }
     }
-
-    for file in &config.extra_dicts {
-        load_file_into_dict(file, &mut trie);
-    }
-
     trie
 }
 
