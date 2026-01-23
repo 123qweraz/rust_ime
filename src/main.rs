@@ -346,15 +346,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     }
     
     let punctuation = load_punctuation_dict("dicts/chinese/punctuation.json");
-    let mut word_en_map = load_char_en_map("dicts/chinese/character");
-    
-    // Also load English mappings from other dictionaries (CEDICT, Vocabulary, etc.)
-    for dir in &["dicts/chinese/other", "dicts/chinese/vocabulary"] {
-        let extra = load_char_en_map(dir);
-        for (char, en_list) in extra {
-            word_en_map.entry(char).or_default().extend(en_list);
-        }
-    }
+    let word_en_map = load_char_en_map("dicts/chinese/character");
 
     println!("Loaded {} profiles.", tries.len());
     println!("Loaded punctuation map with {} entries.", punctuation.len());
