@@ -228,13 +228,21 @@ impl Ime {
 
         // Apply auxiliary filter if active
         if !self.aux_buffer.is_empty() {
-            let filter = self.aux_buffer.to_lowercase();
+            // "首选不参与筛选": Remove the first candidate (default pinyin match)
+            // because the user started filtering, implying the first one is not desired.
+            if let Some(first) = raw_candidates.first().cloned() {
+                raw_candidates.retain(|c| *c != first);
+            }
+
+            let filter_lower = self.aux_buffer.to_lowercase();
             raw_candidates.retain(|cand| {
                 if let Some(en_list) = self.word_en_map.get(cand) {
-                    en_list.iter().any(|en| en.to_lowercase().starts_with(&filter))
+                    en_list.iter().any(|en| {
+                        en.split(|c: char| !c.is_alphanumeric())
+                          .any(|word| word.to_lowercase().starts_with(&filter_lower))
+                    })
                 } else {
                     false // Remove if no english mapping found (strict mode?) 
-                          // Or maybe keep it? Strict is better for filtering.
                 }
             });
         }
@@ -623,6 +631,21 @@ impl Ime {
                     }
                     
                     self.lookup();
+
+                    // Auto-commit if filtering results in a unique candidate
+                    if !self.aux_buffer.is_empty() && self.candidates.len() == 1 {
+                        let word = self.candidates[0].clone();
+                        if self.enable_phantom {
+                            let delete_count = self.phantom_text.chars().count();
+                            self.reset();
+                            return Action::DeleteAndEmit { delete: delete_count, insert: word };
+                        } else {
+                            print!("\r\x1B[K");
+                            self.reset();
+                            return Action::Emit(word);
+                        }
+                    }
+
                     if self.enable_phantom {
                         self.update_phantom_text()
                     } else {
