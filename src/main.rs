@@ -322,9 +322,11 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
     let dict = load_all_dicts(&config);
     let punctuation = load_punctuation_dict("dicts/chinese/punctuation.json");
+    let word_en_map = load_char_en_map("dicts/chinese/character");
 
     println!("Loaded dictionary with {} words.", dict.len());
     println!("Loaded punctuation map with {} entries.", punctuation.len());
+    println!("Loaded char-en map with {} entries.", word_en_map.len());
     
     if dict.is_empty() {
         println!("WARNING: No dictionary entries loaded! Check your 'dicts' folder.");
@@ -382,7 +384,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    let mut ime = Ime::new(dict, punctuation, notify_tx.clone());
+    let mut ime = Ime::new(dict, punctuation, word_en_map, notify_tx.clone());
 
     // Grab the keyboard immediately to ensure we can intercept Ctrl+Space
     // and manage modifier states consistently.
@@ -441,6 +443,12 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     continue;
                 }
 
+                // Ctrl + Alt + P: Toggle Phantom Mode (Ghost Text)
+                if ctrl_held && alt_held && key == Key::KEY_P && is_press {
+                    ime.toggle_phantom();
+                    continue;
+                }
+
                 if ime.chinese_enabled {
                     // Pass through modifiers raw events to ensure shortcuts work
                     if key == Key::KEY_LEFTCTRL || key == Key::KEY_RIGHTCTRL ||
@@ -460,6 +468,17 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     match ime.handle_key(key, val != 0, shift_held) {
                         Action::Emit(s) => {
                             vkbd.send_text(&s);
+                        }
+                        Action::DeleteAndEmit { delete, insert } => {
+                            // Backspace 'delete' times
+                            for _ in 0..delete {
+                                vkbd.tap(Key::KEY_BACKSPACE);
+                                // add tiny delay to ensure input system processes backspace
+                                std::thread::sleep(std::time::Duration::from_millis(2));
+                            }
+                            if !insert.is_empty() {
+                                vkbd.send_text(&insert);
+                            }
                         }
                         Action::PassThrough => {
                             vkbd.emit_raw(key, val);
@@ -591,6 +610,42 @@ fn load_punctuation_dict(path: &str) -> HashMap<String, String> {
     }
     
     println!("Loaded {} punctuation rules from {}", map.len(), path);
+    map
+}
+
+#[derive(Debug, Deserialize)]
+struct CharEnEntry {
+    char: String,
+    en: String,
+}
+
+fn load_char_en_map(dir_path: &str) -> HashMap<String, Vec<String>> {
+    let mut map: HashMap<String, Vec<String>> = HashMap::new();
+    let walker = WalkDir::new(dir_path).into_iter();
+
+    for entry in walker.filter_map(|e| e.ok()) {
+        let path = entry.path();
+        if path.is_file() && path.extension().map_or(false, |ext| ext == "json") {
+             if let Ok(file) = File::open(path) {
+                let reader = BufReader::new(file);
+                // Use default inference
+                if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(reader) {
+                    if let Some(obj) = v.as_object() {
+                        for (_, val) in obj {
+                            // Try to parse array of entries
+                            if let Ok(entries) = serde_json::from_value::<Vec<CharEnEntry>>(val.clone()) {
+                                for e in entries {
+                                    map.entry(e.char)
+                                        .or_default()
+                                        .push(e.en);
+                                }
+                            }
+                        }
+                    }
+                }
+             }
+        }
+    }
     map
 }
 

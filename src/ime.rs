@@ -13,6 +13,7 @@ pub enum ImeState {
 
 pub enum Action {
     Emit(String),
+    DeleteAndEmit { delete: usize, insert: String },
     PassThrough,
     Consume,
 }
@@ -35,10 +36,14 @@ pub struct Ime {
     pub page: usize,
     pub chinese_enabled: bool,
     pub notification_tx: Sender<NotifyEvent>,
+    pub enable_phantom: bool,
+    pub phantom_text: String,
+    pub aux_buffer: String,
+    pub word_en_map: HashMap<String, Vec<String>>,
 }
 
 impl Ime {
-    pub fn new(dict: Trie, punctuation: HashMap<String, String>, notification_tx: Sender<NotifyEvent>) -> Self {
+    pub fn new(dict: Trie, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>) -> Self {
         Self {
             state: ImeState::Direct,
             buffer: String::new(),
@@ -49,6 +54,10 @@ impl Ime {
             page: 0,
             chinese_enabled: false,
             notification_tx,
+            enable_phantom: false,
+            phantom_text: String::new(),
+            aux_buffer: String::new(),
+            word_en_map,
         }
     }
 
@@ -64,12 +73,29 @@ impl Ime {
         }
     }
 
+    pub fn toggle_phantom(&mut self) {
+        self.enable_phantom = !self.enable_phantom;
+        if self.enable_phantom {
+            println!("\n[IME] 幽灵文字预览: 开");
+            let _ = self.notification_tx.send(NotifyEvent::Message("预览: 开".to_string()));
+        } else {
+            println!("\n[IME] 幽灵文字预览: 关");
+            let _ = self.notification_tx.send(NotifyEvent::Message("预览: 关".to_string()));
+            // 如果关闭时还有残留文字，应该清理掉
+            // 但这是一个设置切换，通常不在输入中途切换。为了安全，这里不做操作，
+            // 或者用户如果正在输入中切换，可能会有残留。
+            // 简单起见，假设用户只在空闲时切换。
+        }
+    }
+
     pub fn reset(&mut self) {
         self.buffer.clear();
         self.candidates.clear();
         self.selected = 0;
         self.page = 0;
         self.state = ImeState::Direct;
+        self.phantom_text.clear();
+        self.aux_buffer.clear();
         // 关闭通知
         let _ = self.notification_tx.send(NotifyEvent::Close);
     }
@@ -86,6 +112,26 @@ impl Ime {
         };
     }
 
+    fn update_phantom_text(&mut self) -> Action {
+        if !self.enable_phantom {
+            return Action::Consume;
+        }
+
+        let new_text = if !self.candidates.is_empty() {
+            self.candidates[self.selected].clone()
+        } else {
+            self.buffer.clone() // fallback to pinyin if no match
+        };
+
+        let delete_count = self.phantom_text.chars().count();
+        self.phantom_text = new_text.clone();
+
+        Action::DeleteAndEmit {
+            delete: delete_count,
+            insert: new_text,
+        }
+    }
+
     fn lookup(&mut self) {
         if self.buffer.is_empty() {
             self.candidates.clear();
@@ -94,23 +140,44 @@ impl Ime {
         }
 
         // Use Trie BFS search to find candidates (limit 100)
-        self.candidates = self.dict.search_bfs(&self.buffer, 100);
+        let mut raw_candidates = self.dict.search_bfs(&self.buffer, 100);
+
+        // Apply auxiliary filter if active
+        if !self.aux_buffer.is_empty() {
+            let filter = self.aux_buffer.to_lowercase();
+            raw_candidates.retain(|cand| {
+                if let Some(en_list) = self.word_en_map.get(cand) {
+                    en_list.iter().any(|en| en.to_lowercase().starts_with(&filter))
+                } else {
+                    false // Remove if no english mapping found (strict mode?) 
+                          // Or maybe keep it? Strict is better for filtering.
+                }
+            });
+        }
+
+        self.candidates = raw_candidates;
 
         self.selected = 0;
         self.page = 0;
         self.update_state();
         
         // 打印预览界面
-        self.print_preview();
-        
-        // 通知更新
-        self.notify_preview();
+        if !self.enable_phantom {
+            self.print_preview();
+            // 通知更新
+            self.notify_preview();
+        }
     }
 
     fn notify_preview(&self) {
         if self.buffer.is_empty() { return; }
 
         let buffer = self.buffer.clone();
+        let aux_display = if !self.aux_buffer.is_empty() {
+            format!(" | {}", self.aux_buffer)
+        } else {
+            String::new()
+        };
         let mut body = String::new();
         
         if self.candidates.is_empty() {
@@ -123,10 +190,19 @@ impl Ime {
             for (i, cand) in current_page_candidates.iter().enumerate() {
                 let abs_index = start + i;
                 let num = i + 1;
+                
+                // Always try to find the first english word for display hint
+                let mut hint = String::new();
+                if let Some(en_list) = self.word_en_map.get(cand) {
+                    if let Some(first_en) = en_list.first() {
+                        hint = format!("({})", first_en);
+                    }
+                }
+
                 if abs_index == self.selected {
-                    body.push_str(&format!("【{}.{}】 ", num, cand));
+                    body.push_str(&format!("【{}.{}{}】 ", num, cand, hint));
                 } else {
-                    body.push_str(&format!("{}.{} ", num, cand));
+                    body.push_str(&format!("{}.{}{} ", num, cand, hint));
                 }
             }
             
@@ -137,7 +213,7 @@ impl Ime {
             }
         }
 
-        let _ = self.notification_tx.send(NotifyEvent::Update(format!("拼音: {}", buffer), body));
+        let _ = self.notification_tx.send(NotifyEvent::Update(format!("拼音: {}{}", buffer, aux_display), body));
     }
 
     fn print_preview(&self) {
@@ -145,7 +221,12 @@ impl Ime {
         
         // 使用 \r 回到行首，配合 print! 实现原地刷新
         print!("\r\x1B[K"); // \x1B[K 是清除从光标到行末的内容
-        print!("拼音: {} | ", self.buffer);
+        
+        if !self.aux_buffer.is_empty() {
+             print!("拼音: {} [{}] | ", self.buffer, self.aux_buffer);
+        } else {
+             print!("拼音: {} | ", self.buffer);
+        }
         
         if self.candidates.is_empty() {
             print!("(无候选)");
@@ -156,11 +237,19 @@ impl Ime {
             for (i, cand) in self.candidates[start..end].iter().enumerate() {
                 let abs_index = start + i;
                 let num = i + 1;
+
+                let mut hint = String::new();
+                if let Some(en_list) = self.word_en_map.get(cand) {
+                    if let Some(first_en) = en_list.first() {
+                        hint = format!("({})", first_en);
+                    }
+                }
+
                 if abs_index == self.selected {
                     // 对当前选中的词加一个背景色或方括号
-                    print!("\x1B[7m{}.{}\x1B[m ", num, cand);
+                    print!("\x1B[7m{}.{}{}\x1B[m ", num, cand, hint);
                 } else {
-                    print!("{}.{} ", num, cand);
+                    print!("{}.{}{} ", num, cand, hint);
                 }
             }
             
@@ -176,12 +265,12 @@ impl Ime {
     pub fn handle_key(&mut self, key: Key, is_press: bool, shift_pressed: bool) -> Action {
         if is_press {
             if !self.buffer.is_empty() {
-                return self.handle_composing(key);
+                return self.handle_composing(key, shift_pressed);
             }
 
             match self.state {
                 ImeState::Direct => self.handle_direct(key, shift_pressed),
-                _ => self.handle_composing(key),
+                _ => self.handle_composing(key, shift_pressed),
             }
         } else {
             // 处理按键释放
@@ -212,7 +301,12 @@ impl Ime {
             self.buffer.push(c);
             self.state = ImeState::Composing;
             self.lookup();
-            Action::Consume
+            
+            if self.enable_phantom {
+                self.update_phantom_text()
+            } else {
+                Action::Consume
+            }
         } else if let Some(punc_key) = get_punctuation_key(key, shift_pressed) {
             // 检查是否有对应的标点映射
             if let Some(zh_punc) = self.punctuation.get(punc_key) {
@@ -225,17 +319,37 @@ impl Ime {
         }
     }
 
-    fn handle_composing(&mut self, key: Key) -> Action {
+    fn handle_composing(&mut self, key: Key, shift_pressed: bool) -> Action {
         match key {
             Key::KEY_BACKSPACE => {
-                self.buffer.pop();
-                if self.buffer.is_empty() {
-                    print!("\r\x1B[K"); // 清除预览行
-                    self.reset();
-                } else {
+                if !self.aux_buffer.is_empty() {
+                    self.aux_buffer.pop();
                     self.lookup();
+                     if self.enable_phantom {
+                        self.update_phantom_text()
+                    } else {
+                        Action::Consume
+                    }
+                } else {
+                    self.buffer.pop();
+                    if self.buffer.is_empty() {
+                        print!("\r\x1B[K"); // 清除预览行
+                        let delete_count = self.phantom_text.chars().count();
+                        self.reset();
+                        if self.enable_phantom && delete_count > 0 {
+                             Action::DeleteAndEmit { delete: delete_count, insert: String::new() }
+                        } else {
+                             Action::Consume
+                        }
+                    } else {
+                        self.lookup();
+                        if self.enable_phantom {
+                            self.update_phantom_text()
+                        } else {
+                            Action::Consume
+                        }
+                    }
                 }
-                Action::Consume
             }
 
             Key::KEY_TAB => {
@@ -245,18 +359,28 @@ impl Ime {
                     // Update page if selected moves out of current page
                     self.page = self.selected / 5;
                     
-                    self.print_preview();
-                    self.notify_preview();
+                    if self.enable_phantom {
+                         self.update_phantom_text()
+                    } else {
+                        self.print_preview();
+                        self.notify_preview();
+                        Action::Consume
+                    }
+                } else {
+                    Action::Consume
                 }
-                Action::Consume
             }
             
             Key::KEY_MINUS => {
                  if self.page > 0 {
                      self.page -= 1;
                      self.selected = self.page * 5;
-                     self.print_preview();
-                     self.notify_preview();
+                     if self.enable_phantom {
+                         return self.update_phantom_text();
+                     } else {
+                         self.print_preview();
+                         self.notify_preview();
+                     }
                  }
                  Action::Consume
             }
@@ -265,23 +389,46 @@ impl Ime {
                 if (self.page + 1) * 5 < self.candidates.len() {
                     self.page += 1;
                     self.selected = self.page * 5;
-                    self.print_preview();
-                    self.notify_preview();
+                    if self.enable_phantom {
+                         return self.update_phantom_text();
+                    } else {
+                         self.print_preview();
+                         self.notify_preview();
+                    }
                 }
                 Action::Consume
             }
 
             Key::KEY_SPACE => {
                 if let Some(word) = self.candidates.get(self.selected) {
-                    let out = word.clone();
-                    print!("\r\x1B[K"); // 上屏时清除预览
-                    self.reset();
-                    Action::Emit(out)
+                    let target_word = word.clone();
+                    
+                    if self.enable_phantom {
+                        let prev_phantom = self.phantom_text.clone();
+                        let delete_count = prev_phantom.chars().count();
+                        self.reset(); 
+                        
+                        if target_word == prev_phantom {
+                            Action::Consume 
+                        } else {
+                             Action::DeleteAndEmit { delete: delete_count, insert: target_word }
+                        }
+                    } else {
+                        print!("\r\x1B[K"); // 上屏时清除预览
+                        self.reset();
+                        Action::Emit(target_word)
+                    }
                 } else if !self.buffer.is_empty() {
                     let out = self.buffer.clone();
-                    print!("\r\x1B[K");
-                    self.reset();
-                    Action::Emit(out)
+                    if self.enable_phantom {
+                         let delete_count = self.phantom_text.chars().count();
+                         self.reset();
+                         Action::DeleteAndEmit { delete: delete_count, insert: out }
+                    } else {
+                        print!("\r\x1B[K");
+                        self.reset();
+                        Action::Emit(out)
+                    }
                 } else {
                     Action::Consume
                 }
@@ -289,15 +436,27 @@ impl Ime {
 
             Key::KEY_ENTER => {
                 let out = self.buffer.clone();
-                print!("\r\x1B[K");
-                self.reset();
-                Action::Emit(out)
+                if self.enable_phantom {
+                     let delete_count = self.phantom_text.chars().count();
+                     self.reset();
+                     Action::DeleteAndEmit { delete: delete_count, insert: out }
+                } else {
+                    print!("\r\x1B[K");
+                    self.reset();
+                    Action::Emit(out)
+                }
             }
 
             Key::KEY_ESC => {
-                print!("\r\x1B[K");
-                self.reset();
-                Action::Consume
+                if self.enable_phantom {
+                    let delete_count = self.phantom_text.chars().count();
+                    self.reset();
+                    Action::DeleteAndEmit { delete: delete_count, insert: String::new() }
+                } else {
+                    print!("\r\x1B[K");
+                    self.reset();
+                    Action::Consume
+                }
             }
 
             _ if is_digit(key) => {
@@ -307,20 +466,46 @@ impl Ime {
                     let actual_idx = self.page * 5 + (idx - 1);
                     if let Some(word) = self.candidates.get(actual_idx) {
                         let out = word.clone();
-                        print!("\r\x1B[K");
-                        self.reset();
-                        return Action::Emit(out);
+                        
+                        if self.enable_phantom {
+                            let delete_count = self.phantom_text.chars().count();
+                            self.reset();
+                            Action::DeleteAndEmit { delete: delete_count, insert: out }
+                        } else {
+                            print!("\r\x1B[K");
+                            self.reset();
+                            return Action::Emit(out);
+                        }
+                    } else {
+                        Action::Consume
                     }
+                } else {
+                    Action::Consume
                 }
-                Action::Consume
             }
 
             _ if is_letter(key) => {
                 if let Some(c) = key_to_char(key) {
-                    self.buffer.push(c);
+                    if shift_pressed {
+                        // User typed a Capital letter: Start/Append to Aux Buffer
+                        self.aux_buffer.push(c); 
+                    } else if !self.aux_buffer.is_empty() {
+                         // User typed lowercase, but Aux buffer is active: Append to Aux
+                         self.aux_buffer.push(c);
+                    } else {
+                        // Regular pinyin
+                        self.buffer.push(c);
+                    }
+                    
                     self.lookup();
+                    if self.enable_phantom {
+                        self.update_phantom_text()
+                    } else {
+                        Action::Consume
+                    }
+                } else {
+                    Action::Consume
                 }
-                Action::Consume
             }
 
             _ => Action::PassThrough,
