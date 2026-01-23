@@ -168,36 +168,42 @@ impl Vkbd {
     }
 
     fn send_via_tty_injection(&self, text: &str) -> bool {
-        // 1. Find active TTY
-        let active_tty = match fs::read_to_string("/sys/class/tty/tty0/active") {
-            Ok(s) => s.trim().to_string(),
-            Err(e) => {
-                eprintln!("Failed to read active tty: {}", e);
-                return false;
-            }
+        // Try to identify the target TTY
+        let tty_path = match fs::read_to_string("/sys/class/tty/tty0/active") {
+            Ok(s) => format!("/dev/{}", s.trim()),
+            Err(_) => "/dev/tty".to_string(), // Fallback
         };
 
-        let tty_path = format!("/dev/{}", active_tty);
-        
-        // 2. Open TTY device
-        let file = match fs::OpenOptions::new().write(true).open(&tty_path) {
-            Ok(f) => f,
-            Err(e) => {
-                eprintln!("Failed to open {}: {}", tty_path, e);
-                return false;
-            }
-        };
-
-        let fd = file.as_raw_fd();
-
-        // 3. Inject bytes via IOCTL (TIOCSTI)
-        for byte in text.bytes() {
-            let b = byte as i8; // libc::c_char is usually i8
-            unsafe {
-                if libc::ioctl(fd, libc::TIOCSTI, &b) < 0 {
-                    eprintln!("ioctl failed");
-                    return false;
+        // Helper to try injecting into a path
+        let try_inject = |path: &str| -> Result<(), String> {
+            let file = fs::OpenOptions::new().write(true).open(path)
+                .map_err(|e| format!("Open {} failed: {}", path, e))?;
+            
+            let fd = file.as_raw_fd();
+            for byte in text.bytes() {
+                let b = byte as i8;
+                unsafe {
+                    if libc::ioctl(fd, libc::TIOCSTI, &b) < 0 {
+                        return Err("ioctl TIOCSTI failed".to_string());
+                    }
                 }
+            }
+            Ok(())
+        };
+
+        // 1. Try the detected active TTY (e.g. /dev/tty1)
+        if let Err(e1) = try_inject(&tty_path) {
+            eprintln!("[Vkbd] Injection to {} failed: {}", tty_path, e1);
+            
+            // 2. Fallback: Try /dev/console or /dev/tty directly
+            let fallback = "/dev/tty";
+            if tty_path != fallback {
+                if let Err(e2) = try_inject(fallback) {
+                     eprintln!("[Vkbd] Fallback injection to {} failed: {}", fallback, e2);
+                     return false;
+                }
+            } else {
+                return false;
             }
         }
         
