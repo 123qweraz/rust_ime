@@ -2,6 +2,8 @@ use evdev::uinput::{VirtualDevice, VirtualDeviceBuilder};
 use evdev::{AttributeSet, InputEvent, Key, Device, EventType};
 use std::{thread, time::Duration};
 use std::process::Command;
+use std::fs;
+use std::os::unix::io::AsRawFd;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum PasteMode {
@@ -14,6 +16,7 @@ pub enum PasteMode {
 pub struct Vkbd {
     pub dev: VirtualDevice,
     pub paste_mode: PasteMode,
+    pub tty_mode: bool,
 }
 
 impl Vkbd {
@@ -47,15 +50,31 @@ impl Vkbd {
             .with_keys(&keys)?
             .build()?;
 
+        // Detect environment for TTY mode default
+        let is_gui = std::env::var("DISPLAY").is_ok() || std::env::var("WAYLAND_DISPLAY").is_ok();
+        let tty_mode = !is_gui;
+        
+        if tty_mode {
+            println!("[Vkbd] No GUI detected (DISPLAY/WAYLAND_DISPLAY unset). Defaulting to TTY Injection Mode.");
+        } else {
+            println!("[Vkbd] GUI detected. Defaulting to Clipboard Mode.");
+        }
+
         Ok(Self { 
             dev,
             paste_mode: PasteMode::CtrlV, // Default standard
+            tty_mode,
         })
     }
 
     pub fn set_paste_mode(&mut self, mode: PasteMode) {
         self.paste_mode = mode;
         println!("[Vkbd] Paste mode set to: {:?}", mode);
+    }
+
+    pub fn toggle_tty_mode(&mut self) -> bool {
+        self.tty_mode = !self.tty_mode;
+        self.tty_mode
     }
 
     pub fn cycle_paste_mode(&mut self) -> String {
@@ -81,6 +100,15 @@ impl Vkbd {
 
         println!("[IME] Emitting text: {}", text);
 
+        // 0. TTY Mode (Injection)
+        if self.tty_mode {
+            if self.send_via_tty_injection(text) {
+                return;
+            } else {
+                eprintln!("[Error] TTY injection failed, falling back...");
+            }
+        }
+
         // If using UnicodeHex mode, skip clipboard and type directly
         if self.paste_mode == PasteMode::UnicodeHex {
             for c in text.chars() {
@@ -102,6 +130,43 @@ impl Vkbd {
             .arg("1")
             .arg(text)
             .output();
+    }
+
+    fn send_via_tty_injection(&self, text: &str) -> bool {
+        // 1. Find active TTY
+        let active_tty = match fs::read_to_string("/sys/class/tty/tty0/active") {
+            Ok(s) => s.trim().to_string(),
+            Err(e) => {
+                eprintln!("Failed to read active tty: {}", e);
+                return false;
+            }
+        };
+
+        let tty_path = format!("/dev/{}", active_tty);
+        
+        // 2. Open TTY device
+        let file = match fs::OpenOptions::new().write(true).open(&tty_path) {
+            Ok(f) => f,
+            Err(e) => {
+                eprintln!("Failed to open {}: {}", tty_path, e);
+                return false;
+            }
+        };
+
+        let fd = file.as_raw_fd();
+
+        // 3. Inject bytes via IOCTL (TIOCSTI)
+        for byte in text.bytes() {
+            let b = byte as i8; // libc::c_char is usually i8
+            unsafe {
+                if libc::ioctl(fd, libc::TIOCSTI, &b) < 0 {
+                    eprintln!("ioctl failed");
+                    return false;
+                }
+            }
+        }
+        
+        true
     }
 
     fn send_char_via_unicode(&mut self, ch: char) -> bool {
@@ -213,24 +278,7 @@ impl Vkbd {
     }
 }
 
-fn char_to_key_raw(c: char) -> Option<Key> {
-    match c.to_ascii_lowercase() {
-        '1' => Some(Key::KEY_1), '2' => Some(Key::KEY_2), '3' => Some(Key::KEY_3),
-        '4' => Some(Key::KEY_4), '5' => Some(Key::KEY_5), '6' => Some(Key::KEY_6),
-        '7' => Some(Key::KEY_7), '8' => Some(Key::KEY_8), '9' => Some(Key::KEY_9),
-        '0' => Some(Key::KEY_0), 'a' => Some(Key::KEY_A), 'b' => Some(Key::KEY_B),
-        'c' => Some(Key::KEY_C), 'd' => Some(Key::KEY_D), 'e' => Some(Key::KEY_E),
-        'f' => Some(Key::KEY_F), 'g' => Some(Key::KEY_G), 'h' => Some(Key::KEY_H),
-        'i' => Some(Key::KEY_I), 'j' => Some(Key::KEY_J), 'k' => Some(Key::KEY_K),
-        'l' => Some(Key::KEY_L), 'm' => Some(Key::KEY_M), 'n' => Some(Key::KEY_N),
-        'o' => Some(Key::KEY_O), 'p' => Some(Key::KEY_P), 'q' => Some(Key::KEY_Q),
-        'r' => Some(Key::KEY_R), 's' => Some(Key::KEY_S), 't' => Some(Key::KEY_T),
-        'u' => Some(Key::KEY_U), 'v' => Some(Key::KEY_V), 'w' => Some(Key::KEY_W),
-        'x' => Some(Key::KEY_X), 'y' => Some(Key::KEY_Y), 'z' => Some(Key::KEY_Z),
-        ' ' => Some(Key::KEY_SPACE),
-        _ => None,
-    }
-}
+
 
 fn hex_char_to_key(c: char) -> Option<Key> {
     match c.to_ascii_lowercase() {

@@ -65,6 +65,8 @@ struct Config {
     active_profile: String,
     #[serde(default = "default_paste_shortcut")]
     paste_shortcut: String,
+    #[serde(default)]
+    enable_fuzzy_pinyin: bool,
 }
 
 fn default_paste_shortcut() -> String {
@@ -390,7 +392,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    let mut ime = Ime::new(tries, config.active_profile, punctuation, word_en_map, notify_tx.clone());
+    let mut ime = Ime::new(tries, config.active_profile, punctuation, word_en_map, notify_tx.clone(), config.enable_fuzzy_pinyin);
 
     // Grab the keyboard immediately to ensure we can intercept Ctrl+Space
     // and manage modifier states consistently.
@@ -458,6 +460,21 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                 // Ctrl + Alt + S: Switch Dictionary Profile
                 if ctrl_held && alt_held && key == Key::KEY_S && is_press {
                     ime.next_profile();
+                    continue;
+                }
+                
+                // Ctrl + Alt + F: Toggle Fuzzy Pinyin
+                if ctrl_held && alt_held && key == Key::KEY_F && is_press {
+                    ime.toggle_fuzzy();
+                    continue;
+                }
+
+                // Ctrl + Alt + T: Toggle TTY Injection Mode
+                if ctrl_held && alt_held && key == Key::KEY_T && is_press {
+                    let enabled = vkbd.toggle_tty_mode();
+                    let status = if enabled { "开启 (字节注入)" } else { "关闭 (剪贴板)" };
+                    println!("[IME] TTY Mode: {}", status);
+                    let _ = notify_tx.send(NotifyEvent::Message(format!("TTY模式: {}", status)));
                     continue;
                 }
 
@@ -538,6 +555,7 @@ fn get_default_config() -> Config {
         ],
         active_profile: "Chinese".to_string(),
         paste_shortcut: "ctrl_v".to_string(),
+        enable_fuzzy_pinyin: false,
     }
 }
 

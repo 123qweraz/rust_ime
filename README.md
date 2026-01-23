@@ -62,6 +62,7 @@ sudo ./target/release/blind-ime
 - **系统级监听**：在底层拦截按键，支持全局使用 (Wayland/X11/Console)。
 - **幽灵文字 (Phantom Text)**：支持行内实时预览。输入拼音时，首选词直接显示在输入框，按 Tab 切换时实时更新，零延迟上屏。
 - **语义辅助码 (Semantic Auxiliary)**：支持通过英文单词筛选汉字。例如输入 `li` 后按 `Shift+I` (Inside)，即可快速定位到“里”。
+- **智能模糊拼音**：支持平卷舌 (`z/zh`, `c/ch`, `s/sh`) 和前后鼻音 (`n/ng`) 混合输入，通过 `Ctrl+Alt+F` 开启。
 - **剪贴板加速**：通过剪贴板 + `Ctrl+V` 实现瞬间上屏，避免 Unicode 序列的输入延迟。
 - **无障碍友好**：支持通过 `Shift` 键快速切换中英文模式。
 
@@ -71,6 +72,9 @@ sudo ./target/release/blind-ime
 | :--- | :--- | :--- |
 | **Ctrl + Space** | 切换中/英文模式 | 开启或关闭输入法 |
 | **Ctrl + Alt + P** | 切换幽灵文字模式 | 开启后候选词直接显示在光标处 (推荐开启) |
+| **Ctrl + Alt + F** | 切换模糊拼音 | 开启平卷舌/前后鼻音混合匹配 |
+| **Ctrl + Alt + S** | 切换词库方案 | 在 Chinese / Japanese 等配置间循环切换 |
+| **Ctrl + Alt + T** | 切换 TTY 模式 | 强制切换字节注入模式 (通常自动检测) |
 | **Ctrl + Alt + V** | 切换粘贴模式 | 适配不同终端 (Std Ctrl+V / Term Ctrl+Shift+V / Legacy Shift+Ins / Hex) |
 | **Tab** | 切换候选词 | 选中下一个候选词 |
 | **- / =** | 翻页 | 上一页 / 下一页 |

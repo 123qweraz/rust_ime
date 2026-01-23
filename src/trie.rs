@@ -31,17 +31,17 @@ impl Trie {
         }
     }
 
+    #[allow(dead_code)]
     pub fn len(&self) -> usize {
         self.total_words
     }
 
+    #[allow(dead_code)]
     pub fn is_empty(&self) -> bool {
         self.total_words == 0
     }
 
     /// Search for words starting with `prefix` using BFS.
-    /// This ensures words associated with shorter pinyins (exact matches) appear first,
-    /// followed by longer pinyin matches.
     pub fn search_bfs(&self, prefix: &str, limit: usize) -> Vec<String> {
         let mut results = Vec::new();
         let mut node = &self.root;
@@ -59,7 +59,6 @@ impl Trie {
         queue.push_back(node);
 
         while let Some(curr) = queue.pop_front() {
-            // Add words from current node
             for word in &curr.words {
                 if !results.contains(word) {
                     results.push(word.clone());
@@ -68,16 +67,75 @@ impl Trie {
                     }
                 }
             }
-
-            // Enqueue children
-            // Note: HashMap iteration order is random. If we want stable ordering 
-            // for pinyins of the same length (e.g. 'nia' vs 'nib'), we might need to sort keys.
-            // But usually length is the primary factor for input methods.
             for child in curr.children.values() {
                 queue.push_back(child);
             }
         }
 
         results
+    }
+
+    /// Fuzzy search using Levenshtein distance on the Trie.
+    pub fn search_fuzzy(&self, pattern: &str, max_cost: usize) -> Vec<String> {
+        let pattern_chars: Vec<char> = pattern.chars().collect();
+        // The first row of the Levenshtein matrix: 0, 1, 2, ...
+        let current_row: Vec<usize> = (0..=pattern_chars.len()).collect();
+        
+        let mut results = Vec::new();
+        
+        for (char, child) in &self.root.children {
+            self.search_fuzzy_recursive(child, *char, &pattern_chars, &current_row, max_cost, &mut results);
+        }
+        
+        results
+    }
+
+    fn search_fuzzy_recursive(
+        &self,
+        node: &TrieNode,
+        char: char,
+        pattern: &[char],
+        prev_row: &[usize],
+        max_cost: usize,
+        results: &mut Vec<String>
+    ) {
+        let columns = pattern.len() + 1;
+        let mut current_row = vec![0; columns];
+        current_row[0] = prev_row[0] + 1;
+
+        let mut min_val = current_row[0];
+
+        for i in 1..columns {
+            let insert_cost = current_row[i - 1] + 1;
+            let delete_cost = prev_row[i] + 1;
+            let replace_cost = prev_row[i - 1] + if pattern[i - 1] == char { 0 } else { 1 };
+
+            current_row[i] = insert_cost.min(delete_cost).min(replace_cost);
+            if current_row[i] < min_val {
+                min_val = current_row[i];
+            }
+        }
+
+        // Pruning: if the best possible match in this subtree is already worse than max_cost, stop.
+        if min_val > max_cost {
+            return;
+        }
+
+        // If the last entry in the row is within max_cost, this node matches the pattern closely enough.
+        // Also, since this is an IME, we often want prefix matches too.
+        // But for typo correction (gongnegn -> gongneng), we usually want full matches logic,
+        // or at least "end of pattern matches current node".
+        if current_row[pattern.len()] <= max_cost {
+            for word in &node.words {
+                if !results.contains(word) {
+                    results.push(word.clone());
+                }
+            }
+        }
+
+        // Recurse
+        for (next_char, next_child) in &node.children {
+            self.search_fuzzy_recursive(next_child, *next_char, pattern, &current_row, max_cost, results);
+        }
     }
 }

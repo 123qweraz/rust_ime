@@ -43,10 +43,11 @@ pub struct Ime {
     pub phantom_text: String,
     pub aux_buffer: String,
     pub word_en_map: HashMap<String, Vec<String>>,
+    pub enable_fuzzy: bool,
 }
 
 impl Ime {
-    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>) -> Self {
+    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool) -> Self {
         Self {
             state: ImeState::Direct,
             buffer: String::new(),
@@ -62,6 +63,7 @@ impl Ime {
             phantom_text: String::new(),
             aux_buffer: String::new(),
             word_en_map,
+            enable_fuzzy,
         }
     }
 
@@ -75,6 +77,15 @@ impl Ime {
             println!("\n[IME] 英文模式");
             let _ = self.notification_tx.send(NotifyEvent::Message("英文模式".to_string()));
         }
+    }
+
+    pub fn toggle_fuzzy(&mut self) {
+        self.enable_fuzzy = !self.enable_fuzzy;
+        let status = if self.enable_fuzzy { "开启" } else { "关闭" };
+        println!("\n[IME] 模糊拼音: {}", status);
+        let _ = self.notification_tx.send(NotifyEvent::Message(format!("模糊音: {}", status)));
+        // 重新查询以立即应用
+        self.lookup(); 
     }
 
     pub fn toggle_phantom(&mut self) {
@@ -179,7 +190,41 @@ impl Ime {
         };
 
         // Use Trie BFS search to find candidates (limit 100)
-        let mut raw_candidates = dict.search_bfs(&self.buffer, 100);
+        let mut raw_candidates = if self.enable_fuzzy {
+            let variants = self.expand_fuzzy_pinyin(&self.buffer);
+            let mut merged = Vec::new();
+            for variant in variants {
+                let res = dict.search_bfs(&variant, 50); // smaller limit per variant
+                for c in res {
+                    if !merged.contains(&c) {
+                        merged.push(c);
+                    }
+                }
+            }
+            // Sort merged? BFS already sorts by length mostly. 
+            // Just keeping the order of variants (exact match first) is good.
+            merged
+        } else {
+            dict.search_bfs(&self.buffer, 100)
+        };
+
+        // Fuzzy Search Fallback / Augmentation
+        // If we have few results (or the user typed a long string likely to contain typos), try fuzzy.
+        if raw_candidates.len() < 5 && self.buffer.len() > 3 {
+            // Allow 2 edits for longer strings, 1 for medium.
+            let max_cost = if self.buffer.len() > 5 { 2 } else { 1 };
+            let fuzzy_candidates = dict.search_fuzzy(&self.buffer, max_cost);
+            
+            for cand in fuzzy_candidates {
+                // Dedup: only add if not already present
+                if !raw_candidates.contains(&cand) {
+                    raw_candidates.push(cand);
+                }
+                if raw_candidates.len() >= 100 {
+                    break;
+                }
+            }
+        }
 
         // Apply auxiliary filter if active
         if !self.aux_buffer.is_empty() {
@@ -206,6 +251,47 @@ impl Ime {
             // 通知更新
             self.notify_preview();
         }
+    }
+
+    fn expand_fuzzy_pinyin(&self, pinyin: &str) -> Vec<String> {
+        let mut results = vec![pinyin.to_string()];
+        
+        // Helper to expand a list of strings based on a replacement rule
+        // pattern: substring to find, replacement: string to replace with
+        // bidirectional: if true, also reverse pattern and replacement
+        let apply_rule = |list: &mut Vec<String>, from: &str, to: &str| {
+            let snapshot = list.clone();
+            for s in snapshot {
+                // Check direct direction
+                if s.contains(from) {
+                    let replaced = s.replace(from, to);
+                    if !list.contains(&replaced) {
+                        list.push(replaced);
+                    }
+                }
+                // Check reverse direction
+                if s.contains(to) {
+                     let replaced = s.replace(to, from);
+                     if !list.contains(&replaced) {
+                         list.push(replaced);
+                     }
+                }
+            }
+        };
+
+        // Rules: z-zh, c-ch, s-sh
+        apply_rule(&mut results, "zh", "z");
+        apply_rule(&mut results, "ch", "c");
+        apply_rule(&mut results, "sh", "s");
+        
+        // Rule: ng-n
+        // Only apply at end of string or before syllable boundary?
+        // Simple replace might be too aggressive (e.g. 'ang' -> 'an' OK, 'n' -> 'ng' OK)
+        // But 'nan' -> 'nang' OK.
+        apply_rule(&mut results, "ng", "n");
+
+        // Ensure original pinyin is first (it is initialized so)
+        results
     }
 
     fn notify_preview(&self) {
