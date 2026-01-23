@@ -17,6 +17,7 @@ pub struct Vkbd {
     pub dev: VirtualDevice,
     pub paste_mode: PasteMode,
     pub tty_mode: bool,
+    pub backspace_char: u8,
 }
 
 impl Vkbd {
@@ -64,6 +65,7 @@ impl Vkbd {
             dev,
             paste_mode: PasteMode::CtrlV, // Default standard
             tty_mode,
+            backspace_char: 0x7f, // Default to DEL (^?)
         })
     }
 
@@ -75,6 +77,17 @@ impl Vkbd {
     pub fn toggle_tty_mode(&mut self) -> bool {
         self.tty_mode = !self.tty_mode;
         self.tty_mode
+    }
+    
+    pub fn toggle_backspace_char(&mut self) -> String {
+        self.backspace_char = if self.backspace_char == 0x7f {
+            0x08 // Switch to BS (^H)
+        } else {
+            0x7f // Switch to DEL (^?)
+        };
+        
+        let label = if self.backspace_char == 0x7f { "DEL (^?)" } else { "BS (^H)" };
+        format!("Backspace键值: {}", label)
     }
 
     pub fn cycle_paste_mode(&mut self) -> String {
@@ -130,6 +143,28 @@ impl Vkbd {
             .arg("1")
             .arg(text)
             .output();
+    }
+    
+    pub fn backspace(&mut self, count: usize) {
+        if count == 0 { return; }
+        
+        if self.tty_mode {
+            // Inject backspace bytes
+            let bytes = vec![self.backspace_char; count];
+            // Convert bytes to string if valid utf8? 
+            // Actually send_via_tty_injection expects &str but iterates bytes.
+            // If backspace_char is 0x7f or 0x08, it is valid ASCII, thus valid UTF-8.
+            if let Ok(s) = std::str::from_utf8(&bytes) {
+                 let _ = self.send_via_tty_injection(s);
+                 return;
+            }
+        }
+        
+        // Fallback or GUI mode: use uinput Key::KEY_BACKSPACE
+        for _ in 0..count {
+            self.tap(Key::KEY_BACKSPACE);
+            thread::sleep(Duration::from_millis(2));
+        }
     }
 
     fn send_via_tty_injection(&self, text: &str) -> bool {

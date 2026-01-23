@@ -75,6 +75,7 @@ sudo ./target/release/blind-ime
 | **Ctrl + Alt + F** | 切换模糊拼音 | 开启平卷舌/前后鼻音混合匹配 |
 | **Ctrl + Alt + S** | 切换词库方案 | 在 Chinese / Japanese 等配置间循环切换 |
 | **Ctrl + Alt + T** | 切换 TTY 模式 | 强制切换字节注入模式 (通常自动检测) |
+| **Ctrl + Alt + B** | 切换 Backspace 键值 | 解决 TTY 下出现 ^? 的问题 (切换 DEL/BS) |
 | **Ctrl + Alt + V** | 切换粘贴模式 | 适配不同终端 (Std Ctrl+V / Term Ctrl+Shift+V / Legacy Shift+Ins / Hex) |
 | **Tab** | 切换候选词 | 选中下一个候选词 |
 | **- / =** | 翻页 | 上一页 / 下一页 |

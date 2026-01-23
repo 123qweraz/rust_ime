@@ -28,7 +28,7 @@ fn find_project_root() -> PathBuf {
     let mut curr = env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
     let original_cwd = curr.clone();
 
-    // Try to find a directory containing 'dicts' folder
+    // 1. Try to find local 'dicts' in current or parent directories (Dev/Portable mode)
     for _ in 0..3 {
         if curr.join("dicts").exists() {
             return curr;
@@ -37,6 +37,22 @@ fn find_project_root() -> PathBuf {
             break;
         }
     }
+
+    // 2. Try System Install Path
+    let system_path = PathBuf::from("/usr/local/share/blind-ime");
+    if system_path.join("dicts").exists() {
+        return system_path;
+    }
+
+    // 3. Try User Install Path
+    if let Ok(home) = env::var("HOME") {
+        let user_path = PathBuf::from(home).join(".local/share/blind-ime");
+        if user_path.join("dicts").exists() {
+            return user_path;
+        }
+    }
+
+    // Fallback to original CWD if nothing found (will likely fail later but keeps behavior)
     original_cwd
 }
 
@@ -478,6 +494,14 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     continue;
                 }
 
+                // Ctrl + Alt + B: Toggle Backspace Char (DEL vs BS)
+                if ctrl_held && alt_held && key == Key::KEY_B && is_press {
+                    let msg = vkbd.toggle_backspace_char();
+                    println!("[IME] Backspace Mode: {}", msg);
+                    let _ = notify_tx.send(NotifyEvent::Message(msg));
+                    continue;
+                }
+
                 if ime.chinese_enabled {
                     // Pass through modifiers raw events to ensure shortcuts work
                     if key == Key::KEY_LEFTCTRL || key == Key::KEY_RIGHTCTRL ||
@@ -500,23 +524,28 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                         }
                         Action::DeleteAndEmit { delete, insert } => {
                             // Backspace 'delete' times
-                            for _ in 0..delete {
-                                vkbd.tap(Key::KEY_BACKSPACE);
-                                // add tiny delay to ensure input system processes backspace
-                                std::thread::sleep(std::time::Duration::from_millis(2));
-                            }
+                            vkbd.backspace(delete);
+                            
                             if !insert.is_empty() {
                                 vkbd.send_text(&insert);
                             }
                         }
                         Action::PassThrough => {
-                            vkbd.emit_raw(key, val);
+                            if vkbd.tty_mode && key == Key::KEY_BACKSPACE {
+                                if is_press { vkbd.backspace(1); }
+                            } else {
+                                vkbd.emit_raw(key, val);
+                            }
                         }
                         Action::Consume => {}
                     }
                 } else {
                     // English Mode: Just pass everything through
-                    vkbd.emit_raw(key, val);
+                    if vkbd.tty_mode && key == Key::KEY_BACKSPACE {
+                        if is_press { vkbd.backspace(1); }
+                    } else {
+                        vkbd.emit_raw(key, val);
+                    }
                 }
             }
         }
