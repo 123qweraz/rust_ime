@@ -196,22 +196,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "blind-ime"
-version = "0.1.0"
-dependencies = [
- "arboard",
- "daemonize",
- "evdev",
- "libc",
- "notify-rust",
- "serde",
- "serde_json",
- "signal-hook",
- "users",
- "walkdir",
-]
-
-[[package]]
 name = "block2"
 version = "0.6.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -961,6 +945,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ed2bf2547551a7053d6fdfafda3f938979645c44812fbfcda098faae3f1a362d"
 dependencies = [
  "bitflags 2.10.0",
+]
+
+[[package]]
+name = "rust-ime"
+version = "0.1.0"
+dependencies = [
+ "arboard",
+ "daemonize",
+ "evdev",
+ "libc",
+ "notify-rust",
+ "serde",
+ "serde_json",
+ "signal-hook",
+ "users",
+ "walkdir",
 ]
 
 [[package]]

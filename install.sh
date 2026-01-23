@@ -3,10 +3,11 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-echo "=== Blind-IME 自动安装脚本 ==="
+echo "=== Rust-IME 自动安装脚本 ==="
 
 # 0. Check Rust environment
-if ! command -v cargo &> /dev/null; then
+if ! command -v cargo &> /dev/null;
+then
     echo "❌ 错误: 未检测到 Rust/Cargo 环境"
     echo "请先安装 Rust: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
     exit 1
@@ -43,8 +44,8 @@ fi
 
 # Udev rules for uinput
 echo "正在配置 uinput 设备规则..."
-if [ ! -f /etc/udev/rules.d/99-blind-ime-uinput.rules ]; then
-    echo 'KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/99-blind-ime-uinput.rules > /dev/null
+if [ ! -f /etc/udev/rules.d/99-rust-ime-uinput.rules ]; then
+    echo 'KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/99-rust-ime-uinput.rules > /dev/null
     echo "✅ 规则文件已创建"
     sudo udevadm control --reload-rules
     sudo udevadm trigger
@@ -58,12 +59,12 @@ cargo build --release
 
 # 4. Install Autostart
 echo -e "\n[4/4] 配置开机自启..."
-./target/release/blind-ime --install
+./target/release/rust-ime --install
 
 echo -e "\n=========================================="
 echo "🎉 安装完成！"
 echo "⚠️  注意: 如果是第一次运行脚本并被添加到了 input 组，"
 echo "    你必须【注销并重新登录】(或重启电脑) 才能正常使用！"
 echo ""
-echo "手动启动命令: ./target/release/blind-ime"
+echo "手动启动命令: ./target/release/rust-ime"
 echo "==========================================

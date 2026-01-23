@@ -38,26 +38,20 @@ fn find_project_root() -> PathBuf {
         }
     }
 
-    // 2. Try System Install Path
-    let system_path = PathBuf::from("/usr/local/share/blind-ime");
-    if system_path.join("dicts").exists() {
-        return system_path;
-    }
+    // 尝试常见安装路径
+    let system_path = PathBuf::from("/usr/local/share/rust-ime");
+    if system_path.exists() { return system_path; }
 
-    // 3. Try User Install Path
     if let Ok(home) = env::var("HOME") {
-        let user_path = PathBuf::from(home).join(".local/share/blind-ime");
-        if user_path.join("dicts").exists() {
-            return user_path;
-        }
+        let user_path = PathBuf::from(home).join(".local/share/rust-ime");
+        if user_path.exists() { return user_path; }
     }
 
-    // Fallback to original CWD if nothing found (will likely fail later but keeps behavior)
-    original_cwd
+    curr
 }
 
-const PID_FILE: &str = "/tmp/blind-ime.pid";
-const LOG_FILE: &str = "/tmp/blind-ime.log";
+const PID_FILE: &str = "/tmp/rust-ime.pid";
+const LOG_FILE: &str = "/tmp/rust-ime.log";
 
 #[derive(Debug, Deserialize)]
 struct DictEntry {
@@ -178,7 +172,7 @@ fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
     
     // 构造 .desktop 文件内容
     let desktop_entry = format!(
-        "[Desktop Entry]\nType=Application\nName=Blind IME\nComment=Blind IME Background Service\nExec={}\nPath={}\nTerminal=false\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\n",
+        "[Desktop Entry]\nType=Application\nName=Rust IME\nComment=Rust IME Background Service\nExec={}\nPath={}\nTerminal=false\nHidden=false\nNoDisplay=false\nX-GNOME-Autostart-enabled=true\n",
         exe_path.display(),
         working_dir.display()
     );
@@ -190,7 +184,7 @@ fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
         std::fs::create_dir_all(&autostart_dir)?;
     }
     
-    let desktop_file = autostart_dir.join("blind-ime.desktop");
+    let desktop_file = autostart_dir.join("rust-ime.desktop");
     let mut file = File::create(&desktop_file)?;
     file.write_all(desktop_entry.as_bytes())?;
     
@@ -416,7 +410,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         eprintln!("Failed to grab device: {}", e);
         return Err(e.into());
     }
-    println!("[IME] Keyboard grabbed. Blind-IME active.");
+    println!("[IME] Keyboard grabbed. Rust-IME active.");
     println!("[IME] Toggle: Ctrl + Space");
     println!("Current mode: English");
     

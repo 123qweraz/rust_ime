@@ -47,7 +47,7 @@ impl Vkbd {
         keys.insert(Key::KEY_D); keys.insert(Key::KEY_E); keys.insert(Key::KEY_F);
 
         let dev = VirtualDeviceBuilder::new()? 
-            .name("blind-ime-v2")
+            .name("rust-ime-v2")
             .with_keys(&keys)?
             .build()?;
 
