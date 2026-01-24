@@ -328,21 +328,33 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
     // Load Dictionaries per Profile
     let mut tries = HashMap::new();
+    println!("[Config] Loading {} profiles...", config.profiles.len());
     for profile in &config.profiles {
         let trie = load_dict_for_profile(&profile.dicts);
+        println!("[Profile] Loaded profile '{}' with {} entries in Trie.", profile.name, trie.len());
         tries.insert(profile.name.clone(), trie);
     }
     
     let punctuation = load_punctuation_dict(&config.punctuation_path);
     let word_en_map = load_char_en_map(&config.char_en_path);
 
-    println!("Loaded {} profiles.", tries.len());
-    println!("Loaded punctuation map with {} entries.", punctuation.len());
-    println!("Loaded char-en map with {} entries.", word_en_map.len());
+    println!("[IME] Loaded {} profiles.", tries.len());
+    println!("[IME] Loaded punctuation map with {} entries.", punctuation.len());
+    println!("[IME] Loaded char-en map with {} entries.", word_en_map.len());
     
     if tries.is_empty() {
-        println!("WARNING: No profiles loaded!");
+        println!("CRITICAL WARNING: No profiles loaded! Chinese input will not work.");
     }
+
+    let active_profile = if tries.contains_key(&config.active_profile) {
+        config.active_profile.clone()
+    } else if let Some(first) = tries.keys().next() {
+        println!("Warning: Active profile '{}' not found in loaded profiles. Falling back to '{}'.", config.active_profile, first);
+        first.clone()
+    } else {
+        println!("Warning: No profiles available at all.");
+        config.active_profile.clone()
+    };
 
     // 初始化通知线程
     let (notify_tx, notify_rx) = std::sync::mpsc::channel();
@@ -396,7 +408,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    let mut ime = Ime::new(tries, config.active_profile, punctuation, word_en_map, notify_tx.clone(), config.enable_fuzzy_pinyin);
+    let mut ime = Ime::new(tries, active_profile, punctuation, word_en_map, notify_tx.clone(), config.enable_fuzzy_pinyin);
 
     // Grab the keyboard immediately to ensure we can intercept Ctrl+Space
     // and manage modifier states consistently.
@@ -458,10 +470,8 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         if let Some(tk) = target_key {
             key == tk
         } else {
-            // It was a pure modifier shortcut (like just CapsLock)
-            // This logic is simplified; for single-key shortcuts, they usually trigger on press if no other modifiers.
-            // If the shortcut is just "caps_lock", we handle it specially.
-            false
+            // It was a pure modifier shortcut (like just CapsLock or Ctrl)
+            held_keys.contains(&key)
         }
     };
 
@@ -529,15 +539,8 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                         continue;
                     }
 
-                    // IME Toggle (often single key like CapsLock)
-                    let is_ime_toggle = if ime_toggle_keys.len() == 1 && ime_toggle_keys[0] == key {
-                        // Check that NO other modifiers are held
-                        !ctrl_held && !alt_held && !shift_held && !meta_held
-                    } else {
-                        check_shortcut(key, &ime_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held)
-                    };
-
-                    if is_ime_toggle {
+                    // IME Toggle
+                    if check_shortcut(key, &ime_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
                         ime.toggle();
                         continue;
                     }
