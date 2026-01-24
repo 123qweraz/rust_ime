@@ -315,7 +315,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let mut vkbd = Vkbd::new(&dev)?;
     
     // Set paste mode based on config
-    let mode = match config.paste_shortcut.as_str() {
+    let mode = match config.paste_shortcut.key.as_str() {
         "ctrl_shift_v" => PasteMode::CtrlShiftV,
         "shift_insert" => PasteMode::ShiftInsert,
         _ => PasteMode::CtrlV,
@@ -403,17 +403,17 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     println!("[IME] Keyboard grabbed. Rust-IME active.");
     
     let shortcuts = &config.shortcuts;
-    let ime_toggle_keys = config::parse_key(&shortcuts.ime_toggle);
-    let caps_toggle_keys = config::parse_key(&shortcuts.caps_lock_toggle);
-    let paste_cycle_keys = config::parse_key(&shortcuts.paste_cycle);
-    let phantom_toggle_keys = config::parse_key(&shortcuts.phantom_toggle);
-    let profile_next_keys = config::parse_key(&shortcuts.profile_next);
-    let fuzzy_toggle_keys = config::parse_key(&shortcuts.fuzzy_toggle);
-    let tty_toggle_keys = config::parse_key(&shortcuts.tty_toggle);
-    let backspace_toggle_keys = config::parse_key(&shortcuts.backspace_toggle);
+    let ime_toggle_keys = config::parse_key(&shortcuts.ime_toggle.key);
+    let caps_toggle_keys = config::parse_key(&shortcuts.caps_lock_toggle.key);
+    let paste_cycle_keys = config::parse_key(&shortcuts.paste_cycle.key);
+    let phantom_toggle_keys = config::parse_key(&shortcuts.phantom_toggle.key);
+    let profile_next_keys = config::parse_key(&shortcuts.profile_next.key);
+    let fuzzy_toggle_keys = config::parse_key(&shortcuts.fuzzy_toggle.key);
+    let tty_toggle_keys = config::parse_key(&shortcuts.tty_toggle.key);
+    let backspace_toggle_keys = config::parse_key(&shortcuts.backspace_toggle.key);
 
-    println!("[IME] Toggle: {}", shortcuts.ime_toggle);
-    println!("[IME] CapsLock Lock: {}", shortcuts.caps_lock_toggle);
+    println!("[IME] Toggle: {}", shortcuts.ime_toggle.key);
+    println!("[IME] CapsLock Lock: {}", shortcuts.caps_lock_toggle.key);
     println!("Current mode: English");
     
     let mut ctrl_held = false;
