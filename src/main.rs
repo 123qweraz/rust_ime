@@ -301,7 +301,11 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
     let config = load_config();
 
-    let device_path = find_keyboard().unwrap_or_else(|_| "/dev/input/event3".to_string());
+    let device_path = if let Some(path) = &config.device_path {
+        path.clone()
+    } else {
+        find_keyboard().unwrap_or_else(|_| "/dev/input/event3".to_string())
+    };
     println!("Opening device: {}", device_path);
     
     let mut dev = match Device::open(&device_path) {
@@ -329,8 +333,8 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         tries.insert(profile.name.clone(), trie);
     }
     
-    let punctuation = load_punctuation_dict("dicts/chinese/punctuation.json");
-    let word_en_map = load_char_en_map("dicts/chinese/character");
+    let punctuation = load_punctuation_dict(&config.punctuation_path);
+    let word_en_map = load_char_en_map(&config.char_en_path);
 
     println!("Loaded {} profiles.", tries.len());
     println!("Loaded punctuation map with {} entries.", punctuation.len());
