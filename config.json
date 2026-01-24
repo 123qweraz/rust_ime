@@ -1,0 +1,64 @@
+{
+  "_readme": "这是 Blind-IME 的配置文件。每个配置项都有对应的 description 说明。",
+  "profiles": [
+    {
+      "name": "Chinese",
+      "description": "中文拼音输入方案，包含常用词汇和单字",
+      "dicts": [
+        "dicts/chinese/vocabulary",
+        "dicts/chinese/character",
+        "dicts/chinese/other"
+      ]
+    },
+    {
+      "name": "Japanese",
+      "description": "日语输入方案 (假名/N1-N5)",
+      "dicts": [
+        "dicts/japanese"
+      ]
+    }
+  ],
+  "active_profile": "Chinese",
+  "punctuation_path": "dicts/chinese/punctuation.json",
+  "char_en_path": "dicts/chinese/character",
+  "device_path": null,
+  "paste_shortcut": {
+    "key": "ctrl_v",
+    "description": "自动粘贴时发送的按键: ctrl_v, ctrl_shift_v, shift_insert"
+  },
+  "enable_fuzzy_pinyin": false,
+  "shortcuts": {
+    "ime_toggle": {
+      "key": "caps_lock",
+      "description": "切换中英文输入模式"
+    },
+    "caps_lock_toggle": {
+      "key": "caps_lock+tab",
+      "description": "触发物理大写锁定 (CapsLock)"
+    },
+    "paste_cycle": {
+      "key": "ctrl+alt+v",
+      "description": "循环切换粘贴模式 (兼容不同终端)"
+    },
+    "phantom_toggle": {
+      "key": "ctrl+alt+p",
+      "description": "开启/关闭幻影模式 (在输入框显示拼音)"
+    },
+    "profile_next": {
+      "key": "ctrl+alt+s",
+      "description": "切换到下一个输入方案 (如中/日切换)"
+    },
+    "fuzzy_toggle": {
+      "key": "ctrl+alt+f",
+      "description": "实时开启/关闭模糊拼音"
+    },
+    "tty_toggle": {
+      "key": "ctrl+alt+t",
+      "description": "切换 TTY 模式 (直接注入字节，适合终端)"
+    },
+    "backspace_toggle": {
+      "key": "ctrl+alt+b",
+      "description": "切换退格键处理方式"
+    }
+  }
+}

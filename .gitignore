@@ -9,7 +9,6 @@ Cargo.lock
 *.log
 
 # Configuration
-config.json
 
 # Reference/External project
 webime/
