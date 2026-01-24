@@ -47,6 +47,8 @@ impl Default for Shortcut {
 pub struct Shortcuts {
     #[serde(default = "default_ime_toggle")]
     pub ime_toggle: Shortcut,
+    #[serde(default = "default_ime_toggle_alt")]
+    pub ime_toggle_alt: Shortcut,
     #[serde(default = "default_caps_lock_toggle")]
     pub caps_lock_toggle: Shortcut,
     #[serde(default = "default_paste_cycle")]
@@ -69,6 +71,7 @@ impl Default for Shortcuts {
     fn default() -> Self {
         Shortcuts {
             ime_toggle: default_ime_toggle(),
+            ime_toggle_alt: default_ime_toggle_alt(),
             caps_lock_toggle: default_caps_lock_toggle(),
             paste_cycle: default_paste_cycle(),
             phantom_toggle: default_phantom_toggle(),
@@ -82,6 +85,7 @@ impl Default for Shortcuts {
 }
 
 fn default_ime_toggle() -> Shortcut { Shortcut::new("caps_lock", "切换中英文输入模式") }
+fn default_ime_toggle_alt() -> Shortcut { Shortcut::new("ctrl+space", "切换中英文输入模式 (备选)") }
 fn default_caps_lock_toggle() -> Shortcut { Shortcut::new("caps_lock+tab", "触发物理大写锁定 (CapsLock)") }
 fn default_paste_cycle() -> Shortcut { Shortcut::new("ctrl+alt+v", "循环切换粘贴模式 (兼容不同终端)") }
 fn default_phantom_toggle() -> Shortcut { Shortcut::new("ctrl+alt+p", "开启/关闭幻影模式 (在输入框显示拼音)") }

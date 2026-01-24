@@ -436,6 +436,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     
     let shortcuts = &config.shortcuts;
     let ime_toggle_keys = config::parse_key(&shortcuts.ime_toggle.key);
+    let ime_toggle_alt_keys = config::parse_key(&shortcuts.ime_toggle_alt.key);
     let caps_toggle_keys = config::parse_key(&shortcuts.caps_lock_toggle.key);
     let paste_cycle_keys = config::parse_key(&shortcuts.paste_cycle.key);
     let phantom_toggle_keys = config::parse_key(&shortcuts.phantom_toggle.key);
@@ -569,16 +570,18 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     }
 
                     // IME Toggle
-                    if check_shortcut(key, &ime_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                    if check_shortcut(key, &ime_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) ||
+                       check_shortcut(key, &ime_toggle_alt_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
                         ime.toggle();
                         continue;
                     }
                 }
 
-                if is_release && key == Key::KEY_CAPSLOCK {
-                    // Consume caps release to prevent it from toggling state if we used it as a modifier
-                    // or if it was our IME toggle.
-                    continue;
+                if is_release && (key == Key::KEY_CAPSLOCK || key == Key::KEY_SPACE) {
+                    // Consume caps or space release if it might have been part of an IME toggle
+                    // to prevent unexpected side effects (though space usually only toggles when ctrl is held)
+                    if key == Key::KEY_CAPSLOCK { continue; }
+                    if key == Key::KEY_SPACE && ctrl_held { continue; }
                 }
 
                 if ime.chinese_enabled {
