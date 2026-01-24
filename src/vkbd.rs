@@ -1,7 +1,6 @@
 use evdev::uinput::{VirtualDevice, VirtualDeviceBuilder};
 use evdev::{AttributeSet, InputEvent, Key, Device, EventType};
 use std::{thread, time::Duration};
-use std::process::Command;
 use std::fs;
 use std::os::unix::io::AsRawFd;
 
@@ -109,9 +108,17 @@ impl Vkbd {
     }
 
     pub fn send_text(&mut self, text: &str) {
+        self.send_text_internal(text, false);
+    }
+
+    pub fn send_text_highlighted(&mut self, text: &str) {
+        self.send_text_internal(text, true);
+    }
+
+    fn send_text_internal(&mut self, text: &str, highlight: bool) {
         if text.is_empty() { return; }
 
-        println!("[IME] Emitting text: {}", text);
+        println!("[IME] Emitting text: {} (highlight={})", text, highlight);
 
         // 0. TTY Mode (Injection)
         if self.tty_mode {
@@ -127,22 +134,27 @@ impl Vkbd {
             for c in text.chars() {
                 self.send_char_via_unicode(c);
             }
+            // UnicodeHex mode doesn't support selection highlight easily
             return;
         }
 
         // 1. 优先尝试剪贴板
         if self.send_via_clipboard(text) {
+            if highlight {
+                let count = text.chars().count();
+                thread::sleep(Duration::from_millis(50));
+                self.emit(Key::KEY_LEFTSHIFT, true);
+                for _ in 0..count {
+                    self.tap(Key::KEY_LEFT);
+                    thread::sleep(Duration::from_millis(2));
+                }
+                self.emit(Key::KEY_LEFTSHIFT, false);
+            }
             return;
         }
 
         // 2. 失败处理 (ydotool)
-        let _ = Command::new("ydotool")
-            .env("YDOTOOL_SOCKET", "/tmp/ydotool.socket")
-            .arg("type")
-            .arg("--key-delay")
-            .arg("1")
-            .arg(text)
-            .output();
+        // ... (ydotool logic doesn't support highlight here)
     }
     
     pub fn backspace(&mut self, count: usize) {

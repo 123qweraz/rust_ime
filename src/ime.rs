@@ -13,7 +13,7 @@ pub enum ImeState {
 
 pub enum Action {
     Emit(String),
-    DeleteAndEmit { delete: usize, insert: String },
+    DeleteAndEmit { delete: usize, insert: String, highlight: bool },
     PassThrough,
     Consume,
 }
@@ -169,6 +169,7 @@ impl Ime {
         Action::DeleteAndEmit {
             delete: delete_count,
             insert: new_text,
+            highlight: true,
         }
     }
 
@@ -470,7 +471,7 @@ impl Ime {
                         let delete_count = self.phantom_text.chars().count();
                         self.reset();
                         if self.enable_phantom && delete_count > 0 {
-                             Action::DeleteAndEmit { delete: delete_count, insert: String::new() }
+                             Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
                         } else {
                              Action::Consume
                         }
@@ -541,11 +542,7 @@ impl Ime {
                         let delete_count = prev_phantom.chars().count();
                         self.reset(); 
                         
-                        if target_word == prev_phantom {
-                            Action::Consume 
-                        } else {
-                             Action::DeleteAndEmit { delete: delete_count, insert: target_word }
-                        }
+                        Action::DeleteAndEmit { delete: delete_count, insert: target_word, highlight: false }
                     } else {
                         print!("\r\x1B[K"); // 上屏时清除预览
                         self.reset();
@@ -556,7 +553,7 @@ impl Ime {
                     if self.enable_phantom {
                          let delete_count = self.phantom_text.chars().count();
                          self.reset();
-                         Action::DeleteAndEmit { delete: delete_count, insert: out }
+                         Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
                     } else {
                         print!("\r\x1B[K");
                         self.reset();
@@ -572,7 +569,7 @@ impl Ime {
                 if self.enable_phantom {
                      let delete_count = self.phantom_text.chars().count();
                      self.reset();
-                     Action::DeleteAndEmit { delete: delete_count, insert: out }
+                     Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
                 } else {
                     print!("\r\x1B[K");
                     self.reset();
@@ -584,7 +581,7 @@ impl Ime {
                 if self.enable_phantom {
                     let delete_count = self.phantom_text.chars().count();
                     self.reset();
-                    Action::DeleteAndEmit { delete: delete_count, insert: String::new() }
+                    Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
                 } else {
                     print!("\r\x1B[K");
                     self.reset();
@@ -603,7 +600,7 @@ impl Ime {
                         if self.enable_phantom {
                             let delete_count = self.phantom_text.chars().count();
                             self.reset();
-                            Action::DeleteAndEmit { delete: delete_count, insert: out }
+                            Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
                         } else {
                             print!("\r\x1B[K");
                             self.reset();
@@ -638,7 +635,7 @@ impl Ime {
                         if self.enable_phantom {
                             let delete_count = self.phantom_text.chars().count();
                             self.reset();
-                            return Action::DeleteAndEmit { delete: delete_count, insert: word };
+                            return Action::DeleteAndEmit { delete: delete_count, insert: word, highlight: false };
                         } else {
                             print!("\r\x1B[K");
                             self.reset();

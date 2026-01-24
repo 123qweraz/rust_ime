@@ -572,12 +572,16 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                         Action::Emit(s) => {
                             vkbd.send_text(&s);
                         }
-                        Action::DeleteAndEmit { delete, insert } => {
+                        Action::DeleteAndEmit { delete, insert, highlight } => {
                             // Backspace 'delete' times
                             vkbd.backspace(delete);
                             
                             if !insert.is_empty() {
-                                vkbd.send_text(&insert);
+                                if highlight {
+                                    vkbd.send_text_highlighted(&insert);
+                                } else {
+                                    vkbd.send_text(&insert);
+                                }
                             }
                         }
                         Action::PassThrough => {
