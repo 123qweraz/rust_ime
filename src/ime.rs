@@ -128,6 +128,50 @@ impl Ime {
         }
     }
 
+    pub fn convert_text(&self, text: &str) -> String {
+        let dict = if let Some(d) = self.tries.get(&self.current_profile) {
+            d
+        } else {
+            return text.to_string();
+        };
+
+        let mut result = String::new();
+        let chars: Vec<char> = text.chars().collect();
+        let mut i = 0;
+
+        while i < chars.len() {
+            if !chars[i].is_ascii_alphabetic() {
+                let s = chars[i].to_string();
+                if let Some(zh) = self.punctuation.get(&s) {
+                    result.push_str(zh);
+                } else {
+                    result.push(chars[i]);
+                }
+                i += 1;
+                continue;
+            }
+
+            // Longest match segmentation
+            let mut found = false;
+            for len in (1..=(chars.len() - i).min(15)).rev() {
+                let sub: String = chars[i..i+len].iter().collect();
+                let sub_lower = sub.to_lowercase();
+                if let Some(word) = dict.get_exact(&sub_lower) {
+                    result.push_str(&word);
+                    i += len;
+                    found = true;
+                    break;
+                }
+            }
+
+            if !found {
+                result.push(chars[i]);
+                i += 1;
+            }
+        }
+        result
+    }
+
     pub fn reset(&mut self) {
         self.buffer.clear();
         self.candidates.clear();

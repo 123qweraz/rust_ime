@@ -443,6 +443,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let fuzzy_toggle_keys = config::parse_key(&shortcuts.fuzzy_toggle.key);
     let tty_toggle_keys = config::parse_key(&shortcuts.tty_toggle.key);
     let backspace_toggle_keys = config::parse_key(&shortcuts.backspace_toggle.key);
+    let convert_pinyin_keys = config::parse_key(&shortcuts.convert_pinyin.key);
 
     println!("[IME] Toggle: {}", shortcuts.ime_toggle.key);
     println!("[IME] CapsLock Lock: {}", shortcuts.caps_lock_toggle.key);
@@ -552,6 +553,18 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     if check_shortcut(key, &backspace_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
                         let msg = vkbd.toggle_backspace_char();
                         let _ = notify_tx.send(NotifyEvent::Message(msg));
+                        continue;
+                    }
+                    if check_shortcut(key, &convert_pinyin_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        // 1. Copy selection
+                        vkbd.copy_selection();
+                        // 2. Read clipboard
+                        if let Some(text) = vkbd.get_clipboard_text() {
+                            // 3. Convert
+                            let converted = ime.convert_text(&text);
+                            // 4. Paste back (replacing selection)
+                            vkbd.send_text(&converted);
+                        }
                         continue;
                     }
 

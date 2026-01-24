@@ -61,6 +61,8 @@ pub struct Shortcuts {
     pub tty_toggle: Shortcut,
     #[serde(default = "default_backspace_toggle")]
     pub backspace_toggle: Shortcut,
+    #[serde(default = "default_convert_pinyin")]
+    pub convert_pinyin: Shortcut,
 }
 
 impl Default for Shortcuts {
@@ -74,6 +76,7 @@ impl Default for Shortcuts {
             fuzzy_toggle: default_fuzzy_toggle(),
             tty_toggle: default_tty_toggle(),
             backspace_toggle: default_backspace_toggle(),
+            convert_pinyin: default_convert_pinyin(),
         }
     }
 }
@@ -86,6 +89,7 @@ fn default_profile_next() -> Shortcut { Shortcut::new("ctrl+alt+s", "切换到�
 fn default_fuzzy_toggle() -> Shortcut { Shortcut::new("ctrl+alt+f", "实时开启/关闭模糊拼音") }
 fn default_tty_toggle() -> Shortcut { Shortcut::new("ctrl+alt+t", "切换 TTY 模式 (直接注入字节，适合终端)") }
 fn default_backspace_toggle() -> Shortcut { Shortcut::new("ctrl+alt+b", "切换退格键处理方式") }
+fn default_convert_pinyin() -> Shortcut { Shortcut::new("ctrl+r", "将选中的拼音转换为汉字") }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Config {

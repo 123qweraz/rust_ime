@@ -348,6 +348,19 @@ impl Vkbd {
             self.emit(k, false);
         }
     }
+
+    pub fn copy_selection(&mut self) {
+        self.emit(Key::KEY_LEFTCTRL, true);
+        self.tap(Key::KEY_C);
+        self.emit(Key::KEY_LEFTCTRL, false);
+        thread::sleep(Duration::from_millis(150)); // Wait for app to copy
+    }
+
+    pub fn get_clipboard_text(&self) -> Option<String> {
+        use arboard::Clipboard;
+        let mut cb = Clipboard::new().ok()?;
+        cb.get_text().ok()
+    }
 }
 
 
