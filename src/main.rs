@@ -12,17 +12,18 @@ use daemonize::Daemonize;
 
 mod ime;
 mod vkbd;
+mod trie;
+mod config;
 
 use ime::*;
 use vkbd::*;
 use trie::Trie;
+use config::{Config, Shortcuts};
 use users::{get_effective_uid, get_current_uid, get_user_by_uid, get_user_groups};
 use arboard::Clipboard;
 use std::process::Command;
 use std::env;
 use std::path::{Path, PathBuf};
-
-mod trie;
 
 fn find_project_root() -> PathBuf {
     let mut curr = env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
@@ -61,26 +62,6 @@ struct DictEntry {
 #[derive(Debug, Deserialize)]
 struct PunctuationEntry {
     char: String,
-}
-
-#[derive(Debug, Deserialize, Clone)]
-struct Profile {
-    name: String,
-    dicts: Vec<String>,
-}
-
-#[derive(Debug, Deserialize)]
-struct Config {
-    profiles: Vec<Profile>,
-    active_profile: String,
-    #[serde(default = "default_paste_shortcut")]
-    paste_shortcut: String,
-    #[serde(default)]
-    enable_fuzzy_pinyin: bool,
-}
-
-fn default_paste_shortcut() -> String {
-    "ctrl_v".to_string()
 }
 
 fn detect_environment() {
@@ -309,7 +290,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     flag::register(SIGINT, Arc::clone(&should_exit))?;
     flag::register(SIGHUP, Arc::clone(&should_exit))?;
 
-    let config = load_config().unwrap_or_else(|| get_default_config());
+    let config = load_config();
 
     let device_path = find_keyboard().unwrap_or_else(|_| "/dev/input/event3".to_string());
     println!("Opening device: {}", device_path);
@@ -411,13 +392,65 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         return Err(e.into());
     }
     println!("[IME] Keyboard grabbed. Rust-IME active.");
-    println!("[IME] Toggle: Ctrl + Space");
+    
+    let shortcuts = &config.shortcuts;
+    let ime_toggle_keys = config::parse_key(&shortcuts.ime_toggle);
+    let caps_toggle_keys = config::parse_key(&shortcuts.caps_lock_toggle);
+    let paste_cycle_keys = config::parse_key(&shortcuts.paste_cycle);
+    let phantom_toggle_keys = config::parse_key(&shortcuts.phantom_toggle);
+    let profile_next_keys = config::parse_key(&shortcuts.profile_next);
+    let fuzzy_toggle_keys = config::parse_key(&shortcuts.fuzzy_toggle);
+    let tty_toggle_keys = config::parse_key(&shortcuts.tty_toggle);
+    let backspace_toggle_keys = config::parse_key(&shortcuts.backspace_toggle);
+
+    println!("[IME] Toggle: {}", shortcuts.ime_toggle);
+    println!("[IME] CapsLock Lock: {}", shortcuts.caps_lock_toggle);
     println!("Current mode: English");
     
     let mut ctrl_held = false;
     let mut alt_held = false;
     let mut meta_held = false;
     let mut shift_held = false;
+    let mut caps_held = false;
+
+    let check_shortcut = |key: Key, held_keys: &[Key], ctrl: bool, alt: bool, shift: bool, meta: bool, caps: bool| -> bool {
+        if held_keys.is_empty() { return false; }
+        let mut has_ctrl = false;
+        let mut has_alt = false;
+        let mut has_shift = false;
+        let mut has_meta = false;
+        let mut has_caps = false;
+        let mut target_key = None;
+
+        for &k in held_keys {
+            match k {
+                Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL => has_ctrl = true,
+                Key::KEY_LEFTALT | Key::KEY_RIGHTALT => has_alt = true,
+                Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT => has_shift = true,
+                Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA => has_meta = true,
+                Key::KEY_CAPSLOCK => has_caps = true,
+                _ => target_key = Some(k),
+            }
+        }
+
+        if ctrl != has_ctrl || alt != has_alt || shift != has_shift || meta != has_meta {
+            return false;
+        }
+
+        // Special case for CapsLock as a modifier
+        if caps != has_caps {
+            return false;
+        }
+
+        if let Some(tk) = target_key {
+            key == tk
+        } else {
+            // It was a pure modifier shortcut (like just CapsLock)
+            // This logic is simplified; for single-key shortcuts, they usually trigger on press if no other modifiers.
+            // If the shortcut is just "caps_lock", we handle it specially.
+            false
+        }
+    };
 
     while !should_exit.load(Ordering::Relaxed) {
         let events: Vec<_> = match dev.fetch_events() {
@@ -435,7 +468,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
             if let InputEventKind::Key(key) = ev.kind() {
                 let val = ev.value();
                 let is_press = val != 0; 
-                let _is_release = val == 0;
+                let is_release = val == 0;
 
                 // 跟踪修饰键状态
                 match key {
@@ -443,56 +476,63 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     Key::KEY_LEFTALT | Key::KEY_RIGHTALT => alt_held = is_press,
                     Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA => meta_held = is_press,
                     Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT => shift_held = is_press,
+                    Key::KEY_CAPSLOCK => caps_held = is_press,
                     _ => {}
                 }
 
-                // Ctrl + Space Toggle
-                if ctrl_held && key == Key::KEY_SPACE && is_press {
-                    ime.toggle();
-                    
-                    // Consume the Space press so it doesn't trigger system change
-                    continue;
+                if is_press {
+                    // Check complex shortcuts first
+                    if check_shortcut(key, &caps_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        vkbd.send_key(Key::KEY_CAPSLOCK, 1);
+                        vkbd.send_key(Key::KEY_CAPSLOCK, 0);
+                        continue;
+                    }
+                    if check_shortcut(key, &paste_cycle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        let msg = vkbd.cycle_paste_mode();
+                        let _ = notify_tx.send(NotifyEvent::Message(format!("粘贴: {}", msg)));
+                        continue;
+                    }
+                    if check_shortcut(key, &phantom_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        ime.toggle_phantom();
+                        continue;
+                    }
+                    if check_shortcut(key, &profile_next_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        ime.next_profile();
+                        continue;
+                    }
+                    if check_shortcut(key, &fuzzy_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        ime.toggle_fuzzy();
+                        continue;
+                    }
+                    if check_shortcut(key, &tty_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        let enabled = vkbd.toggle_tty_mode();
+                        let status = if enabled { "开启 (字节注入)" } else { "关闭 (剪贴板)" };
+                        let _ = notify_tx.send(NotifyEvent::Message(format!("TTY模式: {}", status)));
+                        continue;
+                    }
+                    if check_shortcut(key, &backspace_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        let msg = vkbd.toggle_backspace_char();
+                        let _ = notify_tx.send(NotifyEvent::Message(msg));
+                        continue;
+                    }
+
+                    // IME Toggle (often single key like CapsLock)
+                    let is_ime_toggle = if ime_toggle_keys.len() == 1 && ime_toggle_keys[0] == key {
+                        // Check that NO other modifiers are held
+                        !ctrl_held && !alt_held && !shift_held && !meta_held
+                    } else {
+                        check_shortcut(key, &ime_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held)
+                    };
+
+                    if is_ime_toggle {
+                        ime.toggle();
+                        continue;
+                    }
                 }
 
-                // Ctrl + Alt + V: Cycle Paste Mode
-                if ctrl_held && alt_held && key == Key::KEY_V && is_press {
-                    let msg = vkbd.cycle_paste_mode();
-                    let _ = notify_tx.send(NotifyEvent::Message(format!("粘贴: {}", msg)));
-                    continue;
-                }
-
-                // Ctrl + Alt + P: Toggle Phantom Mode (Ghost Text)
-                if ctrl_held && alt_held && key == Key::KEY_P && is_press {
-                    ime.toggle_phantom();
-                    continue;
-                }
-
-                // Ctrl + Alt + S: Switch Dictionary Profile
-                if ctrl_held && alt_held && key == Key::KEY_S && is_press {
-                    ime.next_profile();
-                    continue;
-                }
-                
-                // Ctrl + Alt + F: Toggle Fuzzy Pinyin
-                if ctrl_held && alt_held && key == Key::KEY_F && is_press {
-                    ime.toggle_fuzzy();
-                    continue;
-                }
-
-                // Ctrl + Alt + T: Toggle TTY Injection Mode
-                if ctrl_held && alt_held && key == Key::KEY_T && is_press {
-                    let enabled = vkbd.toggle_tty_mode();
-                    let status = if enabled { "开启 (字节注入)" } else { "关闭 (剪贴板)" };
-                    println!("[IME] TTY Mode: {}", status);
-                    let _ = notify_tx.send(NotifyEvent::Message(format!("TTY模式: {}", status)));
-                    continue;
-                }
-
-                // Ctrl + Alt + B: Toggle Backspace Char (DEL vs BS)
-                if ctrl_held && alt_held && key == Key::KEY_B && is_press {
-                    let msg = vkbd.toggle_backspace_char();
-                    println!("[IME] Backspace Mode: {}", msg);
-                    let _ = notify_tx.send(NotifyEvent::Message(msg));
+                if is_release && key == Key::KEY_CAPSLOCK {
+                    // Consume caps release to prevent it from toggling state if we used it as a modifier
+                    // or if it was our IME toggle.
                     continue;
                 }
 
@@ -557,28 +597,36 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn load_config() -> Option<Config> {
-    let file = File::open("config.json").ok()?;
-    let reader = BufReader::new(file);
-    serde_json::from_reader(reader).ok()
-}
+fn load_config() -> Config {
+    let mut config_path = find_project_root();
+    config_path.push("config.json");
 
-fn get_default_config() -> Config {
+    if let Ok(file) = File::open(&config_path) {
+        let reader = BufReader::new(file);
+        match serde_json::from_reader(reader) {
+            Ok(config) => return config,
+            Err(e) => eprintln!("[Config] Failed to parse config.json: {}", e),
+        }
+    } else {
+        println!("[Config] config.json not found, using default settings.");
+    }
+
+    // Default configuration if file is missing or broken
     Config {
-        profiles: vec![
-            Profile {
-                name: "Chinese".to_string(),
-                dicts: vec![
-                    "dicts/chinese/punctuation.json".to_string(),
-                    "dicts/chinese/character".to_string(),
-                    "dicts/chinese/vocabulary/dict_cizu.json".to_string(),
-                    "dicts/chinese/vocabulary/chuzhongcihui".to_string(),
-                ],
-            },
-        ],
+        profiles: vec![],
         active_profile: "Chinese".to_string(),
         paste_shortcut: "ctrl_v".to_string(),
         enable_fuzzy_pinyin: false,
+        shortcuts: config::Shortcuts {
+            ime_toggle: "caps_lock".to_string(),
+            caps_lock_toggle: "caps_lock+tab".to_string(),
+            paste_cycle: "ctrl+alt+v".to_string(),
+            phantom_toggle: "ctrl+alt+p".to_string(),
+            profile_next: "ctrl+alt+s".to_string(),
+            fuzzy_toggle: "ctrl+alt+f".to_string(),
+            tty_toggle: "ctrl+alt+t".to_string(),
+            backspace_toggle: "ctrl+alt+b".to_string(),
+        }
     }
 }
 

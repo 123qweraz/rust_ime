@@ -292,6 +292,10 @@ impl Vkbd {
         self.emit(key, false);
     }
 
+    pub fn send_key(&mut self, key: Key, value: i32) {
+        self.emit_raw(key, value);
+    }
+
     pub fn emit_raw(&mut self, key: Key, value: i32) {
         let ev = InputEvent::new(EventType::KEY, key.code(), value);
         let syn = InputEvent::new(EventType::SYNCHRONIZATION, 0, 0); // SYN_REPORT
