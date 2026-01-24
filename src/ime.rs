@@ -41,6 +41,7 @@ pub struct Ime {
     pub notification_tx: Sender<NotifyEvent>,
     pub enable_phantom: bool,
     pub phantom_text: String,
+    pub is_highlighted: bool,
     pub word_en_map: HashMap<String, Vec<String>>,
     pub enable_fuzzy: bool,
 }
@@ -60,6 +61,7 @@ impl Ime {
             notification_tx,
             enable_phantom: false,
             phantom_text: String::new(),
+            is_highlighted: false,
             word_en_map,
             enable_fuzzy,
         }
@@ -133,6 +135,7 @@ impl Ime {
         self.page = 0;
         self.state = ImeState::Direct;
         self.phantom_text.clear();
+        self.is_highlighted = false;
         // 关闭通知
         let _ = self.notification_tx.send(NotifyEvent::Close);
     }
@@ -160,8 +163,13 @@ impl Ime {
             self.buffer.clone() // fallback to pinyin if no match
         };
 
-        let delete_count = self.phantom_text.chars().count();
+        let mut delete_count = self.phantom_text.chars().count();
+        if self.is_highlighted && delete_count > 0 {
+            delete_count = 1;
+        }
+        
         self.phantom_text = new_text.clone();
+        self.is_highlighted = true;
 
         Action::DeleteAndEmit {
             delete: delete_count,
@@ -228,14 +236,6 @@ impl Ime {
 
         // Apply auxiliary filter if active (uppercase letters found in buffer)
         if !filter_string.is_empty() {
-            // "首选不参与筛选": Optional, but keeping consistency with your previous logic
-            if let Some(first) = raw_candidates.first().cloned() {
-                // If there's more than one candidate, remove the first one to force selection
-                if raw_candidates.len() > 1 {
-                    raw_candidates.retain(|c| *c != first);
-                }
-            }
-
             raw_candidates.retain(|cand| {
                 if let Some(en_list) = self.word_en_map.get(cand) {
                     en_list.iter().any(|en| {
@@ -440,7 +440,10 @@ impl Ime {
                 self.buffer.pop();
                 if self.buffer.is_empty() {
                     print!("\r\x1B[K"); // 清除预览行
-                    let delete_count = self.phantom_text.chars().count();
+                    let mut delete_count = self.phantom_text.chars().count();
+                    if self.is_highlighted && delete_count > 0 {
+                        delete_count = 1;
+                    }
                     self.reset();
                     if self.enable_phantom && delete_count > 0 {
                          Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
@@ -509,8 +512,10 @@ impl Ime {
                     let target_word = word.clone();
                     
                     if self.enable_phantom {
-                        let prev_phantom = self.phantom_text.clone();
-                        let delete_count = prev_phantom.chars().count();
+                        let mut delete_count = self.phantom_text.chars().count();
+                        if self.is_highlighted && delete_count > 0 {
+                            delete_count = 1;
+                        }
                         self.reset(); 
                         
                         Action::DeleteAndEmit { delete: delete_count, insert: target_word, highlight: false }
@@ -522,7 +527,10 @@ impl Ime {
                 } else if !self.buffer.is_empty() {
                     let out = self.buffer.clone();
                     if self.enable_phantom {
-                         let delete_count = self.phantom_text.chars().count();
+                         let mut delete_count = self.phantom_text.chars().count();
+                         if self.is_highlighted && delete_count > 0 {
+                             delete_count = 1;
+                         }
                          self.reset();
                          Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
                     } else {
@@ -538,7 +546,10 @@ impl Ime {
             Key::KEY_ENTER => {
                 let out = self.buffer.clone();
                 if self.enable_phantom {
-                     let delete_count = self.phantom_text.chars().count();
+                     let mut delete_count = self.phantom_text.chars().count();
+                     if self.is_highlighted && delete_count > 0 {
+                         delete_count = 1;
+                     }
                      self.reset();
                      Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
                 } else {
@@ -550,7 +561,10 @@ impl Ime {
 
             Key::KEY_ESC => {
                 if self.enable_phantom {
-                    let delete_count = self.phantom_text.chars().count();
+                    let mut delete_count = self.phantom_text.chars().count();
+                    if self.is_highlighted && delete_count > 0 {
+                        delete_count = 1;
+                    }
                     self.reset();
                     Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
                 } else {
@@ -593,7 +607,10 @@ impl Ime {
                         let out = word.clone();
                         
                         if self.enable_phantom {
-                            let delete_count = self.phantom_text.chars().count();
+                            let mut delete_count = self.phantom_text.chars().count();
+                            if self.is_highlighted && delete_count > 0 {
+                                delete_count = 1;
+                            }
                             self.reset();
                             Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
                         } else {
@@ -621,7 +638,10 @@ impl Ime {
                     if has_filter && self.candidates.len() == 1 {
                         let word = self.candidates[0].clone();
                         if self.enable_phantom {
-                            let delete_count = self.phantom_text.chars().count();
+                            let mut delete_count = self.phantom_text.chars().count();
+                            if self.is_highlighted && delete_count > 0 {
+                                delete_count = 1;
+                            }
                             self.reset();
                             return Action::DeleteAndEmit { delete: delete_count, insert: word, highlight: false };
                         } else {

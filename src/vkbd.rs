@@ -3,6 +3,7 @@ use evdev::{AttributeSet, InputEvent, Key, Device, EventType};
 use std::{thread, time::Duration};
 use std::fs;
 use std::os::unix::io::AsRawFd;
+use std::process::Command;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum PasteMode {
@@ -154,7 +155,11 @@ impl Vkbd {
         }
 
         // 2. 失败处理 (ydotool)
-        // ... (ydotool logic doesn't support highlight here)
+        if self.send_via_ydotool(text) {
+             return;
+        }
+        
+        eprintln!("[Error] All emission methods failed for text: {}", text);
     }
     
     pub fn backspace(&mut self, count: usize) {
@@ -163,12 +168,11 @@ impl Vkbd {
         if self.tty_mode {
             // Inject backspace bytes
             let bytes = vec![self.backspace_char; count];
-            // Convert bytes to string if valid utf8? 
-            // Actually send_via_tty_injection expects &str but iterates bytes.
-            // If backspace_char is 0x7f or 0x08, it is valid ASCII, thus valid UTF-8.
             if let Ok(s) = std::str::from_utf8(&bytes) {
-                 let _ = self.send_via_tty_injection(s);
-                 return;
+                 if self.send_via_tty_injection(s) {
+                     return;
+                 }
+                 eprintln!("[Error] TTY backspace injection failed, falling back to uinput...");
             }
         }
         
@@ -176,6 +180,17 @@ impl Vkbd {
         for _ in 0..count {
             self.tap(Key::KEY_BACKSPACE);
             thread::sleep(Duration::from_millis(2));
+        }
+    }
+
+    fn send_via_ydotool(&self, text: &str) -> bool {
+        let status = Command::new("ydotool")
+            .arg("type")
+            .arg(text)
+            .status();
+        match status {
+            Ok(s) => s.success(),
+            Err(_) => false,
         }
     }
 

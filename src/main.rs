@@ -206,6 +206,11 @@ fn stop_daemon() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+fn is_process_running(pid: i32) -> bool {
+    // 检查 /proc/<pid> 是否存在
+    Path::new(&format!("/proc/{}", pid)).exists()
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     
@@ -248,15 +253,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 默认进入后台模式
     // 检查是否已经在运行
-    if Path::new(PID_FILE).exists() {
-        // 简单的检查，如果文件存在且进程真的在跑
-        // 这里为了简单，只提示用户
-        eprintln!("警告: {} 已存在。", PID_FILE);
-        eprintln!("程序可能已经在运行。如果是意外关闭残留，请先运行 --stop 清理，或手动删除该文件。");
-        // 为了防止重复启动导致两个进程抢键盘，这里最好退出，或者用户强制清理
-        eprintln!("如果确定未运行，请删除该文件后重试。\n");
-        return Ok(())
+    if let Ok(pid_str) = std::fs::read_to_string(PID_FILE) {
+        if let Ok(pid) = pid_str.trim().parse::<i32>() {
+            if is_process_running(pid) {
+                eprintln!("错误: 程序已在运行 (PID: {})。", pid);
+                eprintln!("请先运行 --stop 停止它，或手动删除 {}。\n", PID_FILE);
+                return Ok(())
+            } else {
+                println!("检测到残留的 PID 文件，但进程未运行。正在清理...");
+                let _ = std::fs::remove_file(PID_FILE);
+            }
+        }
     }
+
 
     let log_file = File::create(LOG_FILE)?;
     let cwd = find_project_root();
@@ -304,7 +313,14 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let device_path = if let Some(path) = &config.device_path {
         path.clone()
     } else {
-        find_keyboard().unwrap_or_else(|_| "/dev/input/event3".to_string())
+        match find_keyboard() {
+            Ok(p) => p,
+            Err(e) => {
+                eprintln!("Fatal: No keyboard device found: {}", e);
+                eprintln!("Please specify 'device_path' in config.json (e.g., /dev/input/event3)");
+                return Err(e);
+            }
+        }
     };
     println!("Opening device: {}", device_path);
     
