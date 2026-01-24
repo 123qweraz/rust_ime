@@ -5,17 +5,15 @@
       "name": "Chinese",
       "description": "中文拼音输入方案，包含常用词汇和单字",
       "dicts": [
-        "dicts/chinese/vocabulary",
         "dicts/chinese/character",
+        "dicts/chinese/vocabulary",
         "dicts/chinese/other"
       ]
     },
     {
       "name": "Japanese",
       "description": "日语输入方案 (假名/N1-N5)",
-      "dicts": [
-        "dicts/japanese"
-      ]
+      "dicts": ["dicts/japanese"]
     }
   ],
   "active_profile": "Chinese",
