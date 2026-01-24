@@ -18,7 +18,7 @@ mod config;
 use ime::*;
 use vkbd::*;
 use trie::Trie;
-use config::{Config, Shortcuts};
+use config::Config;
 use users::{get_effective_uid, get_current_uid, get_user_by_uid, get_user_groups};
 use arboard::Clipboard;
 use std::process::Command;
@@ -27,7 +27,6 @@ use std::path::{Path, PathBuf};
 
 fn find_project_root() -> PathBuf {
     let mut curr = env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
-    let original_cwd = curr.clone();
 
     // 1. Try to find local 'dicts' in current or parent directories (Dev/Portable mode)
     for _ in 0..3 {
@@ -218,17 +217,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             "--stop" => {
                 return stop_daemon();
             }
+            "--reset-config" => {
+                let config = Config::default_config();
+                if let Err(e) = save_config(&config) {
+                    eprintln!("✗ 重置配置失败: {}", e);
+                } else {
+                    println!("✓ 已重置配置文件 config.json 为默认设置。");
+                }
+                return Ok(());
+            }
             "--foreground" => {
                 // 直接运行，不后台化
                 return run_ime();
             }
             "--help" | "-h" => {
-                println!("Usage: blind-ime [OPTIONS]");
+                println!("Usage: rust-ime [OPTIONS]");
                 println!("Options:");
-                println!("  (default)     后台运行 (Daemon mode)");
-                println!("  --foreground  前台运行 (调试用)");
-                println!("  --install     安装开机自启 (添加到 ~/.config/autostart)");
-                println!("  --stop        停止正在运行的后台进程");
+                println!("  (default)       后台运行 (Daemon mode)");
+                println!("  --foreground    前台运行 (调试用)");
+                println!("  --install       安装开机自启 (添加到 ~/.config/autostart)");
+                println!("  --stop          停止正在运行的后台进程");
+                println!("  --reset-config  重置配置文件为默认设置");
                 return Ok(())
             }
             _ => {
@@ -605,29 +614,29 @@ fn load_config() -> Config {
         let reader = BufReader::new(file);
         match serde_json::from_reader(reader) {
             Ok(config) => return config,
-            Err(e) => eprintln!("[Config] Failed to parse config.json: {}", e),
+            Err(e) => {
+                eprintln!("[Config] Failed to parse config.json: {}", e);
+                eprintln!("[Config] Falling back to default settings.");
+            }
         }
     } else {
-        println!("[Config] config.json not found, using default settings.");
+        println!("[Config] config.json not found, creating default config.");
+        let default_config = Config::default_config();
+        if let Err(e) = save_config(&default_config) {
+            eprintln!("[Config] Failed to create default config.json: {}", e);
+        }
+        return default_config;
     }
 
-    // Default configuration if file is missing or broken
-    Config {
-        profiles: vec![],
-        active_profile: "Chinese".to_string(),
-        paste_shortcut: "ctrl_v".to_string(),
-        enable_fuzzy_pinyin: false,
-        shortcuts: config::Shortcuts {
-            ime_toggle: "caps_lock".to_string(),
-            caps_lock_toggle: "caps_lock+tab".to_string(),
-            paste_cycle: "ctrl+alt+v".to_string(),
-            phantom_toggle: "ctrl+alt+p".to_string(),
-            profile_next: "ctrl+alt+s".to_string(),
-            fuzzy_toggle: "ctrl+alt+f".to_string(),
-            tty_toggle: "ctrl+alt+t".to_string(),
-            backspace_toggle: "ctrl+alt+b".to_string(),
-        }
-    }
+    Config::default_config()
+}
+
+fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
+    let mut config_path = find_project_root();
+    config_path.push("config.json");
+    let file = File::create(config_path)?;
+    serde_json::to_writer_pretty(file, config)?;
+    Ok(())
 }
 
 fn load_dict_for_profile(paths: &[String]) -> Trie {
