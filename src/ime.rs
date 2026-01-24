@@ -424,14 +424,7 @@ impl Ime {
     }
 
     fn handle_direct(&mut self, key: Key, shift_pressed: bool) -> Action {
-        if let Some(c) = key_to_char(key) {
-            // 如果按下了 Shift 且是字母，通常意味着输入大写字母，这时候应该直接放行而不是进入拼音模式
-            // 除非我们想要支持 Shift+字母 依然进入拼音？通常输入法是 Shift 切换中英文，或者 Shift+A 输入 'A'
-            // 这里为了简单，如果 shift 按下，我们认为是英文输入
-            if shift_pressed {
-                return Action::PassThrough;
-            }
-            
+        if let Some(c) = key_to_char(key, shift_pressed) {
             self.buffer.push(c);
             self.state = ImeState::Composing;
             self.lookup();
@@ -590,10 +583,34 @@ impl Ime {
             }
 
             _ if is_digit(key) => {
-                let idx = key_to_digit(key).unwrap_or(0);
+                let digit = key_to_digit(key).unwrap_or(0);
+
+                // Tone handling: 7, 8, 9, 0
+                if matches!(digit, 7 | 8 | 9 | 0) {
+                    let tone = match digit {
+                        7 => 1,
+                        8 => 2,
+                        9 => 3,
+                        0 => 4,
+                        _ => 0,
+                    };
+                    if let Some(last_char) = self.buffer.chars().last() {
+                        if let Some(toned) = apply_tone(last_char, tone) {
+                            self.buffer.pop();
+                            self.buffer.push(toned);
+                            self.lookup();
+                            if self.enable_phantom {
+                                return self.update_phantom_text();
+                            } else {
+                                return Action::Consume;
+                            }
+                        }
+                    }
+                }
+
                 // 1-5 maps to index on CURRENT page
-                if idx >= 1 && idx <= 5 {
-                    let actual_idx = self.page * 5 + (idx - 1);
+                if digit >= 1 && digit <= 5 {
+                    let actual_idx = self.page * 5 + (digit - 1);
                     if let Some(word) = self.candidates.get(actual_idx) {
                         let out = word.clone();
                         
@@ -615,17 +632,9 @@ impl Ime {
             }
 
             _ if is_letter(key) => {
-                if let Some(c) = key_to_char(key) {
-                    if shift_pressed {
-                        // User typed a Capital letter: Start/Append to Aux Buffer
-                        self.aux_buffer.push(c); 
-                    } else if !self.aux_buffer.is_empty() {
-                         // User typed lowercase, but Aux buffer is active: Append to Aux
-                         self.aux_buffer.push(c);
-                    } else {
-                        // Regular pinyin
-                        self.buffer.push(c);
-                    }
+                if let Some(c) = key_to_char(key, shift_pressed) {
+                    // Treat uppercase as part of pinyin as requested
+                    self.buffer.push(c);
                     
                     self.lookup();
 
@@ -659,7 +668,7 @@ impl Ime {
 }
 
 pub fn is_letter(key: Key) -> bool {
-    key_to_char(key).is_some()
+    key_to_char(key, false).is_some()
 }
 
 pub fn is_digit(key: Key) -> bool {
@@ -677,8 +686,8 @@ pub fn key_to_digit(key: Key) -> Option<usize> {
     }
 }
 
-pub fn key_to_char(key: Key) -> Option<char> {
-    match key {
+pub fn key_to_char(key: Key, shift: bool) -> Option<char> {
+    let c = match key {
         Key::KEY_Q => Some('q'), Key::KEY_W => Some('w'), Key::KEY_E => Some('e'), Key::KEY_R => Some('r'),
         Key::KEY_T => Some('t'), Key::KEY_Y => Some('y'), Key::KEY_U => Some('u'), Key::KEY_I => Some('i'),
         Key::KEY_O => Some('o'), Key::KEY_P => Some('p'), Key::KEY_A => Some('a'), Key::KEY_S => Some('s'),
@@ -686,6 +695,30 @@ pub fn key_to_char(key: Key) -> Option<char> {
         Key::KEY_J => Some('j'), Key::KEY_K => Some('k'), Key::KEY_L => Some('l'), Key::KEY_Z => Some('z'),
         Key::KEY_X => Some('x'), Key::KEY_C => Some('c'), Key::KEY_V => Some('v'), Key::KEY_B => Some('b'),
         Key::KEY_N => Some('n'), Key::KEY_M => Some('m'),
+        _ => None,
+    };
+
+    if shift {
+        c.map(|ch| ch.to_ascii_uppercase())
+    } else {
+        c
+    }
+}
+
+pub fn apply_tone(c: char, tone: usize) -> Option<char> {
+    match (c, tone) {
+        ('a', 1) => Some('ā'), ('a', 2) => Some('á'), ('a', 3) => Some('ǎ'), ('a', 4) => Some('à'),
+        ('e', 1) => Some('ē'), ('e', 2) => Some('é'), ('e', 3) => Some('ě'), ('e', 4) => Some('è'),
+        ('i', 1) => Some('ī'), ('i', 2) => Some('í'), ('i', 3) => Some('ǐ'), ('i', 4) => Some('ì'),
+        ('o', 1) => Some('ō'), ('o', 2) => Some('ó'), ('o', 3) => Some('ǒ'), ('o', 4) => Some('ò'),
+        ('u', 1) => Some('ū'), ('u', 2) => Some('ú'), ('u', 3) => Some('ǔ'), ('u', 4) => Some('ù'),
+        ('v', 1) => Some('ǖ'), ('v', 2) => Some('ǘ'), ('v', 3) => Some('ǚ'), ('v', 4) => Some('ǜ'),
+        ('A', 1) => Some('Ā'), ('A', 2) => Some('Á'), ('A', 3) => Some('Ǎ'), ('A', 4) => Some('À'),
+        ('E', 1) => Some('Ē'), ('E', 2) => Some('É'), ('E', 3) => Some('Ě'), ('E', 4) => Some('È'),
+        ('I', 1) => Some('Ī'), ('I', 2) => Some('Í'), ('I', 3) => Some('Ǐ'), ('I', 4) => Some('Ì'),
+        ('O', 1) => Some('Ō'), ('O', 2) => Some('Ó'), ('O', 3) => Some('Ǒ'), ('O', 4) => Some('Ò'),
+        ('U', 1) => Some('Ū'), ('U', 2) => Some('Ú'), ('U', 3) => Some('Ǔ'), ('U', 4) => Some('Ù'),
+        ('V', 1) => Some('Ǖ'), ('V', 2) => Some('Ǘ'), ('V', 3) => Some('Ǚ'), ('V', 4) => Some('Ǜ'),
         _ => None,
     }
 }
