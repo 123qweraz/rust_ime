@@ -41,7 +41,6 @@ pub struct Ime {
     pub notification_tx: Sender<NotifyEvent>,
     pub enable_phantom: bool,
     pub phantom_text: String,
-    pub aux_buffer: String,
     pub word_en_map: HashMap<String, Vec<String>>,
     pub enable_fuzzy: bool,
 }
@@ -61,7 +60,6 @@ impl Ime {
             notification_tx,
             enable_phantom: false,
             phantom_text: String::new(),
-            aux_buffer: String::new(),
             word_en_map,
             enable_fuzzy,
         }
@@ -135,7 +133,6 @@ impl Ime {
         self.page = 0;
         self.state = ImeState::Direct;
         self.phantom_text.clear();
-        self.aux_buffer.clear();
         // 关闭通知
         let _ = self.notification_tx.send(NotifyEvent::Close);
     }
@@ -184,80 +181,80 @@ impl Ime {
         let dict = if let Some(d) = self.tries.get(&self.current_profile) {
             d
         } else {
-            // Should not happen if config is correct, but safe fallback
             self.candidates.clear();
             self.update_state();
             return;
         };
 
-        // Use Trie BFS search to find candidates (limit 100)
+        // Unified Buffer Logic: 
+        // 1. Find the first uppercase ASCII letter that is NOT at the start.
+        // 2. If found, split into pinyin prefix and english filter.
+        let mut pinyin_search = self.buffer.clone();
+        let mut filter_string = String::new();
+
+        if let Some((idx, _)) = self.buffer.char_indices().skip(1).find(|(_, c)| c.is_ascii_uppercase()) {
+            pinyin_search = self.buffer[..idx].to_string();
+            filter_string = self.buffer[idx..].to_lowercase();
+        }
+
+        // Use Trie BFS search to find candidates
         let mut raw_candidates = if self.enable_fuzzy {
-            let variants = self.expand_fuzzy_pinyin(&self.buffer);
+            let variants = self.expand_fuzzy_pinyin(&pinyin_search.to_lowercase());
             let mut merged = Vec::new();
             for variant in variants {
-                let res = dict.search_bfs(&variant, 50); // smaller limit per variant
+                let res = dict.search_bfs(&variant, 50);
                 for c in res {
                     if !merged.contains(&c) {
                         merged.push(c);
                     }
                 }
             }
-            // Sort merged? BFS already sorts by length mostly. 
-            // Just keeping the order of variants (exact match first) is good.
             merged
         } else {
-            dict.search_bfs(&self.buffer, 100)
+            dict.search_bfs(&pinyin_search.to_lowercase(), 100)
         };
 
-        // Fuzzy Search Fallback / Augmentation
-        // If we have few results (or the user typed a long string likely to contain typos), try fuzzy.
-        if raw_candidates.len() < 5 && self.buffer.len() > 3 {
-            // Allow 2 edits for longer strings, 1 for medium.
-            let max_cost = if self.buffer.len() > 5 { 2 } else { 1 };
-            let fuzzy_candidates = dict.search_fuzzy(&self.buffer, max_cost);
-            
+        // Fuzzy Search Fallback
+        if raw_candidates.len() < 5 && pinyin_search.len() > 3 {
+            let max_cost = if pinyin_search.len() > 5 { 2 } else { 1 };
+            let fuzzy_candidates = dict.search_fuzzy(&pinyin_search.to_lowercase(), max_cost);
             for cand in fuzzy_candidates {
-                // Dedup: only add if not already present
                 if !raw_candidates.contains(&cand) {
                     raw_candidates.push(cand);
                 }
-                if raw_candidates.len() >= 100 {
-                    break;
-                }
+                if raw_candidates.len() >= 100 { break; }
             }
         }
 
-        // Apply auxiliary filter if active
-        if !self.aux_buffer.is_empty() {
-            // "首选不参与筛选": Remove the first candidate (default pinyin match)
-            // because the user started filtering, implying the first one is not desired.
+        // Apply auxiliary filter if active (uppercase letters found in buffer)
+        if !filter_string.is_empty() {
+            // "首选不参与筛选": Optional, but keeping consistency with your previous logic
             if let Some(first) = raw_candidates.first().cloned() {
-                raw_candidates.retain(|c| *c != first);
+                // If there's more than one candidate, remove the first one to force selection
+                if raw_candidates.len() > 1 {
+                    raw_candidates.retain(|c| *c != first);
+                }
             }
 
-            let filter_lower = self.aux_buffer.to_lowercase();
             raw_candidates.retain(|cand| {
                 if let Some(en_list) = self.word_en_map.get(cand) {
                     en_list.iter().any(|en| {
                         en.split(|c: char| !c.is_alphanumeric())
-                          .any(|word| word.to_lowercase().starts_with(&filter_lower))
+                          .any(|word| word.to_lowercase().starts_with(&filter_string))
                     })
                 } else {
-                    false // Remove if no english mapping found (strict mode?) 
+                    false 
                 }
             });
         }
 
         self.candidates = raw_candidates;
-
         self.selected = 0;
         self.page = 0;
         self.update_state();
         
-        // 打印预览界面
         if !self.enable_phantom {
             self.print_preview();
-            // 通知更新
             self.notify_preview();
         }
     }
@@ -307,11 +304,6 @@ impl Ime {
         if self.buffer.is_empty() { return; }
 
         let buffer = self.buffer.clone();
-        let aux_display = if !self.aux_buffer.is_empty() {
-            format!(" | {}", self.aux_buffer)
-        } else {
-            String::new()
-        };
         let mut body = String::new();
         
         if self.candidates.is_empty() {
@@ -347,7 +339,7 @@ impl Ime {
             }
         }
 
-        let _ = self.notification_tx.send(NotifyEvent::Update(format!("拼音: {}{}", buffer, aux_display), body));
+        let _ = self.notification_tx.send(NotifyEvent::Update(format!("拼音: {}", buffer), body));
     }
 
     fn print_preview(&self) {
@@ -356,11 +348,7 @@ impl Ime {
         // 使用 \r 回到行首，配合 print! 实现原地刷新
         print!("\r\x1B[K"); // \x1B[K 是清除从光标到行末的内容
         
-        if !self.aux_buffer.is_empty() {
-             print!("拼音: {} [{}] | ", self.buffer, self.aux_buffer);
-        } else {
-             print!("拼音: {} | ", self.buffer);
-        }
+        print!("拼音: {} | ", self.buffer);
         
         if self.candidates.is_empty() {
             print!("(无候选)");
@@ -449,32 +437,22 @@ impl Ime {
     fn handle_composing(&mut self, key: Key, shift_pressed: bool) -> Action {
         match key {
             Key::KEY_BACKSPACE => {
-                if !self.aux_buffer.is_empty() {
-                    self.aux_buffer.pop();
+                self.buffer.pop();
+                if self.buffer.is_empty() {
+                    print!("\r\x1B[K"); // 清除预览行
+                    let delete_count = self.phantom_text.chars().count();
+                    self.reset();
+                    if self.enable_phantom && delete_count > 0 {
+                         Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
+                    } else {
+                         Action::Consume
+                    }
+                } else {
                     self.lookup();
-                     if self.enable_phantom {
+                    if self.enable_phantom {
                         self.update_phantom_text()
                     } else {
                         Action::Consume
-                    }
-                } else {
-                    self.buffer.pop();
-                    if self.buffer.is_empty() {
-                        print!("\r\x1B[K"); // 清除预览行
-                        let delete_count = self.phantom_text.chars().count();
-                        self.reset();
-                        if self.enable_phantom && delete_count > 0 {
-                             Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
-                        } else {
-                             Action::Consume
-                        }
-                    } else {
-                        self.lookup();
-                        if self.enable_phantom {
-                            self.update_phantom_text()
-                        } else {
-                            Action::Consume
-                        }
                     }
                 }
             }
@@ -637,20 +615,6 @@ impl Ime {
                     self.buffer.push(c);
                     
                     self.lookup();
-
-                    // Auto-commit if filtering results in a unique candidate
-                    if !self.aux_buffer.is_empty() && self.candidates.len() == 1 {
-                        let word = self.candidates[0].clone();
-                        if self.enable_phantom {
-                            let delete_count = self.phantom_text.chars().count();
-                            self.reset();
-                            return Action::DeleteAndEmit { delete: delete_count, insert: word, highlight: false };
-                        } else {
-                            print!("\r\x1B[K");
-                            self.reset();
-                            return Action::Emit(word);
-                        }
-                    }
 
                     if self.enable_phantom {
                         self.update_phantom_text()
