@@ -653,27 +653,26 @@ fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
 fn load_dict_for_profile(paths: &[String]) -> Trie {
     let mut trie = Trie::new();
     
-    println!("Loading dictionary profile with {} paths...", paths.len());
+    println!("[Config] Loading dictionary profile with {} paths...", paths.len());
     for path_str in paths {
         let path = Path::new(path_str);
         if path.is_dir() {
-             let walker = WalkDir::new(path).into_iter();
-             // Sort entries to ensure consistent loading order if needed, but WalkDir order is not guaranteed.
-             // For strict priority within a directory, we might want to collect and sort.
-             // But usually directory content priority is less critical than file vs directory priority.
-             for entry in walker.filter_map(|e| e.ok()) {
+             let mut entries: Vec<_> = WalkDir::new(path)
+                .into_iter()
+                .filter_map(|e| e.ok())
+                .filter(|e| e.path().is_file() && e.path().extension().map_or(false, |ext| ext == "json"))
+                .collect();
+             
+             // Sort entries alphabetically by path to ensure level-1 comes before level-2/3
+             entries.sort_by(|a, b| a.path().cmp(b.path()));
+
+             for entry in entries {
                 let sub_path = entry.path();
-                if sub_path.is_file() && sub_path.extension().map_or(false, |ext| ext == "json") {
-                    let sub_path_str = sub_path.to_str().unwrap_or("");
-                    // Skip punctuation within directories if it's loaded explicitly elsewhere?
-                    // But usually we just load everything.
-                    // Note: punctuation.json is usually loaded into 'punctuation' map, not Trie.
-                    // But if it's in the list, we might load it into Trie? No, punctuation is separate map.
-                    if sub_path_str.ends_with("punctuation.json") {
-                        continue;
-                    }
-                    load_file_into_dict(sub_path_str, &mut trie);
+                let sub_path_str = sub_path.to_str().unwrap_or("");
+                if sub_path_str.ends_with("punctuation.json") {
+                    continue;
                 }
+                load_file_into_dict(sub_path_str, &mut trie);
              }
         } else if path.is_file() {
              load_file_into_dict(path_str, &mut trie);
