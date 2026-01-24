@@ -14,6 +14,7 @@ mod ime;
 mod vkbd;
 mod trie;
 mod config;
+mod tray;
 
 use ime::*;
 use vkbd::*;
@@ -375,6 +376,15 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化通知线程
     let (notify_tx, notify_rx) = std::sync::mpsc::channel();
     
+    // 初始化托盘事件通道
+    let (tray_event_tx, tray_event_rx) = std::sync::mpsc::channel();
+    
+    let mut ime = Ime::new(tries, active_profile.clone(), punctuation, word_en_map, notify_tx.clone(), config.enable_fuzzy_pinyin);
+
+    // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
+    let tray_handle = tray::start_tray(ime.chinese_enabled, active_profile, tray_event_tx);
+    let tray_handle = Some(tray_handle); // For consistency, although ksni::install returns a handle
+
     std::thread::spawn(move || {
         use notify_rust::{Notification, Timeout};
         let mut handle: Option<notify_rust::NotificationHandle> = None;
@@ -423,8 +433,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     });
-
-    let mut ime = Ime::new(tries, active_profile, punctuation, word_en_map, notify_tx.clone(), config.enable_fuzzy_pinyin);
 
     // Grab the keyboard immediately to ensure we can intercept Ctrl+Space
     // and manage modifier states consistently.
@@ -494,6 +502,23 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     };
 
     while !should_exit.load(Ordering::Relaxed) {
+        // 处理托盘事件
+        while let Ok(event) = tray_event_rx.try_recv() {
+            match event {
+                tray::TrayEvent::ToggleIme => {
+                    ime.toggle();
+                    if let Some(ref h) = tray_handle { h.update(|t| t.chinese_enabled = ime.chinese_enabled); }
+                }
+                tray::TrayEvent::NextProfile => {
+                    ime.next_profile();
+                    if let Some(ref h) = tray_handle { h.update(|t| t.active_profile = ime.current_profile.clone()); }
+                }
+                tray::TrayEvent::Exit => {
+                    should_exit.store(true, Ordering::Relaxed);
+                }
+            }
+        }
+
         let events: Vec<_> = match dev.fetch_events() {
             Ok(iterator) => iterator.collect(),
             Err(e) => {
@@ -539,6 +564,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     }
                     if check_shortcut(key, &profile_next_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
                         ime.next_profile();
+                        if let Some(ref h) = tray_handle { h.update(|t| t.active_profile = ime.current_profile.clone()); }
                         continue;
                     }
                     if check_shortcut(key, &fuzzy_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
@@ -573,6 +599,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     if check_shortcut(key, &ime_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) ||
                        check_shortcut(key, &ime_toggle_alt_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
                         ime.toggle();
+                        if let Some(ref h) = tray_handle { h.update(|t| t.chinese_enabled = ime.chinese_enabled); }
                         continue;
                     }
                 }
