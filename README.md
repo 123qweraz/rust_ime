@@ -1,74 +1,86 @@
 # Rust-IME
 
-一个基于 Rust 开发的 Linux 系统级输入法框架。它通过监听底层键盘事件 (`/dev/input/event`) 并利用虚拟键盘 (uinput) 注入字符，实现了与具体显示协议（Wayland/X11/TTY）无关的全局输入能力。
+一个基于 Rust 开发的 Linux 系统级输入法框架。通过监听底层键盘事件 (`/dev/input/event`) 并利用虚拟键盘 (uinput) 注入字符，实现与显示协议（Wayland/X11/TTY）无关的全局输入能力。
 
-## 核心特性
+## 🚀 特点
 
-- **底层驱动级监听**：在内核输入层拦截按键，不依赖于特定的桌面环境（如 GNOME/KDE）或显示协议（X11/Wayland），甚至可以在控制台 (TTY) 中运行。
-- **幽灵文字 (Phantom Text)**：创新的行内实时预览模式。输入拼音时，首选词直接显示在当前光标处，切换候选词时实时更新，提供零延迟的沉浸式输入体验。
-- **语义辅助码 (Semantic Auxiliary)**：通过汉字的英文释义进行二次筛选。例如输入 `li` 后按 `Shift+I` (Inside)，即可快速定位到“里”，大幅减少重码翻页。
-- **极速粘贴上屏**：利用系统剪贴板实现字符注入，彻底消除在 Wayland 或高延迟环境下模拟大量 Unicode 按键序列的卡顿感。
-- **多语言与方案支持**：支持拼音、日语五十音等多种输入方案，可根据配置轻松扩展。
-- **高度可定制**：通过 `config.json` 轻松配置词库、快捷键和注入模式。
+- **底层驱动级监听**：在内核输入层拦截按键，不依赖特定桌面环境或显示协议，支持在 Wayland、X11 甚至纯终端 (TTY) 中完美运行。
+- **幽灵文字 (Phantom Text)**：独创的行内实时预览模式，首选词直接显示在当前光标处，提供零延迟的沉浸式输入体验。
+- **语义辅助码 (Semantic Auxiliary)**：通过汉字的英文标签进行快速过滤（例如输入 `li` 后按 `Shift+I` 即可定位到“里” Inside），大幅降低重码率。
+- **极速粘贴注入**：利用系统剪贴板实现字符上屏，彻底解决 Wayland 下模拟 Unicode 按键序列产生的卡顿。
+- **多语言方案**：原生支持中文拼音、日语五十音、英语及 Emoji 等多种混合输入方案。
 
-## 快速开始
+---
+
+## 📦 安装教程
 
 ### 1. 安装系统依赖
 
 ```bash
-# Ubuntu/Debian
+# Ubuntu/Debian 示例
 sudo apt-get update
-sudo apt-get install libxcb-composite0-dev libx11-dev libdbus-1-dev
+sudo apt-get install -y libxcb-composite0-dev libx11-dev libdbus-1-dev build-essential
 ```
 
-### 2. 配置权限 (免 sudo 运行)
+### 2. 配置硬件访问权限 (免 sudo)
 
-1. **加入 `input` 组**：
+1. **加入输入设备组**：
    ```bash
    sudo usermod -aG input $USER
    ```
-
-2. **配置 `uinput` 权限**：
+2. **配置 uinput 规则**：
    ```bash
-   echo 'KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/99-uinput.rules
+   echo 'KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/99-rust-ime-uinput.rules
+   sudo udevadm control --reload-rules && sudo udevadm trigger
    ```
+3. **重要**：完成上述步骤后，请**注销并重新登录**以使组权限生效。
 
-3. **重新登录** 以使组权限生效。
+### 3. 快速安装脚本
 
-### 3. 编译与运行
-
+您可以直接运行项目根目录下的安装脚本：
 ```bash
-cargo build --release
-./target/release/blind-ime
+chmod +x install.sh
+./install.sh
 ```
 
-## 快捷键说明
+---
+
+## 🛠 使用教程
+
+### 基本操作
 
 | 快捷键 | 功能 | 说明 |
 | :--- | :--- | :--- |
-| **Ctrl + Space** | 切换中/英文模式 | 开启或关闭输入法 |
-| **Ctrl + Alt + P** | 切换预览模式 | 开启/关闭幽灵文字预览 |
-| **Ctrl + Alt + F** | 切换模糊拼音 | 开启平卷舌/前后鼻音自动纠错 |
-| **Ctrl + Alt + S** | 切换配置方案 | 在 Chinese / Japanese 等配置间切换 |
-| **Ctrl + Alt + V** | 切换粘贴模式 | 适配不同终端 (Ctrl+V / Ctrl+Shift+V / Shift+Ins) |
-| **Tab** | 切换候选词 | 选中下一个候选词 |
-| **- / =** | 翻页 | 上一页 / 下一页 |
-| **Shift + [A-Z]** | 语义过滤 | 通过按住 Shift 输入英文首字母过滤候选词 |
+| **Ctrl + Space** | 切换输入法 | 开启/关闭中英文输入 |
+| **Tab** | 切换候选词 | 在备选列表中循环选择 |
+| **- / =** | 翻页 | 上一页 / 下一页候选词 |
+| **Space** | 确认上屏 | 将首选词或选中词输入到当前位置 |
+| **Shift + [A-Z]** | 语义过滤 | 按住 Shift 输入英文首字母，按标签快速筛选汉字 |
 
-## 辅助码使用示例
+### 高级技巧：辅助码
+1. 输入拼音 `li`。
+2. 想要“里” (Inside)，按住 `Shift` 并输入 `i`。
+3. 候选词将立即筛选出对应标签的字。
 
-1. **输入拼音**：输入 `li`。
-2. **触发筛选**：如果你想要“里”，其对应的英文标签包含 **I**nside。
-3. **输入辅助码**：按住 Shift 输入 `I`。
-4. **结果**：候选词列表将只显示英文标签以 "I" 开头的字。
-5. **上屏**：按空格上屏。
+---
 
-## 服务管理
+## 📅 待办事项 (TODO List)
 
-- **安装自动启动**：`./target/release/blind-ime --install`
-- **停止后台进程**：`./target/release/blind-ime --stop`
-- **查看运行日志**：`cat /tmp/blind-ime.log`
+### 1. 词典与定位优化
+- [ ] **极致单字定位**：优化词库权重，实现绝大多数常用单字可通过“拼音 + 单个英文字母”辅助码精准定位。
+- [ ] **声调支持**：引入声调输入，进一步降低拼音输入时的重码率。
+- [ ] **动态词库更新**：支持用户自定义词条的自动学习与权重排序。
+
+### 2. UI/UX 增强
+- [ ] **影子文字高亮**：在未确认上屏前，为行内预览的“影子文字”添加高亮或虚线效果，以区分正式输入的文本。
+- [ ] **拼音直转汉字**：支持在输入框直接输入拼音串并一键批量转换为汉字，无需逐词确认。
+
+### 3. 高度可定制化
+- [ ] **全按键自定义**：支持配置文件内任意修改快捷键映射。
+- [ ] **图形界面配置 (GUI)**：开发配套的图形化设置界面，支持词库管理、按键映射及 UI 样式的可视化调整。
+- [ ] **主题系统**：支持配置候选框的颜色、字体、透明度等外观属性。
+
+---
 
 ## 许可证
-
-MIT
+MIT License
