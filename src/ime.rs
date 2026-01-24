@@ -616,6 +616,21 @@ impl Ime {
                     
                     self.lookup();
 
+                    // Auto-commit if filtering (has uppercase after index 0) and unique result
+                    let has_filter = self.buffer.char_indices().skip(1).any(|(_, c)| c.is_ascii_uppercase());
+                    if has_filter && self.candidates.len() == 1 {
+                        let word = self.candidates[0].clone();
+                        if self.enable_phantom {
+                            let delete_count = self.phantom_text.chars().count();
+                            self.reset();
+                            return Action::DeleteAndEmit { delete: delete_count, insert: word, highlight: false };
+                        } else {
+                            print!("\r\x1B[K");
+                            self.reset();
+                            return Action::Emit(word);
+                        }
+                    }
+
                     if self.enable_phantom {
                         self.update_phantom_text()
                     } else {
