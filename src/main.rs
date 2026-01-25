@@ -215,62 +215,155 @@ fn is_process_running(pid: i32) -> bool {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     
-    // 1. CLI 命令行工具模式 (Conversion Mode)
-    if args.len() > 1 && !args[1].starts_with("-") {
-        let input_pinyin = args[1..].join("");
-        
-        // --- 尝试客户端模式 (连接已运行的 Daemon) ---
-        // 使用简单的 HTTP 请求探测
-        let client = reqwest::blocking::Client::builder()
-            .timeout(std::time::Duration::from_millis(200)) // 极速超时
-            .build();
-        
-        if let Ok(client) = client {
-            // Request server to copy to clipboard (&copy=true)
-            let url = format!("http://127.0.0.1:8765/api/convert?copy=true&text={}", urlencoding::encode(&input_pinyin));
-            if let Ok(resp) = client.get(url).send() {
-                if let Ok(converted) = resp.text() {
-                    // 输出结果 (仅结果)
-                    println!("{}", converted);
-                    
-                    // 剪贴板已由服务端持有，无需客户端操作
-                    if atty::is(atty::Stream::Stdout) {
-                        eprintln!("(已复制到剪贴板)");
+        // 1. CLI 命令行工具模式 (Conversion Mode)
+    
+        if args.len() > 1 && !args[1].starts_with("--") {
+    
+            let mut input_text = String::new();
+    
+            let mut list_limit = None;
+    
+            let mut list_page = None;
+    
+            let mut show_all = false;
+    
+    
+    
+            // 简单的命令行参数解析
+    
+            let mut i = 1;
+    
+            while i < args.len() {
+    
+                let arg = &args[i];
+    
+                if arg == "-a" {
+    
+                    show_all = true;
+    
+                } else if arg.starts_with("-l") {
+    
+                    list_limit = Some(5);
+    
+                    if arg.len() > 2 {
+    
+                        if let Ok(p) = arg[2..].parse::<usize>() {
+    
+                            list_page = Some(p);
+    
+                        }
+    
                     }
-                    return Ok(());
+    
+                } else if !arg.starts_with("-") {
+    
+                    if !input_text.is_empty() { input_text.push(' '); }
+    
+                    input_text.push_str(arg);
+    
                 }
+    
+                i += 1;
+    
             }
-        }
-
-        // --- 降级模式: 自己加载词库 (较慢) ---
-        let config = load_config();
-        let mut tries = HashMap::new();
-        let active_profile_name = &config.input.default_profile;
-        
-        if let Some(profile) = config.files.profiles.iter().find(|p| &p.name == active_profile_name) {
-            let trie = load_dict_for_profile_quiet(&profile.dicts);
-            tries.insert(profile.name.clone(), trie);
-        }
-        
-        let punctuation = load_punctuation_dict_quiet(&config.files.punctuation_file);
-        let (tx, _) = std::sync::mpsc::channel();
-        
-        let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false);
-        let converted = ime.convert_text(&input_pinyin);
-        
-        println!("{}", converted);
-        if let Ok(mut cb) = Clipboard::new() {
-            if let Ok(_) = cb.set_text(converted) {
-                if atty::is(atty::Stream::Stdout) {
-                     eprintln!("(已复制到剪贴板 - 无后台模式)");
+    
+    
+    
+            if input_text.is_empty() { return Ok(()); }
+    
+    
+    
+            // --- 尝试客户端模式 (连接已运行的 Daemon) ---
+    
+            let client = reqwest::blocking::Client::builder()
+    
+                .timeout(std::time::Duration::from_millis(300))
+    
+                .build();
+    
+            
+    
+            if let Ok(client) = client {
+    
+                let mut url = format!("http://127.0.0.1:8765/api/convert?copy=true&text={}", urlencoding::encode(&input_text));
+    
+                if show_all { url.push_str("&all=true"); }
+    
+                if let Some(l) = list_limit { url.push_str(&format!("&list={}", l)); }
+    
+                if let Some(p) = list_page { url.push_str(&format!("&page={}", p)); }
+    
+    
+    
+                if let Ok(resp) = client.get(url).send() {
+    
+                    if let Ok(converted) = resp.text() {
+    
+                        if !converted.is_empty() {
+    
+                            println!("{}", converted);
+    
+                        }
+    
+                        return Ok(());
+    
+                    }
+    
                 }
-                // 关键：在无后台模式下，必须等待一段时间，否则进程退出会导致剪贴板内容丢失
+    
+            }
+    
+    
+    
+            // --- 降级模式: 自己加载词库 (较慢) ---
+    
+            // (保持简单转换，暂不支持高级 CLI flag 在降级模式下)
+    
+            if input_text.starts_with('/') {
+    
+                println!("{}", &input_text[1..]);
+    
+                return Ok(());
+    
+            }
+    
+            let config = load_config();
+    
+            let mut tries = HashMap::new();
+    
+            let active_profile_name = &config.input.default_profile;
+    
+            if let Some(profile) = config.files.profiles.iter().find(|p| &p.name == active_profile_name) {
+    
+                let trie = load_dict_for_profile_quiet(&profile.dicts);
+    
+                tries.insert(profile.name.clone(), trie);
+    
+            }
+    
+            let punctuation = load_punctuation_dict_quiet(&config.files.punctuation_file);
+    
+            let (tx, _) = std::sync::mpsc::channel();
+    
+            let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false);
+    
+            let converted = ime.convert_text(&input_text);
+    
+            println!("{}", converted);
+    
+            if let Ok(mut cb) = Clipboard::new() {
+    
+                let _ = cb.set_text(converted);
+    
                 std::thread::sleep(std::time::Duration::from_millis(500));
+    
             }
+    
+            return Ok(());
+    
         }
-        
-        return Ok(());
-    }
+    
+    
 
     if args.len() > 1 {
         match args[1].as_str() {
