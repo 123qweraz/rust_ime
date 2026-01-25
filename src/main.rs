@@ -215,6 +215,72 @@ fn is_process_running(pid: i32) -> bool {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     
+    // 1. CLI 命令行工具模式 (Conversion Mode)
+    // 如果有参数，且第一个参数不是以 -- 开头 (flags)，则认为是拼音输入
+    if args.len() > 1 && !args[1].starts_with("-") {
+        let input_pinyin = args[1..].join(""); // 支持 rust-ime ni hao 这种带空格的输入
+        
+        // 快速加载配置和词库 (只加载必要的)
+        let config = load_config();
+        
+        // 这里的逻辑稍微简化，只加载默认或配置指定的词库
+        // 为了速度，我们可以只加载 active_profile
+        let mut tries = HashMap::new();
+        let active_profile_name = &config.input.default_profile;
+        
+        // 找到 active profile
+        if let Some(profile) = config.files.profiles.iter().find(|p| &p.name == active_profile_name) {
+            let trie = load_dict_for_profile(&profile.dicts);
+            tries.insert(profile.name.clone(), trie);
+        } else {
+             // Fallback: load first available or warn
+             if let Some(first) = config.files.profiles.first() {
+                 let trie = load_dict_for_profile(&first.dicts);
+                 tries.insert(first.name.clone(), trie);
+             }
+        }
+        
+        let punctuation = load_punctuation_dict(&config.files.punctuation_file);
+        
+        // 我们不需要 notification_tx，给一个 dummy channel
+        let (tx, _) = std::sync::mpsc::channel();
+        
+        let ime = Ime::new(
+            tries, 
+            active_profile_name.clone(), 
+            punctuation, 
+            HashMap::new(), // CLI模式下暂不需要英文联想
+            tx, 
+            config.input.enable_fuzzy_pinyin,
+            "none",
+            false
+        );
+        
+        let converted = ime.convert_text(&input_pinyin);
+        
+        // 输出到 stdout (方便管道使用)
+        println!("{}", converted);
+        
+        // 尝试复制到剪贴板
+        match Clipboard::new() {
+            Ok(mut cb) => {
+                if let Err(e) = cb.set_text(converted.clone()) {
+                    eprintln!("(Clipboard error: {})", e);
+                } else {
+                    // 如果不是管道输出（即在终端直接运行），提示一下已复制
+                    if atty::is(atty::Stream::Stdout) {
+                        eprintln!("(已复制到剪贴板)");
+                    }
+                }
+            },
+            Err(_) => {
+                // 可能是纯服务器环境，忽略剪贴板错误
+            }
+        }
+        
+        return Ok(());
+    }
+
     if args.len() > 1 {
         match args[1].as_str() {
             "--install" => {
@@ -476,7 +542,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let mut fuzzy_toggle_keys;
     let mut tty_toggle_keys;
     let mut backspace_toggle_keys;
-    let mut convert_pinyin_keys;
     let mut notification_toggle_keys;
 
     // 初次加载快捷键
@@ -492,7 +557,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         fuzzy_toggle_keys = config::parse_key(&hotkeys.toggle_fuzzy_pinyin.key);
         tty_toggle_keys = config::parse_key(&hotkeys.toggle_tty_mode.key);
         backspace_toggle_keys = config::parse_key(&hotkeys.toggle_backspace_type.key);
-        convert_pinyin_keys = config::parse_key(&hotkeys.convert_selection.key);
         notification_toggle_keys = config::parse_key(&hotkeys.toggle_notifications.key);
     }
 
@@ -569,7 +633,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
             fuzzy_toggle_keys = config::parse_key(&hotkeys.toggle_fuzzy_pinyin.key);
             tty_toggle_keys = config::parse_key(&hotkeys.toggle_tty_mode.key);
             backspace_toggle_keys = config::parse_key(&hotkeys.toggle_backspace_type.key);
-            convert_pinyin_keys = config::parse_key(&hotkeys.convert_selection.key);
             notification_toggle_keys = config::parse_key(&hotkeys.toggle_notifications.key);
         }
 
@@ -655,20 +718,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     if check_shortcut(key, &backspace_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
                         let msg = vkbd.toggle_backspace_char();
                         let _ = notify_tx.send(NotifyEvent::Message(msg));
-                        continue;
-                    }
-                    if check_shortcut(key, &convert_pinyin_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
-                        // 1. Copy selection
-                        vkbd.copy_selection();
-                        // Wait for clipboard to update
-                        std::thread::sleep(std::time::Duration::from_millis(100));
-                        // 2. Read clipboard
-                        if let Some(text) = vkbd.get_clipboard_text() {
-                            // 3. Convert
-                            let converted = ime.convert_text(&text);
-                            // 4. Paste back (replacing selection)
-                            vkbd.send_text(&converted);
-                        }
                         continue;
                     }
 

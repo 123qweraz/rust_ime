@@ -20,3 +20,4 @@ tokio = { version = "1", features = ["full"] }
 rust-embed = "8.2"
 tower-http = { version = "0.5", features = ["full"] }
 mime_guess = "2.0"
+atty = "0.2"
