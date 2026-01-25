@@ -660,6 +660,8 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     if check_shortcut(key, &convert_pinyin_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
                         // 1. Copy selection
                         vkbd.copy_selection();
+                        // Wait for clipboard to update
+                        std::thread::sleep(std::time::Duration::from_millis(100));
                         // 2. Read clipboard
                         if let Some(text) = vkbd.get_clipboard_text() {
                             // 3. Convert
