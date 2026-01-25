@@ -432,6 +432,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 let _ = stop_daemon(); // 尝试停止，忽略错误
                 // 继续向下执行进入后台模式
             }
+            "--config" | "-c" => {
+                let url = "http://localhost:8765";
+                println!("正在打开浏览器配置页面: {}", url);
+                if let Err(e) = open::that(url) {
+                    eprintln!("无法打开浏览器: {}", e);
+                }
+                return Ok(());
+            }
             "--reset-config" => {
                 let config = Config::default_config();
                 if let Err(e) = save_config(&config) {
@@ -453,6 +461,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 println!("  --install       安装开机自启 (添加到 ~/.config/autostart)");
                 println!("  --stop          停止正在运行的后台进程");
                 println!("  --restart       重启后台进程");
+                println!("  --config, -c    打开浏览器配置中心/词典编辑器");
                 println!("  --reset-config  重置配置文件为默认设置");
                 return Ok(())
             }

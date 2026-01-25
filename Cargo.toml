@@ -23,3 +23,4 @@ mime_guess = "2.0"
 atty = "0.2"
 reqwest = { version = "0.12", features = ["blocking"] }
 urlencoding = "2.1"
+open = "5.1"
