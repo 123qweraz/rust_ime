@@ -2,83 +2,84 @@
 
 一个基于 Rust 开发的 Linux 系统级输入法框架。通过监听底层键盘事件 (`/dev/input/event`) 并利用虚拟键盘 (uinput) 注入字符，实现与显示协议（Wayland/X11/TTY）无关的全局输入能力。
 
-## 🚀 特点
+## 🚀 核心特性
 
-- **底层驱动级监听**：在内核输入层拦截按键，不依赖特定桌面环境或显示协议，支持在 Wayland、X11 甚至纯终端 (TTY) 中完美运行。
-- **幽灵文字 (Phantom Text)**：独创的行内实时预览模式，首选词直接显示在当前光标处，提供零延迟的沉浸式输入体验。
-- **语义辅助码 (Semantic Auxiliary)**：通过汉字的英文标签进行快速过滤（例如输入 `li` 后按 `Shift+I` 即可定位到“里” Inside），大幅降低重码率。
-- **批量拼音转换**：选中已输入的拼音串，一键转换为汉字，适合长句输入后的快速修正。
-- **系统托盘集成**：实时显示当前输入模式与方案，支持菜单快速切换。
-- **极速粘贴注入**：利用系统剪贴板实现字符上屏，彻底解决 Wayland 下模拟 Unicode 按键序列产生的卡顿。
+- **底层监听**：在内核输入层拦截按键，支持在 Wayland、X11 甚至纯终端 (TTY) 中完美运行。
+- **图形化配置中心**：内置 Web 服务器，支持通过浏览器远程或本地配置所有参数。
+- **秒开 CLI 转换**：通过命令 `r <拼音>` 瞬间完成转换并自动复制到剪贴板。
+- **三态预览模式**：支持“无、拼音、汉字”三种行内预览状态，首选词直接显示在光标处。
+- **语义辅助码**：通过汉字的英文标签快速过滤（如 `li` 后按 `Shift+I` 匹配“里” Inside）。
+- **极速粘贴注入**：由后台服务持有剪贴板，彻底解决 Linux 进程退出导致剪贴板丢失的问题。
 
 ---
 
-## 📦 安装教程
+## 📦 安装与配置
 
-### 1. 安装系统依赖
+### 1. 硬件访问权限 (免 sudo)
 
 ```bash
-# Ubuntu/Debian 示例
-sudo apt-get update
-sudo apt-get install -y libxcb-composite0-dev libx11-dev libdbus-1-dev pkg-config build-essential
+sudo usermod -aG input,uinput $USER
+# 配置 uinput 规则
+echo 'KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/99-rust-ime-uinput.rules
+sudo udevadm control --reload-rules && sudo udevadm trigger
 ```
+*注意：完成后请重新登录。*
 
-### 2. 配置硬件访问权限 (免 sudo)
+### 2. 设置短命令 `r`
 
-1. **加入输入设备组**：
-   ```bash
-   sudo usermod -aG input $USER
-   sudo usermod -aG uinput $USER
-   ```
-2. **配置 uinput 规则**：
-   ```bash
-   echo 'KERNEL=="uinput", GROUP="input", MODE="0660", OPTIONS+="static_node=uinput"' | sudo tee /etc/udev/rules.d/99-rust-ime-uinput.rules
-   sudo udevadm control --reload-rules && sudo udevadm trigger
-   ```
-3. **重要**：完成上述步骤后，请**注销并重新登录**（或注销会话）以使组权限生效。
-
-### 3. 构建与运行
-
+将以下内容添加到您的 `~/.bashrc` 或 `~/.zshrc`：
 ```bash
-cargo build --release
-./target/release/rust-ime --help
+alias r='/path/to/your/rust-ime'
 ```
 
 ---
 
-## 🛠 使用教程
+## 🛠 命令行技巧 (CLI)
 
-### 快捷键说明 (默认配置)
+`rust-ime` 不仅仅是后台输入法，它还是一个强大的命令行工具。
+
+| 命令示例 | 功能说明 |
+| :--- | :--- |
+| `r nihao` | 转换“你好”并**自动复制到剪贴板** |
+| `r ni1` | 直接输出第 1 个候选词（你） |
+| `r ni2` | 直接输出第 2 个候选词（泥） |
+| `r xi an` | **空格分词**：输出“西安”（自动剔除中间空格） |
+| `r ni -l` | **列表模式**：显示前 5 个候选词（不复制） |
+| `r ni -a` | **全量模式**：显示该拼音下的所有候选词 |
+| `r /linux` | **逃逸模式**：原样输出 linux（方便快速复制英文） |
+| `r ni /dui` | **混合转换**：输出“你dui” |
+
+---
+
+## 🌐 网页配置中心
+
+程序启动后，访问以下地址即可进入图形化配置界面：
+👉 **`http://localhost:8765`**
+
+- **实时生效**：在网页修改快捷键、开启模糊音或切换预览模式，点击保存后输入法无需重启即可应用。
+- **外观定制**：开关系统通知、调节预览状态。
+
+---
+
+## ⌨️ 快捷键说明 (默认)
 
 | 快捷键 | 功能 | 说明 |
 | :--- | :--- | :--- |
-| **CapsLock** / **Ctrl+Space** | 切换输入法 | 开启/关闭中英文输入模式 |
-| **Ctrl + R** | 拼音转汉字 | **[新]** 将选中的拼音串（如 `nihao`）转换为汉字 |
-| **Ctrl + Alt + S** | 切换方案 | 在中文、日语等不同输入 Profile 间切换 |
-| **Tab** | 切换候选词 | 在备选列表中循环选择 |
-| **- / =** | 翻页 | 上一页 / 下一页候选词 |
-| **Space** | 确认上屏 | 将首选词或选中词输入到当前位置 |
-| **Enter** | 原始输入 | 直接输入当前缓存的拼音字符串 |
-| **Esc** | 取消输入 | 清空当前输入缓存 |
-| **Shift + [A-Z]** | 语义过滤 | 在输入拼音后，按住 Shift 输入英文首字母进行筛选 |
-| **Ctrl + Alt + V** | 切换粘贴模式 | 循环切换：Ctrl+V, Ctrl+Shift+V, Shift+Insert 等 |
-| **Ctrl + Alt + T** | TTY 模式 | 切换直接字节注入模式（适合纯终端） |
-
-### 辅助码示例
-1. 输入拼音 `li`。
-2. 想要“里” (Inside)，按住 `Shift` 并输入 `i`。
-3. 候选词将立即筛选出带有 `inside` 标签的汉字。
+| **CapsLock** | 切换输入法 | 开启/关闭中英文输入模式 |
+| **Ctrl + Alt + P** | 切换预览模式 | 循环切换：无 -> 拼音 -> 汉字预览 |
+| **Ctrl + Alt + N** | 切换通知 | 开启/关闭系统右上角的候选词弹窗 |
+| **Ctrl + Alt + F** | 模糊拼音 | 实时开启/关闭 z=zh, c=ch 等模糊音 |
+| **Ctrl + Alt + S** | 切换方案 | 在中文、日语等词库方案间切换 |
+| **Shift + [A-Z]** | 语义过滤 | 输入拼音后，按住 Shift 输入英文首字母筛选 |
 
 ---
 
-## 🖥 系统托盘
+## 🚀 管理命令
 
-程序启动后会在系统托盘显示图标：
-- **图标变化**：区分中英文模式（基于系统 `keyboard` 和 `input-keyboard` 图标）。
-- **右键菜单**：
-    - 快速查看/切换当前模式。
-    - 查看/切换当前输入方案。
-    - 退出程序。
+- `rust-ime`：启动后台服务（守护进程模式）。
+- `rust-ime --restart`：**[推荐]** 自动停止旧进程并启动新进程。
+- `rust-ime --stop`：停止正在运行的后台服务。
+- `rust-ime --foreground`：前台运行（调试用，可看实时日志）。
 
 ---
 
