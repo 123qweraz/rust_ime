@@ -379,7 +379,16 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化托盘事件通道
     let (tray_event_tx, tray_event_rx) = std::sync::mpsc::channel();
     
-    let mut ime = Ime::new(tries, active_profile.clone(), punctuation, word_en_map, notify_tx.clone(), config.enable_fuzzy_pinyin);
+    let mut ime = Ime::new(
+        tries, 
+        active_profile.clone(), 
+        punctuation, 
+        word_en_map, 
+        notify_tx.clone(), 
+        config.enable_fuzzy_pinyin,
+        &config.phantom_mode,
+        config.enable_notifications
+    );
 
     // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
     let tray_handle = tray::start_tray(ime.chinese_enabled, active_profile, tray_event_tx);
@@ -447,12 +456,13 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let ime_toggle_alt_keys = config::parse_key(&shortcuts.ime_toggle_alt.key);
     let caps_toggle_keys = config::parse_key(&shortcuts.caps_lock_toggle.key);
     let paste_cycle_keys = config::parse_key(&shortcuts.paste_cycle.key);
-    let phantom_toggle_keys = config::parse_key(&shortcuts.phantom_toggle.key);
+    let phantom_cycle_keys = config::parse_key(&shortcuts.phantom_cycle.key);
     let profile_next_keys = config::parse_key(&shortcuts.profile_next.key);
     let fuzzy_toggle_keys = config::parse_key(&shortcuts.fuzzy_toggle.key);
     let tty_toggle_keys = config::parse_key(&shortcuts.tty_toggle.key);
     let backspace_toggle_keys = config::parse_key(&shortcuts.backspace_toggle.key);
     let convert_pinyin_keys = config::parse_key(&shortcuts.convert_pinyin.key);
+    let notification_toggle_keys = config::parse_key(&shortcuts.notification_toggle.key);
 
     println!("[IME] Toggle: {}", shortcuts.ime_toggle.key);
     println!("[IME] CapsLock Lock: {}", shortcuts.caps_lock_toggle.key);
@@ -558,8 +568,12 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                         let _ = notify_tx.send(NotifyEvent::Message(format!("粘贴: {}", msg)));
                         continue;
                     }
-                    if check_shortcut(key, &phantom_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
-                        ime.toggle_phantom();
+                    if check_shortcut(key, &phantom_cycle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        ime.cycle_phantom();
+                        continue;
+                    }
+                    if check_shortcut(key, &notification_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
+                        ime.toggle_notifications();
                         continue;
                     }
                     if check_shortcut(key, &profile_next_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {

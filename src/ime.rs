@@ -26,6 +26,13 @@ pub enum NotifyEvent {
 
 use crate::trie::Trie;
 
+#[derive(Debug, Clone, PartialEq)]
+pub enum PhantomMode {
+    None,
+    Pinyin,
+    Hanzi,
+}
+
 pub struct Ime {
     pub state: ImeState,
     pub buffer: String,
@@ -39,7 +46,8 @@ pub struct Ime {
     pub page: usize,
     pub chinese_enabled: bool,
     pub notification_tx: Sender<NotifyEvent>,
-    pub enable_phantom: bool,
+    pub phantom_mode: PhantomMode,
+    pub enable_notifications: bool,
     pub phantom_text: String,
     pub is_highlighted: bool,
     pub word_en_map: HashMap<String, Vec<String>>,
@@ -47,7 +55,13 @@ pub struct Ime {
 }
 
 impl Ime {
-    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool) -> Self {
+    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool) -> Self {
+        let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
+            "pinyin" => PhantomMode::Pinyin,
+            "hanzi" => PhantomMode::Hanzi,
+            _ => PhantomMode::None,
+        };
+        
         Self {
             state: ImeState::Direct,
             buffer: String::new(),
@@ -59,7 +73,8 @@ impl Ime {
             page: 0,
             chinese_enabled: false,
             notification_tx,
-            enable_phantom: false,
+            phantom_mode,
+            enable_notifications,
             phantom_text: String::new(),
             is_highlighted: false,
             word_en_map,
@@ -88,19 +103,30 @@ impl Ime {
         self.lookup(); 
     }
 
-    pub fn toggle_phantom(&mut self) {
-        self.enable_phantom = !self.enable_phantom;
-        if self.enable_phantom {
-            println!("\n[IME] 幽灵文字预览: 开");
-            let _ = self.notification_tx.send(NotifyEvent::Message("预览: 开".to_string()));
-        } else {
-            println!("\n[IME] 幽灵文字预览: 关");
-            let _ = self.notification_tx.send(NotifyEvent::Message("预览: 关".to_string()));
-            // 如果关闭时还有残留文字，应该清理掉
-            // 但这是一个设置切换，通常不在输入中途切换。为了安全，这里不做操作，
-            // 或者用户如果正在输入中切换，可能会有残留。
-            // 简单起见，假设用户只在空闲时切换。
-        }
+    pub fn cycle_phantom(&mut self) {
+        self.phantom_mode = match self.phantom_mode {
+            PhantomMode::None => PhantomMode::Pinyin,
+            PhantomMode::Pinyin => PhantomMode::Hanzi,
+            PhantomMode::Hanzi => PhantomMode::None,
+        };
+
+        let msg = match self.phantom_mode {
+            PhantomMode::None => "预览: 关",
+            PhantomMode::Pinyin => "预览: 拼音",
+            PhantomMode::Hanzi => "预览: 汉字",
+        };
+        
+        println!("\n[IME] {}", msg);
+        let _ = self.notification_tx.send(NotifyEvent::Message(msg.to_string()));
+    }
+
+    pub fn toggle_notifications(&mut self) {
+        self.enable_notifications = !self.enable_notifications;
+        let status = if self.enable_notifications { "开" } else { "关" };
+        let msg = format!("通知: {}", status);
+        println!("\n[IME] {}", msg);
+        // Force send this message even if notifications are nominally "off" so user knows they turned it off
+        let _ = self.notification_tx.send(NotifyEvent::Message(msg));
     }
     
     pub fn switch_profile(&mut self, profile_name: &str) {
@@ -197,15 +223,23 @@ impl Ime {
     }
 
     fn update_phantom_text(&mut self) -> Action {
-        if !self.enable_phantom {
+        if self.phantom_mode == PhantomMode::None {
             return Action::Consume;
         }
 
-        let new_text = if !self.candidates.is_empty() {
-            format!("[{}]", self.candidates[self.selected])
-        } else {
-            format!("[{}]", self.buffer) // fallback to pinyin if no match
+        let inner_text = match self.phantom_mode {
+            PhantomMode::Pinyin => self.buffer.clone(),
+            PhantomMode::Hanzi => {
+                if !self.candidates.is_empty() {
+                    self.candidates[self.selected].clone()
+                } else {
+                    self.buffer.clone() // fallback to pinyin if no match
+                }
+            },
+            PhantomMode::None => unreachable!(),
         };
+
+        let new_text = format!("[{}]", inner_text);
 
         let mut delete_count = self.phantom_text.chars().count();
         if self.is_highlighted && delete_count > 0 {
@@ -297,10 +331,15 @@ impl Ime {
         self.page = 0;
         self.update_state();
         
-        if !self.enable_phantom {
-            self.print_preview();
+        // Always print preview to log/stdout if in terminal mode logic, but `print_preview` does direct console output.
+        // We only skip notification if user disabled it.
+        // We do NOT disable notification just because phantom mode is on, per user request.
+        if self.enable_notifications {
             self.notify_preview();
         }
+        
+        // Still print to stdout for debugging/legacy terminal usage
+        self.print_preview();
     }
 
     fn expand_fuzzy_pinyin(&self, pinyin: &str) -> Vec<String> {
@@ -461,7 +500,7 @@ impl Ime {
             self.state = ImeState::Composing;
             self.lookup();
             
-            if self.enable_phantom {
+            if self.phantom_mode != PhantomMode::None {
                 self.update_phantom_text()
             } else {
                 Action::Consume
@@ -489,14 +528,14 @@ impl Ime {
                         delete_count = 1;
                     }
                     self.reset();
-                    if self.enable_phantom && delete_count > 0 {
+                    if self.phantom_mode != PhantomMode::None && delete_count > 0 {
                          Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
                     } else {
                          Action::Consume
                     }
                 } else {
                     self.lookup();
-                    if self.enable_phantom {
+                    if self.phantom_mode != PhantomMode::None {
                         self.update_phantom_text()
                     } else {
                         Action::Consume
@@ -511,7 +550,7 @@ impl Ime {
                     // Update page if selected moves out of current page
                     self.page = self.selected / 5;
                     
-                    if self.enable_phantom {
+                    if self.phantom_mode != PhantomMode::None {
                          self.update_phantom_text()
                     } else {
                         self.print_preview();
@@ -527,7 +566,7 @@ impl Ime {
                  if self.page > 0 {
                      self.page -= 1;
                      self.selected = self.page * 5;
-                     if self.enable_phantom {
+                     if self.phantom_mode != PhantomMode::None {
                          return self.update_phantom_text();
                      } else {
                          self.print_preview();
@@ -541,7 +580,7 @@ impl Ime {
                 if (self.page + 1) * 5 < self.candidates.len() {
                     self.page += 1;
                     self.selected = self.page * 5;
-                    if self.enable_phantom {
+                    if self.phantom_mode != PhantomMode::None {
                          return self.update_phantom_text();
                     } else {
                          self.print_preview();
@@ -555,7 +594,7 @@ impl Ime {
                 if let Some(word) = self.candidates.get(self.selected) {
                     let target_word = word.clone();
                     
-                    if self.enable_phantom {
+                    if self.phantom_mode != PhantomMode::None {
                         let mut delete_count = self.phantom_text.chars().count();
                         if self.is_highlighted && delete_count > 0 {
                             delete_count = 1;
@@ -570,7 +609,7 @@ impl Ime {
                     }
                 } else if !self.buffer.is_empty() {
                     let out = self.buffer.clone();
-                    if self.enable_phantom {
+                    if self.phantom_mode != PhantomMode::None {
                          let mut delete_count = self.phantom_text.chars().count();
                          if self.is_highlighted && delete_count > 0 {
                              delete_count = 1;
@@ -589,7 +628,7 @@ impl Ime {
 
             Key::KEY_ENTER => {
                 let out = self.buffer.clone();
-                if self.enable_phantom {
+                if self.phantom_mode != PhantomMode::None {
                      let mut delete_count = self.phantom_text.chars().count();
                      if self.is_highlighted && delete_count > 0 {
                          delete_count = 1;
@@ -604,7 +643,7 @@ impl Ime {
             }
 
             Key::KEY_ESC => {
-                if self.enable_phantom {
+                if self.phantom_mode != PhantomMode::None {
                     let mut delete_count = self.phantom_text.chars().count();
                     if self.is_highlighted && delete_count > 0 {
                         delete_count = 1;
@@ -635,7 +674,7 @@ impl Ime {
                             self.buffer.pop();
                             self.buffer.push(toned);
                             self.lookup();
-                            if self.enable_phantom {
+                            if self.phantom_mode != PhantomMode::None {
                                 return self.update_phantom_text();
                             } else {
                                 return Action::Consume;
@@ -650,7 +689,7 @@ impl Ime {
                     if let Some(word) = self.candidates.get(actual_idx) {
                         let out = word.clone();
                         
-                        if self.enable_phantom {
+                        if self.phantom_mode != PhantomMode::None {
                             let mut delete_count = self.phantom_text.chars().count();
                             if self.is_highlighted && delete_count > 0 {
                                 delete_count = 1;
@@ -681,7 +720,7 @@ impl Ime {
                     let has_filter = self.buffer.char_indices().skip(1).any(|(_, c)| c.is_ascii_uppercase());
                     if has_filter && self.candidates.len() == 1 {
                         let word = self.candidates[0].clone();
-                        if self.enable_phantom {
+                        if self.phantom_mode != PhantomMode::None {
                             let mut delete_count = self.phantom_text.chars().count();
                             if self.is_highlighted && delete_count > 0 {
                                 delete_count = 1;
@@ -695,7 +734,7 @@ impl Ime {
                         }
                     }
 
-                    if self.enable_phantom {
+                    if self.phantom_mode != PhantomMode::None {
                         self.update_phantom_text()
                     } else {
                         Action::Consume

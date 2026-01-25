@@ -53,8 +53,8 @@ pub struct Shortcuts {
     pub caps_lock_toggle: Shortcut,
     #[serde(default = "default_paste_cycle")]
     pub paste_cycle: Shortcut,
-    #[serde(default = "default_phantom_toggle")]
-    pub phantom_toggle: Shortcut,
+    #[serde(default = "default_phantom_cycle")]
+    pub phantom_cycle: Shortcut,
     #[serde(default = "default_profile_next")]
     pub profile_next: Shortcut,
     #[serde(default = "default_fuzzy_toggle")]
@@ -65,6 +65,8 @@ pub struct Shortcuts {
     pub backspace_toggle: Shortcut,
     #[serde(default = "default_convert_pinyin")]
     pub convert_pinyin: Shortcut,
+    #[serde(default = "default_notification_toggle")]
+    pub notification_toggle: Shortcut,
 }
 
 impl Default for Shortcuts {
@@ -74,12 +76,13 @@ impl Default for Shortcuts {
             ime_toggle_alt: default_ime_toggle_alt(),
             caps_lock_toggle: default_caps_lock_toggle(),
             paste_cycle: default_paste_cycle(),
-            phantom_toggle: default_phantom_toggle(),
+            phantom_cycle: default_phantom_cycle(),
             profile_next: default_profile_next(),
             fuzzy_toggle: default_fuzzy_toggle(),
             tty_toggle: default_tty_toggle(),
             backspace_toggle: default_backspace_toggle(),
             convert_pinyin: default_convert_pinyin(),
+            notification_toggle: default_notification_toggle(),
         }
     }
 }
@@ -88,12 +91,13 @@ fn default_ime_toggle() -> Shortcut { Shortcut::new("caps_lock", "切换中英�
 fn default_ime_toggle_alt() -> Shortcut { Shortcut::new("ctrl+space", "切换中英文输入模式 (备选)") }
 fn default_caps_lock_toggle() -> Shortcut { Shortcut::new("caps_lock+tab", "触发物理大写锁定 (CapsLock)") }
 fn default_paste_cycle() -> Shortcut { Shortcut::new("ctrl+alt+v", "循环切换粘贴模式 (兼容不同终端)") }
-fn default_phantom_toggle() -> Shortcut { Shortcut::new("ctrl+alt+p", "开启/关闭幻影模式 (在输入框显示拼音)") }
+fn default_phantom_cycle() -> Shortcut { Shortcut::new("ctrl+alt+p", "循环切换幻影模式 (无/拼音/汉字)") }
 fn default_profile_next() -> Shortcut { Shortcut::new("ctrl+alt+s", "切换到下一个输入方案 (如中/日切换)") }
 fn default_fuzzy_toggle() -> Shortcut { Shortcut::new("ctrl+alt+f", "实时开启/关闭模糊拼音") }
 fn default_tty_toggle() -> Shortcut { Shortcut::new("ctrl+alt+t", "切换 TTY 模式 (直接注入字节，适合终端)") }
 fn default_backspace_toggle() -> Shortcut { Shortcut::new("ctrl+alt+b", "切换退格键处理方式") }
 fn default_convert_pinyin() -> Shortcut { Shortcut::new("ctrl+r", "将选中的拼音转换为汉字") }
+fn default_notification_toggle() -> Shortcut { Shortcut::new("ctrl+alt+n", "开启/关闭候选词通知") }
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Config {
@@ -113,6 +117,10 @@ pub struct Config {
     pub paste_shortcut: Shortcut,
     #[serde(default)]
     pub enable_fuzzy_pinyin: bool,
+    #[serde(default = "default_enable_notifications")]
+    pub enable_notifications: bool,
+    #[serde(default = "default_phantom_mode")]
+    pub phantom_mode: String,
     #[serde(default)]
     pub shortcuts: Shortcuts,
 }
@@ -132,6 +140,8 @@ fn default_active_profile() -> String { "Chinese".to_string() }
 fn default_punctuation_path() -> String { "dicts/chinese/punctuation.json".to_string() }
 fn default_char_en_path() -> String { "dicts/chinese/character".to_string() }
 fn default_paste_shortcut() -> Shortcut { Shortcut::new("ctrl_v", "自动粘贴时发送的按键: ctrl_v, ctrl_shift_v, shift_insert") }
+fn default_enable_notifications() -> bool { true }
+fn default_phantom_mode() -> String { "none".to_string() }
 
 impl Config {
     pub fn default_config() -> Self {
@@ -144,6 +154,8 @@ impl Config {
             device_path: None,
             paste_shortcut: default_paste_shortcut(),
             enable_fuzzy_pinyin: false,
+            enable_notifications: default_enable_notifications(),
+            phantom_mode: default_phantom_mode(),
             shortcuts: Shortcuts::default(),
         }
     }
