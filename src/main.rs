@@ -765,6 +765,9 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
 
+    use nix::poll::{PollFd, PollFlags};
+    use std::os::unix::io::{AsRawFd, BorrowedFd};
+
     while !should_exit.load(Ordering::Relaxed) {
         // 定期检查配置更新 (每 2 秒)
         if last_config_check.elapsed().as_secs() >= 2 {
@@ -795,19 +798,39 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
 
         // 处理托盘事件
-        while let Ok(event) = tray_event_rx.try_recv() {
-            match event {
-                tray::TrayEvent::ToggleIme => {
-                    ime.toggle();
-                    if let Some(ref h) = tray_handle { h.update(|t| t.chinese_enabled = ime.chinese_enabled); }
-                }
-                tray::TrayEvent::NextProfile => {
-                    ime.next_profile();
-                    if let Some(ref h) = tray_handle { h.update(|t| t.active_profile = ime.current_profile.clone()); }
-                }
-                tray::TrayEvent::Exit => {
-                    should_exit.store(true, Ordering::Relaxed);
-                }
+                        while let Ok(event) = tray_event_rx.try_recv() {
+                            match event {
+                                tray::TrayEvent::ToggleIme => {
+                                    ime.toggle();
+                                    if let Some(ref h) = tray_handle { h.update(|t| t.chinese_enabled = ime.chinese_enabled); }
+                                }
+                                tray::TrayEvent::NextProfile => {
+                                    ime.next_profile();
+                                    if let Some(ref h) = tray_handle { h.update(|t| t.active_profile = ime.current_profile.clone()); }
+                                }
+                                tray::TrayEvent::OpenConfig => {
+                                    let _ = open::that("http://localhost:8765");
+                                }
+                                tray::TrayEvent::Exit => {
+                                    should_exit.store(true, Ordering::Relaxed);
+                                }
+                            }
+                        }
+        if should_exit.load(Ordering::Relaxed) { break; }
+
+        // 使用 poll 进行带超时的等待 (200ms)
+        // 这样可以确保即使没有按键，循环也能继续运行来处理托盘事件和定期任务
+        let raw_fd = dev.as_raw_fd();
+        let borrowed_fd = unsafe { BorrowedFd::borrow_raw(raw_fd) };
+        let mut poll_fds = [PollFd::new(&borrowed_fd, PollFlags::POLLIN)];
+        
+        match nix::poll::poll(&mut poll_fds, 200) {
+            Ok(n) if n > 0 => {
+                // 有按键事件，去 fetch
+            }
+            _ => {
+                // 超时或无事件，回到循环开头检查退出标记和托盘
+                continue;
             }
         }
 
@@ -815,12 +838,15 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
             Ok(iterator) => iterator.collect(),
             Err(e) => {
                 if e.kind() == io::ErrorKind::Interrupted {
+                    if should_exit.load(Ordering::Relaxed) { break; }
                     continue;
                 }
                 eprintln!("Error fetching events: {}", e);
                 break;
             }
         };
+
+        if should_exit.load(Ordering::Relaxed) { break; }
 
         for ev in events {
             if let InputEventKind::Key(key) = ev.kind() {

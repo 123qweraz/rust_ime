@@ -6,6 +6,7 @@ use std::sync::mpsc::Sender;
 pub enum TrayEvent {
     ToggleIme,
     NextProfile,
+    OpenConfig,
     Exit,
 }
 
@@ -49,6 +50,14 @@ impl Tray for ImeTray {
                 label: format!("Profile: {}", self.active_profile),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::NextProfile);
+                }),
+                ..Default::default()
+            }.into(),
+            MenuItem::Separator,
+            StandardItem {
+                label: "Config Center (r -c)".to_string(),
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::OpenConfig);
                 }),
                 ..Default::default()
             }.into(),
