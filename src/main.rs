@@ -984,7 +984,7 @@ pub fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn load_dict_for_profile(paths: &[String]) -> Trie {
+pub fn load_dict_for_profile(paths: &[String]) -> Trie {
     let mut trie = Trie::new();
     
     println!("[Config] Loading dictionary profile with {} paths...", paths.len());
