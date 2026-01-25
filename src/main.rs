@@ -311,14 +311,14 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
     let config = load_config();
 
-    let device_path = if let Some(path) = &config.device_path {
+    let device_path = if let Some(path) = &config.files.device_path {
         path.clone()
     } else {
         match find_keyboard() {
             Ok(p) => p,
             Err(e) => {
                 eprintln!("Fatal: No keyboard device found: {}", e);
-                eprintln!("Please specify 'device_path' in config.json (e.g., /dev/input/event3)");
+                eprintln!("Please specify 'files.device_path' in config.json");
                 return Err(e);
             }
         }
@@ -336,7 +336,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let mut vkbd = Vkbd::new(&dev)?;
     
     // Set paste mode based on config
-    let mode = match config.paste_shortcut.key.as_str() {
+    let mode = match config.input.paste_method.as_str() {
         "ctrl_shift_v" => PasteMode::CtrlShiftV,
         "shift_insert" => PasteMode::ShiftInsert,
         _ => PasteMode::CtrlV,
@@ -345,15 +345,15 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
     // Load Dictionaries per Profile
     let mut tries = HashMap::new();
-    println!("[Config] Loading {} profiles...", config.profiles.len());
-    for profile in &config.profiles {
+    println!("[Config] Loading {} profiles...", config.files.profiles.len());
+    for profile in &config.files.profiles {
         let trie = load_dict_for_profile(&profile.dicts);
         println!("[Profile] Loaded profile '{}' with {} entries in Trie.", profile.name, trie.len());
         tries.insert(profile.name.clone(), trie);
     }
     
-    let punctuation = load_punctuation_dict(&config.punctuation_path);
-    let word_en_map = load_char_en_map(&config.char_en_path);
+    let punctuation = load_punctuation_dict(&config.files.punctuation_file);
+    let word_en_map = load_char_en_map(&config.files.char_map_dir);
 
     println!("[IME] Loaded {} profiles.", tries.len());
     println!("[IME] Loaded punctuation map with {} entries.", punctuation.len());
@@ -363,14 +363,14 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         println!("CRITICAL WARNING: No profiles loaded! Chinese input will not work.");
     }
 
-    let active_profile = if tries.contains_key(&config.active_profile) {
-        config.active_profile.clone()
+    let active_profile = if tries.contains_key(&config.input.default_profile) {
+        config.input.default_profile.clone()
     } else if let Some(first) = tries.keys().next() {
-        println!("Warning: Active profile '{}' not found in loaded profiles. Falling back to '{}'.", config.active_profile, first);
+        println!("Warning: Active profile '{}' not found in loaded profiles. Falling back to '{}'.", config.input.default_profile, first);
         first.clone()
     } else {
         println!("Warning: No profiles available at all.");
-        config.active_profile.clone()
+        config.input.default_profile.clone()
     };
 
     // 初始化通知线程
@@ -385,9 +385,9 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         punctuation, 
         word_en_map, 
         notify_tx.clone(), 
-        config.enable_fuzzy_pinyin,
-        &config.phantom_mode,
-        config.enable_notifications
+        config.input.enable_fuzzy_pinyin,
+        &config.appearance.preview_mode,
+        config.appearance.show_notifications
     );
 
     // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
@@ -451,21 +451,21 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     }
     println!("[IME] Keyboard grabbed. Rust-IME active.");
     
-    let shortcuts = &config.shortcuts;
-    let ime_toggle_keys = config::parse_key(&shortcuts.ime_toggle.key);
-    let ime_toggle_alt_keys = config::parse_key(&shortcuts.ime_toggle_alt.key);
-    let caps_toggle_keys = config::parse_key(&shortcuts.caps_lock_toggle.key);
-    let paste_cycle_keys = config::parse_key(&shortcuts.paste_cycle.key);
-    let phantom_cycle_keys = config::parse_key(&shortcuts.phantom_cycle.key);
-    let profile_next_keys = config::parse_key(&shortcuts.profile_next.key);
-    let fuzzy_toggle_keys = config::parse_key(&shortcuts.fuzzy_toggle.key);
-    let tty_toggle_keys = config::parse_key(&shortcuts.tty_toggle.key);
-    let backspace_toggle_keys = config::parse_key(&shortcuts.backspace_toggle.key);
-    let convert_pinyin_keys = config::parse_key(&shortcuts.convert_pinyin.key);
-    let notification_toggle_keys = config::parse_key(&shortcuts.notification_toggle.key);
+    let hotkeys = &config.hotkeys;
+    let ime_toggle_keys = config::parse_key(&hotkeys.switch_language.key);
+    let ime_toggle_alt_keys = config::parse_key(&hotkeys.switch_language_alt.key);
+    let caps_toggle_keys = config::parse_key(&hotkeys.trigger_caps_lock.key);
+    let paste_cycle_keys = config::parse_key(&hotkeys.cycle_paste_method.key);
+    let phantom_cycle_keys = config::parse_key(&hotkeys.cycle_preview_mode.key);
+    let profile_next_keys = config::parse_key(&hotkeys.switch_dictionary.key);
+    let fuzzy_toggle_keys = config::parse_key(&hotkeys.toggle_fuzzy_pinyin.key);
+    let tty_toggle_keys = config::parse_key(&hotkeys.toggle_tty_mode.key);
+    let backspace_toggle_keys = config::parse_key(&hotkeys.toggle_backspace_type.key);
+    let convert_pinyin_keys = config::parse_key(&hotkeys.convert_selection.key);
+    let notification_toggle_keys = config::parse_key(&hotkeys.toggle_notifications.key);
 
-    println!("[IME] Toggle: {}", shortcuts.ime_toggle.key);
-    println!("[IME] CapsLock Lock: {}", shortcuts.caps_lock_toggle.key);
+    println!("[IME] Toggle: {}", hotkeys.switch_language.key);
+    println!("[IME] CapsLock Lock: {}", hotkeys.trigger_caps_lock.key);
     println!("Current mode: English");
     
     let mut ctrl_held = false;

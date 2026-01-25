@@ -1,6 +1,151 @@
 use serde::{Deserialize, Serialize};
 use evdev::Key;
 
+// --- 1. 外观设置 ---
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Appearance {
+    #[serde(default = "default_enable_notifications")]
+    pub show_notifications: bool, // 原 enable_notifications
+    #[serde(default = "default_phantom_mode")]
+    pub preview_mode: String,     // 原 phantom_mode: none/pinyin/hanzi
+}
+
+impl Default for Appearance {
+    fn default() -> Self {
+        Appearance {
+            show_notifications: true,
+            preview_mode: "none".to_string(),
+        }
+    }
+}
+
+// --- 2. 输入行为 ---
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Input {
+    #[serde(default)]
+    pub enable_fuzzy_pinyin: bool,
+    #[serde(default = "default_active_profile")]
+    pub default_profile: String,   // 原 active_profile
+    #[serde(default = "default_paste_behavior")]
+    pub paste_method: String,      // 原 paste_shortcut.key (ctrl_v/shift_insert...)
+}
+
+impl Default for Input {
+    fn default() -> Self {
+        Input {
+            enable_fuzzy_pinyin: false,
+            default_profile: "Chinese".to_string(),
+            paste_method: "ctrl_v".to_string(),
+        }
+    }
+}
+
+// --- 3. 词库与文件 ---
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Files {
+    #[serde(default)]
+    pub device_path: Option<String>,
+    #[serde(default = "default_profiles")]
+    pub profiles: Vec<Profile>,
+    #[serde(default = "default_punctuation_path")]
+    pub punctuation_file: String,
+    #[serde(default = "default_char_en_path")]
+    pub char_map_dir: String,
+}
+
+impl Default for Files {
+    fn default() -> Self {
+        Files {
+            device_path: None,
+            profiles: default_profiles(),
+            punctuation_file: default_punctuation_path(),
+            char_map_dir: default_char_en_path(),
+        }
+    }
+}
+
+// --- 4. 快捷键 ---
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Hotkeys {
+    #[serde(default = "default_ime_toggle")]
+    pub switch_language: Shortcut,
+    #[serde(default = "default_ime_toggle_alt")]
+    pub switch_language_alt: Shortcut,
+    #[serde(default = "default_convert_pinyin")]
+    pub convert_selection: Shortcut,
+    
+    // 功能切换
+    #[serde(default = "default_phantom_cycle")]
+    pub cycle_preview_mode: Shortcut,
+    #[serde(default = "default_notification_toggle")]
+    pub toggle_notifications: Shortcut,
+    #[serde(default = "default_fuzzy_toggle")]
+    pub toggle_fuzzy_pinyin: Shortcut,
+    #[serde(default = "default_profile_next")]
+    pub switch_dictionary: Shortcut,
+    
+    // 高级/特殊
+    #[serde(default = "default_paste_cycle")]
+    pub cycle_paste_method: Shortcut,
+    #[serde(default = "default_caps_lock_toggle")]
+    pub trigger_caps_lock: Shortcut,
+    #[serde(default = "default_tty_toggle")]
+    pub toggle_tty_mode: Shortcut,
+    #[serde(default = "default_backspace_toggle")]
+    pub toggle_backspace_type: Shortcut,
+}
+
+impl Default for Hotkeys {
+    fn default() -> Self {
+        Hotkeys {
+            switch_language: default_ime_toggle(),
+            switch_language_alt: default_ime_toggle_alt(),
+            convert_selection: default_convert_pinyin(),
+            cycle_preview_mode: default_phantom_cycle(),
+            toggle_notifications: default_notification_toggle(),
+            toggle_fuzzy_pinyin: default_fuzzy_toggle(),
+            switch_dictionary: default_profile_next(),
+            cycle_paste_method: default_paste_cycle(),
+            trigger_caps_lock: default_caps_lock_toggle(),
+            toggle_tty_mode: default_tty_toggle(),
+            toggle_backspace_type: default_backspace_toggle(),
+        }
+    }
+}
+
+// --- 主配置结构 ---
+#[derive(Debug, Deserialize, Serialize, Clone)]
+pub struct Config {
+    #[serde(default = "default_readme", rename = "_help_readme")]
+    pub readme: String,
+    
+    #[serde(default)]
+    pub appearance: Appearance, // 外观
+    
+    #[serde(default)]
+    pub input: Input,           // 输入习惯
+    
+    #[serde(default)]
+    pub hotkeys: Hotkeys,       // 快捷键
+    
+    #[serde(default)]
+    pub files: Files,           // 文件路径
+}
+
+impl Config {
+    pub fn default_config() -> Self {
+        Config {
+            readme: default_readme(),
+            appearance: Appearance::default(),
+            input: Input::default(),
+            hotkeys: Hotkeys::default(),
+            files: Files::default(),
+        }
+    }
+}
+
+// --- Helper Structs & Defaults ---
+
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Profile {
     pub name: String,
@@ -43,124 +188,43 @@ impl Default for Shortcut {
     }
 }
 
-#[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct Shortcuts {
-    #[serde(default = "default_ime_toggle")]
-    pub ime_toggle: Shortcut,
-    #[serde(default = "default_ime_toggle_alt")]
-    pub ime_toggle_alt: Shortcut,
-    #[serde(default = "default_caps_lock_toggle")]
-    pub caps_lock_toggle: Shortcut,
-    #[serde(default = "default_paste_cycle")]
-    pub paste_cycle: Shortcut,
-    #[serde(default = "default_phantom_cycle")]
-    pub phantom_cycle: Shortcut,
-    #[serde(default = "default_profile_next")]
-    pub profile_next: Shortcut,
-    #[serde(default = "default_fuzzy_toggle")]
-    pub fuzzy_toggle: Shortcut,
-    #[serde(default = "default_tty_toggle")]
-    pub tty_toggle: Shortcut,
-    #[serde(default = "default_backspace_toggle")]
-    pub backspace_toggle: Shortcut,
-    #[serde(default = "default_convert_pinyin")]
-    pub convert_pinyin: Shortcut,
-    #[serde(default = "default_notification_toggle")]
-    pub notification_toggle: Shortcut,
-}
+// Default Value Generators
+fn default_readme() -> String { "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert".to_string() }
+fn default_enable_notifications() -> bool { true }
+fn default_phantom_mode() -> String { "none".to_string() }
 
-impl Default for Shortcuts {
-    fn default() -> Self {
-        Shortcuts {
-            ime_toggle: default_ime_toggle(),
-            ime_toggle_alt: default_ime_toggle_alt(),
-            caps_lock_toggle: default_caps_lock_toggle(),
-            paste_cycle: default_paste_cycle(),
-            phantom_cycle: default_phantom_cycle(),
-            profile_next: default_profile_next(),
-            fuzzy_toggle: default_fuzzy_toggle(),
-            tty_toggle: default_tty_toggle(),
-            backspace_toggle: default_backspace_toggle(),
-            convert_pinyin: default_convert_pinyin(),
-            notification_toggle: default_notification_toggle(),
-        }
-    }
-}
+fn default_active_profile() -> String { "Chinese".to_string() }
+fn default_paste_behavior() -> String { "ctrl_v".to_string() }
 
-fn default_ime_toggle() -> Shortcut { Shortcut::new("caps_lock", "切换中英文输入模式") }
-fn default_ime_toggle_alt() -> Shortcut { Shortcut::new("ctrl+space", "切换中英文输入模式 (备选)") }
-fn default_caps_lock_toggle() -> Shortcut { Shortcut::new("caps_lock+tab", "触发物理大写锁定 (CapsLock)") }
-fn default_paste_cycle() -> Shortcut { Shortcut::new("ctrl+alt+v", "循环切换粘贴模式 (兼容不同终端)") }
-fn default_phantom_cycle() -> Shortcut { Shortcut::new("ctrl+alt+p", "循环切换幻影模式 (无/拼音/汉字)") }
-fn default_profile_next() -> Shortcut { Shortcut::new("ctrl+alt+s", "切换到下一个输入方案 (如中/日切换)") }
-fn default_fuzzy_toggle() -> Shortcut { Shortcut::new("ctrl+alt+f", "实时开启/关闭模糊拼音") }
-fn default_tty_toggle() -> Shortcut { Shortcut::new("ctrl+alt+t", "切换 TTY 模式 (直接注入字节，适合终端)") }
-fn default_backspace_toggle() -> Shortcut { Shortcut::new("ctrl+alt+b", "切换退格键处理方式") }
-fn default_convert_pinyin() -> Shortcut { Shortcut::new("ctrl+r", "将选中的拼音转换为汉字") }
-fn default_notification_toggle() -> Shortcut { Shortcut::new("ctrl+alt+n", "开启/关闭候选词通知") }
-
-#[derive(Debug, Deserialize, Serialize, Clone)]
-pub struct Config {
-    #[serde(default = "default_readme", rename = "_readme")]
-    pub readme: String,
-    #[serde(default = "default_profiles")]
-    pub profiles: Vec<Profile>,
-    #[serde(default = "default_active_profile")]
-    pub active_profile: String,
-    #[serde(default = "default_punctuation_path")]
-    pub punctuation_path: String,
-    #[serde(default = "default_char_en_path")]
-    pub char_en_path: String,
-    #[serde(default)]
-    pub device_path: Option<String>,
-    #[serde(default = "default_paste_shortcut")]
-    pub paste_shortcut: Shortcut,
-    #[serde(default)]
-    pub enable_fuzzy_pinyin: bool,
-    #[serde(default = "default_enable_notifications")]
-    pub enable_notifications: bool,
-    #[serde(default = "default_phantom_mode")]
-    pub phantom_mode: String,
-    #[serde(default)]
-    pub shortcuts: Shortcuts,
-}
-
-fn default_readme() -> String { "这是 Blind-IME 的配置文件。每个配置项都有对应的 description 说明。".to_string() }
 fn default_profiles() -> Vec<Profile> {
     vec![
         Profile::default(),
         Profile {
             name: "Japanese".to_string(),
-            description: "日语输入方案 (假名/N1-N5)".to_string(),
+            description: "日语输入方案".to_string(),
             dicts: vec!["dicts/japanese".to_string()],
         },
     ]
 }
-fn default_active_profile() -> String { "Chinese".to_string() }
 fn default_punctuation_path() -> String { "dicts/chinese/punctuation.json".to_string() }
 fn default_char_en_path() -> String { "dicts/chinese/character".to_string() }
-fn default_paste_shortcut() -> Shortcut { Shortcut::new("ctrl_v", "自动粘贴时发送的按键: ctrl_v, ctrl_shift_v, shift_insert") }
-fn default_enable_notifications() -> bool { true }
-fn default_phantom_mode() -> String { "none".to_string() }
 
-impl Config {
-    pub fn default_config() -> Self {
-        Config {
-            readme: default_readme(),
-            profiles: default_profiles(),
-            active_profile: default_active_profile(),
-            punctuation_path: default_punctuation_path(),
-            char_en_path: default_char_en_path(),
-            device_path: None,
-            paste_shortcut: default_paste_shortcut(),
-            enable_fuzzy_pinyin: false,
-            enable_notifications: default_enable_notifications(),
-            phantom_mode: default_phantom_mode(),
-            shortcuts: Shortcuts::default(),
-        }
-    }
-}
+// Shortcuts Defaults
+fn default_ime_toggle() -> Shortcut { Shortcut::new("caps_lock", "核心: 切换中/英文模式") }
+fn default_ime_toggle_alt() -> Shortcut { Shortcut::new("ctrl+space", "核心: 切换中/英文模式 (备选)") }
+fn default_convert_pinyin() -> Shortcut { Shortcut::new("ctrl+r", "核心: 将选中的拼音转换为汉字 (选中拼音后按此键)") }
 
+fn default_phantom_cycle() -> Shortcut { Shortcut::new("ctrl+alt+p", "功能: 切换输入预览模式 (无 -> 拼音 -> 汉字)") }
+fn default_notification_toggle() -> Shortcut { Shortcut::new("ctrl+alt+n", "功能: 开启/关闭桌面候选词通知") }
+fn default_fuzzy_toggle() -> Shortcut { Shortcut::new("ctrl+alt+f", "功能: 开启/关闭模糊拼音 (z=zh, c=ch...)") }
+fn default_profile_next() -> Shortcut { Shortcut::new("ctrl+alt+s", "功能: 切换词库 (如 中文 -> 日语)") }
+
+fn default_paste_cycle() -> Shortcut { Shortcut::new("ctrl+alt+v", "高级: 循环切换自动粘贴的方式 (如在终端无法上屏时使用)") }
+fn default_caps_lock_toggle() -> Shortcut { Shortcut::new("caps_lock+tab", "高级: 发送真实的 CapsLock 键 (因 CapsLock 被占用于切换输入法)") }
+fn default_tty_toggle() -> Shortcut { Shortcut::new("ctrl+alt+t", "高级: 切换 TTY 字节注入模式 (仅用于纯命令行环境)") }
+fn default_backspace_toggle() -> Shortcut { Shortcut::new("ctrl+alt+b", "高级: 切换退格键编码 (Delete / Backspace)") }
+
+// Helper for parse (unchanged)
 pub fn parse_key(s: &str) -> Vec<Key> {
     s.split('+').filter_map(|k| {
         let k = k.to_lowercase().trim().to_string();
@@ -181,7 +245,6 @@ pub fn parse_key(s: &str) -> Vec<Key> {
             "end" => Some(Key::KEY_END),
             "page_up" => Some(Key::KEY_PAGEUP),
             "page_down" => Some(Key::KEY_PAGEDOWN),
-            // Handle all letters a-z
             s if s.len() == 1 => {
                 let c = s.chars().next().unwrap();
                 match c {
