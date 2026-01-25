@@ -226,15 +226,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             .build();
         
         if let Ok(client) = client {
-            let url = format!("http://127.0.0.1:8765/api/convert?text={}", urlencoding::encode(&input_pinyin));
+            // Request server to copy to clipboard (&copy=true)
+            let url = format!("http://127.0.0.1:8765/api/convert?copy=true&text={}", urlencoding::encode(&input_pinyin));
             if let Ok(resp) = client.get(url).send() {
                 if let Ok(converted) = resp.text() {
                     // 输出结果 (仅结果)
                     println!("{}", converted);
                     
-                    // 复制到剪贴板
-                    if let Ok(mut cb) = Clipboard::new() {
-                        let _ = cb.set_text(converted);
+                    // 剪贴板已由服务端持有，无需客户端操作
+                    if atty::is(atty::Stream::Stdout) {
+                        eprintln!("(已复制到剪贴板)");
                     }
                     return Ok(());
                 }
@@ -259,7 +260,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         
         println!("{}", converted);
         if let Ok(mut cb) = Clipboard::new() {
-            let _ = cb.set_text(converted);
+            if let Ok(_) = cb.set_text(converted) {
+                if atty::is(atty::Stream::Stdout) {
+                     eprintln!("(已复制到剪贴板 - 无后台模式)");
+                }
+                // 关键：在无后台模式下，必须等待一段时间，否则进程退出会导致剪贴板内容丢失
+                std::thread::sleep(std::time::Duration::from_millis(500));
+            }
         }
         
         return Ok(());

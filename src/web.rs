@@ -12,6 +12,7 @@ use std::sync::{Arc, RwLock};
 use std::net::SocketAddr;
 use std::collections::HashMap;
 use serde::Deserialize;
+use arboard::Clipboard;
 
 #[derive(RustEmbed)]
 #[folder = "static/"]
@@ -100,55 +101,139 @@ async fn update_config(
 }
 
 #[derive(Deserialize)]
+
 struct ConvertParams {
+
     text: String,
+
+    copy: Option<bool>,
+
 }
 
+
+
 async fn convert_handler(
+
     State((config, tries)): State<WebState>,
+
     Query(params): Query<ConvertParams>,
+
 ) -> String {
+
     let c = config.read().unwrap();
+
     let t = tries.read().unwrap();
+
     
+
     let active_profile = &c.input.default_profile;
-    let dict = match t.get(active_profile) {
-        Some(d) => d,
-        None => return params.text, // No dict, return as is
-    };
 
-    // Use the same logic as Ime::convert_text but without the full Ime struct
-    // (Actually, since we want to avoid duplication, we could make it a standalone function,
-    // but for now let's just implement the loop here)
+    // Default to returning input if dict not found
+
+    let mut result = params.text.clone(); 
+
     
-    let text = &params.text;
-    let mut result = String::new();
-    let chars: Vec<char> = text.chars().collect();
-    let mut i = 0;
 
-    while i < chars.len() {
-        if !chars[i].is_ascii_alphabetic() {
-            result.push(chars[i]);
-            i += 1;
-            continue;
-        }
+    if let Some(dict) = t.get(active_profile) {
 
-        let mut found = false;
-        for len in (1..=(chars.len() - i).min(15)).rev() {
-            let sub: String = chars[i..i+len].iter().collect();
-            let sub_lower = sub.to_lowercase();
-            if let Some(word) = dict.get_exact(&sub_lower) {
-                result.push_str(&word);
-                i += len;
-                found = true;
-                break;
+        // Perform Conversion
+
+        let text = &params.text;
+
+        let mut converted = String::new();
+
+        let chars: Vec<char> = text.chars().collect();
+
+        let mut i = 0;
+
+
+
+        while i < chars.len() {
+
+            if !chars[i].is_ascii_alphabetic() {
+
+                converted.push(chars[i]);
+
+                i += 1;
+
+                continue;
+
             }
+
+
+
+            let mut found = false;
+
+            for len in (1..=(chars.len() - i).min(15)).rev() {
+
+                let sub: String = chars[i..i+len].iter().collect();
+
+                let sub_lower = sub.to_lowercase();
+
+                if let Some(word) = dict.get_exact(&sub_lower) {
+
+                    converted.push_str(&word);
+
+                    i += len;
+
+                    found = true;
+
+                    break;
+
+                }
+
+            }
+
+
+
+            if !found {
+
+                converted.push(chars[i]);
+
+                i += 1;
+
+            }
+
         }
 
-        if !found {
-            result.push(chars[i]);
-            i += 1;
-        }
+        result = converted;
+
     }
+
+
+
+    // Handle Server-side Copy
+
+    if params.copy.unwrap_or(false) {
+
+        // Use a blocking task or just do it since arboard is generally fast enough
+
+        // but creating Clipboard might block or fail.
+
+        let text_to_copy = result.clone();
+
+        std::thread::spawn(move || {
+
+            if let Ok(mut cb) = Clipboard::new() {
+
+                if let Err(e) = cb.set_text(text_to_copy) {
+
+                    eprintln!("[Web] Clipboard set error: {}", e);
+
+                } else {
+
+                    // println!("[Web] Copied to clipboard by daemon.");
+
+                }
+
+            }
+
+        });
+
+    }
+
+
+
     result
+
 }
