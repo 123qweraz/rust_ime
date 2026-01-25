@@ -143,7 +143,7 @@ impl Vkbd {
         if self.send_via_clipboard(text) {
             if highlight {
                 let count = text.chars().count();
-                thread::sleep(Duration::from_millis(50));
+                thread::sleep(Duration::from_millis(150));
                 self.emit(Key::KEY_LEFTSHIFT, true);
                 for _ in 0..count {
                     self.tap(Key::KEY_LEFT);

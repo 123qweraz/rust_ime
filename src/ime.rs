@@ -202,9 +202,9 @@ impl Ime {
         }
 
         let new_text = if !self.candidates.is_empty() {
-            self.candidates[self.selected].clone()
+            format!("[{}]", self.candidates[self.selected])
         } else {
-            self.buffer.clone() // fallback to pinyin if no match
+            format!("[{}]", self.buffer) // fallback to pinyin if no match
         };
 
         let mut delete_count = self.phantom_text.chars().count();
