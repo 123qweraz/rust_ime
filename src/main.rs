@@ -4,7 +4,6 @@ use std::fs::File;
 use std::io::{self, BufReader, Write};
 use serde::Deserialize;
 use walkdir::WalkDir;
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
 use signal_hook::consts::signal::*;
 use signal_hook::flag;
@@ -15,6 +14,7 @@ mod vkbd;
 mod trie;
 mod config;
 mod tray;
+mod web;
 
 use ime::*;
 use vkbd::*;
@@ -293,6 +293,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 
+use std::sync::{Arc, RwLock};
+
 fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     // 确保在项目根目录运行，以便找到 dicts 和 config.json
     let root = find_project_root();
@@ -310,8 +312,21 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     flag::register(SIGHUP, Arc::clone(&should_exit))?;
 
     let config = load_config();
+    let config_arc = Arc::new(RwLock::new(config));
+    let config_for_web = Arc::clone(&config_arc);
 
-    let device_path = if let Some(path) = &config.files.device_path {
+    // 启动 Web 配置服务器 (使用非标端口 8765)
+    std::thread::spawn(move || {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let server = web::WebServer::new(8765, config_for_web);
+            server.start().await;
+        });
+    });
+
+    let initial_config = config_arc.read().unwrap().clone();
+
+    let device_path = if let Some(path) = &initial_config.files.device_path {
         path.clone()
     } else {
         match find_keyboard() {
@@ -336,7 +351,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let mut vkbd = Vkbd::new(&dev)?;
     
     // Set paste mode based on config
-    let mode = match config.input.paste_method.as_str() {
+    let mode = match initial_config.input.paste_method.as_str() {
         "ctrl_shift_v" => PasteMode::CtrlShiftV,
         "shift_insert" => PasteMode::ShiftInsert,
         _ => PasteMode::CtrlV,
@@ -345,15 +360,15 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
     // Load Dictionaries per Profile
     let mut tries = HashMap::new();
-    println!("[Config] Loading {} profiles...", config.files.profiles.len());
-    for profile in &config.files.profiles {
+    println!("[Config] Loading {} profiles...", initial_config.files.profiles.len());
+    for profile in &initial_config.files.profiles {
         let trie = load_dict_for_profile(&profile.dicts);
         println!("[Profile] Loaded profile '{}' with {} entries in Trie.", profile.name, trie.len());
         tries.insert(profile.name.clone(), trie);
     }
     
-    let punctuation = load_punctuation_dict(&config.files.punctuation_file);
-    let word_en_map = load_char_en_map(&config.files.char_map_dir);
+    let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
+    let word_en_map = load_char_en_map(&initial_config.files.char_map_dir);
 
     println!("[IME] Loaded {} profiles.", tries.len());
     println!("[IME] Loaded punctuation map with {} entries.", punctuation.len());
@@ -363,14 +378,14 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         println!("CRITICAL WARNING: No profiles loaded! Chinese input will not work.");
     }
 
-    let active_profile = if tries.contains_key(&config.input.default_profile) {
-        config.input.default_profile.clone()
+    let active_profile = if tries.contains_key(&initial_config.input.default_profile) {
+        initial_config.input.default_profile.clone()
     } else if let Some(first) = tries.keys().next() {
-        println!("Warning: Active profile '{}' not found in loaded profiles. Falling back to '{}'.", config.input.default_profile, first);
+        println!("Warning: Active profile '{}' not found in loaded profiles. Falling back to '{}'.", initial_config.input.default_profile, first);
         first.clone()
     } else {
         println!("Warning: No profiles available at all.");
-        config.input.default_profile.clone()
+        initial_config.input.default_profile.clone()
     };
 
     // 初始化通知线程
@@ -385,9 +400,9 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         punctuation, 
         word_en_map, 
         notify_tx.clone(), 
-        config.input.enable_fuzzy_pinyin,
-        &config.appearance.preview_mode,
-        config.appearance.show_notifications
+        initial_config.input.enable_fuzzy_pinyin,
+        &initial_config.appearance.preview_mode,
+        initial_config.appearance.show_notifications
     );
 
     // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
@@ -451,21 +466,38 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     }
     println!("[IME] Keyboard grabbed. Rust-IME active.");
     
-    let hotkeys = &config.hotkeys;
-    let ime_toggle_keys = config::parse_key(&hotkeys.switch_language.key);
-    let ime_toggle_alt_keys = config::parse_key(&hotkeys.switch_language_alt.key);
-    let caps_toggle_keys = config::parse_key(&hotkeys.trigger_caps_lock.key);
-    let paste_cycle_keys = config::parse_key(&hotkeys.cycle_paste_method.key);
-    let phantom_cycle_keys = config::parse_key(&hotkeys.cycle_preview_mode.key);
-    let profile_next_keys = config::parse_key(&hotkeys.switch_dictionary.key);
-    let fuzzy_toggle_keys = config::parse_key(&hotkeys.toggle_fuzzy_pinyin.key);
-    let tty_toggle_keys = config::parse_key(&hotkeys.toggle_tty_mode.key);
-    let backspace_toggle_keys = config::parse_key(&hotkeys.toggle_backspace_type.key);
-    let convert_pinyin_keys = config::parse_key(&hotkeys.convert_selection.key);
-    let notification_toggle_keys = config::parse_key(&hotkeys.toggle_notifications.key);
+    let mut last_config_check = std::time::Instant::now();
+    let mut ime_toggle_keys;
+    let mut ime_toggle_alt_keys;
+    let mut caps_toggle_keys;
+    let mut paste_cycle_keys;
+    let mut phantom_cycle_keys;
+    let mut profile_next_keys;
+    let mut fuzzy_toggle_keys;
+    let mut tty_toggle_keys;
+    let mut backspace_toggle_keys;
+    let mut convert_pinyin_keys;
+    let mut notification_toggle_keys;
 
-    println!("[IME] Toggle: {}", hotkeys.switch_language.key);
-    println!("[IME] CapsLock Lock: {}", hotkeys.trigger_caps_lock.key);
+    // 初次加载快捷键
+    {
+        let c = config_arc.read().unwrap();
+        let hotkeys = &c.hotkeys;
+        ime_toggle_keys = config::parse_key(&hotkeys.switch_language.key);
+        ime_toggle_alt_keys = config::parse_key(&hotkeys.switch_language_alt.key);
+        caps_toggle_keys = config::parse_key(&hotkeys.trigger_caps_lock.key);
+        paste_cycle_keys = config::parse_key(&hotkeys.cycle_paste_method.key);
+        phantom_cycle_keys = config::parse_key(&hotkeys.cycle_preview_mode.key);
+        profile_next_keys = config::parse_key(&hotkeys.switch_dictionary.key);
+        fuzzy_toggle_keys = config::parse_key(&hotkeys.toggle_fuzzy_pinyin.key);
+        tty_toggle_keys = config::parse_key(&hotkeys.toggle_tty_mode.key);
+        backspace_toggle_keys = config::parse_key(&hotkeys.toggle_backspace_type.key);
+        convert_pinyin_keys = config::parse_key(&hotkeys.convert_selection.key);
+        notification_toggle_keys = config::parse_key(&hotkeys.toggle_notifications.key);
+    }
+
+    println!("[IME] Toggle: {}", initial_config.hotkeys.switch_language.key);
+    println!("[IME] CapsLock Lock: {}", initial_config.hotkeys.trigger_caps_lock.key);
     println!("Current mode: English");
     
     let mut ctrl_held = false;
@@ -512,6 +544,35 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     };
 
     while !should_exit.load(Ordering::Relaxed) {
+        // 定期检查配置更新 (每 2 秒)
+        if last_config_check.elapsed().as_secs() >= 2 {
+            last_config_check = std::time::Instant::now();
+            let c = config_arc.read().unwrap();
+            
+            // 更新 IME 内部状态
+            ime.enable_fuzzy = c.input.enable_fuzzy_pinyin;
+            ime.enable_notifications = c.appearance.show_notifications;
+            ime.phantom_mode = match c.appearance.preview_mode.as_str() {
+                "pinyin" => PhantomMode::Pinyin,
+                "hanzi" => PhantomMode::Hanzi,
+                _ => PhantomMode::None,
+            };
+            
+            // 重新解析快捷键 (以防用户在网页端修改)
+            let hotkeys = &c.hotkeys;
+            ime_toggle_keys = config::parse_key(&hotkeys.switch_language.key);
+            ime_toggle_alt_keys = config::parse_key(&hotkeys.switch_language_alt.key);
+            caps_toggle_keys = config::parse_key(&hotkeys.trigger_caps_lock.key);
+            paste_cycle_keys = config::parse_key(&hotkeys.cycle_paste_method.key);
+            phantom_cycle_keys = config::parse_key(&hotkeys.cycle_preview_mode.key);
+            profile_next_keys = config::parse_key(&hotkeys.switch_dictionary.key);
+            fuzzy_toggle_keys = config::parse_key(&hotkeys.toggle_fuzzy_pinyin.key);
+            tty_toggle_keys = config::parse_key(&hotkeys.toggle_tty_mode.key);
+            backspace_toggle_keys = config::parse_key(&hotkeys.toggle_backspace_type.key);
+            convert_pinyin_keys = config::parse_key(&hotkeys.convert_selection.key);
+            notification_toggle_keys = config::parse_key(&hotkeys.toggle_notifications.key);
+        }
+
         // 处理托盘事件
         while let Ok(event) = tray_event_rx.try_recv() {
             match event {
@@ -690,7 +751,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn load_config() -> Config {
+pub fn load_config() -> Config {
     let mut config_path = find_project_root();
     config_path.push("config.json");
 
@@ -715,7 +776,7 @@ fn load_config() -> Config {
     Config::default_config()
 }
 
-fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
+pub fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
     let mut config_path = find_project_root();
     config_path.push("config.json");
     let file = File::create(config_path)?;

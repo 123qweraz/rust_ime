@@ -15,3 +15,8 @@ signal-hook = "0.4.1"
 daemonize = "0.5"
 libc = "0.2.180"
 ksni = "0.2.1"
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+rust-embed = "8.2"
+tower-http = { version = "0.5", features = ["full"] }
+mime_guess = "2.0"

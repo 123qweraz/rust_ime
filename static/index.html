@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rust-IME 配置中心</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-color: #e1e4e8;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .section {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        h2 {
+            margin-top: 0;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .form-group label {
+            font-weight: 500;
+            flex: 1;
+        }
+        .form-group .desc {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 4px;
+            display: block;
+        }
+        input[type="text"], select {
+            padding: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            width: 200px;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px; width: 18px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--primary-color); }
+        input:checked + .slider:before { transform: translateX(26px); }
+
+        .hotkey-row {
+            display: grid;
+            grid-template-columns: 1fr 150px;
+            gap: 10px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--bg-color);
+        }
+        .hotkey-info { flex: 1; }
+
+        .btn-save {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 20px;
+        }
+        .btn-save:hover { background-color: #357abd; }
+        .status {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Rust-IME 控制面板</h1>
+            <p>图形化配置中心 - 修改即刻生效</p>
+        </header>
+
+        <div id="config-form">
+            <!-- 外观设置 -->
+            <div class="section">
+                <h2>视觉外观 (Appearance)</h2>
+                <div class="form-group">
+                    <div>
+                        <label>显示通知</label>
+                        <span class="desc">在系统右上角弹出候选词列表</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="show_notifications">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label>预览模式 (Phantom)</label>
+                        <span class="desc">直接在光标处显示未确认的内容</span>
+                    </div>
+                    <select id="preview_mode">
+                        <option value="none">关闭 (None)</option>
+                        <option value="pinyin">仅拼音 (Pinyin)</option>
+                        <option value="hanzi">仅汉字 (Hanzi)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 输入习惯 -->
+            <div class="section">
+                <h2>输入行为 (Input)</h2>
+                <div class="form-group">
+                    <div>
+                        <label>模糊拼音</label>
+                        <span class="desc">纠正 z/zh, c/ch, s/sh 等拼写</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="enable_fuzzy_pinyin">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label>默认词库</label>
+                    </div>
+                    <select id="default_profile"></select>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label>粘贴方式</label>
+                        <span class="desc">如果某些软件无法上屏，请尝试切换</span>
+                    </div>
+                    <select id="paste_method">
+                        <option value="ctrl_v">标准 (Ctrl+V)</option>
+                        <option value="ctrl_shift_v">终端 (Ctrl+Shift+V)</option>
+                        <option value="shift_insert">旧版 (Shift+Insert)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 快捷键 -->
+            <div class="section">
+                <h2>快捷键绑定 (Hotkeys)</h2>
+                <div id="hotkeys-list">
+                    <!-- 动态生成 -->
+                </div>
+            </div>
+
+            <button class="btn-save" onclick="saveConfig()">保存配置</button>
+            <div id="status" class="status"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentConfig = null;
+
+        async function loadConfig() {
+            try {
+                const response = await fetch('/api/config');
+                currentConfig = await response.json();
+                
+                // 填充外观
+                document.getElementById('show_notifications').checked = currentConfig.appearance.show_notifications;
+                document.getElementById('preview_mode').value = currentConfig.appearance.preview_mode;
+                
+                // 填充输入
+                document.getElementById('enable_fuzzy_pinyin').checked = currentConfig.input.enable_fuzzy_pinyin;
+                document.getElementById('paste_method').value = currentConfig.input.paste_method;
+                
+                // 填充词库选项
+                const profileSelect = document.getElementById('default_profile');
+                profileSelect.innerHTML = '';
+                currentConfig.files.profiles.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.name;
+                    opt.textContent = p.name + ' (' + p.description + ')';
+                    profileSelect.appendChild(opt);
+                });
+                profileSelect.value = currentConfig.input.default_profile;
+
+                // 填充快捷键
+                const hotkeysList = document.getElementById('hotkeys-list');
+                hotkeysList.innerHTML = '';
+                for (const [key, val] of Object.entries(currentConfig.hotkeys)) {
+                    const row = document.createElement('div');
+                    row.className = 'hotkey-row';
+                    row.innerHTML = `
+                        <div class="hotkey-info">
+                            <label style="display:block">${val.description}</label>
+                            <span class="desc" style="font-size:0.7rem">字段名: ${key}</span>
+                        </div>
+                        <input type="text" data-key="${key}" value="${val.key}">
+                    `;
+                    hotkeysList.appendChild(row);
+                }
+
+            } catch (e) {
+                showStatus('加载失败: ' + e, 'red');
+            }
+        }
+
+        async function saveConfig() {
+            showStatus('正在保存...', 'blue');
+            
+            // 更新当前对象
+            currentConfig.appearance.show_notifications = document.getElementById('show_notifications').checked;
+            currentConfig.appearance.preview_mode = document.getElementById('preview_mode').value;
+            currentConfig.input.enable_fuzzy_pinyin = document.getElementById('enable_fuzzy_pinyin').checked;
+            currentConfig.input.paste_method = document.getElementById('paste_method').value;
+            currentConfig.input.default_profile = document.getElementById('default_profile').value;
+
+            const hotkeyInputs = document.querySelectorAll('#hotkeys-list input');
+            hotkeyInputs.forEach(input => {
+                const field = input.getAttribute('data-key');
+                currentConfig.hotkeys[field].key = input.value;
+            });
+
+            try {
+                const response = await fetch('/api/config', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(currentConfig)
+                });
+                
+                if (response.ok) {
+                    showStatus('保存成功！配置已实时生效。', 'green');
+                } else {
+                    showStatus('保存失败，请检查服务器日志', 'red');
+                }
+            } catch (e) {
+                showStatus('保存出错: ' + e, 'red');
+            }
+        }
+
+        function showStatus(msg, color) {
+            const s = document.getElementById('status');
+            s.textContent = msg;
+            s.style.color = color;
+            if (color === 'green') {
+                setTimeout(() => s.textContent = '', 3000);
+            }
+        }
+
+        loadConfig();
+    </script>
+</body>
+</html>
