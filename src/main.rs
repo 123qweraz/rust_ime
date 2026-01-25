@@ -216,66 +216,50 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     
     // 1. CLI 命令行工具模式 (Conversion Mode)
-    // 如果有参数，且第一个参数不是以 -- 开头 (flags)，则认为是拼音输入
     if args.len() > 1 && !args[1].starts_with("-") {
-        let input_pinyin = args[1..].join(""); // 支持 rust-ime ni hao 这种带空格的输入
+        let input_pinyin = args[1..].join("");
         
-        // 快速加载配置和词库 (只加载必要的)
+        // --- 尝试客户端模式 (连接已运行的 Daemon) ---
+        // 使用简单的 HTTP 请求探测
+        let client = reqwest::blocking::Client::builder()
+            .timeout(std::time::Duration::from_millis(200)) // 极速超时
+            .build();
+        
+        if let Ok(client) = client {
+            let url = format!("http://127.0.0.1:8765/api/convert?text={}", urlencoding::encode(&input_pinyin));
+            if let Ok(resp) = client.get(url).send() {
+                if let Ok(converted) = resp.text() {
+                    // 输出结果 (仅结果)
+                    println!("{}", converted);
+                    
+                    // 复制到剪贴板
+                    if let Ok(mut cb) = Clipboard::new() {
+                        let _ = cb.set_text(converted);
+                    }
+                    return Ok(());
+                }
+            }
+        }
+
+        // --- 降级模式: 自己加载词库 (较慢) ---
         let config = load_config();
-        
-        // 这里的逻辑稍微简化，只加载默认或配置指定的词库
-        // 为了速度，我们可以只加载 active_profile
         let mut tries = HashMap::new();
         let active_profile_name = &config.input.default_profile;
         
-        // 找到 active profile
         if let Some(profile) = config.files.profiles.iter().find(|p| &p.name == active_profile_name) {
-            let trie = load_dict_for_profile(&profile.dicts);
+            let trie = load_dict_for_profile_quiet(&profile.dicts);
             tries.insert(profile.name.clone(), trie);
-        } else {
-             // Fallback: load first available or warn
-             if let Some(first) = config.files.profiles.first() {
-                 let trie = load_dict_for_profile(&first.dicts);
-                 tries.insert(first.name.clone(), trie);
-             }
         }
         
-        let punctuation = load_punctuation_dict(&config.files.punctuation_file);
-        
-        // 我们不需要 notification_tx，给一个 dummy channel
+        let punctuation = load_punctuation_dict_quiet(&config.files.punctuation_file);
         let (tx, _) = std::sync::mpsc::channel();
         
-        let ime = Ime::new(
-            tries, 
-            active_profile_name.clone(), 
-            punctuation, 
-            HashMap::new(), // CLI模式下暂不需要英文联想
-            tx, 
-            config.input.enable_fuzzy_pinyin,
-            "none",
-            false
-        );
-        
+        let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false);
         let converted = ime.convert_text(&input_pinyin);
         
-        // 输出到 stdout (方便管道使用)
         println!("{}", converted);
-        
-        // 尝试复制到剪贴板
-        match Clipboard::new() {
-            Ok(mut cb) => {
-                if let Err(e) = cb.set_text(converted.clone()) {
-                    eprintln!("(Clipboard error: {})", e);
-                } else {
-                    // 如果不是管道输出（即在终端直接运行），提示一下已复制
-                    if atty::is(atty::Stream::Stdout) {
-                        eprintln!("(已复制到剪贴板)");
-                    }
-                }
-            },
-            Err(_) => {
-                // 可能是纯服务器环境，忽略剪贴板错误
-            }
+        if let Ok(mut cb) = Clipboard::new() {
+            let _ = cb.set_text(converted);
         }
         
         return Ok(());
@@ -380,17 +364,27 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let config = load_config();
     let config_arc = Arc::new(RwLock::new(config));
     let config_for_web = Arc::clone(&config_arc);
+    
+    let mut tries_map = HashMap::new();
+    let initial_config = config_arc.read().unwrap().clone();
 
-    // 启动 Web 配置服务器 (使用非标端口 8765)
+    // Pre-load dictionaries to share them with Web server
+    println!("[Config] Loading dictionaries...");
+    for profile in &initial_config.files.profiles {
+        let trie = load_dict_for_profile(&profile.dicts);
+        tries_map.insert(profile.name.clone(), trie);
+    }
+    let tries_arc = Arc::new(RwLock::new(tries_map));
+    let tries_for_web = Arc::clone(&tries_arc);
+
+    // 启动 Web 配置服务器
     std::thread::spawn(move || {
         let rt = tokio::runtime::Runtime::new().unwrap();
         rt.block_on(async {
-            let server = web::WebServer::new(8765, config_for_web);
+            let server = web::WebServer::new(8765, config_for_web, tries_for_web);
             server.start().await;
         });
     });
-
-    let initial_config = config_arc.read().unwrap().clone();
 
     let device_path = if let Some(path) = &initial_config.files.device_path {
         path.clone()
@@ -424,14 +418,8 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     };
     vkbd.set_paste_mode(mode);
 
-    // Load Dictionaries per Profile
-    let mut tries = HashMap::new();
-    println!("[Config] Loading {} profiles...", initial_config.files.profiles.len());
-    for profile in &initial_config.files.profiles {
-        let trie = load_dict_for_profile(&profile.dicts);
-        println!("[Profile] Loaded profile '{}' with {} entries in Trie.", profile.name, trie.len());
-        tries.insert(profile.name.clone(), trie);
-    }
+    // Dictionaries are already loaded
+    let tries = tries_arc.read().unwrap().clone();
     
     let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
     let word_en_map = load_char_en_map(&initial_config.files.char_map_dir);
@@ -447,8 +435,9 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let active_profile = if tries.contains_key(&initial_config.input.default_profile) {
         initial_config.input.default_profile.clone()
     } else if let Some(first) = tries.keys().next() {
-        println!("Warning: Active profile '{}' not found in loaded profiles. Falling back to '{}'.", initial_config.input.default_profile, first);
-        first.clone()
+        let first_name: String = first.clone();
+        println!("Warning: Active profile '{}' not found in loaded profiles. Falling back to '{}'.", initial_config.input.default_profile, first_name);
+        first_name
     } else {
         println!("Warning: No profiles available at all.");
         initial_config.input.default_profile.clone()
@@ -994,4 +983,66 @@ fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
         }
     }
     Err("No physical keyboard found".into())
+}
+
+// --- Quiet loaders for CLI mode ---
+
+fn load_dict_for_profile_quiet(paths: &[String]) -> Trie {
+    let mut trie = Trie::new();
+    for path_str in paths {
+        let path = Path::new(path_str);
+        if path.is_dir() {
+             let mut entries: Vec<_> = WalkDir::new(path)
+                .into_iter()
+                .filter_map(|e| e.ok())
+                .filter(|e| e.path().is_file() && e.path().extension().map_or(false, |ext| ext == "json"))
+                .collect();
+             entries.sort_by(|a, b| a.path().cmp(b.path()));
+             for entry in entries {
+                let sub_path = entry.path();
+                let sub_path_str = sub_path.to_str().unwrap_or("");
+                if !sub_path_str.ends_with("punctuation.json") {
+                    load_file_into_dict_quiet(sub_path_str, &mut trie);
+                }
+             }
+        } else if path.is_file() {
+             load_file_into_dict_quiet(path_str, &mut trie);
+        }
+    }
+    trie
+}
+
+fn load_file_into_dict_quiet(path: &str, trie: &mut Trie) {
+    if let Ok(file) = File::open(path) {
+        let reader = BufReader::new(file);
+        if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(reader) {
+            if let Some(obj) = v.as_object() {
+                for (py, val) in obj {
+                    let py_lower = py.to_lowercase();
+                    if let Ok(entries) = serde_json::from_value::<Vec<DictEntry>>(val.clone()) {
+                        for e in entries { trie.insert(&py_lower, e.char); }
+                    } else if let Ok(strings) = serde_json::from_value::<Vec<String>>(val.clone()) {
+                        for s in strings { trie.insert(&py_lower, s); }
+                    }
+                }
+            }
+        }
+    }
+}
+
+fn load_punctuation_dict_quiet(path: &str) -> HashMap<String, String> {
+    let mut map = HashMap::new();
+    if let Ok(file) = File::open(path) {
+        let reader = BufReader::new(file);
+        if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(reader) {
+            if let Some(obj) = v.as_object() {
+                for (key, val) in obj {
+                    if let Ok(entries) = serde_json::from_value::<Vec<PunctuationEntry>>(val.clone()) {
+                        if let Some(first) = entries.first() { map.insert(key.clone(), first.char.clone()); }
+                    }
+                }
+            }
+        }
+    }
+    map
 }

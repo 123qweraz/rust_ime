@@ -1,12 +1,12 @@
 use std::collections::{HashMap, VecDeque};
 
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone)]
 struct TrieNode {
     children: HashMap<char, TrieNode>,
     words: Vec<String>,
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone)]
 pub struct Trie {
     root: TrieNode,
     total_words: usize,

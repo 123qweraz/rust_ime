@@ -21,3 +21,5 @@ rust-embed = "8.2"
 tower-http = { version = "0.5", features = ["full"] }
 mime_guess = "2.0"
 atty = "0.2"
+reqwest = { version = "0.12", features = ["blocking"] }
+urlencoding = "2.1"
