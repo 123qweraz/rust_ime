@@ -180,7 +180,15 @@ async fn convert_handler(
 
 
 
+
+
+
+
     State((config, tries, clipboard)): State<WebState>,
+
+
+
+
 
 
 
@@ -188,31 +196,11 @@ async fn convert_handler(
 
 
 
+
+
+
+
 ) -> String {
-
-
-
-    let text = &params.text;
-
-
-
-    
-
-
-
-    // 1. 处理逃逸字符 /
-
-
-
-    if text.starts_with('/') {
-
-
-
-        return text[1..].to_string();
-
-
-
-    }
 
 
 
@@ -224,7 +212,15 @@ async fn convert_handler(
 
 
 
+
+
+
+
     let t = tries.read().unwrap();
+
+
+
+
 
 
 
@@ -232,19 +228,11 @@ async fn convert_handler(
 
 
 
-    let dict = match t.get(active_profile) {
 
 
 
-        Some(d) => d,
 
-
-
-        None => return text.clone(),
-
-
-
-    };
+    let dict = t.get(active_profile);
 
 
 
@@ -252,15 +240,19 @@ async fn convert_handler(
 
 
 
-    // 2. 解析数字选择 (例如 ni1, nihao10)
 
 
 
-    let mut clean_text = text.clone();
 
 
 
-    let mut selected_idx = None;
+
+
+    let mut final_result = String::new();
+
+
+
+
 
 
 
@@ -268,51 +260,43 @@ async fn convert_handler(
 
 
 
-    // 从末尾寻找数字
 
 
 
-    let mut num_str = String::new();
 
+    // 将输入按空格拆分（处理多个参数或手动分词）
 
 
-    while let Some(last_char) = clean_text.chars().last() {
 
 
 
-        if last_char.is_ascii_digit() {
 
 
+    let words: Vec<&str> = params.text.split_whitespace().collect();
 
-            num_str.insert(0, clean_text.pop().unwrap());
 
 
 
-        } else {
 
 
 
-            break;
 
 
 
-        }
 
 
 
-    }
 
 
+    for word in words {
 
-    if !num_str.is_empty() {
 
 
 
-        selected_idx = num_str.parse::<usize>().ok();
 
 
 
-    }
+        // 1. 处理单个单词的逃逸字符 /
 
 
 
@@ -320,55 +304,27 @@ async fn convert_handler(
 
 
 
-    // 3. 判断是进行“单词查词”还是“全句转换”
+        if word.starts_with('/') {
 
 
 
-    // 如果有 -l, -a, 或者有数字索引，或者只有单个词的感觉，进入单词模式
 
 
 
-    let is_query_mode = params.all.unwrap_or(false) || params.list.is_some() || selected_idx.is_some();
 
+            final_result.push_str(&word[1..]);
 
 
 
 
 
 
-    let result = if is_query_mode {
 
+            continue;
 
 
-        // --- 单词模式 (Lookup Logic) ---
 
 
-
-        let mut pinyin_search = clean_text.clone();
-
-
-
-        let mut filter_string = String::new();
-
-
-
-
-
-
-
-        // 处理大写字母辅助过滤 (niN -> ni, n)
-
-
-
-        if let Some((idx, _)) = clean_text.char_indices().skip(1).find(|(_, c)| c.is_ascii_uppercase()) {
-
-
-
-            pinyin_search = clean_text[..idx].to_string();
-
-
-
-            filter_string = clean_text[idx..].to_lowercase();
 
 
 
@@ -380,35 +336,31 @@ async fn convert_handler(
 
 
 
-        // 获取候选词 (简化版搜索，不带模糊音以保证准确性)
 
 
 
-        let raw_candidates = dict.search_bfs(&pinyin_search.to_lowercase(), 100);
 
 
 
 
 
+        // 2. 如果没有字典，原样输出
 
 
-        // 应用英文过滤
 
 
 
-        if !filter_string.is_empty() {
 
 
+        let dict = match dict {
 
-            // 需要加载 word_en_map，但在 WebState 里没存，我们暂时从磁盘读取或先跳过高级过滤
 
 
 
-            // 为了性能和实现，这里可以先根据 profile 字典查找
 
 
 
-        }
+            Some(d) => d,
 
 
 
@@ -416,127 +368,19 @@ async fn convert_handler(
 
 
 
-        if let Some(idx) = selected_idx {
+            None => {
 
 
 
-            // ni1 对应索引 0
 
 
 
-            if idx > 0 && idx <= raw_candidates.len() {
 
+                final_result.push_str(word);
 
 
-                raw_candidates[idx - 1].clone()
 
 
-
-            } else {
-
-
-
-                clean_text // 没找到索引，返回原文
-
-
-
-            }
-
-
-
-        } else if params.all.unwrap_or(false) {
-
-
-
-            raw_candidates.join(" ")
-
-
-
-        } else if let Some(limit) = params.list {
-
-
-
-            let page = params.page.unwrap_or(1).max(1);
-
-
-
-            let start = (page - 1) * limit;
-
-
-
-            if start < raw_candidates.len() {
-
-
-
-                let end = (start + limit).min(raw_candidates.len());
-
-
-
-                raw_candidates[start..end].join(" ")
-
-
-
-            } else {
-
-
-
-                String::new()
-
-
-
-            }
-
-
-
-        } else {
-
-
-
-            raw_candidates.first().cloned().unwrap_or(clean_text)
-
-
-
-        }
-
-
-
-    } else {
-
-
-
-        // --- 全句模式 (Convert Logic) ---
-
-
-
-        let mut converted = String::new();
-
-
-
-        let chars: Vec<char> = text.chars().collect();
-
-
-
-        let mut i = 0;
-
-
-
-
-
-
-
-        while i < chars.len() {
-
-
-
-            if !chars[i].is_ascii_alphabetic() {
-
-
-
-                converted.push(chars[i]);
-
-
-
-                i += 1;
 
 
 
@@ -544,51 +388,7 @@ async fn convert_handler(
 
 
 
-            }
 
-
-
-
-
-
-
-            let mut found = false;
-
-
-
-            for len in (1..=(chars.len() - i).min(15)).rev() {
-
-
-
-                let sub: String = chars[i..i+len].iter().collect();
-
-
-
-                let sub_lower = sub.to_lowercase();
-
-
-
-                if let Some(word) = dict.get_exact(&sub_lower) {
-
-
-
-                    converted.push_str(&word);
-
-
-
-                    i += len;
-
-
-
-                    found = true;
-
-
-
-                    break;
-
-
-
-                }
 
 
 
@@ -600,19 +400,99 @@ async fn convert_handler(
 
 
 
-            if !found {
+        };
 
 
 
-                converted.push(chars[i]);
 
 
 
-                i += 1;
+
+
+
+
+
+
+
+
+
+        // 3. 解析数字选择 (例如 ni1)
+
+
+
+
+
+
+
+        let mut clean_word = word.to_string();
+
+
+
+
+
+
+
+        let mut selected_idx = None;
+
+
+
+
+
+
+
+        let mut num_str = String::new();
+
+
+
+
+
+
+
+        while let Some(last_char) = clean_word.chars().last() {
+
+
+
+
+
+
+
+            if last_char.is_ascii_digit() {
+
+
+
+
+
+
+
+                num_str.insert(0, clean_word.pop().unwrap());
+
+
+
+
+
+
+
+            } else {
+
+
+
+
+
+
+
+                break;
+
+
+
+
 
 
 
             }
+
+
+
+
 
 
 
@@ -620,11 +500,539 @@ async fn convert_handler(
 
 
 
-        converted
 
 
 
-    };
+
+        if !num_str.is_empty() {
+
+
+
+
+
+
+
+            selected_idx = num_str.parse::<usize>().ok();
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // 4. 判断模式
+
+
+
+
+
+
+
+        let is_query_mode = params.all.unwrap_or(false) || params.list.is_some() || selected_idx.is_some();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        if is_query_mode {
+
+
+
+
+
+
+
+            // --- 单词模式 ---
+
+
+
+
+
+
+
+            let mut pinyin_search = clean_word;
+
+
+
+
+
+
+
+                        let mut _filter_string = String::new();
+
+
+
+
+
+
+
+                        if let Some((idx, _)) = pinyin_search.char_indices().skip(1).find(|(_, c)| c.is_ascii_uppercase()) {
+
+
+
+
+
+
+
+                            _filter_string = pinyin_search[idx..].to_lowercase();
+
+
+
+
+
+
+
+                            pinyin_search = pinyin_search[..idx].to_string();
+
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            let raw_candidates = dict.search_bfs(&pinyin_search.to_lowercase(), 100);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            if let Some(idx) = selected_idx {
+
+
+
+
+
+
+
+                if idx > 0 && idx <= raw_candidates.len() {
+
+
+
+
+
+
+
+                    final_result.push_str(&raw_candidates[idx - 1]);
+
+
+
+
+
+
+
+                } else {
+
+
+
+
+
+
+
+                    final_result.push_str(&pinyin_search); // 索引无效回退
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+            } else if params.all.unwrap_or(false) {
+
+
+
+
+
+
+
+                final_result.push_str(&raw_candidates.join(" "));
+
+
+
+
+
+
+
+            } else if let Some(limit) = params.list {
+
+
+
+
+
+
+
+                let page = params.page.unwrap_or(1).max(1);
+
+
+
+
+
+
+
+                let start = (page - 1) * limit;
+
+
+
+
+
+
+
+                if start < raw_candidates.len() {
+
+
+
+
+
+
+
+                    let end = (start + limit).min(raw_candidates.len());
+
+
+
+
+
+
+
+                    final_result.push_str(&raw_candidates[start..end].join(" "));
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+            else {
+
+
+
+
+
+
+
+                final_result.push_str(raw_candidates.first().unwrap_or(&pinyin_search));
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+        } else {
+
+
+
+
+
+
+
+            // --- 全句转换模式 ---
+
+
+
+
+
+
+
+            let chars: Vec<char> = word.chars().collect();
+
+
+
+
+
+
+
+            let mut i = 0;
+
+
+
+
+
+
+
+            while i < chars.len() {
+
+
+
+
+
+
+
+                if !chars[i].is_ascii_alphabetic() {
+
+
+
+
+
+
+
+                    final_result.push(chars[i]);
+
+
+
+
+
+
+
+                    i += 1;
+
+
+
+
+
+
+
+                    continue;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                let mut found = false;
+
+
+
+
+
+
+
+                for len in (1..=(chars.len() - i).min(15)).rev() {
+
+
+
+
+
+
+
+                    let sub: String = chars[i..i+len].iter().collect();
+
+
+
+
+
+
+
+                    let sub_lower = sub.to_lowercase();
+
+
+
+
+
+
+
+                    if let Some(word_match) = dict.get_exact(&sub_lower) {
+
+
+
+
+
+
+
+                        final_result.push_str(&word_match);
+
+
+
+
+
+
+
+                        i += len;
+
+
+
+
+
+
+
+                        found = true;
+
+
+
+
+
+
+
+                        break;
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+                if !found {
+
+
+
+
+
+
+
+                    final_result.push(chars[i]);
+
+
+
+
+
+
+
+                    i += 1;
+
+
+
+
+
+
+
+                }
+
+
+
+
+
+
+
+            }
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
 
 
 
@@ -636,11 +1044,23 @@ async fn convert_handler(
 
 
 
+
+
+
+
     if params.copy.unwrap_or(false) {
 
 
 
-        let text_to_copy = result.clone();
+
+
+
+
+        let text_to_copy = final_result.clone();
+
+
+
+
 
 
 
@@ -648,7 +1068,15 @@ async fn convert_handler(
 
 
 
+
+
+
+
         std::thread::spawn(move || {
+
+
+
+
 
 
 
@@ -656,7 +1084,15 @@ async fn convert_handler(
 
 
 
+
+
+
+
                 if let Some(cb) = guard.as_mut() {
+
+
+
+
 
 
 
@@ -664,7 +1100,15 @@ async fn convert_handler(
 
 
 
+
+
+
+
                 }
+
+
+
+
 
 
 
@@ -672,7 +1116,15 @@ async fn convert_handler(
 
 
 
+
+
+
+
         });
+
+
+
+
 
 
 
@@ -684,7 +1136,19 @@ async fn convert_handler(
 
 
 
-    result
+
+
+
+
+
+
+
+
+    final_result
+
+
+
+
 
 
 

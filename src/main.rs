@@ -315,53 +315,107 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     
     
-            // --- 降级模式: 自己加载词库 (较慢) ---
+                    // --- 降级模式: 自己加载词库 (较慢) ---
     
-            // (保持简单转换，暂不支持高级 CLI flag 在降级模式下)
     
-            if input_text.starts_with('/') {
     
-                println!("{}", &input_text[1..]);
+                    // (保持简单转换，暂不支持高级 CLI flag 在降级模式下)
     
-                return Ok(());
     
-            }
     
-            let config = load_config();
+                    let converted = if input_text.starts_with('/') {
     
-            let mut tries = HashMap::new();
     
-            let active_profile_name = &config.input.default_profile;
     
-            if let Some(profile) = config.files.profiles.iter().find(|p| &p.name == active_profile_name) {
+                        input_text[1..].to_string()
     
-                let trie = load_dict_for_profile_quiet(&profile.dicts);
     
-                tries.insert(profile.name.clone(), trie);
     
-            }
+                    } else {
     
-            let punctuation = load_punctuation_dict_quiet(&config.files.punctuation_file);
     
-            let (tx, _) = std::sync::mpsc::channel();
     
-            let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false);
+                        let config = load_config();
     
-            let converted = ime.convert_text(&input_text);
     
-            println!("{}", converted);
     
-            if let Ok(mut cb) = Clipboard::new() {
+                        let mut tries = HashMap::new();
     
-                let _ = cb.set_text(converted);
     
-                std::thread::sleep(std::time::Duration::from_millis(500));
     
-            }
+                        let active_profile_name = &config.input.default_profile;
     
-            return Ok(());
     
-        }
+    
+                        if let Some(profile) = config.files.profiles.iter().find(|p| &p.name == active_profile_name) {
+    
+    
+    
+                            let trie = load_dict_for_profile_quiet(&profile.dicts);
+    
+    
+    
+                            tries.insert(profile.name.clone(), trie);
+    
+    
+    
+                        }
+    
+    
+    
+                        let punctuation = load_punctuation_dict_quiet(&config.files.punctuation_file);
+    
+    
+    
+                        let (tx, _) = std::sync::mpsc::channel();
+    
+    
+    
+                        let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false);
+    
+    
+    
+                        ime.convert_text(&input_text)
+    
+    
+    
+                    };
+    
+    
+    
+            
+    
+    
+    
+                    println!("{}", converted);
+    
+    
+    
+                    if let Ok(mut cb) = Clipboard::new() {
+    
+    
+    
+                        let _ = cb.set_text(converted);
+    
+    
+    
+                        std::thread::sleep(std::time::Duration::from_millis(500));
+    
+    
+    
+                    }
+    
+    
+    
+                    return Ok(());
+    
+    
+    
+                }
+    
+    
+    
+            
     
     
 
@@ -372,6 +426,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
             "--stop" => {
                 return stop_daemon();
+            }
+            "--restart" => {
+                println!("正在重启服务...");
+                let _ = stop_daemon(); // 尝试停止，忽略错误
+                // 继续向下执行进入后台模式
             }
             "--reset-config" => {
                 let config = Config::default_config();
@@ -393,11 +452,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 println!("  --foreground    前台运行 (调试用)");
                 println!("  --install       安装开机自启 (添加到 ~/.config/autostart)");
                 println!("  --stop          停止正在运行的后台进程");
+                println!("  --restart       重启后台进程");
                 println!("  --reset-config  重置配置文件为默认设置");
                 return Ok(())
             }
             _ => {
-                // 未知参数，继续（或者报错），这里选择当作前台参数或忽略
+                // 未知参数，继续
             }
         }
     }
