@@ -357,6 +357,10 @@ impl Ime {
             }
         }
 
+        // Sort by character length to prioritize single characters (danzi)
+        // Stable sort maintains the relative order of Exact matches vs BFS matches for same length
+        final_candidates.sort_by_key(|s| s.chars().count());
+
         self.candidates = final_candidates;
         self.selected = 0;
         self.page = 0;

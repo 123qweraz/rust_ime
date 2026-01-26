@@ -87,8 +87,14 @@ impl Trie {
                     }
                 }
             }
-            for child in curr.children.values() {
-                queue.push_back(child);
+            
+            // Sort children keys to ensure deterministic BFS order
+            let mut keys: Vec<&char> = curr.children.keys().collect();
+            keys.sort();
+            for &k in keys {
+                if let Some(child) = curr.children.get(&k) {
+                    queue.push_back(child);
+                }
             }
         }
 
