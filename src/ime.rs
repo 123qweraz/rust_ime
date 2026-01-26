@@ -298,6 +298,16 @@ impl Ime {
         }
 
         // 2. Pinyin Lookup
+        // 2a. Exact Match First (e.g. "gan" -> "干", "感")
+        if let Some(exact_res) = dict.get_all_exact(&pinyin_search.to_lowercase()) {
+            for cand in exact_res {
+                if !final_candidates.contains(&cand) {
+                    final_candidates.push(cand);
+                }
+            }
+        }
+
+        // 2b. BFS Expansion (for prefixes/shorthands)
         // Use Trie BFS search to find candidates
         let mut raw_candidates = if self.enable_fuzzy {
             let variants = self.expand_fuzzy_pinyin(&pinyin_search.to_lowercase());

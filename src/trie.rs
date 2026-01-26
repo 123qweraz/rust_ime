@@ -49,6 +49,18 @@ impl Trie {
         node.words.first().cloned()
     }
 
+    pub fn get_all_exact(&self, pinyin: &str) -> Option<Vec<String>> {
+        let mut node = &self.root;
+        for c in pinyin.chars() {
+            node = node.children.get(&c)?;
+        }
+        if node.words.is_empty() {
+            None
+        } else {
+            Some(node.words.clone())
+        }
+    }
+
     /// Search for words starting with `prefix` using BFS.
     pub fn search_bfs(&self, prefix: &str, limit: usize) -> Vec<String> {
         let mut results = Vec::new();
