@@ -409,14 +409,14 @@ impl Ime {
                 }
 
                 if abs_index == self.selected {
-                    body.push_str(&format!("【{}.{}{}】\n", num, cand, hint));
+                    body.push_str(&format!("【{}.{}{}】 ", num, cand, hint));
                 } else {
-                    body.push_str(&format!("{}.{}{} \n", num, cand, hint));
+                    body.push_str(&format!("{}.{}{} ", num, cand, hint));
                 }
             }
             
             if self.candidates.len() > 5 {
-                 body.push_str(&format!("[Total: {}]", self.candidates.len()));
+                 body.push_str(&format!("\n[Total: {}]", self.candidates.len()));
             }
         }
 
