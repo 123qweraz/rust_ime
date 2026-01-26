@@ -635,48 +635,34 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
     std::thread::spawn(move || {
         use notify_rust::{Notification, Timeout};
-        let mut handle: Option<notify_rust::NotificationHandle> = None;
         
         while let Ok(event) = notify_rx.recv() {
             match event {
                 NotifyEvent::Update(summary, body) => {
-                    let res = Notification::new()
+                    // 候选词列表使用固定 ID 9999，且设为永不自动消失
+                    let _ = Notification::new()
                         .summary(&summary)
                         .body(&body)
                         .id(9999)
-                        .timeout(Timeout::Never) // 候选词不自动消失
+                        .timeout(Timeout::Never)
                         .show();
-                    
-                    match res {
-                        Ok(h) => handle = Some(h),
-                        Err(e) => eprintln!("Notification error: {}", e),
-                    }
                 },
                 NotifyEvent::Message(msg) => {
-                    let res = Notification::new()
+                    // 状态提示（如“中文模式”）使用 ID 9998，防止干扰候选词 ID 9999 的计时器
+                    let _ = Notification::new()
                         .summary("Blind IME")
                         .body(&msg)
-                        .id(9999)
+                        .id(9998)
                         .timeout(Timeout::Milliseconds(1500))
                         .show();
-                        
-                    match res {
-                        Ok(h) => handle = Some(h),
-                        Err(e) => eprintln!("Notification error: {}", e),
-                    }
                 },
                 NotifyEvent::Close => {
-                    if let Some(h) = handle.take() {
-                        h.close();
-                    } else {
-                        // 尝试发送一个极短的通知来覆盖/关闭
-                        let _ = Notification::new()
-                            .summary(" ")
-                            .body(" ")
-                            .id(9999)
-                            .timeout(Timeout::Milliseconds(1))
-                            .show();
-                    }
+                    // 通过发送一个带有 1ms 超时的空通知来清除 ID 9999 的槽位
+                    let _ = Notification::new()
+                        .summary(" ")
+                        .id(9999)
+                        .timeout(Timeout::Milliseconds(1))
+                        .show();
                 }
             }
         }
