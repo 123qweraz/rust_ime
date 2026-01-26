@@ -392,7 +392,8 @@ impl Ime {
         if self.candidates.is_empty() {
             body = "(无候选)".to_string();
         } else {
-            let start = self.page * 5;
+            // Sliding window: page is the start offset
+            let start = self.page;
             let end = (start + 5).min(self.candidates.len());
             let current_page_candidates = &self.candidates[start..end];
             
@@ -415,10 +416,8 @@ impl Ime {
                 }
             }
             
-            // Show total pages
-            let total_pages = (self.candidates.len() + 4) / 5;
-            if total_pages > 1 {
-                body.push_str(&format!("\n[Page {}/{}]", self.page + 1, total_pages));
+            if self.candidates.len() > 5 {
+                 body.push_str(&format!("\n[Total: {}]", self.candidates.len()));
             }
         }
 
@@ -436,7 +435,7 @@ impl Ime {
         if self.candidates.is_empty() {
             print!("(无候选)");
         } else {
-            let start = self.page * 5;
+            let start = self.page;
             let end = (start + 5).min(self.candidates.len());
             
             for (i, cand) in self.candidates[start..end].iter().enumerate() {
@@ -458,10 +457,9 @@ impl Ime {
                 }
             }
             
-             let total_pages = (self.candidates.len() + 4) / 5;
-             if total_pages > 1 {
-                 print!(" [Pg {}/{}]", self.page + 1, total_pages);
-             }
+            if self.candidates.len() > 5 {
+                print!(" [{}/{}]", self.page + 1, self.candidates.len());
+            }
         }
         use std::io::{self, Write};
         let _ = io::stdout().flush();
@@ -545,11 +543,22 @@ impl Ime {
 
             Key::KEY_TAB => {
                 if !self.candidates.is_empty() {
-                    // Move to next candidate
-                    self.selected = (self.selected + 1) % self.candidates.len();
-                    // Update page if selected moves out of current page
-                    self.page = self.selected / 5;
-                    
+                    if shift_pressed {
+                        // Shift + Tab: Move selection UP (prev candidate)
+                        // Sliding window: window follows selection
+                        if self.selected > 0 {
+                            self.selected -= 1;
+                            self.page = self.selected; // Window starts at selected
+                        }
+                    } else {
+                        // Tab: Move selection DOWN (next candidate)
+                        // Sliding window: window follows selection
+                        if self.selected + 1 < self.candidates.len() {
+                            self.selected += 1;
+                            self.page = self.selected; // Window starts at selected
+                        }
+                    }
+
                     if self.phantom_mode != PhantomMode::None {
                          self.update_phantom_text()
                     } else {
@@ -563,29 +572,35 @@ impl Ime {
             }
             
             Key::KEY_MINUS => {
-                 if self.page > 0 {
-                     self.page -= 1;
-                     self.selected = self.page * 5;
-                     if self.phantom_mode != PhantomMode::None {
-                         return self.update_phantom_text();
-                     } else {
-                         self.print_preview();
-                         self.notify_preview();
-                     }
+                 if self.page >= 5 {
+                     self.page -= 5;
+                 } else {
+                     self.page = 0;
+                 }
+                 self.selected = self.page;
+                 
+                 if self.phantom_mode != PhantomMode::None {
+                     return self.update_phantom_text();
+                 } else {
+                     self.print_preview();
+                     self.notify_preview();
                  }
                  Action::Consume
             }
 
             Key::KEY_EQUAL => {
-                if (self.page + 1) * 5 < self.candidates.len() {
-                    self.page += 1;
-                    self.selected = self.page * 5;
-                    if self.phantom_mode != PhantomMode::None {
-                         return self.update_phantom_text();
-                    } else {
-                         self.print_preview();
-                         self.notify_preview();
-                    }
+                if self.page + 5 < self.candidates.len() {
+                    self.page += 5;
+                    self.selected = self.page;
+                } else if self.candidates.len() > 0 {
+                    // Jump to end logic or stay? Stay for now to avoid overshoot
+                }
+
+                if self.phantom_mode != PhantomMode::None {
+                     return self.update_phantom_text();
+                } else {
+                     self.print_preview();
+                     self.notify_preview();
                 }
                 Action::Consume
             }
@@ -685,7 +700,8 @@ impl Ime {
 
                 // 1-5 maps to index on CURRENT page
                 if digit >= 1 && digit <= 5 {
-                    let actual_idx = self.page * 5 + (digit - 1);
+                    // Sliding window: page is start offset
+                    let actual_idx = self.page + (digit - 1);
                     if let Some(word) = self.candidates.get(actual_idx) {
                         let out = word.clone();
                         
