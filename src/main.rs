@@ -636,19 +636,26 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     std::thread::spawn(move || {
         use notify_rust::{Notification, Timeout};
         
+        // 分别保存候选词通知和状态消息通知的句柄
+        let mut cand_handle: Option<notify_rust::NotificationHandle> = None;
+        
         while let Ok(event) = notify_rx.recv() {
             match event {
                 NotifyEvent::Update(summary, body) => {
-                    // 候选词列表使用固定 ID 9999，且设为永不自动消失
-                    let _ = Notification::new()
+                    // 候选词列表 ID 9999
+                    let res = Notification::new()
                         .summary(&summary)
                         .body(&body)
                         .id(9999)
                         .timeout(Timeout::Never)
                         .show();
+                    
+                    if let Ok(h) = res {
+                        cand_handle = Some(h);
+                    }
                 },
                 NotifyEvent::Message(msg) => {
-                    // 状态提示（如“中文模式”）使用 ID 9998，防止干扰候选词 ID 9999 的计时器
+                    // 状态提示 ID 9998，不干扰候选词
                     let _ = Notification::new()
                         .summary("Blind IME")
                         .body(&msg)
@@ -657,7 +664,12 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                         .show();
                 },
                 NotifyEvent::Close => {
-                    // 通过发送一个带有 1ms 超时的空通知来清除 ID 9999 的槽位
+                    // 彻底关闭候选词通知
+                    if let Some(h) = cand_handle.take() {
+                        h.close();
+                    }
+                    
+                    // 某些桌面环境 close() 可能失效，补充一个物理覆盖清除
                     let _ = Notification::new()
                         .summary(" ")
                         .id(9999)
