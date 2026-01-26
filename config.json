@@ -1,62 +1,81 @@
 {
-  "_readme": "这是 Blind-IME 的配置文件。每个配置项都有对应的 description 说明。",
-  "profiles": [
-    {
-      "name": "Chinese",
-      "description": "中文拼音输入方案，包含常用词汇和单字",
-      "dicts": [
-        "dicts/chinese/character",
-        "dicts/chinese/vocabulary",
-        "dicts/chinese/other"
-      ]
-    },
-    {
-      "name": "Japanese",
-      "description": "日语输入方案 (假名/N1-N5)",
-      "dicts": ["dicts/japanese"]
-    }
-  ],
-  "active_profile": "Chinese",
-  "punctuation_path": "dicts/chinese/punctuation.json",
-  "char_en_path": "dicts/chinese/character",
-  "device_path": null,
-  "paste_shortcut": {
-    "key": "ctrl_v",
-    "description": "自动粘贴时发送的按键: ctrl_v, ctrl_shift_v, shift_insert"
+  "_help_readme": "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert",
+  "appearance": {
+    "show_notifications": true,
+    "preview_mode": "none"
   },
-  "enable_fuzzy_pinyin": false,
-  "shortcuts": {
-    "ime_toggle": {
+  "input": {
+    "enable_fuzzy_pinyin": false,
+    "default_profile": "Chinese",
+    "paste_method": "ctrl_v"
+  },
+  "hotkeys": {
+    "switch_language": {
       "key": "caps_lock",
-      "description": "切换中英文输入模式"
+      "description": "核心: 切换中/英文模式"
     },
-    "caps_lock_toggle": {
-      "key": "caps_lock+tab",
-      "description": "触发物理大写锁定 (CapsLock)"
+    "switch_language_alt": {
+      "key": "ctrl+space",
+      "description": "核心: 切换中/英文模式 (备选)"
     },
-    "paste_cycle": {
-      "key": "ctrl+alt+v",
-      "description": "循环切换粘贴模式 (兼容不同终端)"
+    "convert_selection": {
+      "key": "ctrl+r",
+      "description": "核心: 将选中的拼音转换为汉字 (选中拼音后按此键)"
     },
-    "phantom_toggle": {
-      "key": "ctrl+alt+p",
-      "description": "开启/关闭幻影模式 (在输入框显示拼音)"
+    "cycle_preview_mode": {
+      "key": "ctrl+alt+m",
+      "description": "功能: 切换输入预览模式 (无 -> 拼音 -> 汉字)"
     },
-    "profile_next": {
-      "key": "ctrl+alt+s",
-      "description": "切换到下一个输入方案 (如中/日切换)"
+    "toggle_notifications": {
+      "key": "ctrl+alt+n",
+      "description": "功能: 开启/关闭桌面候选词通知"
     },
-    "fuzzy_toggle": {
+    "toggle_fuzzy_pinyin": {
       "key": "ctrl+alt+f",
-      "description": "实时开启/关闭模糊拼音"
+      "description": "功能: 开启/关闭模糊拼音 (z=zh, c=ch...)"
     },
-    "tty_toggle": {
+    "switch_dictionary": {
+      "key": "ctrl+alt+s",
+      "description": "功能: 切换词库 (如 中文 -> 日语)"
+    },
+    "cycle_paste_method": {
+      "key": "ctrl+alt+v",
+      "description": "高级: 循环切换自动粘贴的方式 (如在终端无法上屏时使用)"
+    },
+    "trigger_caps_lock": {
+      "key": "caps_lock+tab",
+      "description": "高级: 发送真实的 CapsLock 键 (因 CapsLock 被占用于切换输入法)"
+    },
+    "toggle_tty_mode": {
       "key": "ctrl+alt+t",
-      "description": "切换 TTY 模式 (直接注入字节，适合终端)"
+      "description": "高级: 切换 TTY 字节注入模式 (仅用于纯命令行环境)"
     },
-    "backspace_toggle": {
+    "toggle_backspace_type": {
       "key": "ctrl+alt+b",
-      "description": "切换退格键处理方式"
+      "description": "高级: 切换退格键编码 (Delete / Backspace)"
     }
+  },
+  "files": {
+    "device_path": null,
+    "profiles": [
+      {
+        "name": "Chinese",
+        "description": "默认中文输入",
+        "dicts": [
+          "dicts/chinese/vocabulary",
+          "dicts/chinese/character",
+          "dicts/chinese/other"
+        ]
+      },
+      {
+        "name": "Japanese",
+        "description": "日语输入方案",
+        "dicts": [
+          "dicts/japanese"
+        ]
+      }
+    ],
+    "punctuation_file": "dicts/chinese/punctuation.json",
+    "char_map_dir": "dicts/chinese/character"
   }
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rust-IME 控制面板 & 词典编辑器</title>
+    <title>Rust-IME 控制中心</title>
     <style>
         :root {
             --primary-color: #4a90e2;
@@ -12,6 +12,7 @@
             --text-color: #333;
             --border-color: #e1e4e8;
             --accent-color: #2ecc71;
+            --danger-color: #e74c3c;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -21,201 +22,160 @@
             display: flex; flex-direction: column;
             height: 100vh;
         }
-        header {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        nav {
-            display: flex;
-            justify-content: center;
-            background: white;
-            border-bottom: 1px solid var(--border-color);
-        }
-        nav button {
-            padding: 10px 20px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-weight: bold;
-            color: #666;
-        }
-        nav button.active {
-            color: var(--primary-color);
-            border-bottom: 3px solid var(--primary-color);
-        }
+        header { background: var(--primary-color); color: white; padding: 1rem; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        nav { display: flex; justify-content: center; background: white; border-bottom: 1px solid var(--border-color); }
+        nav button { padding: 12px 25px; border: none; background: none; cursor: pointer; font-weight: bold; color: #666; font-size: 1rem; }
+        nav button.active { color: var(--primary-color); border-bottom: 3px solid var(--primary-color); }
 
-        .tab-content {
-            flex: 1;
-            overflow: auto;
-            padding: 20px;
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content { flex: 1; overflow: auto; padding: 20px; display: none; }
+        .tab-content.active { display: block; }
 
-        /* 配置页面样式 */
-        .config-container { max-width: 800px; margin: 0 auto; }
+        .container { max-width: 1000px; margin: 0 auto; }
         .section { background: var(--card-bg); border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
         h2 { margin-top: 0; color: var(--primary-color); border-bottom: 2px solid var(--bg-color); padding-bottom: 10px; font-size: 1.2rem; }
-        .form-group { margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; }
+        
+        .form-group { margin-bottom: 15px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
         .form-group label { font-weight: 500; flex: 1; }
         .form-group .desc { font-size: 0.85rem; color: #666; margin-top: 4px; display: block; }
-        input[type="text"], select { padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; width: 200px; }
-        .switch { position: relative; display: inline-block; width: 50px; height: 24px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; transition: .4s; border-radius: 24px; }
-        .slider:before { position: absolute; content: ""; height: 18px; width: 18px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-        input:checked + .slider { background-color: var(--primary-color); }
-        input:checked + .slider:before { transform: translateX(26px); }
-        .hotkey-row { display: grid; grid-template-columns: 1fr 150px; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--bg-color); }
+        input[type="text"], select { padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; width: 250px; }
+        
+        /* 词库管理专属样式 */
+        .profile-card { border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin-bottom: 20px; background: #fff; }
+        .profile-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
+        .dict-selector { display: flex; flex-direction: column; gap: 5px; margin-top: 10px; padding: 10px; background: #f9f9f9; border: 1px solid #eee; border-radius: 4px; max-height: 300px; overflow-y: auto; }
+        .dict-checkbox { display: flex; align-items: center; padding: 8px; border-bottom: 1px solid #eee; cursor: pointer; transition: background 0.2s; }
+        .dict-checkbox:hover { background: #f0f7ff; }
+        .dict-checkbox:last-child { border-bottom: none; }
+        .dict-checkbox input { width: 18px; height: 18px; margin-right: 12px; cursor: pointer; }
+        .dict-checkbox .file-name { flex: 1; font-family: monospace; font-size: 0.9rem; color: #444; }
+        .dict-checkbox.is-selected { background: #e8f4ff; font-weight: bold; }
+
+        /* 通用按钮 */
+        .btn { padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; transition: opacity 0.2s; }
+        .btn-primary { background: var(--primary-color); color: white; }
+        .btn-success { background: var(--accent-color); color: white; }
+        .btn-danger { background: var(--danger-color); color: white; }
+        .btn:hover { opacity: 0.8; }
 
         /* 词典编辑器样式 */
-        .editor-layout {
-            display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 20px;
-            height: calc(100vh - 150px);
-        }
-        .file-list {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            overflow-y: auto;
-        }
-        .file-item {
-            padding: 10px;
-            cursor: pointer;
-            border-bottom: 1px solid var(--bg-color);
-            font-size: 0.9rem;
-        }
+        .editor-layout { display: grid; grid-template-columns: 250px 1fr; gap: 20px; height: 600px; }
+        .file-list { background: white; border-radius: 8px; border: 1px solid var(--border-color); overflow-y: auto; }
+        .file-item { padding: 10px; cursor: pointer; border-bottom: 1px solid var(--bg-color); font-size: 0.9rem; }
         .file-item:hover { background: var(--bg-color); }
         .file-item.active { background: var(--primary-color); color: white; }
-
-        .dict-main {
-            background: white;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-        }
-        .dict-toolbar {
-            padding: 10px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
-        .dict-toolbar input { flex: 1; padding: 8px; }
-        
-        .dict-table-container {
-            flex: 1;
-            overflow-y: auto;
-        }
+        .dict-main { background: white; border-radius: 8px; border: 1px solid var(--border-color); display: flex; flex-direction: column; }
+        .dict-toolbar { padding: 10px; border-bottom: 1px solid var(--border-color); display: flex; gap: 10px; }
+        .dict-table-container { flex: 1; overflow-y: auto; }
         table { width: 100%; border-collapse: collapse; }
-        th { background: var(--bg-color); position: sticky; top: 0; text-align: left; padding: 10px; border-bottom: 1px solid var(--border-color); }
+        th { background: var(--bg-color); position: sticky; top: 0; text-align: left; padding: 10px; border-bottom: 1px solid var(--border-color); z-index: 10; }
         td { padding: 8px; border-bottom: 1px solid var(--bg-color); }
         .row-pinyin { font-weight: bold; color: var(--primary-color); width: 150px; }
-        .row-chars input { width: 95%; border: none; background: transparent; padding: 5px; }
+        .row-chars input { width: 95%; border: none; background: transparent; padding: 5px; font-size: 1rem; }
         .row-chars input:focus { background: #fffde7; border-bottom: 1px solid orange; outline: none; }
 
-        .btn-save { padding: 10px 20px; background: var(--primary-color); color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
-        .btn-add { background: var(--accent-color); }
-        .btn-save:hover { opacity: 0.9; }
-
-        .pagination {
-            padding: 10px;
-            border-top: 1px solid var(--border-color);
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            background: var(--bg-color);
-        }
-        .status { text-align: center; font-weight: bold; height: 24px; margin-top: 10px; }
+        .status { text-align: center; font-weight: bold; height: 24px; margin-top: 10px; color: var(--primary-color); }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Rust-IME 控制中心</h1>
-    </header>
-
+    <header><h1>Rust-IME 控制中心</h1></header>
     <nav>
-        <button id="nav-config" class="active" onclick="showTab('config')">系统配置</button>
+        <button id="nav-config" class="active" onclick="showTab('config')">系统设置</button>
+        <button id="nav-profiles" onclick="showTab('profiles')">方案管理</button>
         <button id="nav-dict" onclick="showTab('dict')">词典编辑器</button>
     </nav>
 
-    <!-- 系统配置 Tab -->
+    <!-- 1. 系统设置 Tab -->
     <div id="tab-config" class="tab-content active">
-        <div class="config-container">
+        <div class="container">
             <div class="section">
-                <h2>外观设置</h2>
+                <h2>外观与交互</h2>
                 <div class="form-group">
                     <div><label>显示通知</label><span class="desc">在系统角弹出候选词列表</span></div>
                     <label class="switch"><input type="checkbox" id="show_notifications"><span class="slider"></span></label>
                 </div>
                 <div class="form-group">
-                    <div><label>预览模式</label><span class="desc">直接在光标处显示预览</span></div>
+                    <div><label>预览模式 (Phantom)</label><span class="desc">在光标处显示的行内预览类型</span></div>
                     <select id="preview_mode">
                         <option value="none">关闭</option>
-                        <option value="pinyin">拼音</option>
-                        <option value="hanzi">汉字</option>
+                        <option value="pinyin">仅拼音</option>
+                        <option value="hanzi">首选汉字</option>
                     </select>
                 </div>
             </div>
             <div class="section">
                 <h2>输入习惯</h2>
                 <div class="form-group">
-                    <div><label>模糊拼音</label><span class="desc">纠正 z/zh 等拼写</span></div>
+                    <div><label>模糊拼音</label><span class="desc">自动纠正 z/zh, c/ch, s/sh 等拼写</span></div>
                     <label class="switch"><input type="checkbox" id="enable_fuzzy_pinyin"><span class="slider"></span></label>
                 </div>
-                <div class="form-group"><div><label>默认词库</label></div><select id="default_profile"></select></div>
                 <div class="form-group">
-                    <div><label>粘贴方式</label></div>
+                    <div><label>默认激活方案</label><span class="desc">程序启动时默认使用的词库方案</span></div>
+                    <select id="default_profile"></select>
+                </div>
+                <div class="form-group">
+                    <div><label>粘贴注入方式</label><span class="desc">兼容性设置：常规 Ctrl+V 或 终端模式</span></div>
                     <select id="paste_method">
-                        <option value="ctrl_v">Ctrl+V</option>
-                        <option value="ctrl_shift_v">Ctrl+Shift+V</option>
-                        <option value="shift_insert">Shift+Insert</option>
+                        <option value="ctrl_v">标准 (Ctrl+V)</option>
+                        <option value="ctrl_shift_v">终端 (Ctrl+Shift+V)</option>
+                        <option value="shift_insert">X11 (Shift+Insert)</option>
                     </select>
                 </div>
             </div>
             <div class="section">
-                <h2>快捷键绑定</h2>
+                <h2>核心快捷键</h2>
                 <div id="hotkeys-list"></div>
             </div>
-            <button class="btn-save" style="width:100%" onclick="saveConfig()">保存系统配置</button>
+            <button class="btn btn-primary" style="width:100%; padding: 15px;" onclick="saveConfig()">保存并应用所有设置</button>
             <div id="config-status" class="status"></div>
         </div>
     </div>
 
-    <!-- 词典编辑器 Tab -->
+    <!-- 2. 方案管理 Tab -->
+    <div id="tab-profiles" class="tab-content">
+        <div class="container">
+            <div class="section">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                    <h2>输入方案 (Profiles)</h2>
+                    <button class="btn btn-success" onclick="addProfile()">+ 新增方案</button>
+                </div>
+                <div id="profiles-container"></div>
+            </div>
+            <div class="section">
+                <h2>高级路径设置</h2>
+                <div class="form-group">
+                    <label>标点符号映射文件</label>
+                    <input type="text" id="punctuation_file" style="width:400px">
+                </div>
+                <div class="form-group">
+                    <label>英文联想字典目录</label>
+                    <input type="text" id="char_map_dir" style="width:400px">
+                </div>
+            </div>
+            <button class="btn btn-primary" style="width:100%; padding: 15px;" onclick="saveConfig()">保存方案配置</button>
+            <div id="profiles-status" class="status"></div>
+        </div>
+    </div>
+
+    <!-- 3. 词典编辑器 Tab -->
     <div id="tab-dict" class="tab-content">
         <div class="editor-layout">
             <div class="file-list" id="dict-files"></div>
             <div class="dict-main">
                 <div class="dict-toolbar">
-                    <input type="text" id="dict-search" placeholder="搜索拼音或汉字..." oninput="filterDict()">
-                    <button class="btn-save btn-add" onclick="addNewEntry()">新增词条</button>
-                    <button class="btn-save" onclick="saveDict()">保存并应用词典</button>
+                    <input type="text" id="dict-search" placeholder="搜索拼音或汉字..." oninput="filterDict()" style="flex:1; padding:8px;">
+                    <button class="btn btn-success" onclick="addNewEntry()">新增词条</button>
+                    <button class="btn btn-primary" onclick="saveDict()">保存并同步到引擎</button>
                 </div>
                 <div class="dict-table-container">
                     <table id="dict-table">
-                        <thead>
-                            <tr>
-                                <th>拼音 (Key)</th>
-                                <th>汉字 (Value) - 逗号分隔或JSON数组</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
+                        <thead><tr><th>拼音 (Key)</th><th>汉字 (Value)</th><th style="width:80px">操作</th></tr></thead>
                         <tbody id="dict-body"></tbody>
                     </table>
                 </div>
-                <div class="pagination">
-                    <button onclick="changePage(-1)">上一页</button>
-                    <span id="page-info">第 1 页</span>
-                    <button onclick="changePage(1)">下一页</button>
+                <div style="display:flex; justify-content:center; gap:20px; padding:10px; background:#f0f0f0;">
+                    <button onclick="changePage(-1)" class="btn">上一页</button>
+                    <span id="page-info" style="line-height:35px;">第 1 页</span>
+                    <button onclick="changePage(1)" class="btn">下一页</button>
                 </div>
             </div>
         </div>
@@ -224,66 +184,179 @@
 
     <script>
         let currentConfig = null;
-        let fullDictData = {}; // 存储当前文件的完整 JSON 对象
-        let filteredKeys = []; // 搜索过滤后的 Key 列表
+        let allDictFiles = []; // 存储服务器上所有的字典文件路径
+        let fullDictData = {}; 
+        let filteredKeys = []; 
         let currentPage = 1;
         let pageSize = 50;
         let currentFilePath = "";
 
-        // --- Tab 切换 ---
+        async function init() {
+            await loadConfig();
+            await loadAllDictFiles();
+        }
+
         function showTab(tab) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('nav button').forEach(el => el.classList.remove('active'));
             document.getElementById('tab-' + tab).classList.add('active');
             document.getElementById('nav-' + tab).classList.add('active');
+            if (tab === 'profiles') renderProfiles();
             if (tab === 'dict' && currentFilePath === "") loadDictList();
         }
 
-        // --- 配置逻辑 ---
         async function loadConfig() {
-            try {
-                const r = await fetch('/api/config');
-                currentConfig = await r.json();
-                document.getElementById('show_notifications').checked = currentConfig.appearance.show_notifications;
-                document.getElementById('preview_mode').value = currentConfig.appearance.preview_mode;
-                document.getElementById('enable_fuzzy_pinyin').checked = currentConfig.input.enable_fuzzy_pinyin;
-                document.getElementById('paste_method').value = currentConfig.input.paste_method;
-                const ps = document.getElementById('default_profile');
-                ps.innerHTML = '';
-                currentConfig.files.profiles.forEach(p => {
-                    const o = document.createElement('option');
-                    o.value = p.name; o.textContent = p.name;
-                    ps.appendChild(o);
+            const r = await fetch('/api/config');
+            currentConfig = await r.json();
+            
+            // 填充设置页
+            document.getElementById('show_notifications').checked = currentConfig.appearance.show_notifications;
+            document.getElementById('preview_mode').value = currentConfig.appearance.preview_mode;
+            document.getElementById('enable_fuzzy_pinyin').checked = currentConfig.input.enable_fuzzy_pinyin;
+            document.getElementById('paste_method').value = currentConfig.input.paste_method;
+            
+            const ps = document.getElementById('default_profile');
+            ps.innerHTML = '';
+            currentConfig.files.profiles.forEach(p => {
+                const o = document.createElement('option');
+                o.value = p.name; o.textContent = p.name;
+                ps.appendChild(o);
+            });
+            ps.value = currentConfig.input.default_profile;
+
+            const hl = document.getElementById('hotkeys-list');
+            hl.innerHTML = '';
+            for (const [k, v] of Object.entries(currentConfig.hotkeys)) {
+                const row = document.createElement('div');
+                row.className = 'hotkey-row';
+                row.innerHTML = `<div class="hotkey-info"><label>${v.description}</label></div><input type="text" data-key="${k}" value="${v.key}">`;
+                hl.appendChild(row);
+            }
+
+            // 填充方案管理页路径
+            document.getElementById('punctuation_file').value = currentConfig.files.punctuation_file;
+            document.getElementById('char_map_dir').value = currentConfig.files.char_map_dir;
+        }
+
+        async function loadAllDictFiles() {
+            const r = await fetch('/api/dicts/list');
+            allDictFiles = await r.json();
+        }
+
+        function renderProfiles() {
+            const container = document.getElementById('profiles-container');
+            container.innerHTML = '';
+            currentConfig.files.profiles.forEach((p, idx) => {
+                const card = document.createElement('div');
+                card.className = 'profile-card';
+                
+                // 检查一个文件是否被选中的逻辑：
+                // 如果 p.dicts 中直接包含该文件路径，或者包含该文件的父目录路径，则视为已选中
+                const isFileSelected = (filePath) => {
+                    return p.dicts.some(d => filePath === d || filePath.startsWith(d + '/'));
+                };
+
+                card.innerHTML = `
+                    <div class="profile-header">
+                        <div style="flex:1">
+                            <label style="font-size:0.8rem; color:#888;">方案名称</label><br>
+                            <input type="text" value="${p.name}" onchange="currentConfig.files.profiles[${idx}].name=this.value" style="font-weight:bold; font-size:1.2rem; width:250px; margin-bottom:10px;">
+                            <br>
+                            <label style="font-size:0.8rem; color:#888;">描述</label><br>
+                            <input type="text" value="${p.description}" onchange="currentConfig.files.profiles[${idx}].description=this.value" style="color:#666; width:500px; border:none; background:transparent; border-bottom:1px dashed #ccc;">
+                        </div>
+                        <button class="btn btn-danger" onclick="deleteProfile(${idx})">删除此方案</button>
+                    </div>
+                    <div style="margin-top:15px;">
+                        <strong>选择包含的词典文件 (一行一个):</strong>
+                        <div class="dict-selector">
+                            ${allDictFiles.map(f => {
+                                const selected = isFileSelected(f.path);
+                                return `
+                                    <label class="dict-checkbox ${selected ? 'is-selected' : ''}">
+                                        <input type="checkbox" ${selected ? 'checked' : ''} 
+                                            onchange="toggleDictInProfile(${idx}, '${f.path}', this.checked); this.parentElement.classList.toggle('is-selected', this.checked)">
+                                        <span class="file-name">${f.path}</span>
+                                    </label>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function toggleDictInProfile(profileIdx, dictPath, checked) {
+            const p = currentConfig.files.profiles[profileIdx];
+            
+            // 如果原来的 p.dicts 里存的是目录，这里会比较复杂。
+            // 简单的做法是：一旦用户开始手动点选，我们就把该方案切换为“完全基于文件”模式
+            // 首先判断是否需要把目录展开为文件
+            if (p.dicts.some(d => !d.endsWith('.json'))) {
+                // 如果检测到目录，将其展开
+                let newDicts = [];
+                allDictFiles.forEach(f => {
+                    if (p.dicts.some(d => f.path === d || f.path.startsWith(d + '/'))) {
+                        newDicts.push(f.path);
+                    }
                 });
-                ps.value = currentConfig.input.default_profile;
-                const hl = document.getElementById('hotkeys-list');
-                hl.innerHTML = '';
-                for (const [k, v] of Object.entries(currentConfig.hotkeys)) {
-                    const row = document.createElement('div');
-                    row.className = 'hotkey-row';
-                    row.innerHTML = `<div class="hotkey-info"><label>${v.description}</label></div><input type="text" data-key="${k}" value="${v.key}">`;
-                    hl.appendChild(row);
-                }
-            } catch (e) { console.error(e); }
+                p.dicts = newDicts;
+            }
+
+            if (checked) {
+                if (!p.dicts.includes(dictPath)) p.dicts.push(dictPath);
+            } else {
+                p.dicts = p.dicts.filter(d => d !== dictPath);
+            }
+        }
+
+        function addProfile() {
+            currentConfig.files.profiles.push({
+                name: "新方案",
+                description: "描述内容",
+                dicts: []
+            });
+            renderProfiles();
+        }
+
+        function deleteProfile(idx) {
+            if (confirm("确定要删除这个方案吗？")) {
+                currentConfig.files.profiles.splice(idx, 1);
+                renderProfiles();
+            }
         }
 
         async function saveConfig() {
-            const s = document.getElementById('config-status');
-            s.textContent = '正在保存...';
+            const status = document.querySelector('.tab-content.active .status');
+            status.textContent = '正在保存并重载引擎...';
+            
+            // 基础配置收集
             currentConfig.appearance.show_notifications = document.getElementById('show_notifications').checked;
             currentConfig.appearance.preview_mode = document.getElementById('preview_mode').value;
             currentConfig.input.enable_fuzzy_pinyin = document.getElementById('enable_fuzzy_pinyin').checked;
             currentConfig.input.paste_method = document.getElementById('paste_method').value;
             currentConfig.input.default_profile = document.getElementById('default_profile').value;
+            
             document.querySelectorAll('#hotkeys-list input').forEach(i => {
                 currentConfig.hotkeys[i.dataset.key].key = i.value;
             });
-            await fetch('/api/config', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(currentConfig)});
-            s.textContent = '保存成功！';
-            setTimeout(() => s.textContent = '', 2000);
+
+            currentConfig.files.punctuation_file = document.getElementById('punctuation_file').value;
+            currentConfig.files.char_map_dir = document.getElementById('char_map_dir').value;
+
+            try {
+                // 1. 保存配置
+                await fetch('/api/config', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(currentConfig)});
+                // 2. 触发引擎全量重载 (Profile 变更需要重载词典)
+                await fetch('/api/dicts/reload', { method: 'POST' });
+                status.textContent = '保存并重载成功！';
+                setTimeout(() => status.textContent = '', 2000);
+                loadConfig(); // 刷新界面
+            } catch (e) { status.textContent = '保存失败: ' + e; }
         }
 
-        // --- 词典逻辑 ---
+        // --- 词典编辑逻辑 (保持不变) ---
         async function loadDictList() {
             const r = await fetch('/api/dicts/list');
             const files = await r.json();
@@ -324,74 +397,52 @@
             const start = (currentPage - 1) * pageSize;
             const end = start + pageSize;
             const keys = filteredKeys.slice(start, end);
-
             keys.forEach(k => {
                 let val = fullDictData[k];
-                // 处理不同格式：[{"char":...}] 或 ["char",...]
-                let displayVal = Array.isArray(val) ? 
-                    val.map(v => typeof v === 'object' ? v.char : v).join(', ') : val;
-
+                let displayVal = Array.isArray(val) ? val.map(v => typeof v === 'object' ? v.char : v).join(', ') : val;
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td class="row-pinyin">${k}</td>
                     <td class="row-chars"><input type="text" value="${displayVal}" onchange="updateValue('${k}', this.value)"></td>
-                    <td><button onclick="deleteEntry('${k}')">删除</button></td>
+                    <td><button class="btn btn-danger" onclick="deleteEntry('${k}')" style="padding:2px 8px; font-size:0.8rem">删除</button></td>
                 `;
                 tbody.appendChild(tr);
             });
-            document.getElementById('page-info').textContent = `第 ${currentPage} 页 / 共 ${Math.ceil(filteredKeys.length / pageSize)} 页 (总计 ${filteredKeys.length})`;
+            document.getElementById('page-info').textContent = `第 ${currentPage} 页 / 共 ${Math.ceil(filteredKeys.length / pageSize)} 页`;
         }
 
         function updateValue(key, val) {
-            // 尝试保持原有格式
             if (Array.isArray(fullDictData[key])) {
                 if (typeof fullDictData[key][0] === 'object') {
                     fullDictData[key] = val.split(',').map(s => ({ char: s.trim() }));
                 } else {
                     fullDictData[key] = val.split(',').map(s => s.trim());
                 }
-            } else {
-                fullDictData[key] = val;
-            }
+            } else { fullDictData[key] = val; }
         }
 
-        function deleteEntry(key) {
-            delete fullDictData[key];
-            filterDict();
-        }
-
+        function deleteEntry(key) { delete fullDictData[key]; filterDict(); }
         function addNewEntry() {
-            const key = prompt("请输入拼音:");
-            if (!key) return;
-            if (fullDictData[key]) { alert("词条已存在！"); return; }
-            fullDictData[key] = [];
-            filterDict();
+            const k = prompt("请输入拼音:");
+            if (k && !fullDictData[k]) { fullDictData[k] = []; filterDict(); }
         }
 
         async function saveDict() {
             const s = document.getElementById('dict-status');
-            s.textContent = '正在保存到硬盘并重载引擎...';
-            try {
-                // 1. 保存文件
-                await fetch('/api/dicts/save', {
-                    method: 'POST',
-                    headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({ path: currentFilePath, content: fullDictData })
-                });
-                // 2. 触发重载
-                await fetch('/api/dicts/reload', { method: 'POST' });
-                s.textContent = '保存并重载成功！新词条已生效。';
-                setTimeout(() => s.textContent = '', 3000);
-            } catch (e) { s.textContent = '失败: ' + e; }
+            s.textContent = '保存中...';
+            await fetch('/api/dicts/save', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify({ path: currentFilePath, content: fullDictData })});
+            await fetch('/api/dicts/reload', { method: 'POST' });
+            s.textContent = '词典已保存并生效！';
+            setTimeout(() => s.textContent = '', 2000);
         }
 
-        function changePage(delta) {
-            const max = Math.ceil(filteredKeys.length / pageSize);
-            currentPage = Math.min(max, Math.max(1, currentPage + delta));
+        function changePage(d) {
+            const m = Math.ceil(filteredKeys.length / pageSize);
+            currentPage = Math.min(m, Math.max(1, currentPage + d));
             renderDictTable();
         }
 
-        loadConfig();
+        init();
     </script>
 </body>
 </html>

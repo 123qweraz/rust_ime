@@ -464,7 +464,7 @@ impl Ime {
              }
         }
         use std::io::{self, Write};
-        io::stdout().flush().unwrap();
+        let _ = io::stdout().flush();
     }
 
     pub fn handle_key(&mut self, key: Key, is_press: bool, shift_pressed: bool) -> Action {

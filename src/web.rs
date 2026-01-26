@@ -62,14 +62,29 @@ impl WebServer {
             .fallback(static_handler)
             .with_state(state);
 
-        let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
-        axum::serve(listener, app).await.unwrap();
+        match tokio::net::TcpListener::bind(addr).await {
+            Ok(listener) => {
+                if let Err(e) = axum::serve(listener, app).await {
+                    eprintln!("[Web] 服务器运行错误: {}", e);
+                }
+            },
+            Err(e) => {
+                eprintln!("[Web] 无法绑定端口 {}: {}", self.port, e);
+            }
+        }
     }
 }
 
 async fn index_handler() -> impl IntoResponse {
-    let asset = Assets::get("index.html").unwrap();
-    Html(std::str::from_utf8(&asset.data).unwrap().to_string())
+    match Assets::get("index.html") {
+        Some(content) => {
+             match std::str::from_utf8(&content.data) {
+                Ok(html) => Html(html.to_string()).into_response(),
+                Err(_) => StatusCode::INTERNAL_SERVER_ERROR.into_response(),
+             }
+        },
+        None => StatusCode::NOT_FOUND.into_response(),
+    }
 }
 
 async fn static_handler(uri: Uri) -> impl IntoResponse {

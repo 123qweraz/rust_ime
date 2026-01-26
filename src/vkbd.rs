@@ -1,8 +1,6 @@
 use evdev::uinput::{VirtualDevice, VirtualDeviceBuilder};
 use evdev::{AttributeSet, InputEvent, Key, Device, EventType};
 use std::{thread, time::Duration};
-use std::fs;
-use std::os::unix::io::AsRawFd;
 use std::process::Command;
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -16,7 +14,6 @@ pub enum PasteMode {
 pub struct Vkbd {
     pub dev: VirtualDevice,
     pub paste_mode: PasteMode,
-    pub tty_mode: bool,
     pub backspace_char: u8,
 }
 
@@ -51,20 +48,9 @@ impl Vkbd {
             .with_keys(&keys)?
             .build()?;
 
-        // Detect environment for TTY mode default
-        let is_gui = std::env::var("DISPLAY").is_ok() || std::env::var("WAYLAND_DISPLAY").is_ok();
-        let tty_mode = !is_gui;
-        
-        if tty_mode {
-            println!("[Vkbd] No GUI detected (DISPLAY/WAYLAND_DISPLAY unset). Defaulting to TTY Injection Mode.");
-        } else {
-            println!("[Vkbd] GUI detected. Defaulting to Clipboard Mode.");
-        }
-
         Ok(Self { 
             dev,
             paste_mode: PasteMode::CtrlV, // Default standard
-            tty_mode,
             backspace_char: 0x7f, // Default to DEL (^?)
         })
     }
@@ -72,11 +58,6 @@ impl Vkbd {
     pub fn set_paste_mode(&mut self, mode: PasteMode) {
         self.paste_mode = mode;
         println!("[Vkbd] Paste mode set to: {:?}", mode);
-    }
-
-    pub fn toggle_tty_mode(&mut self) -> bool {
-        self.tty_mode = !self.tty_mode;
-        self.tty_mode
     }
     
     pub fn toggle_backspace_char(&mut self) -> String {
@@ -121,15 +102,6 @@ impl Vkbd {
 
         println!("[IME] Emitting text: {} (highlight={})", text, highlight);
 
-        // 0. TTY Mode (Injection)
-        if self.tty_mode {
-            if self.send_via_tty_injection(text) {
-                return;
-            } else {
-                eprintln!("[Error] TTY injection failed, falling back...");
-            }
-        }
-
         // If using UnicodeHex mode, skip clipboard and type directly
         if self.paste_mode == PasteMode::UnicodeHex {
             for c in text.chars() {
@@ -165,17 +137,6 @@ impl Vkbd {
     pub fn backspace(&mut self, count: usize) {
         if count == 0 { return; }
         
-        if self.tty_mode {
-            // Inject backspace bytes
-            let bytes = vec![self.backspace_char; count];
-            if let Ok(s) = std::str::from_utf8(&bytes) {
-                 if self.send_via_tty_injection(s) {
-                     return;
-                 }
-                 eprintln!("[Error] TTY backspace injection failed, falling back to uinput...");
-            }
-        }
-        
         // Fallback or GUI mode: use uinput Key::KEY_BACKSPACE
         for _ in 0..count {
             self.tap(Key::KEY_BACKSPACE);
@@ -192,49 +153,6 @@ impl Vkbd {
             Ok(s) => s.success(),
             Err(_) => false,
         }
-    }
-
-    fn send_via_tty_injection(&self, text: &str) -> bool {
-        // Try to identify the target TTY
-        let tty_path = match fs::read_to_string("/sys/class/tty/tty0/active") {
-            Ok(s) => format!("/dev/{}", s.trim()),
-            Err(_) => "/dev/tty".to_string(), // Fallback
-        };
-
-        // Helper to try injecting into a path
-        let try_inject = |path: &str| -> Result<(), String> {
-            let file = fs::OpenOptions::new().write(true).open(path)
-                .map_err(|e| format!("Open {} failed: {}", path, e))?;
-            
-            let fd = file.as_raw_fd();
-            for byte in text.bytes() {
-                let b = byte as i8;
-                unsafe {
-                    if libc::ioctl(fd, libc::TIOCSTI, &b) < 0 {
-                        return Err("ioctl TIOCSTI failed".to_string());
-                    }
-                }
-            }
-            Ok(())
-        };
-
-        // 1. Try the detected active TTY (e.g. /dev/tty1)
-        if let Err(e1) = try_inject(&tty_path) {
-            eprintln!("[Vkbd] Injection to {} failed: {}", tty_path, e1);
-            
-            // 2. Fallback: Try /dev/console or /dev/tty directly
-            let fallback = "/dev/tty";
-            if tty_path != fallback {
-                if let Err(e2) = try_inject(fallback) {
-                     eprintln!("[Vkbd] Fallback injection to {} failed: {}", fallback, e2);
-                     return false;
-                }
-            } else {
-                return false;
-            }
-        }
-        
-        true
     }
 
     fn send_char_via_unicode(&mut self, ch: char) -> bool {
@@ -349,6 +267,7 @@ impl Vkbd {
         }
     }
 
+    #[allow(dead_code)]
     pub fn copy_selection(&mut self) {
         self.emit(Key::KEY_LEFTCTRL, true);
         self.tap(Key::KEY_C);
@@ -356,6 +275,7 @@ impl Vkbd {
         thread::sleep(Duration::from_millis(150)); // Wait for app to copy
     }
 
+    #[allow(dead_code)]
     pub fn get_clipboard_text(&self) -> Option<String> {
         use arboard::Clipboard;
         let mut cb = Clipboard::new().ok()?;

@@ -89,8 +89,6 @@ pub struct Hotkeys {
     pub cycle_paste_method: Shortcut,
     #[serde(default = "default_caps_lock_toggle")]
     pub trigger_caps_lock: Shortcut,
-    #[serde(default = "default_tty_toggle")]
-    pub toggle_tty_mode: Shortcut,
     #[serde(default = "default_backspace_toggle")]
     pub toggle_backspace_type: Shortcut,
 }
@@ -107,7 +105,6 @@ impl Default for Hotkeys {
             switch_dictionary: default_profile_next(),
             cycle_paste_method: default_paste_cycle(),
             trigger_caps_lock: default_caps_lock_toggle(),
-            toggle_tty_mode: default_tty_toggle(),
             toggle_backspace_type: default_backspace_toggle(),
         }
     }
@@ -221,7 +218,6 @@ fn default_profile_next() -> Shortcut { Shortcut::new("ctrl+alt+s", "功能: 切
 
 fn default_paste_cycle() -> Shortcut { Shortcut::new("ctrl+alt+v", "高级: 循环切换自动粘贴的方式 (如在终端无法上屏时使用)") }
 fn default_caps_lock_toggle() -> Shortcut { Shortcut::new("caps_lock+tab", "高级: 发送真实的 CapsLock 键 (因 CapsLock 被占用于切换输入法)") }
-fn default_tty_toggle() -> Shortcut { Shortcut::new("ctrl+alt+t", "高级: 切换 TTY 字节注入模式 (仅用于纯命令行环境)") }
 fn default_backspace_toggle() -> Shortcut { Shortcut::new("ctrl+alt+b", "高级: 切换退格键编码 (Delete / Backspace)") }
 
 // Helper for parse (unchanged)

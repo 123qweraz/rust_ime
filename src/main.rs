@@ -698,7 +698,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let mut phantom_cycle_keys;
     let mut profile_next_keys;
     let mut fuzzy_toggle_keys;
-    let mut tty_toggle_keys;
     let mut backspace_toggle_keys;
     let mut notification_toggle_keys;
 
@@ -713,7 +712,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         phantom_cycle_keys = config::parse_key(&hotkeys.cycle_preview_mode.key);
         profile_next_keys = config::parse_key(&hotkeys.switch_dictionary.key);
         fuzzy_toggle_keys = config::parse_key(&hotkeys.toggle_fuzzy_pinyin.key);
-        tty_toggle_keys = config::parse_key(&hotkeys.toggle_tty_mode.key);
         backspace_toggle_keys = config::parse_key(&hotkeys.toggle_backspace_type.key);
         notification_toggle_keys = config::parse_key(&hotkeys.toggle_notifications.key);
     }
@@ -792,7 +790,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
             phantom_cycle_keys = config::parse_key(&hotkeys.cycle_preview_mode.key);
             profile_next_keys = config::parse_key(&hotkeys.switch_dictionary.key);
             fuzzy_toggle_keys = config::parse_key(&hotkeys.toggle_fuzzy_pinyin.key);
-            tty_toggle_keys = config::parse_key(&hotkeys.toggle_tty_mode.key);
             backspace_toggle_keys = config::parse_key(&hotkeys.toggle_backspace_type.key);
             notification_toggle_keys = config::parse_key(&hotkeys.toggle_notifications.key);
         }
@@ -893,12 +890,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                         ime.toggle_fuzzy();
                         continue;
                     }
-                    if check_shortcut(key, &tty_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
-                        let enabled = vkbd.toggle_tty_mode();
-                        let status = if enabled { "开启 (字节注入)" } else { "关闭 (剪贴板)" };
-                        let _ = notify_tx.send(NotifyEvent::Message(format!("TTY模式: {}", status)));
-                        continue;
-                    }
                     if check_shortcut(key, &backspace_toggle_keys, ctrl_held, alt_held, shift_held, meta_held, caps_held) {
                         let msg = vkbd.toggle_backspace_char();
                         let _ = notify_tx.send(NotifyEvent::Message(msg));
@@ -954,21 +945,13 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                             }
                         }
                         Action::PassThrough => {
-                            if vkbd.tty_mode && key == Key::KEY_BACKSPACE {
-                                if is_press { vkbd.backspace(1); }
-                            } else {
-                                vkbd.emit_raw(key, val);
-                            }
+                            vkbd.emit_raw(key, val);
                         }
                         Action::Consume => {}
                     }
                 } else {
                     // English Mode: Just pass everything through
-                    if vkbd.tty_mode && key == Key::KEY_BACKSPACE {
-                        if is_press { vkbd.backspace(1); }
-                    } else {
-                        vkbd.emit_raw(key, val);
-                    }
+                    vkbd.emit_raw(key, val);
                 }
             }
         }
