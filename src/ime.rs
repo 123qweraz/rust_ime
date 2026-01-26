@@ -51,11 +51,12 @@ pub struct Ime {
     pub phantom_text: String,
     pub is_highlighted: bool,
     pub word_en_map: HashMap<String, Vec<String>>,
+    pub en_word_map: HashMap<String, Vec<String>>,
     pub enable_fuzzy: bool,
 }
 
 impl Ime {
-    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool) -> Self {
+    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, en_word_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool) -> Self {
         let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
             "pinyin" => PhantomMode::Pinyin,
             "hanzi" => PhantomMode::Hanzi,
@@ -78,6 +79,7 @@ impl Ime {
             phantom_text: String::new(),
             is_highlighted: false,
             word_en_map,
+            en_word_map,
             enable_fuzzy,
         }
     }
@@ -283,6 +285,19 @@ impl Ime {
             filter_string = self.buffer[idx..].to_lowercase();
         }
 
+        let mut final_candidates = Vec::new();
+
+        // 1. Direct English Lookup
+        let buffer_lower = self.buffer.to_lowercase();
+        if let Some(en_candidates) = self.en_word_map.get(&buffer_lower) {
+            for cand in en_candidates {
+                if !final_candidates.contains(cand) {
+                    final_candidates.push(cand.clone());
+                }
+            }
+        }
+
+        // 2. Pinyin Lookup
         // Use Trie BFS search to find candidates
         let mut raw_candidates = if self.enable_fuzzy {
             let variants = self.expand_fuzzy_pinyin(&pinyin_search.to_lowercase());
@@ -326,7 +341,13 @@ impl Ime {
             });
         }
 
-        self.candidates = raw_candidates;
+        for cand in raw_candidates {
+            if !final_candidates.contains(&cand) {
+                final_candidates.push(cand);
+            }
+        }
+
+        self.candidates = final_candidates;
         self.selected = 0;
         self.page = 0;
         self.update_state();

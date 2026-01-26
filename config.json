@@ -73,7 +73,8 @@
     ],
     "punctuation_file": "dicts/chinese/punctuation.json",
     "char_defs": [
-      "dicts/chinese/character/level-1_char_en.json"
+      "dicts/chinese/character/level-1_char_en.json",
+      "dicts/chinese/character/level-1_en_char.json"
     ]
   }
 }
