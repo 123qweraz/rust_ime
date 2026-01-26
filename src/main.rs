@@ -591,7 +591,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let tries = tries_arc.read().unwrap().clone();
     
     let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
-    let word_en_map = load_char_en_map(&initial_config.files.char_map_dir);
+    let word_en_map = load_char_en_map(&initial_config.files.char_defs);
 
     println!("[IME] Loaded {} profiles.", tries.len());
     println!("[IME] Loaded punctuation map with {} entries.", punctuation.len());
@@ -1112,13 +1112,12 @@ struct CharEnEntry {
     en: String,
 }
 
-fn load_char_en_map(dir_path: &str) -> HashMap<String, Vec<String>> {
+fn load_char_en_map(paths: &[String]) -> HashMap<String, Vec<String>> {
     let mut map: HashMap<String, Vec<String>> = HashMap::new();
-    let walker = WalkDir::new(dir_path).into_iter();
 
-    for entry in walker.filter_map(|e| e.ok()) {
-        let path = entry.path();
-        if path.is_file() && path.extension().map_or(false, |ext| ext == "json") {
+    for path_str in paths {
+        let path = Path::new(path_str);
+        if path.is_file() {
              if let Ok(file) = File::open(path) {
                 let reader = BufReader::new(file);
                 // Use default inference
@@ -1135,8 +1134,15 @@ fn load_char_en_map(dir_path: &str) -> HashMap<String, Vec<String>> {
                             }
                         }
                     }
+                    println!("Loaded char-en definitions from: {}", path_str);
+                } else {
+                    eprintln!("Warning: Failed to parse JSON from {}", path_str);
                 }
+             } else {
+                 eprintln!("Warning: Failed to open file {}", path_str);
              }
+        } else {
+            eprintln!("Warning: Char definition file not found: {}", path_str);
         }
     }
     map

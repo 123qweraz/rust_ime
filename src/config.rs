@@ -49,8 +49,8 @@ pub struct Files {
     pub profiles: Vec<Profile>,
     #[serde(default = "default_punctuation_path")]
     pub punctuation_file: String,
-    #[serde(default = "default_char_en_path")]
-    pub char_map_dir: String,
+    #[serde(default = "default_char_defs")]
+    pub char_defs: Vec<String>,
 }
 
 impl Default for Files {
@@ -59,7 +59,7 @@ impl Default for Files {
             device_path: None,
             profiles: default_profiles(),
             punctuation_file: default_punctuation_path(),
-            char_map_dir: default_char_en_path(),
+            char_defs: default_char_defs(),
         }
     }
 }
@@ -204,7 +204,11 @@ fn default_profiles() -> Vec<Profile> {
     ]
 }
 fn default_punctuation_path() -> String { "dicts/chinese/punctuation.json".to_string() }
-fn default_char_en_path() -> String { "dicts/chinese/character".to_string() }
+fn default_char_defs() -> Vec<String> {
+    vec![
+        "dicts/chinese/character/level-1_char_en.json".to_string()
+    ]
+}
 
 // Shortcuts Defaults
 fn default_ime_toggle() -> Shortcut { Shortcut::new("caps_lock", "核心: 切换中/英文模式") }
