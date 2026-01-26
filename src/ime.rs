@@ -401,7 +401,6 @@ impl Ime {
                 let abs_index = start + i;
                 let num = i + 1;
                 
-                // Always try to find the first english word for display hint
                 let mut hint = String::new();
                 if let Some(en_list) = self.word_en_map.get(cand) {
                     if let Some(first_en) = en_list.first() {
@@ -412,7 +411,7 @@ impl Ime {
                 if abs_index == self.selected {
                     body.push_str(&format!("【{}.{}{}】\n", num, cand, hint));
                 } else {
-                    body.push_str(&format!("{}.{}{}\n", num, cand, hint));
+                    body.push_str(&format!("{}.{}{} \n", num, cand, hint));
                 }
             }
             
@@ -427,9 +426,7 @@ impl Ime {
     fn print_preview(&self) {
         if self.buffer.is_empty() { return; }
         
-        // 使用 \r 回到行首，配合 print! 实现原地刷新
-        print!("\r\x1B[K"); // \x1B[K 是清除从光标到行末的内容
-        
+        print!("\r\x1B[K"); 
         print!("拼音: {} | ", self.buffer);
         
         if self.candidates.is_empty() {
@@ -450,7 +447,6 @@ impl Ime {
                 }
 
                 if abs_index == self.selected {
-                    // 对当前选中的词加一个背景色或方括号
                     print!("\x1B[7m{}.{}{}\x1B[m ", num, cand, hint);
                 } else {
                     print!("{}.{}{} ", num, cand, hint);
@@ -544,18 +540,18 @@ impl Ime {
             Key::KEY_TAB => {
                 if !self.candidates.is_empty() {
                     if shift_pressed {
-                        // Shift + Tab: Move selection UP (prev candidate)
-                        // Sliding window: window follows selection
+                        // Shift + Tab: Move selection UP
                         if self.selected > 0 {
                             self.selected -= 1;
-                            self.page = self.selected; // Window starts at selected
+                            // Sliding window: window follows selection, but stays at 0 if near start
+                            self.page = self.selected;
                         }
                     } else {
-                        // Tab: Move selection DOWN (next candidate)
-                        // Sliding window: window follows selection
+                        // Tab: Move selection DOWN
                         if self.selected + 1 < self.candidates.len() {
                             self.selected += 1;
-                            self.page = self.selected; // Window starts at selected
+                            // Sliding window: window follows selection
+                            self.page = self.selected;
                         }
                     }
 

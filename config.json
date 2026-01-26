@@ -1,0 +1,79 @@
+{
+  "_help_readme": "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert",
+  "appearance": {
+    "show_notifications": true,
+    "preview_mode": "none"
+  },
+  "input": {
+    "enable_fuzzy_pinyin": false,
+    "default_profile": "Chinese",
+    "paste_method": "ctrl_v"
+  },
+  "hotkeys": {
+    "switch_language": {
+      "key": "caps_lock",
+      "description": "核心: 切换中/英文模式"
+    },
+    "switch_language_alt": {
+      "key": "ctrl+space",
+      "description": "核心: 切换中/英文模式 (备选)"
+    },
+    "convert_selection": {
+      "key": "ctrl+r",
+      "description": "核心: 将选中的拼音转换为汉字 (选中拼音后按此键)"
+    },
+    "cycle_preview_mode": {
+      "key": "ctrl+alt+p",
+      "description": "功能: 切换输入预览模式 (无 -> 拼音 -> 汉字)"
+    },
+    "toggle_notifications": {
+      "key": "ctrl+alt+n",
+      "description": "功能: 开启/关闭桌面候选词通知"
+    },
+    "toggle_fuzzy_pinyin": {
+      "key": "ctrl+alt+f",
+      "description": "功能: 开启/关闭模糊拼音 (z=zh, c=ch...)"
+    },
+    "switch_dictionary": {
+      "key": "ctrl+alt+s",
+      "description": "功能: 切换词库 (如 中文 -> 日语)"
+    },
+    "cycle_paste_method": {
+      "key": "ctrl+alt+v",
+      "description": "高级: 循环切换自动粘贴的方式 (如在终端无法上屏时使用)"
+    },
+    "trigger_caps_lock": {
+      "key": "caps_lock+tab",
+      "description": "高级: 发送真实的 CapsLock 键 (因 CapsLock 被占用于切换输入法)"
+    },
+    "toggle_backspace_type": {
+      "key": "ctrl+alt+b",
+      "description": "高级: 切换退格键编码 (Delete / Backspace)"
+    }
+  },
+  "files": {
+    "device_path": null,
+    "profiles": [
+      {
+        "name": "Chinese",
+        "description": "默认中文输入",
+        "dicts": [
+          "dicts/chinese/vocabulary",
+          "dicts/chinese/character",
+          "dicts/chinese/other"
+        ]
+      },
+      {
+        "name": "Japanese",
+        "description": "日语输入方案",
+        "dicts": [
+          "dicts/japanese"
+        ]
+      }
+    ],
+    "punctuation_file": "dicts/chinese/punctuation.json",
+    "char_defs": [
+      "dicts/chinese/character/level-1_char_en.json"
+    ]
+  }
+}
