@@ -12,7 +12,7 @@ def main():
     with open(INPUT_FILE, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
-    en_char_pairs = []
+    en_char_pairs = set()
 
     # data format: {"pinyin": [{"char": "...", "en": "..."}, ...], ...}
     for entries in data.values():
@@ -22,17 +22,17 @@ def main():
             if char and en:
                 # Some 'en' might have multiple words or punctuation, 
                 # but we'll follow the requested 'en,char' format.
-                en_char_pairs.append(f"{en},{char}")
+                en_char_pairs.add(f"{en},{char}")
 
-    # Sort alphabetically by English word for better usability
-    en_char_pairs.sort()
+    # Convert set back to sorted list for consistent output
+    sorted_pairs = sorted(list(en_char_pairs))
 
     with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-        for line in en_char_pairs:
+        for line in sorted_pairs:
             f.write(line + "\n")
 
     print(f"File generated: {OUTPUT_FILE}")
-    print(f"Total entries: {len(en_char_pairs)}")
+    print(f"Total entries: {len(sorted_pairs)}")
 
 if __name__ == "__main__":
     main()
