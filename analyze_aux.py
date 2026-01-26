@@ -2,7 +2,8 @@ import json
 import os
 
 INPUT_FILE = "dicts/chinese/character/level-1_char_en.json"
-OUTPUT_FILE = "uniqueness_report.txt"
+OUTPUT_FILE = "dicts/chinese/character/level-1_uniqueness_report.txt"
+HARD_WORDS_FILE = "dicts/chinese/character/level-1_hard_words.txt"
 
 def get_shortest_unique_prefix_len(target_word, other_words):
     target_len = len(target_word)
@@ -135,10 +136,10 @@ def main():
     
     print(f"\nStats: Entries requiring > 2 keystrokes: {len(hard_entries)}")
     if hard_entries:
-        with open("hard_words.txt", "w", encoding="utf-8") as f:
+        with open(HARD_WORDS_FILE, "w", encoding="utf-8") as f:
             for line in hard_entries:
                 f.write(line + "\n")
-        print("Detailed list saved to: hard_words.txt")
+        print(f"Detailed list saved to: {HARD_WORDS_FILE}")
         # Print first few examples
         print("Examples:")
         for line in hard_entries[:5]:
