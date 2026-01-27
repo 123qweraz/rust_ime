@@ -215,9 +215,26 @@ fn stop_daemon() -> Result<(), Box<dyn std::error::Error>> {
 
     if status.success() {
         println!("✓ 进程已发送停止信号");
+        
+        // Wait for process to actually exit
+        let mut retries = 50; // 5 seconds
+        while is_process_running(pid) && retries > 0 {
+            std::thread::sleep(std::time::Duration::from_millis(100));
+            retries -= 1;
+        }
+
+        if is_process_running(pid) {
+             eprintln!("⚠️  警告: 进程 PID {} 未能及时退出 (可能需要 kill -9)", pid);
+        } else {
+             println!("✓ 进程已完全退出");
+        }
+
         // 清理 PID 文件
         if let Err(e) = std::fs::remove_file(PID_FILE) {
-            eprintln!("警告: 无法删除 PID 文件: {}", e);
+            // Ignore if already removed
+            if e.kind() != std::io::ErrorKind::NotFound {
+                 eprintln!("警告: 无法删除 PID 文件: {}", e);
+            }
         }
     } else {
         eprintln!("✗ 停止进程失败");
@@ -830,6 +847,11 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                                 }
                                 tray::TrayEvent::OpenConfig => {
                                     let _ = open::that("http://localhost:8765");
+                                }
+                                tray::TrayEvent::Restart => {
+                                    let exe = env::current_exe().unwrap_or_else(|_| PathBuf::from("rust-ime"));
+                                    let _ = Command::new(exe).arg("--restart").spawn();
+                                    should_exit.store(true, Ordering::Relaxed);
                                 }
                                 tray::TrayEvent::Exit => {
                                     should_exit.store(true, Ordering::Relaxed);

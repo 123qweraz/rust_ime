@@ -317,18 +317,6 @@ impl Ime {
             dict.search_bfs(&pinyin_lower, 500)
         };
 
-        // Fuzzy Search Fallback (Levenshtein)
-        if raw_candidates.len() < 5 && pinyin_search.len() > 3 {
-            let max_cost = if pinyin_search.len() > 5 { 2 } else { 1 };
-            let fuzzy_candidates = dict.search_fuzzy(&pinyin_lower, max_cost);
-            for cand in fuzzy_candidates {
-                if !raw_candidates.contains(&cand) {
-                    raw_candidates.push(cand);
-                }
-                if raw_candidates.len() >= 100 { break; }
-            }
-        }
-
         // Apply auxiliary filter if active (uppercase letters found in buffer)
         if !filter_string.is_empty() {
             raw_candidates.retain(|cand| {
@@ -365,6 +353,9 @@ impl Ime {
                 std::cmp::Ordering::Less
             } else if !a_is_exact && b_is_exact {
                 std::cmp::Ordering::Greater
+            } else if a_is_exact && b_is_exact {
+                // Keep original dictionary order for exact matches
+                std::cmp::Ordering::Equal
             } else {
                 // Secondary Sort: Word Length (Prefer single chars / shorter words)
                 let len_cmp = a.chars().count().cmp(&b.chars().count());

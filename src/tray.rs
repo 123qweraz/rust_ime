@@ -7,6 +7,7 @@ pub enum TrayEvent {
     ToggleIme,
     NextProfile,
     OpenConfig,
+    Restart,
     Exit,
 }
 
@@ -58,6 +59,13 @@ impl Tray for ImeTray {
                 label: "Config Center (r -c)".to_string(),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::OpenConfig);
+                }),
+                ..Default::default()
+            }.into(),
+            StandardItem {
+                label: "Restart".to_string(),
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::Restart);
                 }),
                 ..Default::default()
             }.into(),
