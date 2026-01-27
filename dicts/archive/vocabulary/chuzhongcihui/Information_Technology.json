@@ -1,0 +1,3074 @@
+{
+  "xinxixitong": [
+    {
+      "char": "信息系统",
+      "en": "information system"
+    }
+  ],
+  "biancheng": [
+    {
+      "char": "编程",
+      "en": "to program"
+    }
+  ],
+  "shuzu": [
+    {
+      "char": "数组",
+      "en": "array"
+    }
+  ],
+  "beifen": [
+    {
+      "char": "备份",
+      "en": "backup"
+    }
+  ],
+  "shenjingwangluo": [
+    {
+      "char": "神经网络",
+      "en": "neurological"
+    }
+  ],
+  "zifuchuan": [
+    {
+      "char": "字符串",
+      "en": "string (computer science)"
+    }
+  ],
+  "duilie": [
+    {
+      "char": "队列",
+      "en": "formation"
+    }
+  ],
+  "ziranyuyan": [
+    {
+      "char": "自然语言",
+      "en": "natural language"
+    }
+  ],
+  "daoru": [
+    {
+      "char": "导入",
+      "en": "to introduce into"
+    }
+  ],
+  "yuming": [
+    {
+      "char": "域名",
+      "en": "domain name"
+    }
+  ],
+  "shujuguanli": [
+    {
+      "char": "数据管理",
+      "en": "data management"
+    }
+  ],
+  "lianbiao": [
+    {
+      "char": "链表",
+      "en": "linked list"
+    }
+  ],
+  "erchashu": [
+    {
+      "char": "二叉树",
+      "en": "binary tree"
+    }
+  ],
+  "caozuoxitong": [
+    {
+      "char": "操作系统",
+      "en": "operating system"
+    }
+  ],
+  "jueceshu": [
+    {
+      "char": "决策树",
+      "en": "decision tree"
+    }
+  ],
+  "juyuwang": [
+    {
+      "char": "局域网",
+      "en": "local area network"
+    }
+  ],
+  "wendang": [
+    {
+      "char": "文档",
+      "en": "(computer) file"
+    }
+  ],
+  "chengxusheji": [
+    {
+      "char": "程序设计",
+      "en": "computer programming"
+    }
+  ],
+  "zhuanjiaxitong": [
+    {
+      "char": "专家系统",
+      "en": "expert system"
+    }
+  ],
+  "xulie": [
+    {
+      "char": "序列",
+      "en": "sequence"
+    }
+  ],
+  "jiekou": [
+    {
+      "char": "接口",
+      "en": "interface"
+    }
+  ],
+  "kehuduan": [
+    {
+      "char": "客户端",
+      "en": "client (computing)"
+    }
+  ],
+  "lanya": [
+    {
+      "char": "蓝牙",
+      "en": "Bluetooth"
+    }
+  ],
+  "erjinzhi": [
+    {
+      "char": "二进制",
+      "en": "binary numeral system"
+    }
+  ],
+  "sushu": [
+    {
+      "char": "素数",
+      "en": "prime number"
+    }
+  ],
+  "shenjingyuan": [
+    {
+      "char": "神经元",
+      "en": "neuron"
+    }
+  ],
+  "mingwen": [
+    {
+      "char": "明文",
+      "en": "(laws"
+    }
+  ],
+  "pachong": [
+    {
+      "char": "爬虫",
+      "en": "reptile (old or common word for T:爬行動物|S:爬行动物)"
+    }
+  ],
+  "sheyingji": [
+    {
+      "char": "摄影机",
+      "en": "camera"
+    }
+  ],
+  "jiasudu": [
+    {
+      "char": "加速度",
+      "en": "acceleration"
+    }
+  ],
+  "wangluoxieyi": [
+    {
+      "char": "网络协议",
+      "en": "network protocol"
+    }
+  ],
+  "xianxing": [
+    {
+      "char": "线性",
+      "en": "(math.) linear"
+    }
+  ],
+  "neizhi": [
+    {
+      "char": "内置",
+      "en": "internal"
+    }
+  ],
+  "wangluoshebei": [
+    {
+      "char": "网络设备",
+      "en": "network equipment"
+    }
+  ],
+  "yingjianpingtai": [
+    {
+      "char": "硬件平台",
+      "en": "hardware platform"
+    }
+  ],
+  "dingpiao": [
+    {
+      "char": "订票",
+      "en": "to issue tickets"
+    }
+  ],
+  "daikuan": [
+    {
+      "char": "带宽",
+      "en": "bandwidth"
+    }
+  ],
+  "ruanyingjian": [
+    {
+      "char": "软硬件",
+      "en": "software and hardware"
+    }
+  ],
+  "shitu": [
+    {
+      "char": "视图",
+      "en": "view"
+    }
+  ],
+  "yingyongruanjian": [
+    {
+      "char": "应用软件",
+      "en": "application software"
+    }
+  ],
+  "moren": [
+    {
+      "char": "默认",
+      "en": "default (as in 'default setting')"
+    }
+  ],
+  "lianghua": [
+    {
+      "char": "量化",
+      "en": "quantization"
+    }
+  ],
+  "shijinzhi": [
+    {
+      "char": "十进制",
+      "en": "decimal"
+    }
+  ],
+  "jisuanjikexue": [
+    {
+      "char": "计算机科学",
+      "en": "computer science"
+    }
+  ],
+  "xiabiao": [
+    {
+      "char": "下标",
+      "en": "subscript"
+    }
+  ],
+  "weidu": [
+    {
+      "char": "维度",
+      "en": "(math.) dimension"
+    }
+  ],
+  "feixianxing": [
+    {
+      "char": "非线性",
+      "en": "nonlinear (math.)"
+    }
+  ],
+  "wangka": [
+    {
+      "char": "网卡",
+      "en": "network card"
+    }
+  ],
+  "baidu": [
+    {
+      "char": "百度",
+      "en": "Baidu (internet portal)"
+    }
+  ],
+  "zhishiku": [
+    {
+      "char": "知识库",
+      "en": "knowledge base"
+    }
+  ],
+  "feiduichen": [
+    {
+      "char": "非对称",
+      "en": "asymmetric"
+    }
+  ],
+  "fangzhen": [
+    {
+      "char": "仿真",
+      "en": "to emulate"
+    }
+  ],
+  "qiyong": [
+    {
+      "char": "启用",
+      "en": "start using"
+    }
+  ],
+  "disanfang": [
+    {
+      "char": "第三方",
+      "en": "third party"
+    }
+  ],
+  "guangyuwang": [
+    {
+      "char": "广域网",
+      "en": "wide area network"
+    }
+  ],
+  "dianzishangwu": [
+    {
+      "char": "电子商务",
+      "en": "e-commerce"
+    }
+  ],
+  "tongjixue": [
+    {
+      "char": "统计学",
+      "en": "statistics"
+    }
+  ],
+  "wenjiangeshi": [
+    {
+      "char": "文件格式",
+      "en": "file format"
+    }
+  ],
+  "ziduan": [
+    {
+      "char": "字段",
+      "en": "(numeric"
+    }
+  ],
+  "biaozhunhua": [
+    {
+      "char": "标准化",
+      "en": "standardization"
+    }
+  ],
+  "tidu": [
+    {
+      "char": "梯度",
+      "en": "gradient"
+    }
+  ],
+  "liangzi": [
+    {
+      "char": "量子",
+      "en": "quantum"
+    }
+  ],
+  "wanweiwang": [
+    {
+      "char": "万维网",
+      "en": "World Wide Web (WWW)"
+    }
+  ],
+  "chuliqi": [
+    {
+      "char": "处理器",
+      "en": "processor"
+    }
+  ],
+  "yingyongceng": [
+    {
+      "char": "应用层",
+      "en": "application layer"
+    }
+  ],
+  "shipeiqi": [
+    {
+      "char": "适配器",
+      "en": "adapter (device)"
+    }
+  ],
+  "ziranshu": [
+    {
+      "char": "自然数",
+      "en": "natural number"
+    }
+  ],
+  "fuben": [
+    {
+      "char": "副本",
+      "en": "duplicate"
+    }
+  ],
+  "botelv": [
+    {
+      "char": "波特率",
+      "en": "baud"
+    }
+  ],
+  "zongxian": [
+    {
+      "char": "总线",
+      "en": "computer bus"
+    }
+  ],
+  "wangluoyingyong": [
+    {
+      "char": "网络应用",
+      "en": "network application"
+    }
+  ],
+  "wangluocaozuoxitong": [
+    {
+      "char": "网络操作系统",
+      "en": "network operating system"
+    }
+  ],
+  "shuangjiaoxian": [
+    {
+      "char": "双绞线",
+      "en": "unshielded twisted pair"
+    }
+  ],
+  "zengyi": [
+    {
+      "char": "增益",
+      "en": "gain"
+    }
+  ],
+  "shujuchuanshu": [
+    {
+      "char": "数据传输",
+      "en": "data transmission"
+    }
+  ],
+  "kuandai": [
+    {
+      "char": "宽带",
+      "en": "broadband"
+    }
+  ],
+  "yuandaima": [
+    {
+      "char": "源代码",
+      "en": "source code"
+    }
+  ],
+  "fudian": [
+    {
+      "char": "浮点",
+      "en": "floating point"
+    }
+  ],
+  "tuopu": [
+    {
+      "char": "拓扑",
+      "en": "(math.) topology"
+    }
+  ],
+  "fenbushi": [
+    {
+      "char": "分布式",
+      "en": "distributed"
+    }
+  ],
+  "tiaozhijiediaoqi": [
+    {
+      "char": "调制解调器",
+      "en": "modem"
+    }
+  ],
+  "shaduruanjian": [
+    {
+      "char": "杀毒软件",
+      "en": "antivirus software"
+    }
+  ],
+  "guge": [
+    {
+      "char": "谷歌",
+      "en": "Google (internet search engine)"
+    }
+  ],
+  "shujuyasuo": [
+    {
+      "char": "数据压缩",
+      "en": "data compression"
+    }
+  ],
+  "sanguang": [
+    {
+      "char": "散光",
+      "en": "astigmatism"
+    }
+  ],
+  "jiqifanyi": [
+    {
+      "char": "机器翻译",
+      "en": "machine translation"
+    }
+  ],
+  "zhenliao": [
+    {
+      "char": "诊疗",
+      "en": "diagnosis and treatment"
+    }
+  ],
+  "yuzhi": [
+    {
+      "char": "阈值",
+      "en": "threshold"
+    }
+  ],
+  "yingshe": [
+    {
+      "char": "映射",
+      "en": "map (mathematics)"
+    }
+  ],
+  "bitong": [
+    {
+      "char": "笔筒",
+      "en": "pen container"
+    }
+  ],
+  "shiliujinzhi": [
+    {
+      "char": "十六进制",
+      "en": "hexadecimal"
+    }
+  ],
+  "wangluoceng": [
+    {
+      "char": "网络层",
+      "en": "network layer"
+    }
+  ],
+  "yuliaoku": [
+    {
+      "char": "语料库",
+      "en": "text corpus"
+    }
+  ],
+  "jisuanjibingdu": [
+    {
+      "char": "计算机病毒",
+      "en": "computer virus"
+    }
+  ],
+  "ziwang": [
+    {
+      "char": "子网",
+      "en": "subnetwork"
+    }
+  ],
+  "gaoxingneng": [
+    {
+      "char": "高性能",
+      "en": "high performance"
+    }
+  ],
+  "dingzhi": [
+    {
+      "char": "定制",
+      "en": "custom"
+    }
+  ],
+  "bianjiqi": [
+    {
+      "char": "编辑器",
+      "en": "editor (software)"
+    }
+  ],
+  "sifu": [
+    {
+      "char": "伺服",
+      "en": "servo"
+    }
+  ],
+  "nixiang": [
+    {
+      "char": "逆向",
+      "en": "backwards"
+    }
+  ],
+  "qipu": [
+    {
+      "char": "棋谱",
+      "en": "kifu (record of a game of go or shogi)"
+    }
+  ],
+  "wanjia": [
+    {
+      "char": "玩家",
+      "en": "player (game)"
+    }
+  ],
+  "bajinzhi": [
+    {
+      "char": "八进制",
+      "en": "octal"
+    }
+  ],
+  "xichengqu": [
+    {
+      "char": "西城区",
+      "en": "Xicheng District"
+    }
+  ],
+  "ganxian": [
+    {
+      "char": "干线",
+      "en": "(n) main road"
+    }
+  ],
+  "cunchuqi": [
+    {
+      "char": "存储器",
+      "en": "memory (unit)"
+    }
+  ],
+  "youxian": [
+    {
+      "char": "有线",
+      "en": "wired"
+    }
+  ],
+  "xinxiguanli": [
+    {
+      "char": "信息管理",
+      "en": "information management"
+    }
+  ],
+  "chuanshusulv": [
+    {
+      "char": "传输速率",
+      "en": "transmission rate"
+    }
+  ],
+  "xiangliang": [
+    {
+      "char": "向量",
+      "en": "vector"
+    }
+  ],
+  "chuanshuceng": [
+    {
+      "char": "传输层",
+      "en": "transport layer"
+    }
+  ],
+  "yuanweihua": [
+    {
+      "char": "鸢尾花",
+      "en": "iris (flower)"
+    }
+  ],
+  "ruanjiankaifa": [
+    {
+      "char": "软件开发",
+      "en": "software development"
+    }
+  ],
+  "kaifarenyuan": [
+    {
+      "char": "开发人员",
+      "en": "developer"
+    }
+  ],
+  "qiehuan": [
+    {
+      "char": "切换",
+      "en": "to cut over"
+    }
+  ],
+  "dianhuawang": [
+    {
+      "char": "电话网",
+      "en": "telephone network"
+    }
+  ],
+  "ziliaoku": [
+    {
+      "char": "资料库",
+      "en": "database"
+    }
+  ],
+  "tiaomu": [
+    {
+      "char": "条目",
+      "en": "article (publishing)"
+    }
+  ],
+  "xunihuanjing": [
+    {
+      "char": "虚拟环境",
+      "en": "theoretical environment"
+    }
+  ],
+  "shuzhi": [
+    {
+      "char": "树脂",
+      "en": "resin"
+    },
+    {
+      "char": "熟知",
+      "en": "acquaintance"
+    }
+  ],
+  "yichu": [
+    {
+      "char": "溢出",
+      "en": "overflow"
+    }
+  ],
+  "fenxing": [
+    {
+      "char": "分形",
+      "en": "(math.) fractal"
+    }
+  ],
+  "yibu": [
+    {
+      "char": "异步",
+      "en": "asynchronous"
+    }
+  ],
+  "yanjiuzhe": [
+    {
+      "char": "研究者",
+      "en": "investigator"
+    }
+  ],
+  "moniqi": [
+    {
+      "char": "模拟器",
+      "en": "emulator"
+    }
+  ],
+  "faxin": [
+    {
+      "char": "发信",
+      "en": "post a letter"
+    }
+  ],
+  "hongmo": [
+    {
+      "char": "虹膜",
+      "en": "iris"
+    }
+  ],
+  "geshihua": [
+    {
+      "char": "格式化",
+      "en": "to format"
+    }
+  ],
+  "gujian": [
+    {
+      "char": "固件",
+      "en": "firmware"
+    }
+  ],
+  "kejianguang": [
+    {
+      "char": "可见光",
+      "en": "optical spectrum"
+    }
+  ],
+  "bingxingjisuan": [
+    {
+      "char": "并行计算",
+      "en": "parallel computing"
+    }
+  ],
+  "huowuyunshu": [
+    {
+      "char": "货物运输",
+      "en": "freight"
+    }
+  ],
+  "mofang": [
+    {
+      "char": "魔方",
+      "en": "Rubik's cube"
+    }
+  ],
+  "tongzhoudianlan": [
+    {
+      "char": "同轴电缆",
+      "en": "coaxial cable"
+    }
+  ],
+  "wangluoguanli": [
+    {
+      "char": "网络管理",
+      "en": "network management"
+    }
+  ],
+  "fuwuzhiliang": [
+    {
+      "char": "服务质量",
+      "en": "Quality of Service"
+    }
+  ],
+  "bingfa": [
+    {
+      "char": "并发",
+      "en": "be complicated by"
+    }
+  ],
+  "youxiandianshi": [
+    {
+      "char": "有线电视",
+      "en": "cable television"
+    }
+  ],
+  "xinlang": [
+    {
+      "char": "新浪",
+      "en": "SINA.com"
+    }
+  ],
+  "piliang": [
+    {
+      "char": "批量",
+      "en": "batch"
+    }
+  ],
+  "danpianji": [
+    {
+      "char": "单片机",
+      "en": "microcontroller"
+    }
+  ],
+  "luyou": [
+    {
+      "char": "路由",
+      "en": "routing (in computer networks)"
+    }
+  ],
+  "cunqu": [
+    {
+      "char": "存取",
+      "en": "access"
+    }
+  ],
+  "ali": [
+    {
+      "char": "阿里",
+      "en": "Ali (proper name)"
+    }
+  ],
+  "kehuji": [
+    {
+      "char": "客户机",
+      "en": "client (computer)"
+    }
+  ],
+  "xinxilun": [
+    {
+      "char": "信息论",
+      "en": "information theory"
+    }
+  ],
+  "duyao": [
+    {
+      "char": "毒药",
+      "en": "poison"
+    }
+  ],
+  "tongyongxing": [
+    {
+      "char": "通用性",
+      "en": "universality"
+    }
+  ],
+  "lianlu": [
+    {
+      "char": "链路",
+      "en": "link"
+    }
+  ],
+  "buxian": [
+    {
+      "char": "布线",
+      "en": "wiring"
+    }
+  ],
+  "zhongceng": [
+    {
+      "char": "中层",
+      "en": "middle-ranking"
+    }
+  ],
+  "dazai": [
+    {
+      "char": "搭载",
+      "en": "carry (people)"
+    }
+  ],
+  "fuzaxing": [
+    {
+      "char": "复杂性",
+      "en": "complexity"
+    }
+  ],
+  "lesuo": [
+    {
+      "char": "勒索",
+      "en": "extort"
+    }
+  ],
+  "jiaocheng": [
+    {
+      "char": "教程",
+      "en": "lecture course"
+    }
+  ],
+  "zhongjiqi": [
+    {
+      "char": "中继器",
+      "en": "repeater"
+    }
+  ],
+  "wanyongbiao": [
+    {
+      "char": "万用表",
+      "en": "multimeter"
+    }
+  ],
+  "shancun": [
+    {
+      "char": "闪存",
+      "en": "flash memory"
+    }
+  ],
+  "baomixing": [
+    {
+      "char": "保密性",
+      "en": "secrecy"
+    }
+  ],
+  "shouye": [
+    {
+      "char": "首页",
+      "en": "title page"
+    }
+  ],
+  "shicha": [
+    {
+      "char": "视差",
+      "en": "parallax"
+    }
+  ],
+  "yulan": [
+    {
+      "char": "预览",
+      "en": "preview"
+    }
+  ],
+  "fuwutigongzhe": [
+    {
+      "char": "服务提供者",
+      "en": "service provider"
+    }
+  ],
+  "xianlan": [
+    {
+      "char": "线缆",
+      "en": "cable"
+    }
+  ],
+  "xindao": [
+    {
+      "char": "信道",
+      "en": "signal path"
+    }
+  ],
+  "yitaiwang": [
+    {
+      "char": "以太网",
+      "en": "Ethernet"
+    }
+  ],
+  "chahuo": [
+    {
+      "char": "查获",
+      "en": "(v) investigate and capture a criminal"
+    }
+  ],
+  "pichuli": [
+    {
+      "char": "批处理",
+      "en": "batch file"
+    }
+  ],
+  "huohua": [
+    {
+      "char": "活化",
+      "en": "activation"
+    }
+  ],
+  "huibianyuyan": [
+    {
+      "char": "汇编语言",
+      "en": "assembly language"
+    }
+  ],
+  "qiantao": [
+    {
+      "char": "潜逃",
+      "en": "(vi) abscond"
+    }
+  ],
+  "ziyouluoti": [
+    {
+      "char": "自由落体",
+      "en": "free-fall"
+    }
+  ],
+  "jingtiguan": [
+    {
+      "char": "晶体管",
+      "en": "transistor"
+    }
+  ],
+  "ruanjianxitong": [
+    {
+      "char": "软件系统",
+      "en": "software system"
+    }
+  ],
+  "baobiao": [
+    {
+      "char": "报表",
+      "en": "forms for reporting statistics"
+    }
+  ],
+  "maifang": [
+    {
+      "char": "买方",
+      "en": "buyer (in contracts)"
+    }
+  ],
+  "yunchouxue": [
+    {
+      "char": "运筹学",
+      "en": "operations research (OR)"
+    }
+  ],
+  "qingsao": [
+    {
+      "char": "清扫",
+      "en": "to tidy up"
+    }
+  ],
+  "moban": [
+    {
+      "char": "模板",
+      "en": "template"
+    }
+  ],
+  "shujutongxin": [
+    {
+      "char": "数据通信",
+      "en": "data communication"
+    }
+  ],
+  "jizhan": [
+    {
+      "char": "基站",
+      "en": "base station"
+    }
+  ],
+  "qudongchengxu": [
+    {
+      "char": "驱动程序",
+      "en": "device driver"
+    }
+  ],
+  "baiban": [
+    {
+      "char": "白板",
+      "en": "whiteboard"
+    }
+  ],
+  "chaolianjie": [
+    {
+      "char": "超链接",
+      "en": "hyperlink"
+    }
+  ],
+  "shehuixue": [
+    {
+      "char": "社会学",
+      "en": "sociology"
+    }
+  ],
+  "danzi": [
+    {
+      "char": "单字",
+      "en": "individual character"
+    }
+  ],
+  "guojibiaozhunhuazuzhi": [
+    {
+      "char": "国际标准化组织",
+      "en": "International Organization for Standardization"
+    }
+  ],
+  "jiaoben": [
+    {
+      "char": "脚本",
+      "en": "script"
+    }
+  ],
+  "tuopuxue": [
+    {
+      "char": "拓扑学",
+      "en": "(math.) topology"
+    }
+  ],
+  "huiwen": [
+    {
+      "char": "回文",
+      "en": "palindrome"
+    }
+  ],
+  "tianxie": [
+    {
+      "char": "天蝎",
+      "en": "Scorpio (constellation)"
+    }
+  ],
+  "bingji": [
+    {
+      "char": "病机",
+      "en": "interpretation of the cause"
+    }
+  ],
+  "mahuang": [
+    {
+      "char": "麻黄",
+      "en": "ephedra"
+    }
+  ],
+  "xiada": [
+    {
+      "char": "下达",
+      "en": "(v) transmit to lower level people"
+    }
+  ],
+  "jufafenxi": [
+    {
+      "char": "句法分析",
+      "en": "syntactic analysis"
+    }
+  ],
+  "yeya": [
+    {
+      "char": "液压",
+      "en": "hydraulic pressure"
+    }
+  ],
+  "shangshu": [
+    {
+      "char": "商数",
+      "en": "quotient (math)"
+    }
+  ],
+  "zhuangxie": [
+    {
+      "char": "装卸",
+      "en": "(v) load or unload"
+    }
+  ],
+  "lidui": [
+    {
+      "char": "离队",
+      "en": "leave one's post"
+    }
+  ],
+  "guangbiao": [
+    {
+      "char": "光标",
+      "en": "cursor (computer)"
+    }
+  ],
+  "bingli": [
+    {
+      "char": "病理",
+      "en": "pathology"
+    },
+    {
+      "char": "病例",
+      "en": "[medical] case [of illness]"
+    },
+    {
+      "char": "病历",
+      "en": "medical record"
+    }
+  ],
+  "jigu": [
+    {
+      "char": "脊骨",
+      "en": "backbone"
+    }
+  ],
+  "bangongzidonghua": [
+    {
+      "char": "办公自动化",
+      "en": "office automation"
+    }
+  ],
+  "wufeng": [
+    {
+      "char": "无缝",
+      "en": "seamless"
+    }
+  ],
+  "yaogan": [
+    {
+      "char": "遥感",
+      "en": "remote sensing"
+    }
+  ],
+  "dianfanbao": [
+    {
+      "char": "电饭煲",
+      "en": "rice cooker"
+    }
+  ],
+  "yejie": [
+    {
+      "char": "业界",
+      "en": "industry"
+    }
+  ],
+  "chanxiao": [
+    {
+      "char": "产销",
+      "en": "production and marketing"
+    }
+  ],
+  "jieshu": [
+    {
+      "char": "借书",
+      "en": "borrow books"
+    }
+  ],
+  "kongzhilun": [
+    {
+      "char": "控制论",
+      "en": "cybernetics"
+    }
+  ],
+  "beizhu": [
+    {
+      "char": "备注",
+      "en": "remarks"
+    }
+  ],
+  "jiema": [
+    {
+      "char": "解码",
+      "en": "to decode"
+    }
+  ],
+  "renjijiemian": [
+    {
+      "char": "人机界面",
+      "en": "user interface"
+    }
+  ],
+  "liantong": [
+    {
+      "char": "联通",
+      "en": "connection"
+    }
+  ],
+  "heimingdan": [
+    {
+      "char": "黑名单",
+      "en": "blacklist"
+    }
+  ],
+  "shuli": [
+    {
+      "char": "数理",
+      "en": "mathematical sciences"
+    }
+  ],
+  "fangwenzhe": [
+    {
+      "char": "访问者",
+      "en": "interviewer"
+    }
+  ],
+  "xianka": [
+    {
+      "char": "显卡",
+      "en": "video card"
+    }
+  ],
+  "chaowenben": [
+    {
+      "char": "超文本",
+      "en": "hypertext"
+    }
+  ],
+  "duoyonghu": [
+    {
+      "char": "多用户",
+      "en": "multiuser"
+    }
+  ],
+  "hangkonggongsi": [
+    {
+      "char": "航空公司",
+      "en": "airline"
+    }
+  ],
+  "qixiangju": [
+    {
+      "char": "气象局",
+      "en": "(n) weather bureau"
+    }
+  ],
+  "yingli": [
+    {
+      "char": "营利",
+      "en": "for profit"
+    }
+  ],
+  "gengzheng": [
+    {
+      "char": "更正",
+      "en": "(v) correct"
+    }
+  ],
+  "shangyehua": [
+    {
+      "char": "商业化",
+      "en": "to commercialize"
+    }
+  ],
+  "jieyasuo": [
+    {
+      "char": "解压缩",
+      "en": "to decompress"
+    }
+  ],
+  "jijin": [
+    {
+      "char": "集锦",
+      "en": "best of the best"
+    }
+  ],
+  "shiliang": [
+    {
+      "char": "矢量",
+      "en": "vector (spatial)"
+    }
+  ],
+  "liju": [
+    {
+      "char": "力矩",
+      "en": "torque"
+    }
+  ],
+  "jianrongxing": [
+    {
+      "char": "兼容性",
+      "en": "compatibility"
+    }
+  ],
+  "jixiang": [
+    {
+      "char": "机箱",
+      "en": "case (computer) (lit. machine box)"
+    }
+  ],
+  "pigai": [
+    {
+      "char": "批改",
+      "en": "(v) correct an exam or paper an possibly add criticisms"
+    }
+  ],
+  "shujuwangluo": [
+    {
+      "char": "数据网络",
+      "en": "data network"
+    }
+  ],
+  "shoushi": [
+    {
+      "char": "授时",
+      "en": "time service"
+    }
+  ],
+  "lekesi": [
+    {
+      "char": "勒克斯",
+      "en": "lux"
+    }
+  ],
+  "jishiyi": [
+    {
+      "char": "几十亿",
+      "en": "several billion"
+    }
+  ],
+  "fushang": [
+    {
+      "char": "附上",
+      "en": "attach"
+    }
+  ],
+  "tulingjiang": [
+    {
+      "char": "图灵奖",
+      "en": "Turing Award"
+    }
+  ],
+  "beiershiyanshi": [
+    {
+      "char": "贝尔实验室",
+      "en": "Bell Labs"
+    }
+  ],
+  "xinxixue": [
+    {
+      "char": "信息学",
+      "en": "information science"
+    }
+  ],
+  "keyizhixing": [
+    {
+      "char": "可移植性",
+      "en": "portability (programming language)"
+    }
+  ],
+  "fenxishi": [
+    {
+      "char": "分析师",
+      "en": "analyst"
+    }
+  ],
+  "zhicheng": [
+    {
+      "char": "职称",
+      "en": "(n) title"
+    }
+  ],
+  "jiantizhongwen": [
+    {
+      "char": "简体中文",
+      "en": "simplified character Chinese"
+    }
+  ],
+  "fantizhongwen": [
+    {
+      "char": "繁体中文",
+      "en": "traditional character Chinese"
+    }
+  ],
+  "luanma": [
+    {
+      "char": "乱码",
+      "en": "mojibake (nonsense characters from misrendering an encoding)"
+    }
+  ],
+  "huichejian": [
+    {
+      "char": "回车键",
+      "en": "carriage return"
+    }
+  ],
+  "diji": [
+    {
+      "char": "低级",
+      "en": "low level"
+    }
+  ],
+  "zheshelv": [
+    {
+      "char": "折射率",
+      "en": "index of refraction"
+    }
+  ],
+  "guibi": [
+    {
+      "char": "规避",
+      "en": "to evade"
+    }
+  ],
+  "moju": [
+    {
+      "char": "模具",
+      "en": "molding (process)"
+    }
+  ],
+  "shengjiangji": [
+    {
+      "char": "升降机",
+      "en": "elevator"
+    }
+  ],
+  "ziyoudu": [
+    {
+      "char": "自由度",
+      "en": "(math.) (number of) degrees of freedom"
+    }
+  ],
+  "sanreqi": [
+    {
+      "char": "散热器",
+      "en": "heatsink"
+    }
+  ],
+  "paiqiguan": [
+    {
+      "char": "排气管",
+      "en": "exhaust pipe"
+    }
+  ],
+  "chengyuwang": [
+    {
+      "char": "城域网",
+      "en": "metropolitan area network"
+    }
+  ],
+  "chuanshulv": [
+    {
+      "char": "传输率",
+      "en": "transmission rate"
+    }
+  ],
+  "baotou": [
+    {
+      "char": "报头",
+      "en": "masthead (of a newspaper"
+    }
+  ],
+  "zhongguoyinhang": [
+    {
+      "char": "中国银行",
+      "en": "Bank of China"
+    }
+  ],
+  "kanwu": [
+    {
+      "char": "勘误",
+      "en": "to correct printing errors"
+    }
+  ],
+  "zhongjianjian": [
+    {
+      "char": "中间件",
+      "en": "middleware"
+    }
+  ],
+  "xuniji": [
+    {
+      "char": "虚拟机",
+      "en": "virtual machine"
+    }
+  ],
+  "aidehua": [
+    {
+      "char": "爱德华",
+      "en": "Edward"
+    }
+  ],
+  "shuliluoji": [
+    {
+      "char": "数理逻辑",
+      "en": "mathematical logic"
+    }
+  ],
+  "guizehua": [
+    {
+      "char": "规则化",
+      "en": "regularity"
+    }
+  ],
+  "jiegeng": [
+    {
+      "char": "桔梗",
+      "en": "Chinese bellflower"
+    }
+  ],
+  "chenpi": [
+    {
+      "char": "陈皮",
+      "en": "Mandarin orange"
+    }
+  ],
+  "quantianhou": [
+    {
+      "char": "全天候",
+      "en": "all-weather"
+    }
+  ],
+  "relixue": [
+    {
+      "char": "热力学",
+      "en": "thermodynamics"
+    }
+  ],
+  "lianggang": [
+    {
+      "char": "量纲",
+      "en": "dimension (unit)"
+    }
+  ],
+  "datouding": [
+    {
+      "char": "大头钉",
+      "en": "tack"
+    }
+  ],
+  "zhoutu": [
+    {
+      "char": "轴突",
+      "en": "axon"
+    }
+  ],
+  "huae": [
+    {
+      "char": "花萼",
+      "en": "sepal"
+    }
+  ],
+  "shixu": [
+    {
+      "char": "时序",
+      "en": "time course"
+    }
+  ],
+  "cixing": [
+    {
+      "char": "词性",
+      "en": "lexical category"
+    }
+  ],
+  "yuyanxue": [
+    {
+      "char": "语言学",
+      "en": "linguistics"
+    }
+  ],
+  "yansuan": [
+    {
+      "char": "演算",
+      "en": "to calculate"
+    }
+  ],
+  "zibizheng": [
+    {
+      "char": "自闭症",
+      "en": "autism"
+    }
+  ],
+  "weiyuchoumou": [
+    {
+      "char": "未雨绸缪",
+      "en": "prepare for a rainy day"
+    }
+  ],
+  "bobao": [
+    {
+      "char": "播报",
+      "en": "(v) announce"
+    }
+  ],
+  "baixibao": [
+    {
+      "char": "白细胞",
+      "en": "white blood cell"
+    }
+  ],
+  "linbaxibao": [
+    {
+      "char": "淋巴细胞",
+      "en": "lymphocyte"
+    }
+  ],
+  "shuwei": [
+    {
+      "char": "数位",
+      "en": "digital"
+    }
+  ],
+  "tianwentai": [
+    {
+      "char": "天文台",
+      "en": "observatory"
+    }
+  ],
+  "kaocha": [
+    {
+      "char": "考查",
+      "en": "investigate"
+    }
+  ],
+  "qiantitiaojian": [
+    {
+      "char": "前提条件",
+      "en": "pre-conditions"
+    }
+  ],
+  "bieming": [
+    {
+      "char": "别名",
+      "en": "another name"
+    }
+  ],
+  "jiaoyie": [
+    {
+      "char": "交易额",
+      "en": "sum or volume or amount of business transactions"
+    }
+  ],
+  "tongzhi": [
+    {
+      "char": "同质",
+      "en": "homogeneous"
+    }
+  ],
+  "yizhi": [
+    {
+      "char": "异质",
+      "en": "heterogeneous"
+    }
+  ],
+  "zhiduo": [
+    {
+      "char": "至多",
+      "en": "(adv) upper limit"
+    }
+  ],
+  "weishu": [
+    {
+      "char": "维数",
+      "en": "(math.) dimension"
+    }
+  ],
+  "baoshu": [
+    {
+      "char": "报数",
+      "en": "number off"
+    }
+  ],
+  "erxiangshi": [
+    {
+      "char": "二项式",
+      "en": "binomial"
+    }
+  ],
+  "goujia": [
+    {
+      "char": "构架",
+      "en": "structure"
+    }
+  ],
+  "wangui": [
+    {
+      "char": "碗柜",
+      "en": "cupboard"
+    }
+  ],
+  "xushu": [
+    {
+      "char": "虚数",
+      "en": "imaginary number"
+    }
+  ],
+  "churukou": [
+    {
+      "char": "出入口",
+      "en": "gateway"
+    }
+  ],
+  "weidianzixue": [
+    {
+      "char": "微电子学",
+      "en": "microelectronics"
+    }
+  ],
+  "nianhui": [
+    {
+      "char": "年会",
+      "en": "annual meeting"
+    }
+  ],
+  "chuanshujishu": [
+    {
+      "char": "传输技术",
+      "en": "transmission technology"
+    }
+  ],
+  "jixiegongcheng": [
+    {
+      "char": "机械工程",
+      "en": "mechanical engineering"
+    }
+  ],
+  "dianzihuobi": [
+    {
+      "char": "电子货币",
+      "en": "electronic money"
+    }
+  ],
+  "yinsu": [
+    {
+      "char": "音速",
+      "en": "speed of sound"
+    }
+  ],
+  "diqiukexue": [
+    {
+      "char": "地球科学",
+      "en": "earth science"
+    }
+  ],
+  "yuxuan": [
+    {
+      "char": "预选",
+      "en": "(n) preelection"
+    }
+  ],
+  "duoyongtu": [
+    {
+      "char": "多用途",
+      "en": "multi-purpose"
+    }
+  ],
+  "chongsheng": [
+    {
+      "char": "冲绳",
+      "en": "Okinawa"
+    }
+  ],
+  "chuanshufuwu": [
+    {
+      "char": "传输服务",
+      "en": "transport service"
+    }
+  ],
+  "fuwuyuan": [
+    {
+      "char": "服务员",
+      "en": "waiter"
+    }
+  ],
+  "fendian": [
+    {
+      "char": "分店",
+      "en": "branch (of a chain store)"
+    }
+  ],
+  "zichengxu": [
+    {
+      "char": "子程序",
+      "en": "subroutine"
+    }
+  ],
+  "jinzhang": [
+    {
+      "char": "进账",
+      "en": "income"
+    }
+  ],
+  "kebiao": [
+    {
+      "char": "课表",
+      "en": "school timetable"
+    }
+  ],
+  "gongyinglian": [
+    {
+      "char": "供应链",
+      "en": "supply chain"
+    }
+  ],
+  "kexingxingyanjiu": [
+    {
+      "char": "可行性研究",
+      "en": "feasibility study"
+    }
+  ],
+  "bufeichuihuizhili": [
+    {
+      "char": "不费吹灰之力",
+      "en": "as easy as blowing off dust - not needing the slightest effort"
+    }
+  ],
+  "huawei": [
+    {
+      "char": "华为",
+      "en": "Huawei Technologies"
+    }
+  ],
+  "nuoyong": [
+    {
+      "char": "挪用",
+      "en": "to embezzle"
+    }
+  ],
+  "guanlixue": [
+    {
+      "char": "管理学",
+      "en": "management studies"
+    }
+  ],
+  "chafen": [
+    {
+      "char": "差分",
+      "en": "difference operator"
+    }
+  ],
+  "cusu": [
+    {
+      "char": "粗俗",
+      "en": "vulgar"
+    }
+  ],
+  "saomiaoqi": [
+    {
+      "char": "扫描器",
+      "en": "scanner"
+    }
+  ],
+  "budaode": [
+    {
+      "char": "不道德",
+      "en": "immoral"
+    }
+  ],
+  "bukekangli": [
+    {
+      "char": "不可抗力",
+      "en": "force majeure"
+    }
+  ],
+  "tigongshang": [
+    {
+      "char": "提供商",
+      "en": "provider (company)"
+    }
+  ],
+  "fuchuan": [
+    {
+      "char": "符串",
+      "en": "string (as in 'character string')"
+    }
+  ],
+  "chajian": [
+    {
+      "char": "插件",
+      "en": "plug-in"
+    }
+  ],
+  "feijichang": [
+    {
+      "char": "飞机场",
+      "en": "airport"
+    }
+  ],
+  "zhongjinshu": [
+    {
+      "char": "重金属",
+      "en": "heavy metal music"
+    }
+  ],
+  "zhongyangdianshitai": [
+    {
+      "char": "中央电视台",
+      "en": "China Central Television (CCTV)"
+    }
+  ],
+  "xinhuawang": [
+    {
+      "char": "新华网",
+      "en": "Xinhua news network"
+    }
+  ],
+  "shoujianxiang": [
+    {
+      "char": "收件箱",
+      "en": "inbox"
+    }
+  ],
+  "kaobei": [
+    {
+      "char": "拷贝",
+      "en": "to copy"
+    }
+  ],
+  "caliangyanjing": [
+    {
+      "char": "擦亮眼睛",
+      "en": "remove the scales from one's eyes"
+    }
+  ],
+  "yaochuan": [
+    {
+      "char": "谣传",
+      "en": "rumor"
+    }
+  ],
+  "neiqing": [
+    {
+      "char": "内情",
+      "en": "inside information"
+    }
+  ],
+  "wuliao": [
+    {
+      "char": "物料",
+      "en": "material"
+    }
+  ],
+  "mianfeiruanjian": [
+    {
+      "char": "免费软件",
+      "en": "freeware"
+    }
+  ],
+  "penmo": [
+    {
+      "char": "喷墨",
+      "en": "ink jet"
+    }
+  ],
+  "weichuliqi": [
+    {
+      "char": "微处理器",
+      "en": "microprocessor"
+    }
+  ],
+  "tesila": [
+    {
+      "char": "特斯拉",
+      "en": "Tesla (unit)"
+    }
+  ],
+  "zhejiangdaxue": [
+    {
+      "char": "浙江大学",
+      "en": "Zhejiang University"
+    }
+  ],
+  "laodonggaizao": [
+    {
+      "char": "劳动改造",
+      "en": "laogai (Chinese prison camp)"
+    }
+  ],
+  "xunxi": [
+    {
+      "char": "讯息",
+      "en": "message (used for text messages on a cellphone aka SMS)"
+    }
+  ],
+  "fuhebiaozhun": [
+    {
+      "char": "符合标准",
+      "en": "to comply with a standard"
+    }
+  ],
+  "bianyiqi": [
+    {
+      "char": "编译器",
+      "en": "compiler"
+    }
+  ],
+  "fuyinji": [
+    {
+      "char": "复印机",
+      "en": "photocopying"
+    }
+  ],
+  "jiaojuan": [
+    {
+      "char": "胶卷",
+      "en": "film"
+    }
+  ],
+  "yejingxianshi": [
+    {
+      "char": "液晶显示",
+      "en": "LCD"
+    }
+  ],
+  "mosha": [
+    {
+      "char": "磨砂",
+      "en": "frosted (e.g. glass)"
+    }
+  ],
+  "chazhi": [
+    {
+      "char": "插值",
+      "en": "interpolation"
+    }
+  ],
+  "shiyongfangbian": [
+    {
+      "char": "使用方便",
+      "en": "easy to use"
+    }
+  ],
+  "diangan": [
+    {
+      "char": "电感",
+      "en": "inductance"
+    }
+  ],
+  "huocheng": [
+    {
+      "char": "或称",
+      "en": "also called"
+    }
+  ],
+  "tigongzhe": [
+    {
+      "char": "提供者",
+      "en": "supplier"
+    }
+  ],
+  "fuzahua": [
+    {
+      "char": "复杂化",
+      "en": "complicate"
+    }
+  ],
+  "kerongren": [
+    {
+      "char": "可容忍",
+      "en": "tolerable"
+    }
+  ],
+  "youhuiquan": [
+    {
+      "char": "优惠券",
+      "en": "coupon"
+    }
+  ],
+  "kancha": [
+    {
+      "char": "勘察",
+      "en": "reconnaissance"
+    }
+  ],
+  "gaoqing": [
+    {
+      "char": "高清",
+      "en": "HDTV"
+    }
+  ],
+  "guominxing": [
+    {
+      "char": "过敏性",
+      "en": "anaphylaxis"
+    }
+  ],
+  "kelifulan": [
+    {
+      "char": "克利夫兰",
+      "en": "Cleveland"
+    }
+  ],
+  "xueshujie": [
+    {
+      "char": "学术界",
+      "en": "academic circles"
+    }
+  ],
+  "shenji": [
+    {
+      "char": "审计",
+      "en": "audit"
+    }
+  ],
+  "kaipule": [
+    {
+      "char": "开普勒",
+      "en": "(Johannes) Kepler"
+    }
+  ],
+  "zhizuozhe": [
+    {
+      "char": "制作者",
+      "en": "producer"
+    }
+  ],
+  "xilali": [
+    {
+      "char": "希拉里",
+      "en": "Hillary (person name)"
+    }
+  ],
+  "lingcunwei": [
+    {
+      "char": "另存为",
+      "en": "save as (a file)"
+    }
+  ],
+  "biaoling": [
+    {
+      "char": "嘌呤",
+      "en": "purine"
+    }
+  ],
+  "qiwangzhi": [
+    {
+      "char": "期望值",
+      "en": "expected value"
+    }
+  ],
+  "huanshu": [
+    {
+      "char": "还书",
+      "en": "return books"
+    }
+  ],
+  "chufaqi": [
+    {
+      "char": "触发器",
+      "en": "flip-flop (electronics)"
+    }
+  ],
+  "gongling": [
+    {
+      "char": "工龄",
+      "en": "length of service"
+    }
+  ],
+  "fudianshu": [
+    {
+      "char": "浮点数",
+      "en": "floating point"
+    }
+  ],
+  "fubusi": [
+    {
+      "char": "福布斯",
+      "en": "Forbes"
+    }
+  ],
+  "qingbaojiansuo": [
+    {
+      "char": "情报检索",
+      "en": "information retrieval"
+    }
+  ],
+  "sanshe": [
+    {
+      "char": "散射",
+      "en": "scattering"
+    }
+  ],
+  "sijiao": [
+    {
+      "char": "死角",
+      "en": "blind corner"
+    }
+  ],
+  "shubiaoqi": [
+    {
+      "char": "鼠标器",
+      "en": "mouse (computer)"
+    }
+  ],
+  "ziwai": [
+    {
+      "char": "紫外",
+      "en": "ultraviolet (ray)"
+    }
+  ],
+  "leishe": [
+    {
+      "char": "镭射",
+      "en": "laser"
+    }
+  ],
+  "teji": [
+    {
+      "char": "特技",
+      "en": "(n) special effects"
+    }
+  ],
+  "jiandiao": [
+    {
+      "char": "减掉",
+      "en": "subtract"
+    }
+  ],
+  "nazha": [
+    {
+      "char": "哪吒",
+      "en": "Nezha (deity)"
+    }
+  ],
+  "zhuanshi": [
+    {
+      "char": "转世",
+      "en": "(Buddhist) reincarnation"
+    }
+  ],
+  "xiaoxiongmao": [
+    {
+      "char": "小熊猫",
+      "en": "red panda"
+    }
+  ],
+  "shengu": [
+    {
+      "char": "深谷",
+      "en": "(n) coomb"
+    }
+  ],
+  "youle": [
+    {
+      "char": "游乐",
+      "en": "(v) amuse oneself"
+    }
+  ],
+  "suikuai": [
+    {
+      "char": "碎块",
+      "en": "fragment"
+    }
+  ],
+  "guangdu": [
+    {
+      "char": "光度",
+      "en": "luminosity"
+    }
+  ],
+  "qulv": [
+    {
+      "char": "曲率",
+      "en": "curvature"
+    }
+  ],
+  "wangdan": [
+    {
+      "char": "王丹",
+      "en": "Wang Dan (Chinese dissident)"
+    }
+  ],
+  "beijinggongyedaxue": [
+    {
+      "char": "北京工业大学",
+      "en": "Beijing University of Technology"
+    }
+  ],
+  "wanglu": [
+    {
+      "char": "网路",
+      "en": "network"
+    }
+  ],
+  "fengsha": [
+    {
+      "char": "封杀",
+      "en": "shut out"
+    }
+  ],
+  "chechu": [
+    {
+      "char": "撤除",
+      "en": "remove"
+    }
+  ],
+  "dianciganrao": [
+    {
+      "char": "电磁干扰",
+      "en": "electromagnetic interference"
+    }
+  ],
+  "zhuananzu": [
+    {
+      "char": "专案组",
+      "en": "special (legal|judicial) investigations group"
+    }
+  ],
+  "neibuwang": [
+    {
+      "char": "内部网",
+      "en": "intranet"
+    }
+  ],
+  "fenliu": [
+    {
+      "char": "分流",
+      "en": "bypass"
+    }
+  ],
+  "qiangxian": [
+    {
+      "char": "抢先",
+      "en": "to rush (to do sth urgent)"
+    }
+  ],
+  "gongshangyinhang": [
+    {
+      "char": "工商银行",
+      "en": "Industrial and Commercial Bank of China (ICBC)"
+    }
+  ],
+  "jucheng": [
+    {
+      "char": "据称",
+      "en": "according to reports"
+    }
+  ],
+  "anquantao": [
+    {
+      "char": "安全套",
+      "en": "condom"
+    }
+  ],
+  "caozuozhe": [
+    {
+      "char": "操作者",
+      "en": "operator"
+    }
+  ],
+  "bokeli": [
+    {
+      "char": "伯克利",
+      "en": "Berkeley"
+    }
+  ],
+  "bupin": [
+    {
+      "char": "补品",
+      "en": "tonic"
+    }
+  ],
+  "zhuguanrenyuan": [
+    {
+      "char": "主管人员",
+      "en": "executive"
+    }
+  ],
+  "lvjinbuzhi": [
+    {
+      "char": "屡禁不止",
+      "en": "repeated failure to prohibit"
+    }
+  ],
+  "mensuo": [
+    {
+      "char": "门锁",
+      "en": "(n) doorlock"
+    }
+  ],
+  "youjin": [
+    {
+      "char": "尤金",
+      "en": "Eugene"
+    }
+  ],
+  "keti": [
+    {
+      "char": "客体",
+      "en": "object (philosophy)"
+    }
+  ],
+  "hebote": [
+    {
+      "char": "赫伯特",
+      "en": "Herbert (name)"
+    }
+  ],
+  "bukannan": [
+    {
+      "char": "布坎南",
+      "en": "Buchanan"
+    }
+  ],
+  "lichade": [
+    {
+      "char": "理查德",
+      "en": "Richard (name)"
+    }
+  ],
+  "sitanfu": [
+    {
+      "char": "斯坦福",
+      "en": "Stanford (university)"
+    }
+  ],
+  "jiwu": [
+    {
+      "char": "及物",
+      "en": "transitive"
+    }
+  ],
+  "guiguan": [
+    {
+      "char": "桂冠",
+      "en": "(n) victory laurel"
+    }
+  ],
+  "yangmu": [
+    {
+      "char": "养母",
+      "en": "foster"
+    }
+  ],
+  "bianzhong": [
+    {
+      "char": "变种",
+      "en": "mutation"
+    }
+  ],
+  "kaisuo": [
+    {
+      "char": "开锁",
+      "en": "unlock"
+    }
+  ],
+  "jingdi": [
+    {
+      "char": "警笛",
+      "en": "siren"
+    }
+  ],
+  "xianyan": [
+    {
+      "char": "先验",
+      "en": "a priori and a posteriori (philosophy)"
+    }
+  ],
+  "suantong": [
+    {
+      "char": "酸痛",
+      "en": "ache"
+    }
+  ],
+  "bise": [
+    {
+      "char": "鼻塞",
+      "en": "have a stuffy nose"
+    }
+  ],
+  "zhishuhanshu": [
+    {
+      "char": "指数函数",
+      "en": "exponential function"
+    }
+  ],
+  "duishuhanshu": [
+    {
+      "char": "对数函数",
+      "en": "logarithmic function"
+    }
+  ],
+  "ouwen": [
+    {
+      "char": "欧文",
+      "en": "(n) Erwin"
+    }
+  ],
+  "dongliang": [
+    {
+      "char": "动量",
+      "en": "momentum"
+    }
+  ],
+  "xielv": [
+    {
+      "char": "斜率",
+      "en": "slope"
+    }
+  ],
+  "xianxingdaishu": [
+    {
+      "char": "线性代数",
+      "en": "linear algebra"
+    }
+  ],
+  "weijifen": [
+    {
+      "char": "微积分",
+      "en": "infinitesimal calculus"
+    }
+  ],
+  "jiaochaxueke": [
+    {
+      "char": "交叉学科",
+      "en": "interdisciplinary"
+    }
+  ],
+  "sijiyingbei": [
+    {
+      "char": "死记硬背",
+      "en": "to learn by rote"
+    }
+  ],
+  "hengdengshi": [
+    {
+      "char": "恒等式",
+      "en": "identity (mathematics)"
+    }
+  ],
+  "zhangliang": [
+    {
+      "char": "张量",
+      "en": "tensor"
+    }
+  ],
+  "wangyi": [
+    {
+      "char": "网易",
+      "en": "NetEase"
+    }
+  ],
+  "dingliangfenxi": [
+    {
+      "char": "定量分析",
+      "en": "quantitative analysis"
+    }
+  ],
+  "yinzi": [
+    {
+      "char": "因子",
+      "en": "factor"
+    }
+  ],
+  "zaihaobuguo": [
+    {
+      "char": "再好不过",
+      "en": "(phr) can't be better"
+    }
+  ],
+  "youlechang": [
+    {
+      "char": "游乐场",
+      "en": "playground"
+    }
+  ],
+  "duozhongyuyan": [
+    {
+      "char": "多种语言",
+      "en": "multilingual"
+    }
+  ],
+  "wusuobuzhi": [
+    {
+      "char": "无所不知",
+      "en": "omniscient"
+    }
+  ],
+  "pianweifen": [
+    {
+      "char": "偏微分",
+      "en": "(math.) partial differential"
+    }
+  ],
+  "shushiyi": [
+    {
+      "char": "数十亿",
+      "en": "several billion"
+    }
+  ],
+  "laonianchidaizheng": [
+    {
+      "char": "老年痴呆症",
+      "en": "senile dementia"
+    }
+  ],
+  "fangxingweiai": [
+    {
+      "char": "方兴未艾",
+      "en": "to be unfolding"
+    }
+  ],
+  "sanxing": [
+    {
+      "char": "三星",
+      "en": "Samsung"
+    }
+  ],
+  "xiaofangshuan": [
+    {
+      "char": "消防栓",
+      "en": "fire hydrant"
+    }
+  ],
+  "yinbao": [
+    {
+      "char": "引爆",
+      "en": "ignite"
+    }
+  ],
+  "shicuo": [
+    {
+      "char": "试错",
+      "en": "trial and error"
+    }
+  ],
+  "cailiaokexue": [
+    {
+      "char": "材料科学",
+      "en": "materials science"
+    }
+  ],
+  "yundongxue": [
+    {
+      "char": "运动学",
+      "en": "kinematics"
+    }
+  ],
+  "haomiao": [
+    {
+      "char": "毫秒",
+      "en": "millisecond"
+    }
+  ],
+  "kouyi": [
+    {
+      "char": "口译",
+      "en": "interpreting"
+    }
+  ],
+  "dianrongqi": [
+    {
+      "char": "电容器",
+      "en": "capacitor"
+    }
+  ],
+  "zhongduanji": [
+    {
+      "char": "终端机",
+      "en": "terminal"
+    }
+  ],
+  "suofeiya": [
+    {
+      "char": "索菲亚",
+      "en": "Sofia (city in Bulgaria)"
+    }
+  ],
+  "zhongzuqishi": [
+    {
+      "char": "种族歧视",
+      "en": "(n) racism"
+    }
+  ],
+  "yichuanxing": [
+    {
+      "char": "遗传性",
+      "en": "(n) heritability"
+    }
+  ],
+  "tiaoxingma": [
+    {
+      "char": "条形码",
+      "en": "barcode"
+    }
+  ],
+  "xianchangzhibo": [
+    {
+      "char": "现场直播",
+      "en": "live broadcast"
+    }
+  ],
+  "yaoce": [
+    {
+      "char": "遥测",
+      "en": "telemetry"
+    }
+  ],
+  "biaozhuncha": [
+    {
+      "char": "标准差",
+      "en": "(statistics) standard deviation"
+    }
+  ],
+  "anbao": [
+    {
+      "char": "安保",
+      "en": "(abbreviation) maintain security"
+    }
+  ],
+  "lianxuhanshu": [
+    {
+      "char": "连续函数",
+      "en": "continuous function"
+    }
+  ],
+  "neima": [
+    {
+      "char": "内码",
+      "en": "to encode"
+    }
+  ],
+  "jinglian": [
+    {
+      "char": "精炼",
+      "en": "refine"
+    }
+  ],
+  "zijieshu": [
+    {
+      "char": "字节数",
+      "en": "byte count"
+    }
+  ],
+  "xiangzhi": [
+    {
+      "char": "相纸",
+      "en": "photographic paper"
+    }
+  ],
+  "chifeng": [
+    {
+      "char": "赤峰",
+      "en": "(N) Chifeng (city in Inner Mongolia)"
+    }
+  ],
+  "dezhou": [
+    {
+      "char": "德州",
+      "en": "Texas"
+    }
+  ],
+  "cailu": [
+    {
+      "char": "采录",
+      "en": "collect and record"
+    }
+  ],
+  "xiaqu": [
+    {
+      "char": "辖区",
+      "en": "administrative region"
+    }
+  ],
+  "xuncha": [
+    {
+      "char": "巡查",
+      "en": "to go around and inspect"
+    }
+  ],
+  "yanxi": [
+    {
+      "char": "沿袭",
+      "en": "carry on the same way as before"
+    }
+  ],
+  "jiaotonganquan": [
+    {
+      "char": "交通安全",
+      "en": "road-traffic safety"
+    }
+  ],
+  "dijiyuyan": [
+    {
+      "char": "低级语言",
+      "en": "low level (computer) language"
+    }
+  ],
+  "sanjiaohanshu": [
+    {
+      "char": "三角函数",
+      "en": "trigonometric function"
+    }
+  ],
+  "suijishu": [
+    {
+      "char": "随机数",
+      "en": "random number"
+    }
+  ],
+  "fanyingshijian": [
+    {
+      "char": "反应时间",
+      "en": "response time (technology)"
+    }
+  ],
+  "fangcheng": [
+    {
+      "char": "方城",
+      "en": "(N) Fangcheng (place in Henan)"
+    }
+  ],
+  "dianbiao": [
+    {
+      "char": "电表",
+      "en": "(n) ammeter"
+    }
+  ],
+  "lanban": [
+    {
+      "char": "篮板",
+      "en": "backboard"
+    }
+  ],
+  "gaimao": [
+    {
+      "char": "盖帽",
+      "en": "block (basketball)"
+    }
+  ],
+  "yantaohui": [
+    {
+      "char": "研讨会",
+      "en": "discussion forum"
+    }
+  ],
+  "shanghaijiaotongdaxue": [
+    {
+      "char": "上海交通大学",
+      "en": "Shanghai Jiao Tong University"
+    }
+  ],
+  "yandong": [
+    {
+      "char": "眼动",
+      "en": "eye movement"
+    }
+  ],
+  "quyang": [
+    {
+      "char": "取样",
+      "en": "sampling (signal processing)"
+    }
+  ],
+  "gaojie": [
+    {
+      "char": "高阶",
+      "en": "high level"
+    }
+  ],
+  "keyizhi": [
+    {
+      "char": "可移植",
+      "en": "portable (programming language)"
+    }
+  ],
+  "yujingxitong": [
+    {
+      "char": "预警系统",
+      "en": "early warning system"
+    }
+  ],
+  "cundang": [
+    {
+      "char": "存档",
+      "en": "to file"
+    }
+  ],
+  "yuanmu": [
+    {
+      "char": "原木",
+      "en": "logs"
+    }
+  ],
+  "sunbin": [
+    {
+      "char": "孙膑",
+      "en": "Sun Bin"
+    }
+  ],
+  "douzhi": [
+    {
+      "char": "斗智",
+      "en": "battle of wits"
+    }
+  ],
+  "huangyu": [
+    {
+      "char": "黄玉",
+      "en": "topaz"
+    }
+  ],
+  "sitanfudaxue": [
+    {
+      "char": "斯坦福大学",
+      "en": "Stanford University"
+    }
+  ],
+  "rulai": [
+    {
+      "char": "如来",
+      "en": "Tathagata (Buddhist term)"
+    }
+  ],
+  "shengwuhuaxue": [
+    {
+      "char": "生物化学",
+      "en": "biochemistry"
+    }
+  ],
+  "beiwanglu": [
+    {
+      "char": "备忘录",
+      "en": "memorandum"
+    }
+  ],
+  "chouzi": [
+    {
+      "char": "绸子",
+      "en": "(n) fabric made of silk"
+    }
+  ],
+  "jingxi": [
+    {
+      "char": "京戏",
+      "en": "Beijing Opera"
+    }
+  ],
+  "dingguagua": [
+    {
+      "char": "顶呱呱",
+      "en": "tip top"
+    }
+  ],
+  "bailian": [
+    {
+      "char": "白脸",
+      "en": "white face"
+    }
+  ],
+  "nigulasi": [
+    {
+      "char": "尼古拉斯",
+      "en": "Nicholas"
+    }
+  ],
+  "dijie": [
+    {
+      "char": "低阶",
+      "en": "low level"
+    }
+  ],
+  "tianhou": [
+    {
+      "char": "天后",
+      "en": "Tin Hau (another name for the goddess Matsu)"
+    }
+  ],
+  "xinhuazidian": [
+    {
+      "char": "新华字典",
+      "en": "Xinhua Zidian"
+    }
+  ]
+}

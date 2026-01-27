@@ -8421,6 +8421,10 @@
     {
       "char": "练败",
       "en": "To defeat"
+    },
+    {
+      "char": "连败",
+      "en": "Consecutive defeat"
     }
   ],
   "zufen": [
@@ -9823,6 +9827,1358 @@
     {
       "char": "较能",
       "en": "More capable"
+    }
+  ],
+  "jiaojin": [
+    {
+      "char": "较近",
+      "en": "Near"
+    }
+  ],
+  "fuxing": [
+    {
+      "char": "辅行",
+      "en": "Walking"
+    }
+  ],
+  "fuxingfa": [
+    {
+      "char": "辅行法",
+      "en": "Walking Method"
+    }
+  ],
+  "shuchuliang": [
+    {
+      "char": "输出量",
+      "en": "Output Volume"
+    }
+  ],
+  "shuyang": [
+    {
+      "char": "输氧",
+      "en": "Oxygen Supply"
+    }
+  ],
+  "shuqiu": [
+    {
+      "char": "输球",
+      "en": "Passing the ball"
+    }
+  ],
+  "shuying": [
+    {
+      "char": "输赢",
+      "en": "Win or Lose"
+    }
+  ],
+  "bianxiang": [
+    {
+      "char": "辨向",
+      "en": "Determine Direction"
+    }
+  ],
+  "bianxianfaqiu": [
+    {
+      "char": "边线发球",
+      "en": "Sideline Serve"
+    }
+  ],
+  "bianluchuan": [
+    {
+      "char": "边路传",
+      "en": "Sideline Pass"
+    }
+  ],
+  "dasizhi": [
+    {
+      "char": "达四指",
+      "en": "Four-Finger Technique"
+    }
+  ],
+  "daquan": [
+    {
+      "char": "达拳",
+      "en": "Daquan (Boxing Style)"
+    }
+  ],
+  "xunfali": [
+    {
+      "char": "迅发力",
+      "en": "Quick Release of Force"
+    }
+  ],
+  "xunguo": [
+    {
+      "char": "迅过",
+      "en": "Quick Dribble/Pass"
+    }
+  ],
+  "guorenban": [
+    {
+      "char": "过人般",
+      "en": "Like Dribbling Past"
+    }
+  ],
+  "guorenyao": [
+    {
+      "char": "过人要",
+      "en": "Dribbling to Pass"
+    }
+  ],
+  "guoliang": [
+    {
+      "char": "过凉",
+      "en": "Overweight"
+    }
+  ],
+  "guoduoqing": [
+    {
+      "char": "过多轻",
+      "en": "Too Light"
+    }
+  ],
+  "guominfanying": [
+    {
+      "char": "过敏反应",
+      "en": "Allergic Reaction"
+    }
+  ],
+  "guoxiang": [
+    {
+      "char": "过箱",
+      "en": "Over the Box"
+    }
+  ],
+  "guosheng": [
+    {
+      "char": "过绳",
+      "en": "Over the Rope"
+    }
+  ],
+  "guopang": [
+    {
+      "char": "过胖",
+      "en": "Overweight"
+    }
+  ],
+  "guobao": [
+    {
+      "char": "过饱",
+      "en": "Overfed"
+    }
+  ],
+  "maiguo": [
+    {
+      "char": "迈过",
+      "en": "Overcome"
+    }
+  ],
+  "yingqiu": [
+    {
+      "char": "迎球",
+      "en": "Receive the Ball"
+    }
+  ],
+  "yunyi": [
+    {
+      "char": "运一",
+      "en": "One Movement"
+    }
+  ],
+  "yunhui": [
+    {
+      "char": "运会",
+      "en": "Sports Meet"
+    }
+  ],
+  "yunxingze": [
+    {
+      "char": "运兴则",
+      "en": "Sports Promote"
+    }
+  ],
+  "yundongqicai": [
+    {
+      "char": "运动器材",
+      "en": "Sports Equipment"
+    }
+  ],
+  "yundongxing": [
+    {
+      "char": "运动性",
+      "en": "Sports Characteristics"
+    }
+  ],
+  "yunjin": [
+    {
+      "char": "运进",
+      "en": "Advance"
+    }
+  ],
+  "jindi": [
+    {
+      "char": "近敌",
+      "en": "Close opponent"
+    }
+  ],
+  "haiyi": [
+    {
+      "char": "还易",
+      "en": "Return easy"
+    }
+  ],
+  "haisai": [
+    {
+      "char": "还赛",
+      "en": "Return race"
+    }
+  ],
+  "haican": [
+    {
+      "char": "还餐",
+      "en": "Return meal"
+    }
+  ],
+  "zhejie": [
+    {
+      "char": "这届",
+      "en": "This generation"
+    }
+  ],
+  "jingongxing": [
+    {
+      "char": "进攻型",
+      "en": "Offensive type"
+    }
+  ],
+  "jingongfang": [
+    {
+      "char": "进攻方",
+      "en": "Offensive side"
+    }
+  ],
+  "jinshengzhe": [
+    {
+      "char": "进绳者",
+      "en": "Player who advances the rope"
+    }
+  ],
+  "jintui": [
+    {
+      "char": "进退",
+      "en": "Advance and retreat"
+    }
+  ],
+  "yuanshen": [
+    {
+      "char": "远伸",
+      "en": "Far extend"
+    }
+  ],
+  "yuancheng": [
+    {
+      "char": "远撑",
+      "en": "Far support"
+    }
+  ],
+  "yuanqiu": [
+    {
+      "char": "远球",
+      "en": "Far ball"
+    }
+  ],
+  "yuanqiusong": [
+    {
+      "char": "远球松",
+      "en": "Far ball loose"
+    }
+  ],
+  "yuanjiao": [
+    {
+      "char": "远角",
+      "en": "Far angle"
+    }
+  ],
+  "weiti": [
+    {
+      "char": "违体",
+      "en": "Violate body"
+    }
+  ],
+  "lianhao": [
+    {
+      "char": "连好",
+      "en": "Consecutive good"
+    }
+  ],
+  "mizuo": [
+    {
+      "char": "迷作",
+      "en": "Misdoing"
+    }
+  ],
+  "mishifangxiang": [
+    {
+      "char": "迷失方向",
+      "en": "Lost direction"
+    }
+  ],
+  "zhuishenqiu": [
+    {
+      "char": "追身球",
+      "en": "Chase body ball"
+    }
+  ],
+  "tuiyijunren": [
+    {
+      "char": "退役军人",
+      "en": "Retired military personnel"
+    }
+  ],
+  "shineng": [
+    {
+      "char": "适能",
+      "en": "Suitable ability"
+    }
+  ],
+  "taolixianchang": [
+    {
+      "char": "逃离现场",
+      "en": "Escape the scene"
+    }
+  ],
+  "taobixianshi": [
+    {
+      "char": "逃避现实",
+      "en": "Avoid reality"
+    }
+  ],
+  "xuanhui": [
+    {
+      "char": "选会",
+      "en": "Selection meeting"
+    }
+  ],
+  "xuanzexiang": [
+    {
+      "char": "选择项",
+      "en": "Selection item"
+    }
+  ],
+  "xuanjin": [
+    {
+      "char": "选近",
+      "en": "Select near"
+    }
+  ],
+  "zhubuwanshan": [
+    {
+      "char": "逐步完善",
+      "en": "Gradually improve"
+    }
+  ],
+  "zhuduan": [
+    {
+      "char": "逐段",
+      "en": "Segment by segment"
+    }
+  ],
+  "dishen": [
+    {
+      "char": "递伸",
+      "en": "Extension"
+    }
+  ],
+  "sujia": [
+    {
+      "char": "速加",
+      "en": "Speed up"
+    }
+  ],
+  "suduman": [
+    {
+      "char": "速度慢",
+      "en": "Slow down"
+    }
+  ],
+  "yuzu": [
+    {
+      "char": "遇阻",
+      "en": "Encounter obstacles"
+    }
+  ],
+  "daokan": [
+    {
+      "char": "道坎",
+      "en": "Road obstacles"
+    }
+  ],
+  "zunshoujilv": [
+    {
+      "char": "遵守纪律",
+      "en": "Observe discipline"
+    }
+  ],
+  "linqu": [
+    {
+      "char": "邻区",
+      "en": "Neighboring area"
+    }
+  ],
+  "haojin": [
+    {
+      "char": "郝金",
+      "en": "(Assuming a name - no direct translation)"
+    }
+  ],
+  "fenlei": [
+    {
+      "char": "酚类",
+      "en": "Phenols"
+    }
+  ],
+  "jiaojie": [
+    {
+      "char": "酵解",
+      "en": "Fermentation"
+    }
+  ],
+  "suanzhang": [
+    {
+      "char": "酸胀",
+      "en": "Sourness/Swelling"
+    }
+  ],
+  "caier": [
+    {
+      "char": "采二",
+      "en": "Collect second"
+    }
+  ],
+  "caishi": [
+    {
+      "char": "采势",
+      "en": "Collect momentum"
+    }
+  ],
+  "caiqurenhe": [
+    {
+      "char": "采取任何",
+      "en": "Take any action"
+    }
+  ],
+  "caiquxiangying": [
+    {
+      "char": "采取相应",
+      "en": "Take appropriate action"
+    }
+  ],
+  "zhongzhong": [
+    {
+      "char": "重中",
+      "en": "Most important"
+    }
+  ],
+  "chongfuxing": [
+    {
+      "char": "重复性",
+      "en": "Repetitive"
+    }
+  ],
+  "zhongdianbuwei": [
+    {
+      "char": "重点部位",
+      "en": "Key areas"
+    }
+  ],
+  "zhongzheng": [
+    {
+      "char": "重症",
+      "en": "Severe illness/disease"
+    }
+  ],
+  "zhongbi": [
+    {
+      "char": "重臂",
+      "en": "Heavy arm"
+    }
+  ],
+  "zhongjie": [
+    {
+      "char": "重解",
+      "en": "Heavy release/relaxation"
+    }
+  ],
+  "zhenxing": [
+    {
+      "char": "针性",
+      "en": "Needle-like"
+    }
+  ],
+  "chandao": [
+    {
+      "char": "铲倒",
+      "en": "Scoop down"
+    }
+  ],
+  "chanqiu": [
+    {
+      "char": "铲球",
+      "en": "Scoop ball"
+    }
+  ],
+  "suojin": [
+    {
+      "char": "锁紧",
+      "en": "Lock tight"
+    }
+  ],
+  "ruiyigaige": [
+    {
+      "char": "锐意改革",
+      "en": "Determined reform"
+    }
+  ],
+  "cuoshi": [
+    {
+      "char": "错失",
+      "en": "Missed opportunity"
+    }
+  ],
+  "cuokai": [
+    {
+      "char": "错开",
+      "en": "Misplace/Shift"
+    }
+  ],
+  "cuowupanduan": [
+    {
+      "char": "错误判断",
+      "en": "Incorrect judgment"
+    }
+  ],
+  "jianguo": [
+    {
+      "char": "键过",
+      "en": "(Assuming a movement - no direct translation)"
+    }
+  ],
+  "zhangchuan": [
+    {
+      "char": "长传",
+      "en": "Long pass"
+    }
+  ],
+  "zhangkebizhiduan": [
+    {
+      "char": "长克彼之短",
+      "en": "Counterattack"
+    }
+  ],
+  "zhangban": [
+    {
+      "char": "长板",
+      "en": "Long shot"
+    }
+  ],
+  "zhangqiu": [
+    {
+      "char": "长球",
+      "en": "Long ball"
+    }
+  ],
+  "bishi": [
+    {
+      "char": "闭式",
+      "en": "Closed position"
+    }
+  ],
+  "biyan": [
+    {
+      "char": "闭眼",
+      "en": "Blindfolded"
+    },
+    {
+      "char": "鼻咽",
+      "en": "Pharynx"
+    }
+  ],
+  "xiansan": [
+    {
+      "char": "闲散",
+      "en": "Leisurely"
+    }
+  ],
+  "jiandu": [
+    {
+      "char": "间度",
+      "en": "Interval"
+    }
+  ],
+  "jiangan": [
+    {
+      "char": "间感",
+      "en": "Intermittent"
+    }
+  ],
+  "jianxiexing": [
+    {
+      "char": "间歇性",
+      "en": "Intermittent"
+    }
+  ],
+  "duize": [
+    {
+      "char": "队则",
+      "en": "Team rules"
+    }
+  ],
+  "duidang": [
+    {
+      "char": "队当",
+      "en": "Team play"
+    }
+  ],
+  "duixingbianhuan": [
+    {
+      "char": "队形变换",
+      "en": "Formation change"
+    }
+  ],
+  "duishengqiu": [
+    {
+      "char": "队胜球",
+      "en": "Winning goal"
+    }
+  ],
+  "fangbian": [
+    {
+      "char": "防变",
+      "en": "Defensive change"
+    }
+  ],
+  "fangbei": [
+    {
+      "char": "防备",
+      "en": "Defense"
+    }
+  ],
+  "fangduo": [
+    {
+      "char": "防多",
+      "en": "Defense against multiple"
+    }
+  ],
+  "fanghan": [
+    {
+      "char": "防寒",
+      "en": "Cold-proof"
+    }
+  ],
+  "fangdang": [
+    {
+      "char": "防当",
+      "en": "Defensive position"
+    }
+  ],
+  "fanghuyongpin": [
+    {
+      "char": "防护用品",
+      "en": "Protective equipment"
+    }
+  ],
+  "fangshuai": [
+    {
+      "char": "防衰",
+      "en": "Anti-fatigue"
+    }
+  ],
+  "fangqing": [
+    {
+      "char": "防请",
+      "en": "Anti-fraud"
+    }
+  ],
+  "fangshenshu": [
+    {
+      "char": "防身术",
+      "en": "Self-defense"
+    }
+  ],
+  "fangzhen": [
+    {
+      "char": "防震",
+      "en": "Anti-earthquake"
+    }
+  ],
+  "jietishi": [
+    {
+      "char": "阶梯式",
+      "en": "Step-by-step"
+    }
+  ],
+  "zusexing": [
+    {
+      "char": "阻塞性",
+      "en": "Obstruction"
+    }
+  ],
+  "anuode": [
+    {
+      "char": "阿诺德",
+      "en": "Arnold (likely a name)"
+    }
+  ],
+  "chenzhi": [
+    {
+      "char": "陈志",
+      "en": "Chen Zhi (likely a name)"
+    }
+  ],
+  "jiangneng": [
+    {
+      "char": "降能",
+      "en": "Energy reduction"
+    }
+  ],
+  "chuchan": [
+    {
+      "char": "除颤",
+      "en": "Defibrillation"
+    }
+  ],
+  "suishi": [
+    {
+      "char": "随视",
+      "en": "Visual observation"
+    }
+  ],
+  "nanyiwancheng": [
+    {
+      "char": "难以完成",
+      "en": "Difficult to complete"
+    }
+  ],
+  "nanyidadao": [
+    {
+      "char": "难以达到",
+      "en": "Difficult to achieve"
+    }
+  ],
+  "jitixing": [
+    {
+      "char": "集体性",
+      "en": "Collectivity"
+    }
+  ],
+  "xuerenke": [
+    {
+      "char": "雪刃刻",
+      "en": "Snow blade carving (likely referring to snow sports technique)"
+    }
+  ],
+  "xuechang": [
+    {
+      "char": "雪场",
+      "en": "Ski resort"
+    }
+  ],
+  "xuepo": [
+    {
+      "char": "雪坡",
+      "en": "Snow slope"
+    }
+  ],
+  "xuezhang": [
+    {
+      "char": "雪杖",
+      "en": "Ski pole"
+    }
+  ],
+  "xueban": [
+    {
+      "char": "雪板",
+      "en": "Skis"
+    }
+  ],
+  "xueyoulongxue": [
+    {
+      "char": "雪游龙雪",
+      "en": "Snow dragon snow (likely a specific snow activity or term)"
+    }
+  ],
+  "xuelian": [
+    {
+      "char": "雪联",
+      "en": "Snow chain"
+    }
+  ],
+  "xuedao": [
+    {
+      "char": "雪道",
+      "en": "Ski run"
+    }
+  ],
+  "lingquedian": [
+    {
+      "char": "零缺点",
+      "en": "Zero defects"
+    }
+  ],
+  "xujie": [
+    {
+      "char": "需接",
+      "en": "Need assistance/support"
+    }
+  ],
+  "xuyangliang": [
+    {
+      "char": "需氧量",
+      "en": "Oxygen requirement"
+    }
+  ],
+  "xujiao": [
+    {
+      "char": "需较",
+      "en": "Need more/require more"
+    }
+  ],
+  "xugewang": [
+    {
+      "char": "需隔网",
+      "en": "Need a net (likely referring to safety measures)"
+    }
+  ],
+  "zhenjiao": [
+    {
+      "char": "震脚",
+      "en": "Shaking feet (likely referring to balance exercises)"
+    }
+  ],
+  "luchupozhan": [
+    {
+      "char": "露出破绽",
+      "en": "Reveal flaws/expose weaknesses"
+    }
+  ],
+  "qingao": [
+    {
+      "char": "青奥",
+      "en": "Youth Olympic Games"
+    }
+  ],
+  "qingaohui": [
+    {
+      "char": "青奥会",
+      "en": "Youth Olympic Games"
+    }
+  ],
+  "qingshaonianertong": [
+    {
+      "char": "青少年儿童",
+      "en": "Young children/Youths"
+    }
+  ],
+  "qingkang": [
+    {
+      "char": "青康",
+      "en": "Youth health"
+    }
+  ],
+  "jingtaipingheng": [
+    {
+      "char": "静态平衡",
+      "en": "Static balance"
+    }
+  ],
+  "jingzhidi": [
+    {
+      "char": "静止地",
+      "en": "Stillly/In a stationary position"
+    }
+  ],
+  "jingfagong": [
+    {
+      "char": "静法供",
+      "en": "Static supply (likely referring to a static exercise method)"
+    }
+  ],
+  "jingmaizhushe": [
+    {
+      "char": "静脉注射",
+      "en": "Intravenous injection"
+    }
+  ],
+  "feichuan": [
+    {
+      "char": "非传",
+      "en": "Non-transmission"
+    }
+  ],
+  "feizhouqixing": [
+    {
+      "char": "非周期性",
+      "en": "Non-periodic"
+    }
+  ],
+  "feiyiyuan": [
+    {
+      "char": "非意愿",
+      "en": "Non-voluntary"
+    }
+  ],
+  "kaoku": [
+    {
+      "char": "靠苦",
+      "en": "Facing reality"
+    }
+  ],
+  "mianduixianshi": [
+    {
+      "char": "面对现实",
+      "en": "Facing reality"
+    }
+  ],
+  "xieshang": [
+    {
+      "char": "鞋上",
+      "en": "Footwear"
+    }
+  ],
+  "jushi": [
+    {
+      "char": "鞠是",
+      "en": "(This appears to be a typo - likely intended to be \"鞠躬\" - bowing) Bowing"
+    }
+  ],
+  "weituo": [
+    {
+      "char": "韦驮",
+      "en": "(This refers to a Buddhist deity - often translated as \"Vajra\") Vajra"
+    }
+  ],
+  "yinyuejie": [
+    {
+      "char": "音乐节",
+      "en": "Music festival"
+    }
+  ],
+  "yunlvcao": [
+    {
+      "char": "韵律操",
+      "en": "Rhythm exercise/exercise with rhythm"
+    }
+  ],
+  "dingji": [
+    {
+      "char": "顶击",
+      "en": "Overhead strike"
+    }
+  ],
+  "dingzhou": [
+    {
+      "char": "顶肘",
+      "en": "Overhead arm extension"
+    }
+  ],
+  "dingxi": [
+    {
+      "char": "顶膝",
+      "en": "Overhead knee extension"
+    }
+  ],
+  "xiangdong": [
+    {
+      "char": "项冬",
+      "en": "(This appears to be a typo - likely intended to be \"项链\" - necklace) Necklace"
+    }
+  ],
+  "wanshi": [
+    {
+      "char": "顽是",
+      "en": "(This appears to be a typo - likely intended to be \"顽强\" - tenacious) Tenacious"
+    }
+  ],
+  "gupan": [
+    {
+      "char": "顾盼",
+      "en": "Observation/Perspective"
+    }
+  ],
+  "yushe": [
+    {
+      "char": "预设",
+      "en": "Anticipation/Planned"
+    }
+  ],
+  "yufangjiezhong": [
+    {
+      "char": "预防接种",
+      "en": "Vaccination"
+    }
+  ],
+  "lingxianzhe": [
+    {
+      "char": "领先者",
+      "en": "Leader/Pioneer"
+    }
+  ],
+  "lingpao": [
+    {
+      "char": "领跑",
+      "en": "Leading the way/Running ahead"
+    }
+  ],
+  "jinghou": [
+    {
+      "char": "颈后",
+      "en": "Behind the neck"
+    }
+  ],
+  "pinci": [
+    {
+      "char": "频次",
+      "en": "Frequency"
+    }
+  ],
+  "dianqiushu": [
+    {
+      "char": "颠球数",
+      "en": "Number of bounces"
+    }
+  ],
+  "piaohou": [
+    {
+      "char": "飘后",
+      "en": "(This appears to be a typo - likely intended to be \"飘落\" - falling) Falling"
+    }
+  ],
+  "piaoshi": [
+    {
+      "char": "飘是",
+      "en": "(This appears to be a typo - likely intended to be \"飘落\" - falling) Falling"
+    }
+  ],
+  "feihui": [
+    {
+      "char": "飞回",
+      "en": "Return flight/Flying back"
+    }
+  ],
+  "feiyanxue": [
+    {
+      "char": "飞燕雪",
+      "en": "(This refers to a specific exercise - \"Flying Swallow Snow\") Flying Swallow Snow"
+    }
+  ],
+  "feiwenzheng": [
+    {
+      "char": "飞蚊症",
+      "en": "(This refers to a specific exercise - \"Mosquitoes Flying\") Mosquitoes Flying"
+    }
+  ],
+  "shijian": [
+    {
+      "char": "食减",
+      "en": "Reducing food intake"
+    }
+  ],
+  "shishi": [
+    {
+      "char": "食势",
+      "en": "Posture during eating"
+    }
+  ],
+  "shiguan": [
+    {
+      "char": "食管",
+      "en": "(This refers to the pharynx - throat) Pharynx"
+    }
+  ],
+  "canhou": [
+    {
+      "char": "餐后",
+      "en": "After meal"
+    }
+  ],
+  "yinshuiliang": [
+    {
+      "char": "饮水量",
+      "en": "Amount of water consumed"
+    }
+  ],
+  "baoti": [
+    {
+      "char": "饱体",
+      "en": "Full-bodied"
+    }
+  ],
+  "guanbing": [
+    {
+      "char": "馆冰",
+      "en": "Ice Hall (likely referring to an ice rink or facility)"
+    }
+  ],
+  "shouzai": [
+    {
+      "char": "首在",
+      "en": "(This appears to be a misspelling or abbreviation - context needed for accurate translation, but likely refers to a specific team or individual)"
+    }
+  ],
+  "shougang": [
+    {
+      "char": "首钢",
+      "en": "First Steel (likely referring to the Shaanxi First Steel Group)"
+    }
+  ],
+  "mali": [
+    {
+      "char": "马丽",
+      "en": "Ma Li"
+    }
+  ],
+  "maling": [
+    {
+      "char": "马凌",
+      "en": "Ma Ling"
+    }
+  ],
+  "madao": [
+    {
+      "char": "马刀",
+      "en": "Ma Dao (likely a martial arts term or a specific equipment name - context needed)"
+    }
+  ],
+  "mayuan": [
+    {
+      "char": "马原",
+      "en": "Ma Yuan"
+    }
+  ],
+  "mayue": [
+    {
+      "char": "马跃",
+      "en": "Ma Yue"
+    }
+  ],
+  "luobingquan": [
+    {
+      "char": "骆秉全",
+      "en": "Luo Bingquan"
+    }
+  ],
+  "zhouting": [
+    {
+      "char": "骤停",
+      "en": "Sudden Stop"
+    }
+  ],
+  "kuansu": [
+    {
+      "char": "髋速",
+      "en": "Hip Speed"
+    }
+  ],
+  "kuanbu": [
+    {
+      "char": "髋部",
+      "en": "Hip Area/Region"
+    }
+  ],
+  "gaozhongtongxue": [
+    {
+      "char": "高中同学",
+      "en": "Senior High School Students"
+    }
+  ],
+  "gaozhongkecheng": [
+    {
+      "char": "高中课程",
+      "en": "Senior High School Curriculum"
+    }
+  ],
+  "gaoerdi": [
+    {
+      "char": "高二地",
+      "en": "Grade 11 (High School)"
+    }
+  ],
+  "gaohui": [
+    {
+      "char": "高会",
+      "en": "High School Meeting/Event"
+    },
+    {
+      "char": "高挥",
+      "en": "High Swing"
+    }
+  ],
+  "gaowei": [
+    {
+      "char": "高位",
+      "en": "High Position/Level"
+    }
+  ],
+  "gaoyuanqi": [
+    {
+      "char": "高原期",
+      "en": "Altitude Plateau (physiological adaptation to high altitude)"
+    }
+  ],
+  "gaoyue": [
+    {
+      "char": "高悦",
+      "en": "Gao Yue"
+    }
+  ],
+  "gaonongdu": [
+    {
+      "char": "高浓度",
+      "en": "High Concentration"
+    }
+  ],
+  "gaoqiu": [
+    {
+      "char": "高球",
+      "en": "High Ball (likely referring to golf)"
+    }
+  ],
+  "gaoyan": [
+    {
+      "char": "高盐",
+      "en": "High Salt"
+    }
+  ],
+  "gaotang": [
+    {
+      "char": "高糖",
+      "en": "High Sugar"
+    }
+  ],
+  "gaonengliang": [
+    {
+      "char": "高能量",
+      "en": "High Energy"
+    }
+  ],
+  "gaozhi": [
+    {
+      "char": "高脂",
+      "en": "High Fat"
+    }
+  ],
+  "gaozhixuezheng": [
+    {
+      "char": "高脂血症",
+      "en": "Hyperlipidemia"
+    }
+  ],
+  "gaoxuezhi": [
+    {
+      "char": "高血脂",
+      "en": "High Cholesterol"
+    }
+  ],
+  "gaotong": [
+    {
+      "char": "高通",
+      "en": "High Throughput"
+    }
+  ],
+  "gaosudu": [
+    {
+      "char": "高速度",
+      "en": "High speed"
+    }
+  ],
+  "gaofengxian": [
+    {
+      "char": "高风险",
+      "en": "High risk"
+    }
+  ],
+  "moyu": [
+    {
+      "char": "魔芋",
+      "en": "Pufferfish"
+    }
+  ],
+  "niaoxi": [
+    {
+      "char": "鸟戏",
+      "en": "Bird’s nest"
+    }
+  ],
+  "mingshao": [
+    {
+      "char": "鸣哨",
+      "en": "Whistle"
+    }
+  ],
+  "luzhianshuxiong": [
+    {
+      "char": "鹿之安舒熊",
+      "en": "Deer’s peaceful bear"
+    }
+  ],
+  "luchongyun": [
+    {
+      "char": "鹿崇云",
+      "en": "Deer Chongyun"
+    }
+  ],
+  "luxilu": [
+    {
+      "char": "鹿戏鹿",
+      "en": "Deer playing deer"
+    }
+  ],
+  "huangdineijing": [
+    {
+      "char": "黄帝内经",
+      "en": "Huangdi’s Canon of Internal Medicine"
+    }
+  ],
+  "huangxiaoling": [
+    {
+      "char": "黄晓玲",
+      "en": "Huang Xiaoling"
+    }
+  ],
+  "nianzhixing": [
+    {
+      "char": "黏滞性",
+      "en": "Viscous"
+    }
+  ],
+  "heibanca": [
+    {
+      "char": "黑板擦",
+      "en": "Blackboard eraser"
+    }
+  ],
+  "heimei": [
+    {
+      "char": "黑莓",
+      "en": "Blackberry"
+    }
+  ],
+  "gujin": [
+    {
+      "char": "鼓劲",
+      "en": "Encourage"
+    }
+  ],
+  "longzhoujingdu": [
+    {
+      "char": "龙舟竞渡",
+      "en": "Dragon boat racing"
+    }
+  ],
+  "longhuaqiang": [
+    {
+      "char": "龙花强",
+      "en": "Longhua Strong"
     }
   ]
 }

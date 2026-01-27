@@ -130,5 +130,8237 @@
       "char": "韦达定理",
       "en": "Vieta's formulas"
     }
+  ],
+  "dingdi": [
+    {
+      "char": "丁地",
+      "en": "Land"
+    }
+  ],
+  "dingyixiangma": [
+    {
+      "char": "丁益祥马",
+      "en": "Ding Yixiang Ma (likely a specific mathematical concept or name)"
+    }
+  ],
+  "wanfen": [
+    {
+      "char": "万份",
+      "en": "Thousand parts"
+    }
+  ],
+  "sanleng": [
+    {
+      "char": "三棱",
+      "en": "Trigonal"
+    }
+  ],
+  "shangyu": [
+    {
+      "char": "上于",
+      "en": "Above/Over"
+    }
+  ],
+  "shangfa": [
+    {
+      "char": "上发",
+      "en": "Above/Upward"
+    }
+  ],
+  "shangming": [
+    {
+      "char": "上名",
+      "en": "Above/Superior"
+    }
+  ],
+  "shangjian": [
+    {
+      "char": "上尖",
+      "en": "Above/Apex"
+    }
+  ],
+  "shangjie": [
+    {
+      "char": "上解",
+      "en": "Above/Solution"
+    }
+  ],
+  "xiatuqie": [
+    {
+      "char": "下凸且",
+      "en": "Below/Convex and"
+    }
+  ],
+  "xiaqiu": [
+    {
+      "char": "下求",
+      "en": "Below/Seeking/Calculating"
+    }
+  ],
+  "xiabiaofang": [
+    {
+      "char": "下表放",
+      "en": "Below/Table Setting (likely a specific geometric construction)"
+    }
+  ],
+  "xiashe": [
+    {
+      "char": "下设",
+      "en": "Below/Established"
+    }
+  ],
+  "xiaxuandao": [
+    {
+      "char": "下选到",
+      "en": "Below/Selected"
+    }
+  ],
+  "buyizhi": [
+    {
+      "char": "不一值",
+      "en": "Not equal"
+    }
+  ],
+  "buxiayu": [
+    {
+      "char": "不下雨",
+      "en": "Not raining (likely a visual representation)"
+    }
+  ],
+  "bugongdian": [
+    {
+      "char": "不共点",
+      "en": "Not a common point"
+    }
+  ],
+  "budabiao": [
+    {
+      "char": "不大表",
+      "en": "Not a large table"
+    }
+  ],
+  "bufanghui": [
+    {
+      "char": "不放回",
+      "en": "Without replacement"
+    }
+  ],
+  "buhua": [
+    {
+      "char": "不画",
+      "en": "Not draw"
+    }
+  ],
+  "bingdi": [
+    {
+      "char": "丙地",
+      "en": "Bing Di (likely a specific location or area)"
+    }
+  ],
+  "liangbujiao": [
+    {
+      "char": "两不交",
+      "en": "Two non-intersecting"
+    }
+  ],
+  "liangrengongti": [
+    {
+      "char": "两人共提",
+      "en": "Two people jointly raise"
+    }
+  ],
+  "liangju": [
+    {
+      "char": "两局",
+      "en": "Two sets/rounds"
+    }
+  ],
+  "liangsuo": [
+    {
+      "char": "两所",
+      "en": "Two schools"
+    }
+  ],
+  "liangpi": [
+    {
+      "char": "两批",
+      "en": "Two batches"
+    }
+  ],
+  "liangxiao": [
+    {
+      "char": "两校",
+      "en": "Two schools"
+    }
+  ],
+  "liangqiu": [
+    {
+      "char": "两球",
+      "en": "Two balls"
+    }
+  ],
+  "liangxiang": [
+    {
+      "char": "两箱",
+      "en": "Two boxes"
+    }
+  ],
+  "liangguan": [
+    {
+      "char": "两罐",
+      "en": "Two cans"
+    }
+  ],
+  "liangjie": [
+    {
+      "char": "两解",
+      "en": "Two solutions"
+    }
+  ],
+  "liangzhou": [
+    {
+      "char": "两轴",
+      "en": "Two axes"
+    }
+  ],
+  "yangekongzhi": [
+    {
+      "char": "严格控制",
+      "en": "Strict control"
+    }
+  ],
+  "yanjinxing": [
+    {
+      "char": "严谨性",
+      "en": "Rigor/Carefulness"
+    }
+  ],
+  "linjie": [
+    {
+      "char": "临界",
+      "en": "Critical point/Limit"
+    }
+  ],
+  "linjiezhi": [
+    {
+      "char": "临界值",
+      "en": "Critical value"
+    }
+  ],
+  "weiqie": [
+    {
+      "char": "为且",
+      "en": "And"
+    }
+  ],
+  "weijian": [
+    {
+      "char": "为件",
+      "en": "Piece/Item"
+    }
+  ],
+  "weice": [
+    {
+      "char": "为侧",
+      "en": "Side"
+    }
+  ],
+  "weibei": [
+    {
+      "char": "为北",
+      "en": "North"
+    }
+  ],
+  "weinan": [
+    {
+      "char": "为南",
+      "en": "South"
+    }
+  ],
+  "weishi": [
+    {
+      "char": "为始",
+      "en": "Beginning/Start"
+    },
+    {
+      "char": "位是",
+      "en": "It is/this is"
+    }
+  ],
+  "weiding": [
+    {
+      "char": "为定",
+      "en": "Fixed/Determined"
+    }
+  ],
+  "weixiaohua": [
+    {
+      "char": "为小华",
+      "en": "(Likely a specific name or reference - needs context)"
+    }
+  ],
+  "weiceng": [
+    {
+      "char": "为层",
+      "en": "Layer"
+    }
+  ],
+  "weikai": [
+    {
+      "char": "为开",
+      "en": "Open/Start"
+    }
+  ],
+  "weixian": [
+    {
+      "char": "为线",
+      "en": "Line"
+    }
+  ],
+  "weiliang": [
+    {
+      "char": "为良",
+      "en": "Good/Fine"
+    },
+    {
+      "char": "为辆",
+      "en": "Vehicle/Car"
+    }
+  ],
+  "zhuzhi": [
+    {
+      "char": "主值",
+      "en": "Main value"
+    }
+  ],
+  "zhudongquan": [
+    {
+      "char": "主动权",
+      "en": "Initiative/Control"
+    }
+  ],
+  "zhukechang": [
+    {
+      "char": "主客场",
+      "en": "Home and away stadium"
+    }
+  ],
+  "zhudui": [
+    {
+      "char": "主队",
+      "en": "Home team"
+    }
+  ],
+  "naiyusuan": [
+    {
+      "char": "乃隅算",
+      "en": "(Likely a specific term - needs context)"
+    }
+  ],
+  "zhibijie": [
+    {
+      "char": "之比解",
+      "en": "Ratio solution"
+    }
+  ],
+  "chengdaxie": [
+    {
+      "char": "乘大斜",
+      "en": "Multiply by the large slope"
+    }
+  ],
+  "chenggao": [
+    {
+      "char": "乘高",
+      "en": "Multiply by height"
+    }
+  ],
+  "yiqu": [
+    {
+      "char": "乙去",
+      "en": "(Likely a specific name or reference - needs context)"
+    }
+  ],
+  "yixiao": [
+    {
+      "char": "乙校",
+      "en": "(Likely a specific name or reference - needs context)"
+    }
+  ],
+  "yibijia": [
+    {
+      "char": "乙比甲",
+      "en": "Ratio of B to A"
+    }
+  ],
+  "yixiang": [
+    {
+      "char": "乙箱",
+      "en": "Second box"
+    }
+  ],
+  "yisheng": [
+    {
+      "char": "乙胜",
+      "en": "Second win"
+    }
+  ],
+  "shuxian": [
+    {
+      "char": "书现",
+      "en": "Book present"
+    }
+  ],
+  "leyang": [
+    {
+      "char": "了样",
+      "en": "Like this"
+    }
+  ],
+  "shishi": [
+    {
+      "char": "事是",
+      "en": "This is"
+    }
+  ],
+  "shiyou": [
+    {
+      "char": "事有",
+      "en": "There is"
+    }
+  ],
+  "erjinzhiwei": [
+    {
+      "char": "二进制位",
+      "en": "Binary bit"
+    }
+  ],
+  "yuge": [
+    {
+      "char": "于个",
+      "en": "In a group"
+    }
+  ],
+  "yutong": [
+    {
+      "char": "于同",
+      "en": "In the same"
+    }
+  ],
+  "yuyaochu": [
+    {
+      "char": "于摇出",
+      "en": "Shake out"
+    }
+  ],
+  "huhuali": [
+    {
+      "char": "互化例",
+      "en": "Mutual conversion example"
+    }
+  ],
+  "huchi": [
+    {
+      "char": "互斥",
+      "en": "Mutually exclusive"
+    }
+  ],
+  "huxiangzhuanhua": [
+    {
+      "char": "互相转化",
+      "en": "Mutual conversion"
+    }
+  ],
+  "jiaoyu": [
+    {
+      "char": "交于",
+      "en": "To deliver"
+    }
+  ],
+  "jiaotongbumen": [
+    {
+      "char": "交通部门",
+      "en": "Transportation Department"
+    }
+  ],
+  "chanpinjianyan": [
+    {
+      "char": "产品检验",
+      "en": "Product inspection"
+    }
+  ],
+  "muchanliang": [
+    {
+      "char": "亩产量",
+      "en": "Yield per acre"
+    }
+  ],
+  "rengongti": [
+    {
+      "char": "人共提",
+      "en": "People's proposal"
+    }
+  ],
+  "rennv": [
+    {
+      "char": "人女",
+      "en": "Female person"
+    }
+  ],
+  "renqiu": [
+    {
+      "char": "人求",
+      "en": "People seek"
+    }
+  ],
+  "renzi": [
+    {
+      "char": "人自",
+      "en": "Self"
+    }
+  ],
+  "renbiao": [
+    {
+      "char": "人表",
+      "en": "People table"
+    }
+  ],
+  "tachu": [
+    {
+      "char": "他出",
+      "en": "His output"
+    }
+  ],
+  "lingrenkunhuo": [
+    {
+      "char": "令人困惑",
+      "en": "Confusing"
+    }
+  ],
+  "yishi": [
+    {
+      "char": "以使",
+      "en": "In order to"
+    }
+  ],
+  "yixiaoxie": [
+    {
+      "char": "以小斜",
+      "en": "With a small slope"
+    }
+  ],
+  "yilian": [
+    {
+      "char": "以廉",
+      "en": "With integrity"
+    }
+  ],
+  "yiyou": [
+    {
+      "char": "以有",
+      "en": "With having"
+    }
+  ],
+  "yigai": [
+    {
+      "char": "以该",
+      "en": "With this"
+    }
+  ],
+  "jianchanpin": [
+    {
+      "char": "件产品",
+      "en": "Piece of product"
+    }
+  ],
+  "renzuo": [
+    {
+      "char": "任作",
+      "en": "Free exercise/problem-solving"
+    }
+  ],
+  "rengei": [
+    {
+      "char": "任给",
+      "en": "Leave it to/at one's discretion"
+    }
+  ],
+  "youheliang": [
+    {
+      "char": "优和良",
+      "en": "Excellent and good"
+    }
+  ],
+  "chuandixing": [
+    {
+      "char": "传递性",
+      "en": "Transitivity"
+    }
+  ],
+  "chuandishuju": [
+    {
+      "char": "传递数据",
+      "en": "Data transmission"
+    }
+  ],
+  "guchan": [
+    {
+      "char": "估产",
+      "en": "Estimation of output/production"
+    }
+  ],
+  "gujiliang": [
+    {
+      "char": "估计量",
+      "en": "Estimate of quantity/amount"
+    }
+  ],
+  "shiranfa": [
+    {
+      "char": "似然法",
+      "en": "Likelihood method/principle"
+    }
+  ],
+  "danjin": [
+    {
+      "char": "但仅",
+      "en": "But only"
+    }
+  ],
+  "danxing": [
+    {
+      "char": "但性",
+      "en": "But inherent/characteristic"
+    }
+  ],
+  "danliang": [
+    {
+      "char": "但良",
+      "en": "But good/acceptable"
+    }
+  ],
+  "dizhi": [
+    {
+      "char": "低值",
+      "en": "Low value"
+    }
+  ],
+  "dijie": [
+    {
+      "char": "低解",
+      "en": "Low resolution/interpretation"
+    }
+  ],
+  "tizhong": [
+    {
+      "char": "体中",
+      "en": "Within the body"
+    }
+  ],
+  "tiyucaipiao": [
+    {
+      "char": "体育彩票",
+      "en": "Sports lottery"
+    }
+  ],
+  "tiyuzu": [
+    {
+      "char": "体育组",
+      "en": "Sports group"
+    }
+  ],
+  "tijie": [
+    {
+      "char": "体解",
+      "en": "Body interpretation/analysis"
+    }
+  ],
+  "tizhongjianqing": [
+    {
+      "char": "体重减轻",
+      "en": "Weight loss"
+    }
+  ],
+  "yusiyue": [
+    {
+      "char": "余四约",
+      "en": "Approximately four"
+    }
+  ],
+  "yuxian": [
+    {
+      "char": "余弦",
+      "en": "Cosine"
+    }
+  ],
+  "yuxiangongshi": [
+    {
+      "char": "余弦公式",
+      "en": "Cosine formula"
+    }
+  ],
+  "yuxiandingli": [
+    {
+      "char": "余弦定理",
+      "en": "Cosine theorem"
+    }
+  ],
+  "zuojiao": [
+    {
+      "char": "作交",
+      "en": "Correspondence/connection"
+    }
+  ],
+  "zuoquan": [
+    {
+      "char": "作全",
+      "en": "Complete/entire"
+    }
+  ],
+  "zuochupingjia": [
+    {
+      "char": "作出评价",
+      "en": "To make an evaluation/assessment"
+    }
+  ],
+  "zuoyongdian": [
+    {
+      "char": "作用点",
+      "en": "Point of action/application"
+    }
+  ],
+  "zuodeng": [
+    {
+      "char": "作等",
+      "en": "To make equal/similar"
+    }
+  ],
+  "shiyang": [
+    {
+      "char": "使样",
+      "en": "To make like/as"
+    }
+  ],
+  "licong": [
+    {
+      "char": "例从",
+      "en": "Example from"
+    }
+  ],
+  "licongming": [
+    {
+      "char": "例从名",
+      "en": "Example from"
+    }
+  ],
+  "lilie": [
+    {
+      "char": "例列",
+      "en": "Listing"
+    }
+  ],
+  "liheli": [
+    {
+      "char": "例和例",
+      "en": "Example and Example"
+    }
+  ],
+  "lijiang": [
+    {
+      "char": "例将",
+      "en": "Example of"
+    }
+  ],
+  "lishe": [
+    {
+      "char": "例设",
+      "en": "Assumption"
+    },
+    {
+      "char": "理设",
+      "en": "Theoretical assumption"
+    }
+  ],
+  "yicun": [
+    {
+      "char": "依存",
+      "en": "Dependency"
+    }
+  ],
+  "celengzhang": [
+    {
+      "char": "侧棱长",
+      "en": "Lateral edge length"
+    }
+  ],
+  "celengding": [
+    {
+      "char": "侧棱顶",
+      "en": "Lateral vertex"
+    }
+  ],
+  "baoxiuqi": [
+    {
+      "char": "保修期",
+      "en": "Warranty period"
+    }
+  ],
+  "baoxianjine": [
+    {
+      "char": "保险金额",
+      "en": "Insurance amount"
+    }
+  ],
+  "xinxiguji": [
+    {
+      "char": "信息估计",
+      "en": "Information estimate"
+    }
+  ],
+  "zhiqie": [
+    {
+      "char": "值且",
+      "en": "Value and"
+    }
+  ],
+  "zhibian": [
+    {
+      "char": "值变",
+      "en": "Value variation"
+    }
+  ],
+  "zhirutu": [
+    {
+      "char": "值如图",
+      "en": "Value as shown in the figure"
+    }
+  ],
+  "zhishifu": [
+    {
+      "char": "值时复",
+      "en": "Value at the time of renewal"
+    }
+  ],
+  "zhiyou": [
+    {
+      "char": "值有",
+      "en": "Value exists"
+    }
+  ],
+  "zhishugao": [
+    {
+      "char": "值树高",
+      "en": "Tree height value"
+    }
+  ],
+  "zhiyue": [
+    {
+      "char": "值越",
+      "en": "Value increases"
+    }
+  ],
+  "zhijiao": [
+    {
+      "char": "值较",
+      "en": "Value is relatively"
+    }
+  ],
+  "qingxiedu": [
+    {
+      "char": "倾斜度",
+      "en": "Inclination angle"
+    }
+  ],
+  "qingxiejiao": [
+    {
+      "char": "倾斜角",
+      "en": "Inclined angle"
+    }
+  ],
+  "jiashejianyan": [
+    {
+      "char": "假设检验",
+      "en": "Hypothesis test"
+    }
+  ],
+  "pianyi": [
+    {
+      "char": "偏倚",
+      "en": "Bias"
+    }
+  ],
+  "pianduo": [
+    {
+      "char": "偏多",
+      "en": "Overestimation"
+    }
+  ],
+  "pianshou": [
+    {
+      "char": "偏瘦",
+      "en": "Underweight"
+    }
+  ],
+  "pianpang": [
+    {
+      "char": "偏胖",
+      "en": "Obesity"
+    }
+  ],
+  "zuoti": [
+    {
+      "char": "做题",
+      "en": "Solving problems"
+    }
+  ],
+  "toushuiloushui": [
+    {
+      "char": "偷税漏税",
+      "en": "Tax evasion"
+    }
+  ],
+  "chuxuka": [
+    {
+      "char": "储蓄卡",
+      "en": "Savings card"
+    }
+  ],
+  "ertongyiyuan": [
+    {
+      "char": "儿童医院",
+      "en": "Children's hospital"
+    }
+  ],
+  "yuanju": [
+    {
+      "char": "元据",
+      "en": "Data"
+    }
+  ],
+  "yuandanjiaqi": [
+    {
+      "char": "元旦假期",
+      "en": "New Year Holiday"
+    }
+  ],
+  "yuanguize": [
+    {
+      "char": "元规则",
+      "en": "Basic Rules"
+    }
+  ],
+  "chongfentiaojian": [
+    {
+      "char": "充分条件",
+      "en": "Sufficient Condition"
+    }
+  ],
+  "chongyaotiaojian": [
+    {
+      "char": "充要条件",
+      "en": "Necessary and Sufficient Condition"
+    }
+  ],
+  "xiancongjian": [
+    {
+      "char": "先从件",
+      "en": "First from the"
+    }
+  ],
+  "xianyouge": [
+    {
+      "char": "先由个",
+      "en": "First by the"
+    }
+  ],
+  "xiankan": [
+    {
+      "char": "先看",
+      "en": "First look"
+    }
+  ],
+  "xianyangailv": [
+    {
+      "char": "先验概率",
+      "en": "Prior Probability"
+    }
+  ],
+  "gongzhiyushi": [
+    {
+      "char": "公之于世",
+      "en": "Made public"
+    }
+  ],
+  "gongsiyuangong": [
+    {
+      "char": "公司员工",
+      "en": "Company Employees"
+    }
+  ],
+  "gonglihua": [
+    {
+      "char": "公理化",
+      "en": "Axiomatic"
+    }
+  ],
+  "gongshe": [
+    {
+      "char": "公设",
+      "en": "Axiom"
+    }
+  ],
+  "gongweizi": [
+    {
+      "char": "共为子",
+      "en": "Together with"
+    }
+  ],
+  "gongti": [
+    {
+      "char": "共提",
+      "en": "Together propose"
+    }
+  ],
+  "gongdian": [
+    {
+      "char": "共点",
+      "en": "Coplanar"
+    }
+  ],
+  "gongxian": [
+    {
+      "char": "共线",
+      "en": "Collinear"
+    }
+  ],
+  "gonge": [
+    {
+      "char": "共轭",
+      "en": "Conjugate"
+    }
+  ],
+  "gongefushu": [
+    {
+      "char": "共轭复数",
+      "en": "Conjugate Complex Number"
+    }
+  ],
+  "gongzhong": [
+    {
+      "char": "共重",
+      "en": "Uniform Weight"
+    }
+  ],
+  "gongmian": [
+    {
+      "char": "共面",
+      "en": "Coplanar"
+    }
+  ],
+  "guanlianxing": [
+    {
+      "char": "关联性",
+      "en": "Correlation"
+    }
+  ],
+  "qizhi": [
+    {
+      "char": "其值",
+      "en": "Its value"
+    }
+  ],
+  "qixiaoxie": [
+    {
+      "char": "其小斜",
+      "en": "Its small slope"
+    }
+  ],
+  "qibenzhi": [
+    {
+      "char": "其本质",
+      "en": "Its essence"
+    }
+  ],
+  "qigaoyue": [
+    {
+      "char": "其高越",
+      "en": "Its high altitude"
+    }
+  ],
+  "juticaozuo": [
+    {
+      "char": "具体操作",
+      "en": "Specific Operations"
+    }
+  ],
+  "diangai": [
+    {
+      "char": "典概",
+      "en": "Classic Examples"
+    },
+    {
+      "char": "点该",
+      "en": "To assign"
+    }
+  ],
+  "neige": [
+    {
+      "char": "内个",
+      "en": "Internal"
+    }
+  ],
+  "neiyi": [
+    {
+      "char": "内以",
+      "en": "Internal with"
+    }
+  ],
+  "neizuo": [
+    {
+      "char": "内作",
+      "en": "Internal Work"
+    }
+  ],
+  "neiqi": [
+    {
+      "char": "内其",
+      "en": "Internal It"
+    }
+  ],
+  "neiqu": [
+    {
+      "char": "内取",
+      "en": "Internal Take"
+    }
+  ],
+  "neihedian": [
+    {
+      "char": "内和点",
+      "en": "Internal Intersection Point"
+    }
+  ],
+  "neikong": [
+    {
+      "char": "内孔",
+      "en": "Internal Hole"
+    }
+  ],
+  "neishi": [
+    {
+      "char": "内实",
+      "en": "Internal Real"
+    }
+  ],
+  "neiying": [
+    {
+      "char": "内应",
+      "en": "Internal Response"
+    }
+  ],
+  "neiyouqie": [
+    {
+      "char": "内有且",
+      "en": "Internal Has and"
+    }
+  ],
+  "neiwei": [
+    {
+      "char": "内未",
+      "en": "Internal Not"
+    }
+  ],
+  "neice": [
+    {
+      "char": "内测",
+      "en": "Internal Test"
+    }
+  ],
+  "neiji": [
+    {
+      "char": "内积",
+      "en": "Internal Product"
+    },
+    {
+      "char": "内记",
+      "en": "Internal Record"
+    }
+  ],
+  "neiertu": [
+    {
+      "char": "内而图",
+      "en": "Internal With Diagram"
+    }
+  ],
+  "neiyao": [
+    {
+      "char": "内要",
+      "en": "Internal Need"
+    }
+  ],
+  "neijie": [
+    {
+      "char": "内解",
+      "en": "Internal Solution"
+    }
+  ],
+  "neishe": [
+    {
+      "char": "内设",
+      "en": "Internal Assumption"
+    }
+  ],
+  "neiqing": [
+    {
+      "char": "内请",
+      "en": "Internal Request"
+    }
+  ],
+  "zaizhong": [
+    {
+      "char": "再种",
+      "en": "Replant"
+    }
+  ],
+  "junshixueyuan": [
+    {
+      "char": "军事学院",
+      "en": "Military Academy"
+    }
+  ],
+  "guanyajun": [
+    {
+      "char": "冠亚军",
+      "en": "First Class Military Award"
+    }
+  ],
+  "juechu": [
+    {
+      "char": "决出",
+      "en": "Decide to Exit"
+    }
+  ],
+  "juedingxishu": [
+    {
+      "char": "决定系数",
+      "en": "Determinant Coefficient"
+    }
+  ],
+  "juecefenxi": [
+    {
+      "char": "决策分析",
+      "en": "Decision Analysis"
+    }
+  ],
+  "juecewenti": [
+    {
+      "char": "决策问题",
+      "en": "Decision Problem"
+    }
+  ],
+  "jianshang": [
+    {
+      "char": "减上",
+      "en": "Subtract Up"
+    }
+  ],
+  "jianzhong": [
+    {
+      "char": "减中",
+      "en": "Subtract Middle"
+    }
+  ],
+  "jianfeiyao": [
+    {
+      "char": "减肥药",
+      "en": "Weight Loss Pill"
+    }
+  ],
+  "jihexuejia": [
+    {
+      "char": "几何学家",
+      "en": "Geometer"
+    }
+  ],
+  "jiduidian": [
+    {
+      "char": "几对点",
+      "en": "Several Pairs of Points"
+    }
+  ],
+  "jidai": [
+    {
+      "char": "几袋",
+      "en": "Several Bags"
+    }
+  ],
+  "jiling": [
+    {
+      "char": "几零",
+      "en": "Zero"
+    }
+  ],
+  "chuce": [
+    {
+      "char": "出侧",
+      "en": "Incorrect (likely a typo - needs context for accurate translation)"
+    }
+  ],
+  "chulie": [
+    {
+      "char": "出列",
+      "en": "To leave, to withdraw"
+    }
+  ],
+  "chushi": [
+    {
+      "char": "出式",
+      "en": "To express, to manifest"
+    }
+  ],
+  "chucheng": [
+    {
+      "char": "出成",
+      "en": "To achieve, to accomplish"
+    }
+  ],
+  "chuhu": [
+    {
+      "char": "出户",
+      "en": "To go out, to leave home"
+    }
+  ],
+  "chushugao": [
+    {
+      "char": "出树高",
+      "en": "Tree height (measured)"
+    }
+  ],
+  "chubai": [
+    {
+      "char": "出白",
+      "en": "White (as in, a white result)"
+    }
+  ],
+  "chubiaozhongcheng": [
+    {
+      "char": "出表中成",
+      "en": "Result from the table"
+    }
+  ],
+  "chugai": [
+    {
+      "char": "出该",
+      "en": "To refer to it, to cite it"
+    }
+  ],
+  "hanshuku": [
+    {
+      "char": "函数库",
+      "en": "Function library"
+    }
+  ],
+  "fencong": [
+    {
+      "char": "分从",
+      "en": "To divide from"
+    }
+  ],
+  "fenli": [
+    {
+      "char": "分力",
+      "en": "To divide into forces"
+    }
+  ],
+  "fenwan": [
+    {
+      "char": "分完",
+      "en": "To finish dividing"
+    }
+  ],
+  "fencengchouyang": [
+    {
+      "char": "分层抽样",
+      "en": "Stratified sampling"
+    }
+  ],
+  "fenzhang": [
+    {
+      "char": "分张",
+      "en": "To divide into sheets"
+    }
+  ],
+  "fenshuxian": [
+    {
+      "char": "分数线",
+      "en": "Cut-off score"
+    }
+  ],
+  "fenximoxing": [
+    {
+      "char": "分析模型",
+      "en": "Analytical model"
+    }
+  ],
+  "fenxifa": [
+    {
+      "char": "分析法",
+      "en": "Analytical method"
+    }
+  ],
+  "fenbu": [
+    {
+      "char": "分步",
+      "en": "Step by step"
+    }
+  ],
+  "fennie": [
+    {
+      "char": "分蘖",
+      "en": "Sprouts"
+    }
+  ],
+  "lieyi": [
+    {
+      "char": "列乙",
+      "en": "Column B"
+    }
+  ],
+  "liezai": [
+    {
+      "char": "列再",
+      "en": "Column again/re-column"
+    }
+  ],
+  "lieji": [
+    {
+      "char": "列及",
+      "en": "Including columns"
+    }
+  ],
+  "liewai": [
+    {
+      "char": "列外",
+      "en": "Excluding columns"
+    }
+  ],
+  "lierubiao": [
+    {
+      "char": "列如表",
+      "en": "As in a table"
+    }
+  ],
+  "lierubiaohebiao": [
+    {
+      "char": "列如表和表",
+      "en": "As in a table and a chart"
+    }
+  ],
+  "lieshi": [
+    {
+      "char": "列是",
+      "en": "Column is"
+    }
+  ],
+  "liemou": [
+    {
+      "char": "列某",
+      "en": "Column of"
+    }
+  ],
+  "lieqiu": [
+    {
+      "char": "列求",
+      "en": "Column to be calculated"
+    }
+  ],
+  "lieyou": [
+    {
+      "char": "列由",
+      "en": "Row data"
+    }
+  ],
+  "lielian": [
+    {
+      "char": "列联",
+      "en": "Contingency table"
+    }
+  ],
+  "lielianbiao": [
+    {
+      "char": "列联表",
+      "en": "Contingency table"
+    }
+  ],
+  "lielianbiaozhong": [
+    {
+      "char": "列联表中",
+      "en": "Within a contingency table"
+    }
+  ],
+  "liejieshe": [
+    {
+      "char": "列解设",
+      "en": "Column solution"
+    }
+  ],
+  "liushaoxue": [
+    {
+      "char": "刘绍学",
+      "en": "Liu Shao-hsiu (referring to the mathematician)"
+    }
+  ],
+  "chuangjilu": [
+    {
+      "char": "创纪录",
+      "en": "Breaking record"
+    }
+  ],
+  "chubutongji": [
+    {
+      "char": "初步统计",
+      "en": "Preliminary statistics"
+    }
+  ],
+  "bieshi": [
+    {
+      "char": "别是",
+      "en": "Especially"
+    }
+  ],
+  "daoshi": [
+    {
+      "char": "到式",
+      "en": "Equation"
+    }
+  ],
+  "daodian": [
+    {
+      "char": "到点",
+      "en": "Pointwise"
+    }
+  ],
+  "zhichang": [
+    {
+      "char": "制场",
+      "en": "Venue setup"
+    }
+  ],
+  "qiange": [
+    {
+      "char": "前个",
+      "en": "Previous unit"
+    }
+  ],
+  "qianwei": [
+    {
+      "char": "前位",
+      "en": "Previous position"
+    }
+  ],
+  "qianxiang": [
+    {
+      "char": "前想",
+      "en": "Previous thought"
+    },
+    {
+      "char": "前项",
+      "en": "Previous item"
+    }
+  ],
+  "qianduan": [
+    {
+      "char": "前断",
+      "en": "Previous deduction"
+    }
+  ],
+  "lirutu": [
+    {
+      "char": "力如图",
+      "en": "As shown in the figure"
+    }
+  ],
+  "lishi": [
+    {
+      "char": "力是",
+      "en": "Force is"
+    }
+  ],
+  "gongrutu": [
+    {
+      "char": "功如图",
+      "en": "As shown in the figure"
+    }
+  ],
+  "gongshi": [
+    {
+      "char": "功是",
+      "en": "Work is"
+    }
+  ],
+  "jiaquan": [
+    {
+      "char": "加权",
+      "en": "Weighted"
+    }
+  ],
+  "shiji": [
+    {
+      "char": "势即",
+      "en": "Potential as"
+    }
+  ],
+  "huaqu": [
+    {
+      "char": "化去",
+      "en": "Reduce to"
+    }
+  ],
+  "huayinshi": [
+    {
+      "char": "化因式",
+      "en": "Factorization"
+    }
+  ],
+  "huabu": [
+    {
+      "char": "化布",
+      "en": "Simplify"
+    }
+  ],
+  "huafanweijian": [
+    {
+      "char": "化繁为简",
+      "en": "Simplify complex"
+    }
+  ],
+  "qianyuan": [
+    {
+      "char": "千元",
+      "en": "Thousand yuan"
+    }
+  ],
+  "banzhou": [
+    {
+      "char": "半轴",
+      "en": "Semi-axis"
+    }
+  ],
+  "danweixiangliang": [
+    {
+      "char": "单位向量",
+      "en": "Unit vector"
+    }
+  ],
+  "danfeng": [
+    {
+      "char": "单峰",
+      "en": "Single peak"
+    }
+  ],
+  "danxunhuansai": [
+    {
+      "char": "单循环赛",
+      "en": "Single loop race"
+    }
+  ],
+  "danxuanti": [
+    {
+      "char": "单选题",
+      "en": "Multiple choice question"
+    }
+  ],
+  "boyi": [
+    {
+      "char": "博弈",
+      "en": "Game theory"
+    }
+  ],
+  "bona": [
+    {
+      "char": "博衲",
+      "en": "(This term appears to be a misspelling, likely referring to a type of garment.  No direct mathematical translation exists.)"
+    }
+  ],
+  "kaerdanuo": [
+    {
+      "char": "卡尔达诺",
+      "en": "Cardano"
+    }
+  ],
+  "kafang": [
+    {
+      "char": "卡方",
+      "en": "Chi-squared"
+    }
+  ],
+  "kawalieli": [
+    {
+      "char": "卡瓦列里",
+      "en": "Cavalieri"
+    }
+  ],
+  "weishengbumen": [
+    {
+      "char": "卫生部门",
+      "en": "Health department"
+    }
+  ],
+  "yinzhe": [
+    {
+      "char": "印着",
+      "en": "Printed"
+    }
+  ],
+  "jihe": [
+    {
+      "char": "即何",
+      "en": "What"
+    }
+  ],
+  "jili": [
+    {
+      "char": "即力",
+      "en": "Force"
+    }
+  ],
+  "jicheng": [
+    {
+      "char": "即成",
+      "en": "Established"
+    }
+  ],
+  "jihu": [
+    {
+      "char": "即户",
+      "en": "Household"
+    }
+  ],
+  "jijia": [
+    {
+      "char": "即甲",
+      "en": "First"
+    }
+  ],
+  "juanwutianyu": [
+    {
+      "char": "卷五田域",
+      "en": "Volume Five Territory (likely a specific mathematical context)"
+    }
+  ],
+  "yuanshishuju": [
+    {
+      "char": "原始数据",
+      "en": "Raw data"
+    }
+  ],
+  "quweicunzhen": [
+    {
+      "char": "去伪存真",
+      "en": "Eliminate the false, preserve the true"
+    }
+  ],
+  "canjiakaoshi": [
+    {
+      "char": "参加考试",
+      "en": "Take an exam"
+    }
+  ],
+  "canshushezhi": [
+    {
+      "char": "参数设置",
+      "en": "Parameter setting"
+    }
+  ],
+  "canguanquan": [
+    {
+      "char": "参观券",
+      "en": "Voucher/Admission ticket"
+    }
+  ],
+  "jilie": [
+    {
+      "char": "及列",
+      "en": "And so on"
+    }
+  ],
+  "jiyao": [
+    {
+      "char": "及要",
+      "en": "And so forth"
+    }
+  ],
+  "qujian": [
+    {
+      "char": "取件",
+      "en": "Pick up"
+    }
+  ],
+  "qujianyang": [
+    {
+      "char": "取件样",
+      "en": "Sample pick-up"
+    }
+  ],
+  "quren": [
+    {
+      "char": "取任",
+      "en": "Select"
+    }
+  ],
+  "qudao": [
+    {
+      "char": "取到",
+      "en": "Obtain"
+    }
+  ],
+  "quding": [
+    {
+      "char": "取定",
+      "en": "Determine"
+    }
+  ],
+  "quzheng": [
+    {
+      "char": "取整",
+      "en": "Round off"
+    }
+  ],
+  "qushi": [
+    {
+      "char": "取是",
+      "en": "Take it as true"
+    }
+  ],
+  "quben": [
+    {
+      "char": "取本",
+      "en": "Take the root"
+    }
+  ],
+  "qufa": [
+    {
+      "char": "取法",
+      "en": "Take the method"
+    }
+  ],
+  "quqiu": [
+    {
+      "char": "取球",
+      "en": "Take the ball"
+    }
+  ],
+  "qupan": [
+    {
+      "char": "取盘",
+      "en": "Take the plate"
+    }
+  ],
+  "qudengzhang": [
+    {
+      "char": "取等长",
+      "en": "Take equal length"
+    }
+  ],
+  "qujie": [
+    {
+      "char": "取解",
+      "en": "Obtain the solution"
+    }
+  ],
+  "shoupin": [
+    {
+      "char": "受聘",
+      "en": "To be offered a job"
+    }
+  ],
+  "biandatu": [
+    {
+      "char": "变大图",
+      "en": "Enlarged picture"
+    }
+  ],
+  "biandadang": [
+    {
+      "char": "变大当",
+      "en": "Enlarged as"
+    }
+  ],
+  "biandaer": [
+    {
+      "char": "变大而",
+      "en": "Enlarged while"
+    }
+  ],
+  "bianrutu": [
+    {
+      "char": "变如图",
+      "en": "As a picture"
+    }
+  ],
+  "bianliangzhi": [
+    {
+      "char": "变量值",
+      "en": "Variable value"
+    }
+  ],
+  "lingren": [
+    {
+      "char": "另人",
+      "en": "To others"
+    }
+  ],
+  "lingming": [
+    {
+      "char": "另名",
+      "en": "Another name"
+    }
+  ],
+  "lingshe": [
+    {
+      "char": "另设",
+      "en": "Another setting"
+    }
+  ],
+  "lingpixijing": [
+    {
+      "char": "另辟蹊径",
+      "en": "Another approach"
+    }
+  ],
+  "zhizuo": [
+    {
+      "char": "只作",
+      "en": "Only for"
+    },
+    {
+      "char": "支座",
+      "en": "Support Seat"
+    }
+  ],
+  "zhixie": [
+    {
+      "char": "只鞋",
+      "en": "Only shoes"
+    }
+  ],
+  "zhiji": [
+    {
+      "char": "只鸡",
+      "en": "Only chicken"
+    }
+  ],
+  "kefenjie": [
+    {
+      "char": "可分解",
+      "en": "Can be decomposed"
+    }
+  ],
+  "kebubiao": [
+    {
+      "char": "可布表",
+      "en": "Can be expressed"
+    }
+  ],
+  "kedeli": [
+    {
+      "char": "可得例",
+      "en": "Can obtain examples"
+    }
+  ],
+  "kedehu": [
+    {
+      "char": "可得户",
+      "en": "Can obtain households"
+    }
+  ],
+  "kefangduo": [
+    {
+      "char": "可放多",
+      "en": "Can be expanded"
+    }
+  ],
+  "keqiu": [
+    {
+      "char": "可求",
+      "en": "Can be calculated"
+    }
+  ],
+  "keyouzi": [
+    {
+      "char": "可由子",
+      "en": "Can be derived from"
+    }
+  ],
+  "keshihua": [
+    {
+      "char": "可视化",
+      "en": "Visualize"
+    }
+  ],
+  "kejie": [
+    {
+      "char": "可解",
+      "en": "Can be solved"
+    }
+  ],
+  "taiti": [
+    {
+      "char": "台体",
+      "en": "Table form"
+    }
+  ],
+  "taitiqiu": [
+    {
+      "char": "台体球",
+      "en": "Circular Plate"
+    }
+  ],
+  "taisi": [
+    {
+      "char": "台四",
+      "en": "Plate Four"
+    }
+  ],
+  "taishu": [
+    {
+      "char": "台数",
+      "en": "Number of Plates"
+    }
+  ],
+  "taiqiu": [
+    {
+      "char": "台求",
+      "en": "Plate Calculation"
+    }
+  ],
+  "youkai": [
+    {
+      "char": "右开",
+      "en": "Right Opening"
+    }
+  ],
+  "youmao": [
+    {
+      "char": "右袤",
+      "en": "Right Dimension"
+    }
+  ],
+  "haohui": [
+    {
+      "char": "号会",
+      "en": "Number Meeting"
+    }
+  ],
+  "haoshi": [
+    {
+      "char": "号示",
+      "en": "Number Display"
+    }
+  ],
+  "haoxiang": [
+    {
+      "char": "号箱",
+      "en": "Number Box"
+    }
+  ],
+  "hegepin": [
+    {
+      "char": "合格品",
+      "en": "Qualified Product"
+    }
+  ],
+  "hegelv": [
+    {
+      "char": "合格率",
+      "en": "Passing Rate"
+    }
+  ],
+  "hesudu": [
+    {
+      "char": "合速度",
+      "en": "Combined Speed"
+    }
+  ],
+  "jibusi": [
+    {
+      "char": "吉布斯",
+      "en": "Gibbs"
+    }
+  ],
+  "tongyu": [
+    {
+      "char": "同余",
+      "en": "Congruent"
+    }
+  ],
+  "tongzeji": [
+    {
+      "char": "同则积",
+      "en": "If Equal, Multiply"
+    }
+  ],
+  "tongnianling": [
+    {
+      "char": "同年龄",
+      "en": "Same Age"
+    }
+  ],
+  "tonglikezheng": [
+    {
+      "char": "同理可证",
+      "en": "Similar Reasoning"
+    }
+  ],
+  "mingqu": [
+    {
+      "char": "名去",
+      "en": "Name Removed"
+    }
+  ],
+  "mingnv": [
+    {
+      "char": "名女",
+      "en": "Female Name"
+    }
+  ],
+  "mingshichugaotu": [
+    {
+      "char": "名师出高徒",
+      "en": "Famous Teachers Produce High Disciples"
+    }
+  ],
+  "mingshi": [
+    {
+      "char": "名试",
+      "en": "Name Test"
+    }
+  ],
+  "minggao": [
+    {
+      "char": "名高",
+      "en": "High-Ranking Name"
+    }
+  ],
+  "houyaochu": [
+    {
+      "char": "后摇出",
+      "en": "Posterior Roll Out"
+    }
+  ],
+  "houqiu": [
+    {
+      "char": "后球",
+      "en": "Posterior Ball"
+    }
+  ],
+  "houmengri": [
+    {
+      "char": "后蒙日",
+      "en": "Posterior Covered Day"
+    }
+  ],
+  "houyan": [
+    {
+      "char": "后验",
+      "en": "Posterior Verification"
+    }
+  ],
+  "xiangbeizou": [
+    {
+      "char": "向北走",
+      "en": "Walk North"
+    }
+  ],
+  "xiangnanzou": [
+    {
+      "char": "向南走",
+      "en": "Walk South"
+    }
+  ],
+  "xianghe": [
+    {
+      "char": "向河",
+      "en": "Towards the River"
+    }
+  ],
+  "hange": [
+    {
+      "char": "含个",
+      "en": "Containing a"
+    }
+  ],
+  "xiyanzhe": [
+    {
+      "char": "吸烟者",
+      "en": "Smoker"
+    }
+  ],
+  "hesheng": [
+    {
+      "char": "和生",
+      "en": "(This appears to be a misspelling, likely intended to be \"和生\" -  \"and life\" or \"and living\") And life/living"
+    }
+  ],
+  "kafeise": [
+    {
+      "char": "咖啡色",
+      "en": "Brown"
+    }
+  ],
+  "hamidun": [
+    {
+      "char": "哈密顿",
+      "en": "Hamilton"
+    }
+  ],
+  "natai": [
+    {
+      "char": "哪台",
+      "en": "Which machine/Which one"
+    }
+  ],
+  "najia": [
+    {
+      "char": "哪家",
+      "en": "Which company/Which one"
+    }
+  ],
+  "namei": [
+    {
+      "char": "哪枚",
+      "en": "Which coin/Which one"
+    }
+  ],
+  "nafa": [
+    {
+      "char": "哪法",
+      "en": "Which method/Which way"
+    }
+  ],
+  "namen": [
+    {
+      "char": "哪门",
+      "en": "Which door/Which room"
+    }
+  ],
+  "shangpinzhiliang": [
+    {
+      "char": "商品质量",
+      "en": "Product quality"
+    }
+  ],
+  "shangpinxiaoshou": [
+    {
+      "char": "商品销售",
+      "en": "Product sales"
+    }
+  ],
+  "shangshang": [
+    {
+      "char": "商商",
+      "en": "(Likely a typo, possibly referring to \"商\" - merchant) Merchant"
+    }
+  ],
+  "shangfangming": [
+    {
+      "char": "商方命",
+      "en": "Company decision/Merchant's decree"
+    }
+  ],
+  "shangshi": [
+    {
+      "char": "商是",
+      "en": "Merchant is"
+    }
+  ],
+  "shangdemo": [
+    {
+      "char": "商的模",
+      "en": "Merchant's model"
+    }
+  ],
+  "qizhong": [
+    {
+      "char": "器中",
+      "en": "Inside the device"
+    }
+  ],
+  "qice": [
+    {
+      "char": "器测",
+      "en": "Device measurement"
+    }
+  ],
+  "huidi": [
+    {
+      "char": "回地",
+      "en": "Return to earth"
+    }
+  ],
+  "huiguifangcheng": [
+    {
+      "char": "回归方程",
+      "en": "Regression equation"
+    }
+  ],
+  "huiguixishu": [
+    {
+      "char": "回归系数",
+      "en": "Regression coefficient"
+    }
+  ],
+  "huimoqiu": [
+    {
+      "char": "回摸球",
+      "en": "Returning to roll the ball"
+    }
+  ],
+  "huidazhe": [
+    {
+      "char": "回答者",
+      "en": "Respondent"
+    }
+  ],
+  "huijian": [
+    {
+      "char": "回简",
+      "en": "Return to simplify"
+    }
+  ],
+  "yinbianliang": [
+    {
+      "char": "因变量",
+      "en": "Dependent variable"
+    }
+  ],
+  "tuantibisai": [
+    {
+      "char": "团体比赛",
+      "en": "Team competition"
+    }
+  ],
+  "weiqijie": [
+    {
+      "char": "围棋界",
+      "en": "Go community/Go world"
+    }
+  ],
+  "gudingzhi": [
+    {
+      "char": "固定值",
+      "en": "Fixed value"
+    }
+  ],
+  "guobiaoma": [
+    {
+      "char": "国标码",
+      "en": "National standard code"
+    }
+  ],
+  "tuqie": [
+    {
+      "char": "图且",
+      "en": "(Likely a typo, possibly referring to \"图\" - picture/graph) Picture/Graph"
+    }
+  ],
+  "tuge": [
+    {
+      "char": "图个",
+      "en": "(Likely a typo, possibly referring to \"图\" - picture/graph) Picture/Graph"
+    }
+  ],
+  "tuzhongfu": [
+    {
+      "char": "图中复",
+      "en": "Image repetition"
+    }
+  ],
+  "tuzhongcheng": [
+    {
+      "char": "图中成",
+      "en": "Image formation"
+    }
+  ],
+  "tuce": [
+    {
+      "char": "图侧",
+      "en": "Side of the image"
+    }
+  ],
+  "tuxiangshibie": [
+    {
+      "char": "图像识别",
+      "en": "Image recognition"
+    }
+  ],
+  "tuli": [
+    {
+      "char": "图力",
+      "en": "Image force"
+    }
+  ],
+  "tuji": [
+    {
+      "char": "图及",
+      "en": "Image and"
+    }
+  ],
+  "tutai": [
+    {
+      "char": "图台",
+      "en": "Image table"
+    }
+  ],
+  "tufu": [
+    {
+      "char": "图复",
+      "en": "Image repetition"
+    }
+  ],
+  "tudui": [
+    {
+      "char": "图对",
+      "en": "Image pair"
+    }
+  ],
+  "tusuo": [
+    {
+      "char": "图所",
+      "en": "Image of"
+    }
+  ],
+  "tushu": [
+    {
+      "char": "图数",
+      "en": "Number of images"
+    }
+  ],
+  "tuyoutu": [
+    {
+      "char": "图由图",
+      "en": "Image from image"
+    }
+  ],
+  "yuantai": [
+    {
+      "char": "圆台",
+      "en": "Cylinder"
+    }
+  ],
+  "yuansuo": [
+    {
+      "char": "圆所",
+      "en": "Cylinder of"
+    }
+  ],
+  "yuanshi": [
+    {
+      "char": "圆拾",
+      "en": "Cylinder pick"
+    }
+  ],
+  "yuanli": [
+    {
+      "char": "圆粒",
+      "en": "Cylinder grain"
+    }
+  ],
+  "yuanmian": [
+    {
+      "char": "圆面",
+      "en": "Cylinder face"
+    }
+  ],
+  "zaili": [
+    {
+      "char": "在力",
+      "en": "In force"
+    }
+  ],
+  "zaizi": [
+    {
+      "char": "在子",
+      "en": "In child"
+    }
+  ],
+  "dimo": [
+    {
+      "char": "地摸",
+      "en": "Touch the ground"
+    }
+  ],
+  "dimochu": [
+    {
+      "char": "地摸出",
+      "en": "Touch the ground out"
+    }
+  ],
+  "diyoutu": [
+    {
+      "char": "地由图",
+      "en": "Ground from image"
+    }
+  ],
+  "diruo": [
+    {
+      "char": "地若",
+      "en": "Ground like"
+    }
+  ],
+  "dishe": [
+    {
+      "char": "地设",
+      "en": "Ground set"
+    }
+  ],
+  "changsheng": [
+    {
+      "char": "场胜",
+      "en": "Field victory"
+    }
+  ],
+  "junyunfenbu": [
+    {
+      "char": "均匀分布",
+      "en": "Uniform distribution"
+    }
+  ],
+  "chuixin": [
+    {
+      "char": "垂心",
+      "en": "Centroid"
+    }
+  ],
+  "lajifenshao": [
+    {
+      "char": "垃圾焚烧",
+      "en": "Garbage burning"
+    }
+  ],
+  "duoxia": [
+    {
+      "char": "垛下",
+      "en": "Under the pile"
+    }
+  ],
+  "duoji": [
+    {
+      "char": "垛积",
+      "en": "Pile volume"
+    }
+  ],
+  "aiqi": [
+    {
+      "char": "埃奇",
+      "en": "Edge"
+    },
+    {
+      "char": "矮其",
+      "en": "(This appears to be a typo - likely intended to be \"矮\" - short)"
+    }
+  ],
+  "jidu": [
+    {
+      "char": "基度",
+      "en": "Base"
+    }
+  ],
+  "jidian": [
+    {
+      "char": "基点",
+      "en": "Base point"
+    }
+  ],
+  "tangke": [
+    {
+      "char": "堂课",
+      "en": "Class"
+    }
+  ],
+  "tiange": [
+    {
+      "char": "填个",
+      "en": "Fill in"
+    }
+  ],
+  "tianfa": [
+    {
+      "char": "填法",
+      "en": "Method of filling"
+    }
+  ],
+  "qiangyou": [
+    {
+      "char": "墙有",
+      "en": "Wall has"
+    }
+  ],
+  "qiangjiaochu": [
+    {
+      "char": "墙角处",
+      "en": "Corner of the wall"
+    }
+  ],
+  "yiyuanwu": [
+    {
+      "char": "壹圆伍",
+      "en": "One yuan five"
+    }
+  ],
+  "chugua": [
+    {
+      "char": "处挂",
+      "en": "Hanging at a place"
+    }
+  ],
+  "chulibiao": [
+    {
+      "char": "处理表",
+      "en": "Processing table"
+    }
+  ],
+  "chuhua": [
+    {
+      "char": "处画",
+      "en": "Drawing at a place"
+    }
+  ],
+  "fushudemo": [
+    {
+      "char": "复数的模",
+      "en": "Modulus of a complex number"
+    }
+  ],
+  "waige": [
+    {
+      "char": "外个",
+      "en": "Outside (as in, outside of something)"
+    }
+  ],
+  "wairutu": [
+    {
+      "char": "外如图",
+      "en": "As shown in the figure"
+    }
+  ],
+  "waiji": [
+    {
+      "char": "外记",
+      "en": "Outside record"
+    }
+  ],
+  "duowange": [
+    {
+      "char": "多万个",
+      "en": "Ten thousand or more"
+    }
+  ],
+  "duoli": [
+    {
+      "char": "多例",
+      "en": "Multiple examples"
+    },
+    {
+      "char": "多里",
+      "en": "Multiple places/instances"
+    }
+  ],
+  "duokuo": [
+    {
+      "char": "多括",
+      "en": "Multiple brackets"
+    }
+  ],
+  "duolei": [
+    {
+      "char": "多类",
+      "en": "Multiple categories"
+    }
+  ],
+  "duozu": [
+    {
+      "char": "多组",
+      "en": "Multiple sets"
+    }
+  ],
+  "duoxuanti": [
+    {
+      "char": "多选题",
+      "en": "Multiple-choice question"
+    }
+  ],
+  "dayi": [
+    {
+      "char": "大乙",
+      "en": "Large E (likely referring to a variable or value)"
+    }
+  ],
+  "dayuhao": [
+    {
+      "char": "大于号",
+      "en": "Greater than sign"
+    }
+  ],
+  "dayuqiu": [
+    {
+      "char": "大于求",
+      "en": "Greater than (as in, greater than what is sought)"
+    }
+  ],
+  "darutu": [
+    {
+      "char": "大如图",
+      "en": "As shown in the figure"
+    }
+  ],
+  "daxiaobudeng": [
+    {
+      "char": "大小不等",
+      "en": "Unequal in size"
+    }
+  ],
+  "daying": [
+    {
+      "char": "大应",
+      "en": "Large response/result"
+    }
+  ],
+  "dashu": [
+    {
+      "char": "大术",
+      "en": "Large operation/calculation"
+    }
+  ],
+  "dachengdu": [
+    {
+      "char": "大程度",
+      "en": "To a large extent"
+    }
+  ],
+  "dayanqiu": [
+    {
+      "char": "大衍求",
+      "en": "Golden ratio method"
+    }
+  ],
+  "dajiaoxiaobian": [
+    {
+      "char": "大角小边",
+      "en": "Large angle small side"
+    }
+  ],
+  "darang": [
+    {
+      "char": "大让",
+      "en": "To allow"
+    }
+  ],
+  "tianyou": [
+    {
+      "char": "天有",
+      "en": "Heaven has"
+    }
+  ],
+  "taigaoze": [
+    {
+      "char": "太高则",
+      "en": "Too high then"
+    }
+  ],
+  "shiqiu": [
+    {
+      "char": "失球",
+      "en": "Lost ball"
+    }
+  ],
+  "jiangjine": [
+    {
+      "char": "奖金额",
+      "en": "Prize money"
+    }
+  ],
+  "aonaduo": [
+    {
+      "char": "奥纳多",
+      "en": "Onardo"
+    }
+  ],
+  "nvying": [
+    {
+      "char": "女婴",
+      "en": "Female infant"
+    }
+  ],
+  "naifenguan": [
+    {
+      "char": "奶粉罐",
+      "en": "Milk powder can"
+    }
+  ],
+  "haojie": [
+    {
+      "char": "好解",
+      "en": "Easy to understand"
+    }
+  ],
+  "haolun": [
+    {
+      "char": "好论",
+      "en": "Good discussion"
+    }
+  ],
+  "rushangsuoshu": [
+    {
+      "char": "如上所述",
+      "en": "As stated above"
+    }
+  ],
+  "ruren": [
+    {
+      "char": "如人",
+      "en": "Like a person"
+    }
+  ],
+  "ruli": [
+    {
+      "char": "如例",
+      "en": "Like an example"
+    },
+    {
+      "char": "如力",
+      "en": "Like strength"
+    }
+  ],
+  "ruquan": [
+    {
+      "char": "如全",
+      "en": "Like all"
+    }
+  ],
+  "ruqiansuoshu": [
+    {
+      "char": "如前所述",
+      "en": "As previously mentioned"
+    }
+  ],
+  "ruyoubiao": [
+    {
+      "char": "如右表",
+      "en": "As shown in the table"
+    }
+  ],
+  "rumou": [
+    {
+      "char": "如某",
+      "en": "As I"
+    }
+  ],
+  "rudian": [
+    {
+      "char": "如点",
+      "en": "Like a point"
+    }
+  ],
+  "rubiaohebiao": [
+    {
+      "char": "如表和表",
+      "en": "As in the table and table"
+    }
+  ],
+  "ruke": [
+    {
+      "char": "如课",
+      "en": "Like a lesson"
+    }
+  ],
+  "shibian": [
+    {
+      "char": "始边",
+      "en": "Starting edge"
+    }
+  ],
+  "zilei": [
+    {
+      "char": "子类",
+      "en": "Subclass"
+    }
+  ],
+  "zijingshuo": [
+    {
+      "char": "字景烁",
+      "en": "Character Jing Shu"
+    }
+  ],
+  "mengdeer": [
+    {
+      "char": "孟德尔",
+      "en": "Mendel"
+    }
+  ],
+  "xuexicailiao": [
+    {
+      "char": "学习材料",
+      "en": "Learning materials"
+    }
+  ],
+  "xuexiaotongxue": [
+    {
+      "char": "学校同学",
+      "en": "Schoolmates"
+    }
+  ],
+  "xuexiaoshitang": [
+    {
+      "char": "学校食堂",
+      "en": "School canteen"
+    }
+  ],
+  "tamian": [
+    {
+      "char": "它面",
+      "en": "Noodles"
+    }
+  ],
+  "wanquanzhengque": [
+    {
+      "char": "完全正确",
+      "en": "Absolutely correct"
+    }
+  ],
+  "wanci": [
+    {
+      "char": "完次",
+      "en": "Finished/Completed"
+    }
+  ],
+  "hongzhong": [
+    {
+      "char": "宏中",
+      "en": "(Likely refers to a specific school or institution - needs context)"
+    }
+  ],
+  "guanfangwangzhan": [
+    {
+      "char": "官方网站",
+      "en": "Official website"
+    }
+  ],
+  "dingyichu": [
+    {
+      "char": "定义出",
+      "en": "Define"
+    }
+  ],
+  "dinghualun": [
+    {
+      "char": "定滑轮",
+      "en": "Fixed pulley"
+    }
+  ],
+  "shierchu": [
+    {
+      "char": "实而除",
+      "en": "Real division/Real part (context dependent)"
+    }
+  ],
+  "shizhou": [
+    {
+      "char": "实轴",
+      "en": "Real shaft"
+    }
+  ],
+  "shizhoushang": [
+    {
+      "char": "实轴上",
+      "en": "On the real shaft"
+    }
+  ],
+  "shibu": [
+    {
+      "char": "实部",
+      "en": "Real part"
+    }
+  ],
+  "kedui": [
+    {
+      "char": "客队",
+      "en": "Guest team"
+    }
+  ],
+  "mihe": [
+    {
+      "char": "密合",
+      "en": "Tightly fitted"
+    }
+  ],
+  "duili": [
+    {
+      "char": "对力",
+      "en": "Counterforce"
+    }
+  ],
+  "duitong": [
+    {
+      "char": "对同",
+      "en": "Corresponding to/Similar to"
+    }
+  ],
+  "duishi": [
+    {
+      "char": "对实",
+      "en": "Corresponding to/Similar to"
+    }
+  ],
+  "duicheng": [
+    {
+      "char": "对成",
+      "en": "Corresponding to/Similar to"
+    }
+  ],
+  "duilai": [
+    {
+      "char": "对来",
+      "en": "Corresponding to/Similar to"
+    }
+  ],
+  "duizhu": [
+    {
+      "char": "对柱",
+      "en": "Corresponding to/Similar to"
+    }
+  ],
+  "duimoxing": [
+    {
+      "char": "对模型",
+      "en": "Corresponding to/Similar to"
+    }
+  ],
+  "duidian": [
+    {
+      "char": "对点",
+      "en": "Corresponding to/Similar to"
+    }
+  ],
+  "duijia": [
+    {
+      "char": "对甲",
+      "en": "Corresponding to/Similar to"
+    }
+  ],
+  "duihuakuang": [
+    {
+      "char": "对话框",
+      "en": "Dialogue box"
+    }
+  ],
+  "duibian": [
+    {
+      "char": "对边",
+      "en": "Opposite side"
+    }
+  ],
+  "sheba": [
+    {
+      "char": "射靶",
+      "en": "Target shooting"
+    }
+  ],
+  "jiangli": [
+    {
+      "char": "将力",
+      "en": "Applied force"
+    }
+  ],
+  "xiaosanjiao": [
+    {
+      "char": "小三角",
+      "en": "Small triangle"
+    }
+  ],
+  "xiaonian": [
+    {
+      "char": "小年",
+      "en": "Small New Year (referring to the small Chinese New Year celebration)"
+    }
+  ],
+  "xiaochou": [
+    {
+      "char": "小抽",
+      "en": "Small draw/pull (context dependent)"
+    }
+  ],
+  "xiaoyou": [
+    {
+      "char": "小由",
+      "en": "Small Yu"
+    }
+  ],
+  "xiaoshizi": [
+    {
+      "char": "小石子",
+      "en": "Small Stone"
+    }
+  ],
+  "xiaojiao": [
+    {
+      "char": "小角",
+      "en": "Small Angle"
+    }
+  ],
+  "xiaoti": [
+    {
+      "char": "小题",
+      "en": "Small Problem/Question"
+    }
+  ],
+  "erdun": [
+    {
+      "char": "尔顿",
+      "en": "Eldon"
+    }
+  ],
+  "jianduankeji": [
+    {
+      "char": "尖端科技",
+      "en": "Cutting-Edge Technology"
+    }
+  ],
+  "jiuhuijie": [
+    {
+      "char": "就会解",
+      "en": "Will Solve/Knows How to Solve"
+    }
+  ],
+  "chibian": [
+    {
+      "char": "尺边",
+      "en": "Scale Edge"
+    }
+  ],
+  "chiwen": [
+    {
+      "char": "尺问",
+      "en": "Scale Question"
+    }
+  ],
+  "jinkenengshao": [
+    {
+      "char": "尽可能少",
+      "en": "As Few As Possible"
+    }
+  ],
+  "cengnei": [
+    {
+      "char": "层内",
+      "en": "Within Layer"
+    }
+  ],
+  "cengshu": [
+    {
+      "char": "层数",
+      "en": "Layer Number/Count"
+    }
+  ],
+  "shangao": [
+    {
+      "char": "山高",
+      "en": "Mountain Height"
+    }
+  ],
+  "gongzishuiping": [
+    {
+      "char": "工资水平",
+      "en": "Wage Level"
+    }
+  ],
+  "zuomao": [
+    {
+      "char": "左袤",
+      "en": "Left Area"
+    }
+  ],
+  "zuobi": [
+    {
+      "char": "左闭",
+      "en": "Left Closure"
+    }
+  ],
+  "chali": [
+    {
+      "char": "差例",
+      "en": "Difference Example"
+    }
+  ],
+  "chaji": [
+    {
+      "char": "差记",
+      "en": "Difference Record"
+    }
+  ],
+  "yizheng": [
+    {
+      "char": "已证",
+      "en": "Proven"
+    }
+  ],
+  "changhao": [
+    {
+      "char": "常昊",
+      "en": "Chang Hao"
+    }
+  ],
+  "miyuban": [
+    {
+      "char": "幂余半",
+      "en": "Power Remainder/Half Power"
+    }
+  ],
+  "mihanshu": [
+    {
+      "char": "幂函数",
+      "en": "Power Function"
+    }
+  ],
+  "mishi": [
+    {
+      "char": "幂势",
+      "en": "Power Potential"
+    }
+  ],
+  "fuhua": [
+    {
+      "char": "幅画",
+      "en": "Drawing/Sketch"
+    }
+  ],
+  "pingjunshouru": [
+    {
+      "char": "平均收入",
+      "en": "Average Income"
+    }
+  ],
+  "pingxingliumian": [
+    {
+      "char": "平行六面",
+      "en": "Parallel Hexagon"
+    }
+  ],
+  "pingxingtouying": [
+    {
+      "char": "平行投影",
+      "en": "Parallel Projection"
+    }
+  ],
+  "pingmianjihe": [
+    {
+      "char": "平面几何",
+      "en": "Plane Geometry"
+    }
+  ],
+  "pingmianjiao": [
+    {
+      "char": "平面角",
+      "en": "Plane Angle"
+    }
+  ],
+  "nianmo": [
+    {
+      "char": "年默",
+      "en": "Nian Mo"
+    }
+  ],
+  "binghui": [
+    {
+      "char": "并会",
+      "en": "And also"
+    }
+  ],
+  "bingfeiruci": [
+    {
+      "char": "并非如此",
+      "en": "Not like that"
+    }
+  ],
+  "xuliehao": [
+    {
+      "char": "序列号",
+      "en": "Serial number"
+    }
+  ],
+  "yinggemian": [
+    {
+      "char": "应个面",
+      "en": "Say hello"
+    }
+  ],
+  "yingduo": [
+    {
+      "char": "应多",
+      "en": "Respond fully"
+    }
+  ],
+  "yingshao": [
+    {
+      "char": "应少",
+      "en": "Respond sparingly"
+    }
+  ],
+  "yingpai": [
+    {
+      "char": "应排",
+      "en": "Arrange"
+    }
+  ],
+  "yingyongxing": [
+    {
+      "char": "应用性",
+      "en": "Applicability"
+    }
+  ],
+  "yinghua": [
+    {
+      "char": "应画",
+      "en": "Draw"
+    }
+  ],
+  "dianzhang": [
+    {
+      "char": "店长",
+      "en": "Store manager"
+    }
+  ],
+  "zuoweihao": [
+    {
+      "char": "座位号",
+      "en": "Seat number"
+    }
+  ],
+  "jianmo": [
+    {
+      "char": "建模",
+      "en": "Modeling"
+    }
+  ],
+  "jianshefei": [
+    {
+      "char": "建设费",
+      "en": "Construction cost"
+    }
+  ],
+  "jianyue": [
+    {
+      "char": "建跃",
+      "en": "Build up"
+    }
+  ],
+  "jianyuecheng": [
+    {
+      "char": "建跃程",
+      "en": "Building stage"
+    }
+  ],
+  "kaifang": [
+    {
+      "char": "开方",
+      "en": "Dispense (medicine)"
+    }
+  ],
+  "kaiti": [
+    {
+      "char": "开题",
+      "en": "Topic introduction"
+    }
+  ],
+  "yimian": [
+    {
+      "char": "异面",
+      "en": "Different sides"
+    }
+  ],
+  "zhangyuan": [
+    {
+      "char": "张元",
+      "en": "Zhang Yuan"
+    }
+  ],
+  "zhangjun": [
+    {
+      "char": "张君",
+      "en": "Zhang Jun"
+    }
+  ],
+  "zhangzhang": [
+    {
+      "char": "张张",
+      "en": "Zhang Zhang"
+    }
+  ],
+  "zhanghuiyingzhang": [
+    {
+      "char": "张惠英章",
+      "en": "Zhang Huiying (actor's name)"
+    }
+  ],
+  "zhangqiu": [
+    {
+      "char": "张求",
+      "en": "Zhang Qiu"
+    }
+  ],
+  "zhangshumei": [
+    {
+      "char": "张淑梅",
+      "en": "Zhang Shumei"
+    }
+  ],
+  "zhangshumeitao": [
+    {
+      "char": "张淑梅涛",
+      "en": "Zhang Shumei Tao"
+    }
+  ],
+  "zhangbiao": [
+    {
+      "char": "张表",
+      "en": "Zhang Table"
+    }
+  ],
+  "qiangli": [
+    {
+      "char": "强例",
+      "en": "Strong example"
+    }
+  ],
+  "guinatuili": [
+    {
+      "char": "归纳推理",
+      "en": "Inductive reasoning"
+    }
+  ],
+  "dangbugei": [
+    {
+      "char": "当不给",
+      "en": "When not given"
+    }
+  ],
+  "dangqie": [
+    {
+      "char": "当且",
+      "en": "When and then"
+    }
+  ],
+  "dangqu": [
+    {
+      "char": "当取",
+      "en": "Draw"
+    }
+  ],
+  "dangyaochu": [
+    {
+      "char": "当摇出",
+      "en": "Spin"
+    }
+  ],
+  "dangyou": [
+    {
+      "char": "当由",
+      "en": "Derive"
+    }
+  ],
+  "dangchuan": [
+    {
+      "char": "当船",
+      "en": "Boat"
+    }
+  ],
+  "luru": [
+    {
+      "char": "录入",
+      "en": "Input"
+    }
+  ],
+  "lucheng": [
+    {
+      "char": "录成",
+      "en": "Record"
+    }
+  ],
+  "caiquan": [
+    {
+      "char": "彩券",
+      "en": "Lottery ticket"
+    }
+  ],
+  "jingqiu": [
+    {
+      "char": "径球",
+      "en": "Shot"
+    }
+  ],
+  "daishou": [
+    {
+      "char": "待售",
+      "en": "For sale"
+    }
+  ],
+  "daizheng": [
+    {
+      "char": "待证",
+      "en": "Pending"
+    }
+  ],
+  "henmen": [
+    {
+      "char": "很们",
+      "en": "(This appears to be a typo, likely meant \"then\") Then"
+    }
+  ],
+  "lvli": [
+    {
+      "char": "律例",
+      "en": "Rules"
+    }
+  ],
+  "detu": [
+    {
+      "char": "得图",
+      "en": "Picture"
+    }
+  ],
+  "deji": [
+    {
+      "char": "得积",
+      "en": "Sum"
+    }
+  ],
+  "desa": [
+    {
+      "char": "德萨",
+      "en": "(This appears to be a name, likely a specific mathematical concept or person)"
+    }
+  ],
+  "bixiukecheng": [
+    {
+      "char": "必修课程",
+      "en": "Required course"
+    }
+  ],
+  "taibianliang": [
+    {
+      "char": "态变量",
+      "en": "State variable"
+    }
+  ],
+  "siyi": [
+    {
+      "char": "思议",
+      "en": "Logic"
+    }
+  ],
+  "xingji": [
+    {
+      "char": "性及",
+      "en": "And"
+    }
+  ],
+  "zongfen": [
+    {
+      "char": "总分",
+      "en": "Total score"
+    }
+  ],
+  "zonghuanshu": [
+    {
+      "char": "总环数",
+      "en": "Total circumference"
+    }
+  ],
+  "qiayou": [
+    {
+      "char": "恰有",
+      "en": "There is"
+    }
+  ],
+  "qiayouci": [
+    {
+      "char": "恰有次",
+      "en": "There are times"
+    }
+  ],
+  "qiayoumen": [
+    {
+      "char": "恰有门",
+      "en": "There are doors"
+    }
+  ],
+  "huaner": [
+    {
+      "char": "患儿",
+      "en": "Child patient"
+    }
+  ],
+  "yige": [
+    {
+      "char": "意个",
+      "en": "(This appears to be a typo, likely meant \"idea\") Idea"
+    }
+  ],
+  "ganxingrenshi": [
+    {
+      "char": "感性认识",
+      "en": "Inductive reasoning"
+    }
+  ],
+  "wugongming": [
+    {
+      "char": "戊共名",
+      "en": "(This appears to be a typo, likely a specific term)"
+    }
+  ],
+  "chengkuai": [
+    {
+      "char": "成块",
+      "en": "Block"
+    }
+  ],
+  "chenglengzhang": [
+    {
+      "char": "成棱长",
+      "en": "Cube"
+    }
+  ],
+  "chengzu": [
+    {
+      "char": "成组",
+      "en": "Group"
+    }
+  ],
+  "chengjiyouxiu": [
+    {
+      "char": "成绩优秀",
+      "en": "Excellent grade"
+    }
+  ],
+  "chengjiyouliang": [
+    {
+      "char": "成绩优良",
+      "en": "Good grade"
+    }
+  ],
+  "chengbiao": [
+    {
+      "char": "成表",
+      "en": "Record/Form"
+    }
+  ],
+  "woshu": [
+    {
+      "char": "我数",
+      "en": "Count"
+    }
+  ],
+  "huoyuan": [
+    {
+      "char": "或原",
+      "en": "Or original"
+    }
+  ],
+  "huoju": [
+    {
+      "char": "或局",
+      "en": "Or local"
+    }
+  ],
+  "huolai": [
+    {
+      "char": "或来",
+      "en": "Or come"
+    }
+  ],
+  "huoranxing": [
+    {
+      "char": "或然性",
+      "en": "Or causality"
+    }
+  ],
+  "huoji": [
+    {
+      "char": "或积",
+      "en": "Or accumulation"
+    }
+  ],
+  "huofeng": [
+    {
+      "char": "或风",
+      "en": "Or wind"
+    }
+  ],
+  "jiequ": [
+    {
+      "char": "截去",
+      "en": "Cut off"
+    }
+  ],
+  "jiecheng": [
+    {
+      "char": "截成",
+      "en": "Cut into pieces"
+    },
+    {
+      "char": "阶乘",
+      "en": "Factorial"
+    }
+  ],
+  "jieju": [
+    {
+      "char": "截距",
+      "en": "Intercept"
+    }
+  ],
+  "hushu": [
+    {
+      "char": "户数",
+      "en": "Household number"
+    }
+  ],
+  "suochengjiao": [
+    {
+      "char": "所成角",
+      "en": "Formed angle"
+    }
+  ],
+  "suojie": [
+    {
+      "char": "所截",
+      "en": "Cut off"
+    }
+  ],
+  "shoujiyonghu": [
+    {
+      "char": "手机用户",
+      "en": "Mobile phone users"
+    }
+  ],
+  "shousuan": [
+    {
+      "char": "手算",
+      "en": "Manual calculation"
+    }
+  ],
+  "dakaimen": [
+    {
+      "char": "打开门",
+      "en": "Open the door"
+    }
+  ],
+  "daba": [
+    {
+      "char": "打靶",
+      "en": "Shooting at a target"
+    }
+  ],
+  "kuorong": [
+    {
+      "char": "扩容",
+      "en": "Expand"
+    }
+  ],
+  "zhuaman": [
+    {
+      "char": "抓满",
+      "en": "Fill up"
+    }
+  ],
+  "touyingmian": [
+    {
+      "char": "投影面",
+      "en": "Projection area"
+    }
+  ],
+  "touzishouyi": [
+    {
+      "char": "投资收益",
+      "en": "Investment income"
+    }
+  ],
+  "zhexiantu": [
+    {
+      "char": "折线图",
+      "en": "Line graph"
+    }
+  ],
+  "paomao": [
+    {
+      "char": "抛锚",
+      "en": "Drop anchor"
+    }
+  ],
+  "baofa": [
+    {
+      "char": "报法",
+      "en": "Method/Approach"
+    }
+  ],
+  "chouzhong": [
+    {
+      "char": "抽中",
+      "en": "Draw/Select"
+    }
+  ],
+  "choujian": [
+    {
+      "char": "抽件",
+      "en": "Draw parts"
+    },
+    {
+      "char": "抽检",
+      "en": "Sample"
+    }
+  ],
+  "choufa": [
+    {
+      "char": "抽法",
+      "en": "Sampling method"
+    }
+  ],
+  "choufashu": [
+    {
+      "char": "抽法数",
+      "en": "Number of sampling methods"
+    }
+  ],
+  "chouce": [
+    {
+      "char": "抽测",
+      "en": "Sample test"
+    }
+  ],
+  "choupian": [
+    {
+      "char": "抽篇",
+      "en": "Sample section"
+    }
+  ],
+  "chouzi": [
+    {
+      "char": "抽自",
+      "en": "Sample from"
+    }
+  ],
+  "chouzu": [
+    {
+      "char": "抽足",
+      "en": "Sample completely"
+    }
+  ],
+  "chouti": [
+    {
+      "char": "抽题",
+      "en": "Sample questions"
+    }
+  ],
+  "lapulasi": [
+    {
+      "char": "拉普拉斯",
+      "en": "Laplace"
+    }
+  ],
+  "ladian": [
+    {
+      "char": "拉点",
+      "en": "Pull point"
+    }
+  ],
+  "tuoweitu": [
+    {
+      "char": "拖尾图",
+      "en": "Tail chart"
+    }
+  ],
+  "zhaofa": [
+    {
+      "char": "招法",
+      "en": "Method"
+    }
+  ],
+  "zhaopinhui": [
+    {
+      "char": "招聘会",
+      "en": "Job fair"
+    }
+  ],
+  "nihe": [
+    {
+      "char": "拟合",
+      "en": "Fitting"
+    }
+  ],
+  "pinjie": [
+    {
+      "char": "拼接",
+      "en": "Stitching/Joining"
+    }
+  ],
+  "guafa": [
+    {
+      "char": "挂法",
+      "en": "Hanging method"
+    }
+  ],
+  "zhibufanghui": [
+    {
+      "char": "指不放回",
+      "en": "Without replacement"
+    }
+  ],
+  "zhiqi": [
+    {
+      "char": "指其",
+      "en": "Refer to it"
+    }
+  ],
+  "zhibiaozhi": [
+    {
+      "char": "指标值",
+      "en": "Index value"
+    }
+  ],
+  "zhishi": [
+    {
+      "char": "指释",
+      "en": "Explain"
+    }
+  ],
+  "anzhong": [
+    {
+      "char": "按重",
+      "en": "According to weight"
+    }
+  ],
+  "paizai": [
+    {
+      "char": "排在",
+      "en": "Rank"
+    }
+  ],
+  "paichengyilie": [
+    {
+      "char": "排成一列",
+      "en": "Arrange in a line"
+    }
+  ],
+  "paifa": [
+    {
+      "char": "排法",
+      "en": "Arrangement"
+    }
+  ],
+  "jiege": [
+    {
+      "char": "接个",
+      "en": "Add another"
+    }
+  ],
+  "kongzhitai": [
+    {
+      "char": "控制台",
+      "en": "Control panel"
+    }
+  ],
+  "tuimen": [
+    {
+      "char": "推们",
+      "en": "Push tables"
+    }
+  ],
+  "tuideshi": [
+    {
+      "char": "推得式",
+      "en": "Push-down type"
+    }
+  ],
+  "tuiduanchu": [
+    {
+      "char": "推断出",
+      "en": "Deduce"
+    }
+  ],
+  "tigongshuju": [
+    {
+      "char": "提供数据",
+      "en": "Provide data"
+    }
+  ],
+  "sousuosuanfa": [
+    {
+      "char": "搜索算法",
+      "en": "Search Algorithm"
+    }
+  ],
+  "banyunfei": [
+    {
+      "char": "搬运费",
+      "en": "Freight"
+    }
+  ],
+  "yaochu": [
+    {
+      "char": "摇出",
+      "en": "Draw (a winning number)"
+    }
+  ],
+  "yaohao": [
+    {
+      "char": "摇号",
+      "en": "Lottery Draw"
+    }
+  ],
+  "mojiang": [
+    {
+      "char": "摸奖",
+      "en": "Scratching a lottery"
+    }
+  ],
+  "mociqiu": [
+    {
+      "char": "摸次球",
+      "en": "Draw a specific ball"
+    }
+  ],
+  "moqiuci": [
+    {
+      "char": "摸球次",
+      "en": "Number of balls drawn"
+    }
+  ],
+  "moqiushe": [
+    {
+      "char": "摸球设",
+      "en": "Lottery ball arrangement"
+    }
+  ],
+  "bozhongmianji": [
+    {
+      "char": "播种面积",
+      "en": "Sowing Area"
+    }
+  ],
+  "caozuoyuan": [
+    {
+      "char": "操作员",
+      "en": "Operator"
+    }
+  ],
+  "gaishu": [
+    {
+      "char": "改述",
+      "en": "Rewrite"
+    }
+  ],
+  "fanghuiqiu": [
+    {
+      "char": "放回求",
+      "en": "Conditional Probability (with replacement)"
+    }
+  ],
+  "fangyou": [
+    {
+      "char": "放有",
+      "en": "With replacement"
+    }
+  ],
+  "fangfa": [
+    {
+      "char": "放法",
+      "en": "Method of replacement"
+    }
+  ],
+  "minganxing": [
+    {
+      "char": "敏感性",
+      "en": "Sensitivity"
+    }
+  ],
+  "jiaoxuezhiliang": [
+    {
+      "char": "教学质量",
+      "en": "Teaching Quality"
+    }
+  ],
+  "jiaoxueruanjian": [
+    {
+      "char": "教学软件",
+      "en": "Teaching Software"
+    }
+  ],
+  "jiaozhigong": [
+    {
+      "char": "教职工",
+      "en": "Teachers and Staff"
+    }
+  ],
+  "sandian": [
+    {
+      "char": "散点",
+      "en": "Scatter Plot"
+    }
+  ],
+  "sandiantu": [
+    {
+      "char": "散点图",
+      "en": "Scatter Diagram"
+    }
+  ],
+  "shubuduo": [
+    {
+      "char": "数不多",
+      "en": "Not Enough Numbers"
+    }
+  ],
+  "shuyuxing": [
+    {
+      "char": "数与形",
+      "en": "Numbers and Forms"
+    }
+  ],
+  "shuzhongren": [
+    {
+      "char": "数中任",
+      "en": "Any Number"
+    }
+  ],
+  "shuweili": [
+    {
+      "char": "数为例",
+      "en": "Using a Number as an Example"
+    }
+  ],
+  "shucheng": [
+    {
+      "char": "数乘",
+      "en": "Multiplication of Numbers"
+    }
+  ],
+  "shuchengji": [
+    {
+      "char": "数乘记",
+      "en": "Multiplication Record"
+    }
+  ],
+  "shushu": [
+    {
+      "char": "数书",
+      "en": "Textbook on Numbers"
+    }
+  ],
+  "shucong": [
+    {
+      "char": "数从",
+      "en": "Numbers Begin"
+    }
+  ],
+  "shuzuo": [
+    {
+      "char": "数作",
+      "en": "Numbers as a Subject"
+    }
+  ],
+  "shuzhijifen": [
+    {
+      "char": "数值积分",
+      "en": "Numerical Integration"
+    }
+  ],
+  "shugong": [
+    {
+      "char": "数公",
+      "en": "Number Constant"
+    }
+  ],
+  "shuguan": [
+    {
+      "char": "数关",
+      "en": "Number Connection"
+    }
+  ],
+  "shuchu": [
+    {
+      "char": "数出",
+      "en": "Number Extraction"
+    }
+  ],
+  "shuze": [
+    {
+      "char": "数则",
+      "en": "Number Rule"
+    }
+  ],
+  "shudan": [
+    {
+      "char": "数单",
+      "en": "Number Single"
+    }
+  ],
+  "shuzhi": [
+    {
+      "char": "数只",
+      "en": "Number Only"
+    }
+  ],
+  "shuduo": [
+    {
+      "char": "数多",
+      "en": "Number Multiple"
+    }
+  ],
+  "shusuo": [
+    {
+      "char": "数所",
+      "en": "Number Set"
+    }
+  ],
+  "shujufenbu": [
+    {
+      "char": "数据分布",
+      "en": "Data Distribution"
+    }
+  ],
+  "shujufenxi": [
+    {
+      "char": "数据分析",
+      "en": "Data Analysis"
+    }
+  ],
+  "shujuleixing": [
+    {
+      "char": "数据类型",
+      "en": "Data Type"
+    }
+  ],
+  "shujubiao": [
+    {
+      "char": "数据表",
+      "en": "Data Table"
+    }
+  ],
+  "shujubiaoshi": [
+    {
+      "char": "数据表示",
+      "en": "Data Representation"
+    }
+  ],
+  "shujuliang": [
+    {
+      "char": "数据量",
+      "en": "Data Volume"
+    }
+  ],
+  "shuwen": [
+    {
+      "char": "数文",
+      "en": "Number Text"
+    }
+  ],
+  "shuqiu": [
+    {
+      "char": "数求",
+      "en": "Number Calculation"
+    }
+  ],
+  "shufa": [
+    {
+      "char": "数法",
+      "en": "Number Method"
+    }
+  ],
+  "shuzhu": [
+    {
+      "char": "数注",
+      "en": "Number Note"
+    }
+  ],
+  "shubaiwei": [
+    {
+      "char": "数百位",
+      "en": "Hundreds of Thousands"
+    }
+  ],
+  "shudejihe": [
+    {
+      "char": "数的几何",
+      "en": "Geometry of Numbers"
+    }
+  ],
+  "shudi": [
+    {
+      "char": "数第",
+      "en": "Number Rank"
+    }
+  ],
+  "shudibu": [
+    {
+      "char": "数第步",
+      "en": "Number Step"
+    }
+  ],
+  "shuxi": [
+    {
+      "char": "数系",
+      "en": "Number System"
+    }
+  ],
+  "shuneng": [
+    {
+      "char": "数能",
+      "en": "Number Ability"
+    }
+  ],
+  "shujie": [
+    {
+      "char": "数解",
+      "en": "Number Solution"
+    }
+  ],
+  "shuji": [
+    {
+      "char": "数计",
+      "en": "Number Calculation"
+    },
+    {
+      "char": "数集",
+      "en": "Set of numbers"
+    }
+  ],
+  "shushe": [
+    {
+      "char": "数设",
+      "en": "Number Assumption"
+    }
+  ],
+  "shushi": [
+    {
+      "char": "数识",
+      "en": "Number Awareness"
+    }
+  ],
+  "shuqi": [
+    {
+      "char": "数起",
+      "en": "Number Origin"
+    },
+    {
+      "char": "树起",
+      "en": "To rise/Grow"
+    }
+  ],
+  "shujiao": [
+    {
+      "char": "数较",
+      "en": "Number comparison"
+    },
+    {
+      "char": "树较",
+      "en": "(Likely related to comparison - possibly \"higher\" or \"greater\")"
+    }
+  ],
+  "shulianghua": [
+    {
+      "char": "数量化",
+      "en": "Quantification"
+    }
+  ],
+  "shuzhen": [
+    {
+      "char": "数阵",
+      "en": "Number grid"
+    }
+  ],
+  "zhengpi": [
+    {
+      "char": "整批",
+      "en": "Batch"
+    }
+  ],
+  "zhengyue": [
+    {
+      "char": "整月",
+      "en": "Whole month"
+    }
+  ],
+  "zhengqun": [
+    {
+      "char": "整群",
+      "en": "Entire group"
+    }
+  ],
+  "xieerce": [
+    {
+      "char": "斜二测",
+      "en": "Oblique projection"
+    }
+  ],
+  "xiexing": [
+    {
+      "char": "斜行",
+      "en": "Oblique line"
+    }
+  ],
+  "xiezu": [
+    {
+      "char": "斜足",
+      "en": "Oblique foot"
+    }
+  ],
+  "xinshu": [
+    {
+      "char": "新数",
+      "en": "New number"
+    }
+  ],
+  "xinwengao": [
+    {
+      "char": "新闻稿",
+      "en": "News report"
+    }
+  ],
+  "xinwenlianbo": [
+    {
+      "char": "新闻联播",
+      "en": "News broadcast"
+    }
+  ],
+  "fangxiangxian": [
+    {
+      "char": "方向线",
+      "en": "Direction line"
+    }
+  ],
+  "fangtu": [
+    {
+      "char": "方图",
+      "en": "Chart"
+    }
+  ],
+  "fangshu": [
+    {
+      "char": "方术",
+      "en": "Mathematical method"
+    }
+  ],
+  "fanggen": [
+    {
+      "char": "方根",
+      "en": "Square root"
+    }
+  ],
+  "fangci": [
+    {
+      "char": "方词",
+      "en": "Word (mathematical term)"
+    }
+  ],
+  "fangzhenzhengce": [
+    {
+      "char": "方针政策",
+      "en": "Policy"
+    }
+  ],
+  "shifeiliang": [
+    {
+      "char": "施肥量",
+      "en": "Fertilizer amount"
+    }
+  ],
+  "xuanzhuanti": [
+    {
+      "char": "旋转体",
+      "en": "Rotated body"
+    }
+  ],
+  "xuanzhuanzhou": [
+    {
+      "char": "旋转轴",
+      "en": "Axis of rotation"
+    }
+  ],
+  "wuzuo": [
+    {
+      "char": "无座",
+      "en": "Without seat"
+    }
+  ],
+  "wushutiao": [
+    {
+      "char": "无数条",
+      "en": "Numerous lines"
+    }
+  ],
+  "wuguilv": [
+    {
+      "char": "无规律",
+      "en": "Without pattern"
+    }
+  ],
+  "shiyin": [
+    {
+      "char": "时因",
+      "en": "Time factor"
+    }
+  ],
+  "shizi": [
+    {
+      "char": "时子",
+      "en": "Time period"
+    }
+  ],
+  "shidangchuan": [
+    {
+      "char": "时当船",
+      "en": "Time as a ship"
+    }
+  ],
+  "shichao": [
+    {
+      "char": "时朝",
+      "en": "Time of day"
+    }
+  ],
+  "shifujiao": [
+    {
+      "char": "时辐角",
+      "en": "Angular speed"
+    }
+  ],
+  "minghuazhang": [
+    {
+      "char": "明华张",
+      "en": "Ming Hua Zhang"
+    }
+  ],
+  "minghexiaohua": [
+    {
+      "char": "明和小华",
+      "en": "Ming and Xiao Hua"
+    }
+  ],
+  "mingxi": [
+    {
+      "char": "明细",
+      "en": "Detail"
+    }
+  ],
+  "yizhi": [
+    {
+      "char": "易知",
+      "en": "Easy to understand"
+    }
+  ],
+  "xingdui": [
+    {
+      "char": "星队",
+      "en": "Star team"
+    }
+  ],
+  "xianxing": [
+    {
+      "char": "显性",
+      "en": "Dominant"
+    }
+  ],
+  "xianzhuxing": [
+    {
+      "char": "显著性",
+      "en": "Significance"
+    }
+  ],
+  "putonggaozhong": [
+    {
+      "char": "普通高中",
+      "en": "Senior High School"
+    }
+  ],
+  "tibu": [
+    {
+      "char": "替补",
+      "en": "Substitute"
+    }
+  ],
+  "zuiqian": [
+    {
+      "char": "最前",
+      "en": "First"
+    }
+  ],
+  "zuiduanchuan": [
+    {
+      "char": "最短船",
+      "en": "Shortest ship"
+    }
+  ],
+  "zuigaofen": [
+    {
+      "char": "最高分",
+      "en": "Highest score"
+    }
+  ],
+  "yuejun": [
+    {
+      "char": "月均",
+      "en": "Monthly average"
+    }
+  ],
+  "yousanxie": [
+    {
+      "char": "有三斜",
+      "en": "Three triangles"
+    }
+  ],
+  "yougemian": [
+    {
+      "char": "有个面",
+      "en": "Has an area/face"
+    }
+  ],
+  "yougongge": [
+    {
+      "char": "有共个",
+      "en": "Has a total of"
+    }
+  ],
+  "youchu": [
+    {
+      "char": "有出",
+      "en": "Has an output/result"
+    }
+  ],
+  "youtai": [
+    {
+      "char": "有台",
+      "en": "Has a machine/unit"
+    }
+  ],
+  "youfu": [
+    {
+      "char": "有复",
+      "en": "Has a repetition"
+    }
+  ],
+  "youtian": [
+    {
+      "char": "有天",
+      "en": "Has a day"
+    }
+  ],
+  "youjiang": [
+    {
+      "char": "有奖",
+      "en": "Has a prize"
+    }
+  ],
+  "youxuxing": [
+    {
+      "char": "有序性",
+      "en": "Orderliness"
+    }
+  ],
+  "youpai": [
+    {
+      "char": "有排",
+      "en": "Has an arrangement"
+    }
+  ],
+  "youfang": [
+    {
+      "char": "有放",
+      "en": "Has a release/discharge"
+    }
+  ],
+  "youfanghui": [
+    {
+      "char": "有放回",
+      "en": "With replacement"
+    }
+  ],
+  "youxiaotujing": [
+    {
+      "char": "有效途径",
+      "en": "Effective way"
+    }
+  ],
+  "youben": [
+    {
+      "char": "有本",
+      "en": "Has a copy/version"
+    }
+  ],
+  "youzu": [
+    {
+      "char": "有组",
+      "en": "Has a group/set"
+    }
+  ],
+  "yougu": [
+    {
+      "char": "有股",
+      "en": "Has a share/stock"
+    }
+  ],
+  "youjie": [
+    {
+      "char": "有解",
+      "en": "Has a solution"
+    }
+  ],
+  "youxianxing": [
+    {
+      "char": "有限性",
+      "en": "Finite"
+    }
+  ],
+  "fuzhuangxiehui": [
+    {
+      "char": "服装协会",
+      "en": "Clothing Association"
+    }
+  ],
+  "muqiu": [
+    {
+      "char": "木球",
+      "en": "Wooden Ball"
+    }
+  ],
+  "benshang": [
+    {
+      "char": "本上",
+      "en": "In this book"
+    }
+  ],
+  "bendian": [
+    {
+      "char": "本店",
+      "en": "This shop"
+    }
+  ],
+  "benliang": [
+    {
+      "char": "本量",
+      "en": "Basic quantity"
+    }
+  ],
+  "putinghuan": [
+    {
+      "char": "朴廷桓",
+      "en": "Bukit-Hyun"
+    }
+  ],
+  "jixiezhitu": [
+    {
+      "char": "机械制图",
+      "en": "Mechanical Drafting"
+    }
+  ],
+  "liyong": [
+    {
+      "char": "李勇",
+      "en": "Li Yong"
+    }
+  ],
+  "liyongzhang": [
+    {
+      "char": "李勇张",
+      "en": "Li Yong Zhang"
+    }
+  ],
+  "lizeng": [
+    {
+      "char": "李增",
+      "en": "Li Zheng"
+    }
+  ],
+  "limingying": [
+    {
+      "char": "李明应",
+      "en": "Li Ming Ying"
+    }
+  ],
+  "lihai": [
+    {
+      "char": "李海",
+      "en": "Li Hai"
+    }
+  ],
+  "cunqu": [
+    {
+      "char": "村去",
+      "en": "Village (likely referring to a specific village name)"
+    }
+  ],
+  "tiaojiaoxianqiu": [
+    {
+      "char": "条交线求",
+      "en": "Contour line calculation"
+    }
+  ],
+  "tiaoyi": [
+    {
+      "char": "条以",
+      "en": "According to"
+    }
+  ],
+  "tiaoti": [
+    {
+      "char": "条体",
+      "en": "Baseline"
+    }
+  ],
+  "tiaoxingtu": [
+    {
+      "char": "条形图",
+      "en": "Bar Chart"
+    }
+  ],
+  "tiaoyou": [
+    {
+      "char": "条有",
+      "en": "With lines"
+    }
+  ],
+  "tiaoleng": [
+    {
+      "char": "条棱",
+      "en": "Edge"
+    }
+  ],
+  "tiaolengge": [
+    {
+      "char": "条棱个",
+      "en": "Edge (plural)"
+    }
+  ],
+  "tiaoqiu": [
+    {
+      "char": "条求",
+      "en": "Line calculation"
+    }
+  ],
+  "tiaojie": [
+    {
+      "char": "条解",
+      "en": "Line solution"
+    }
+  ],
+  "tiaolu": [
+    {
+      "char": "条路",
+      "en": "Line route"
+    }
+  ],
+  "tiaoyu": [
+    {
+      "char": "条鱼",
+      "en": "Line fish"
+    }
+  ],
+  "laiqiu": [
+    {
+      "char": "来求",
+      "en": "To seek"
+    }
+  ],
+  "jiefuxun": [
+    {
+      "char": "杰弗逊",
+      "en": "Jefferson"
+    }
+  ],
+  "jiruo": [
+    {
+      "char": "极弱",
+      "en": "Extremely weak"
+    }
+  ],
+  "moujie": [
+    {
+      "char": "某届",
+      "en": "Certain session/term"
+    }
+  ],
+  "mousuo": [
+    {
+      "char": "某所",
+      "en": "Certain institution/school"
+    }
+  ],
+  "mouduan": [
+    {
+      "char": "某段",
+      "en": "Segment"
+    }
+  ],
+  "moulei": [
+    {
+      "char": "某类",
+      "en": "Certain type/Category"
+    }
+  ],
+  "kejiejingshanyu": [
+    {
+      "char": "柯洁井山裕",
+      "en": "(This appears to be a name - likely a mathematician's name)"
+    }
+  ],
+  "zhuti": [
+    {
+      "char": "柱体",
+      "en": "Cylinder"
+    }
+  ],
+  "zhuxing": [
+    {
+      "char": "柱形",
+      "en": "Cylindrical"
+    }
+  ],
+  "zhuzhuitai": [
+    {
+      "char": "柱锥台",
+      "en": "Cone-cylinder"
+    }
+  ],
+  "biaoyi": [
+    {
+      "char": "标以",
+      "en": "Marked with/Denote"
+    }
+  ],
+  "shuren": [
+    {
+      "char": "树人",
+      "en": "(Referring to the spirit of self-improvement and dedication - often associated with education)"
+    }
+  ],
+  "shugaobiao": [
+    {
+      "char": "树高表",
+      "en": "Height measurement"
+    }
+  ],
+  "xiaoming": [
+    {
+      "char": "校名",
+      "en": "School name"
+    }
+  ],
+  "yangzhong": [
+    {
+      "char": "样中",
+      "en": "Sample"
+    }
+  ],
+  "yangbenjunzhi": [
+    {
+      "char": "样本均值",
+      "en": "Sample mean"
+    }
+  ],
+  "yangbenrongliang": [
+    {
+      "char": "样本容量",
+      "en": "Sample size"
+    }
+  ],
+  "yangbenkongjian": [
+    {
+      "char": "样本空间",
+      "en": "Sample space"
+    }
+  ],
+  "genbendafa": [
+    {
+      "char": "根本大法",
+      "en": "(This phrase is often used in a political context - likely referring to \"fundamental law\" or \"basic principles\")"
+    }
+  ],
+  "genqiu": [
+    {
+      "char": "根求",
+      "en": "Root finding"
+    }
+  ],
+  "genzhonggen": [
+    {
+      "char": "根重根",
+      "en": "(Root of a root - likely referring to a mathematical operation)"
+    }
+  ],
+  "gezhong": [
+    {
+      "char": "格中",
+      "en": "Within/In the context of"
+    }
+  ],
+  "dangqing": [
+    {
+      "char": "档请",
+      "en": "(Likely a request for a file or record)"
+    }
+  ],
+  "meijiye": [
+    {
+      "char": "梅济耶",
+      "en": "(This appears to be a name - possibly a reference to a person)"
+    }
+  ],
+  "lengtai": [
+    {
+      "char": "棱台",
+      "en": "Frustum of a cone"
+    }
+  ],
+  "lengji": [
+    {
+      "char": "棱记",
+      "en": "(Likely related to prisms or angles)"
+    }
+  ],
+  "gaixing": [
+    {
+      "char": "概型",
+      "en": "General form/Pattern"
+    }
+  ],
+  "gailvfenbu": [
+    {
+      "char": "概率分布",
+      "en": "Probability distribution"
+    }
+  ],
+  "gailvfenxi": [
+    {
+      "char": "概率分析",
+      "en": "Probability analysis"
+    }
+  ],
+  "gailvmoxing": [
+    {
+      "char": "概率模型",
+      "en": "Probability model"
+    }
+  ],
+  "moweiqiu": [
+    {
+      "char": "模为求",
+      "en": "(Likely related to \"model\" and \"finding\" - possibly \"model to solve\")"
+    }
+  ],
+  "mokuai": [
+    {
+      "char": "模块",
+      "en": "Module"
+    }
+  ],
+  "molai": [
+    {
+      "char": "模来",
+      "en": "Model"
+    }
+  ],
+  "ciqie": [
+    {
+      "char": "次且",
+      "en": "Once and again"
+    }
+  ],
+  "cifu": [
+    {
+      "char": "次复",
+      "en": "Repeatedly"
+    }
+  ],
+  "cici": [
+    {
+      "char": "次次",
+      "en": "Every time"
+    }
+  ],
+  "ciqiu": [
+    {
+      "char": "次求",
+      "en": "Seeking/Looking for"
+    }
+  ],
+  "cishe": [
+    {
+      "char": "次设",
+      "en": "Setting up/Assuming"
+    }
+  ],
+  "oula": [
+    {
+      "char": "欧拉",
+      "en": "Euler"
+    }
+  ],
+  "oushi": [
+    {
+      "char": "欧氏",
+      "en": "Euclidean"
+    }
+  ],
+  "yuliaojie": [
+    {
+      "char": "欲了解",
+      "en": "To understand/To inquire"
+    }
+  ],
+  "geming": [
+    {
+      "char": "歌名",
+      "en": "Song title"
+    }
+  ],
+  "zhengdong": [
+    {
+      "char": "正东",
+      "en": "East"
+    }
+  ],
+  "zhenger": [
+    {
+      "char": "正二",
+      "en": "Second"
+    }
+  ],
+  "zhengqie": [
+    {
+      "char": "正切",
+      "en": "Tangent"
+    }
+  ],
+  "zhengfu": [
+    {
+      "char": "正副",
+      "en": "Main and auxiliary"
+    }
+  ],
+  "zhengpin": [
+    {
+      "char": "正品",
+      "en": "Genuine/Authentic"
+    }
+  ],
+  "zhengsi": [
+    {
+      "char": "正四",
+      "en": "Square"
+    }
+  ],
+  "zhengsimianti": [
+    {
+      "char": "正四面体",
+      "en": "Tetrahedron"
+    }
+  ],
+  "zhengxian": [
+    {
+      "char": "正弦",
+      "en": "Sine"
+    }
+  ],
+  "zhengtai": [
+    {
+      "char": "正态",
+      "en": "Normal"
+    }
+  ],
+  "zhengtaifenbu": [
+    {
+      "char": "正态分布",
+      "en": "Normal distribution"
+    }
+  ],
+  "zhengtaiquxian": [
+    {
+      "char": "正态曲线",
+      "en": "Normal curve"
+    }
+  ],
+  "zhengtouying": [
+    {
+      "char": "正投影",
+      "en": "Orthographic projection"
+    }
+  ],
+  "zhengyou": [
+    {
+      "char": "正有",
+      "en": "There is/There are"
+    }
+  ],
+  "zhengzhengzheng": [
+    {
+      "char": "正正正",
+      "en": "Exactly, exactly, exactly"
+    }
+  ],
+  "zhengdianlv": [
+    {
+      "char": "正点率",
+      "en": "Point density"
+    }
+  ],
+  "zhengdengce": [
+    {
+      "char": "正等测",
+      "en": "Orthometric measurement"
+    }
+  ],
+  "cishu": [
+    {
+      "char": "此数",
+      "en": "This number"
+    }
+  ],
+  "ciyao": [
+    {
+      "char": "此药",
+      "en": "This medicine"
+    }
+  ],
+  "cancha": [
+    {
+      "char": "残差",
+      "en": "Residual"
+    }
+  ],
+  "mudai": [
+    {
+      "char": "母代",
+      "en": "Parental generation"
+    }
+  ],
+  "muben": [
+    {
+      "char": "母本",
+      "en": "Maternal stock"
+    }
+  ],
+  "meiyige": [
+    {
+      "char": "每一格",
+      "en": "Each square/cell"
+    }
+  ],
+  "meikeshi": [
+    {
+      "char": "每可食",
+      "en": "Each edible"
+    }
+  ],
+  "meipi": [
+    {
+      "char": "每批",
+      "en": "Each batch"
+    }
+  ],
+  "meizhu": [
+    {
+      "char": "每注",
+      "en": "Each vial/bottle"
+    }
+  ],
+  "meigu": [
+    {
+      "char": "每股",
+      "en": "Each share/strand"
+    }
+  ],
+  "meibian": [
+    {
+      "char": "每边",
+      "en": "Each side"
+    }
+  ],
+  "meidaoti": [
+    {
+      "char": "每道题",
+      "en": "Each question/problem"
+    }
+  ],
+  "meimen": [
+    {
+      "char": "每门",
+      "en": "Each subject/category"
+    }
+  ],
+  "biyi": [
+    {
+      "char": "比乙",
+      "en": "Compared to B"
+    }
+  ],
+  "biyixiao": [
+    {
+      "char": "比乙校",
+      "en": "Compared to B school"
+    }
+  ],
+  "biyigao": [
+    {
+      "char": "比乙高",
+      "en": "Higher than B"
+    }
+  ],
+  "bilibiao": [
+    {
+      "char": "比例表",
+      "en": "Proportion table"
+    }
+  ],
+  "bidabi": [
+    {
+      "char": "比大比",
+      "en": "Compared to the big one"
+    }
+  ],
+  "biyue": [
+    {
+      "char": "比月",
+      "en": "Compared to the moon"
+    }
+  ],
+  "bixuefu": [
+    {
+      "char": "比雪夫",
+      "en": "Compared to the snow man"
+    }
+  ],
+  "bixiang": [
+    {
+      "char": "比项",
+      "en": "Compared to the item"
+    }
+  ],
+  "haowugulv": [
+    {
+      "char": "毫无顾虑",
+      "en": "Without concern"
+    }
+  ],
+  "qixiangzhuanjia": [
+    {
+      "char": "气象专家",
+      "en": "Meteorologist"
+    }
+  ],
+  "qixiangtiaojian": [
+    {
+      "char": "气象条件",
+      "en": "Weather conditions"
+    }
+  ],
+  "qixiangbumen": [
+    {
+      "char": "气象部门",
+      "en": "Weather department"
+    }
+  ],
+  "qixiangyubao": [
+    {
+      "char": "气象预报",
+      "en": "Weather forecast"
+    }
+  ],
+  "shuice": [
+    {
+      "char": "水侧",
+      "en": "Water side"
+    }
+  ],
+  "shuipingyi": [
+    {
+      "char": "水平仪",
+      "en": "Level"
+    }
+  ],
+  "shuixian": [
+    {
+      "char": "水现",
+      "en": "Water present"
+    }
+  ],
+  "shuidaozhongzi": [
+    {
+      "char": "水稻种子",
+      "en": "Rice seeds"
+    }
+  ],
+  "qicheluntai": [
+    {
+      "char": "汽车轮胎",
+      "en": "Car tires"
+    }
+  ],
+  "wosi": [
+    {
+      "char": "沃思",
+      "en": "Worths (likely a name or company)"
+    }
+  ],
+  "shenjie": [
+    {
+      "char": "沈婕",
+      "en": "Shen Jie"
+    }
+  ],
+  "henanan": [
+    {
+      "char": "河南岸",
+      "en": "Henan shore"
+    }
+  ],
+  "hekuan": [
+    {
+      "char": "河宽",
+      "en": "River width"
+    }
+  ],
+  "yanbei": [
+    {
+      "char": "沿北",
+      "en": "Along the north"
+    }
+  ],
+  "yanditi": [
+    {
+      "char": "沿第题",
+      "en": "Along the nth question/problem"
+    }
+  ],
+  "fazhong": [
+    {
+      "char": "法中",
+      "en": "Method/Approach"
+    }
+  ],
+  "facong": [
+    {
+      "char": "法从",
+      "en": "Method/Approach (from)"
+    }
+  ],
+  "faxian": [
+    {
+      "char": "法先",
+      "en": "Method/Approach (prior)"
+    }
+  ],
+  "faxianqiu": [
+    {
+      "char": "法先求",
+      "en": "Method/Approach (prior calculation)"
+    }
+  ],
+  "fafenxi": [
+    {
+      "char": "法分析",
+      "en": "Method/Analysis"
+    }
+  ],
+  "fajiao": [
+    {
+      "char": "法较",
+      "en": "Method/Comparison"
+    }
+  ],
+  "jinjinledao": [
+    {
+      "char": "津津乐道",
+      "en": "Enthusiastically/Delighted"
+    }
+  ],
+  "paiming": [
+    {
+      "char": "派名",
+      "en": "Designation/Naming"
+    }
+  ],
+  "liuxingse": [
+    {
+      "char": "流行色",
+      "en": "Popular color"
+    }
+  ],
+  "cedishu": [
+    {
+      "char": "测地术",
+      "en": "Geodesy"
+    }
+  ],
+  "cejiaoyi": [
+    {
+      "char": "测角仪",
+      "en": "Theodolite/Angle measuring instrument"
+    }
+  ],
+  "ceshishuju": [
+    {
+      "char": "测试数据",
+      "en": "Test data"
+    }
+  ],
+  "ceshifangfa": [
+    {
+      "char": "测试方法",
+      "en": "Test method"
+    }
+  ],
+  "ceshichengxu": [
+    {
+      "char": "测试程序",
+      "en": "Test program"
+    }
+  ],
+  "celiangxuejia": [
+    {
+      "char": "测量学家",
+      "en": "Surveyor/Measuring scientist"
+    }
+  ],
+  "celiangwucha": [
+    {
+      "char": "测量误差",
+      "en": "Measurement error"
+    }
+  ],
+  "haiqu": [
+    {
+      "char": "海区",
+      "en": "Sea area"
+    }
+  ],
+  "haikui": [
+    {
+      "char": "海奎",
+      "en": "(Likely a typo - needs context, but could relate to nautical terms)"
+    }
+  ],
+  "hailun": [
+    {
+      "char": "海轮",
+      "en": "Sailing ship"
+    }
+  ],
+  "xiaohuabuliang": [
+    {
+      "char": "消化不良",
+      "en": "Indigestion"
+    }
+  ],
+  "laishuixian": [
+    {
+      "char": "涞水县",
+      "en": "Lai Shui County"
+    }
+  ],
+  "shenruyanjiu": [
+    {
+      "char": "深入研究",
+      "en": "In-depth research"
+    }
+  ],
+  "hunjinqu": [
+    {
+      "char": "混进去",
+      "en": "To blend in/mix in"
+    }
+  ],
+  "youxianghe": [
+    {
+      "char": "游向河",
+      "en": "Flowing towards the river"
+    }
+  ],
+  "hualunzu": [
+    {
+      "char": "滑轮组",
+      "en": "Pulley system"
+    }
+  ],
+  "manju": [
+    {
+      "char": "满局",
+      "en": "Full hand (in card games)"
+    }
+  ],
+  "manyidu": [
+    {
+      "char": "满意度",
+      "en": "Satisfaction rate"
+    }
+  ],
+  "manzutiaojian": [
+    {
+      "char": "满足条件",
+      "en": "To satisfy the conditions"
+    }
+  ],
+  "qiyue": [
+    {
+      "char": "漆约",
+      "en": "Approximate value"
+    }
+  ],
+  "guanjin": [
+    {
+      "char": "灌进",
+      "en": "To fill in"
+    }
+  ],
+  "dianze": [
+    {
+      "char": "点则",
+      "en": "If"
+    }
+  ],
+  "dianji": [
+    {
+      "char": "点及",
+      "en": "Including"
+    },
+    {
+      "char": "点记",
+      "en": "To record"
+    },
+    {
+      "char": "点集",
+      "en": "Set of points"
+    }
+  ],
+  "dianjiang": [
+    {
+      "char": "点将",
+      "en": "To arrange points"
+    }
+  ],
+  "dianshiqiu": [
+    {
+      "char": "点时求",
+      "en": "At the time of"
+    }
+  ],
+  "dianyouqie": [
+    {
+      "char": "点有且",
+      "en": "Having"
+    }
+  ],
+  "dianqiu": [
+    {
+      "char": "点求",
+      "en": "To seek"
+    }
+  ],
+  "dianli": [
+    {
+      "char": "点离",
+      "en": "To separate"
+    }
+  ],
+  "yanmin": [
+    {
+      "char": "烟民",
+      "en": "Smoker"
+    }
+  ],
+  "yantong": [
+    {
+      "char": "烟筒",
+      "en": "Chimney"
+    }
+  ],
+  "aiyanri": [
+    {
+      "char": "爱眼日",
+      "en": "(This likely refers to a specific date or event, context needed for a precise translation - e.g., \"Day of the Eye\")"
+    }
+  ],
+  "fuben": [
+    {
+      "char": "父本",
+      "en": "Parent stock/original"
+    }
+  ],
+  "lvbian": [
+    {
+      "char": "率变",
+      "en": "Variable rate"
+    }
+  ],
+  "lvjun": [
+    {
+      "char": "率均",
+      "en": "Average rate"
+    }
+  ],
+  "lvyou": [
+    {
+      "char": "率有",
+      "en": "Rate of existence"
+    }
+  ],
+  "wangzhong": [
+    {
+      "char": "王中",
+      "en": "Among the Wangs"
+    }
+  ],
+  "wangrong": [
+    {
+      "char": "王嵘",
+      "en": "Wang Rong"
+    }
+  ],
+  "wangzhiping": [
+    {
+      "char": "王芝平",
+      "en": "Wang Zhibing"
+    }
+  ],
+  "wandao": [
+    {
+      "char": "玩到",
+      "en": "Reached"
+    }
+  ],
+  "huanji": [
+    {
+      "char": "环即",
+      "en": "Immediate circle"
+    }
+  ],
+  "huanhehuan": [
+    {
+      "char": "环和环",
+      "en": "Circle and circle"
+    }
+  ],
+  "huanjiang": [
+    {
+      "char": "环将",
+      "en": "Circle together"
+    }
+  ],
+  "huanhuan": [
+    {
+      "char": "环环",
+      "en": "Circular"
+    }
+  ],
+  "xiancong": [
+    {
+      "char": "现从",
+      "en": "Currently from"
+    }
+  ],
+  "qiushang": [
+    {
+      "char": "球上",
+      "en": "On the ball"
+    }
+  ],
+  "qiuzhong": [
+    {
+      "char": "球中",
+      "en": "Sphere within"
+    }
+  ],
+  "qiubanjing": [
+    {
+      "char": "球半径",
+      "en": "Sphere radius"
+    }
+  ],
+  "qiutongse": [
+    {
+      "char": "球同色",
+      "en": "Spheres of the same color"
+    }
+  ],
+  "qiurutu": [
+    {
+      "char": "球如图",
+      "en": "Spheres as shown in the figure"
+    }
+  ],
+  "qiushu": [
+    {
+      "char": "球数",
+      "en": "Number of spheres"
+    }
+  ],
+  "qiuqiu": [
+    {
+      "char": "球求",
+      "en": "Calculate the sphere"
+    }
+  ],
+  "qiuma": [
+    {
+      "char": "球码",
+      "en": "Sphere code"
+    }
+  ],
+  "qiubian": [
+    {
+      "char": "球编",
+      "en": "Sphere number"
+    }
+  ],
+  "qiushe": [
+    {
+      "char": "球设",
+      "en": "Assume a sphere"
+    }
+  ],
+  "lizai": [
+    {
+      "char": "理在",
+      "en": "The principle is"
+    }
+  ],
+  "lilunyiju": [
+    {
+      "char": "理论依据",
+      "en": "Theoretical basis"
+    }
+  ],
+  "shengnv": [
+    {
+      "char": "生女",
+      "en": "Female student"
+    }
+  ],
+  "yongge": [
+    {
+      "char": "用个",
+      "en": "Use a"
+    }
+  ],
+  "yongwei": [
+    {
+      "char": "用位",
+      "en": "Use a position/use as"
+    }
+  ],
+  "yongxue": [
+    {
+      "char": "用学",
+      "en": "Use for learning"
+    }
+  ],
+  "yongcheng": [
+    {
+      "char": "用成",
+      "en": "Use to achieve"
+    }
+  ],
+  "yonghua": [
+    {
+      "char": "用画",
+      "en": "Use to draw"
+    }
+  ],
+  "yongzu": [
+    {
+      "char": "用祖",
+      "en": "Use to inherit"
+    }
+  ],
+  "yongzhong": [
+    {
+      "char": "用种",
+      "en": "Use a method/use a kind"
+    }
+  ],
+  "yongbiaozhong": [
+    {
+      "char": "用表中",
+      "en": "Use in the table"
+    }
+  ],
+  "tianjingdui": [
+    {
+      "char": "田径队",
+      "en": "Track and field team"
+    }
+  ],
+  "jiabing": [
+    {
+      "char": "甲丙",
+      "en": "Student A and Student B"
+    }
+  ],
+  "jiaxiao": [
+    {
+      "char": "甲校",
+      "en": "School A"
+    }
+  ],
+  "jiaxiang": [
+    {
+      "char": "甲箱",
+      "en": "Box A"
+    }
+  ],
+  "jiasheng": [
+    {
+      "char": "甲胜",
+      "en": "Victory of A"
+    }
+  ],
+  "jialian": [
+    {
+      "char": "甲连",
+      "en": "Connection of A"
+    }
+  ],
+  "shentie": [
+    {
+      "char": "申铁",
+      "en": "Shen Tie (likely a name)"
+    }
+  ],
+  "dianwei": [
+    {
+      "char": "电位",
+      "en": "Electric potential"
+    }
+  ],
+  "dianqiyuanjian": [
+    {
+      "char": "电器元件",
+      "en": "Electrical components"
+    }
+  ],
+  "nanyuangong": [
+    {
+      "char": "男员工",
+      "en": "Male employee"
+    }
+  ],
+  "nanying": [
+    {
+      "char": "男婴",
+      "en": "Male infant"
+    }
+  ],
+  "huashu": [
+    {
+      "char": "画书",
+      "en": "Drawing book"
+    }
+  ],
+  "huace": [
+    {
+      "char": "画侧",
+      "en": "Drawing side"
+    }
+  ],
+  "huarutu": [
+    {
+      "char": "画如图",
+      "en": "Drawing figure"
+    }
+  ],
+  "huacheng": [
+    {
+      "char": "画成",
+      "en": "Drawing up"
+    }
+  ],
+  "huafajihe": [
+    {
+      "char": "画法几何",
+      "en": "How to draw (literally: method of drawing geometrically)"
+    }
+  ],
+  "huazhou": [
+    {
+      "char": "画轴",
+      "en": "Drawing axis"
+    }
+  ],
+  "lvedayu": [
+    {
+      "char": "略大于",
+      "en": "Slightly greater than"
+    }
+  ],
+  "shougao": [
+    {
+      "char": "瘦高",
+      "en": "Slender tall"
+    }
+  ],
+  "zhouli": [
+    {
+      "char": "皱粒",
+      "en": "Wrinkles"
+    }
+  ],
+  "jianceshuju": [
+    {
+      "char": "监测数据",
+      "en": "Monitoring data"
+    }
+  ],
+  "jiancedian": [
+    {
+      "char": "监测点",
+      "en": "Monitoring point"
+    }
+  ],
+  "heli": [
+    {
+      "char": "盒里",
+      "en": "Inside the box"
+    }
+  ],
+  "pancai": [
+    {
+      "char": "盘菜",
+      "en": "Dish"
+    }
+  ],
+  "muzhong": [
+    {
+      "char": "目中",
+      "en": "Eyes"
+    }
+  ],
+  "zhisan": [
+    {
+      "char": "直三",
+      "en": "Straight three"
+    }
+  ],
+  "zhishu": [
+    {
+      "char": "直数",
+      "en": "Straight number"
+    }
+  ],
+  "zhifang": [
+    {
+      "char": "直方",
+      "en": "Straight (as in, straight line/shape)"
+    }
+  ],
+  "zhifangtu": [
+    {
+      "char": "直方图",
+      "en": "Histogram"
+    }
+  ],
+  "xiangguanxing": [
+    {
+      "char": "相关性",
+      "en": "Correlation"
+    }
+  ],
+  "xiangguanxishu": [
+    {
+      "char": "相关系数",
+      "en": "Correlation coefficient"
+    }
+  ],
+  "xianghui": [
+    {
+      "char": "相回",
+      "en": "Mutual return"
+    }
+  ],
+  "xiangrong": [
+    {
+      "char": "相容",
+      "en": "Compatible"
+    }
+  ],
+  "xiangji": [
+    {
+      "char": "相记",
+      "en": "Remember"
+    }
+  ],
+  "kanchao": [
+    {
+      "char": "看超",
+      "en": "Look up"
+    }
+  ],
+  "zhenfenshu": [
+    {
+      "char": "真分数",
+      "en": "Proper fraction"
+    }
+  ],
+  "zhige": [
+    {
+      "char": "知个",
+      "en": "Know (a specific thing)"
+    }
+  ],
+  "zhizhishenshao": [
+    {
+      "char": "知之甚少",
+      "en": "What one knows is little"
+    }
+  ],
+  "zhihe": [
+    {
+      "char": "知合",
+      "en": "Knowing together"
+    }
+  ],
+  "zhijizhibi": [
+    {
+      "char": "知己知彼",
+      "en": "Know yourself and know your enemy"
+    }
+  ],
+  "zhishijiangzuo": [
+    {
+      "char": "知识讲座",
+      "en": "Knowledge lecture/seminar"
+    }
+  ],
+  "aigezi": [
+    {
+      "char": "矮个子",
+      "en": "Short person"
+    }
+  ],
+  "shideng": [
+    {
+      "char": "石凳",
+      "en": "Stone bench"
+    }
+  ],
+  "ciganying": [
+    {
+      "char": "磁感应",
+      "en": "Magnetic induction"
+    }
+  ],
+  "shehuicunzai": [
+    {
+      "char": "社会存在",
+      "en": "Existence in society"
+    }
+  ],
+  "zuzai": [
+    {
+      "char": "祖在",
+      "en": "Ancestor is here/present"
+    }
+  ],
+  "fulicaipiao": [
+    {
+      "char": "福利彩票",
+      "en": "Welfare lottery"
+    }
+  ],
+  "lilai": [
+    {
+      "char": "离来",
+      "en": "Leaving/departure"
+    }
+  ],
+  "zhongqu": [
+    {
+      "char": "种去",
+      "en": "Planting (gone)"
+    }
+  ],
+  "zhongxuanfa": [
+    {
+      "char": "种选法",
+      "en": "Planting selection method/algorithm"
+    }
+  ],
+  "qinjiushao": [
+    {
+      "char": "秦九韶",
+      "en": "Qin Yu-shao (mathematician)"
+    }
+  ],
+  "jiyu": [
+    {
+      "char": "积与",
+      "en": "Summation/Addition"
+    }
+  ],
+  "jihou": [
+    {
+      "char": "积后",
+      "en": "After accumulation"
+    }
+  ],
+  "jibing": [
+    {
+      "char": "积并",
+      "en": "Combining/Adding"
+    }
+  ],
+  "jishu": [
+    {
+      "char": "积数",
+      "en": "Accumulation of numbers"
+    },
+    {
+      "char": "集数",
+      "en": "Number of sets"
+    }
+  ],
+  "jiyou": [
+    {
+      "char": "积有",
+      "en": "Having accumulated"
+    },
+    {
+      "char": "积由",
+      "en": "Derived from accumulation"
+    }
+  ],
+  "jilai": [
+    {
+      "char": "积来",
+      "en": "Coming/Accumulating"
+    }
+  ],
+  "jiji": [
+    {
+      "char": "积积",
+      "en": "Repeated accumulation"
+    },
+    {
+      "char": "集及",
+      "en": "Set and"
+    }
+  ],
+  "chengshang": [
+    {
+      "char": "称上",
+      "en": "Weighing up/Assessment"
+    }
+  ],
+  "chengchu": [
+    {
+      "char": "称出",
+      "en": "Weighing out/Result of weighing"
+    }
+  ],
+  "chengshi": [
+    {
+      "char": "称式",
+      "en": "Weighing method/Formula"
+    }
+  ],
+  "chengmoqiu": [
+    {
+      "char": "称摸球",
+      "en": "Weighing balls (likely in a lottery context)"
+    }
+  ],
+  "chengmo": [
+    {
+      "char": "称模",
+      "en": "Weighing model"
+    }
+  ],
+  "chengyao": [
+    {
+      "char": "称要",
+      "en": "Weighing importance/value"
+    }
+  ],
+  "chengxumokuai": [
+    {
+      "char": "程序模块",
+      "en": "Program module"
+    }
+  ],
+  "wenhai": [
+    {
+      "char": "稳孩",
+      "en": "(This appears to be a typo - likely intended to be \"稳\" - stable)"
+    }
+  ],
+  "kongge": [
+    {
+      "char": "空个",
+      "en": "(This appears to be a typo - likely intended to be \"空\" - empty)"
+    }
+  ],
+  "kongjian": [
+    {
+      "char": "空件",
+      "en": "Empty item"
+    }
+  ],
+  "kongxiang": [
+    {
+      "char": "空箱",
+      "en": "Empty box"
+    }
+  ],
+  "kongxiangzi": [
+    {
+      "char": "空箱子",
+      "en": "Empty box"
+    }
+  ],
+  "kongjiantuxing": [
+    {
+      "char": "空间图形",
+      "en": "Spatial figure"
+    }
+  ],
+  "litixing": [
+    {
+      "char": "立体性",
+      "en": "Three-dimensionality"
+    }
+  ],
+  "shuxiang": [
+    {
+      "char": "竖向",
+      "en": "Vertical"
+    }
+  ],
+  "zhanwen": [
+    {
+      "char": "站稳",
+      "en": "Stand steady"
+    }
+  ],
+  "zhangjianyuecheng": [
+    {
+      "char": "章建跃程",
+      "en": "Zhang Jian Yue Cheng (This is a specific name/term, best left untranslated)"
+    }
+  ],
+  "bijibendiannao": [
+    {
+      "char": "笔记本电脑",
+      "en": "Laptop computer"
+    }
+  ],
+  "diyimei": [
+    {
+      "char": "第一枚",
+      "en": "First piece/item"
+    }
+  ],
+  "diyiguan": [
+    {
+      "char": "第一罐",
+      "en": "First can"
+    }
+  ],
+  "diyidao": [
+    {
+      "char": "第一道",
+      "en": "First line/step"
+    }
+  ],
+  "disanming": [
+    {
+      "char": "第三名",
+      "en": "Third place"
+    }
+  ],
+  "dierce": [
+    {
+      "char": "第二册",
+      "en": "Second volume/book"
+    }
+  ],
+  "diermei": [
+    {
+      "char": "第二枚",
+      "en": "Second piece/item"
+    }
+  ],
+  "dierdang": [
+    {
+      "char": "第二档",
+      "en": "Second level/grade"
+    }
+  ],
+  "diwei": [
+    {
+      "char": "第位",
+      "en": "Tenth position"
+    }
+  ],
+  "ditai": [
+    {
+      "char": "第台",
+      "en": "Tenth machine/unit"
+    }
+  ],
+  "diming": [
+    {
+      "char": "第名",
+      "en": "Tenth name/rank"
+    }
+  ],
+  "disiming": [
+    {
+      "char": "第四名",
+      "en": "Fourth place"
+    }
+  ],
+  "ditian": [
+    {
+      "char": "第天",
+      "en": "Tenth day"
+    }
+  ],
+  "diju": [
+    {
+      "char": "第局",
+      "en": "Tenth game/round"
+    }
+  ],
+  "diqiu": [
+    {
+      "char": "第球",
+      "en": "Tenth ball"
+    }
+  ],
+  "dilei": [
+    {
+      "char": "第类",
+      "en": "Tenth category"
+    }
+  ],
+  "dizubiao": [
+    {
+      "char": "第组标",
+      "en": "Tenth group marker"
+    }
+  ],
+  "diwen": [
+    {
+      "char": "第问",
+      "en": "Tenth question"
+    }
+  ],
+  "dixiang": [
+    {
+      "char": "第项",
+      "en": "Tenth item"
+    }
+  ],
+  "dengyuling": [
+    {
+      "char": "等于零",
+      "en": "Equals zero"
+    }
+  ],
+  "dengdi": [
+    {
+      "char": "等底",
+      "en": "Equal base"
+    }
+  ],
+  "dengju": [
+    {
+      "char": "等距",
+      "en": "Equally spaced"
+    }
+  ],
+  "dati": [
+    {
+      "char": "答题",
+      "en": "Answer"
+    }
+  ],
+  "shaicha": [
+    {
+      "char": "筛查",
+      "en": "Screening"
+    }
+  ],
+  "qianshang": [
+    {
+      "char": "签上",
+      "en": "To match/correspond"
+    }
+  ],
+  "qianshi": [
+    {
+      "char": "签使",
+      "en": "Messenger/Envoy"
+    }
+  ],
+  "jiandanyixing": [
+    {
+      "char": "简单易行",
+      "en": "Simple and easy"
+    }
+  ],
+  "suanyisheng": [
+    {
+      "char": "算乙胜",
+      "en": "Calculation of 'Et' victory (referring to a specific mathematical game)"
+    }
+  ],
+  "suanshuqie": [
+    {
+      "char": "算书且",
+      "en": "Arithmetic book and (implying a method)"
+    }
+  ],
+  "suanjiasheng": [
+    {
+      "char": "算甲胜",
+      "en": "Calculation of 'Jia' victory (referring to a specific mathematical game)"
+    }
+  ],
+  "suanti": [
+    {
+      "char": "算题",
+      "en": "Math problem/exercise"
+    }
+  ],
+  "jianba": [
+    {
+      "char": "箭靶",
+      "en": "Target/Bullseye"
+    }
+  ],
+  "xiangnei": [
+    {
+      "char": "箱内",
+      "en": "Inside the box"
+    }
+  ],
+  "pianqiu": [
+    {
+      "char": "篇求",
+      "en": "Seeking/Pursuing (often in a mathematical context)"
+    }
+  ],
+  "mizesi": [
+    {
+      "char": "米泽斯",
+      "en": "(Likely a specific mathematical concept or name - requires further context)"
+    }
+  ],
+  "leili": [
+    {
+      "char": "类里",
+      "en": "Category/Class"
+    }
+  ],
+  "litian": [
+    {
+      "char": "粒甜",
+      "en": "(Likely a specific mathematical concept or name - requires further context)"
+    }
+  ],
+  "xizhonghua": [
+    {
+      "char": "系中画",
+      "en": "Drawing within the system"
+    }
+  ],
+  "xizhongshe": [
+    {
+      "char": "系中设",
+      "en": "Setting within the system"
+    }
+  ],
+  "xinei": [
+    {
+      "char": "系内",
+      "en": "Within the system"
+    }
+  ],
+  "xidao": [
+    {
+      "char": "系到",
+      "en": "Connected to the system"
+    }
+  ],
+  "xixing": [
+    {
+      "char": "系性",
+      "en": "Systemic nature"
+    }
+  ],
+  "xilai": [
+    {
+      "char": "系来",
+      "en": "Coming from the system"
+    }
+  ],
+  "xitonghua": [
+    {
+      "char": "系统化",
+      "en": "Systematization"
+    }
+  ],
+  "xitongchouyang": [
+    {
+      "char": "系统抽样",
+      "en": "Systemic sampling"
+    }
+  ],
+  "jinmixianglian": [
+    {
+      "char": "紧密相联",
+      "en": "Closely connected"
+    }
+  ],
+  "jinkaozai": [
+    {
+      "char": "紧靠在",
+      "en": "Situated closely"
+    }
+  ],
+  "hongxin": [
+    {
+      "char": "红心",
+      "en": "Red heart (likely a visual aid or symbol)"
+    }
+  ],
+  "honghuanglan": [
+    {
+      "char": "红黄蓝",
+      "en": "Red, Yellow, Blue (often used in color theory or visual representations)"
+    }
+  ],
+  "xianweichangdu": [
+    {
+      "char": "纤维长度",
+      "en": "Fiber length"
+    }
+  ],
+  "yuehua": [
+    {
+      "char": "约化",
+      "en": "Reduction/Simplification"
+    }
+  ],
+  "chunshuxue": [
+    {
+      "char": "纯数学",
+      "en": "Pure mathematics"
+    }
+  ],
+  "zhidui": [
+    {
+      "char": "纸堆",
+      "en": "Paper stack"
+    }
+  ],
+  "xianxingguanxi": [
+    {
+      "char": "线性关系",
+      "en": "Linear relationship"
+    }
+  ],
+  "xianxingxiangguan": [
+    {
+      "char": "线性相关",
+      "en": "Linearly related"
+    }
+  ],
+  "zulie": [
+    {
+      "char": "组列",
+      "en": "Grouping"
+    }
+  ],
+  "zuheti": [
+    {
+      "char": "组合体",
+      "en": "Composite"
+    }
+  ],
+  "zuzaige": [
+    {
+      "char": "组在个",
+      "en": "Group in a"
+    }
+  ],
+  "zushu": [
+    {
+      "char": "组数",
+      "en": "Group number"
+    }
+  ],
+  "zushushao": [
+    {
+      "char": "组数少",
+      "en": "Few groups"
+    }
+  ],
+  "zuju": [
+    {
+      "char": "组距",
+      "en": "Group distance"
+    }
+  ],
+  "zujuying": [
+    {
+      "char": "组距应",
+      "en": "Group distance should"
+    }
+  ],
+  "zhongtudian": [
+    {
+      "char": "终图点",
+      "en": "Terminal point"
+    }
+  ],
+  "zhongbian": [
+    {
+      "char": "终边",
+      "en": "Terminal edge"
+    }
+  ],
+  "jingcun": [
+    {
+      "char": "经村",
+      "en": "Through the village"
+    }
+  ],
+  "jieyu": [
+    {
+      "char": "结于",
+      "en": "Connected with"
+    }
+  ],
+  "huituyuan": [
+    {
+      "char": "绘图员",
+      "en": "Draftsman"
+    }
+  ],
+  "jueduishidu": [
+    {
+      "char": "绝对湿度",
+      "en": "Absolute humidity"
+    }
+  ],
+  "tongkao": [
+    {
+      "char": "统考",
+      "en": "Unified Examination"
+    }
+  ],
+  "tongjifenxi": [
+    {
+      "char": "统计分析",
+      "en": "Statistical analysis"
+    }
+  ],
+  "tongjitu": [
+    {
+      "char": "统计图",
+      "en": "Statistical chart"
+    }
+  ],
+  "tongjitubiao": [
+    {
+      "char": "统计图表",
+      "en": "Statistical chart/table"
+    }
+  ],
+  "tongjixuejia": [
+    {
+      "char": "统计学家",
+      "en": "Statistician"
+    }
+  ],
+  "tongjiju": [
+    {
+      "char": "统计局",
+      "en": "Statistical Bureau"
+    }
+  ],
+  "tongjidiaocha": [
+    {
+      "char": "统计调查",
+      "en": "Statistical survey"
+    }
+  ],
+  "zongheceshi": [
+    {
+      "char": "综合测试",
+      "en": "Comprehensive test"
+    }
+  ],
+  "bianxiezhe": [
+    {
+      "char": "编写者",
+      "en": "Author"
+    }
+  ],
+  "bianchuzhong": [
+    {
+      "char": "编出种",
+      "en": "Created kind"
+    }
+  ],
+  "bianba": [
+    {
+      "char": "编把",
+      "en": "To compile"
+    }
+  ],
+  "guanqiu": [
+    {
+      "char": "罐求",
+      "en": "Can obtain"
+    }
+  ],
+  "guanneng": [
+    {
+      "char": "罐能",
+      "en": "Can hold"
+    }
+  ],
+  "qunqun": [
+    {
+      "char": "群群",
+      "en": "Groups"
+    }
+  ],
+  "erming": [
+    {
+      "char": "而名",
+      "en": "To name"
+    }
+  ],
+  "erbiaozhong": [
+    {
+      "char": "而表中",
+      "en": "In the table"
+    }
+  ],
+  "ershou": [
+    {
+      "char": "而首",
+      "en": "At the beginning"
+    }
+  ],
+  "lianshang": [
+    {
+      "char": "联上",
+      "en": "Connected to"
+    }
+  ],
+  "lianhuanwanhui": [
+    {
+      "char": "联欢晚会",
+      "en": "Variety Show"
+    }
+  ],
+  "lianbiao": [
+    {
+      "char": "联表",
+      "en": "Linked table"
+    }
+  ],
+  "lianbiaozhong": [
+    {
+      "char": "联表中",
+      "en": "Linked table"
+    }
+  ],
+  "beichu": [
+    {
+      "char": "背出",
+      "en": "Recite"
+    }
+  ],
+  "taimian": [
+    {
+      "char": "胎面",
+      "en": "Facial features"
+    }
+  ],
+  "shengci": [
+    {
+      "char": "胜次",
+      "en": "Victory"
+    }
+  ],
+  "shengsheng": [
+    {
+      "char": "胜胜",
+      "en": "Victory (repeated)"
+    }
+  ],
+  "hukedinglv": [
+    {
+      "char": "胡克定律",
+      "en": "Hooke's Law"
+    }
+  ],
+  "jiaojia": [
+    {
+      "char": "脚架",
+      "en": "Foot support"
+    }
+  ],
+  "tuoba": [
+    {
+      "char": "脱靶",
+      "en": "Off-target"
+    }
+  ],
+  "yaoshang": [
+    {
+      "char": "腰上",
+      "en": "Above the waist"
+    }
+  ],
+  "bizhan": [
+    {
+      "char": "臂展",
+      "en": "Arm span"
+    }
+  ],
+  "zicheng": [
+    {
+      "char": "自乘",
+      "en": "Self-propelled"
+    }
+  ],
+  "ziyouxuanze": [
+    {
+      "char": "自由选择",
+      "en": "Free choice"
+    }
+  ],
+  "liangyou": [
+    {
+      "char": "良优",
+      "en": "Good choice"
+    }
+  ],
+  "seyisheng": [
+    {
+      "char": "色乙胜",
+      "en": "Color B wins"
+    }
+  ],
+  "jiezhong": [
+    {
+      "char": "节中",
+      "en": "Mid-term"
+    }
+  ],
+  "jiezhonghu": [
+    {
+      "char": "节中户",
+      "en": "Mid-term examination"
+    }
+  ],
+  "jieli": [
+    {
+      "char": "节例",
+      "en": "Example lesson"
+    }
+  ],
+  "jiebiaozhong": [
+    {
+      "char": "节表中",
+      "en": "Table of lessons"
+    }
+  ],
+  "fanyangjun": [
+    {
+      "char": "范阳郡",
+      "en": "Fanyang County"
+    }
+  ],
+  "caohua": [
+    {
+      "char": "草花",
+      "en": "Grass and flowers"
+    }
+  ],
+  "yaochang": [
+    {
+      "char": "药厂",
+      "en": "Pharmacy"
+    }
+  ],
+  "laibunici": [
+    {
+      "char": "莱布尼茨",
+      "en": "Leibniz"
+    }
+  ],
+  "huoqushuju": [
+    {
+      "char": "获取数据",
+      "en": "Obtain data"
+    }
+  ],
+  "caidanzhongxuanze": [
+    {
+      "char": "菜单中选择",
+      "en": "Select from the menu"
+    }
+  ],
+  "caidanlan": [
+    {
+      "char": "菜单栏",
+      "en": "Menu Bar"
+    }
+  ],
+  "mengri": [
+    {
+      "char": "蒙日",
+      "en": "Moon Day"
+    }
+  ],
+  "xuzhou": [
+    {
+      "char": "虚轴",
+      "en": "Phantom Axis"
+    }
+  ],
+  "xubu": [
+    {
+      "char": "虚部",
+      "en": "Phantom Part"
+    }
+  ],
+  "xueyang": [
+    {
+      "char": "血样",
+      "en": "Blood Sample"
+    }
+  ],
+  "xingdu": [
+    {
+      "char": "行都",
+      "en": "Hengdu (likely referring to a specific mathematical concept or notation - context needed for precise translation)"
+    }
+  ],
+  "biaobuwan": [
+    {
+      "char": "表不晚",
+      "en": "Table Not Late (likely a specific instruction or term within a context)"
+    }
+  ],
+  "biaoge": [
+    {
+      "char": "表个",
+      "en": "Table a (likely a specific instruction or term within a context)"
+    }
+  ],
+  "biaohetu": [
+    {
+      "char": "表和图",
+      "en": "Table and Chart"
+    }
+  ],
+  "biaohuotu": [
+    {
+      "char": "表或图",
+      "en": "Table or Chart"
+    }
+  ],
+  "biaosuo": [
+    {
+      "char": "表所",
+      "en": "Table of"
+    }
+  ],
+  "biaoshugao": [
+    {
+      "char": "表树高",
+      "en": "Table of Height"
+    }
+  ],
+  "biaohua": [
+    {
+      "char": "表画",
+      "en": "Table of Drawing"
+    }
+  ],
+  "biaoruo": [
+    {
+      "char": "表若",
+      "en": "Table as"
+    }
+  ],
+  "biaobiao": [
+    {
+      "char": "表表",
+      "en": "Table of Tables"
+    }
+  ],
+  "yaofen": [
+    {
+      "char": "要分",
+      "en": "Need to Divide"
+    }
+  ],
+  "yaoqu": [
+    {
+      "char": "要取",
+      "en": "Need to Take"
+    }
+  ],
+  "yaohua": [
+    {
+      "char": "要画",
+      "en": "Need to Draw"
+    }
+  ],
+  "yaoxuan": [
+    {
+      "char": "要选",
+      "en": "Need to Select"
+    }
+  ],
+  "guanchadian": [
+    {
+      "char": "观察点",
+      "en": "Observation Point"
+    }
+  ],
+  "jiaoyishu": [
+    {
+      "char": "角一书",
+      "en": "Corner One Book (likely referring to a specific geometric concept or notation - context needed for precise translation)"
+    }
+  ],
+  "jiaoguan": [
+    {
+      "char": "角关",
+      "en": "Corner Connection"
+    }
+  ],
+  "jiaoda": [
+    {
+      "char": "角大",
+      "en": "Large Corner"
+    }
+  ],
+  "jiecong": [
+    {
+      "char": "解从",
+      "en": "Solve From"
+    }
+  ],
+  "jiecongfu": [
+    {
+      "char": "解从幅",
+      "en": "Solve from Width"
+    }
+  ],
+  "jietong": [
+    {
+      "char": "解同",
+      "en": "Solve Similarly"
+    }
+  ],
+  "jiejiang": [
+    {
+      "char": "解将",
+      "en": "Solve As"
+    }
+  ],
+  "jienian": [
+    {
+      "char": "解年",
+      "en": "Solve in Year"
+    }
+  ],
+  "jiedang": [
+    {
+      "char": "解当",
+      "en": "Solve When"
+    }
+  ],
+  "jiefangchulai": [
+    {
+      "char": "解放出来",
+      "en": "Release/Free Up (likely referring to a mathematical process or concept)"
+    }
+  ],
+  "jieji": [
+    {
+      "char": "解集",
+      "en": "Solution Set"
+    }
+  ],
+  "jieling": [
+    {
+      "char": "解零",
+      "en": "Zero Solution"
+    }
+  ],
+  "chujiao": [
+    {
+      "char": "触礁",
+      "en": "Dead End"
+    }
+  ],
+  "jingshiyu": [
+    {
+      "char": "警示语",
+      "en": "Warning Message"
+    }
+  ],
+  "jishuwenti": [
+    {
+      "char": "计数问题",
+      "en": "Counting Problem"
+    }
+  ],
+  "jibu": [
+    {
+      "char": "计步",
+      "en": "Step Counting"
+    }
+  ],
+  "renshishuiping": [
+    {
+      "char": "认识水平",
+      "en": "Level of Understanding"
+    }
+  ],
+  "taoluntanjiu": [
+    {
+      "char": "讨论探究",
+      "en": "Discussion and Exploration"
+    }
+  ],
+  "jizhong": [
+    {
+      "char": "记中",
+      "en": "Record Center"
+    }
+  ],
+  "jiangchang": [
+    {
+      "char": "讲场",
+      "en": "Lecture Hall"
+    }
+  ],
+  "gaixian": [
+    {
+      "char": "该县",
+      "en": "This County"
+    }
+  ],
+  "gaitu": [
+    {
+      "char": "该图",
+      "en": "This Figure/Graph"
+    }
+  ],
+  "gaizi": [
+    {
+      "char": "该子",
+      "en": "This Sub-group"
+    }
+  ],
+  "gaishi": [
+    {
+      "char": "该式",
+      "en": "This Equation"
+    }
+  ],
+  "gaixiang": [
+    {
+      "char": "该箱",
+      "en": "This Box/Container"
+    }
+  ],
+  "gaiyao": [
+    {
+      "char": "该药",
+      "en": "This Medicine"
+    }
+  ],
+  "gairuanjian": [
+    {
+      "char": "该软件",
+      "en": "This Software"
+    }
+  ],
+  "gaiti": [
+    {
+      "char": "该题",
+      "en": "This Question"
+    }
+  ],
+  "nuoyiman": [
+    {
+      "char": "诺伊曼",
+      "en": "Neumann (likely referring to John von Neumann)"
+    }
+  ],
+  "duru": [
+    {
+      "char": "读入",
+      "en": "Input"
+    }
+  ],
+  "kexian": [
+    {
+      "char": "课现",
+      "en": "Classroom"
+    }
+  ],
+  "diaochu": [
+    {
+      "char": "调出",
+      "en": "Retrieve"
+    }
+  ],
+  "diaochayuan": [
+    {
+      "char": "调查员",
+      "en": "Investigator"
+    }
+  ],
+  "diaochadui": [
+    {
+      "char": "调查队",
+      "en": "Investigation Team"
+    }
+  ],
+  "beiyesi": [
+    {
+      "char": "贝叶斯",
+      "en": "Bayesian"
+    }
+  ],
+  "fuju": [
+    {
+      "char": "负局",
+      "en": "Negative Result"
+    }
+  ],
+  "fuxiangguan": [
+    {
+      "char": "负相关",
+      "en": "Negative Correlation"
+    }
+  ],
+  "caichansunshi": [
+    {
+      "char": "财产损失",
+      "en": "Property Loss"
+    }
+  ],
+  "zhiliangzhibiao": [
+    {
+      "char": "质量指标",
+      "en": "Quality Indicator"
+    }
+  ],
+  "jiaxianyue": [
+    {
+      "char": "贾宪约",
+      "en": "Jia Xianyou (likely a name or specific reference)"
+    }
+  ],
+  "zigezheng": [
+    {
+      "char": "资格证",
+      "en": "Qualification Certificate"
+    }
+  ],
+  "zigezhengshu": [
+    {
+      "char": "资格证书",
+      "en": "Certificate of Qualification"
+    }
+  ],
+  "peifu": [
+    {
+      "char": "赔付",
+      "en": "Compensation"
+    }
+  ],
+  "saiwan": [
+    {
+      "char": "赛完",
+      "en": "Finish the race"
+    }
+  ],
+  "saiman": [
+    {
+      "char": "赛满",
+      "en": "Complete the race"
+    }
+  ],
+  "qili": [
+    {
+      "char": "起例",
+      "en": "Case opening"
+    }
+  ],
+  "yuedaji": [
+    {
+      "char": "越大即",
+      "en": "As large as"
+    }
+  ],
+  "yuedatu": [
+    {
+      "char": "越大图",
+      "en": "Larger diagram"
+    }
+  ],
+  "yuedadang": [
+    {
+      "char": "越大当",
+      "en": "As large as"
+    }
+  ],
+  "yuehaoli": [
+    {
+      "char": "越好例",
+      "en": "Better example"
+    }
+  ],
+  "yuexiaoze": [
+    {
+      "char": "越小则",
+      "en": "As small as"
+    }
+  ],
+  "yuexiaoji": [
+    {
+      "char": "越小即",
+      "en": "As small as"
+    }
+  ],
+  "yuexiaoyue": [
+    {
+      "char": "越小越",
+      "en": "Smaller is better"
+    }
+  ],
+  "yuecha": [
+    {
+      "char": "越差",
+      "en": "Worse"
+    }
+  ],
+  "yueping": [
+    {
+      "char": "越平",
+      "en": "More flat"
+    }
+  ],
+  "yueruoguan": [
+    {
+      "char": "越弱关",
+      "en": "Weaker connection"
+    }
+  ],
+  "quxiangyu": [
+    {
+      "char": "趋向于",
+      "en": "Tend to"
+    }
+  ],
+  "ruanjiangongju": [
+    {
+      "char": "软件工具",
+      "en": "Software tools"
+    }
+  ],
+  "zhouxian": [
+    {
+      "char": "轴线",
+      "en": "Axis"
+    }
+  ],
+  "jiaoxiaoze": [
+    {
+      "char": "较小则",
+      "en": "As small as"
+    }
+  ],
+  "fujiao": [
+    {
+      "char": "辐角",
+      "en": "Bevel angle"
+    }
+  ],
+  "fujiaoyi": [
+    {
+      "char": "辐角义",
+      "en": "Bevel angle meaning"
+    }
+  ],
+  "bianwai": [
+    {
+      "char": "边外",
+      "en": "Outside the edge"
+    }
+  ],
+  "bianhuacheng": [
+    {
+      "char": "边画成",
+      "en": "Drawn along the edge"
+    }
+  ],
+  "datian": [
+    {
+      "char": "达天",
+      "en": "Reach the sky"
+    }
+  ],
+  "guoqiu": [
+    {
+      "char": "过求",
+      "en": "Exceed the requirement"
+    }
+  ],
+  "guogai": [
+    {
+      "char": "过该",
+      "en": "Exceed the standard"
+    }
+  ],
+  "yundongdui": [
+    {
+      "char": "运动队",
+      "en": "Sports team"
+    }
+  ],
+  "yunshi": [
+    {
+      "char": "运是",
+      "en": "Calculation (referring to a specific type of calculation)"
+    }
+  ],
+  "jinsijisuan": [
+    {
+      "char": "近似计算",
+      "en": "Approximate calculation"
+    }
+  ],
+  "zhedui": [
+    {
+      "char": "这堆",
+      "en": "Pile"
+    }
+  ],
+  "zhetiaoding": [
+    {
+      "char": "这条定",
+      "en": "This line/rule"
+    }
+  ],
+  "zhepan": [
+    {
+      "char": "这盘",
+      "en": "This plate/dish"
+    }
+  ],
+  "lianchengji": [
+    {
+      "char": "连乘积",
+      "en": "Product (of consecutive terms)"
+    }
+  ],
+  "lianxuxing": [
+    {
+      "char": "连续型",
+      "en": "Continuous type"
+    }
+  ],
+  "liansheng": [
+    {
+      "char": "连胜",
+      "en": "Consecutive wins"
+    }
+  ],
+  "songwei": [
+    {
+      "char": "送位",
+      "en": "Assigned seat"
+    }
+  ],
+  "songfa": [
+    {
+      "char": "送法",
+      "en": "Method/Approach"
+    }
+  ],
+  "xuanyi": [
+    {
+      "char": "选一",
+      "en": "Choose one"
+    }
+  ],
+  "xuanren": [
+    {
+      "char": "选人",
+      "en": "Select people"
+    }
+  ],
+  "xuanxiuke": [
+    {
+      "char": "选修课",
+      "en": "Elective course"
+    }
+  ],
+  "xuangongzhong": [
+    {
+      "char": "选共种",
+      "en": "Choose a kind/type"
+    }
+  ],
+  "xuandao": [
+    {
+      "char": "选到",
+      "en": "Choose/Select (to obtain)"
+    }
+  ],
+  "xuanhao": [
+    {
+      "char": "选号",
+      "en": "Choose a number"
+    }
+  ],
+  "xuanming": [
+    {
+      "char": "选名",
+      "en": "Choose a name"
+    }
+  ],
+  "xuandui": [
+    {
+      "char": "选对",
+      "en": "Choose correctly"
+    }
+  ],
+  "xuanbaxing": [
+    {
+      "char": "选拔性",
+      "en": "Selection (based on merit)"
+    }
+  ],
+  "xuanjiali": [
+    {
+      "char": "选甲例",
+      "en": "Choose example A"
+    }
+  ],
+  "xuanxuanxuan": [
+    {
+      "char": "选选选",
+      "en": "Choose, choose, choose (multiple choices)"
+    }
+  ],
+  "xuancuo": [
+    {
+      "char": "选错",
+      "en": "Choose incorrectly"
+    }
+  ],
+  "xuanshou": [
+    {
+      "char": "选首",
+      "en": "Choose first"
+    }
+  ],
+  "zhuge": [
+    {
+      "char": "逐个",
+      "en": "One by one"
+    }
+  ],
+  "zhurendi": [
+    {
+      "char": "逐人地",
+      "en": "Person by person/location"
+    }
+  ],
+  "zhuhu": [
+    {
+      "char": "逐户",
+      "en": "Household by household"
+    }
+  ],
+  "tongyuduan": [
+    {
+      "char": "通与断",
+      "en": "Connect and disconnect"
+    }
+  ],
+  "tonghuashijian": [
+    {
+      "char": "通话时间",
+      "en": "Call duration/talk time"
+    }
+  ],
+  "tongxiang": [
+    {
+      "char": "通项",
+      "en": "Common terms/parameters"
+    }
+  ],
+  "qiuxian": [
+    {
+      "char": "遒县",
+      "en": "(Historical) County -  (This term is less common in modern math, but historically refers to a county)"
+    }
+  ],
+  "yichuanyinzi": [
+    {
+      "char": "遗传因子",
+      "en": "Genetic factor"
+    }
+  ],
+  "yichuanxuejia": [
+    {
+      "char": "遗传学家",
+      "en": "Geneticist"
+    }
+  ],
+  "bushouji": [
+    {
+      "char": "部手机",
+      "en": "Mobile phone"
+    }
+  ],
+  "shisuo": [
+    {
+      "char": "释锁",
+      "en": "Unlock"
+    }
+  ],
+  "liya": [
+    {
+      "char": "里亚",
+      "en": "Lia (likely a name)"
+    }
+  ],
+  "lidaxie": [
+    {
+      "char": "里大斜",
+      "en": "Lidaixi (likely a specific term or name)"
+    }
+  ],
+  "lifa": [
+    {
+      "char": "里法",
+      "en": "Lifǎ (likely a specific term or name)"
+    }
+  ],
+  "chongfuxing": [
+    {
+      "char": "重复性",
+      "en": "Repetition"
+    }
+  ],
+  "jinkeqin": [
+    {
+      "char": "金克勤",
+      "en": "Jin Keqin (likely a name of a textbook or author)"
+    }
+  ],
+  "zhongxing": [
+    {
+      "char": "钟形",
+      "en": "Zhongxing (bell-shaped curve)"
+    }
+  ],
+  "tiezhi": [
+    {
+      "char": "铁制",
+      "en": "Iron-made"
+    }
+  ],
+  "qianchui": [
+    {
+      "char": "铅垂",
+      "en": "Lead plumb line"
+    }
+  ],
+  "cuokai": [
+    {
+      "char": "错开",
+      "en": "Offset"
+    }
+  ],
+  "zhuiti": [
+    {
+      "char": "锥体",
+      "en": "Cone"
+    }
+  ],
+  "jiantuodong": [
+    {
+      "char": "键拖动",
+      "en": "Key drag (likely a specific mathematical operation or term)"
+    }
+  ],
+  "zhanghua": [
+    {
+      "char": "长画",
+      "en": "Long line"
+    }
+  ],
+  "zhangzhou": [
+    {
+      "char": "长轴",
+      "en": "Long axis"
+    }
+  ],
+  "wenyou": [
+    {
+      "char": "问有",
+      "en": "Ask (a question)"
+    }
+  ],
+  "wenfa": [
+    {
+      "char": "问法",
+      "en": "Method of questioning/asking"
+    }
+  ],
+  "wenji": [
+    {
+      "char": "问计",
+      "en": "Consult/seek advice"
+    }
+  ],
+  "fangxiao": [
+    {
+      "char": "防小",
+      "en": "Protect against small (likely a specific problem or variable)"
+    }
+  ],
+  "jietishi": [
+    {
+      "char": "阶梯式",
+      "en": "Stair-step (likely referring to a function or graph)"
+    }
+  ],
+  "aergang": [
+    {
+      "char": "阿尔冈",
+      "en": "Argon (likely a name or place)"
+    }
+  ],
+  "aergangtu": [
+    {
+      "char": "阿尔冈图",
+      "en": "Argon chart (likely a specific type of graph)"
+    }
+  ],
+  "chenxuemei": [
+    {
+      "char": "陈雪梅",
+      "en": "Chen Xuemei (likely a name of a textbook or author)"
+    }
+  ],
+  "xianbao": [
+    {
+      "char": "限报",
+      "en": "Limited report"
+    }
+  ],
+  "xianzhong": [
+    {
+      "char": "险种",
+      "en": "Hazardous type"
+    }
+  ],
+  "suijihua": [
+    {
+      "char": "随机化",
+      "en": "Randomization"
+    }
+  ],
+  "suijibianliang": [
+    {
+      "char": "随机变量",
+      "en": "Random variable"
+    }
+  ],
+  "suijiyinsu": [
+    {
+      "char": "随机因素",
+      "en": "Random factor"
+    }
+  ],
+  "suijixing": [
+    {
+      "char": "随机性",
+      "en": "Randomness"
+    }
+  ],
+  "suijichouyang": [
+    {
+      "char": "随机抽样",
+      "en": "Random sampling"
+    }
+  ],
+  "suijiyangben": [
+    {
+      "char": "随机样本",
+      "en": "Random sample"
+    }
+  ],
+  "suijiwucha": [
+    {
+      "char": "随机误差",
+      "en": "Random error"
+    }
+  ],
+  "nanyiwancheng": [
+    {
+      "char": "难以完成",
+      "en": "Difficult to complete"
+    }
+  ],
+  "nanxuan": [
+    {
+      "char": "难选",
+      "en": "Difficult to select"
+    }
+  ],
+  "jishi": [
+    {
+      "char": "集使",
+      "en": "Set theory"
+    },
+    {
+      "char": "集示",
+      "en": "Set representation"
+    }
+  ],
+  "jidao": [
+    {
+      "char": "集到",
+      "en": "Set to"
+    }
+  ],
+  "jishibu": [
+    {
+      "char": "集实部",
+      "en": "Real part (of a set)"
+    }
+  ],
+  "jichun": [
+    {
+      "char": "集纯",
+      "en": "Pure set"
+    }
+  ],
+  "lingze": [
+    {
+      "char": "零则",
+      "en": "If zero"
+    }
+  ],
+  "lingdian": [
+    {
+      "char": "零点",
+      "en": "Zero point"
+    }
+  ],
+  "xuren": [
+    {
+      "char": "需人",
+      "en": "Requires personnel"
+    }
+  ],
+  "zhenji": [
+    {
+      "char": "震级",
+      "en": "Magnitude (earthquake)"
+    }
+  ],
+  "feiou": [
+    {
+      "char": "非欧",
+      "en": "Non-Euclidean"
+    }
+  ],
+  "feifu": [
+    {
+      "char": "非负",
+      "en": "Non-negative"
+    }
+  ],
+  "mianyumian": [
+    {
+      "char": "面与面",
+      "en": "Surface and surface"
+    }
+  ],
+  "mianti": [
+    {
+      "char": "面体",
+      "en": "Polyhedron"
+    }
+  ],
+  "mianjun": [
+    {
+      "char": "面均",
+      "en": "Average surface"
+    }
+  ],
+  "miansuo": [
+    {
+      "char": "面所",
+      "en": "Surface area"
+    }
+  ],
+  "mianluo": [
+    {
+      "char": "面落",
+      "en": "Surface (falling)"
+    }
+  ],
+  "miandou": [
+    {
+      "char": "面都",
+      "en": "All surfaces"
+    }
+  ],
+  "baci": [
+    {
+      "char": "靶次",
+      "en": "Target number"
+    }
+  ],
+  "xiehao": [
+    {
+      "char": "鞋号",
+      "en": "Shoe size"
+    }
+  ],
+  "weisaier": [
+    {
+      "char": "韦塞尔",
+      "en": "Weissler"
+    }
+  ],
+  "dingceng": [
+    {
+      "char": "顶层",
+      "en": "Top layer"
+    }
+  ],
+  "xiangqiu": [
+    {
+      "char": "项求",
+      "en": "Item request"
+    }
+  ],
+  "xiangzhuan": [
+    {
+      "char": "项转",
+      "en": "Item transfer"
+    }
+  ],
+  "yucezhi": [
+    {
+      "char": "预测值",
+      "en": "Forecast Value"
+    }
+  ],
+  "yuxuansai": [
+    {
+      "char": "预选赛",
+      "en": "Qualifying Round"
+    }
+  ],
+  "pinshuo": [
+    {
+      "char": "频数",
+      "en": "Frequency"
+    }
+  ],
+  "tiqie": [
+    {
+      "char": "题且",
+      "en": "(This appears to be a typo - likely intended to be \"题题\" - question)"
+    }
+  ],
+  "tize": [
+    {
+      "char": "题则",
+      "en": "(This appears to be a typo - likely intended to be \"题题\" - question)"
+    }
+  ],
+  "tixing": [
+    {
+      "char": "题型",
+      "en": "Question Type"
+    }
+  ],
+  "fengdianchang": [
+    {
+      "char": "风电场",
+      "en": "Wind Farm"
+    }
+  ],
+  "feiren": [
+    {
+      "char": "飞人",
+      "en": "Flyer"
+    }
+  ],
+  "shoumo": [
+    {
+      "char": "首末",
+      "en": "First and Last"
+    }
+  ],
+  "xiangyanhe": [
+    {
+      "char": "香烟盒",
+      "en": "Cigarette Box"
+    }
+  ],
+  "zhoulai": [
+    {
+      "char": "骤来",
+      "en": "Sudden Arrival"
+    }
+  ],
+  "gaoge": [
+    {
+      "char": "高个",
+      "en": "Tall Person"
+    }
+  ],
+  "gaogezi": [
+    {
+      "char": "高个子",
+      "en": "Tall Boy/Girl"
+    }
+  ],
+  "gaozhongshuxue": [
+    {
+      "char": "高中数学",
+      "en": "High School Mathematics"
+    }
+  ],
+  "gaozhongkecheng": [
+    {
+      "char": "高中课程",
+      "en": "High School Course"
+    }
+  ],
+  "gaogu": [
+    {
+      "char": "高估",
+      "en": "Overestimate"
+    }
+  ],
+  "gaoqi": [
+    {
+      "char": "高其",
+      "en": "(This appears to be a typo - likely intended to be \"高其\" - high value)"
+    }
+  ],
+  "gaojun": [
+    {
+      "char": "高均",
+      "en": "Average"
+    }
+  ],
+  "gaoerdun": [
+    {
+      "char": "高尔顿",
+      "en": "G. E. Dalton"
+    }
+  ],
+  "gaodang": [
+    {
+      "char": "高当",
+      "en": "(This appears to be a typo - likely intended to be \"高当\" - high income)"
+    }
+  ],
+  "gaoshouruzhe": [
+    {
+      "char": "高收入者",
+      "en": "High-Income Earners"
+    }
+  ],
+  "gaosifenbu": [
+    {
+      "char": "高斯分布",
+      "en": "Gaussian Distribution"
+    }
+  ],
+  "gaocifangcheng": [
+    {
+      "char": "高次方程",
+      "en": "Polynomial Equation"
+    }
+  ],
+  "gaoai": [
+    {
+      "char": "高矮",
+      "en": "Height Difference"
+    }
+  ],
+  "gaosuizhang": [
+    {
+      "char": "高穗长",
+      "en": "Length of Grain Ear"
+    }
+  ],
+  "gaojie": [
+    {
+      "char": "高解",
+      "en": "High Solution"
+    }
+  ],
+  "yuzhong": [
+    {
+      "char": "鱼中",
+      "en": "Fish (in the middle)"
+    }
+  ],
+  "maishou": [
+    {
+      "char": "麦收",
+      "en": "Wheat Harvest"
+    }
+  ],
+  "mafa": [
+    {
+      "char": "麻法",
+      "en": "(This appears to be a typo - likely intended to be \"麻法\" - a specific technique or method)"
+    }
+  ],
+  "huangqiuge": [
+    {
+      "char": "黄球个",
+      "en": "Yellow Ball (likely referring to a game with yellow balls)"
+    }
   ]
 }
