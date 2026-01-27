@@ -165,3 +165,51 @@ impl Trie {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_trie_insert_and_exact_match() {
+        let mut trie = Trie::new();
+        trie.insert("ni", "你".to_string());
+        trie.insert("ni", "拟".to_string());
+        trie.insert("hao", "好".to_string());
+
+        assert_eq!(trie.get_exact("ni"), Some("你".to_string()));
+        assert_eq!(trie.get_all_exact("ni"), Some(vec!["你".to_string(), "拟".to_string()]));
+        assert_eq!(trie.get_exact("hao"), Some("好".to_string()));
+        assert_eq!(trie.get_exact("abc"), None);
+    }
+
+    #[test]
+    fn test_trie_search_bfs() {
+        let mut trie = Trie::new();
+        trie.insert("zhong", "中".to_string());
+        trie.insert("zhong", "重".to_string());
+        trie.insert("zhongguo", "中国".to_string());
+        trie.insert("zhongwen", "中文".to_string());
+        trie.insert("zi", "子".to_string());
+
+        // 测试前缀搜索
+        let results = trie.search_bfs("zhong", 10);
+        assert!(results.contains(&"中".to_string()));
+        assert!(results.contains(&"中国".to_string()));
+        assert!(results.contains(&"中文".to_string()));
+        assert!(!results.contains(&"子".to_string()));
+
+        // 测试限制
+        let limited = trie.search_bfs("zhong", 2);
+        assert_eq!(limited.len(), 2);
+    }
+
+    #[test]
+    fn test_trie_case_sensitivity() {
+        let mut trie = Trie::new();
+        trie.insert("ni", "你".to_string());
+        // Trie 内部目前是区分大小写的，取决于 handle_key 传什么进来
+        assert_eq!(trie.get_exact("Ni"), None);
+        assert_eq!(trie.get_exact("ni"), Some("你".to_string()));
+    }
+}

@@ -11,6 +11,7 @@ pub enum ImeState {
     Multi,
 }
 
+#[derive(Debug, Clone, PartialEq)]
 pub enum Action {
     Emit(String),
     DeleteAndEmit { delete: usize, insert: String, highlight: bool },
@@ -18,6 +19,7 @@ pub enum Action {
     Consume,
 }
 
+#[derive(Debug)]
 pub enum NotifyEvent {
     Update(String, String),
     Message(String),
@@ -882,5 +884,98 @@ fn get_punctuation_key(key: Key, shift: bool) -> Option<&'static str> {
         (Key::KEY_9, true) => Some("("),
         (Key::KEY_0, true) => Some(")"),
         _ => None,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::sync::mpsc::channel;
+
+    fn setup_ime() -> Ime {
+        let (tx, _) = channel();
+        let mut tries = HashMap::new();
+        let mut trie = Trie::new();
+        trie.insert("ni", "你".to_string());
+        trie.insert("hao", "好".to_string());
+        trie.insert("zhong", "中".to_string());
+        tries.insert("default".to_string(), trie);
+        
+        Ime::new(tries, "default".to_string(), HashMap::new(), HashMap::new(), tx, false, "none", false)
+    }
+
+    #[test]
+    fn test_ime_pinyin_input_and_commit() {
+        let mut ime = setup_ime();
+        ime.chinese_enabled = true;
+
+        // 输入 'n'
+        let action = ime.handle_key(Key::KEY_N, true, false);
+        assert!(matches!(action, Action::Consume));
+        assert_eq!(ime.buffer, "n");
+
+        // 输入 'i'
+        ime.handle_key(Key::KEY_I, true, false);
+        assert_eq!(ime.buffer, "ni");
+        assert!(ime.candidates.contains(&"你".to_string()));
+
+        // 按空格上屏
+        let action = ime.handle_key(Key::KEY_SPACE, true, false);
+        if let Action::Emit(res) = action {
+            assert_eq!(res, "你");
+        } else {
+            panic!("Expected Action::Emit, got {:?}", action);
+        }
+        assert!(ime.buffer.is_empty());
+    }
+
+    #[test]
+    fn test_ime_backspace() {
+        let mut ime = setup_ime();
+        ime.chinese_enabled = true;
+        ime.handle_key(Key::KEY_N, true, false);
+        ime.handle_key(Key::KEY_I, true, false);
+        assert_eq!(ime.buffer, "ni");
+
+        ime.handle_key(Key::KEY_BACKSPACE, true, false);
+        assert_eq!(ime.buffer, "n");
+        
+        ime.handle_key(Key::KEY_BACKSPACE, true, false);
+        assert!(ime.buffer.is_empty());
+    }
+
+    #[test]
+    fn test_ime_tone_handling_fixed() {
+        let mut ime = setup_ime();
+        ime.chinese_enabled = true;
+        
+        // 输入 zhong
+        for &k in &[Key::KEY_Z, Key::KEY_H, Key::KEY_O, Key::KEY_N, Key::KEY_G] {
+            ime.handle_key(k, true, false);
+        }
+        assert_eq!(ime.buffer, "zhong");
+
+        // 输入 9 (三声)
+        ime.handle_key(Key::KEY_9, true, false);
+        // 验证修复：o 应该变成 ǒ，且末尾的 g 应该保留
+        assert_eq!(ime.buffer, "zhǒng");
+    }
+
+    #[test]
+    fn test_ime_space_without_match() {
+        let mut ime = setup_ime();
+        ime.chinese_enabled = true;
+        
+        // 输入一个字典里没有的词
+        ime.handle_key(Key::KEY_X, true, false);
+        ime.handle_key(Key::KEY_X, true, false);
+        
+        // 按空格应该原样上屏拼音
+        let action = ime.handle_key(Key::KEY_SPACE, true, false);
+        if let Action::Emit(res) = action {
+            assert_eq!(res, "xx");
+        } else {
+            panic!("Expected Action::Emit, got {:?}", action);
+        }
     }
 }
