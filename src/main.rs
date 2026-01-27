@@ -403,15 +403,31 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     
     
-                                                let (tx, _) = std::sync::mpsc::channel();
+                                                                                                let (tx, _) = std::sync::mpsc::channel();
     
     
     
-                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false);
+                                                    
     
     
     
-                                                ime.convert_text(&input_text)
+                                                    
+    
+    
+    
+                                                    
+    
+    
+    
+                                                                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false);
+    
+    
+    
+                                                                                                ime.convert_text(&input_text)
+    
+    
+    
+                                                
     
     
     
@@ -627,12 +643,11 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let tries = tries_arc.read().unwrap().clone();
     
     let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
-    let (word_en_map, en_word_map) = load_char_en_map(&initial_config.files.char_defs);
+    let word_en_map = load_char_en_map(&initial_config.files.char_defs);
 
     println!("[IME] Loaded {} profiles.", tries.len());
     println!("[IME] Loaded punctuation map with {} entries.", punctuation.len());
     println!("[IME] Loaded char-en map with {} entries.", word_en_map.len());
-    println!("[IME] Loaded en-char map with {} entries.", en_word_map.len());
     
     if tries.is_empty() {
         println!("CRITICAL WARNING: No profiles loaded! Chinese input will not work.");
@@ -660,7 +675,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         active_profile.clone(), 
         punctuation, 
         word_en_map, 
-        en_word_map,
         notify_tx.clone(), 
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
@@ -1175,9 +1189,8 @@ struct CharEnEntry {
     en: String,
 }
 
-fn load_char_en_map(paths: &[String]) -> (HashMap<String, Vec<String>>, HashMap<String, Vec<String>>) {
+fn load_char_en_map(paths: &[String]) -> HashMap<String, Vec<String>> {
     let mut word_en_map: HashMap<String, Vec<String>> = HashMap::new();
-    let mut en_word_map: HashMap<String, Vec<String>> = HashMap::new();
 
     for path_str in paths {
         let path = Path::new(path_str);
@@ -1194,10 +1207,6 @@ fn load_char_en_map(paths: &[String]) -> (HashMap<String, Vec<String>>, HashMap<
                                     word_en_map.entry(e.char.clone())
                                         .or_default()
                                         .push(e.en.clone());
-                                    
-                                    en_word_map.entry(e.en.to_lowercase())
-                                        .or_default()
-                                        .push(e.char);
                                 }
                             }
                         }
@@ -1213,7 +1222,7 @@ fn load_char_en_map(paths: &[String]) -> (HashMap<String, Vec<String>>, HashMap<
             eprintln!("Warning: Char definition file not found: {}", path_str);
         }
     }
-    (word_en_map, en_word_map)
+    word_en_map
 }
 
 fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
