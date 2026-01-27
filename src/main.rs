@@ -141,9 +141,29 @@ fn detect_environment() {
                 }
             }
         }
+    } else {
+        // Enforce non-root execution for security and functionality
+        eprintln!("错误: 不允许以root权限运行");
+        eprintln!("原因: 可能导致剪贴板访问问题 (X11/Wayland 安全限制) 及潜在的安全风险。");
+        std::process::exit(1);
     }
 
     println!("[环境检测] 检查完成\n");
+}
+
+fn validate_path(path_str: &str) -> Result<PathBuf, String> {
+    let path = Path::new(path_str);
+    let canonical = path.canonicalize().map_err(|e| format!("Path error: {}", e))?;
+    let project_root = find_project_root().canonicalize().unwrap_or(PathBuf::from("/"));
+    
+    // Allow paths inside project root OR standard system paths if needed
+    // For now, strictly inside project root or explicit system dicts
+    if canonical.starts_with(&project_root) {
+        Ok(canonical)
+    } else {
+        // You might want to allow specific external paths here
+        Err(format!("Access denied: Path {} is outside project root.", path_str))
+    }
 }
 
 fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
@@ -644,6 +664,11 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         while let Ok(event) = notify_rx.recv() {
             match event {
                 NotifyEvent::Update(summary, body) => {
+                    // Close previous notification to prevent leak
+                    if let Some(old_handle) = cand_handle.take() {
+                        old_handle.close();
+                    }
+
                     // 候选词列表 ID 9999
                     let res = Notification::new()
                         .summary(&summary)
@@ -857,8 +882,21 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                     Key::KEY_LEFTALT | Key::KEY_RIGHTALT => alt_held = is_press,
                     Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA => meta_held = is_press,
                     Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT => shift_held = is_press,
-                    Key::KEY_CAPSLOCK => caps_held = is_press,
+                    Key::KEY_CAPSLOCK => {
+                        // Use actual LED state for CapsLock to avoid desync
+                        if let Ok(leds) = dev.get_led_state() {
+                            caps_held = leds.contains(evdev::LedType::LED_CAPSL);
+                        } else {
+                             // Fallback if LED state is unavailable
+                             caps_held = is_press; 
+                        }
+                    },
                     _ => {}
+                }
+                
+                // Sync CapsLock state on every key press to be safe
+                if let Ok(leds) = dev.get_led_state() {
+                     caps_held = leds.contains(evdev::LedType::LED_CAPSL);
                 }
 
                 if is_press {
@@ -1007,6 +1045,11 @@ pub fn load_dict_for_profile(paths: &[String]) -> Trie {
     
     println!("[Config] Loading dictionary profile with {} paths...", paths.len());
     for path_str in paths {
+        if let Err(e) = validate_path(path_str) {
+            eprintln!("Security Warning: Skipping invalid path '{}': {}", path_str, e);
+            continue;
+        }
+
         let path = Path::new(path_str);
         if path.is_dir() {
              let mut entries: Vec<_> = WalkDir::new(path)

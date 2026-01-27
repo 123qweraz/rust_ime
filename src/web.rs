@@ -8,39 +8,62 @@ use rust_embed::RustEmbed;
 use crate::config::Config;
 use crate::save_config;
 use crate::trie::Trie;
-use std::sync::{Arc, RwLock, Mutex};
+use std::sync::{Arc, RwLock};
 use std::net::SocketAddr;
 use std::collections::HashMap;
 use serde::Deserialize;
 use arboard::Clipboard;
+use tokio::sync::mpsc::{UnboundedSender, unbounded_channel};
 
 #[derive(RustEmbed)]
 #[folder = "static/"]
 struct Assets;
 
+pub enum ClipboardRequest {
+    SetText(String),
+}
+
 pub struct WebServer {
     pub port: u16,
     pub config: Arc<RwLock<Config>>,
     pub tries: Arc<RwLock<HashMap<String, Trie>>>,
-    pub clipboard: Arc<Mutex<Option<Clipboard>>>,
+    pub clipboard_tx: UnboundedSender<ClipboardRequest>,
 }
 
-type WebState = (Arc<RwLock<Config>>, Arc<RwLock<HashMap<String, Trie>>>, Arc<Mutex<Option<Clipboard>>>);
+type WebState = (Arc<RwLock<Config>>, Arc<RwLock<HashMap<String, Trie>>>, UnboundedSender<ClipboardRequest>);
 
 impl WebServer {
     pub fn new(port: u16, config: Arc<RwLock<Config>>, tries: Arc<RwLock<HashMap<String, Trie>>>) -> Self {
-        let clipboard = match Clipboard::new() {
-            Ok(cb) => Some(cb),
-            Err(e) => {
-                eprintln!("[Web] Warning: Failed to initialize system clipboard: {}", e);
-                None
+        let (tx, mut rx) = unbounded_channel::<ClipboardRequest>();
+
+        // Dedicated Clipboard Worker Thread
+        std::thread::spawn(move || {
+            let mut clipboard = match Clipboard::new() {
+                Ok(cb) => Some(cb),
+                Err(e) => {
+                    eprintln!("[Web] Warning: Failed to initialize system clipboard: {}", e);
+                    None
+                }
+            };
+
+            while let Some(req) = rx.blocking_recv() {
+                match req {
+                    ClipboardRequest::SetText(text) => {
+                        if let Some(cb) = clipboard.as_mut() {
+                            if let Err(e) = cb.set_text(text) {
+                                eprintln!("[Web] Failed to set clipboard: {}", e);
+                            }
+                        }
+                    }
+                }
             }
-        };
+        });
+
         Self { 
             port, 
             config, 
             tries,
-            clipboard: Arc::new(Mutex::new(clipboard)),
+            clipboard_tx: tx,
         }
     }
 
@@ -48,7 +71,7 @@ impl WebServer {
         let addr = SocketAddr::from(([0, 0, 0, 0], self.port));
         println!("[Web] 服务器启动在 http://{}", addr);
 
-        let state: WebState = (self.config, self.tries, self.clipboard);
+        let state: WebState = (self.config, self.tries, self.clipboard_tx);
 
         let app = Router::new()
             .route("/", get(index_handler))
@@ -196,990 +219,121 @@ struct ConvertParams {
 
 
 async fn convert_handler(
-
-
-
-
-
-
-
-    State((config, tries, clipboard)): State<WebState>,
-
-
-
-
-
-
-
+    State((config, tries, clipboard_tx)): State<WebState>,
     Query(params): Query<ConvertParams>,
-
-
-
-
-
-
-
 ) -> String {
-
-
-
-
-
-
-
     let c = config.read().unwrap();
-
-
-
-
-
-
-
     let t = tries.read().unwrap();
-
-
-
-
-
-
-
     let active_profile = &c.input.default_profile;
-
-
-
-
-
-
-
     let dict = t.get(active_profile);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     let mut final_result = String::new();
-
-
-
-
-
-
-
     
-
-
-
-
-
-
-
     // 将输入按空格拆分（处理多个参数或手动分词）
-
-
-
-
-
-
-
     let words: Vec<&str> = params.text.split_whitespace().collect();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     for word in words {
-
-
-
-
-
-
-
         // 1. 处理单个单词的逃逸字符 /
-
-
-
-
-
-
-
         if word.starts_with('/') {
-
-
-
-
-
-
-
             final_result.push_str(&word[1..]);
-
-
-
-
-
-
-
             continue;
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         // 2. 如果没有字典，原样输出
-
-
-
-
-
-
-
         let dict = match dict {
-
-
-
-
-
-
-
             Some(d) => d,
-
-
-
-
-
-
-
             None => {
-
-
-
-
-
-
-
                 final_result.push_str(word);
-
-
-
-
-
-
-
                 continue;
-
-
-
-
-
-
-
             }
-
-
-
-
-
-
-
         };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // 3. 解析数字选择 (例如 ni1)
-
-
-
-
-
-
-
         let mut clean_word = word.to_string();
-
-
-
-
-
-
-
         let mut selected_idx = None;
-
-
-
-
-
-
-
         let mut num_str = String::new();
-
-
-
-
-
-
-
         while let Some(last_char) = clean_word.chars().last() {
-
-
-
-
-
-
-
             if last_char.is_ascii_digit() {
-
-
-
-
-
-
-
                 num_str.insert(0, clean_word.pop().unwrap());
-
-
-
-
-
-
-
             } else {
-
-
-
-
-
-
-
                 break;
-
-
-
-
-
-
-
             }
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
         if !num_str.is_empty() {
-
-
-
-
-
-
-
             selected_idx = num_str.parse::<usize>().ok();
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         // 4. 判断模式
-
-
-
-
-
-
-
         let is_query_mode = params.all.unwrap_or(false) || params.list.is_some() || selected_idx.is_some();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         if is_query_mode {
-
-
-
-
-
-
-
             // --- 单词模式 ---
-
-
-
-
-
-
-
             let mut pinyin_search = clean_word;
-
-
-
-
-
-
-
-                        let mut _filter_string = String::new();
-
-
-
-
-
-
-
-                        if let Some((idx, _)) = pinyin_search.char_indices().skip(1).find(|(_, c)| c.is_ascii_uppercase()) {
-
-
-
-
-
-
-
-                            _filter_string = pinyin_search[idx..].to_lowercase();
-
-
-
-
-
-
-
-                            pinyin_search = pinyin_search[..idx].to_string();
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            let mut _filter_string = String::new();
+            if let Some((idx, _)) = pinyin_search.char_indices().skip(1).find(|(_, c)| c.is_ascii_uppercase()) {
+                _filter_string = pinyin_search[idx..].to_lowercase();
+                pinyin_search = pinyin_search[..idx].to_string();
+            }
 
             let raw_candidates = dict.search_bfs(&pinyin_search.to_lowercase(), 100);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             if let Some(idx) = selected_idx {
-
-
-
-
-
-
-
                 if idx > 0 && idx <= raw_candidates.len() {
-
-
-
-
-
-
-
                     final_result.push_str(&raw_candidates[idx - 1]);
-
-
-
-
-
-
-
                 } else {
-
-
-
-
-
-
-
                     final_result.push_str(&pinyin_search); // 索引无效回退
-
-
-
-
-
-
-
                 }
-
-
-
-
-
-
-
             } else if params.all.unwrap_or(false) {
-
-
-
-
-
-
-
                 final_result.push_str(&raw_candidates.join(" "));
-
-
-
-
-
-
-
             } else if let Some(limit) = params.list {
-
-
-
-
-
-
-
                 let page = params.page.unwrap_or(1).max(1);
-
-
-
-
-
-
-
                 let start = (page - 1) * limit;
-
-
-
-
-
-
-
                 if start < raw_candidates.len() {
-
-
-
-
-
-
-
                     let end = (start + limit).min(raw_candidates.len());
-
-
-
-
-
-
-
                     final_result.push_str(&raw_candidates[start..end].join(" "));
-
-
-
-
-
-
-
                 }
-
-
-
-
-
-
-
             }
-
-
-
-
-
-
-
             else {
-
-
-
-
-
-
-
                 final_result.push_str(raw_candidates.first().unwrap_or(&pinyin_search));
-
-
-
-
-
-
-
             }
-
-
-
-
-
-
-
         } else {
-
-
-
-
-
-
-
             // --- 全句转换模式 ---
-
-
-
-
-
-
-
             let chars: Vec<char> = word.chars().collect();
-
-
-
-
-
-
-
             let mut i = 0;
-
-
-
-
-
-
-
             while i < chars.len() {
-
-
-
-
-
-
-
                 if !chars[i].is_ascii_alphabetic() {
-
-
-
-
-
-
-
                     final_result.push(chars[i]);
-
-
-
-
-
-
-
                     i += 1;
-
-
-
-
-
-
-
                     continue;
-
-
-
-
-
-
-
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 let mut found = false;
-
-
-
-
-
-
-
                 for len in (1..=(chars.len() - i).min(15)).rev() {
-
-
-
-
-
-
-
                     let sub: String = chars[i..i+len].iter().collect();
-
-
-
-
-
-
-
                     let sub_lower = sub.to_lowercase();
-
-
-
-
-
-
-
                     if let Some(word_match) = dict.get_exact(&sub_lower) {
-
-
-
-
-
-
-
                         final_result.push_str(&word_match);
-
-
-
-
-
-
-
                         i += len;
-
-
-
-
-
-
-
                         found = true;
-
-
-
-
-
-
-
                         break;
-
-
-
-
-
-
-
                     }
-
-
-
-
-
-
-
                 }
-
-
-
-
-
-
-
                 if !found {
-
-
-
-
-
-
-
                     final_result.push(chars[i]);
-
-
-
-
-
-
-
                     i += 1;
-
-
-
-
-
-
-
                 }
-
-
-
-
-
-
-
             }
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     // Handle Server-side Copy
-
-
-
-
-
-
-
     if params.copy.unwrap_or(false) {
-
-
-
-
-
-
-
         let text_to_copy = final_result.clone();
-
-
-
-
-
-
-
-        let clipboard_state = Arc::clone(&clipboard);
-
-
-
-
-
-
-
-        std::thread::spawn(move || {
-
-
-
-
-
-
-
-            if let Ok(mut guard) = clipboard_state.lock() {
-
-
-
-
-
-
-
-                if let Some(cb) = guard.as_mut() {
-
-
-
-
-
-
-
-                    let _ = cb.set_text(text_to_copy);
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-        });
-
-
-
-
-
-
-
+        let _ = clipboard_tx.send(ClipboardRequest::SetText(text_to_copy));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        final_result
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+    final_result
+}
 
 
 

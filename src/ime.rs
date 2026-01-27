@@ -286,6 +286,7 @@ impl Ime {
         }
 
         let mut final_candidates = Vec::new();
+        let pinyin_lower = pinyin_search.to_lowercase();
 
         // 1. Direct English Lookup
         let buffer_lower = self.buffer.to_lowercase();
@@ -297,23 +298,14 @@ impl Ime {
             }
         }
 
-        // 2. Pinyin Lookup
-        // 2a. Exact Match First (e.g. "gan" -> "干", "感")
-        if let Some(exact_res) = dict.get_all_exact(&pinyin_search.to_lowercase()) {
-            for cand in exact_res {
-                if !final_candidates.contains(&cand) {
-                    final_candidates.push(cand);
-                }
-            }
-        }
-
-        // 2b. BFS Expansion (for prefixes/shorthands)
-        // Use Trie BFS search to find candidates
+        // 2. Search Logic
+        // We use a larger limit (500) to ensure we find deeper words (e.g. "zhong" depth 4) 
+        // even if shallow words (e.g. "zi" depth 1) are numerous.
         let mut raw_candidates = if self.enable_fuzzy {
-            let variants = self.expand_fuzzy_pinyin(&pinyin_search.to_lowercase());
+            let variants = self.expand_fuzzy_pinyin(&pinyin_lower);
             let mut merged = Vec::new();
             for variant in variants {
-                let res = dict.search_bfs(&variant, 50);
+                let res = dict.search_bfs(&variant, 200); // 200 per variant
                 for c in res {
                     if !merged.contains(&c) {
                         merged.push(c);
@@ -322,13 +314,13 @@ impl Ime {
             }
             merged
         } else {
-            dict.search_bfs(&pinyin_search.to_lowercase(), 100)
+            dict.search_bfs(&pinyin_lower, 500)
         };
 
-        // Fuzzy Search Fallback
+        // Fuzzy Search Fallback (Levenshtein)
         if raw_candidates.len() < 5 && pinyin_search.len() > 3 {
             let max_cost = if pinyin_search.len() > 5 { 2 } else { 1 };
-            let fuzzy_candidates = dict.search_fuzzy(&pinyin_search.to_lowercase(), max_cost);
+            let fuzzy_candidates = dict.search_fuzzy(&pinyin_lower, max_cost);
             for cand in fuzzy_candidates {
                 if !raw_candidates.contains(&cand) {
                     raw_candidates.push(cand);
@@ -351,49 +343,64 @@ impl Ime {
             });
         }
 
+        // Merge raw candidates
         for cand in raw_candidates {
             if !final_candidates.contains(&cand) {
                 final_candidates.push(cand);
             }
         }
 
-        // Sort by character length to prioritize single characters (danzi)
-        // Stable sort maintains the relative order of Exact matches vs BFS matches for same length
-        final_candidates.sort_by_key(|s| s.chars().count());
+        // --- Improved Sorting ---
+        // 1. Exact Pinyin Match vs Partial
+        // We need to know which words match the pinyin EXACTLY.
+        // Since we don't have that info from search_bfs directly without checking the Trie again,
+        // we can rely on `dict.get_all_exact`.
+        let exact_matches = dict.get_all_exact(&pinyin_lower).unwrap_or_default();
+
+        final_candidates.sort_by(|a, b| {
+            let a_is_exact = exact_matches.contains(a);
+            let b_is_exact = exact_matches.contains(b);
+
+            if a_is_exact && !b_is_exact {
+                std::cmp::Ordering::Less
+            } else if !a_is_exact && b_is_exact {
+                std::cmp::Ordering::Greater
+            } else {
+                // Secondary Sort: Word Length (Prefer single chars / shorter words)
+                let len_cmp = a.chars().count().cmp(&b.chars().count());
+                if len_cmp != std::cmp::Ordering::Equal {
+                    len_cmp
+                } else {
+                    // Tertiary Sort: Alphabetical (Stable)
+                    a.cmp(b)
+                }
+            }
+        });
 
         self.candidates = final_candidates;
         self.selected = 0;
         self.page = 0;
         self.update_state();
         
-        // Always print preview to log/stdout if in terminal mode logic, but `print_preview` does direct console output.
-        // We only skip notification if user disabled it.
-        // We do NOT disable notification just because phantom mode is on, per user request.
         if self.enable_notifications {
             self.notify_preview();
         }
         
-        // Still print to stdout for debugging/legacy terminal usage
         self.print_preview();
     }
 
     fn expand_fuzzy_pinyin(&self, pinyin: &str) -> Vec<String> {
         let mut results = vec![pinyin.to_string()];
         
-        // Helper to expand a list of strings based on a replacement rule
-        // pattern: substring to find, replacement: string to replace with
-        // bidirectional: if true, also reverse pattern and replacement
         let apply_rule = |list: &mut Vec<String>, from: &str, to: &str| {
             let snapshot = list.clone();
             for s in snapshot {
-                // Check direct direction
                 if s.contains(from) {
                     let replaced = s.replace(from, to);
                     if !list.contains(&replaced) {
                         list.push(replaced);
                     }
                 }
-                // Check reverse direction
                 if s.contains(to) {
                      let replaced = s.replace(to, from);
                      if !list.contains(&replaced) {
@@ -403,55 +410,51 @@ impl Ime {
             }
         };
 
-        // Rules: z-zh, c-ch, s-sh
         apply_rule(&mut results, "zh", "z");
         apply_rule(&mut results, "ch", "c");
         apply_rule(&mut results, "sh", "s");
-        
-        // Rule: ng-n
-        // Only apply at end of string or before syllable boundary?
-        // Simple replace might be too aggressive (e.g. 'ang' -> 'an' OK, 'n' -> 'ng' OK)
-        // But 'nan' -> 'nang' OK.
         apply_rule(&mut results, "ng", "n");
 
-        // Ensure original pinyin is first (it is initialized so)
         results
     }
 
     fn notify_preview(&self) {
         if self.buffer.is_empty() { return; }
 
-        let buffer = self.buffer.clone();
+        let buffer = &self.buffer; // Avoid clone
         let mut body = String::new();
         
         if self.candidates.is_empty() {
             body = "(无候选)".to_string();
         } else {
-            // Sliding window: page is the start offset
             let start = self.page;
-            let end = (start + 5).min(self.candidates.len());
-            let current_page_candidates = &self.candidates[start..end];
-            
-            for (i, cand) in current_page_candidates.iter().enumerate() {
-                let abs_index = start + i;
-                let num = i + 1;
+            // Bounds check
+            if start >= self.candidates.len() {
+                // Should not happen if page logic is correct, but safe guard
+            } else {
+                let end = (start + 5).min(self.candidates.len());
+                let current_page_candidates = &self.candidates[start..end];
                 
-                let mut hint = String::new();
-                if let Some(en_list) = self.word_en_map.get(cand) {
-                    if let Some(first_en) = en_list.first() {
-                        hint = format!("({})", first_en);
+                for (i, cand) in current_page_candidates.iter().enumerate() {
+                    let num = i + 1;
+                    
+                    let mut hint = String::new();
+                    if let Some(en_list) = self.word_en_map.get(cand) {
+                        if let Some(first_en) = en_list.first() {
+                            hint = format!("({})", first_en);
+                        }
+                    }
+
+                    if (start + i) == self.selected {
+                        body.push_str(&format!("【{}.{}{}】 ", num, cand, hint));
+                    } else {
+                        body.push_str(&format!("{}.{}{} ", num, cand, hint));
                     }
                 }
-
-                if abs_index == self.selected {
-                    body.push_str(&format!("【{}.{}{}】 ", num, cand, hint));
-                } else {
-                    body.push_str(&format!("{}.{}{} ", num, cand, hint));
+                
+                if self.candidates.len() > 5 {
+                     body.push_str(&format!("\n[Total: {}]", self.candidates.len()));
                 }
-            }
-            
-            if self.candidates.len() > 5 {
-                 body.push_str(&format!("\n[Total: {}]", self.candidates.len()));
             }
         }
 
@@ -468,28 +471,31 @@ impl Ime {
             print!("(无候选)");
         } else {
             let start = self.page;
-            let end = (start + 5).min(self.candidates.len());
-            
-            for (i, cand) in self.candidates[start..end].iter().enumerate() {
-                let abs_index = start + i;
-                let num = i + 1;
+            // Bounds check
+            if start < self.candidates.len() {
+                let end = (start + 5).min(self.candidates.len());
+                
+                for (i, cand) in self.candidates[start..end].iter().enumerate() {
+                    let abs_index = start + i;
+                    let num = i + 1;
 
-                let mut hint = String::new();
-                if let Some(en_list) = self.word_en_map.get(cand) {
-                    if let Some(first_en) = en_list.first() {
-                        hint = format!("({})", first_en);
+                    let mut hint = String::new();
+                    if let Some(en_list) = self.word_en_map.get(cand) {
+                        if let Some(first_en) = en_list.first() {
+                            hint = format!("({})", first_en);
+                        }
+                    }
+
+                    if abs_index == self.selected {
+                        print!("\x1B[7m{}.{}{}\x1B[m ", num, cand, hint);
+                    } else {
+                        print!("{}.{}{} ", num, cand, hint);
                     }
                 }
-
-                if abs_index == self.selected {
-                    print!("\x1B[7m{}.{}{}\x1B[m ", num, cand, hint);
-                } else {
-                    print!("{}.{}{} ", num, cand, hint);
+                
+                if self.candidates.len() > 5 {
+                    print!(" [{}/{}]", self.page + 1, self.candidates.len());
                 }
-            }
-            
-            if self.candidates.len() > 5 {
-                print!(" [{}/{}]", self.page + 1, self.candidates.len());
             }
         }
         use std::io::{self, Write};
