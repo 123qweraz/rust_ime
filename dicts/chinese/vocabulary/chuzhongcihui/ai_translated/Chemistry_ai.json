@@ -1,0 +1,302 @@
+{
+  "dingerxi": [
+    {
+      "char": "丁二烯",
+      "en": "butadiene"
+    }
+  ],
+  "sanyanghualiu": [
+    {
+      "char": "三氧化硫",
+      "en": "sulfur trioxide"
+    }
+  ],
+  "burongwu": [
+    {
+      "char": "不溶物",
+      "en": "insolubles"
+    }
+  ],
+  "yanjinhuozhong": [
+    {
+      "char": "严禁火种",
+      "en": "no ignition sources"
+    }
+  ],
+  "zhongxingrongye": [
+    {
+      "char": "中性溶液",
+      "en": "neutral solution"
+    }
+  ],
+  "yierchun": [
+    {
+      "char": "乙二醇",
+      "en": "ethylene glycol"
+    }
+  ],
+  "eryanghualiu": [
+    {
+      "char": "二氧化硫",
+      "en": "sulfur dioxide"
+    }
+  ],
+  "ditanshenghuo": [
+    {
+      "char": "低碳生活",
+      "en": "low-carbon lifestyle"
+    }
+  ],
+  "cuihuafanying": [
+    {
+      "char": "催化反应",
+      "en": "catalytic reaction"
+    }
+  ],
+  "yuansufuhao": [
+    {
+      "char": "元素符号",
+      "en": "element symbol"
+    }
+  ],
+  "yelianjinshu": [
+    {
+      "char": "冶炼金属",
+      "en": "metal smelting"
+    }
+  ],
+  "fenzidejiange": [
+    {
+      "char": "分子的间隔",
+      "en": "molecular spacing"
+    }
+  ],
+  "huaxuebianhua": [
+    {
+      "char": "化学变化",
+      "en": "chemical change"
+    }
+  ],
+  "huaxuefanying": [
+    {
+      "char": "化学反应",
+      "en": "chemical reaction"
+    }
+  ],
+  "yalirongqi": [
+    {
+      "char": "压力容器",
+      "en": "pressure vessel"
+    }
+  ],
+  "danzhilin": [
+    {
+      "char": "单质磷",
+      "en": "elemental phosphorus"
+    }
+  ],
+  "yuanzizucheng": [
+    {
+      "char": "原子组成",
+      "en": "atomic composition"
+    }
+  ],
+  "yuanzijiegoushiyitu": [
+    {
+      "char": "原子结构示意图",
+      "en": "atomic structure diagram"
+    }
+  ],
+  "hechengcailiao": [
+    {
+      "char": "合成材料",
+      "en": "synthetic material"
+    }
+  ],
+  "gutaieryanghuatan": [
+    {
+      "char": "固态二氧化碳",
+      "en": "solid carbon dioxide (dry ice)"
+    }
+  ],
+  "gutifeiqiwu": [
+    {
+      "char": "固体废弃物",
+      "en": "solid waste"
+    }
+  ],
+  "kuaizhuangyaopin": [
+    {
+      "char": "块状药品",
+      "en": "bulky medicine/chemicals"
+    }
+  ],
+  "duoyuansuan": [
+    {
+      "char": "多元酸",
+      "en": "polyprotic acid"
+    }
+  ],
+  "tianranxianwei": [
+    {
+      "char": "天然纤维",
+      "en": "natural fiber"
+    }
+  ],
+  "shiyancaozuo": [
+    {
+      "char": "实验操作",
+      "en": "experimental operation"
+    }
+  ],
+  "duizhaozu": [
+    {
+      "char": "对照组",
+      "en": "control group"
+    }
+  ],
+  "weiliangyuansu": [
+    {
+      "char": "微量元素",
+      "en": "trace element"
+    }
+  ],
+  "hengwentiaojianxia": [
+    {
+      "char": "恒温条件下",
+      "en": "under constant temperature"
+    }
+  ],
+  "chengjiandianzi": [
+    {
+      "char": "成键电子",
+      "en": "bonding electrons"
+    }
+  ],
+  "yaoyun": [
+    {
+      "char": "摇匀",
+      "en": "shake well"
+    }
+  ],
+  "jiaobanbang": [
+    {
+      "char": "搅拌棒",
+      "en": "stirring rod"
+    }
+  ],
+  "fangshexing": [
+    {
+      "char": "放射性",
+      "en": "radioactivity"
+    }
+  ],
+  "wuseqiti": [
+    {
+      "char": "无色气体",
+      "en": "colorless gas"
+    }
+  ],
+  "yiranyeti": [
+    {
+      "char": "易燃液体",
+      "en": "flammable liquid"
+    }
+  ],
+  "youjihuahewu": [
+    {
+      "char": "有机化合物",
+      "en": "organic compound"
+    }
+  ],
+  "jixingfenzi": [
+    {
+      "char": "极性分子",
+      "en": "polar molecule"
+    }
+  ],
+  "qingyanghuajia": [
+    {
+      "char": "氢氧化钾",
+      "en": "potassium hydroxide"
+    }
+  ],
+  "yanghuawu": [
+    {
+      "char": "氧化物",
+      "en": "oxide"
+    }
+  ],
+  "huoyuedu": [
+    {
+      "char": "活跃度",
+      "en": "activity"
+    }
+  ],
+  "rongzhizhiliangfenshu": [
+    {
+      "char": "溶质质量分数",
+      "en": "mass fraction of solute"
+    }
+  ],
+  "rongyenongdu": [
+    {
+      "char": "溶液浓度",
+      "en": "solution concentration"
+    }
+  ],
+  "diguan": [
+    {
+      "char": "滴管",
+      "en": "dropper"
+    }
+  ],
+  "ranshaochanwu": [
+    {
+      "char": "燃烧产物",
+      "en": "combustion products"
+    }
+  ],
+  "wuzhidiliang": [
+    {
+      "char": "物质的量",
+      "en": "amount of substance"
+    }
+  ],
+  "boliyiqi": [
+    {
+      "char": "玻璃仪器",
+      "en": "glassware"
+    }
+  ],
+  "tansuanqingna": [
+    {
+      "char": "碳酸氢钠",
+      "en": "sodium bicarbonate (baking soda)"
+    }
+  ],
+  "xiangduifenzizhiliang": [
+    {
+      "char": "相对分子质量",
+      "en": "relative molecular mass"
+    }
+  ],
+  "xiyansuan": [
+    {
+      "char": "稀盐酸",
+      "en": "dilute hydrochloric acid"
+    }
+  ],
+  "xishi": [
+    {
+      "char": "稀释",
+      "en": "dilution"
+    }
+  ],
+  "lizihuahewu": [
+    {
+      "char": "离子化合物",
+      "en": "ionic compound"
+    }
+  ]
+}
