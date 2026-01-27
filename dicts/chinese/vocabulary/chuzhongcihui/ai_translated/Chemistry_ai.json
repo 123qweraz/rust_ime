@@ -298,5 +298,657 @@
       "char": "离子化合物",
       "en": "ionic compound"
     }
+  ],
+  "qiyetai": [
+    {
+      "char": "气液态",
+      "en": "gas-liquid state"
+    }
+  ],
+  "huaxuejian": [
+    {
+      "char": "化学键",
+      "en": "chemical bond"
+    }
+  ],
+  "lianzhuang": [
+    {
+      "char": "链状",
+      "en": "chain-like"
+    }
+  ],
+  "pentouzui": [
+    {
+      "char": "喷头嘴",
+      "en": "nozzle"
+    }
+  ],
+  "rongyehuaxue": [
+    {
+      "char": "溶液化学",
+      "en": "solution chemistry"
+    }
+  ],
+  "dianjiezhi": [
+    {
+      "char": "电解质",
+      "en": "electrolyte"
+    }
+  ],
+  "yanghuamei": [
+    {
+      "char": "氧化镁",
+      "en": "magnesium oxide"
+    }
+  ],
+  "liusuanceng": [
+    {
+      "char": "硫酸层",
+      "en": "sulfate layer"
+    }
+  ],
+  "lvhuana": [
+    {
+      "char": "氯化钠",
+      "en": "sodium chloride"
+    }
+  ],
+  "tanhuawu": [
+    {
+      "char": "碳化物",
+      "en": "carbide"
+    }
+  ],
+  "danhuawu": [
+    {
+      "char": "氮化物",
+      "en": "nitride"
+    }
+  ],
+  "qingfusuan": [
+    {
+      "char": "氢氟酸",
+      "en": "hydrofluoric acid"
+    }
+  ],
+  "gaomengsuanjia": [
+    {
+      "char": "高锰酸钾",
+      "en": "potassium permanganate"
+    }
+  ],
+  "lvsuanna": [
+    {
+      "char": "氯酸钠",
+      "en": "sodium chlorate"
+    }
+  ],
+  "cilvsuanna": [
+    {
+      "char": "次氯酸钠",
+      "en": "sodium hypochlorite"
+    }
+  ],
+  "liusuanyamei": [
+    {
+      "char": "硫酸亚镁",
+      "en": "magnesium sulfate"
+    }
+  ],
+  "xiaosuanyin": [
+    {
+      "char": "硝酸银",
+      "en": "silver nitrate"
+    }
+  ],
+  "tanhuagui": [
+    {
+      "char": "碳化硅",
+      "en": "silicon carbide"
+    }
+  ],
+  "huanyuanxing": [
+    {
+      "char": "还原性",
+      "en": "reducing property"
+    }
+  ],
+  "yanghuaxing": [
+    {
+      "char": "氧化性",
+      "en": "oxidizing property"
+    }
+  ],
+  "pHzhishiji": [
+    {
+      "char": "pH指示剂",
+      "en": "pH indicator"
+    }
+  ],
+  "shiyanshizhibei": [
+    {
+      "char": "实验室制备",
+      "en": "laboratory preparation"
+    }
+  ],
+  "gongyezhiche": [
+    {
+      "char": "工业制车",
+      "en": "industrial production"
+    }
+  ],
+  "feidian": [
+    {
+      "char": "沸点",
+      "en": "boiling point"
+    }
+  ],
+  "rongdian": [
+    {
+      "char": "熔点",
+      "en": "melting point"
+    }
+  ],
+  "shandian": [
+    {
+      "char": "闪点",
+      "en": "flash point"
+    }
+  ],
+  "ranshaozhi": [
+    {
+      "char": "燃烧值",
+      "en": "calorific value"
+    }
+  ],
+  "nengliangshouheng": [
+    {
+      "char": "能量守恒",
+      "en": "conservation of energy"
+    }
+  ],
+  "zhiliangshouheng": [
+    {
+      "char": "质量守恒",
+      "en": "conservation of mass"
+    }
+  ],
+  "huaxuepingheng": [
+    {
+      "char": "化学平衡",
+      "en": "chemical equilibrium"
+    }
+  ],
+  "leixiatelieyuanli": [
+    {
+      "char": "勒夏特列原理",
+      "en": "Le Chatelier's principle"
+    }
+  ],
+  "fanyingre": [
+    {
+      "char": "反应热",
+      "en": "heat of reaction"
+    }
+  ],
+  "xirefanying": [
+    {
+      "char": "吸热反应",
+      "en": "endothermic reaction"
+    }
+  ],
+  "fangrefanying": [
+    {
+      "char": "放热反应",
+      "en": "exothermic reaction"
+    }
+  ],
+  "huohuaneng": [
+    {
+      "char": "活化能",
+      "en": "activation energy"
+    }
+  ],
+  "cuihuaji": [
+    {
+      "char": "催化剂",
+      "en": "catalyst"
+    }
+  ],
+  "fuya": [
+    {
+      "char": "负压",
+      "en": "negative pressure"
+    }
+  ],
+  "zhengya": [
+    {
+      "char": "正压",
+      "en": "positive pressure"
+    }
+  ],
+  "kongqixishi": [
+    {
+      "char": "空气稀释",
+      "en": "air dilution"
+    }
+  ],
+  "weiliangfenxi": [
+    {
+      "char": "微量分析",
+      "en": "trace analysis"
+    }
+  ],
+  "dingxingfenxi": [
+    {
+      "char": "定性分析",
+      "en": "qualitative analysis"
+    }
+  ],
+  "dingliangfenxi": [
+    {
+      "char": "定量分析",
+      "en": "quantitative analysis"
+    }
+  ],
+  "diding": [
+    {
+      "char": "滴定",
+      "en": "titration"
+    }
+  ],
+  "zhishiji": [
+    {
+      "char": "指示剂",
+      "en": "indicator"
+    }
+  ],
+  "peizhi": [
+    {
+      "char": "配制",
+      "en": "preparation"
+    }
+  ],
+  "yehuaxing": [
+    {
+      "char": "液化性",
+      "en": "liquefiability"
+    }
+  ],
+  "shuihewu": [
+    {
+      "char": "水合物",
+      "en": "hydrate"
+    }
+  ],
+  "jiejingshui": [
+    {
+      "char": "结晶水",
+      "en": "water of crystallization"
+    }
+  ],
+  "fenghua": [
+    {
+      "char": "风化",
+      "en": "weathering"
+    }
+  ],
+  "chaojie": [
+    {
+      "char": "潮解",
+      "en": "deliquescence"
+    }
+  ],
+  "xishixing": [
+    {
+      "char": "吸湿性",
+      "en": "hygroscopy"
+    }
+  ],
+  "chouchuan": [
+    {
+      "char": "抽传",
+      "en": "extraction"
+    }
+  ],
+  "zhengliu": [
+    {
+      "char": "蒸馏",
+      "en": "distillation"
+    }
+  ],
+  "fenliu": [
+    {
+      "char": "分馏",
+      "en": "fractionation"
+    }
+  ],
+  "cuiqu": [
+    {
+      "char": "萃取",
+      "en": "extraction"
+    }
+  ],
+  "zhongjiejing": [
+    {
+      "char": "重结晶",
+      "en": "recrystallization"
+    }
+  ],
+  "shuifen": [
+    {
+      "char": "水分",
+      "en": "moisture content"
+    }
+  ],
+  "huifen": [
+    {
+      "char": "灰分",
+      "en": "ash content"
+    }
+  ],
+  "zazhi": [
+    {
+      "char": "杂质",
+      "en": "impurity"
+    }
+  ],
+  "tichun": [
+    {
+      "char": "提纯",
+      "en": "purification"
+    }
+  ],
+  "shai": [
+    {
+      "char": "筛",
+      "en": "sieve"
+    }
+  ],
+  "yanmo": [
+    {
+      "char": "研磨",
+      "en": "grinding"
+    }
+  ],
+  "fushi": [
+    {
+      "char": "腐蚀",
+      "en": "corrosion"
+    }
+  ],
+  "fangxiu": [
+    {
+      "char": "防锈",
+      "en": "rust prevention"
+    }
+  ],
+  "diandu": [
+    {
+      "char": "电镀",
+      "en": "electroplating"
+    }
+  ],
+  "hejin": [
+    {
+      "char": "合金",
+      "en": "alloy"
+    }
+  ],
+  "gang": [
+    {
+      "char": "钢",
+      "en": "steel"
+    }
+  ],
+  "shengtie": [
+    {
+      "char": "生铁",
+      "en": "pig iron"
+    }
+  ],
+  "zhutie": [
+    {
+      "char": "铸铁",
+      "en": "cast iron"
+    }
+  ],
+  "buxiugang": [
+    {
+      "char": "不锈钢",
+      "en": "stainless steel"
+    }
+  ],
+  "huangtong": [
+    {
+      "char": "黄铜",
+      "en": "brass"
+    }
+  ],
+  "qingtong": [
+    {
+      "char": "青铜",
+      "en": "bronze"
+    }
+  ],
+  "baiyin": [
+    {
+      "char": "白银",
+      "en": "sterling silver"
+    }
+  ],
+  "zuanshi": [
+    {
+      "char": "钻石",
+      "en": "diamond"
+    }
+  ],
+  "shimo": [
+    {
+      "char": "石墨",
+      "en": "graphite"
+    }
+  ],
+  "fuleixi": [
+    {
+      "char": "富勒烯",
+      "en": "fullerene"
+    }
+  ],
+  "tanqing": [
+    {
+      "char": "碳氢",
+      "en": "hydrocarbon"
+    }
+  ],
+  "wanting": [
+    {
+      "char": "烷烃",
+      "en": "alkane"
+    }
+  ],
+  "xiting": [
+    {
+      "char": "烯烃",
+      "en": "alkene"
+    }
+  ],
+  "guiting": [
+    {
+      "char": "炔烃",
+      "en": "alkyne"
+    }
+  ],
+  "ben": [
+    {
+      "char": "苯",
+      "en": "benzene"
+    }
+  ],
+  "jiaji": [
+    {
+      "char": "甲基",
+      "en": "methyl group"
+    }
+  ],
+  "yiji": [
+    {
+      "char": "乙基",
+      "en": "ethyl group"
+    }
+  ],
+  "chun": [
+    {
+      "char": "醇",
+      "en": "alcohol/ethanol"
+    }
+  ],
+  "quan": [
+    {
+      "char": "醛",
+      "en": "aldehyde"
+    }
+  ],
+  "tong": [
+    {
+      "char": "酮",
+      "en": "ketone"
+    }
+  ],
+  "suan": [
+    {
+      "char": "酸",
+      "en": "acid"
+    }
+  ],
+  "zhi": [
+    {
+      "char": "酯",
+      "en": "ester"
+    }
+  ],
+  "mi": [
+    {
+      "char": "醚",
+      "en": "ether"
+    }
+  ],
+  "an": [
+    {
+      "char": "胺",
+      "en": "amine"
+    },
+    {
+      "char": "氨",
+      "en": "ammonia"
+    }
+  ],
+  "anshui": [
+    {
+      "char": "氨水",
+      "en": "aqueous ammonia"
+    }
+  ],
+  "niaosu": [
+    {
+      "char": "尿素",
+      "en": "urea"
+    }
+  ],
+  "benan": [
+    {
+      "char": "苯胺",
+      "en": "aniline"
+    }
+  ],
+  "danbaizhi": [
+    {
+      "char": "蛋白质",
+      "en": "protein"
+    }
+  ],
+  "dianfen": [
+    {
+      "char": "淀粉",
+      "en": "starch"
+    }
+  ],
+  "xianweisu": [
+    {
+      "char": "纤维素",
+      "en": "cellulose"
+    }
+  ],
+  "weishengsu": [
+    {
+      "char": "维生素",
+      "en": "vitamin"
+    }
+  ],
+  "jisu": [
+    {
+      "char": "激素",
+      "en": "hormone"
+    }
+  ],
+  "mei": [
+    {
+      "char": "酶",
+      "en": "enzyme"
+    }
+  ],
+  "anjisuan": [
+    {
+      "char": "氨基酸",
+      "en": "amino acid"
+    }
+  ],
+  "hesuan": [
+    {
+      "char": "核酸",
+      "en": "nucleic acid"
+    }
+  ],
+  "tanglei": [
+    {
+      "char": "糖类",
+      "en": "carbohydrate"
+    }
+  ],
+  "zhizhi": [
+    {
+      "char": "脂质",
+      "en": "lipid"
+    }
+  ],
+  "feizao": [
+    {
+      "char": "肥皂",
+      "en": "soap"
+    }
+  ],
+  "hechengxiangjiao": [
+    {
+      "char": "合成橡胶",
+      "en": "synthetic rubber"
+    }
+  ],
+  "suliao": [
+    {
+      "char": "塑料",
+      "en": "plastic"
+    }
+  ],
+  "juhewu": [
+    {
+      "char": "聚合物",
+      "en": "polymer"
+    }
+  ],
+  "danti": [
+    {
+      "char": "单体",
+      "en": "monomer"
+    }
   ]
 }
