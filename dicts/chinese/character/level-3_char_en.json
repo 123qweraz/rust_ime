@@ -19,12 +19,12 @@
       "en": "prison"
     },
     {
-      "char": "垵",
-      "en": "pit"
-    },
-    {
       "char": "盦",
       "en": "box"
+    },
+    {
+      "char": "垵",
+      "en": "pit"
     }
   ],
   "ang": [
@@ -39,68 +39,68 @@
       "en": "cove"
     },
     {
-      "char": "奡",
-      "en": "arrogant"
-    },
-    {
-      "char": "嶅",
-      "en": "Ao Mountain"
-    },
-    {
       "char": "廒",
       "en": "granary"
     },
     {
+      "char": "奡",
+      "en": "arrogant"
+    },
+    {
       "char": "隩",
       "en": "warm"
+    },
+    {
+      "char": "嶅",
+      "en": "Ao Mountain"
     }
   ],
   "ba": [
     {
-      "char": "朳",
-      "en": "wood"
-    },
-    {
       "char": "岜",
       "en": "Ba Mountain"
-    },
-    {
-      "char": "妭",
-      "en": "witch"
-    },
-    {
-      "char": "胈",
-      "en": "fine hair"
-    },
-    {
-      "char": "蚆",
-      "en": "leech"
-    },
-    {
-      "char": "羓",
-      "en": "dried meat"
-    },
-    {
-      "char": "菝",
-      "en": "smilax"
     },
     {
       "char": "鲃",
       "en": "barbel"
     },
     {
+      "char": "菝",
+      "en": "smilax"
+    },
+    {
       "char": "鲌",
       "en": "bream"
+    },
+    {
+      "char": "蚆",
+      "en": "leech"
+    },
+    {
+      "char": "胈",
+      "en": "fine hair"
+    },
+    {
+      "char": "羓",
+      "en": "dried meat"
+    },
+    {
+      "char": "朳",
+      "en": "wood"
+    },
+    {
+      "char": "妭",
+      "en": "witch"
     }
   ],
   "ban": [
     {
-      "char": "昄",
-      "en": "return"
-    },
-    {
       "char": "攽",
       "en": "distribute"
+    },
+    {
+      "char": "昄",
+      "en": "return"
     },
     {
       "char": "湴",
@@ -113,20 +113,20 @@
   ],
   "bang": [
     {
-      "char": "玤",
-      "en": "jade"
+      "char": "搒",
+      "en": "beat"
     },
     {
       "char": "棓",
       "en": "stick"
     },
     {
-      "char": "塝",
-      "en": "slope"
+      "char": "玤",
+      "en": "jade"
     },
     {
-      "char": "搒",
-      "en": "beat"
+      "char": "塝",
+      "en": "slope"
     }
   ],
   "bao": [
@@ -137,6 +137,14 @@
   ],
   "bei": [
     {
+      "char": "鹎",
+      "en": "bulbul"
+    },
+    {
+      "char": "糒",
+      "en": "dried rice"
+    },
+    {
       "char": "琲",
       "en": "jade beads"
     },
@@ -145,30 +153,22 @@
       "en": "pear"
     },
     {
-      "char": "鹎",
-      "en": "bulbul"
-    },
-    {
       "char": "鞁",
       "en": "saddle"
-    },
-    {
-      "char": "糒",
-      "en": "dried rice"
     }
   ],
   "ben": [
     {
-      "char": "坋",
-      "en": "dust"
+      "char": "犇",
+      "en": "run"
     },
     {
       "char": "倴",
       "en": "Ben (place)"
     },
     {
-      "char": "犇",
-      "en": "run"
+      "char": "坋",
+      "en": "dust"
     }
   ],
   "beng": [
@@ -179,64 +179,64 @@
   ],
   "bi": [
     {
-      "char": "坒",
-      "en": "firm"
-    },
-    {
-      "char": "佖",
-      "en": "secret"
-    },
-    {
-      "char": "沘",
-      "en": "Bi River"
-    },
-    {
-      "char": "邲",
-      "en": "Bi (state)"
-    },
-    {
-      "char": "诐",
-      "en": "biased"
-    },
-    {
-      "char": "苾",
-      "en": "fragrant"
-    },
-    {
-      "char": "珌",
-      "en": "jade"
-    },
-    {
-      "char": "舭",
-      "en": "ship's side"
-    },
-    {
       "char": "狴",
       "en": "prison"
-    },
-    {
-      "char": "萆",
-      "en": "plant"
-    },
-    {
-      "char": "庳",
-      "en": "low"
-    },
-    {
-      "char": "皕",
-      "en": "two hundred"
     },
     {
       "char": "赑",
       "en": "heavy"
     },
     {
-      "char": "馝",
+      "char": "苾",
       "en": "fragrant"
+    },
+    {
+      "char": "庳",
+      "en": "low"
+    },
+    {
+      "char": "萆",
+      "en": "plant"
+    },
+    {
+      "char": "皕",
+      "en": "two hundred"
+    },
+    {
+      "char": "舭",
+      "en": "ship's side"
+    },
+    {
+      "char": "沘",
+      "en": "Bi River"
+    },
+    {
+      "char": "珌",
+      "en": "jade"
     },
     {
       "char": "觱",
       "en": "flute"
+    },
+    {
+      "char": "诐",
+      "en": "biased"
+    },
+    {
+      "char": "邲",
+      "en": "Bi (state)"
+    },
+    {
+      "char": "佖",
+      "en": "secret"
+    },
+    {
+      "char": "馝",
+      "en": "fragrant"
+    },
+    {
+      "char": "坒",
+      "en": "firm"
     },
     {
       "char": "鲾",
@@ -249,18 +249,38 @@
       "en": "bright"
     },
     {
-      "char": "萹",
-      "en": "bindweed"
-    },
-    {
       "char": "碥",
       "en": "slope"
+    },
+    {
+      "char": "萹",
+      "en": "bindweed"
     }
   ],
   "biao": [
     {
+      "char": "瘭",
+      "en": "boil"
+    },
+    {
+      "char": "熛",
+      "en": "flame"
+    },
+    {
+      "char": "藨",
+      "en": "blackberry"
+    },
+    {
+      "char": "儦",
+      "en": "run"
+    },
+    {
       "char": "骉",
       "en": "gallop"
+    },
+    {
+      "char": "瀌",
+      "en": "pour"
     },
     {
       "char": "脿",
@@ -273,26 +293,6 @@
     {
       "char": "幖",
       "en": "mark"
-    },
-    {
-      "char": "熛",
-      "en": "flame"
-    },
-    {
-      "char": "瘭",
-      "en": "boil"
-    },
-    {
-      "char": "儦",
-      "en": "run"
-    },
-    {
-      "char": "藨",
-      "en": "blackberry"
-    },
-    {
-      "char": "瀌",
-      "en": "pour"
     }
   ],
   "bie": [
@@ -319,8 +319,20 @@
   ],
   "bo": [
     {
+      "char": "踣",
+      "en": "fall"
+    },
+    {
+      "char": "镈",
+      "en": "bell"
+    },
+    {
       "char": "砵",
       "en": "bowl"
+    },
+    {
+      "char": "嶓",
+      "en": "Bo Mountain"
     },
     {
       "char": "哱",
@@ -331,24 +343,12 @@
       "en": "surge"
     },
     {
-      "char": "袯",
-      "en": "coarse garment"
-    },
-    {
-      "char": "踣",
-      "en": "fall"
-    },
-    {
-      "char": "嶓",
-      "en": "Bo Mountain"
-    },
-    {
-      "char": "镈",
-      "en": "bell"
-    },
-    {
       "char": "馞",
       "en": "fragrant"
+    },
+    {
+      "char": "袯",
+      "en": "coarse garment"
     },
     {
       "char": "欂",
@@ -357,16 +357,16 @@
   ],
   "bu": [
     {
-      "char": "埗",
-      "en": "step"
+      "char": "醭",
+      "en": "mold"
     },
     {
       "char": "蔀",
       "en": "hut"
     },
     {
-      "char": "醭",
-      "en": "mold"
+      "char": "埗",
+      "en": "step"
     }
   ],
   "cai": [
@@ -401,20 +401,20 @@
   ],
   "cha": [
     {
-      "char": "侘",
-      "en": "sad"
+      "char": "檫",
+      "en": "sassafras"
     },
     {
       "char": "垞",
       "en": "mound"
     },
     {
-      "char": "蹅",
-      "en": "step"
+      "char": "侘",
+      "en": "sad"
     },
     {
-      "char": "檫",
-      "en": "sassafras"
+      "char": "蹅",
+      "en": "step"
     }
   ],
   "chai": [
@@ -429,48 +429,12 @@
   ],
   "chan": [
     {
-      "char": "辿",
-      "en": "path"
-    },
-    {
-      "char": "刬",
-      "en": "level"
-    },
-    {
-      "char": "旵",
-      "en": "sun"
-    },
-    {
-      "char": "浐",
-      "en": "Chan River"
-    },
-    {
-      "char": "梴",
-      "en": "long"
-    },
-    {
-      "char": "啴",
-      "en": "loud"
-    },
-    {
-      "char": "蒇",
-      "en": "store"
-    },
-    {
       "char": "冁",
       "en": "laugh"
     },
     {
-      "char": "瀍",
-      "en": "Chan River"
-    },
-    {
-      "char": "襜",
-      "en": "apron"
-    },
-    {
-      "char": "儳",
-      "en": "reckless"
+      "char": "蒇",
+      "en": "store"
     },
     {
       "char": "韂",
@@ -479,16 +443,52 @@
     {
       "char": "躔",
       "en": "orbit"
+    },
+    {
+      "char": "刬",
+      "en": "level"
+    },
+    {
+      "char": "浐",
+      "en": "Chan River"
+    },
+    {
+      "char": "襜",
+      "en": "apron"
+    },
+    {
+      "char": "瀍",
+      "en": "Chan River"
+    },
+    {
+      "char": "旵",
+      "en": "sun"
+    },
+    {
+      "char": "啴",
+      "en": "loud"
+    },
+    {
+      "char": "梴",
+      "en": "long"
+    },
+    {
+      "char": "儳",
+      "en": "reckless"
+    },
+    {
+      "char": "辿",
+      "en": "path"
     }
   ],
   "chang": [
     {
-      "char": "玚",
-      "en": "jade"
-    },
-    {
       "char": "鬯",
       "en": "wine"
+    },
+    {
+      "char": "玚",
+      "en": "jade"
     },
     {
       "char": "鲿",
@@ -507,12 +507,12 @@
   ],
   "chen": [
     {
-      "char": "疢",
-      "en": "illness"
-    },
-    {
       "char": "榇",
       "en": "coffin"
+    },
+    {
+      "char": "疢",
+      "en": "illness"
     },
     {
       "char": "煁",
@@ -521,66 +521,54 @@
   ],
   "cheng": [
     {
-      "char": "宬",
-      "en": "archive"
-    },
-    {
-      "char": "珹",
-      "en": "jade"
-    },
-    {
-      "char": "珵",
-      "en": "jade"
-    },
-    {
       "char": "铖",
       "en": "Cheng (surname)"
-    },
-    {
-      "char": "偁",
-      "en": "praise"
-    },
-    {
-      "char": "庱",
-      "en": "Peng (place)"
-    },
-    {
-      "char": "牚",
-      "en": "prop"
-    },
-    {
-      "char": "赪",
-      "en": "red"
-    },
-    {
-      "char": "酲",
-      "en": "hangover"
     },
     {
       "char": "澂",
       "en": "clear"
     },
     {
+      "char": "酲",
+      "en": "hangover"
+    },
+    {
+      "char": "珵",
+      "en": "jade"
+    },
+    {
+      "char": "赪",
+      "en": "red"
+    },
+    {
+      "char": "偁",
+      "en": "praise"
+    },
+    {
+      "char": "宬",
+      "en": "archive"
+    },
+    {
+      "char": "牚",
+      "en": "prop"
+    },
+    {
+      "char": "珹",
+      "en": "jade"
+    },
+    {
       "char": "憕",
       "en": "calm"
+    },
+    {
+      "char": "庱",
+      "en": "Peng (place)"
     }
   ],
   "chi": [
     {
       "char": "彳",
       "en": "walk"
-    },
-    {
-      "char": "胣",
-      "en": "eviscerate"
-    },
-    {
-      "char": "瓻",
-      "en": "bottle"
-    },
-    {
-      "char": "痓",
-      "en": "spasm"
     },
     {
       "char": "摛",
@@ -593,9 +581,25 @@
     {
       "char": "漦",
       "en": "saliva"
+    },
+    {
+      "char": "胣",
+      "en": "eviscerate"
+    },
+    {
+      "char": "瓻",
+      "en": "bottle"
+    },
+    {
+      "char": "痓",
+      "en": "spasm"
     }
   ],
   "chong": [
+    {
+      "char": "翀",
+      "en": "soar"
+    },
     {
       "char": "茺",
       "en": "barren"
@@ -603,10 +607,6 @@
     {
       "char": "珫",
       "en": "jade"
-    },
-    {
-      "char": "翀",
-      "en": "soar"
     },
     {
       "char": "埫",
@@ -619,7 +619,7 @@
   ],
   "chou": [
     {
-      "char": "侴",
+      "char": "犨",
       "en": "Chou (surname)"
     },
     {
@@ -631,15 +631,19 @@
       "en": "beautiful"
     },
     {
-      "char": "椆",
-      "en": "oak"
+      "char": "侴",
+      "en": "Chou (surname)"
     },
     {
-      "char": "犨",
-      "en": "Chou (surname)"
+      "char": "椆",
+      "en": "oak"
     }
   ],
   "chu": [
+    {
+      "char": "憷",
+      "en": "fear"
+    },
     {
       "char": "亍",
       "en": "step"
@@ -649,24 +653,20 @@
       "en": "musical instrument"
     },
     {
-      "char": "琡",
-      "en": "jade"
+      "char": "斶",
+      "en": "Chu (surname)"
     },
     {
       "char": "摴",
       "en": "dice"
     },
     {
+      "char": "琡",
+      "en": "jade"
+    },
+    {
       "char": "濋",
       "en": "Chu River"
-    },
-    {
-      "char": "憷",
-      "en": "fear"
-    },
-    {
-      "char": "斶",
-      "en": "Chu (surname)"
     }
   ],
   "chua": [
@@ -695,44 +695,44 @@
   ],
   "chun": [
     {
-      "char": "堾",
-      "en": "ridge"
-    },
-    {
       "char": "瑃",
       "en": "jade"
+    },
+    {
+      "char": "堾",
+      "en": "ridge"
     }
   ],
   "chuo": [
     {
-      "char": "逴",
-      "en": "distant"
+      "char": "婼",
+      "en": "Ruo (surname)"
     },
     {
       "char": "惙",
       "en": "weak"
     },
     {
-      "char": "婼",
-      "en": "Ruo (surname)"
+      "char": "逴",
+      "en": "distant"
     }
   ],
   "ci": [
     {
-      "char": "佽",
-      "en": "assist"
+      "char": "泚",
+      "en": "clear"
     },
     {
       "char": "茈",
       "en": "purple"
     },
     {
-      "char": "泚",
-      "en": "clear"
-    },
-    {
       "char": "玼",
       "en": "jade"
+    },
+    {
+      "char": "佽",
+      "en": "assist"
     },
     {
       "char": "堲",
@@ -751,12 +751,12 @@
   ],
   "cui": [
     {
-      "char": "缞",
-      "en": "mourning clothes"
-    },
-    {
       "char": "漼",
       "en": "deep"
+    },
+    {
+      "char": "缞",
+      "en": "mourning clothes"
     }
   ],
   "cun": [
@@ -767,61 +767,53 @@
   ],
   "cuo": [
     {
-      "char": "莝",
-      "en": "chop straw"
+      "char": "鹾",
+      "en": "salt"
     },
     {
       "char": "脞",
       "en": "trivial"
     },
     {
-      "char": "棤",
-      "en": "tree"
-    },
-    {
       "char": "瑳",
       "en": "jade"
     },
     {
-      "char": "鹾",
-      "en": "salt"
-    },
-    {
       "char": "酂",
       "en": "Zuo (place)"
+    },
+    {
+      "char": "莝",
+      "en": "chop straw"
+    },
+    {
+      "char": "棤",
+      "en": "tree"
     }
   ],
   "da": [
     {
-      "char": "垯",
-      "en": "mound"
-    },
-    {
-      "char": "荙",
-      "en": "chard"
-    },
-    {
       "char": "哒",
       "en": "da (sound)"
+    },
+    {
+      "char": "阘",
+      "en": "low"
+    },
+    {
+      "char": "垯",
+      "en": "mound"
     },
     {
       "char": "炟",
       "en": "bright"
     },
     {
-      "char": "阘",
-      "en": "low"
+      "char": "荙",
+      "en": "chard"
     }
   ],
   "dai": [
-    {
-      "char": "轪",
-      "en": "cart"
-    },
-    {
-      "char": "垈",
-      "en": "field"
-    },
     {
       "char": "绐",
       "en": "deceive"
@@ -829,16 +821,24 @@
     {
       "char": "叇",
       "en": "cloudy"
+    },
+    {
+      "char": "轪",
+      "en": "cart"
+    },
+    {
+      "char": "垈",
+      "en": "field"
     }
   ],
   "dan": [
     {
-      "char": "疍",
-      "en": "egg"
-    },
-    {
       "char": "瘅",
       "en": "painful"
+    },
+    {
+      "char": "疍",
+      "en": "egg"
     },
     {
       "char": "憺",
@@ -857,12 +857,12 @@
       "en": "anxious"
     },
     {
-      "char": "舠",
-      "en": "boat"
-    },
-    {
       "char": "鱽",
       "en": "fish"
+    },
+    {
+      "char": "舠",
+      "en": "boat"
     }
   ],
   "den": [
@@ -879,16 +879,8 @@
   ],
   "di": [
     {
-      "char": "玓",
-      "en": "luster"
-    },
-    {
-      "char": "杕",
-      "en": "tree"
-    },
-    {
-      "char": "菂",
-      "en": "lotus seed"
+      "char": "鞮",
+      "en": "shoe"
     },
     {
       "char": "羝",
@@ -899,14 +891,6 @@
       "en": "meet"
     },
     {
-      "char": "媂",
-      "en": "beautiful"
-    },
-    {
-      "char": "髢",
-      "en": "wig"
-    },
-    {
       "char": "禘",
       "en": "sacrifice"
     },
@@ -915,12 +899,28 @@
       "en": "kick"
     },
     {
-      "char": "鞮",
-      "en": "shoe"
+      "char": "髢",
+      "en": "wig"
+    },
+    {
+      "char": "菂",
+      "en": "lotus seed"
+    },
+    {
+      "char": "玓",
+      "en": "luster"
+    },
+    {
+      "char": "杕",
+      "en": "tree"
     },
     {
       "char": "蹢",
       "en": "step"
+    },
+    {
+      "char": "媂",
+      "en": "beautiful"
     }
   ],
   "dian": [
@@ -939,16 +939,16 @@
   ],
   "diao": [
     {
-      "char": "汈",
-      "en": "Diao Lake"
+      "char": "铞",
+      "en": "buckle"
     },
     {
       "char": "窎",
       "en": "distant"
     },
     {
-      "char": "铞",
-      "en": "buckle"
+      "char": "汈",
+      "en": "Diao Lake"
     }
   ],
   "die": [
@@ -957,12 +957,12 @@
       "en": "beauty"
     },
     {
-      "char": "绖",
-      "en": "mourning band"
-    },
-    {
       "char": "瓞",
       "en": "melon"
+    },
+    {
+      "char": "绖",
+      "en": "mourning band"
     }
   ],
   "ding": [
@@ -1019,12 +1019,12 @@
       "en": "dumpling"
     },
     {
-      "char": "剟",
-      "en": "cut"
-    },
-    {
       "char": "亸",
       "en": "hang"
+    },
+    {
+      "char": "剟",
+      "en": "cut"
     }
   ],
   "e": [
@@ -1033,16 +1033,16 @@
       "en": "acenaphthene"
     },
     {
+      "char": "崿",
+      "en": "cliff"
+    },
+    {
       "char": "姶",
       "en": "beautiful"
     },
     {
       "char": "涐",
       "en": "I"
-    },
-    {
-      "char": "崿",
-      "en": "cliff"
     }
   ],
   "er": [
@@ -1055,12 +1055,12 @@
       "en": "En (place)"
     },
     {
-      "char": "咡",
-      "en": "ear"
-    },
-    {
       "char": "鲕",
       "en": "roe"
+    },
+    {
+      "char": "咡",
+      "en": "ear"
     }
   ],
   "fan": [
@@ -1069,12 +1069,12 @@
       "en": "flood"
     },
     {
-      "char": "墦",
-      "en": "tomb"
-    },
-    {
       "char": "蹯",
       "en": "paw"
+    },
+    {
+      "char": "墦",
+      "en": "tomb"
     }
   ],
   "fang": [
@@ -1093,12 +1093,12 @@
   ],
   "fei": [
     {
-      "char": "朏",
-      "en": "dawn"
+      "char": "篚",
+      "en": "basket"
     },
     {
-      "char": "剕",
-      "en": "cut foot"
+      "char": "朏",
+      "en": "dawn"
     },
     {
       "char": "棐",
@@ -1109,8 +1109,8 @@
       "en": "fermium"
     },
     {
-      "char": "篚",
-      "en": "basket"
+      "char": "剕",
+      "en": "cut foot"
     }
   ],
   "fen": [
@@ -1119,64 +1119,36 @@
       "en": "fly"
     },
     {
-      "char": "豮",
-      "en": "castrated boar"
-    },
-    {
       "char": "瀵",
       "en": "spring"
+    },
+    {
+      "char": "豮",
+      "en": "castrated boar"
     }
   ],
   "feng": [
-    {
-      "char": "浲",
-      "en": "river"
-    },
     {
       "char": "唪",
       "en": "recite"
     },
     {
-      "char": "崶",
-      "en": "Feng Mountain"
-    },
-    {
       "char": "赗",
       "en": "gift"
+    },
+    {
+      "char": "浲",
+      "en": "river"
+    },
+    {
+      "char": "崶",
+      "en": "Feng Mountain"
     }
   ],
   "fu": [
     {
-      "char": "芣",
-      "en": "plant"
-    },
-    {
-      "char": "玞",
-      "en": "jade"
-    },
-    {
       "char": "绋",
       "en": "rope"
-    },
-    {
-      "char": "韨",
-      "en": "ritual skirt"
-    },
-    {
-      "char": "砆",
-      "en": "jade"
-    },
-    {
-      "char": "洑",
-      "en": "eddy"
-    },
-    {
-      "char": "垺",
-      "en": "vessel"
-    },
-    {
-      "char": "琈",
-      "en": "jade"
     },
     {
       "char": "艴",
@@ -1187,12 +1159,40 @@
       "en": "Fu (place)"
     },
     {
-      "char": "榑",
-      "en": "mulberry"
+      "char": "芣",
+      "en": "plant"
+    },
+    {
+      "char": "洑",
+      "en": "eddy"
     },
     {
       "char": "簠",
       "en": "ritual vessel"
+    },
+    {
+      "char": "榑",
+      "en": "mulberry"
+    },
+    {
+      "char": "韨",
+      "en": "ritual skirt"
+    },
+    {
+      "char": "玞",
+      "en": "jade"
+    },
+    {
+      "char": "砆",
+      "en": "jade"
+    },
+    {
+      "char": "垺",
+      "en": "vessel"
+    },
+    {
+      "char": "琈",
+      "en": "jade"
     }
   ],
   "ga": [
@@ -1203,16 +1203,16 @@
   ],
   "gai": [
     {
+      "char": "戤",
+      "en": "rely"
+    },
+    {
       "char": "荄",
       "en": "root"
     },
     {
       "char": "晐",
       "en": "bright"
-    },
-    {
-      "char": "戤",
-      "en": "rely"
     }
   ],
   "gan": [
@@ -1227,6 +1227,10 @@
   ],
   "gang": [
     {
+      "char": "筻",
+      "en": "Gang (place)"
+    },
+    {
       "char": "冮",
       "en": "Jiang (surname)"
     },
@@ -1235,16 +1239,12 @@
       "en": "stone"
     },
     {
-      "char": "鿍",
-      "en": "bird"
-    },
-    {
       "char": "堽",
       "en": "Gang (place)"
     },
     {
-      "char": "筻",
-      "en": "Gang (place)"
+      "char": "鿍",
+      "en": "bird"
     }
   ],
   "gao": [
@@ -1255,12 +1255,12 @@
   ],
   "ge": [
     {
-      "char": "哿",
-      "en": "praise"
-    },
-    {
       "char": "袼",
       "en": "armpit"
+    },
+    {
+      "char": "哿",
+      "en": "praise"
     },
     {
       "char": "塥",
@@ -1299,11 +1299,7 @@
   ],
   "gou": [
     {
-      "char": "耇",
-      "en": "elderly"
-    },
-    {
-      "char": "姤",
+      "char": "遘",
       "en": "meet"
     },
     {
@@ -1311,12 +1307,16 @@
       "en": "fish trap"
     },
     {
-      "char": "遘",
+      "char": "姤",
       "en": "meet"
     },
     {
       "char": "雊",
       "en": "crow"
+    },
+    {
+      "char": "耇",
+      "en": "elderly"
     }
   ],
   "gu": [
@@ -1325,24 +1325,24 @@
       "en": "black sheep"
     },
     {
-      "char": "堌",
-      "en": "Gu (place)"
-    },
-    {
-      "char": "牿",
-      "en": "ox pen"
-    },
-    {
-      "char": "蓇",
-      "en": "fruit"
+      "char": "嘏",
+      "en": "blessing"
     },
     {
       "char": "馉",
       "en": "dumpling"
     },
     {
-      "char": "嘏",
-      "en": "blessing"
+      "char": "牿",
+      "en": "ox pen"
+    },
+    {
+      "char": "堌",
+      "en": "Gu (place)"
+    },
+    {
+      "char": "蓇",
+      "en": "fruit"
     },
     {
       "char": "瀔",
@@ -1357,20 +1357,20 @@
   ],
   "guan": [
     {
-      "char": "毌",
-      "en": "mother"
-    },
-    {
-      "char": "蒄",
-      "en": "crown"
-    },
-    {
       "char": "祼",
       "en": "sacrifice"
     },
     {
+      "char": "毌",
+      "en": "mother"
+    },
+    {
       "char": "筦",
       "en": "tube"
+    },
+    {
+      "char": "蒄",
+      "en": "crown"
     },
     {
       "char": "爟",
@@ -1383,8 +1383,8 @@
   ],
   "guang": [
     {
-      "char": "垙",
-      "en": "field"
+      "char": "桄",
+      "en": "bamboo"
     },
     {
       "char": "洸",
@@ -1395,14 +1395,18 @@
       "en": "jade"
     },
     {
-      "char": "桄",
-      "en": "bamboo"
+      "char": "垙",
+      "en": "field"
     }
   ],
   "gui": [
     {
-      "char": "氿",
-      "en": "wine"
+      "char": "珪",
+      "en": "jade"
+    },
+    {
+      "char": "姽",
+      "en": "gentle"
     },
     {
       "char": "宄",
@@ -1413,24 +1417,20 @@
       "en": "Gui (place)"
     },
     {
-      "char": "姽",
-      "en": "gentle"
-    },
-    {
-      "char": "珪",
-      "en": "jade"
-    },
-    {
-      "char": "筀",
-      "en": "bamboo"
-    },
-    {
       "char": "廆",
       "en": "Hui (surname)"
     },
     {
+      "char": "氿",
+      "en": "wine"
+    },
+    {
       "char": "鬶",
       "en": "tripod"
+    },
+    {
+      "char": "筀",
+      "en": "bamboo"
     }
   ],
   "guo": [
@@ -1447,32 +1447,36 @@
       "en": "knee pit"
     },
     {
-      "char": "蜾",
-      "en": "wasp"
-    },
-    {
       "char": "馘",
       "en": "cut off head"
+    },
+    {
+      "char": "蜾",
+      "en": "wasp"
     }
   ],
   "hai": [
     {
-      "char": "咍",
-      "en": "laugh"
-    },
-    {
       "char": "胲",
       "en": "cheek"
+    },
+    {
+      "char": "咍",
+      "en": "laugh"
     }
   ],
   "han": [
+    {
+      "char": "撖",
+      "en": "Han (surname)"
+    },
     {
       "char": "虷",
       "en": "mosquito larva"
     },
     {
-      "char": "垾",
-      "en": "embankment"
+      "char": "暵",
+      "en": "dry"
     },
     {
       "char": "浛",
@@ -1483,6 +1487,10 @@
       "en": "jade"
     },
     {
+      "char": "垾",
+      "en": "embankment"
+    },
+    {
       "char": "崡",
       "en": "mountain pass"
     },
@@ -1491,19 +1499,15 @@
       "en": "Kan Mountain"
     },
     {
-      "char": "撖",
-      "en": "Han (surname)"
-    },
-    {
       "char": "蔊",
       "en": "mustard"
-    },
-    {
-      "char": "暵",
-      "en": "dry"
     }
   ],
   "hao": [
+    {
+      "char": "皞",
+      "en": "bright"
+    },
     {
       "char": "淏",
       "en": "clear"
@@ -1511,10 +1515,6 @@
     {
       "char": "鄗",
       "en": "Jiao (place)"
-    },
-    {
-      "char": "皞",
-      "en": "bright"
     }
   ],
   "he": [
@@ -1523,28 +1523,28 @@
       "en": "He (surname)"
     },
     {
-      "char": "垎",
-      "en": "fertile"
+      "char": "龢",
+      "en": "harmony"
     },
     {
       "char": "龁",
       "en": "bite"
     },
     {
-      "char": "鹖",
-      "en": "pheasant"
-    },
-    {
       "char": "熇",
       "en": "hot"
+    },
+    {
+      "char": "鹖",
+      "en": "pheasant"
     },
     {
       "char": "翯",
       "en": "white"
     },
     {
-      "char": "龢",
-      "en": "harmony"
+      "char": "垎",
+      "en": "fertile"
     }
   ],
   "heng": [
@@ -1555,20 +1555,24 @@
   ],
   "hong": [
     {
-      "char": "玒",
-      "en": "jade"
+      "char": "荭",
+      "en": "smartweed"
     },
     {
       "char": "纮",
       "en": "cord"
     },
     {
-      "char": "荭",
-      "en": "smartweed"
-    },
-    {
       "char": "翃",
       "en": "fly"
+    },
+    {
+      "char": "黉",
+      "en": "school"
+    },
+    {
+      "char": "玒",
+      "en": "jade"
     },
     {
       "char": "硔",
@@ -1577,78 +1581,74 @@
     {
       "char": "谼",
       "en": "valley"
-    },
-    {
-      "char": "黉",
-      "en": "school"
     }
   ],
   "hou": [
     {
-      "char": "郈",
-      "en": "Hou (surname)"
+      "char": "堠",
+      "en": "mound"
     },
     {
       "char": "垕",
       "en": "Hou (surname)"
     },
     {
-      "char": "堠",
-      "en": "mound"
+      "char": "糇",
+      "en": "provisions"
+    },
+    {
+      "char": "郈",
+      "en": "Hou (surname)"
     },
     {
       "char": "鲘",
       "en": "fish"
-    },
-    {
-      "char": "糇",
-      "en": "provisions"
     }
   ],
   "hu": [
     {
-      "char": "冱",
-      "en": "freeze"
-    },
-    {
-      "char": "昒",
-      "en": "dawn"
-    },
-    {
-      "char": "昈",
-      "en": "clear"
-    },
-    {
       "char": "岵",
       "en": "hill"
-    },
-    {
-      "char": "轷",
-      "en": "Hu (surname)"
-    },
-    {
-      "char": "隺",
-      "en": "bird"
-    },
-    {
-      "char": "淴",
-      "en": "gush"
     },
     {
       "char": "鄠",
       "en": "Hu (place)"
     },
     {
-      "char": "嫭",
-      "en": "beautiful"
+      "char": "冱",
+      "en": "freeze"
     },
     {
       "char": "鹱",
       "en": "shearwater"
     },
     {
+      "char": "淴",
+      "en": "gush"
+    },
+    {
+      "char": "昒",
+      "en": "dawn"
+    },
+    {
       "char": "鳠",
       "en": "catfish"
+    },
+    {
+      "char": "轷",
+      "en": "Hu (surname)"
+    },
+    {
+      "char": "嫭",
+      "en": "beautiful"
+    },
+    {
+      "char": "昈",
+      "en": "clear"
+    },
+    {
+      "char": "隺",
+      "en": "bird"
     }
   ],
   "hua": [
@@ -1663,58 +1663,54 @@
   ],
   "huan": [
     {
-      "char": "荁",
-      "en": "plant"
-    },
-    {
-      "char": "峘",
-      "en": "high"
+      "char": "嬛",
+      "en": "beautiful"
     },
     {
       "char": "逭",
       "en": "avoid"
     },
     {
-      "char": "貆",
-      "en": "badger"
+      "char": "擐",
+      "en": "put on"
     },
     {
       "char": "锾",
       "en": "fine"
     },
     {
-      "char": "擐",
-      "en": "put on"
+      "char": "镮",
+      "en": "ring"
     },
     {
       "char": "澴",
       "en": "Huan River"
     },
     {
-      "char": "嬛",
-      "en": "beautiful"
+      "char": "貆",
+      "en": "badger"
     },
     {
-      "char": "镮",
-      "en": "ring"
+      "char": "峘",
+      "en": "high"
+    },
+    {
+      "char": "荁",
+      "en": "plant"
     }
   ],
   "huang": [
+    {
+      "char": "滉",
+      "en": "vast"
+    },
     {
       "char": "喤",
       "en": "loud"
     },
     {
-      "char": "媓",
-      "en": "goddess"
-    },
-    {
-      "char": "瑝",
-      "en": "jade"
-    },
-    {
-      "char": "滉",
-      "en": "vast"
+      "char": "癀",
+      "en": "jaundice"
     },
     {
       "char": "锽",
@@ -1725,22 +1721,22 @@
       "en": "ship"
     },
     {
-      "char": "癀",
-      "en": "jaundice"
+      "char": "瑝",
+      "en": "jade"
+    },
+    {
+      "char": "媓",
+      "en": "goddess"
     }
   ],
   "hui": [
-    {
-      "char": "袆",
-      "en": "beautiful"
-    },
     {
       "char": "晖",
       "en": "sunshine"
     },
     {
-      "char": "烠",
-      "en": "hot"
+      "char": "袆",
+      "en": "beautiful"
     },
     {
       "char": "翙",
@@ -1749,6 +1745,10 @@
     {
       "char": "橞",
       "en": "flower"
+    },
+    {
+      "char": "烠",
+      "en": "hot"
     }
   ],
   "hun": [
@@ -1759,8 +1759,8 @@
   ],
   "huo": [
     {
-      "char": "佸",
-      "en": "return"
+      "char": "夥",
+      "en": "many"
     },
     {
       "char": "砉",
@@ -1775,86 +1775,86 @@
       "en": "counterbore"
     },
     {
-      "char": "漷",
-      "en": "Huo (place)"
-    },
-    {
-      "char": "夥",
-      "en": "many"
-    },
-    {
       "char": "劐",
       "en": "cut"
     },
     {
       "char": "濩",
       "en": "flood"
+    },
+    {
+      "char": "漷",
+      "en": "Huo (place)"
+    },
+    {
+      "char": "佸",
+      "en": "return"
     }
   ],
   "ji": [
     {
-      "char": "伋",
-      "en": "Ji (surname)"
-    },
-    {
       "char": "芰",
       "en": "water lily"
-    },
-    {
-      "char": "枅",
-      "en": "beam"
-    },
-    {
-      "char": "垍",
-      "en": "hard"
-    },
-    {
-      "char": "姞",
-      "en": "Ji (surname)"
-    },
-    {
-      "char": "掎",
-      "en": "pull"
-    },
-    {
-      "char": "徛",
-      "en": "stand"
-    },
-    {
-      "char": "鱾",
-      "en": "fish"
-    },
-    {
-      "char": "惎",
-      "en": "hate"
-    },
-    {
-      "char": "耤",
-      "en": "farm"
-    },
-    {
-      "char": "跽",
-      "en": "kneel"
-    },
-    {
-      "char": "漈",
-      "en": "waterfall"
-    },
-    {
-      "char": "觭",
-      "en": "odd"
     },
     {
       "char": "鹡",
       "en": "wagtail"
     },
     {
-      "char": "穄",
-      "en": "broomcorn"
+      "char": "伋",
+      "en": "Ji (surname)"
+    },
+    {
+      "char": "垍",
+      "en": "hard"
+    },
+    {
+      "char": "掎",
+      "en": "pull"
+    },
+    {
+      "char": "跽",
+      "en": "kneel"
     },
     {
       "char": "蹐",
       "en": "step carefully"
+    },
+    {
+      "char": "姞",
+      "en": "Ji (surname)"
+    },
+    {
+      "char": "漈",
+      "en": "waterfall"
+    },
+    {
+      "char": "穄",
+      "en": "broomcorn"
+    },
+    {
+      "char": "耤",
+      "en": "farm"
+    },
+    {
+      "char": "觭",
+      "en": "odd"
+    },
+    {
+      "char": "惎",
+      "en": "hate"
+    },
+    {
+      "char": "鱾",
+      "en": "fish"
+    },
+    {
+      "char": "枅",
+      "en": "beam"
+    },
+    {
+      "char": "徛",
+      "en": "stand"
     },
     {
       "char": "瀱",
@@ -1863,12 +1863,8 @@
   ],
   "jia": [
     {
-      "char": "泇",
-      "en": "Jia River"
-    },
-    {
-      "char": "叚",
-      "en": "false"
+      "char": "槚",
+      "en": "tea"
     },
     {
       "char": "恝",
@@ -1879,22 +1875,38 @@
       "en": "goblet"
     },
     {
-      "char": "槚",
-      "en": "tea"
-    },
-    {
       "char": "瘕",
       "en": "tumor"
+    },
+    {
+      "char": "叚",
+      "en": "false"
+    },
+    {
+      "char": "泇",
+      "en": "Jia River"
     }
   ],
   "jian": [
+    {
+      "char": "翦",
+      "en": "cut"
+    },
     {
       "char": "戋",
       "en": "small"
     },
     {
+      "char": "鹣",
+      "en": "lovebird"
+    },
+    {
       "char": "趼",
       "en": "callus"
+    },
+    {
+      "char": "谫",
+      "en": "shallow"
     },
     {
       "char": "楗",
@@ -1903,18 +1915,6 @@
     {
       "char": "暕",
       "en": "bright"
-    },
-    {
-      "char": "谫",
-      "en": "shallow"
-    },
-    {
-      "char": "翦",
-      "en": "cut"
-    },
-    {
-      "char": "鹣",
-      "en": "lovebird"
     },
     {
       "char": "篯",
@@ -1935,76 +1935,64 @@
       "en": "flood"
     },
     {
-      "char": "弶",
-      "en": "trap"
-    },
-    {
       "char": "鳉",
       "en": "killifish"
+    },
+    {
+      "char": "弶",
+      "en": "trap"
     }
   ],
   "jiao": [
     {
-      "char": "峧",
-      "en": "Jiao Mountain"
+      "char": "僬",
+      "en": "busy"
     },
     {
-      "char": "恔",
-      "en": "happy"
+      "char": "峧",
+      "en": "Jiao Mountain"
     },
     {
       "char": "滘",
       "en": "river"
     },
     {
-      "char": "斠",
-      "en": "measure"
-    },
-    {
-      "char": "僬",
-      "en": "busy"
-    },
-    {
-      "char": "漖",
-      "en": "Jiao River"
-    },
-    {
       "char": "燋",
       "en": "burn"
-    },
-    {
-      "char": "璬",
-      "en": "jade"
     },
     {
       "char": "皦",
       "en": "bright"
     },
     {
+      "char": "斠",
+      "en": "measure"
+    },
+    {
+      "char": "璬",
+      "en": "jade"
+    },
+    {
       "char": "皭",
       "en": "pure"
+    },
+    {
+      "char": "恔",
+      "en": "happy"
+    },
+    {
+      "char": "漖",
+      "en": "Jiao River"
     }
   ],
   "jie": [
-    {
-      "char": "岊",
-      "en": "cliff"
-    },
-    {
-      "char": "悈",
-      "en": "cruel"
-    },
     {
       "char": "絜",
       "en": "pure"
     },
     {
-      "char": "湝",
-      "en": "gurgle"
-    },
-    {
-      "char": "蜐",
-      "en": "barnacle"
+      "char": "檞",
+      "en": "oak"
     },
     {
       "char": "骱",
@@ -2019,8 +2007,20 @@
       "en": "diaper"
     },
     {
-      "char": "檞",
-      "en": "oak"
+      "char": "湝",
+      "en": "gurgle"
+    },
+    {
+      "char": "岊",
+      "en": "cliff"
+    },
+    {
+      "char": "悈",
+      "en": "cruel"
+    },
+    {
+      "char": "蜐",
+      "en": "barnacle"
     }
   ],
   "jin": [
@@ -2029,7 +2029,15 @@
       "en": "nuptial cup"
     },
     {
-      "char": "珒",
+      "char": "瑨",
+      "en": "jade"
+    },
+    {
+      "char": "廑",
+      "en": "diligent"
+    },
+    {
+      "char": "琎",
       "en": "jade"
     },
     {
@@ -2037,58 +2045,38 @@
       "en": "gift"
     },
     {
-      "char": "琎",
-      "en": "jade"
+      "char": "溍",
+      "en": "Jin River"
     },
     {
       "char": "祲",
       "en": "omen"
     },
     {
-      "char": "溍",
-      "en": "Jin River"
-    },
-    {
-      "char": "瑨",
-      "en": "jade"
-    },
-    {
       "char": "墐",
       "en": "seal"
     },
     {
-      "char": "廑",
-      "en": "diligent"
-    },
-    {
       "char": "殣",
       "en": "die of hunger"
+    },
+    {
+      "char": "珒",
+      "en": "jade"
     }
   ],
   "jing": [
-    {
-      "char": "汫",
-      "en": "Jing River"
-    },
     {
       "char": "迳",
       "en": "path"
     },
     {
-      "char": "倞",
-      "en": "bright"
-    },
-    {
-      "char": "猄",
-      "en": "deer"
-    },
-    {
-      "char": "竫",
-      "en": "quiet"
-    },
-    {
       "char": "獍",
       "en": "monster"
+    },
+    {
+      "char": "倞",
+      "en": "bright"
     },
     {
       "char": "璥",
@@ -2101,6 +2089,18 @@
     {
       "char": "鼱",
       "en": "shrew"
+    },
+    {
+      "char": "猄",
+      "en": "deer"
+    },
+    {
+      "char": "汫",
+      "en": "Jing River"
+    },
+    {
+      "char": "竫",
+      "en": "quiet"
     }
   ],
   "jiong": [
@@ -2125,56 +2125,56 @@
   ],
   "ju": [
     {
-      "char": "岠",
-      "en": "distance"
-    },
-    {
-      "char": "弆",
-      "en": "hide"
-    },
-    {
-      "char": "泃",
-      "en": "Ju River"
-    },
-    {
       "char": "钜",
       "en": "huge"
-    },
-    {
-      "char": "秬",
-      "en": "black millet"
-    },
-    {
-      "char": "砠",
-      "en": "stone"
-    },
-    {
-      "char": "崌",
-      "en": "Ju Mountain"
-    },
-    {
-      "char": "娵",
-      "en": "Ju (surname)"
     },
     {
       "char": "筥",
       "en": "basket"
     },
     {
-      "char": "腒",
-      "en": "dried meat"
-    },
-    {
       "char": "窭",
       "en": "poor"
+    },
+    {
+      "char": "醵",
+      "en": "raise money"
     },
     {
       "char": "澽",
       "en": "Qui River"
     },
     {
-      "char": "醵",
-      "en": "raise money"
+      "char": "娵",
+      "en": "Ju (surname)"
+    },
+    {
+      "char": "秬",
+      "en": "black millet"
+    },
+    {
+      "char": "崌",
+      "en": "Ju Mountain"
+    },
+    {
+      "char": "岠",
+      "en": "distance"
+    },
+    {
+      "char": "砠",
+      "en": "stone"
+    },
+    {
+      "char": "腒",
+      "en": "dried meat"
+    },
+    {
+      "char": "泃",
+      "en": "Ju River"
+    },
+    {
+      "char": "弆",
+      "en": "hide"
     }
   ],
   "juan": [
@@ -2189,16 +2189,12 @@
   ],
   "jue": [
     {
-      "char": "砄",
-      "en": "stone"
+      "char": "傕",
+      "en": "urge"
     },
     {
       "char": "觖",
       "en": "dissatisfied"
-    },
-    {
-      "char": "傕",
-      "en": "urge"
     },
     {
       "char": "劂",
@@ -2207,20 +2203,16 @@
     {
       "char": "玃",
       "en": "monkey"
+    },
+    {
+      "char": "砄",
+      "en": "stone"
     }
   ],
   "jun": [
     {
-      "char": "莙",
-      "en": "chard"
-    },
-    {
       "char": "珺",
       "en": "jade"
-    },
-    {
-      "char": "晙",
-      "en": "dawn"
     },
     {
       "char": "焌",
@@ -2229,6 +2221,14 @@
     {
       "char": "畯",
       "en": "farmer"
+    },
+    {
+      "char": "莙",
+      "en": "chard"
+    },
+    {
+      "char": "晙",
+      "en": "dawn"
     },
     {
       "char": "鲪",
@@ -2243,34 +2243,38 @@
   ],
   "kai": [
     {
-      "char": "炌",
-      "en": "fire"
-    },
-    {
       "char": "垲",
       "en": "dry"
     },
     {
-      "char": "蒈",
-      "en": "carene"
-    },
-    {
       "char": "锎",
       "en": "californium"
+    },
+    {
+      "char": "炌",
+      "en": "fire"
+    },
+    {
+      "char": "蒈",
+      "en": "carene"
     }
   ],
   "kan": [
     {
-      "char": "衎",
-      "en": "happy"
+      "char": "崁",
+      "en": "rock"
     },
     {
       "char": "莰",
       "en": "camphene"
     },
     {
-      "char": "崁",
-      "en": "rock"
+      "char": "衎",
+      "en": "happy"
+    },
+    {
+      "char": "磡",
+      "en": "cliff"
     },
     {
       "char": "嵁",
@@ -2279,20 +2283,16 @@
     {
       "char": "墈",
       "en": "slope"
-    },
-    {
-      "char": "磡",
-      "en": "cliff"
     }
   ],
   "kang": [
     {
-      "char": "闶",
-      "en": "tall"
-    },
-    {
       "char": "钪",
       "en": "scandium"
+    },
+    {
+      "char": "闶",
+      "en": "tall"
     }
   ],
   "kao": [
@@ -2319,12 +2319,12 @@
   ],
   "kong": [
     {
-      "char": "埪",
-      "en": "cave"
-    },
-    {
       "char": "硿",
       "en": "bang"
+    },
+    {
+      "char": "埪",
+      "en": "cave"
     }
   ],
   "kou": [
@@ -2379,6 +2379,10 @@
       "en": "basket"
     },
     {
+      "char": "櫆",
+      "en": "catalpa"
+    },
+    {
       "char": "骙",
       "en": "gallop"
     },
@@ -2389,10 +2393,6 @@
     {
       "char": "戣",
       "en": "spear"
-    },
-    {
-      "char": "櫆",
-      "en": "catalpa"
     }
   ],
   "kun": [
@@ -2401,12 +2401,16 @@
       "en": "sincere"
     },
     {
+      "char": "堃",
+      "en": "Kun (surname)"
+    },
+    {
       "char": "壸",
       "en": "pot"
     },
     {
-      "char": "堃",
-      "en": "Kun (surname)"
+      "char": "鹍",
+      "en": "roc"
     },
     {
       "char": "裈",
@@ -2415,10 +2419,6 @@
     {
       "char": "婫",
       "en": "beautiful"
-    },
-    {
-      "char": "鹍",
-      "en": "roc"
     }
   ],
   "la": [
@@ -2443,30 +2443,30 @@
   ],
   "lan": [
     {
-      "char": "漤",
-      "en": "soak"
-    },
-    {
       "char": "襕",
       "en": "robe"
+    },
+    {
+      "char": "漤",
+      "en": "soak"
     }
   ],
   "lang": [
     {
-      "char": "埌",
-      "en": "wasteland"
+      "char": "烺",
+      "en": "bright"
     },
     {
       "char": "崀",
       "en": "Lang (place)"
     },
     {
-      "char": "桹",
-      "en": "bamboo"
+      "char": "埌",
+      "en": "wasteland"
     },
     {
-      "char": "烺",
-      "en": "bright"
+      "char": "桹",
+      "en": "bamboo"
     },
     {
       "char": "蓢",
@@ -2483,16 +2483,16 @@
   ],
   "lao": [
     {
+      "char": "嫪",
+      "en": "cling"
+    },
+    {
       "char": "荖",
       "en": "plant"
     },
     {
       "char": "铹",
       "en": "lawrencium"
-    },
-    {
-      "char": "嫪",
-      "en": "cling"
     },
     {
       "char": "橑",
@@ -2511,36 +2511,36 @@
       "en": "wooden club"
     },
     {
-      "char": "藟",
-      "en": "vine"
-    },
-    {
       "char": "礌",
       "en": "stone"
     },
     {
-      "char": "癗",
-      "en": "skin disease"
-    },
-    {
       "char": "罍",
       "en": "vase"
+    },
+    {
+      "char": "藟",
+      "en": "vine"
+    },
+    {
+      "char": "癗",
+      "en": "skin disease"
     }
   ],
   "leng": [
     {
-      "char": "堎",
-      "en": "mound"
-    },
-    {
       "char": "楞",
       "en": "straight"
+    },
+    {
+      "char": "堎",
+      "en": "mound"
     }
   ],
   "li": [
     {
-      "char": "朸",
-      "en": "tree"
+      "char": "釐",
+      "en": "lucky"
     },
     {
       "char": "坜",
@@ -2551,46 +2551,46 @@
       "en": "crush"
     },
     {
-      "char": "峛",
-      "en": "distant"
-    },
-    {
-      "char": "珕",
-      "en": "jade"
-    },
-    {
       "char": "浬",
       "en": "nautical mile"
-    },
-    {
-      "char": "凓",
-      "en": "cold"
     },
     {
       "char": "醨",
       "en": "thin wine"
     },
     {
-      "char": "釐",
-      "en": "lucky"
+      "char": "凓",
+      "en": "cold"
+    },
+    {
+      "char": "峛",
+      "en": "distant"
+    },
+    {
+      "char": "朸",
+      "en": "tree"
+    },
+    {
+      "char": "珕",
+      "en": "jade"
     }
   ],
   "lian": [
-    {
-      "char": "浰",
-      "en": "quick"
-    },
     {
       "char": "裣",
       "en": "gather"
     },
     {
-      "char": "瑓",
-      "en": "jade"
+      "char": "浰",
+      "en": "quick"
     },
     {
       "char": "蔹",
       "en": "vine"
+    },
+    {
+      "char": "瑓",
+      "en": "jade"
     },
     {
       "char": "磏",
@@ -2599,23 +2599,31 @@
   ],
   "liang": [
     {
-      "char": "俍",
-      "en": "good"
-    },
-    {
-      "char": "悢",
-      "en": "sad"
-    },
-    {
       "char": "辌",
       "en": "hearse"
     },
     {
       "char": "墚",
       "en": "ridge"
+    },
+    {
+      "char": "悢",
+      "en": "sad"
+    },
+    {
+      "char": "俍",
+      "en": "good"
     }
   ],
   "liao": [
+    {
+      "char": "嫽",
+      "en": "beautiful"
+    },
+    {
+      "char": "髎",
+      "en": "bone"
+    },
     {
       "char": "漻",
       "en": "clear"
@@ -2625,16 +2633,8 @@
       "en": "clear"
     },
     {
-      "char": "嫽",
-      "en": "beautiful"
-    },
-    {
       "char": "簝",
       "en": "bamboo screen"
-    },
-    {
-      "char": "髎",
-      "en": "bone"
     }
   ],
   "lie": [
@@ -2645,16 +2645,12 @@
   ],
   "lin": [
     {
-      "char": "箖",
-      "en": "bamboo"
+      "char": "懔",
+      "en": "awe"
     },
     {
       "char": "潾",
       "en": "clear"
-    },
-    {
-      "char": "懔",
-      "en": "awe"
     },
     {
       "char": "瞵",
@@ -2663,28 +2659,20 @@
     {
       "char": "翷",
       "en": "fly"
+    },
+    {
+      "char": "箖",
+      "en": "bamboo"
     }
   ],
   "ling": [
     {
-      "char": "坽",
-      "en": "steep"
-    },
-    {
-      "char": "姈",
-      "en": "beautiful"
+      "char": "鸰",
+      "en": "swallow"
     },
     {
       "char": "柃",
       "en": "wintergreen"
-    },
-    {
-      "char": "昤",
-      "en": "bright"
-    },
-    {
-      "char": "鸰",
-      "en": "swallow"
     },
     {
       "char": "舲",
@@ -2693,20 +2681,40 @@
     {
       "char": "澪",
       "en": "Ling River"
+    },
+    {
+      "char": "昤",
+      "en": "bright"
+    },
+    {
+      "char": "姈",
+      "en": "beautiful"
+    },
+    {
+      "char": "坽",
+      "en": "steep"
     }
   ],
   "liu": [
-    {
-      "char": "珋",
-      "en": "jade"
-    },
     {
       "char": "锍",
       "en": "sulfide"
     },
     {
+      "char": "鹨",
+      "en": "pipit"
+    },
+    {
       "char": "飗",
       "en": "breeze"
+    },
+    {
+      "char": "瑬",
+      "en": "jade"
+    },
+    {
+      "char": "珋",
+      "en": "jade"
     },
     {
       "char": "罶",
@@ -2717,26 +2725,18 @@
       "en": "owl"
     },
     {
-      "char": "瑬",
-      "en": "jade"
-    },
-    {
       "char": "疁",
       "en": "field"
-    },
-    {
-      "char": "鹨",
-      "en": "pipit"
     }
   ],
   "long": [
     {
-      "char": "昽",
-      "en": "dim"
-    },
-    {
       "char": "哢",
       "en": "sing"
+    },
+    {
+      "char": "昽",
+      "en": "dim"
     },
     {
       "char": "漋",
@@ -2745,12 +2745,12 @@
   ],
   "lou": [
     {
-      "char": "剅",
-      "en": "drain"
-    },
-    {
       "char": "溇",
       "en": "Lou River"
+    },
+    {
+      "char": "剅",
+      "en": "drain"
     }
   ],
   "lu": [
@@ -2759,69 +2759,61 @@
       "en": "Lu (place)"
     },
     {
+      "char": "蕗",
+      "en": "weed"
+    },
+    {
+      "char": "簏",
+      "en": "box"
+    },
+    {
       "char": "菉",
       "en": "green"
-    },
-    {
-      "char": "琭",
-      "en": "jade"
-    },
-    {
-      "char": "稑",
-      "en": "late rice"
     },
     {
       "char": "僇",
       "en": "punish"
     },
     {
-      "char": "勠",
-      "en": "unite"
-    },
-    {
-      "char": "澛",
-      "en": "river"
-    },
-    {
-      "char": "蕗",
-      "en": "weed"
-    },
-    {
       "char": "镥",
       "en": "lutetium"
     },
     {
-      "char": "簏",
-      "en": "box"
+      "char": "琭",
+      "en": "jade"
+    },
+    {
+      "char": "勠",
+      "en": "unite"
+    },
+    {
+      "char": "稑",
+      "en": "late rice"
+    },
+    {
+      "char": "澛",
+      "en": "river"
     }
   ],
   "luo": [
     {
-      "char": "倮",
-      "en": "naked"
+      "char": "蠃",
+      "en": "snail"
     },
     {
       "char": "脶",
       "en": "fingerprint"
     },
     {
-      "char": "蓏",
-      "en": "fruit"
+      "char": "倮",
+      "en": "naked"
     },
     {
-      "char": "蠃",
-      "en": "snail"
+      "char": "蓏",
+      "en": "fruit"
     }
   ],
   "lv": [
-    {
-      "char": "垏",
-      "en": "mound"
-    },
-    {
-      "char": "梠",
-      "en": "tree"
-    },
     {
       "char": "稆",
       "en": "wild grain"
@@ -2829,6 +2821,14 @@
     {
       "char": "葎",
       "en": "hop"
+    },
+    {
+      "char": "垏",
+      "en": "mound"
+    },
+    {
+      "char": "梠",
+      "en": "tree"
     }
   ],
   "lve": [
@@ -2843,12 +2843,12 @@
   ],
   "ma": [
     {
-      "char": "孖",
-      "en": "twin"
-    },
-    {
       "char": "杩",
       "en": "bridge"
+    },
+    {
+      "char": "孖",
+      "en": "twin"
     },
     {
       "char": "祃",
@@ -2873,32 +2873,36 @@
   ],
   "mang": [
     {
-      "char": "杧",
-      "en": "mango"
-    },
-    {
       "char": "尨",
       "en": "shaggy"
     },
     {
       "char": "牻",
       "en": "mottled ox"
+    },
+    {
+      "char": "杧",
+      "en": "mango"
     }
   ],
   "mao": [
     {
-      "char": "鄚",
-      "en": "Mao (place)"
-    },
-    {
       "char": "楙",
       "en": "luxuriant"
+    },
+    {
+      "char": "鄚",
+      "en": "Mao (place)"
     }
   ],
   "mei": [
     {
       "char": "浼",
       "en": "beg"
+    },
+    {
+      "char": "镅",
+      "en": "americium"
     },
     {
       "char": "渼",
@@ -2911,10 +2915,6 @@
     {
       "char": "瑂",
       "en": "jade"
-    },
-    {
-      "char": "镅",
-      "en": "americium"
     }
   ],
   "men": [
@@ -2929,12 +2929,12 @@
       "en": "cover"
     },
     {
-      "char": "鹲",
-      "en": "booby"
-    },
-    {
       "char": "礞",
       "en": "stone"
+    },
+    {
+      "char": "鹲",
+      "en": "booby"
     }
   ],
   "mi": [
@@ -2943,8 +2943,8 @@
       "en": "Mi (surname)"
     },
     {
-      "char": "洣",
-      "en": "Mi River"
+      "char": "蘼",
+      "en": "mint"
     },
     {
       "char": "祕",
@@ -2955,8 +2955,8 @@
       "en": "calm"
     },
     {
-      "char": "蘼",
-      "en": "mint"
+      "char": "洣",
+      "en": "Mi River"
     },
     {
       "char": "醾",
@@ -2969,12 +2969,12 @@
       "en": "encourage"
     },
     {
-      "char": "偭",
-      "en": "face"
-    },
-    {
       "char": "愐",
       "en": "recall"
+    },
+    {
+      "char": "偭",
+      "en": "face"
     }
   ],
   "miao": [
@@ -2985,28 +2985,28 @@
   ],
   "min": [
     {
-      "char": "苠",
-      "en": "plant"
-    },
-    {
-      "char": "忞",
-      "en": "diligent"
+      "char": "愍",
+      "en": "pity"
     },
     {
       "char": "湣",
       "en": "sad"
     },
     {
-      "char": "碈",
-      "en": "stone"
-    },
-    {
-      "char": "愍",
-      "en": "pity"
+      "char": "忞",
+      "en": "diligent"
     },
     {
       "char": "鳘",
       "en": "cod"
+    },
+    {
+      "char": "苠",
+      "en": "plant"
+    },
+    {
+      "char": "碈",
+      "en": "stone"
     }
   ],
   "ming": [
@@ -3041,12 +3041,12 @@
       "en": "fat"
     },
     {
-      "char": "乸",
-      "en": "female"
-    },
-    {
       "char": "镎",
       "en": "neptunium"
+    },
+    {
+      "char": "乸",
+      "en": "female"
     }
   ],
   "nai": [
@@ -3075,33 +3075,37 @@
       "en": "mound"
     },
     {
-      "char": "峱",
-      "en": "Nao Mountain"
-    },
-    {
       "char": "臑",
       "en": "arm"
+    },
+    {
+      "char": "峱",
+      "en": "Nao Mountain"
     }
   ],
   "ni": [
-    {
-      "char": "伲",
-      "en": "you"
-    },
     {
       "char": "猊",
       "en": "lion"
     },
     {
-      "char": "薿",
-      "en": "luxuriant"
+      "char": "伲",
+      "en": "you"
     },
     {
       "char": "麑",
       "en": "fawn"
+    },
+    {
+      "char": "薿",
+      "en": "luxuriant"
     }
   ],
   "nie": [
+    {
+      "char": "糵",
+      "en": "sprout"
+    },
     {
       "char": "陧",
       "en": "unstable"
@@ -3113,13 +3117,13 @@
     {
       "char": "嵲",
       "en": "steep"
-    },
-    {
-      "char": "糵",
-      "en": "sprout"
     }
   ],
   "ning": [
+    {
+      "char": "甯",
+      "en": "peaceful"
+    },
     {
       "char": "苧",
       "en": "ramie"
@@ -3127,10 +3131,6 @@
     {
       "char": "聍",
       "en": "earwax"
-    },
-    {
-      "char": "甯",
-      "en": "peaceful"
     }
   ],
   "niu": [
@@ -3141,16 +3141,16 @@
   ],
   "nu": [
     {
+      "char": "傉",
+      "en": "ugly"
+    },
+    {
       "char": "砮",
       "en": "stone arrow"
     },
     {
       "char": "笯",
       "en": "bird cage"
-    },
-    {
-      "char": "傉",
-      "en": "ugly"
     }
   ],
   "nuo": [
@@ -3177,12 +3177,12 @@
   ],
   "pai": [
     {
-      "char": "蒎",
-      "en": "pinene"
-    },
-    {
       "char": "簰",
       "en": "raft"
+    },
+    {
+      "char": "蒎",
+      "en": "pinene"
     }
   ],
   "pan": [
@@ -3207,12 +3207,12 @@
   ],
   "pei": [
     {
-      "char": "衃",
-      "en": "clotted blood"
-    },
-    {
       "char": "锫",
       "en": "berkelium"
+    },
+    {
+      "char": "衃",
+      "en": "clotted blood"
     }
   ],
   "pen": [
@@ -3237,40 +3237,40 @@
       "en": "separate"
     },
     {
-      "char": "苉",
-      "en": "plant"
+      "char": "伾",
+      "en": "Pi (surname)"
     },
     {
       "char": "芘",
       "en": "buttercup"
     },
     {
-      "char": "伾",
-      "en": "Pi (surname)"
-    },
-    {
-      "char": "狉",
-      "en": "wild"
+      "char": "嚭",
+      "en": "arrogant"
     },
     {
       "char": "陴",
       "en": "rampart"
     },
     {
-      "char": "鲏",
-      "en": "bitterling"
+      "char": "甓",
+      "en": "brick"
+    },
+    {
+      "char": "狉",
+      "en": "wild"
     },
     {
       "char": "澼",
       "en": "wash"
     },
     {
-      "char": "甓",
-      "en": "brick"
+      "char": "鲏",
+      "en": "bitterling"
     },
     {
-      "char": "嚭",
-      "en": "arrogant"
+      "char": "苉",
+      "en": "plant"
     }
   ],
   "pian": [
@@ -3293,40 +3293,40 @@
   ],
   "ping": [
     {
-      "char": "泙",
-      "en": "Ping River"
-    },
-    {
-      "char": "玶",
-      "en": "jade"
-    },
-    {
-      "char": "荓",
-      "en": "plant"
-    },
-    {
-      "char": "帡",
-      "en": "canopy"
-    },
-    {
       "char": "俜",
       "en": "lonely"
+    },
+    {
+      "char": "泙",
+      "en": "Ping River"
     },
     {
       "char": "洴",
       "en": "splash"
     },
     {
-      "char": "涄",
-      "en": "cool"
+      "char": "帡",
+      "en": "canopy"
+    },
+    {
+      "char": "荓",
+      "en": "plant"
+    },
+    {
+      "char": "淜",
+      "en": "surge"
     },
     {
       "char": "蚲",
       "en": "cricket"
     },
     {
-      "char": "淜",
-      "en": "surge"
+      "char": "玶",
+      "en": "jade"
+    },
+    {
+      "char": "涄",
+      "en": "cool"
     }
   ],
   "po": [
@@ -3345,28 +3345,28 @@
   ],
   "pu": [
     {
-      "char": "蒱",
-      "en": "vine"
+      "char": "潽",
+      "en": "boil over"
     },
     {
       "char": "酺",
       "en": "feast"
     },
     {
-      "char": "墣",
-      "en": "clod"
-    },
-    {
-      "char": "潽",
-      "en": "boil over"
+      "char": "镨",
+      "en": "praseodymium"
     },
     {
       "char": "镤",
       "en": "protactinium"
     },
     {
-      "char": "镨",
-      "en": "praseodymium"
+      "char": "蒱",
+      "en": "vine"
+    },
+    {
+      "char": "墣",
+      "en": "clod"
     },
     {
       "char": "穙",
@@ -3375,39 +3375,23 @@
   ],
   "qi": [
     {
+      "char": "跂",
+      "en": "stand on tiptoe"
+    },
+    {
       "char": "玘",
       "en": "jade"
-    },
-    {
-      "char": "呇",
-      "en": "star"
-    },
-    {
-      "char": "郪",
-      "en": "Qi (place)"
     },
     {
       "char": "埼",
       "en": "cape"
     },
     {
-      "char": "跂",
-      "en": "stand on tiptoe"
-    },
-    {
-      "char": "婍",
-      "en": "beautiful"
-    },
-    {
       "char": "棨",
       "en": "tally"
     },
     {
-      "char": "愭",
-      "en": "sad"
-    },
-    {
-      "char": "碶",
+      "char": "郪",
       "en": "Qi (place)"
     },
     {
@@ -3417,6 +3401,22 @@
     {
       "char": "鲯",
       "en": "dolphin"
+    },
+    {
+      "char": "愭",
+      "en": "sad"
+    },
+    {
+      "char": "呇",
+      "en": "star"
+    },
+    {
+      "char": "碶",
+      "en": "Qi (place)"
+    },
+    {
+      "char": "婍",
+      "en": "beautiful"
     }
   ],
   "qia": [
@@ -3427,12 +3427,20 @@
   ],
   "qian": [
     {
-      "char": "圲",
-      "en": "dry land"
+      "char": "汧",
+      "en": "Qian River"
     },
     {
-      "char": "伣",
-      "en": "spy"
+      "char": "肷",
+      "en": "flank"
+    },
+    {
+      "char": "蒨",
+      "en": "red"
+    },
+    {
+      "char": "靬",
+      "en": "leather"
     },
     {
       "char": "杄",
@@ -3443,28 +3451,20 @@
       "en": "Qian Mountain"
     },
     {
-      "char": "汧",
-      "en": "Qian River"
+      "char": "孅",
+      "en": "thin"
     },
     {
-      "char": "肷",
-      "en": "flank"
+      "char": "圲",
+      "en": "dry land"
     },
     {
-      "char": "靬",
-      "en": "leather"
-    },
-    {
-      "char": "蒨",
-      "en": "red"
+      "char": "伣",
+      "en": "spy"
     },
     {
       "char": "墘",
       "en": "edge"
-    },
-    {
-      "char": "孅",
-      "en": "thin"
     }
   ],
   "qiang": [
@@ -3495,34 +3495,34 @@
   ],
   "qin": [
     {
-      "char": "嵚",
-      "en": "steep"
-    },
-    {
       "char": "锓",
       "en": "carve"
     },
     {
       "char": "慬",
       "en": "cautious"
+    },
+    {
+      "char": "嵚",
+      "en": "steep"
     }
   ],
   "qing": [
     {
-      "char": "勍",
-      "en": "powerful"
-    },
-    {
-      "char": "庼",
-      "en": "storey"
+      "char": "鲭",
+      "en": "mackerel"
     },
     {
       "char": "碃",
       "en": "stone"
     },
     {
-      "char": "鲭",
-      "en": "mackerel"
+      "char": "庼",
+      "en": "storey"
+    },
+    {
+      "char": "勍",
+      "en": "powerful"
     }
   ],
   "qiong": [
@@ -3533,28 +3533,28 @@
   ],
   "qiu": [
     {
-      "char": "訄",
-      "en": "urge"
-    },
-    {
       "char": "萩",
       "en": "autumn"
-    },
-    {
-      "char": "鹙",
-      "en": "vulture"
-    },
-    {
-      "char": "璆",
-      "en": "jade sound"
     },
     {
       "char": "蝤",
       "en": "crab"
     },
     {
+      "char": "璆",
+      "en": "jade sound"
+    },
+    {
+      "char": "鹙",
+      "en": "vulture"
+    },
+    {
       "char": "鼽",
       "en": "stuffy nose"
+    },
+    {
+      "char": "訄",
+      "en": "urge"
     }
   ],
   "qu": [
@@ -3563,20 +3563,8 @@
       "en": "bend"
     },
     {
-      "char": "坥",
-      "en": "soil"
-    },
-    {
-      "char": "岨",
-      "en": "steep"
-    },
-    {
-      "char": "胠",
-      "en": "steal"
-    },
-    {
-      "char": "竘",
-      "en": "skillful"
+      "char": "蠼",
+      "en": "earwig"
     },
     {
       "char": "袪",
@@ -3587,6 +3575,10 @@
       "en": "yeast"
     },
     {
+      "char": "胠",
+      "en": "steal"
+    },
+    {
       "char": "鼩",
       "en": "shrew"
     },
@@ -3595,14 +3587,30 @@
       "en": "Qu River"
     },
     {
-      "char": "蠼",
-      "en": "earwig"
+      "char": "岨",
+      "en": "steep"
+    },
+    {
+      "char": "竘",
+      "en": "skillful"
+    },
+    {
+      "char": "坥",
+      "en": "soil"
     }
   ],
   "quan": [
     {
       "char": "佺",
       "en": "Quan (surname)"
+    },
+    {
+      "char": "棬",
+      "en": "wooden bowl"
+    },
+    {
+      "char": "鳈",
+      "en": "crucian"
     },
     {
       "char": "辁",
@@ -3613,26 +3621,18 @@
       "en": "relative"
     },
     {
-      "char": "棬",
-      "en": "wooden bowl"
-    },
-    {
       "char": "瑔",
       "en": "jade"
-    },
-    {
-      "char": "鳈",
-      "en": "crucian"
     }
   ],
   "que": [
     {
-      "char": "埆",
-      "en": "hard"
-    },
-    {
       "char": "碏",
       "en": "Que (surname)"
+    },
+    {
+      "char": "埆",
+      "en": "hard"
     }
   ],
   "qun": [
@@ -3649,16 +3649,16 @@
   ],
   "rang": [
     {
-      "char": "儴",
-      "en": "run"
+      "char": "瀼",
+      "en": "moist"
     },
     {
       "char": "蘘",
       "en": "flower"
     },
     {
-      "char": "瀼",
-      "en": "moist"
+      "char": "儴",
+      "en": "run"
     }
   ],
   "rao": [
@@ -3681,22 +3681,22 @@
   ],
   "rong": [
     {
-      "char": "瑢",
-      "en": "jade"
-    },
-    {
       "char": "镕",
       "en": "melt"
+    },
+    {
+      "char": "瑢",
+      "en": "jade"
     }
   ],
   "ru": [
     {
-      "char": "嬬",
-      "en": "gentle"
-    },
-    {
       "char": "颥",
       "en": "temple"
+    },
+    {
+      "char": "嬬",
+      "en": "gentle"
     }
   ],
   "ruan": [
@@ -3705,46 +3705,46 @@
       "en": "bank"
     },
     {
-      "char": "媆",
-      "en": "tender"
-    },
-    {
       "char": "瓀",
       "en": "jade"
+    },
+    {
+      "char": "媆",
+      "en": "tender"
     }
   ],
   "rui": [
     {
-      "char": "汭",
-      "en": "river"
-    },
-    {
       "char": "枘",
       "en": "tenon"
+    },
+    {
+      "char": "汭",
+      "en": "river"
     }
   ],
   "ruo": [
     {
-      "char": "鄀",
-      "en": "Ruo (state)"
+      "char": "爇",
+      "en": "burn"
     },
     {
       "char": "蒻",
       "en": "tender"
     },
     {
-      "char": "爇",
-      "en": "burn"
+      "char": "鄀",
+      "en": "Ruo (state)"
     }
   ],
   "sa": [
     {
-      "char": "脎",
-      "en": "osazone"
-    },
-    {
       "char": "潵",
       "en": "sprinkle"
+    },
+    {
+      "char": "脎",
+      "en": "osazone"
     }
   ],
   "san": [
@@ -3767,12 +3767,12 @@
   ],
   "se": [
     {
-      "char": "洓",
-      "en": "leak"
-    },
-    {
       "char": "璱",
       "en": "jade"
+    },
+    {
+      "char": "洓",
+      "en": "leak"
     }
   ],
   "shai": [
@@ -3783,12 +3783,16 @@
   ],
   "shan": [
     {
-      "char": "钐",
-      "en": "samarium"
+      "char": "墡",
+      "en": "loess"
     },
     {
       "char": "埏",
       "en": "mold"
+    },
+    {
+      "char": "钐",
+      "en": "samarium"
     },
     {
       "char": "掞",
@@ -3797,10 +3801,6 @@
     {
       "char": "晱",
       "en": "bright"
-    },
-    {
-      "char": "墡",
-      "en": "loess"
     }
   ],
   "shao": [
@@ -3815,54 +3815,54 @@
   ],
   "she": [
     {
-      "char": "畬",
-      "en": "farm"
-    },
-    {
       "char": "滠",
       "en": "She River"
+    },
+    {
+      "char": "畬",
+      "en": "farm"
     }
   ],
   "shen": [
     {
-      "char": "屾",
-      "en": "two hills"
-    },
-    {
-      "char": "侁",
-      "en": "numerous"
-    },
-    {
       "char": "珅",
       "en": "jade"
-    },
-    {
-      "char": "矧",
-      "en": "besides"
-    },
-    {
-      "char": "甡",
-      "en": "lush"
-    },
-    {
-      "char": "棽",
-      "en": "luxuriant"
-    },
-    {
-      "char": "椹",
-      "en": "mulberry"
-    },
-    {
-      "char": "鲹",
-      "en": "jackfish"
     },
     {
       "char": "燊",
       "en": "flame"
     },
     {
+      "char": "椹",
+      "en": "mulberry"
+    },
+    {
+      "char": "棽",
+      "en": "luxuriant"
+    },
+    {
+      "char": "甡",
+      "en": "lush"
+    },
+    {
+      "char": "矧",
+      "en": "besides"
+    },
+    {
+      "char": "侁",
+      "en": "numerous"
+    },
+    {
       "char": "瞫",
       "en": "stare"
+    },
+    {
+      "char": "鲹",
+      "en": "jackfish"
+    },
+    {
+      "char": "屾",
+      "en": "two hills"
     }
   ],
   "sheng": [
@@ -3871,15 +3871,35 @@
       "en": "rise"
     },
     {
-      "char": "陞",
-      "en": "rise"
-    },
-    {
       "char": "眚",
       "en": "disaster"
+    },
+    {
+      "char": "陞",
+      "en": "rise"
     }
   ],
   "shi": [
+    {
+      "char": "媞",
+      "en": "gentle"
+    },
+    {
+      "char": "祏",
+      "en": "shrine"
+    },
+    {
+      "char": "栻",
+      "en": "compass"
+    },
+    {
+      "char": "鲺",
+      "en": "louse"
+    },
+    {
+      "char": "鼫",
+      "en": "rat"
+    },
     {
       "char": "邿",
       "en": "Shi (state)"
@@ -3891,26 +3911,6 @@
     {
       "char": "浉",
       "en": "Shi River"
-    },
-    {
-      "char": "祏",
-      "en": "shrine"
-    },
-    {
-      "char": "栻",
-      "en": "compass"
-    },
-    {
-      "char": "媞",
-      "en": "gentle"
-    },
-    {
-      "char": "鲺",
-      "en": "louse"
-    },
-    {
-      "char": "鼫",
-      "en": "rat"
     },
     {
       "char": "襫",
@@ -3929,20 +3929,20 @@
       "en": "weapon"
     },
     {
-      "char": "陎",
-      "en": "place"
-    },
-    {
       "char": "鄃",
       "en": "Shu (place)"
+    },
+    {
+      "char": "婌",
+      "en": "virtuous"
     },
     {
       "char": "隃",
       "en": "Yu (place)"
     },
     {
-      "char": "婌",
-      "en": "virtuous"
+      "char": "陎",
+      "en": "place"
     }
   ],
   "shuan": [
@@ -3953,16 +3953,16 @@
   ],
   "shuang": [
     {
+      "char": "鹴",
+      "en": "swan"
+    },
+    {
       "char": "骦",
       "en": "horse"
     },
     {
       "char": "礵",
       "en": "stone"
-    },
-    {
-      "char": "鹴",
-      "en": "swan"
     }
   ],
   "shui": [
@@ -3973,16 +3973,8 @@
   ],
   "si": [
     {
-      "char": "虒",
-      "en": "tiger"
-    },
-    {
       "char": "涘",
       "en": "bank"
-    },
-    {
-      "char": "楒",
-      "en": "maple"
     },
     {
       "char": "飔",
@@ -3991,37 +3983,49 @@
     {
       "char": "凘",
       "en": "ice"
+    },
+    {
+      "char": "虒",
+      "en": "tiger"
+    },
+    {
+      "char": "楒",
+      "en": "maple"
     }
   ],
   "song": [
     {
-      "char": "娀",
-      "en": "Song (state)"
-    },
-    {
       "char": "崧",
       "en": "Song Mountain"
+    },
+    {
+      "char": "娀",
+      "en": "Song (state)"
     }
   ],
   "sou": [
     {
-      "char": "蒐",
-      "en": "search"
-    },
-    {
       "char": "廋",
       "en": "thin"
+    },
+    {
+      "char": "锼",
+      "en": "carve"
     },
     {
       "char": "瞍",
       "en": "blind"
     },
     {
-      "char": "锼",
-      "en": "carve"
+      "char": "蒐",
+      "en": "search"
     }
   ],
   "su": [
+    {
+      "char": "蔌",
+      "en": "vegetables"
+    },
     {
       "char": "骕",
       "en": "horse"
@@ -4031,16 +4035,12 @@
       "en": "revive"
     },
     {
-      "char": "傃",
-      "en": "follow"
-    },
-    {
       "char": "鹔",
       "en": "swan"
     },
     {
-      "char": "蔌",
-      "en": "vegetables"
+      "char": "傃",
+      "en": "follow"
     },
     {
       "char": "蹜",
@@ -4059,12 +4059,12 @@
       "en": "plant"
     },
     {
-      "char": "璲",
-      "en": "jade"
-    },
-    {
       "char": "穟",
       "en": "ear of grain"
+    },
+    {
+      "char": "璲",
+      "en": "jade"
     },
     {
       "char": "襚",
@@ -4083,34 +4083,22 @@
   ],
   "ta": [
     {
-      "char": "鿎",
-      "en": "bird"
-    },
-    {
       "char": "溚",
       "en": "oil"
     },
     {
       "char": "鞳",
       "en": "bang"
+    },
+    {
+      "char": "鿎",
+      "en": "bird"
     }
   ],
   "tan": [
     {
       "char": "倓",
       "en": "quiet"
-    },
-    {
-      "char": "菼",
-      "en": "reed"
-    },
-    {
-      "char": "惔",
-      "en": "calm"
-    },
-    {
-      "char": "榃",
-      "en": "pond"
     },
     {
       "char": "锬",
@@ -4121,11 +4109,31 @@
       "en": "jade"
     },
     {
+      "char": "惔",
+      "en": "calm"
+    },
+    {
+      "char": "菼",
+      "en": "reed"
+    },
+    {
+      "char": "榃",
+      "en": "pond"
+    },
+    {
       "char": "磹",
       "en": "stone"
     }
   ],
   "tang": [
+    {
+      "char": "螗",
+      "en": "cicada"
+    },
+    {
+      "char": "镋",
+      "en": "halberd"
+    },
     {
       "char": "铴",
       "en": "tin"
@@ -4133,21 +4141,9 @@
     {
       "char": "鄌",
       "en": "Dang (place)"
-    },
-    {
-      "char": "镋",
-      "en": "halberd"
-    },
-    {
-      "char": "螗",
-      "en": "cicada"
     }
   ],
   "tao": [
-    {
-      "char": "弢",
-      "en": "bow case"
-    },
     {
       "char": "梼",
       "en": "toon"
@@ -4157,22 +4153,26 @@
       "en": "rope"
     },
     {
-      "char": "慆",
-      "en": "joy"
+      "char": "弢",
+      "en": "bow case"
     },
     {
       "char": "鼗",
       "en": "drum"
+    },
+    {
+      "char": "慆",
+      "en": "joy"
     }
   ],
   "te": [
     {
-      "char": "铽",
-      "en": "terbium"
-    },
-    {
       "char": "螣",
       "en": "mythical beast"
+    },
+    {
+      "char": "铽",
+      "en": "terbium"
     }
   ],
   "teng": [
@@ -4183,42 +4183,42 @@
   ],
   "ti": [
     {
-      "char": "遆",
-      "en": "Ti (surname)"
-    },
-    {
-      "char": "瑅",
-      "en": "jade"
-    },
-    {
       "char": "裼",
       "en": "strip"
+    },
+    {
+      "char": "趯",
+      "en": "jump"
+    },
+    {
+      "char": "遆",
+      "en": "Ti (surname)"
     },
     {
       "char": "擿",
       "en": "pick"
     },
     {
-      "char": "趯",
-      "en": "jump"
+      "char": "瑅",
+      "en": "jade"
     }
   ],
   "tian": [
     {
-      "char": "沺",
-      "en": "vast"
+      "char": "掭",
+      "en": "stir"
     },
     {
       "char": "盷",
       "en": "stare"
     },
     {
-      "char": "掭",
-      "en": "stir"
-    },
-    {
       "char": "淟",
       "en": "turbid"
+    },
+    {
+      "char": "沺",
+      "en": "vast"
     },
     {
       "char": "晪",
@@ -4230,10 +4230,6 @@
     }
   ],
   "tiao": [
-    {
-      "char": "朓",
-      "en": "moon"
-    },
     {
       "char": "祧",
       "en": "ancestor"
@@ -4247,38 +4243,42 @@
       "en": "minnow"
     },
     {
+      "char": "朓",
+      "en": "moon"
+    },
+    {
       "char": "嬥",
       "en": "jump"
     }
   ],
   "ting": [
     {
-      "char": "圢",
-      "en": "flat"
-    },
-    {
-      "char": "侹",
-      "en": "straight"
-    },
-    {
       "char": "珽",
       "en": "jade"
     },
     {
-      "char": "烶",
-      "en": "hot"
-    },
-    {
-      "char": "桯",
-      "en": "beam"
+      "char": "渟",
+      "en": "still"
     },
     {
       "char": "颋",
       "en": "upright"
     },
     {
-      "char": "渟",
-      "en": "still"
+      "char": "桯",
+      "en": "beam"
+    },
+    {
+      "char": "侹",
+      "en": "straight"
+    },
+    {
+      "char": "圢",
+      "en": "flat"
+    },
+    {
+      "char": "烶",
+      "en": "hot"
     }
   ],
   "tong": [
@@ -4287,28 +4287,28 @@
       "en": "same"
     },
     {
-      "char": "峂",
-      "en": "Tong Mountain"
-    },
-    {
-      "char": "哃",
-      "en": "same"
+      "char": "曈",
+      "en": "pupil"
     },
     {
       "char": "烔",
       "en": "hot"
     },
     {
-      "char": "鲖",
-      "en": "fish"
-    },
-    {
       "char": "橦",
       "en": "paulownia"
     },
     {
-      "char": "曈",
-      "en": "pupil"
+      "char": "哃",
+      "en": "same"
+    },
+    {
+      "char": "鲖",
+      "en": "fish"
+    },
+    {
+      "char": "峂",
+      "en": "Tong Mountain"
     }
   ],
   "tou": [
@@ -4319,24 +4319,24 @@
   ],
   "tu": [
     {
-      "char": "梌",
-      "en": "camphor"
-    },
-    {
-      "char": "葖",
-      "en": "plant"
+      "char": "酴",
+      "en": "wine"
     },
     {
       "char": "稌",
       "en": "rice"
     },
     {
+      "char": "葖",
+      "en": "plant"
+    },
+    {
       "char": "腯",
       "en": "fat"
     },
     {
-      "char": "酴",
-      "en": "wine"
+      "char": "梌",
+      "en": "camphor"
     }
   ],
   "tuan": [
@@ -4379,19 +4379,15 @@
       "en": "rely"
     },
     {
-      "char": "萚",
-      "en": "leaf"
-    },
-    {
       "char": "箨",
       "en": "bamboo shoot shell"
+    },
+    {
+      "char": "萚",
+      "en": "leaf"
     }
   ],
   "wa": [
-    {
-      "char": "畖",
-      "en": "Wa (place)"
-    },
     {
       "char": "窊",
       "en": "hollow"
@@ -4399,16 +4395,20 @@
     {
       "char": "腽",
       "en": "fat"
+    },
+    {
+      "char": "畖",
+      "en": "Wa (place)"
     }
   ],
   "wan": [
     {
-      "char": "妧",
-      "en": "beautiful"
-    },
-    {
       "char": "婠",
       "en": "gentle"
+    },
+    {
+      "char": "妧",
+      "en": "beautiful"
     },
     {
       "char": "椀",
@@ -4423,44 +4423,48 @@
   ],
   "wei": [
     {
-      "char": "峗",
-      "en": "Wei Mountain"
-    },
-    {
-      "char": "洈",
-      "en": "Wei River"
-    },
-    {
-      "char": "硙",
-      "en": "mill"
-    },
-    {
-      "char": "硊",
-      "en": "stone"
-    },
-    {
-      "char": "琟",
-      "en": "jade"
+      "char": "溦",
+      "en": "drizzle"
     },
     {
       "char": "艉",
       "en": "stern"
     },
     {
-      "char": "煟",
-      "en": "bright"
-    },
-    {
-      "char": "溦",
-      "en": "drizzle"
+      "char": "亹",
+      "en": "diligent"
     },
     {
       "char": "碨",
       "en": "grind"
     },
     {
+      "char": "硊",
+      "en": "stone"
+    },
+    {
+      "char": "煟",
+      "en": "bright"
+    },
+    {
+      "char": "琟",
+      "en": "jade"
+    },
+    {
       "char": "薳",
       "en": "Wei (surname)"
+    },
+    {
+      "char": "硙",
+      "en": "mill"
+    },
+    {
+      "char": "峗",
+      "en": "Wei Mountain"
+    },
+    {
+      "char": "洈",
+      "en": "Wei River"
     },
     {
       "char": "鳂",
@@ -4473,10 +4477,6 @@
     {
       "char": "鳚",
       "en": "blenny"
-    },
-    {
-      "char": "亹",
-      "en": "diligent"
     }
   ],
   "wen": [
@@ -4497,12 +4497,12 @@
       "en": "Wen (place)"
     },
     {
-      "char": "榅",
-      "en": "quince"
-    },
-    {
       "char": "辒",
       "en": "hearse"
+    },
+    {
+      "char": "榅",
+      "en": "quince"
     },
     {
       "char": "蕰",
@@ -4515,15 +4515,19 @@
   ],
   "weng": [
     {
-      "char": "鹟",
-      "en": "flycatcher"
-    },
-    {
       "char": "蕹",
       "en": "water spinach"
+    },
+    {
+      "char": "鹟",
+      "en": "flycatcher"
     }
   ],
   "wo": [
+    {
+      "char": "硪",
+      "en": "rammer"
+    },
     {
       "char": "偓",
       "en": "Wo (surname)"
@@ -4531,17 +4535,9 @@
     {
       "char": "涴",
       "en": "stain"
-    },
-    {
-      "char": "硪",
-      "en": "rammer"
     }
   ],
   "wu": [
-    {
-      "char": "屼",
-      "en": "barren hill"
-    },
     {
       "char": "芴",
       "en": "anthracene"
@@ -4551,24 +4547,28 @@
       "en": "evening"
     },
     {
-      "char": "郚",
-      "en": "Wu (place)"
-    },
-    {
       "char": "洿",
       "en": "dirty"
     },
     {
-      "char": "珸",
-      "en": "jade"
+      "char": "鹀",
+      "en": "bunting"
+    },
+    {
+      "char": "郚",
+      "en": "Wu (place)"
     },
     {
       "char": "珷",
       "en": "jade"
     },
     {
-      "char": "鹀",
-      "en": "bunting"
+      "char": "屼",
+      "en": "barren hill"
+    },
+    {
+      "char": "珸",
+      "en": "jade"
     }
   ],
   "xi": [
@@ -4577,16 +4577,84 @@
       "en": "powerful"
     },
     {
-      "char": "肸",
-      "en": "spirit"
+      "char": "傒",
+      "en": "wait"
+    },
+    {
+      "char": "爔",
+      "en": "flame"
+    },
+    {
+      "char": "咥",
+      "en": "laugh"
     },
     {
       "char": "穸",
       "en": "tomb"
     },
     {
-      "char": "咥",
-      "en": "laugh"
+      "char": "嶲",
+      "en": "Xi (place)"
+    },
+    {
+      "char": "舾",
+      "en": "ship's gear"
+    },
+    {
+      "char": "谿",
+      "en": "stream"
+    },
+    {
+      "char": "蓰",
+      "en": "five times"
+    },
+    {
+      "char": "鼷",
+      "en": "mouse"
+    },
+    {
+      "char": "巇",
+      "en": "dangerous"
+    },
+    {
+      "char": "菥",
+      "en": "shepherd's purse"
+    },
+    {
+      "char": "憙",
+      "en": "happy"
+    },
+    {
+      "char": "绤",
+      "en": "coarse cloth"
+    },
+    {
+      "char": "枲",
+      "en": "hemp"
+    },
+    {
+      "char": "肸",
+      "en": "spirit"
+    },
+    {
+      "char": "酅",
+      "en": "Xi (place)"
+    },
+    {
+      "char": "睎",
+      "en": "hope"
+    },
+    {
+      "char": "觿",
+      "en": "hairpin"
+    },
+    {
+      "char": "嶍",
+      "en": "Xi Mountain"
+    },
+    {
+      "char": "暿",
+      "en": "bright"
     },
     {
       "char": "俙",
@@ -4597,80 +4665,12 @@
       "en": "military rations"
     },
     {
-      "char": "枲",
-      "en": "hemp"
-    },
-    {
-      "char": "绤",
-      "en": "coarse cloth"
-    },
-    {
-      "char": "菥",
-      "en": "shepherd's purse"
-    },
-    {
-      "char": "睎",
-      "en": "hope"
-    },
-    {
-      "char": "傒",
-      "en": "wait"
-    },
-    {
-      "char": "舾",
-      "en": "ship's gear"
-    },
-    {
-      "char": "蓰",
-      "en": "five times"
-    },
-    {
-      "char": "嶍",
-      "en": "Xi Mountain"
-    },
-    {
-      "char": "嶲",
-      "en": "Xi (place)"
-    },
-    {
-      "char": "憙",
-      "en": "happy"
-    },
-    {
-      "char": "暿",
-      "en": "bright"
-    },
-    {
       "char": "熻",
       "en": "bright"
     },
     {
-      "char": "谿",
-      "en": "stream"
-    },
-    {
       "char": "鳛",
       "en": "fish"
-    },
-    {
-      "char": "巇",
-      "en": "dangerous"
-    },
-    {
-      "char": "酅",
-      "en": "Xi (place)"
-    },
-    {
-      "char": "爔",
-      "en": "flame"
-    },
-    {
-      "char": "鼷",
-      "en": "mouse"
-    },
-    {
-      "char": "觿",
-      "en": "hairpin"
     }
   ],
   "xia": [
@@ -4681,16 +4681,16 @@
   ],
   "xian": [
     {
-      "char": "伭",
-      "en": "dark"
-    },
-    {
       "char": "忺",
       "en": "willing"
     },
     {
       "char": "狝",
       "en": "hunt"
+    },
+    {
+      "char": "筅",
+      "en": "bamboo brush"
     },
     {
       "char": "莶",
@@ -4701,16 +4701,16 @@
       "en": "dangerous"
     },
     {
+      "char": "缐",
+      "en": "thread"
+    },
+    {
       "char": "硍",
       "en": "crack"
     },
     {
-      "char": "筅",
-      "en": "bamboo brush"
-    },
-    {
-      "char": "缐",
-      "en": "thread"
+      "char": "伭",
+      "en": "dark"
     },
     {
       "char": "禒",
@@ -4719,31 +4719,19 @@
   ],
   "xiang": [
     {
-      "char": "珦",
-      "en": "jade"
+      "char": "瓖",
+      "en": "inlay"
     },
     {
       "char": "葙",
       "en": "box"
     },
     {
-      "char": "瓖",
-      "en": "inlay"
+      "char": "珦",
+      "en": "jade"
     }
   ],
   "xiao": [
-    {
-      "char": "洨",
-      "en": "Xiao River"
-    },
-    {
-      "char": "虓",
-      "en": "roar"
-    },
-    {
-      "char": "涍",
-      "en": "Xiao River"
-    },
     {
       "char": "猇",
       "en": "tiger"
@@ -4753,23 +4741,31 @@
       "en": "swift"
     },
     {
+      "char": "洨",
+      "en": "Xiao River"
+    },
+    {
+      "char": "虓",
+      "en": "roar"
+    },
+    {
+      "char": "蟏",
+      "en": "spider"
+    },
+    {
+      "char": "涍",
+      "en": "Xiao River"
+    },
+    {
       "char": "敩",
       "en": "teach"
     },
     {
       "char": "皛",
       "en": "bright"
-    },
-    {
-      "char": "蟏",
-      "en": "spider"
     }
   ],
   "xie": [
-    {
-      "char": "偰",
-      "en": "Xie (surname)"
-    },
     {
       "char": "榍",
       "en": "sphene"
@@ -4777,6 +4773,10 @@
     {
       "char": "薢",
       "en": "plant"
+    },
+    {
+      "char": "偰",
+      "en": "Xie (surname)"
     }
   ],
   "xin": [
@@ -4787,24 +4787,24 @@
   ],
   "xing": [
     {
-      "char": "钘",
-      "en": "basin"
-    },
-    {
       "char": "骍",
       "en": "red"
     },
     {
-      "char": "铏",
-      "en": "vessel"
+      "char": "钘",
+      "en": "basin"
+    },
+    {
+      "char": "瑆",
+      "en": "jade"
     },
     {
       "char": "婞",
       "en": "stubborn"
     },
     {
-      "char": "瑆",
-      "en": "jade"
+      "char": "铏",
+      "en": "vessel"
     },
     {
       "char": "煋",
@@ -4817,19 +4817,15 @@
       "en": "noisy"
     },
     {
-      "char": "诇",
-      "en": "spy"
-    },
-    {
       "char": "夐",
       "en": "distant"
+    },
+    {
+      "char": "诇",
+      "en": "spy"
     }
   ],
   "xiu": [
-    {
-      "char": "珛",
-      "en": "jade"
-    },
     {
       "char": "脩",
       "en": "long"
@@ -4837,12 +4833,24 @@
     {
       "char": "鸺",
       "en": "owl"
+    },
+    {
+      "char": "珛",
+      "en": "jade"
     }
   ],
   "xu": [
     {
-      "char": "旴",
-      "en": "Xu River"
+      "char": "谞",
+      "en": "wisdom"
+    },
+    {
+      "char": "糈",
+      "en": "sacrificial grain"
+    },
+    {
+      "char": "醑",
+      "en": "wine"
     },
     {
       "char": "昫",
@@ -4853,82 +4861,74 @@
       "en": "jade"
     },
     {
-      "char": "垿",
-      "en": "mound"
-    },
-    {
-      "char": "冔",
-      "en": "helmet"
-    },
-    {
-      "char": "谞",
-      "en": "wisdom"
+      "char": "旴",
+      "en": "Xu River"
     },
     {
       "char": "湑",
       "en": "clear"
     },
     {
-      "char": "糈",
-      "en": "sacrificial grain"
+      "char": "垿",
+      "en": "mound"
     },
     {
-      "char": "醑",
-      "en": "wine"
+      "char": "冔",
+      "en": "helmet"
     }
   ],
   "xuan": [
     {
-      "char": "玹",
-      "en": "jade"
-    },
-    {
-      "char": "咺",
-      "en": "cry"
-    },
-    {
-      "char": "昡",
-      "en": "dazzle"
-    },
-    {
-      "char": "晅",
-      "en": "bright"
-    },
-    {
-      "char": "痃",
-      "en": "hernia"
-    },
-    {
-      "char": "琄",
-      "en": "jade"
-    },
-    {
-      "char": "衒",
-      "en": "show off"
-    },
-    {
-      "char": "愃",
-      "en": "happy"
-    },
-    {
-      "char": "碹",
-      "en": "arch"
-    },
-    {
-      "char": "暶",
-      "en": "bright"
+      "char": "禤",
+      "en": "Xuan (surname)"
     },
     {
       "char": "儇",
       "en": "clever"
     },
     {
-      "char": "禤",
-      "en": "Xuan (surname)"
+      "char": "玹",
+      "en": "jade"
+    },
+    {
+      "char": "碹",
+      "en": "arch"
+    },
+    {
+      "char": "晅",
+      "en": "bright"
+    },
+    {
+      "char": "衒",
+      "en": "show off"
     },
     {
       "char": "翾",
       "en": "fly"
+    },
+    {
+      "char": "痃",
+      "en": "hernia"
+    },
+    {
+      "char": "昡",
+      "en": "dazzle"
+    },
+    {
+      "char": "咺",
+      "en": "cry"
+    },
+    {
+      "char": "暶",
+      "en": "bright"
+    },
+    {
+      "char": "琄",
+      "en": "jade"
+    },
+    {
+      "char": "愃",
+      "en": "happy"
     }
   ],
   "xue": [
@@ -4939,27 +4939,19 @@
   ],
   "xun": [
     {
-      "char": "栒",
-      "en": "tree"
+      "char": "獯",
+      "en": "fierce"
     },
     {
       "char": "噀",
       "en": "spurt"
     },
     {
-      "char": "獯",
-      "en": "fierce"
+      "char": "栒",
+      "en": "tree"
     }
   ],
   "ya": [
-    {
-      "char": "吖",
-      "en": "interjection"
-    },
-    {
-      "char": "砑",
-      "en": "polish"
-    },
     {
       "char": "琊",
       "en": "Yashan Mountain"
@@ -4969,12 +4961,20 @@
       "en": "branch"
     },
     {
-      "char": "堐",
-      "en": "mound"
+      "char": "吖",
+      "en": "interjection"
     },
     {
       "char": "猰",
       "en": "monster"
+    },
+    {
+      "char": "砑",
+      "en": "polish"
+    },
+    {
+      "char": "堐",
+      "en": "mound"
     }
   ],
   "yan": [
@@ -4983,36 +4983,48 @@
       "en": "Yan (surname)"
     },
     {
-      "char": "觃",
-      "en": "Yan (place)"
-    },
-    {
-      "char": "沇",
-      "en": "Yan River"
+      "char": "厣",
+      "en": "operculum"
     },
     {
       "char": "弇",
       "en": "cover"
     },
     {
-      "char": "烻",
-      "en": "bright"
-    },
-    {
-      "char": "厣",
-      "en": "operculum"
-    },
-    {
-      "char": "棪",
-      "en": "date"
+      "char": "黡",
+      "en": "mole"
     },
     {
       "char": "渰",
       "en": "flood"
     },
     {
+      "char": "嬿",
+      "en": "beautiful"
+    },
+    {
+      "char": "棪",
+      "en": "date"
+    },
+    {
       "char": "扊",
       "en": "door bolt"
+    },
+    {
+      "char": "沇",
+      "en": "Yan River"
+    },
+    {
+      "char": "甗",
+      "en": "steamer"
+    },
+    {
+      "char": "烻",
+      "en": "bright"
+    },
+    {
+      "char": "觃",
+      "en": "Yan (place)"
     },
     {
       "char": "墕",
@@ -5033,18 +5045,6 @@
     {
       "char": "虤",
       "en": "tiger"
-    },
-    {
-      "char": "黡",
-      "en": "mole"
-    },
-    {
-      "char": "嬿",
-      "en": "beautiful"
-    },
-    {
-      "char": "甗",
-      "en": "steamer"
     }
   ],
   "yang": [
@@ -5053,50 +5053,50 @@
       "en": "fly"
     },
     {
-      "char": "咉",
-      "en": "reflect"
-    },
-    {
-      "char": "钖",
-      "en": "tin"
+      "char": "羕",
+      "en": "long"
     },
     {
       "char": "垟",
       "en": "field"
     },
     {
-      "char": "羕",
-      "en": "long"
+      "char": "咉",
+      "en": "reflect"
+    },
+    {
+      "char": "钖",
+      "en": "tin"
     }
   ],
   "yao": [
     {
-      "char": "垚",
-      "en": "high"
-    },
-    {
       "char": "轺",
       "en": "carriage"
-    },
-    {
-      "char": "窅",
-      "en": "deep"
     },
     {
       "char": "崾",
       "en": "waist"
     },
     {
+      "char": "窅",
+      "en": "deep"
+    },
+    {
+      "char": "垚",
+      "en": "high"
+    },
+    {
       "char": "猺",
       "en": "Yao (ethnic)"
     },
     {
-      "char": "滧",
-      "en": "stream"
-    },
-    {
       "char": "媱",
       "en": "beautiful"
+    },
+    {
+      "char": "滧",
+      "en": "stream"
     }
   ],
   "ye": [
@@ -5105,42 +5105,74 @@
       "en": "bright"
     },
     {
-      "char": "倻",
-      "en": "Ya (surname)"
-    },
-    {
       "char": "铘",
       "en": "sword"
     },
     {
-      "char": "堨",
-      "en": "dyke"
+      "char": "倻",
+      "en": "Ya (surname)"
+    },
+    {
+      "char": "馌",
+      "en": "bring food"
     },
     {
       "char": "楪",
       "en": "leaf"
     },
     {
-      "char": "馌",
-      "en": "bring food"
+      "char": "堨",
+      "en": "dyke"
     }
   ],
   "yi": [
+    {
+      "char": "镱",
+      "en": "ytterbium"
+    },
+    {
+      "char": "欹",
+      "en": "slanting"
+    },
+    {
+      "char": "瘗",
+      "en": "bury"
+    },
+    {
+      "char": "燚",
+      "en": "fire"
+    },
+    {
+      "char": "扆",
+      "en": "screen"
+    },
+    {
+      "char": "廙",
+      "en": "Yi (surname)"
+    },
+    {
+      "char": "簃",
+      "en": "study"
+    },
+    {
+      "char": "嫕",
+      "en": "gentle"
+    },
+    {
+      "char": "舣",
+      "en": "moor"
+    },
     {
       "char": "杙",
       "en": "stake"
     },
     {
-      "char": "佁",
-      "en": "still"
+      "char": "鹢",
+      "en": "heron"
     },
     {
-      "char": "枍",
-      "en": "tree"
-    },
-    {
-      "char": "舣",
-      "en": "moor"
+      "char": "宧",
+      "en": "room"
     },
     {
       "char": "洢",
@@ -5151,172 +5183,152 @@
       "en": "thin porridge"
     },
     {
-      "char": "宧",
-      "en": "room"
-    },
-    {
-      "char": "扅",
-      "en": "door bolt"
-    },
-    {
-      "char": "扆",
-      "en": "screen"
-    },
-    {
-      "char": "勚",
-      "en": "toil"
-    },
-    {
-      "char": "欹",
-      "en": "slanting"
-    },
-    {
-      "char": "椸",
-      "en": "clothes rack"
+      "char": "繄",
+      "en": "interjection"
     },
     {
       "char": "裛",
       "en": "wrap"
     },
     {
-      "char": "廙",
-      "en": "Yi (surname)"
+      "char": "踦",
+      "en": "lame"
     },
     {
-      "char": "瘗",
-      "en": "bury"
+      "char": "椸",
+      "en": "clothes rack"
     },
     {
-      "char": "潩",
-      "en": "Yi River"
+      "char": "扅",
+      "en": "door bolt"
     },
     {
-      "char": "嫕",
-      "en": "gentle"
+      "char": "佁",
+      "en": "still"
+    },
+    {
+      "char": "勚",
+      "en": "toil"
     },
     {
       "char": "鹝",
       "en": "pheasant"
     },
     {
-      "char": "踦",
-      "en": "lame"
+      "char": "枍",
+      "en": "tree"
     },
     {
-      "char": "鹢",
-      "en": "heron"
-    },
-    {
-      "char": "燚",
-      "en": "fire"
-    },
-    {
-      "char": "繄",
-      "en": "interjection"
-    },
-    {
-      "char": "簃",
-      "en": "study"
-    },
-    {
-      "char": "镱",
-      "en": "ytterbium"
+      "char": "潩",
+      "en": "Yi River"
     }
   ],
   "yin": [
     {
-      "char": "骃",
-      "en": "horse"
-    },
-    {
-      "char": "珢",
-      "en": "jade"
-    },
-    {
-      "char": "崟",
-      "en": "high"
-    },
-    {
-      "char": "龂",
-      "en": "gum"
-    },
-    {
-      "char": "歅",
-      "en": "Yu (surname)"
-    },
-    {
-      "char": "溵",
-      "en": "Yin River"
-    },
-    {
       "char": "禋",
       "en": "sacrifice"
+    },
+    {
+      "char": "嚚",
+      "en": "stubborn"
+    },
+    {
+      "char": "骃",
+      "en": "horse"
     },
     {
       "char": "慭",
       "en": "reluctant"
     },
     {
+      "char": "珢",
+      "en": "jade"
+    },
+    {
+      "char": "龂",
+      "en": "gum"
+    },
+    {
       "char": "蟫",
       "en": "booklouse"
     },
     {
-      "char": "嚚",
-      "en": "stubborn"
+      "char": "溵",
+      "en": "Yin River"
+    },
+    {
+      "char": "崟",
+      "en": "high"
+    },
+    {
+      "char": "歅",
+      "en": "Yu (surname)"
     }
   ],
   "ying": [
     {
-      "char": "媖",
-      "en": "beautiful"
-    },
-    {
-      "char": "溁",
-      "en": "surge"
+      "char": "潆",
+      "en": "spiral"
     },
     {
       "char": "锳",
       "en": "tinkling"
     },
     {
-      "char": "潆",
-      "en": "spiral"
+      "char": "溁",
+      "en": "surge"
+    },
+    {
+      "char": "媖",
+      "en": "beautiful"
     }
   ],
   "yong": [
     {
-      "char": "栐",
-      "en": "tree"
-    },
-    {
-      "char": "埇",
-      "en": "Yong (place)"
+      "char": "澭",
+      "en": "Yong River"
     },
     {
       "char": "鄘",
       "en": "Yong (state)"
     },
     {
-      "char": "鲬",
-      "en": "flatfish"
+      "char": "埇",
+      "en": "Yong (place)"
     },
     {
-      "char": "澭",
-      "en": "Yong River"
+      "char": "栐",
+      "en": "tree"
+    },
+    {
+      "char": "鲬",
+      "en": "flatfish"
     }
   ],
   "you": [
-    {
-      "char": "尢",
-      "en": "deformed"
-    },
     {
       "char": "祐",
       "en": "bless"
     },
     {
+      "char": "尢",
+      "en": "deformed"
+    },
+    {
+      "char": "麀",
+      "en": "female deer"
+    },
+    {
+      "char": "耰",
+      "en": "plow"
+    },
+    {
       "char": "浟",
       "en": "flow"
+    },
+    {
+      "char": "槱",
+      "en": "firewood"
     },
     {
       "char": "铕",
@@ -5325,80 +5337,40 @@
     {
       "char": "鲉",
       "en": "scorpionfish"
-    },
-    {
-      "char": "麀",
-      "en": "female deer"
-    },
-    {
-      "char": "槱",
-      "en": "firewood"
-    },
-    {
-      "char": "耰",
-      "en": "plow"
     }
   ],
   "yu": [
     {
-      "char": "邘",
-      "en": "Yu (state)"
-    },
-    {
-      "char": "圫",
-      "en": "mound"
-    },
-    {
       "char": "於",
       "en": "Yu (surname)"
-    },
-    {
-      "char": "舁",
-      "en": "carry"
-    },
-    {
-      "char": "峿",
-      "en": "Wu Mountain"
-    },
-    {
-      "char": "敔",
-      "en": "musical instrument"
-    },
-    {
-      "char": "鄅",
-      "en": "Yu (place)"
-    },
-    {
-      "char": "悆",
-      "en": "happy"
-    },
-    {
-      "char": "淯",
-      "en": "Yu River"
-    },
-    {
-      "char": "棫",
-      "en": "tree"
-    },
-    {
-      "char": "矞",
-      "en": "beautiful"
     },
     {
       "char": "瑀",
       "en": "jade"
     },
     {
-      "char": "蓣",
-      "en": "yam"
-    },
-    {
-      "char": "艅",
-      "en": "boat"
-    },
-    {
       "char": "瘀",
       "en": "bruise"
+    },
+    {
+      "char": "燏",
+      "en": "bright"
+    },
+    {
+      "char": "棫",
+      "en": "tree"
+    },
+    {
+      "char": "淯",
+      "en": "Yu River"
+    },
+    {
+      "char": "舁",
+      "en": "carry"
+    },
+    {
+      "char": "遹",
+      "en": "go"
     },
     {
       "char": "窬",
@@ -5409,31 +5381,55 @@
       "en": "beautiful"
     },
     {
-      "char": "薁",
-      "en": "mulberry"
+      "char": "矞",
+      "en": "beautiful"
+    },
+    {
+      "char": "髃",
+      "en": "shoulder"
+    },
+    {
+      "char": "蓣",
+      "en": "yam"
     },
     {
       "char": "潏",
       "en": "gush"
     },
     {
-      "char": "遹",
-      "en": "go"
+      "char": "薁",
+      "en": "mulberry"
     },
     {
-      "char": "燏",
-      "en": "bright"
+      "char": "悆",
+      "en": "happy"
     },
     {
-      "char": "髃",
-      "en": "shoulder"
+      "char": "邘",
+      "en": "Yu (state)"
+    },
+    {
+      "char": "敔",
+      "en": "musical instrument"
+    },
+    {
+      "char": "鄅",
+      "en": "Yu (place)"
+    },
+    {
+      "char": "艅",
+      "en": "boat"
+    },
+    {
+      "char": "圫",
+      "en": "mound"
+    },
+    {
+      "char": "峿",
+      "en": "Wu Mountain"
     }
   ],
   "yuan": [
-    {
-      "char": "眢",
-      "en": "dry"
-    },
     {
       "char": "蜎",
       "en": "wriggle"
@@ -5441,6 +5437,10 @@
     {
       "char": "嫄",
       "en": "Yuan (surname)"
+    },
+    {
+      "char": "眢",
+      "en": "dry"
     },
     {
       "char": "羱",
@@ -5475,20 +5475,20 @@
       "en": "Yun (surname)"
     },
     {
-      "char": "涢",
-      "en": "Yun River"
-    },
-    {
       "char": "缊",
       "en": "wrapped"
+    },
+    {
+      "char": "煴",
+      "en": "warm"
     },
     {
       "char": "筼",
       "en": "bamboo"
     },
     {
-      "char": "煴",
-      "en": "warm"
+      "char": "涢",
+      "en": "Yun River"
     },
     {
       "char": "馧",
@@ -5531,12 +5531,12 @@
   ],
   "zeng": [
     {
-      "char": "鄫",
-      "en": "Zeng (state)"
-    },
-    {
       "char": "矰",
       "en": "arrow"
+    },
+    {
+      "char": "鄫",
+      "en": "Zeng (state)"
     }
   ],
   "zha": [
@@ -5545,40 +5545,40 @@
       "en": "shout"
     },
     {
-      "char": "挓",
-      "en": "spread"
-    },
-    {
-      "char": "奓",
-      "en": "open"
+      "char": "鲊",
+      "en": "pickled fish"
     },
     {
       "char": "哳",
       "en": "harsh"
     },
     {
+      "char": "奓",
+      "en": "open"
+    },
+    {
+      "char": "挓",
+      "en": "spread"
+    },
+    {
       "char": "痄",
       "en": "mumps"
-    },
-    {
-      "char": "溠",
-      "en": "Za River"
-    },
-    {
-      "char": "鲊",
-      "en": "pickled fish"
     },
     {
       "char": "劄",
       "en": "note"
     },
     {
-      "char": "鲝",
-      "en": "salted fish"
-    },
-    {
       "char": "霅",
       "en": "sudden"
+    },
+    {
+      "char": "溠",
+      "en": "Za River"
+    },
+    {
+      "char": "鲝",
+      "en": "salted fish"
     },
     {
       "char": "齇",
@@ -5587,32 +5587,32 @@
   ],
   "zhan": [
     {
-      "char": "飐",
-      "en": "flutter"
-    },
-    {
-      "char": "栴",
-      "en": "sandalwood"
-    },
-    {
-      "char": "偡",
-      "en": "elegant"
-    },
-    {
       "char": "搌",
       "en": "press"
     },
     {
-      "char": "嶦",
-      "en": "Shan Mountain"
+      "char": "飐",
+      "en": "flutter"
     },
     {
       "char": "鹯",
       "en": "kite"
     },
     {
+      "char": "偡",
+      "en": "elegant"
+    },
+    {
+      "char": "栴",
+      "en": "sandalwood"
+    },
+    {
       "char": "鳣",
       "en": "sturgeon"
+    },
+    {
+      "char": "嶦",
+      "en": "Shan Mountain"
     }
   ],
   "zhang": [
@@ -5631,26 +5631,26 @@
   ],
   "zhao": [
     {
-      "char": "旐",
-      "en": "flag"
-    },
-    {
       "char": "曌",
       "en": "bright"
+    },
+    {
+      "char": "旐",
+      "en": "flag"
     }
   ],
   "zhe": [
     {
-      "char": "晢",
-      "en": "bright"
+      "char": "喆",
+      "en": "wise"
     },
     {
       "char": "啫",
       "en": "murmur"
     },
     {
-      "char": "喆",
-      "en": "wise"
+      "char": "晢",
+      "en": "bright"
     },
     {
       "char": "詟",
@@ -5659,28 +5659,16 @@
   ],
   "zhen": [
     {
-      "char": "纼",
-      "en": "rope"
+      "char": "禛",
+      "en": "auspicious"
     },
     {
-      "char": "昣",
-      "en": "bright"
+      "char": "稹",
+      "en": "dense"
     },
     {
       "char": "浈",
       "en": "Zhen River"
-    },
-    {
-      "char": "袗",
-      "en": "unlined garment"
-    },
-    {
-      "char": "揕",
-      "en": "stab"
-    },
-    {
-      "char": "葴",
-      "en": "plant"
     },
     {
       "char": "瑧",
@@ -5691,16 +5679,28 @@
       "en": "jade"
     },
     {
-      "char": "禛",
-      "en": "auspicious"
-    },
-    {
-      "char": "稹",
-      "en": "dense"
-    },
-    {
       "char": "鬒",
       "en": "black hair"
+    },
+    {
+      "char": "袗",
+      "en": "unlined garment"
+    },
+    {
+      "char": "葴",
+      "en": "plant"
+    },
+    {
+      "char": "揕",
+      "en": "stab"
+    },
+    {
+      "char": "纼",
+      "en": "rope"
+    },
+    {
+      "char": "昣",
+      "en": "bright"
     }
   ],
   "zheng": [
@@ -5711,102 +5711,102 @@
   ],
   "zhi": [
     {
-      "char": "扺",
-      "en": "resist"
-    },
-    {
-      "char": "忮",
-      "en": "jealous"
-    },
-    {
-      "char": "茋",
-      "en": "stilbene"
-    },
-    {
-      "char": "泜",
-      "en": "Di River"
-    },
-    {
-      "char": "轵",
-      "en": "axle"
-    },
-    {
-      "char": "庤",
-      "en": "store"
-    },
-    {
-      "char": "晊",
-      "en": "bright"
-    },
-    {
-      "char": "梽",
-      "en": "tree"
-    },
-    {
-      "char": "畤",
-      "en": "shrine"
-    },
-    {
-      "char": "铚",
-      "en": "sickle"
+      "char": "禔",
+      "en": "bless"
     },
     {
       "char": "絷",
       "en": "tie"
     },
     {
+      "char": "轵",
+      "en": "axle"
+    },
+    {
       "char": "黹",
       "en": "embroidery"
     },
     {
-      "char": "跱",
-      "en": "stand"
+      "char": "忮",
+      "en": "jealous"
     },
     {
-      "char": "锧",
-      "en": "axe"
+      "char": "晊",
+      "en": "bright"
     },
     {
-      "char": "稙",
-      "en": "early rice"
+      "char": "畤",
+      "en": "shrine"
     },
     {
       "char": "滍",
       "en": "Zhi River"
     },
     {
-      "char": "禔",
-      "en": "bless"
+      "char": "稙",
+      "en": "early rice"
     },
     {
-      "char": "榰",
-      "en": "prop"
+      "char": "扺",
+      "en": "resist"
+    },
+    {
+      "char": "铚",
+      "en": "sickle"
+    },
+    {
+      "char": "锧",
+      "en": "axe"
     },
     {
       "char": "疐",
       "en": "stumble"
+    },
+    {
+      "char": "跱",
+      "en": "stand"
+    },
+    {
+      "char": "泜",
+      "en": "Di River"
+    },
+    {
+      "char": "庤",
+      "en": "store"
+    },
+    {
+      "char": "茋",
+      "en": "stilbene"
+    },
+    {
+      "char": "梽",
+      "en": "tree"
+    },
+    {
+      "char": "榰",
+      "en": "prop"
     }
   ],
   "zhong": [
     {
-      "char": "茽",
-      "en": "luxuriant"
-    },
-    {
-      "char": "柊",
-      "en": "holly"
+      "char": "锺",
+      "en": "bell"
     },
     {
       "char": "舯",
       "en": "midship"
     },
     {
-      "char": "锺",
-      "en": "bell"
+      "char": "柊",
+      "en": "holly"
     },
     {
       "char": "穜",
       "en": "plant"
+    },
+    {
+      "char": "茽",
+      "en": "luxuriant"
     }
   ],
   "zhou": [
@@ -5819,18 +5819,26 @@
       "en": "shaft"
     },
     {
-      "char": "鸼",
-      "en": "bird"
-    },
-    {
       "char": "赒",
       "en": "relieve"
+    },
+    {
+      "char": "鸼",
+      "en": "bird"
     }
   ],
   "zhu": [
     {
+      "char": "舳",
+      "en": "ship's stern"
+    },
+    {
       "char": "纻",
       "en": "ramie"
+    },
+    {
+      "char": "橥",
+      "en": "stake"
     },
     {
       "char": "砫",
@@ -5839,14 +5847,6 @@
     {
       "char": "疰",
       "en": "illness"
-    },
-    {
-      "char": "舳",
-      "en": "ship's stern"
-    },
-    {
-      "char": "橥",
-      "en": "stake"
     },
     {
       "char": "蠋",
@@ -5861,12 +5861,12 @@
   ],
   "zhuan": [
     {
-      "char": "瑑",
-      "en": "carved jade"
-    },
-    {
       "char": "僎",
       "en": "wise"
+    },
+    {
+      "char": "瑑",
+      "en": "carved jade"
     }
   ],
   "zhuang": [
@@ -5893,12 +5893,8 @@
   ],
   "zhuo": [
     {
-      "char": "汋",
-      "en": "stream"
-    },
-    {
-      "char": "叕",
-      "en": "connect"
+      "char": "禚",
+      "en": "Zhuo (surname)"
     },
     {
       "char": "椓",
@@ -5909,46 +5905,50 @@
       "en": "bright"
     },
     {
-      "char": "禚",
-      "en": "Zhuo (surname)"
+      "char": "叕",
+      "en": "connect"
+    },
+    {
+      "char": "汋",
+      "en": "stream"
     }
   ],
   "zi": [
     {
-      "char": "耔",
-      "en": "seedling"
-    },
-    {
-      "char": "虸",
-      "en": "caterpillar"
+      "char": "笫",
+      "en": "mat"
     },
     {
       "char": "赀",
       "en": "wealth"
     },
     {
-      "char": "笫",
-      "en": "mat"
-    },
-    {
-      "char": "鄑",
-      "en": "Zi (place)"
+      "char": "觜",
+      "en": "beak"
     },
     {
       "char": "粢",
       "en": "millet"
     },
     {
-      "char": "觜",
-      "en": "beak"
-    },
-    {
       "char": "镃",
       "en": "plow"
     },
     {
+      "char": "耔",
+      "en": "seedling"
+    },
+    {
       "char": "鼒",
       "en": "small tripod"
+    },
+    {
+      "char": "虸",
+      "en": "caterpillar"
+    },
+    {
+      "char": "鄑",
+      "en": "Zi (place)"
     }
   ],
   "zong": [
@@ -5957,12 +5957,12 @@
       "en": "Zong (surname)"
     },
     {
-      "char": "腙",
-      "en": "hydrazone"
-    },
-    {
       "char": "鬷",
       "en": "Zong (surname)"
+    },
+    {
+      "char": "腙",
+      "en": "hydrazone"
     }
   ],
   "zou": [
@@ -5981,12 +5981,12 @@
   ],
   "zu": [
     {
-      "char": "珇",
-      "en": "jade"
-    },
-    {
       "char": "崒",
       "en": "steep"
+    },
+    {
+      "char": "珇",
+      "en": "jade"
     }
   ],
   "zui": [
@@ -5997,12 +5997,12 @@
   ],
   "zun": [
     {
-      "char": "僔",
-      "en": "respectful"
-    },
-    {
       "char": "噂",
       "en": "gossip"
+    },
+    {
+      "char": "僔",
+      "en": "respectful"
     },
     {
       "char": "嶟",

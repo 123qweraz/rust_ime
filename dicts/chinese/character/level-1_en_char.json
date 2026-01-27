@@ -614,7 +614,7 @@
     },
     {
       "char": "咱",
-      "en": "we/us"
+      "en": "we"
     },
     {
       "char": "嘁",
@@ -890,7 +890,7 @@
     },
     {
       "char": "的",
-      "en": "of/possessive"
+      "en": "of"
     },
     {
       "char": "芍",
@@ -930,11 +930,11 @@
     },
     {
       "char": "逐",
-      "en": "chase/pursue"
+      "en": "chase"
     },
     {
       "char": "逮",
-      "en": "catch/arrest"
+      "en": "catch"
     },
     {
       "char": "迪",
@@ -1430,7 +1430,7 @@
     },
     {
       "char": "巴",
-      "en": "hope/cling to"
+      "en": "hope"
     },
     {
       "char": "罢",
@@ -2810,7 +2810,7 @@
     },
     {
       "char": "洁",
-      "en": "clean/pure"
+      "en": "clean"
     },
     {
       "char": "秸",
@@ -3190,7 +3190,7 @@
     },
     {
       "char": "稽",
-      "en": "inspect/bow"
+      "en": "inspect"
     },
     {
       "char": "荠",
@@ -4906,7 +4906,7 @@
     },
     {
       "char": "哩",
-      "en": "mile/particle"
+      "en": "mile"
     },
     {
       "char": "景",
@@ -5102,7 +5102,7 @@
     },
     {
       "char": "我",
-      "en": "i/me"
+      "en": "i"
     },
     {
       "char": "窝",
@@ -5826,7 +5826,7 @@
     },
     {
       "char": "捧",
-      "en": "hold up/praise"
+      "en": "hold up"
     },
     {
       "char": "方",
@@ -6118,7 +6118,7 @@
     },
     {
       "char": "喊",
-      "en": "shout/call"
+      "en": "shout"
     },
     {
       "char": "沮",
@@ -6502,7 +6502,7 @@
     },
     {
       "char": "池",
-      "en": "pool/pond"
+      "en": "pool"
     },
     {
       "char": "子",
@@ -7502,7 +7502,7 @@
     },
     {
       "char": "余",
-      "en": "surplus/spare"
+      "en": "surplus"
     },
     {
       "char": "语",
@@ -7742,7 +7742,7 @@
     },
     {
       "char": "懊",
-      "en": "regret/annoyed"
+      "en": "regret"
     },
     {
       "char": "或",
@@ -7750,7 +7750,7 @@
     },
     {
       "char": "拗",
-      "en": "twist/stubborn"
+      "en": "twist"
     },
     {
       "char": "昙",
@@ -7878,7 +7878,7 @@
     },
     {
       "char": "穴",
-      "en": "cave/hole"
+      "en": "cave"
     },
     {
       "char": "脚",
@@ -8054,7 +8054,7 @@
     },
     {
       "char": "潦",
-      "en": "flooded/sloppy"
+      "en": "flooded"
     },
     {
       "char": "刊",
@@ -8338,7 +8338,7 @@
     },
     {
       "char": "遇",
-      "en": "meet/encounter"
+      "en": "meet"
     },
     {
       "char": "万",
@@ -8918,7 +8918,7 @@
     },
     {
       "char": "捍",
-      "en": "defend/guard"
+      "en": "defend"
     },
     {
       "char": "探",
@@ -9010,7 +9010,7 @@
     },
     {
       "char": "澄",
-      "en": "clear/settle"
+      "en": "clear"
     },
     {
       "char": "闪",
@@ -9086,7 +9086,7 @@
     },
     {
       "char": "落",
-      "en": "fall/drop"
+      "en": "fall"
     },
     {
       "char": "蓝",
@@ -9170,7 +9170,7 @@
     },
     {
       "char": "啊",
-      "en": "ah/oh"
+      "en": "ah"
     },
     {
       "char": "庵",
@@ -9178,11 +9178,11 @@
     },
     {
       "char": "歹",
-      "en": "bad/evil"
+      "en": "bad"
     },
     {
       "char": "邑",
-      "en": "city/county"
+      "en": "city"
     },
     {
       "char": "阿",
@@ -9326,7 +9326,7 @@
     },
     {
       "char": "莫",
-      "en": "do not/none"
+      "en": "do not"
     },
     {
       "char": "谆",
@@ -9482,7 +9482,7 @@
     },
     {
       "char": "肄",
-      "en": "study/practice"
+      "en": "study"
     },
     {
       "char": "巳",
@@ -9546,7 +9546,7 @@
     },
     {
       "char": "颤",
-      "en": "tremble/shiver"
+      "en": "tremble"
     },
     {
       "char": "装",
@@ -9662,7 +9662,7 @@
     },
     {
       "char": "搞",
-      "en": "do/make"
+      "en": "do"
     },
     {
       "char": "校",
@@ -10018,7 +10018,7 @@
     },
     {
       "char": "许",
-      "en": "allow/promise"
+      "en": "allow"
     },
     {
       "char": "波",
@@ -10114,7 +10114,7 @@
     },
     {
       "char": "魄",
-      "en": "soul/spirit"
+      "en": "soul"
     },
     {
       "char": "庞",
@@ -10526,11 +10526,11 @@
     },
     {
       "char": "把",
-      "en": "grasp/hold"
+      "en": "grasp"
     },
     {
       "char": "握",
-      "en": "grasp/hold"
+      "en": "grasp"
     },
     {
       "char": "扒",
@@ -10822,7 +10822,7 @@
     },
     {
       "char": "没",
-      "en": "not/have not"
+      "en": "not"
     },
     {
       "char": "模",
@@ -11098,7 +11098,7 @@
     },
     {
       "char": "枉",
-      "en": "crooked/wrong"
+      "en": "crooked"
     },
     {
       "char": "方",
@@ -11450,7 +11450,7 @@
     },
     {
       "char": "碟",
-      "en": "dish/plate"
+      "en": "dish"
     },
     {
       "char": "盐",
@@ -11642,7 +11642,7 @@
     },
     {
       "char": "广",
-      "en": "wide/broad"
+      "en": "wide"
     },
     {
       "char": "狠",
@@ -11942,7 +11942,7 @@
     },
     {
       "char": "唧",
-      "en": "chirp/pump"
+      "en": "chirp"
     },
     {
       "char": "圾",
@@ -12106,7 +12106,7 @@
     },
     {
       "char": "靡",
-      "en": "waste/extravagant"
+      "en": "waste"
     },
     {
       "char": "行",
@@ -12142,7 +12142,7 @@
     },
     {
       "char": "肮",
-      "en": "dirty/filthy"
+      "en": "dirty"
     },
     {
       "char": "星",
@@ -12386,7 +12386,7 @@
     },
     {
       "char": "蔽",
-      "en": "cover/shield"
+      "en": "cover"
     },
     {
       "char": "份",
@@ -13270,7 +13270,7 @@
     },
     {
       "char": "也",
-      "en": "also/too"
+      "en": "also"
     },
     {
       "char": "夕",
@@ -13830,7 +13830,7 @@
     },
     {
       "char": "龟",
-      "en": "turtle/tortoise"
+      "en": "turtle"
     },
     {
       "char": "坐",
@@ -13914,7 +13914,7 @@
     },
     {
       "char": "俺",
-      "en": "i/my"
+      "en": "i"
     },
     {
       "char": "氨",
@@ -13930,7 +13930,7 @@
     },
     {
       "char": "盒",
-      "en": "box/case"
+      "en": "box"
     },
     {
       "char": "全",
@@ -14090,11 +14090,11 @@
     },
     {
       "char": "抬",
-      "en": "lift/raise"
+      "en": "lift"
     },
     {
       "char": "拖",
-      "en": "drag/delay"
+      "en": "drag"
     },
     {
       "char": "离",
@@ -14102,7 +14102,7 @@
     },
     {
       "char": "移",
-      "en": "move/shift"
+      "en": "move"
     },
     {
       "char": "茬",
@@ -14470,7 +14470,7 @@
     },
     {
       "char": "投",
-      "en": "throw/cast"
+      "en": "throw"
     },
     {
       "char": "逾",
@@ -14498,7 +14498,7 @@
     },
     {
       "char": "混",
-      "en": "mix/confuse"
+      "en": "mix"
     },
     {
       "char": "乱",
@@ -14674,11 +14674,11 @@
     },
     {
       "char": "尚",
-      "en": "still/esteem"
+      "en": "still"
     },
     {
       "char": "淌",
-      "en": "drip/trickle"
+      "en": "drip"
     },
     {
       "char": "账",
@@ -14806,7 +14806,7 @@
     },
     {
       "char": "奋",
-      "en": "strive/exert"
+      "en": "strive"
     },
     {
       "char": "杭",
@@ -14862,7 +14862,7 @@
     },
     {
       "char": "歇",
-      "en": "rest/stop"
+      "en": "rest"
     },
     {
       "char": "货",
@@ -14938,7 +14938,7 @@
     },
     {
       "char": "否",
-      "en": "deny/negate"
+      "en": "deny"
     },
     {
       "char": "扑",
@@ -15022,7 +15022,7 @@
     },
     {
       "char": "幕",
-      "en": "curtain/screen"
+      "en": "curtain"
     },
     {
       "char": "调",
@@ -15034,7 +15034,7 @@
     },
     {
       "char": "挑",
-      "en": "pick/challenge"
+      "en": "pick"
     },
     {
       "char": "队",
@@ -15342,7 +15342,7 @@
     },
     {
       "char": "适",
-      "en": "fit/suitable"
+      "en": "fit"
     },
     {
       "char": "讯",
@@ -15446,7 +15446,7 @@
     },
     {
       "char": "援",
-      "en": "help/aid"
+      "en": "help"
     },
     {
       "char": "从",
@@ -15554,7 +15554,7 @@
     },
     {
       "char": "掘",
-      "en": "dig/excavate"
+      "en": "dig"
     },
     {
       "char": "跨",
@@ -15694,7 +15694,7 @@
     },
     {
       "char": "愉",
-      "en": "happy/pleasant"
+      "en": "happy"
     },
     {
       "char": "咧",
@@ -15782,7 +15782,7 @@
     },
     {
       "char": "掀",
-      "en": "lift/open"
+      "en": "lift"
     },
     {
       "char": "铐",
@@ -16394,7 +16394,7 @@
     },
     {
       "char": "耐",
-      "en": "patient/endure"
+      "en": "patient"
     },
     {
       "char": "女",
@@ -16462,7 +16462,7 @@
     },
     {
       "char": "若",
-      "en": "if/like"
+      "en": "if"
     },
     {
       "char": "恩",

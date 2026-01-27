@@ -1666,8 +1666,8 @@ hat,帽
 hatch,孵
 hate,恨
 hate,憎
-have,具
 have,有
+have,具
 hawk,鹰
 hazel,榛
 he,他

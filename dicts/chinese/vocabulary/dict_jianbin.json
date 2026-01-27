@@ -58,7 +58,7 @@
   "air": [
     {
       "char": "爱人",
-      "en": "Lover/Spouse"
+      "en": "Lover"
     }
   ],
   "aish": [
@@ -786,7 +786,7 @@
     },
     {
       "char": "不过",
-      "en": "But/However"
+      "en": "But"
     },
     {
       "char": "报告",
@@ -1950,7 +1950,7 @@
     },
     {
       "char": "不行",
-      "en": "No good/Can't"
+      "en": "No good"
     },
     {
       "char": "步行",
@@ -3190,7 +3190,7 @@
   "chhwanl": [
     {
       "char": "吃喝玩乐",
-      "en": "Eat, drink and be merry"
+      "en": "Eat"
     }
   ],
   "chj": [
@@ -3772,7 +3772,7 @@
   "chsh": [
     {
       "char": "车上",
-      "en": "On the bus/train"
+      "en": "On the bus"
     },
     {
       "char": "超市",
@@ -6662,7 +6662,7 @@
     },
     {
       "char": "多少",
-      "en": "How many/much"
+      "en": "How many"
     },
     {
       "char": "大声",
@@ -6986,7 +6986,7 @@
   "dwei": [
     {
       "char": "单位",
-      "en": "Unit/Company"
+      "en": "Unit"
     },
     {
       "char": "地位",
@@ -10386,7 +10386,7 @@
   "gjzhwai": [
     {
       "char": "古今中外",
-      "en": "Ancient and modern, Chinese and foreign"
+      "en": "Ancient and modern"
     }
   ],
   "gk": [
@@ -12932,7 +12932,7 @@
   "hsh": [
     {
       "char": "还是",
-      "en": "Or/Still"
+      "en": "Or"
     },
     {
       "char": "好事",
@@ -13528,7 +13528,7 @@
   "hyou": [
     {
       "char": "还有",
-      "en": "Also/Still have"
+      "en": "Also"
     },
     {
       "char": "含有",
@@ -14044,7 +14044,7 @@
     },
     {
       "char": "觉得",
-      "en": "Think/Feel"
+      "en": "Think"
     },
     {
       "char": "见到",
@@ -16590,7 +16590,7 @@
   "jyou": [
     {
       "char": "加油",
-      "en": "Come on/Refuel"
+      "en": "Come on"
     },
     {
       "char": "具有",
@@ -21132,7 +21132,7 @@
   "myou": [
     {
       "char": "没有",
-      "en": "No/Not have"
+      "en": "No"
     },
     {
       "char": "漫游",
@@ -25106,7 +25106,7 @@
   "rsh": [
     {
       "char": "认识",
-      "en": "Know/Recognize"
+      "en": "Know"
     },
     {
       "char": "人士",
@@ -25682,7 +25682,7 @@
   "shbsh": [
     {
       "char": "是不是",
-      "en": "Is it?/Are they?"
+      "en": "Is it?"
     },
     {
       "char": "时不时",
@@ -25762,7 +25762,7 @@
     },
     {
       "char": "上车",
-      "en": "Get on (bus/train)"
+      "en": "Get on (bus"
     },
     {
       "char": "生产",
@@ -28674,7 +28674,7 @@
   "stkl": [
     {
       "char": "酸甜苦辣",
-      "en": "Sweet, sour, bitter and spicy"
+      "en": "Sweet"
     }
   ],
   "swang": [
@@ -29574,7 +29574,7 @@
   "tm": [
     {
       "char": "他们",
-      "en": "They (masc./mixed)"
+      "en": "They (masc."
     },
     {
       "char": "她们",
@@ -32266,7 +32266,7 @@
   "xch": [
     {
       "char": "下车",
-      "en": "Get off (bus/train)"
+      "en": "Get off (bus"
     },
     {
       "char": "现场",
@@ -33572,7 +33572,7 @@
   "xsh": [
     {
       "char": "先生",
-      "en": "Mr./Sir"
+      "en": "Mr."
     },
     {
       "char": "小时",
@@ -35646,7 +35646,7 @@
   "yid": [
     {
       "char": "一定",
-      "en": "Must/Certain"
+      "en": "Must"
     },
     {
       "char": "移动",
@@ -38200,7 +38200,7 @@
   "yund": [
     {
       "char": "运动",
-      "en": "Sports/Exercise"
+      "en": "Sports"
     },
     {
       "char": "晕倒",

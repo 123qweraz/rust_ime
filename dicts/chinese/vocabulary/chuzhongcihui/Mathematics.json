@@ -14,7 +14,7 @@
   "diti": [
     {
       "char": "第题",
-      "en": "question/problem (specifically the nth one)"
+      "en": "question"
     }
   ],
   "zhixian": [
@@ -44,7 +44,7 @@
   "yunsuan": [
     {
       "char": "运算",
-      "en": "Calculation / Operation"
+      "en": "Calculation"
     }
   ],
   "liyong": [
@@ -56,7 +56,7 @@
   "erci": [
     {
       "char": "二次",
-      "en": "Quadratic / Square"
+      "en": "Quadratic"
     }
   ],
   "gailv": [
@@ -74,7 +74,7 @@
   "zhouduichen": [
     {
       "char": "轴对称",
-      "en": "Axisymmetry / Symmetrical about an axis"
+      "en": "Axisymmetry"
     }
   ],
   "weizhi": [
@@ -104,7 +104,7 @@
   "shizi": [
     {
       "char": "式子",
-      "en": "Expression / Equation"
+      "en": "Expression"
     },
     {
       "char": "十字",
@@ -246,7 +246,7 @@
   "pougangzhiben": [
     {
       "char": "犃犅犆犇",
-      "en": "(This appears to be a random string of characters, likely a typo.  No standard translation)"
+      "en": "(This appears to be a random string of characters"
     }
   ],
   "quandeng": [
@@ -298,7 +298,7 @@
     },
     {
       "char": "型式",
-      "en": "Type/Form/Model"
+      "en": "Type"
     }
   ],
   "sheji": [
@@ -346,7 +346,7 @@
   "zhishi": [
     {
       "char": "值时",
-      "en": "(Context dependent, likely referring to \"value\" or \"time\")"
+      "en": "(Context dependent"
     }
   ],
   "danxiangshi": [
@@ -376,13 +376,13 @@
   "chonghe": [
     {
       "char": "重合",
-      "en": "coincide/overlap"
+      "en": "coincide"
     }
   ],
   "yuandian": [
     {
       "char": "原点",
-      "en": "origin/point"
+      "en": "origin"
     }
   ],
   "zhishu": [
@@ -406,7 +406,7 @@
   "pouben": [
     {
       "char": "犃犇",
-      "en": "oxen (cast iron oxen, a specific type)"
+      "en": "oxen (cast iron oxen"
     }
   ],
   "dushu": [
@@ -418,13 +418,13 @@
   "huawei": [
     {
       "char": "化为",
-      "en": "become/transform"
+      "en": "become"
     }
   ],
   "dianshu": [
     {
       "char": "点数",
-      "en": "point/number"
+      "en": "point"
     }
   ],
   "yuanxinjiao": [
@@ -436,7 +436,7 @@
   "youci": [
     {
       "char": "有次",
-      "en": "Sometimes/Occasionally"
+      "en": "Sometimes"
     }
   ],
   "chuizhipingfen": [
@@ -460,7 +460,7 @@
   "yizhong": [
     {
       "char": "乙种",
-      "en": "Type B/Second type"
+      "en": "Type B"
     },
     {
       "char": "一中",
@@ -500,7 +500,7 @@
   "hebing": [
     {
       "char": "合并",
-      "en": "Merge/Combine"
+      "en": "Merge"
     }
   ],
   "tongleixiang": [
@@ -518,7 +518,7 @@
   "fenjie": [
     {
       "char": "分界",
-      "en": "Boundary/Division"
+      "en": "Boundary"
     }
   ],
   "yinshifenjie": [
@@ -554,7 +554,7 @@
   "faze": [
     {
       "char": "法则",
-      "en": "Rule/Law"
+      "en": "Rule"
     }
   ],
   "juxing": [
@@ -572,13 +572,13 @@
   "suanshi": [
     {
       "char": "算式",
-      "en": "Expression/Equation"
+      "en": "Expression"
     }
   ],
   "liti": [
     {
       "char": "立体",
-      "en": "Three-dimensional/Solid"
+      "en": "Three-dimensional"
     },
     {
       "char": "例题",
@@ -614,7 +614,7 @@
     },
     {
       "char": "以元",
-      "en": "In dollars/In terms of dollars"
+      "en": "In dollars"
     }
   ],
   "changfangxing": [
@@ -696,7 +696,7 @@
   "chuizu": [
     {
       "char": "垂足",
-      "en": "foot (of a wall, etc.)"
+      "en": "foot (of a wall"
     }
   ],
   "qiexian": [
@@ -718,7 +718,7 @@
     },
     {
       "char": "小节",
-      "en": "Small section/Paragraph"
+      "en": "Small section"
     }
   ],
   "dingli": [
@@ -754,7 +754,7 @@
   "panding": [
     {
       "char": "判定",
-      "en": "Determine/Assess"
+      "en": "Determine"
     }
   ],
   "dibian": [
@@ -764,7 +764,7 @@
     },
     {
       "char": "地变",
-      "en": "Change/Transformation (often geological)"
+      "en": "Change"
     }
   ],
   "zhouchang": [
@@ -782,7 +782,7 @@
   "yixiang": [
     {
       "char": "移项",
-      "en": "Shift/Move (a term from algebra)"
+      "en": "Shift"
     }
   ],
   "yidong": [
@@ -812,7 +812,7 @@
   "kaikou": [
     {
       "char": "开口",
-      "en": "Opening/Mouth"
+      "en": "Opening"
     }
   ],
   "zuowei": [
@@ -828,7 +828,7 @@
   "jifei": [
     {
       "char": "计费",
-      "en": "Charge/Bill"
+      "en": "Charge"
     }
   ],
   "yuanzhui": [
@@ -852,7 +852,7 @@
   "pingfen": [
     {
       "char": "平分",
-      "en": "Divide equally, bisect"
+      "en": "Divide equally"
     }
   ],
   "rutusuoshi": [
@@ -886,13 +886,13 @@
   "gangben": [
     {
       "char": "犅犇",
-      "en": "(This appears to be a specific program/software name - no direct translation)"
+      "en": "(This appears to be a specific program"
     }
   ],
   "zhichu": [
     {
       "char": "支出",
-      "en": "Expenditure / Expenses"
+      "en": "Expenditure"
     }
   ],
   "gongyinshi": [
@@ -904,7 +904,7 @@
   "shijie": [
     {
       "char": "使截",
-      "en": "to make a cut/to cause a cut"
+      "en": "to make a cut"
     }
   ],
   "huajian": [
@@ -922,7 +922,7 @@
   "jiexi": [
     {
       "char": "解析",
-      "en": "Analyze, interpret"
+      "en": "Analyze"
     }
   ],
   "xiefa": [
@@ -940,13 +940,13 @@
   "jiajian": [
     {
       "char": "加减",
-      "en": "Add, subtract"
+      "en": "Add"
     }
   ],
   "huwei": [
     {
       "char": "互为",
-      "en": "Mutual, reciprocal"
+      "en": "Mutual"
     }
   ],
   "touzi": [
@@ -964,7 +964,7 @@
   "weicheng": [
     {
       "char": "围成",
-      "en": "Form into a circle/shape"
+      "en": "Form into a circle"
     }
   ],
   "duoshaodu": [
@@ -1022,7 +1022,7 @@
     },
     {
       "char": "场数",
-      "en": "number of games/matches"
+      "en": "number of games"
     }
   ],
   "baozhuanghe": [
@@ -1040,7 +1040,7 @@
   "choudao": [
     {
       "char": "抽到",
-      "en": "To receive/win"
+      "en": "To receive"
     }
   ],
   "xianglin": [
@@ -1052,7 +1052,7 @@
   "xingcheng": [
     {
       "char": "行程",
-      "en": "Journey/Route"
+      "en": "Journey"
     }
   ],
   "yiji": [
@@ -1076,7 +1076,7 @@
   "fanmian": [
     {
       "char": "反面",
-      "en": "Opposite/Reverse"
+      "en": "Opposite"
     }
   ],
   "dongtu": [
@@ -1098,7 +1098,7 @@
     },
     {
       "char": "放个",
-      "en": "Put/Place a"
+      "en": "Put"
     }
   ],
   "wubianxing": [
@@ -1110,7 +1110,7 @@
   "tuili": [
     {
       "char": "推理",
-      "en": "Reasoning/Deduction"
+      "en": "Reasoning"
     }
   ],
   "liangdi": [
@@ -1140,11 +1140,11 @@
   "jichu": [
     {
       "char": "击出",
-      "en": "To strike out/Launch"
+      "en": "To strike out"
     },
     {
       "char": "即除",
-      "en": "Immediately Remove/Exclude"
+      "en": "Immediately Remove"
     }
   ],
   "daoli": [
@@ -1162,7 +1162,7 @@
   "diqiu": [
     {
       "char": "地求",
-      "en": "Local/Regional"
+      "en": "Local"
     }
   ],
   "geshu": [
@@ -1226,7 +1226,7 @@
   "suoqiu": [
     {
       "char": "所求",
-      "en": "What is sought/required"
+      "en": "What is sought"
     }
   ],
   "tushi": [
@@ -1236,7 +1236,7 @@
     },
     {
       "char": "图试",
-      "en": "\"Diagram illustration\" / \"Diagram attempt\""
+      "en": "\"Diagram illustration\""
     }
   ],
   "yigejiao": [
@@ -1266,13 +1266,13 @@
   "zhuangzhuang": [
     {
       "char": "狀狀",
-      "en": "(Referring to shapes) Irregular/Various"
+      "en": "(Referring to shapes) Irregular"
     }
   ],
   "geshi": [
     {
       "char": "各式",
-      "en": "Types/Forms/Varieties"
+      "en": "Types"
     },
     {
       "char": "各是",
@@ -1330,7 +1330,7 @@
   "fanguolai": [
     {
       "char": "反过来",
-      "en": "Conversely/Inversely"
+      "en": "Conversely"
     }
   ],
   "fenpeilv": [
@@ -1358,7 +1358,7 @@
     },
     {
       "char": "几分",
-      "en": "A fraction/Part"
+      "en": "A fraction"
     }
   ],
   "quxian": [
@@ -1370,7 +1370,7 @@
   "liangmei": [
     {
       "char": "两枚",
-      "en": "Two pieces/Two items"
+      "en": "Two pieces"
     }
   ],
   "liyou": [
@@ -1388,13 +1388,13 @@
   "xizhong": [
     {
       "char": "系中",
-      "en": "Within, Inside"
+      "en": "Within"
     }
   ],
   "hangxing": [
     {
       "char": "航行",
-      "en": "Voyage, Navigation"
+      "en": "Voyage"
     }
   ],
   "jianfa": [
@@ -1406,7 +1406,7 @@
   "huacheng": [
     {
       "char": "化成",
-      "en": "Transform into, Become"
+      "en": "Transform into"
     }
   ],
   "chengchu": [
@@ -1424,13 +1424,13 @@
   "meijian": [
     {
       "char": "每件",
-      "en": "Each item, Every piece"
+      "en": "Each item"
     }
   ],
   "zhujiao": [
     {
       "char": "主叫",
-      "en": "Caller, Person initiating the call"
+      "en": "Caller"
     }
   ],
   "dilei": [
@@ -1478,13 +1478,13 @@
   "jiangjia": [
     {
       "char": "降价",
-      "en": "Discount/Reduce price"
+      "en": "Discount"
     }
   ],
   "youzhong": [
     {
       "char": "有种",
-      "en": "There is/There exists"
+      "en": "There is"
     }
   ],
   "shuxuekecheng": [
@@ -1502,7 +1502,7 @@
   "zhuangge": [
     {
       "char": "狀个",
-      "en": "(This appears to be a typo - likely meant \"状\" - to display/show)"
+      "en": "(This appears to be a typo - likely meant \"状\" - to display"
     }
   ],
   "quanzhang": [
@@ -1514,7 +1514,7 @@
   "lvdi": [
     {
       "char": "绿地",
-      "en": "Green space/Park"
+      "en": "Green space"
     }
   ],
   "tiji": [
@@ -1574,13 +1574,13 @@
   "zhejiushishuo": [
     {
       "char": "这就是说",
-      "en": "That means/In other words"
+      "en": "That means"
     }
   ],
   "weiben": [
     {
       "char": "为犇",
-      "en": "(This likely refers to a specific company or product, translation needed for context - e.g., For Ben)"
+      "en": "(This likely refers to a specific company or product"
     }
   ],
   "bianxing": [
@@ -1652,7 +1652,7 @@
   "zhuanpan": [
     {
       "char": "转盘",
-      "en": "Revolving Plate/Disc"
+      "en": "Revolving Plate"
     }
   ],
   "jiajiao": [
@@ -1664,7 +1664,7 @@
   "mutiao": [
     {
       "char": "木条",
-      "en": "Wooden Strip/Stick"
+      "en": "Wooden Strip"
     }
   ],
   "mujia": [
@@ -1722,7 +1722,7 @@
   "yongdao": [
     {
       "char": "甬道",
-      "en": "Corridor/Walkway"
+      "en": "Corridor"
     }
   ],
   "qiugen": [
@@ -1770,7 +1770,7 @@
   "yifu": [
     {
       "char": "一副",
-      "en": "A set of/A pair of"
+      "en": "A set of"
     }
   ],
   "zhongwu": [
@@ -1816,7 +1816,7 @@
   "bianshang": [
     {
       "char": "边上",
-      "en": "Beside/Alongside"
+      "en": "Beside"
     }
   ],
   "yidui": [
@@ -1828,13 +1828,13 @@
   "jizhong": [
     {
       "char": "击中",
-      "en": "Hit/strike"
+      "en": "Hit"
     }
   ],
   "geichu": [
     {
       "char": "给出",
-      "en": "To give/To provide"
+      "en": "To give"
     }
   ],
   "yuangui": [
@@ -1846,13 +1846,13 @@
   "bianjiao": [
     {
       "char": "边角",
-      "en": "Angles/Edges"
+      "en": "Angles"
     }
   ],
   "luduan": [
     {
       "char": "路段",
-      "en": "Section of road/Stretch"
+      "en": "Section of road"
     }
   ],
   "xiebian": [
@@ -1892,7 +1892,7 @@
   "lieshi": [
     {
       "char": "列式",
-      "en": "Formula/Equation"
+      "en": "Formula"
     }
   ],
   "gongfenmu": [
@@ -1954,7 +1954,7 @@
   "chuanran": [
     {
       "char": "传染",
-      "en": "Infect, transmit"
+      "en": "Infect"
     }
   ],
   "banyuan": [
@@ -1966,13 +1966,13 @@
   "zhipouben": [
     {
       "char": "犆犃犇",
-      "en": "(This appears to be a typo - likely meant to be a specific animal or term.  Best to leave as is for a glossary, or add a note: \"Typo - likely referring to a specific animal or term\")"
+      "en": "(This appears to be a typo - likely meant to be a specific animal or term.  Best to leave as is for a glossary"
     }
   ],
   "kede": [
     {
       "char": "可得",
-      "en": "Obtain / Get"
+      "en": "Obtain"
     }
   ],
   "yizu": [
@@ -1990,13 +1990,13 @@
   "xiangqian": [
     {
       "char": "镶嵌",
-      "en": "Inlay / Embed"
+      "en": "Inlay"
     }
   ],
   "shishi": [
     {
       "char": "时使",
-      "en": "(This is also likely a typo or a specialized term.  A possible translation, depending on context, could be:  \"At the time of...\")"
+      "en": "(This is also likely a typo or a specialized term.  A possible translation"
     }
   ],
   "zhichi": [
@@ -2008,7 +2008,7 @@
   "benti": [
     {
       "char": "本题",
-      "en": "This question / This problem"
+      "en": "This question"
     }
   ],
   "jiajianfa": [
@@ -2122,7 +2122,7 @@
   "jiangci": [
     {
       "char": "降次",
-      "en": "Lower rank/Order"
+      "en": "Lower rank"
     }
   ],
   "zuoyuan": [
@@ -2158,13 +2158,13 @@
   "shijiao": [
     {
       "char": "视角",
-      "en": "Viewpoint/Angle of sight"
+      "en": "Viewpoint"
     }
   ],
   "zhuangbian": [
     {
       "char": "狀边",
-      "en": "Side/Edge"
+      "en": "Side"
     }
   ],
   "gege": [
@@ -2182,7 +2182,7 @@
   "guding": [
     {
       "char": "股定",
-      "en": "Fixed/determined"
+      "en": "Fixed"
     }
   ],
   "nishizhen": [
@@ -2206,7 +2206,7 @@
   "zuotu": [
     {
       "char": "作图",
-      "en": "Drawing/Diagramming"
+      "en": "Drawing"
     }
   ],
   "gedian": [
@@ -2236,7 +2236,7 @@
   "xiangju": [
     {
       "char": "相距",
-      "en": "To be apart / Distance between"
+      "en": "To be apart"
     }
   ],
   "yizhishu": [
@@ -2284,7 +2284,7 @@
   "nansheng": [
     {
       "char": "男生",
-      "en": "Male student / Boy"
+      "en": "Male student"
     }
   ],
   "shumiao": [
@@ -2302,7 +2302,7 @@
   "jiwei": [
     {
       "char": "记为",
-      "en": "Recorded as / Designated as"
+      "en": "Recorded as"
     },
     {
       "char": "积为",
@@ -2312,7 +2312,7 @@
   "jiazhong": [
     {
       "char": "甲种",
-      "en": "Type A / Species A"
+      "en": "Type A"
     }
   ],
   "fendian": [
@@ -2348,7 +2348,7 @@
   "biaohao": [
     {
       "char": "标号",
-      "en": "Label/Marking"
+      "en": "Label"
     }
   ],
   "yuanyin": [
@@ -2360,7 +2360,7 @@
   "chenghuo": [
     {
       "char": "成活",
-      "en": "Germination/Maturation"
+      "en": "Germination"
     }
   ],
   "shunci": [
@@ -2378,7 +2378,7 @@
   "tongli": [
     {
       "char": "同理",
-      "en": "Similarly/Likewise"
+      "en": "Similarly"
     }
   ],
   "rutupouben": [
@@ -2390,7 +2390,7 @@
   "mingti": [
     {
       "char": "命题",
-      "en": "Proposition/Problem"
+      "en": "Proposition"
     }
   ],
   "duijiao": [
@@ -2426,27 +2426,27 @@
   "jiequ": [
     {
       "char": "截取",
-      "en": "Cut out/Extract"
+      "en": "Cut out"
     },
     {
       "char": "解去",
-      "en": "Remove, eliminate"
+      "en": "Remove"
     }
   ],
   "tiyi": [
     {
       "char": "题意",
-      "en": "Question/Meaning"
+      "en": "Question"
     }
   ],
   "tushang": [
     {
       "char": "图上",
-      "en": "On the diagram/map"
+      "en": "On the diagram"
     },
     {
       "char": "涂上",
-      "en": "To coat/Paint"
+      "en": "To coat"
     }
   ],
   "xianxiang": [
@@ -2458,7 +2458,7 @@
   "qiuzhi": [
     {
       "char": "求值",
-      "en": "Evaluate/Assess"
+      "en": "Evaluate"
     }
   ],
   "tijia": [
@@ -2470,13 +2470,13 @@
   "shunliu": [
     {
       "char": "顺流",
-      "en": "Downstream/Following the flow"
+      "en": "Downstream"
     }
   ],
   "yiliang": [
     {
       "char": "一量",
-      "en": "One measure/amount"
+      "en": "One measure"
     }
   ],
   "shuidao": [
@@ -2494,7 +2494,7 @@
   "gongchengdui": [
     {
       "char": "工程队",
-      "en": "Construction team/Engineering team"
+      "en": "Construction team"
     }
   ],
   "shuxuemoxing": [
@@ -2540,13 +2540,13 @@
     },
     {
       "char": "即式",
-      "en": "As is/Immediate"
+      "en": "As is"
     }
   ],
   "youge": [
     {
       "char": "右个",
-      "en": "Right side/corner"
+      "en": "Right side"
     }
   ],
   "pailiang": [
@@ -2564,7 +2564,7 @@
   "luozhu": [
     {
       "char": "螺柱",
-      "en": "Screw post/Spindle"
+      "en": "Screw post"
     }
   ],
   "yuebing": [
@@ -2596,7 +2596,7 @@
     },
     {
       "char": "元时",
-      "en": "Moment, Instant"
+      "en": "Moment"
     },
     {
       "char": "元试",
@@ -2612,7 +2612,7 @@
   "pouzhigangben": [
     {
       "char": "犃犆犅犇",
-      "en": "(This appears to be a typo, likely referring to \"完美\" - perfect) Perfect"
+      "en": "(This appears to be a typo"
     }
   ],
   "neijie": [
@@ -2624,7 +2624,7 @@
   "qiedian": [
     {
       "char": "切点",
-      "en": "Vertex/Intersection Point"
+      "en": "Vertex"
     }
   ],
   "liangyuan": [
@@ -2672,7 +2672,7 @@
   "jieshe": [
     {
       "char": "解设",
-      "en": "Solve/Establish"
+      "en": "Solve"
     }
   ],
   "ruanjian": [
@@ -2696,7 +2696,7 @@
   "maben": [
     {
       "char": "犘犇",
-      "en": "(This appears to be a typo, likely referring to \"牛犇\" - a common name)"
+      "en": "(This appears to be a typo"
     }
   ],
   "jihexue": [
@@ -2744,7 +2744,7 @@
   "gewei": [
     {
       "char": "个位",
-      "en": "Digit/Unit"
+      "en": "Digit"
     },
     {
       "char": "各为",
@@ -2754,13 +2754,13 @@
   "beishu": [
     {
       "char": "倍数",
-      "en": "Multiple/Factor"
+      "en": "Multiple"
     }
   ],
   "shifen": [
     {
       "char": "时分",
-      "en": "Time/Moment"
+      "en": "Time"
     }
   ],
   "quzhi": [
@@ -2778,7 +2778,7 @@
   "zhuangci": [
     {
       "char": "狀次",
-      "en": "Status/Rank"
+      "en": "Status"
     }
   ],
   "shigong": [
@@ -2802,7 +2802,7 @@
   "tuyong": [
     {
       "char": "图用",
-      "en": "For drawing/Illustration"
+      "en": "For drawing"
     }
   ],
   "yuanjia": [
@@ -2820,7 +2820,7 @@
   "chushou": [
     {
       "char": "出手",
-      "en": "To take action, to put out"
+      "en": "To take action"
     }
   ],
   "shuzhuang": [
@@ -2848,7 +2848,7 @@
   "yongliao": [
     {
       "char": "用料",
-      "en": "Materials/Ingredients"
+      "en": "Materials"
     }
   ],
   "keche": [
@@ -2890,23 +2890,23 @@
   "fenmiao": [
     {
       "char": "分秒",
-      "en": "Minute/Second"
+      "en": "Minute"
     }
   ],
   "jieben": [
     {
       "char": "犗犇",
-      "en": "Longhorn Cattle (specifically, the ancient breed)"
+      "en": "Longhorn Cattle (specifically"
     },
     {
       "char": "解犇",
-      "en": "(This appears to be a character with no standard meaning; transliterated as \"Jie Fen\" - possibly referring to a specific type of joint or connection)"
+      "en": "(This appears to be a character with no standard meaning"
     }
   ],
   "bianchen": [
     {
       "char": "边衬",
-      "en": "Border/Trim"
+      "en": "Border"
     }
   ],
   "jisuanjiruanjian": [
@@ -2924,7 +2924,7 @@
   "waiqie": [
     {
       "char": "外切",
-      "en": "External/Outward cutting"
+      "en": "External"
     }
   ],
   "pipi": [
@@ -2946,7 +2946,7 @@
     },
     {
       "char": "数由",
-      "en": "Numbers/Figures"
+      "en": "Numbers"
     },
     {
       "char": "书有",
@@ -2986,7 +2986,7 @@
   "zhoujiao": [
     {
       "char": "周角",
-      "en": "Right angle / Circumangle"
+      "en": "Right angle"
     }
   ],
   "qiangmian": [
@@ -3004,7 +3004,7 @@
   "liangzhang": [
     {
       "char": "两张",
-      "en": "Two sheets / Two pieces"
+      "en": "Two sheets"
     }
   ],
   "huahu": [
@@ -3016,7 +3016,7 @@
   "zuofa": [
     {
       "char": "作法",
-      "en": "Method / Way"
+      "en": "Method"
     }
   ],
   "dianben": [
@@ -3040,7 +3040,7 @@
   "shangren": [
     {
       "char": "上任",
-      "en": "Take office / Assume duty"
+      "en": "Take office"
     }
   ],
   "turutu": [
@@ -3064,7 +3064,7 @@
   "lizhu": [
     {
       "char": "立柱",
-      "en": "Pillar / Support post"
+      "en": "Pillar"
     }
   ],
   "jiaoshi": [
@@ -3146,7 +3146,7 @@
   "zhetai": [
     {
       "char": "这台",
-      "en": "This machine/device"
+      "en": "This machine"
     }
   ],
   "xuanxue": [
@@ -3204,7 +3204,7 @@
   "zhuci": [
     {
       "char": "逐次",
-      "en": "Step-by-step/Gradually"
+      "en": "Step-by-step"
     }
   ],
   "wanyuan": [
@@ -3228,13 +3228,13 @@
   "shunshui": [
     {
       "char": "顺水",
-      "en": "Favorable conditions/Smooth flow"
+      "en": "Favorable conditions"
     }
   ],
   "nishui": [
     {
       "char": "逆水",
-      "en": "Adverse conditions/Against the current"
+      "en": "Adverse conditions"
     }
   ],
   "qiudui": [
@@ -3264,7 +3264,7 @@
   "weiyuan": [
     {
       "char": "为元",
-      "en": "To be/to be a"
+      "en": "To be"
     }
   ],
   "kuangtu": [
@@ -3276,19 +3276,19 @@
   "caizhai": [
     {
       "char": "采摘",
-      "en": "To harvest/pick"
+      "en": "To harvest"
     }
   ],
   "nengqiu": [
     {
       "char": "能求",
-      "en": "Able to obtain/possible"
+      "en": "Able to obtain"
     }
   ],
   "xianding": [
     {
       "char": "限定",
-      "en": "Limited/Specified"
+      "en": "Limited"
     }
   ],
   "fuyin": [
@@ -3316,7 +3316,7 @@
   "sitiao": [
     {
       "char": "四条",
-      "en": "Four pieces/lines"
+      "en": "Four pieces"
     }
   ],
   "liangjiaoqi": [
@@ -3328,7 +3328,7 @@
   "zhijieben": [
     {
       "char": "犆犗犇",
-      "en": "Cattle (specifically, horned cattle)"
+      "en": "Cattle (specifically"
     }
   ],
   "yuanhu": [
@@ -3358,7 +3358,7 @@
   "miaodian": [
     {
       "char": "描点",
-      "en": "Spotting/Marking points"
+      "en": "Spotting"
     }
   ],
   "zuididian": [
@@ -3394,13 +3394,13 @@
   "ouranxing": [
     {
       "char": "偶然性",
-      "en": "Chance/Randomness"
+      "en": "Chance"
     }
   ],
   "mochu": [
     {
       "char": "摸出",
-      "en": "To find/discover/extract"
+      "en": "To find"
     }
   ],
   "koudai": [
@@ -3482,7 +3482,7 @@
   "tuilun": [
     {
       "char": "推论",
-      "en": "Inference/Conclusion"
+      "en": "Inference"
     }
   ],
   "tianbiao": [
@@ -3494,13 +3494,13 @@
   "yudianben": [
     {
       "char": "于点犇",
-      "en": "(This appears to be a specific character or term, translation is difficult - leave as is)"
+      "en": "(This appears to be a specific character or term"
     }
   ],
   "cishi": [
     {
       "char": "次时",
-      "en": "Once/Next time"
+      "en": "Once"
     }
   ],
   "shushu": [
@@ -3512,7 +3512,7 @@
   "gangzhiben": [
     {
       "char": "犅犆犇",
-      "en": "(This appears to be a specific character or term, translation is difficult - leave as is)"
+      "en": "(This appears to be a specific character or term"
     }
   ],
   "titu": [
@@ -3522,7 +3522,7 @@
     },
     {
       "char": "体图",
-      "en": "Body diagram/Figure diagram"
+      "en": "Body diagram"
     }
   ],
   "duichenxing": [
@@ -3556,7 +3556,7 @@
     },
     {
       "char": "出使",
-      "en": "Send as an envoy/Dispatch"
+      "en": "Send as an envoy"
     }
   ],
   "rongji": [
@@ -3658,7 +3658,7 @@
   "tihua": [
     {
       "char": "题画",
-      "en": "Problem drawing/exercise illustration"
+      "en": "Problem drawing"
     }
   ],
   "congxiaodaoda": [
@@ -3704,7 +3704,7 @@
   "youzhang": [
     {
       "char": "有张",
-      "en": "Has a/There is a"
+      "en": "Has a"
     }
   ],
   "lifang": [
@@ -3734,7 +3734,7 @@
   "fadui": [
     {
       "char": "法对",
-      "en": "Method of/Approach to"
+      "en": "Method of"
     }
   ],
   "jinshusi": [
@@ -3776,7 +3776,7 @@
   "pincheng": [
     {
       "char": "拼成",
-      "en": "Formed/Assembled"
+      "en": "Formed"
     }
   ],
   "shuibei": [
@@ -3788,7 +3788,7 @@
   "laijie": [
     {
       "char": "来解",
-      "en": "To solve/resolve"
+      "en": "To solve"
     }
   ],
   "chengde": [
@@ -3812,7 +3812,7 @@
   "shoufei": [
     {
       "char": "收费",
-      "en": "Charge/Fee"
+      "en": "Charge"
     }
   ],
   "diufan": [
@@ -3976,13 +3976,13 @@
     },
     {
       "char": "地较",
-      "en": "More/Greater"
+      "en": "More"
     }
   ],
   "getiao": [
     {
       "char": "各条",
-      "en": "Various/All"
+      "en": "Various"
     }
   ],
   "turu": [
@@ -3994,7 +3994,7 @@
   "dingcheng": [
     {
       "char": "钉成",
-      "en": "Nailed/Fastened"
+      "en": "Nailed"
     }
   ],
   "xuanzeti": [
@@ -4006,13 +4006,13 @@
   "wushuge": [
     {
       "char": "无数个",
-      "en": "Numerous/Many"
+      "en": "Numerous"
     }
   ],
   "pinhe": [
     {
       "char": "拼合",
-      "en": "Assemble/Combine"
+      "en": "Assemble"
     }
   ],
   "dengliang": [
@@ -4024,13 +4024,13 @@
   "tuli": [
     {
       "char": "图例",
-      "en": "Legend/Illustration"
+      "en": "Legend"
     }
   ],
   "liangchu": [
     {
       "char": "两处",
-      "en": "Two places/Sides"
+      "en": "Two places"
     }
   ],
   "jiaohuyu": [
@@ -4042,7 +4042,7 @@
   "yudian": [
     {
       "char": "于点",
-      "en": "At/On a point"
+      "en": "At"
     }
   ],
   "quanshi": [
@@ -4060,7 +4060,7 @@
   "qiuchu": [
     {
       "char": "求出",
-      "en": "Calculate/Determine"
+      "en": "Calculate"
     },
     {
       "char": "球除",
@@ -4124,7 +4124,7 @@
   "moutiao": [
     {
       "char": "某条",
-      "en": "A certain/specific"
+      "en": "A certain"
     }
   ],
   "jiaoyin": [
@@ -4142,13 +4142,13 @@
   "miaochu": [
     {
       "char": "描出",
-      "en": "Draw, depict"
+      "en": "Draw"
     }
   ],
   "qishi": [
     {
       "char": "起始",
-      "en": "Start, beginning"
+      "en": "Start"
     }
   ],
   "guiji": [
@@ -4178,31 +4178,31 @@
   "xianyao": [
     {
       "char": "现要",
-      "en": "To present/to show"
+      "en": "To present"
     }
   ],
   "jiading": [
     {
       "char": "假定",
-      "en": "Assumption/Presumption"
+      "en": "Assumption"
     }
   ],
   "meishuzi": [
     {
       "char": "美术字",
-      "en": "Art script/Calligraphic font"
+      "en": "Art script"
     }
   ],
   "meimiao": [
     {
       "char": "每秒",
-      "en": "Per second/Per second"
+      "en": "Per second"
     }
   ],
   "zaiqiu": [
     {
       "char": "再求",
-      "en": "To seek again/To further inquire"
+      "en": "To seek again"
     }
   ],
   "chushu": [
@@ -4214,7 +4214,7 @@
   "wugai": [
     {
       "char": "无盖",
-      "en": "Open-top/Without cover"
+      "en": "Open-top"
     }
   ],
   "hualuogeng": [
@@ -4232,7 +4232,7 @@
   "zhankaishi": [
     {
       "char": "展开式",
-      "en": "Expansion formula/Expanded form"
+      "en": "Expansion formula"
     }
   ],
   "dixing": [
@@ -4256,7 +4256,7 @@
   "xianyou": [
     {
       "char": "先由",
-      "en": "First by/Initially by"
+      "en": "First by"
     }
   ],
   "moucun": [
@@ -4268,7 +4268,7 @@
   "youzhuang": [
     {
       "char": "有狀",
-      "en": "(This term is unclear, likely a misspelling or specialized term - best to leave as is or research further)"
+      "en": "(This term is unclear"
     }
   ],
   "yuefen": [
@@ -4374,7 +4374,7 @@
     },
     {
       "char": "一刻",
-      "en": "Moment/Instant"
+      "en": "Moment"
     }
   ],
   "shuzhong": [
@@ -4546,7 +4546,7 @@
   "duixiao": [
     {
       "char": "对消",
-      "en": "Cancellation, offsetting"
+      "en": "Cancellation"
     }
   ],
   "shulie": [
@@ -4614,13 +4614,13 @@
     },
     {
       "char": "每份",
-      "en": "Each copy, Per unit"
+      "en": "Each copy"
     }
   ],
   "jigong": [
     {
       "char": "技工",
-      "en": "craftsman/technician"
+      "en": "craftsman"
     }
   ],
   "gangcai": [
@@ -4632,7 +4632,7 @@
   "peicheng": [
     {
       "char": "配成",
-      "en": "combine/match"
+      "en": "combine"
     }
   ],
   "shengchang": [
@@ -4680,7 +4680,7 @@
   "mianshi": [
     {
       "char": "面是",
-      "en": "what is it (literally, \"face is\")"
+      "en": "what is it (literally"
     }
   ],
   "youmian": [
@@ -4736,7 +4736,7 @@
   "poujieben": [
     {
       "char": "犃犗犇",
-      "en": "Cattle (specifically, a breed of horned cattle)"
+      "en": "Cattle (specifically"
     }
   ],
   "huolun": [
@@ -4850,7 +4850,7 @@
     },
     {
       "char": "之微",
-      "en": "The minute / The small"
+      "en": "The minute"
     }
   ],
   "banshou": [
@@ -4910,7 +4910,7 @@
   "nengzuo": [
     {
       "char": "能作",
-      "en": "Able to do/Possible"
+      "en": "Able to do"
     }
   ],
   "baiqiu": [
@@ -4928,7 +4928,7 @@
   "moqu": [
     {
       "char": "摸取",
-      "en": "Pick up/Take"
+      "en": "Pick up"
     }
   ],
   "huase": [
@@ -4940,7 +4940,7 @@
   "zhongsuo": [
     {
       "char": "中所",
-      "en": "In (a place/thing)"
+      "en": "In (a place"
     }
   ],
   "maicang": [
@@ -5016,7 +5016,7 @@
   "hunru": [
     {
       "char": "混入",
-      "en": "Mix in/Contaminate"
+      "en": "Mix in"
     }
   ],
   "baozhong": [
@@ -5028,7 +5028,7 @@
   "tianzai": [
     {
       "char": "田载",
-      "en": "(Surname, often referring to a historical figure)"
+      "en": "(Surname"
     },
     {
       "char": "填在",
@@ -5068,7 +5068,7 @@
   "tuyou": [
     {
       "char": "图有",
-      "en": "Diagrams/Figures"
+      "en": "Diagrams"
     },
     {
       "char": "图由",
@@ -5078,7 +5078,7 @@
   "xingtu": [
     {
       "char": "形图",
-      "en": "Form chart/Diagram"
+      "en": "Form chart"
     }
   ],
   "ruijiaosanjiao": [
@@ -5090,7 +5090,7 @@
   "xingzhong": [
     {
       "char": "形中",
-      "en": "In shape/Within the form"
+      "en": "In shape"
     }
   ],
   "yaozhang": [
@@ -5120,7 +5120,7 @@
   "sangen": [
     {
       "char": "三根",
-      "en": "Three pieces/Three rods"
+      "en": "Three pieces"
     }
   ],
   "sigen": [
@@ -5138,7 +5138,7 @@
   "pingmiantu": [
     {
       "char": "平面图",
-      "en": "Plan view/Flat map"
+      "en": "Plan view"
     }
   ],
   "rutupougangzhiben": [
@@ -5168,13 +5168,13 @@
   "xiangxiang": [
     {
       "char": "相向",
-      "en": "Facing each other/In opposition"
+      "en": "Facing each other"
     }
   ],
   "tiaoshu": [
     {
       "char": "条数",
-      "en": "Number of items/Count"
+      "en": "Number of items"
     }
   ],
   "xingrutu": [
@@ -5204,13 +5204,13 @@
   "tuidao": [
     {
       "char": "推导",
-      "en": "Derive/Lead to"
+      "en": "Derive"
     }
   ],
   "najizhong": [
     {
       "char": "哪几种",
-      "en": "Which kinds/Which types"
+      "en": "Which kinds"
     }
   ],
   "rushang": [
@@ -5228,7 +5228,7 @@
   "shanghua": [
     {
       "char": "上画",
-      "en": "As drawn/As depicted"
+      "en": "As drawn"
     }
   ],
   "bianji": [
@@ -5262,7 +5262,7 @@
     },
     {
       "char": "颠倒",
-      "en": "Upside down, reversed"
+      "en": "Upside down"
     }
   ],
   "jimaoshichang": [
@@ -5280,7 +5280,7 @@
   "zhezhang": [
     {
       "char": "这张",
-      "en": "This chart/image"
+      "en": "This chart"
     }
   ],
   "zuohu": [
@@ -5334,7 +5334,7 @@
   "xiansheng": [
     {
       "char": "线绳",
-      "en": "Measuring rope/Line rope"
+      "en": "Measuring rope"
     }
   ],
   "haili": [
@@ -5370,11 +5370,11 @@
   "xingyou": [
     {
       "char": "形有",
-      "en": "Shape has/Form has"
+      "en": "Shape has"
     },
     {
       "char": "形由",
-      "en": "Form depends on/Shape is determined by"
+      "en": "Form depends on"
     }
   ],
   "chaojijisuanji": [
@@ -5398,7 +5398,7 @@
   "huhuan": [
     {
       "char": "互换",
-      "en": "Exchange/Swap"
+      "en": "Exchange"
     }
   ],
   "dianliu": [
@@ -5440,7 +5440,7 @@
   "yilie": [
     {
       "char": "一列",
-      "en": "A train, a line"
+      "en": "A train"
     }
   ],
   "zheliang": [
@@ -5458,7 +5458,7 @@
   "diyikuai": [
     {
       "char": "第一块",
-      "en": "First piece, first block"
+      "en": "First piece"
     }
   ],
   "dijie": [
@@ -5474,7 +5474,7 @@
   "guijiewei": [
     {
       "char": "归结为",
-      "en": "Concluded as, amounted to"
+      "en": "Concluded as"
     }
   ],
   "yisouchuan": [
@@ -5492,19 +5492,19 @@
   "daoshui": [
     {
       "char": "倒水",
-      "en": "Watering (downward), draining"
+      "en": "Watering (downward)"
     }
   ],
   "zhonghan": [
     {
       "char": "中含",
-      "en": "Containing, including"
+      "en": "Containing"
     }
   ],
   "jiewei": [
     {
       "char": "解为",
-      "en": "Interpreted as, resolved into"
+      "en": "Interpreted as"
     }
   ],
   "qingdian": [
@@ -5522,13 +5522,13 @@
   "jiazhang": [
     {
       "char": "加长",
-      "en": "To lengthen/To extend"
+      "en": "To lengthen"
     }
   ],
   "taoshu": [
     {
       "char": "套书",
-      "en": "Set book/Textbook"
+      "en": "Set book"
     }
   ],
   "keyan": [
@@ -5552,19 +5552,19 @@
   "shutu": [
     {
       "char": "数图",
-      "en": "Charts/Figures"
+      "en": "Charts"
     }
   ],
   "shudeng": [
     {
       "char": "数等",
-      "en": "Similar/Similar items"
+      "en": "Similar"
     }
   ],
   "jinchukou": [
     {
       "char": "进出口",
-      "en": "Import/Export"
+      "en": "Import"
     }
   ],
   "zonge": [
@@ -5700,7 +5700,7 @@
   "shichuan": [
     {
       "char": "时船",
-      "en": "Time boat (likely a typo, intended to be \"time\")"
+      "en": "Time boat (likely a typo"
     }
   ],
   "yuanzhuti": [
@@ -5754,7 +5754,7 @@
   "huoge": [
     {
       "char": "或个",
-      "en": "Or, also"
+      "en": "Or"
     }
   ],
   "xiaozhang": [
@@ -5772,7 +5772,7 @@
   "dingchu": [
     {
       "char": "定出",
-      "en": "Determined, decided"
+      "en": "Determined"
     }
   ],
   "tianping": [
@@ -5802,7 +5802,7 @@
   "pishu": [
     {
       "char": "批书",
-      "en": "Printed book, pamphlet"
+      "en": "Printed book"
     }
   ],
   "wangfang": [
@@ -5830,7 +5830,7 @@
   "xiewei": [
     {
       "char": "写为",
-      "en": "Written as, written for"
+      "en": "Written as"
     }
   ],
   "xiabannian": [
@@ -5866,7 +5866,7 @@
   "ganghao": [
     {
       "char": "刚好",
-      "en": "just now, approximately"
+      "en": "just now"
     }
   ],
   "youcikezhi": [
@@ -5912,7 +5912,7 @@
     },
     {
       "char": "隐蔽",
-      "en": "Hidden/Concealed"
+      "en": "Hidden"
     }
   ],
   "jiazu": [
@@ -5924,7 +5924,7 @@
   "dinge": [
     {
       "char": "定额",
-      "en": "quota, specified quantity"
+      "en": "quota"
     }
   ],
   "shanshui": [
@@ -5942,7 +5942,7 @@
   "jiagua": [
     {
       "char": "加挂",
-      "en": "to add on, to append"
+      "en": "to add on"
     }
   ],
   "youduan": [
@@ -6000,7 +6000,7 @@
   "shangzuo": [
     {
       "char": "上作",
-      "en": "Made for, Upper part"
+      "en": "Made for"
     }
   ],
   "paxing": [
@@ -6066,7 +6066,7 @@
   "meiguan": [
     {
       "char": "美观",
-      "en": "Beautiful, Aesthetic"
+      "en": "Beautiful"
     }
   ],
   "huochechexiang": [
@@ -6190,7 +6190,7 @@
   "xiaoguotu": [
     {
       "char": "效果图",
-      "en": "Rendered Image/Visualization"
+      "en": "Rendered Image"
     }
   ],
   "hengjiemian": [
@@ -6214,7 +6214,7 @@
   "dizhong": [
     {
       "char": "第种",
-      "en": "Type/Kind"
+      "en": "Type"
     }
   ],
   "juminlou": [
@@ -6232,7 +6232,7 @@
   "huanshu": [
     {
       "char": "环数",
-      "en": "Ring Number/Circumference"
+      "en": "Ring Number"
     }
   ],
   "danzhedian": [
@@ -6250,7 +6250,7 @@
   "suozuo": [
     {
       "char": "所作",
-      "en": "As Made/Completed"
+      "en": "As Made"
     }
   ],
   "yaoshihuan": [
@@ -6310,7 +6310,7 @@
   "chaoqian": [
     {
       "char": "超前",
-      "en": "Ahead/In Advance"
+      "en": "Ahead"
     }
   ],
   "sanduan": [
@@ -6346,7 +6346,7 @@
   "chuge": [
     {
       "char": "出个",
-      "en": "Make/Get"
+      "en": "Make"
     }
   ],
   "moqiu": [
@@ -6370,7 +6370,7 @@
   "kaiqiu": [
     {
       "char": "开球",
-      "en": "Start/Kick off"
+      "en": "Start"
     }
   ],
   "dimei": [
@@ -6412,7 +6412,7 @@
   "wanhao": [
     {
       "char": "完好",
-      "en": "Intact/Perfect"
+      "en": "Intact"
     }
   ],
   "feibiao": [
@@ -6518,7 +6518,7 @@
   "xiangjie": [
     {
       "char": "相接",
-      "en": "Connected/Linked"
+      "en": "Connected"
     },
     {
       "char": "详解",
@@ -6558,13 +6558,13 @@
   "niurutu": [
     {
       "char": "扭如图",
-      "en": "Inclined Diagram/Twisted Diagram"
+      "en": "Inclined Diagram"
     }
   ],
   "zaiju": [
     {
       "char": "再举",
-      "en": "Again, Give Examples"
+      "en": "Again"
     }
   ],
   "zaihua": [
@@ -6576,7 +6576,7 @@
   "xinfu": [
     {
       "char": "信服",
-      "en": "To Believe/To Be Convinced"
+      "en": "To Believe"
     }
   ],
   "caozuoguocheng": [
@@ -6612,7 +6612,7 @@
   "zhigangben": [
     {
       "char": "犆犅犇",
-      "en": "(This appears to be a playful, nonsensical term, likely a visual element.  A reasonable translation would be) Visual Representation / Diagram"
+      "en": "(This appears to be a playful"
     }
   ],
   "huyu": [
@@ -6624,19 +6624,19 @@
   "yetupougangzhiben": [
     {
       "char": "页图犃犅犆犇",
-      "en": "Page Diagram / Page Layout"
+      "en": "Page Diagram"
     }
   ],
   "tuben": [
     {
       "char": "图犇",
-      "en": "Diagram / Illustration"
+      "en": "Diagram"
     }
   ],
   "lilaoshi": [
     {
       "char": "李老师",
-      "en": "Mr. Li / Teacher Li"
+      "en": "Mr. Li"
     }
   ],
   "shuxuegongshi": [
@@ -6648,37 +6648,37 @@
   "dihua": [
     {
       "char": "地画",
-      "en": "Sketching / Drawing on a surface"
+      "en": "Sketching"
     }
   ],
   "zuoge": [
     {
       "char": "作个",
-      "en": "Make a / Create"
+      "en": "Make a"
     }
   ],
   "lingyizu": [
     {
       "char": "另一组",
-      "en": "Another Set / Another Group"
+      "en": "Another Set"
     }
   ],
   "fenfa": [
     {
       "char": "分法",
-      "en": "Method of Division / Method"
+      "en": "Method of Division"
     }
   ],
   "huanwei": [
     {
       "char": "换为",
-      "en": "Change to / Convert to"
+      "en": "Change to"
     }
   ],
   "pougangyuzhiben": [
     {
       "char": "犃犅与犆犇",
-      "en": "(Again, likely a visual element.  Translation: Diagram/Representation)"
+      "en": "(Again"
     }
   ],
   "diban": [
@@ -6696,13 +6696,13 @@
   "pinpinkan": [
     {
       "char": "拼拼看",
-      "en": "Try it out / Experiment"
+      "en": "Try it out"
     }
   ],
   "maopougangben": [
     {
       "char": "犛犃犅犇",
-      "en": "(Likely a visual element. Translation: Diagram/Representation)"
+      "en": "(Likely a visual element. Translation: Diagram"
     }
   ],
   "huojiao": [
@@ -6714,7 +6714,7 @@
   "fanzhe": [
     {
       "char": "翻折",
-      "en": "Fold / Flip"
+      "en": "Fold"
     }
   ],
   "tuzhongdepougangzhiheben": [
@@ -6726,13 +6726,13 @@
   "quandengshi": [
     {
       "char": "全等时",
-      "en": "When Equal / When Congruent"
+      "en": "When Equal"
     }
   ],
   "jizuopougangzhiben": [
     {
       "char": "记作犃犅犆犇",
-      "en": "Record as 犃犅犆犇 / Denote as 犃犅犆犇"
+      "en": "Record as 犃犅犆犇"
     }
   ],
   "jiaorutu": [
@@ -6918,7 +6918,7 @@
   "rutupougangben": [
     {
       "char": "如图犃犅犇",
-      "en": "As shown in [image/diagram]"
+      "en": "As shown in [image"
     }
   ],
   "xingdengbian": [
@@ -6952,13 +6952,13 @@
   "gangzhigangben": [
     {
       "char": "犅犆犅犇",
-      "en": "[Name/Identifier - likely a person's name]"
+      "en": "[Name"
     }
   ],
   "yuzhiben": [
     {
       "char": "于犆犇",
-      "en": "[Name/Identifier - likely a person's name]"
+      "en": "[Name"
     }
   ],
   "gonggongqiche": [
@@ -7010,7 +7010,7 @@
     },
     {
       "char": "有点",
-      "en": "A little/Some"
+      "en": "A little"
     }
   ],
   "bucheng": [
@@ -7058,13 +7058,13 @@
   "pougangzhizhigangben": [
     {
       "char": "犃犅犆犆犅犇",
-      "en": "(Likely a technical term - needs context for accurate translation, possibly \"a large quantity\")"
+      "en": "(Likely a technical term - needs context for accurate translation"
     }
   ],
   "zhipoupougangben": [
     {
       "char": "犆犃犃犅犇",
-      "en": "(Likely a technical term - needs context for accurate translation, possibly \"a large quantity\")"
+      "en": "(Likely a technical term - needs context for accurate translation"
     }
   ],
   "xingditi": [
@@ -7076,7 +7076,7 @@
   "quangangzhipouben": [
     {
       "char": "犈犅犆犃犇",
-      "en": "(Likely a technical term - needs context for accurate translation, possibly \"a specific shape\")"
+      "en": "(Likely a technical term - needs context for accurate translation"
     }
   ],
   "litu": [
@@ -7100,7 +7100,7 @@
   "waikuang": [
     {
       "char": "外框",
-      "en": "Border, frame"
+      "en": "Border"
     }
   ],
   "zhijiaosanjiao": [
@@ -7112,7 +7112,7 @@
   "fengei": [
     {
       "char": "分给",
-      "en": "To distribute, to assign"
+      "en": "To distribute"
     }
   ],
   "yibing": [
@@ -7136,13 +7136,13 @@
   "quanpouben": [
     {
       "char": "犈犃犇",
-      "en": "(Likely a technical term - needs context for accurate translation, possibly \"a specific measurement\")"
+      "en": "(Likely a technical term - needs context for accurate translation"
     }
   ],
   "keshi": [
     {
       "char": "可使",
-      "en": "Able to, can make"
+      "en": "Able to"
     }
   ],
   "dongdian": [
@@ -7178,13 +7178,13 @@
   "benquanben": [
     {
       "char": "犇犈犇",
-      "en": "(Likely a technical term - needs context for accurate translation, possibly \"a large quantity\")"
+      "en": "(Likely a technical term - needs context for accurate translation"
     }
   ],
   "quanben": [
     {
       "char": "犈犇",
-      "en": "(Likely a technical term - needs context for accurate translation, possibly \"a large quantity\")"
+      "en": "(Likely a technical term - needs context for accurate translation"
     }
   ],
   "jiexinhuayuan": [
@@ -7236,7 +7236,7 @@
   "youtu": [
     {
       "char": "由图",
-      "en": "From the diagram/According to the chart"
+      "en": "From the diagram"
     }
   ],
   "beichushu": [
@@ -7272,7 +7272,7 @@
   "geqie": [
     {
       "char": "各切",
-      "en": "As appropriate/relevant"
+      "en": "As appropriate"
     },
     {
       "char": "个且",
@@ -7306,7 +7306,7 @@
   "zhushi": [
     {
       "char": "注释",
-      "en": "Annotation/Note"
+      "en": "Annotation"
     }
   ],
   "pasika": [
@@ -7406,7 +7406,7 @@
   "weizhuang": [
     {
       "char": "为狀",
-      "en": "For (a purpose/state)"
+      "en": "For (a purpose"
     }
   ],
   "sikuai": [
@@ -7430,7 +7430,7 @@
   "fenli": [
     {
       "char": "分例",
-      "en": "Branch/Division (referring to a system or organization)"
+      "en": "Branch"
     }
   ],
   "xushuichi": [
@@ -7442,7 +7442,7 @@
   "didangzhuang": [
     {
       "char": "地当狀",
-      "en": "Suitable time/Season"
+      "en": "Suitable time"
     }
   ],
   "maonian": [
@@ -7454,7 +7454,7 @@
   "shizhi": [
     {
       "char": "市制",
-      "en": "Commercial System/Metric System"
+      "en": "Commercial System"
     }
   ],
   "mihou": [
@@ -7478,7 +7478,7 @@
   "yidi": [
     {
       "char": "一地",
-      "en": "One place/Area"
+      "en": "One place"
     },
     {
       "char": "乙地",
@@ -7494,13 +7494,13 @@
   "gaixie": [
     {
       "char": "改写",
-      "en": "To rewrite/To revise"
+      "en": "To rewrite"
     }
   ],
   "zhuangzhuangzhuang": [
     {
       "char": "狀狀狀",
-      "en": "(Humorous expression) Amazing/Wonderful"
+      "en": "(Humorous expression) Amazing"
     }
   ],
   "jutizuofa": [
@@ -7522,19 +7522,19 @@
     },
     {
       "char": "节有",
-      "en": "Has a node/branch"
+      "en": "Has a node"
     }
   ],
   "zonggong": [
     {
       "char": "总工",
-      "en": "Foreman/Supervisor"
+      "en": "Foreman"
     }
   ],
   "mouci": [
     {
       "char": "某次",
-      "en": "A time/occasion"
+      "en": "A time"
     }
   ],
   "huagongyuanliao": [
@@ -7558,7 +7558,7 @@
   "lingyiban": [
     {
       "char": "另一半",
-      "en": "Other half/Partner"
+      "en": "Other half"
     }
   ],
   "zhepi": [
@@ -7582,7 +7582,7 @@
   "dingfeng": [
     {
       "char": "顶峰",
-      "en": "Peak/Summit"
+      "en": "Peak"
     }
   ],
   "lianxishiji": [
@@ -7606,7 +7606,7 @@
   "zhuangshi": [
     {
       "char": "狀是",
-      "en": "It is/That is"
+      "en": "It is"
     }
   ],
   "shougeji": [
@@ -7618,7 +7618,7 @@
   "chufadi": [
     {
       "char": "出发地",
-      "en": "Place of origin/Starting point"
+      "en": "Place of origin"
     }
   ],
   "dangjin": [
@@ -7630,7 +7630,7 @@
   "bianhuaguilv": [
     {
       "char": "变化规律",
-      "en": "Law of change / Pattern of change"
+      "en": "Law of change"
     }
   ],
   "shuxuezhishi": [
@@ -7648,7 +7648,7 @@
   "shihua": [
     {
       "char": "史话",
-      "en": "Historical narrative / History"
+      "en": "Historical narrative"
     },
     {
       "char": "时花",
@@ -7664,7 +7664,7 @@
   "qiyuan": [
     {
       "char": "起源",
-      "en": "Origin / Source"
+      "en": "Origin"
     }
   ],
   "chanliangbi": [
@@ -7676,7 +7676,7 @@
   "feipin": [
     {
       "char": "废品",
-      "en": "Waste / Scrap"
+      "en": "Waste"
     }
   ],
   "rimai": [
@@ -7812,19 +7812,19 @@
   "dakuohao": [
     {
       "char": "大括号",
-      "en": "Braces, curly braces"
+      "en": "Braces"
     }
   ],
   "gaodao": [
     {
       "char": "高到",
-      "en": "High, exceeding"
+      "en": "High"
     }
   ],
   "houxu": [
     {
       "char": "后续",
-      "en": "Subsequent, following"
+      "en": "Subsequent"
     }
   ],
   "bida": [
@@ -7858,7 +7858,7 @@
   "hengxing": [
     {
       "char": "横行",
-      "en": "Run rampant, spread"
+      "en": "Run rampant"
     }
   ],
   "bidi": [
@@ -7870,7 +7870,7 @@
   "natian": [
     {
       "char": "哪天",
-      "en": "Which day, on what day"
+      "en": "Which day"
     }
   ],
   "gaoyuan": [
@@ -7982,7 +7982,7 @@
   "jiajianchengchu": [
     {
       "char": "加减乘除",
-      "en": "Addition, subtraction, multiplication, division"
+      "en": "Addition"
     }
   ],
   "limou": [
@@ -8090,7 +8090,7 @@
   "zhangmu": [
     {
       "char": "账目",
-      "en": "Invoice/Statement"
+      "en": "Invoice"
     }
   ],
   "suanchu": [
@@ -8254,7 +8254,7 @@
   "yuanyou": [
     {
       "char": "圆有",
-      "en": "Having a circle/with a circle"
+      "en": "Having a circle"
     }
   ],
   "goujin": [
@@ -8344,7 +8344,7 @@
   "maoshi": [
     {
       "char": "犛是",
-      "en": "(This appears to be a character, likely related to a flute or whistle. Without context, a direct translation is difficult.  A reasonable approximation is: Flute/Whistle)"
+      "en": "(This appears to be a character"
     }
   ],
   "xinghelie": [
@@ -8360,19 +8360,19 @@
     },
     {
       "char": "形用",
-      "en": "shape, use"
+      "en": "shape"
     }
   ],
   "qianxing": [
     {
       "char": "前行",
-      "en": "Forward movement/Advance"
+      "en": "Forward movement"
     }
   ],
   "huisuanchu": [
     {
       "char": "会算出",
-      "en": "Will calculate/Will find out"
+      "en": "Will calculate"
     }
   ],
   "dizhuangge": [
@@ -8400,7 +8400,7 @@
   "tixiao": [
     {
       "char": "体校",
-      "en": "Physical school/Sports school"
+      "en": "Physical school"
     }
   ],
   "jiaolian": [
@@ -8412,7 +8412,7 @@
   "penshuichi": [
     {
       "char": "喷水池",
-      "en": "Spray pool/Water fountain"
+      "en": "Spray pool"
     }
   ],
   "shuichi": [
@@ -8430,7 +8430,7 @@
   "deshu": [
     {
       "char": "得数",
-      "en": "Result/Score"
+      "en": "Result"
     }
   ],
   "zhengchu": [
@@ -8454,7 +8454,7 @@
   "meizhi": [
     {
       "char": "每支",
-      "en": "Each branch/Each team"
+      "en": "Each branch"
     }
   ],
   "gemai": [
@@ -8556,7 +8556,7 @@
   "mouxiang": [
     {
       "char": "某项",
-      "en": "Certain/Specific"
+      "en": "Certain"
     }
   ],
   "zhibiwei": [
@@ -8568,7 +8568,7 @@
   "geying": [
     {
       "char": "各应",
-      "en": "Each/Every"
+      "en": "Each"
     }
   ],
   "diguan": [
@@ -8592,13 +8592,13 @@
   "meikuai": [
     {
       "char": "每块",
-      "en": "Per piece/unit"
+      "en": "Per piece"
     }
   ],
   "zhongke": [
     {
       "char": "种棵",
-      "en": "Species/Variety (of plants)"
+      "en": "Species"
     }
   ],
   "yongdianliang": [
@@ -8610,7 +8610,7 @@
   "erxing": [
     {
       "char": "而行",
-      "en": "And proceed/go"
+      "en": "And proceed"
     }
   ],
   "yongzhi": [
@@ -8622,7 +8622,7 @@
   "qifen": [
     {
       "char": "七分",
-      "en": "Seven-tenths/Almost"
+      "en": "Seven-tenths"
     }
   ],
   "huijie": [
@@ -8640,13 +8640,13 @@
   "hangxian": [
     {
       "char": "航线",
-      "en": "Flight route/Course"
+      "en": "Flight route"
     }
   ],
   "meiming": [
     {
       "char": "每名",
-      "en": "Each person/Each individual"
+      "en": "Each person"
     }
   ],
   "chetou": [
@@ -8658,7 +8658,7 @@
   "dengxia": [
     {
       "char": "灯下",
-      "en": "Under the lamp/Beneath the light"
+      "en": "Under the lamp"
     }
   ],
   "chewei": [
@@ -8670,7 +8670,7 @@
   "chejian": [
     {
       "char": "车间",
-      "en": "Workshop/Production area"
+      "en": "Workshop"
     }
   ],
   "yingshi": [
@@ -8686,7 +8686,7 @@
   "daying": [
     {
       "char": "答应",
-      "en": "To agree/To promise"
+      "en": "To agree"
     }
   ],
   "renxian": [
@@ -8860,7 +8860,7 @@
   "feilai": [
     {
       "char": "飞来",
-      "en": "coming/arriving"
+      "en": "coming"
     }
   ],
   "dadui": [
@@ -8872,7 +8872,7 @@
   "pingzheng": [
     {
       "char": "凭证",
-      "en": "proof/evidence/voucher"
+      "en": "proof"
     }
   ],
   "ruchangquan": [
@@ -8884,13 +8884,13 @@
   "xiagou": [
     {
       "char": "下购",
-      "en": "(This is a complex term, likely related to a specific type of purchase or transaction.  A possible translation is \"downstream purchase\" or \"bulk purchase\")"
+      "en": "(This is a complex term"
     }
   ],
   "hesuan": [
     {
       "char": "合算",
-      "en": "reasonable/worthwhile"
+      "en": "reasonable"
     }
   ],
   "hanyoulv": [
@@ -8908,19 +8908,19 @@
   "rixing": [
     {
       "char": "日行",
-      "en": "daily/per day"
+      "en": "daily"
     }
   ],
   "numa": [
     {
       "char": "驽马",
-      "en": "slow horse/stubborn horse"
+      "en": "slow horse"
     }
   ],
   "guantou": [
     {
       "char": "罐头",
-      "en": "canned goods/tin"
+      "en": "canned goods"
     }
   ],
   "liyongjisuanji": [
@@ -8938,25 +8938,25 @@
   "tulai": [
     {
       "char": "图来",
-      "en": "picture/drawing"
+      "en": "picture"
     }
   ],
   "puping": [
     {
       "char": "铺平",
-      "en": "smooth/level"
+      "en": "smooth"
     }
   ],
   "fuyuan": [
     {
       "char": "复原",
-      "en": "restore/reconstruct"
+      "en": "restore"
     }
   ],
   "mianmian": [
     {
       "char": "面面",
-      "en": "all-around/comprehensive"
+      "en": "all-around"
     }
   ],
   "qumian": [
@@ -8980,19 +8980,19 @@
   "chengmian": [
     {
       "char": "成面",
-      "en": "To be formed into a sheet/panel"
+      "en": "To be formed into a sheet"
     }
   ],
   "miandong": [
     {
       "char": "面动",
-      "en": "To be flattened/spread out"
+      "en": "To be flattened"
     }
   ],
   "chengti": [
     {
       "char": "成体",
-      "en": "To be formed into a body/shape"
+      "en": "To be formed into a body"
     }
   ],
   "raozhou": [
@@ -9010,7 +9010,7 @@
   "hengkancheng": [
     {
       "char": "横看成",
-      "en": "To see immediately/instantly"
+      "en": "To see immediately"
     }
   ],
   "lingce": [
@@ -9022,7 +9022,7 @@
   "chengfeng": [
     {
       "char": "成峰",
-      "en": "To form a peak/ridge"
+      "en": "To form a peak"
     }
   ],
   "duixing": [
@@ -9044,13 +9044,13 @@
     },
     {
       "char": "能化",
-      "en": "Can be converted/transformed"
+      "en": "Can be converted"
     }
   ],
   "shuocheng": [
     {
       "char": "说成",
-      "en": "To say/claim as"
+      "en": "To say"
     }
   ],
   "shukeng": [
@@ -9062,7 +9062,7 @@
   "zhangtu": [
     {
       "char": "长图",
-      "en": "Long picture/Diagram"
+      "en": "Long picture"
     }
   ],
   "sandengfen": [
@@ -9110,7 +9110,7 @@
   "hudu": [
     {
       "char": "弧度",
-      "en": "Radius/Curvature"
+      "en": "Radius"
     }
   ],
   "babilun": [
@@ -9122,7 +9122,7 @@
   "hezaiyiqi": [
     {
       "char": "合在一起",
-      "en": "Combined/Integrated"
+      "en": "Combined"
     }
   ],
   "dangao": [
@@ -9158,7 +9158,7 @@
   "gangjieben": [
     {
       "char": "犅犗犇",
-      "en": "(This appears to be a specific breed of cattle, likely for a zoo context) Cattle"
+      "en": "(This appears to be a specific breed of cattle"
     }
   ],
   "chilun": [
@@ -9170,11 +9170,11 @@
   "chutu": [
     {
       "char": "出图",
-      "en": "Rendering/Drawing"
+      "en": "Rendering"
     },
     {
       "char": "出土",
-      "en": "Excavated/Discovered"
+      "en": "Excavated"
     }
   ],
   "yagaohe": [
@@ -9192,13 +9192,13 @@
   "nianhe": [
     {
       "char": "黏合",
-      "en": "Bonding/Adhesion"
+      "en": "Bonding"
     }
   ],
   "houshan": [
     {
       "char": "猴山",
-      "en": "Monkey mountain/Monkey garden"
+      "en": "Monkey mountain"
     }
   ],
   "daxiang": [
@@ -9288,7 +9288,7 @@
   "shifei": [
     {
       "char": "是非",
-      "en": "Right and wrong / True and False"
+      "en": "Right and wrong"
     }
   ],
   "panbieshi": [
@@ -9306,7 +9306,7 @@
   "genshi": [
     {
       "char": "根是",
-      "en": "Root (as in, the root of something)"
+      "en": "Root (as in"
     }
   ],
   "ercifangcheng": [
@@ -9318,7 +9318,7 @@
   "jiaoyihui": [
     {
       "char": "交易会",
-      "en": "Trade fair / Exchange meeting"
+      "en": "Trade fair"
     }
   ],
   "hetong": [
@@ -9372,7 +9372,7 @@
   "zhugan": [
     {
       "char": "主干",
-      "en": "Main trunk/Stem"
+      "en": "Main trunk"
     }
   ],
   "zhongqian": [
@@ -9384,19 +9384,19 @@
   "zhuangxing": [
     {
       "char": "狀行",
-      "en": "Arrangement/Pattern"
+      "en": "Arrangement"
     }
   ],
   "chuzhuang": [
     {
       "char": "出狀",
-      "en": "Appearance/Form"
+      "en": "Appearance"
     }
   ],
   "tuyao": [
     {
       "char": "图要",
-      "en": "Diagram/Illustration"
+      "en": "Diagram"
     }
   ],
   "jiangxi": [
@@ -9474,7 +9474,7 @@
   "dianyou": [
     {
       "char": "点有",
-      "en": "Pointed/Marked"
+      "en": "Pointed"
     }
   ],
   "genyou": [
@@ -9484,13 +9484,13 @@
     },
     {
       "char": "根由",
-      "en": "Root from/Origin of"
+      "en": "Root from"
     }
   ],
   "tuodong": [
     {
       "char": "拖动",
-      "en": "Drag, Move"
+      "en": "Drag"
     }
   ],
   "zuixiaozhi": [
@@ -9550,7 +9550,7 @@
   "chuidong": [
     {
       "char": "吹动",
-      "en": "Blow, Move"
+      "en": "Blow"
     }
   ],
   "shizhong": [
@@ -9562,7 +9562,7 @@
   "yepian": [
     {
       "char": "叶片",
-      "en": "Blade, Leaf"
+      "en": "Blade"
     }
   ],
   "shidao": [
@@ -9580,13 +9580,13 @@
   "wadiao": [
     {
       "char": "挖掉",
-      "en": "Dig Out, Remove"
+      "en": "Dig Out"
     }
   ],
   "yikai": [
     {
       "char": "移开",
-      "en": "Move Away, Remove"
+      "en": "Move Away"
     }
   ],
   "qiuqian": [
@@ -9620,7 +9620,7 @@
   "huaxin": [
     {
       "char": "花心",
-      "en": "Flower heart/core"
+      "en": "Flower heart"
     }
   ],
   "zhengshubei": [
@@ -9632,7 +9632,7 @@
   "zhengzhuang": [
     {
       "char": "正狀",
-      "en": "Regular/straight"
+      "en": "Regular"
     }
   ],
   "jiaohou": [
@@ -9644,13 +9644,13 @@
   "suichukejian": [
     {
       "char": "随处可见",
-      "en": "Ubiquitous/everywhere"
+      "en": "Ubiquitous"
     }
   ],
   "dingzhang": [
     {
       "char": "定长",
-      "en": "Determine length/fix duration"
+      "en": "Determine length"
     }
   ],
   "youhu": [
@@ -9680,19 +9680,19 @@
   "husuo": [
     {
       "char": "弧所",
-      "en": "Arc's location/position"
+      "en": "Arc's location"
     }
   ],
   "jiezhiben": [
     {
       "char": "犗犆犇",
-      "en": "(Literally \"cattle and sheep,\" used to describe excellent livestock) - Excellent/Superior"
+      "en": "(Literally \"cattle and sheep"
     }
   ],
   "yuanrao": [
     {
       "char": "圆绕",
-      "en": "Circular motion/orbit"
+      "en": "Circular motion"
     }
   ],
   "bujinruci": [
@@ -9704,7 +9704,7 @@
   "qiantan": [
     {
       "char": "浅滩",
-      "en": "Shallow water/mudflat"
+      "en": "Shallow water"
     }
   ],
   "tongxinyuan": [
@@ -9716,7 +9716,7 @@
   "batu": [
     {
       "char": "靶图",
-      "en": "Target diagram/chart"
+      "en": "Target diagram"
     }
   ],
   "waixin": [
@@ -9750,7 +9750,7 @@
     },
     {
       "char": "项例",
-      "en": "Item Example/Case"
+      "en": "Item Example"
     }
   ],
   "shifeichu": [
@@ -10134,7 +10134,7 @@
     },
     {
       "char": "求圆",
-      "en": "Seeking a circle/finding a circle"
+      "en": "Seeking a circle"
     }
   ],
   "zheming": [
@@ -10186,7 +10186,7 @@
     },
     {
       "char": "差倍",
-      "en": "Reduced multiple/Diminished multiple"
+      "en": "Reduced multiple"
     }
   ],
   "xinghao": [
@@ -10198,7 +10198,7 @@
   "sanzhang": [
     {
       "char": "三张",
-      "en": "Three sheets/plates"
+      "en": "Three sheets"
     }
   ],
   "fengjingtupian": [
@@ -10228,7 +10228,7 @@
   "linqun": [
     {
       "char": "林群",
-      "en": "Forest group/cluster"
+      "en": "Forest group"
     }
   ],
   "lilong": [
@@ -10288,13 +10288,13 @@
   "disance": [
     {
       "char": "第三册",
-      "en": "Third volume/edition"
+      "en": "Third volume"
     }
   ],
   "zhibie": [
     {
       "char": "之别",
-      "en": "Difference/Distinction"
+      "en": "Difference"
     }
   ],
   "jiemei": [
@@ -10324,13 +10324,13 @@
   "zhikao": [
     {
       "char": "只靠",
-      "en": "Only by/Relying on"
+      "en": "Only by"
     }
   ],
   "xingji": [
     {
       "char": "形即",
-      "en": "Form implies/Shape itself"
+      "en": "Form implies"
     },
     {
       "char": "形及",
@@ -10340,31 +10340,31 @@
   "zongshang": [
     {
       "char": "综上",
-      "en": "In conclusion/Based on the above"
+      "en": "In conclusion"
     }
   ],
   "anbian": [
     {
       "char": "按边",
-      "en": "Along the side/According to the side"
+      "en": "Along the side"
     }
   ],
   "xiandian": [
     {
       "char": "线点",
-      "en": "Line segment/Point on a line"
+      "en": "Line segment"
     }
   ],
   "kedelu": [
     {
       "char": "可得路",
-      "en": "Obtainable path/Route"
+      "en": "Obtainable path"
     }
   ],
   "youxing": [
     {
       "char": "有形",
-      "en": "Tangible/Existing"
+      "en": "Tangible"
     }
   ],
   "xisheng": [
@@ -10376,7 +10376,7 @@
   "sheyao": [
     {
       "char": "设腰",
-      "en": "Set waist/Establish waist"
+      "en": "Set waist"
     }
   ],
   "yaoshe": [
@@ -10400,7 +10400,7 @@
   "shushushutu": [
     {
       "char": "书书书图",
-      "en": "Diagram/Illustration (repeated)"
+      "en": "Diagram"
     }
   ],
   "jiaopousuoduidebiangangzhiyudianben": [
@@ -10412,7 +10412,7 @@
   "dingzhu": [
     {
       "char": "顶住",
-      "en": "Support/Hold up"
+      "en": "Support"
     }
   ],
   "pinghengdian": [
@@ -10448,13 +10448,13 @@
   "tudong": [
     {
       "char": "图动",
-      "en": "Dynamic diagram/Moving diagram"
+      "en": "Dynamic diagram"
     }
   ],
   "niudong": [
     {
       "char": "扭动",
-      "en": "Twist/Twisting"
+      "en": "Twist"
     }
   ],
   "qizhongji": [
@@ -10472,7 +10472,7 @@
   "guajia": [
     {
       "char": "挂架",
-      "en": "Hanging bracket/Support frame"
+      "en": "Hanging bracket"
     }
   ],
   "shensuomen": [
@@ -10490,7 +10490,7 @@
   "gangquangangpouben": [
     {
       "char": "犅犈犅犃犇",
-      "en": "(Likely a complex character or abbreviation - needs context for accurate translation, possibly \"complex figure\")"
+      "en": "(Likely a complex character or abbreviation - needs context for accurate translation"
     }
   ],
   "rutuzaipougangzhizhongpouganggangzhipougangzhidegaopouben": [
@@ -10526,7 +10526,7 @@
   "gaoyou": [
     {
       "char": "高有",
-      "en": "Height exists/is present"
+      "en": "Height exists"
     }
   ],
   "jianxia": [
@@ -10538,7 +10538,7 @@
   "jiaohe": [
     {
       "char": "角合",
-      "en": "Angles combine/form"
+      "en": "Angles combine"
     }
   ],
   "neicuojiao": [
@@ -10562,7 +10562,7 @@
   "qiupouben": [
     {
       "char": "求犃犇",
-      "en": "Find the value/solution"
+      "en": "Find the value"
     }
   ],
   "jieyougangpouzhipouben": [
@@ -10574,7 +10574,7 @@
   "degangpouzhipouben": [
     {
       "char": "得犅犃犆犃犇",
-      "en": "Obtain the value/solution"
+      "en": "Obtain the value"
     }
   ],
   "gangganggangpouben": [
@@ -10586,19 +10586,19 @@
   "nengqiuchuzhipougangpougangzhijiunengqiuchupouzhigangjiezhipouganggangpouben": [
     {
       "char": "能求出犆犃犅犃犅犆就能求出犃犆犅解犆犃犅犅犃犇",
-      "en": "(If one thing is solved, then another can be solved)"
+      "en": "(If one thing is solved"
     }
   ],
   "youpouben": [
     {
       "char": "由犃犇",
-      "en": "From the value/solution"
+      "en": "From the value"
     }
   ],
   "gangquandetugangpouben": [
     {
       "char": "犅犈得图犅犃犇",
-      "en": "(The diagram gives the value/solution)"
+      "en": "(The diagram gives the value"
     }
   ],
   "pougangquangangpouben": [
@@ -10616,13 +10616,13 @@
   "deben": [
     {
       "char": "得犇",
-      "en": "Obtain the value/solution"
+      "en": "Obtain the value"
     }
   ],
   "tuzhiben": [
     {
       "char": "图犆犇",
-      "en": "Diagram/Figure"
+      "en": "Diagram"
     }
   ],
   "yudianquanzhipouquanyuben": [
@@ -10760,7 +10760,7 @@
   "zhongyaotujing": [
     {
       "char": "重要途径",
-      "en": "Important route/path"
+      "en": "Important route"
     }
   ],
   "fangwujiegou": [
@@ -10778,13 +10778,13 @@
   "tuzhongdepougangzhiben": [
     {
       "char": "图中的犃犅犆犇",
-      "en": "(This appears to be a transliteration of a complex term, likely related to a specific geometric shape or construction.  A reasonable approximation would be: \"Complex Geometric Figure\")"
+      "en": "(This appears to be a transliteration of a complex term"
     }
   ],
   "tuzhongpouzhipouben": [
     {
       "char": "图中犃犆犃犇",
-      "en": "(Similar to above, likely a complex geometric figure)"
+      "en": "(Similar to above"
     }
   ],
   "qinghua": [
@@ -10802,7 +10802,7 @@
   "chubianzhiben": [
     {
       "char": "出边犆犇",
-      "en": "(Again, likely a complex geometric figure - \"Edge Figure\")"
+      "en": "(Again"
     }
   ],
   "pougangzhihepouzhiben": [
@@ -10814,7 +10814,7 @@
   "kedeben": [
     {
       "char": "可得犇",
-      "en": "(Likely \"obtain\" or \"can be obtained,\" followed by a geometric figure)"
+      "en": "(Likely \"obtain\" or \"can be obtained"
     }
   ],
   "pougangganggangzhiben": [
@@ -10838,7 +10838,7 @@
   "zuozhuangtiao": [
     {
       "char": "作狀条",
-      "en": "(Likely referring to a specific construction technique or shape - \"Construction Method/Strip\")"
+      "en": "(Likely referring to a specific construction technique or shape - \"Construction Method"
     }
   ],
   "najie": [
@@ -10856,13 +10856,13 @@
   "gequ": [
     {
       "char": "各取",
-      "en": "Each take/Each"
+      "en": "Each take"
     }
   ],
   "qiufa": [
     {
       "char": "求法",
-      "en": "Method of solution/Calculation method"
+      "en": "Method of solution"
     }
   ],
   "jiangli": [
@@ -10874,7 +10874,7 @@
   "zhongsuozhuan": [
     {
       "char": "中所转",
-      "en": "(What is turned/What is being turned)"
+      "en": "(What is turned"
     }
   ],
   "suozhuan": [
@@ -10934,13 +10934,13 @@
   "pucheng": [
     {
       "char": "铺成",
-      "en": "To form/To construct (into a shape)"
+      "en": "To form"
     }
   ],
   "diyong": [
     {
       "char": "底用",
-      "en": "Bottom use/application"
+      "en": "Bottom use"
     }
   ],
   "cizhuan": [
@@ -11156,7 +11156,7 @@
   "poupouganghezhiben": [
     {
       "char": "犃犃犅和犆犇",
-      "en": "犃, 犃犅 and 犆"
+      "en": "犃"
     }
   ],
   "gangzhiheben": [
@@ -11204,7 +11204,7 @@
   "jianjie": [
     {
       "char": "简捷",
-      "en": "Simple, concise"
+      "en": "Simple"
     }
   ],
   "tuxian": [
@@ -11310,7 +11310,7 @@
   "rutuzhishipougangdezhongdianpouben": [
     {
       "char": "如图犆是犃犅的中点犃犇",
-      "en": "As shown in the figure, the point is the midpoint of the line segment"
+      "en": "As shown in the figure"
     }
   ],
   "zhiquanzhiben": [
@@ -11358,19 +11358,19 @@
   "zhipouzhiben": [
     {
       "char": "犆犃犆犇",
-      "en": "(This appears to be a repeated, possibly stylistic, element and doesn't have a clear translation)"
+      "en": "(This appears to be a repeated"
     }
   ],
   "jiaoxuzhigangzhiquanhengpougangzhiben": [
     {
       "char": "烄烅犆犅犆犈烆犃犅犆犇",
-      "en": "(Similar to above, unclear meaning)"
+      "en": "(Similar to above"
     }
   ],
   "quanzhipougangben": [
     {
       "char": "犈犆犃犅犇",
-      "en": "(Similar to above, unclear meaning)"
+      "en": "(Similar to above"
     }
   ],
   "jiaolai": [
@@ -11424,7 +11424,7 @@
   "pougangpouquangangpougangpouben": [
     {
       "char": "犃犅犃犈犅犃犅犃犇",
-      "en": "(Similar to above, unclear meaning)"
+      "en": "(Similar to above"
     }
   ],
   "zaipouzhiben": [
@@ -11436,7 +11436,7 @@
   "jiaojiaopouzhipougangxuzhiganghengpouzhiben": [
     {
       "char": "角烄犃犆犃犅烅犆犅烆犃犆犇",
-      "en": "(Similar to above, unclear meaning)"
+      "en": "(Similar to above"
     }
   ],
   "tuzaipougangzhiheben": [
@@ -11602,7 +11602,7 @@
   "ditiditirutupouzhizhigangben": [
     {
       "char": "第题第题如图犃犆犆犅犇",
-      "en": "Question number/Problem number as shown in the figure"
+      "en": "Question number"
     }
   ],
   "weizhigangpougangben": [
@@ -11632,7 +11632,7 @@
   "ditiditirutuben": [
     {
       "char": "第题第题如图犇",
-      "en": "Figure 1, Figure 1, as shown in 犇"
+      "en": "Figure 1"
     }
   ],
   "jiaopouzhiyudianquanben": [
@@ -11686,7 +11686,7 @@
   "rutupoujiezhigangjiezhidianmazaijiezhishangmaben": [
     {
       "char": "如图犃犗犆犅犗犆点犘在犗犆上犘犇",
-      "en": "As shown in Figure, 犃犗犆犅犗犆 points 犘 is on 犃犗犆"
+      "en": "As shown in Figure"
     }
   ],
   "jiepoumaquanjiegangmaben": [
@@ -11746,7 +11746,7 @@
   "guodianmazuomaben": [
     {
       "char": "过点犘作犘犇",
-      "en": "Through point 犘, construct 犇"
+      "en": "Through point 犘"
     }
   ],
   "dianmazaigangbeishangmaben": [
@@ -11770,37 +11770,37 @@
   "qiegangben": [
     {
       "char": "且犅犇",
-      "en": "(This appears to be a stylized/decorative character, no direct translation)"
+      "en": "(This appears to be a stylized"
     }
   ],
   "zhirutuzhiben": [
     {
       "char": "犆如图犆犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "quangangquanzhiben": [
     {
       "char": "犈犅犈犆犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "mashipouben": [
     {
       "char": "犘是犃犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "ditirutupouben": [
     {
       "char": "第题如图犃犇",
-      "en": "(This appears to be a stylized/decorative character, no direct translation)"
+      "en": "(This appears to be a stylized"
     }
   ],
   "yudianjiapouben": [
     {
       "char": "于点犌犃犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "rutugangzhiquanshigangzhidezhongdianben": [
@@ -11812,7 +11812,7 @@
   "pouquanshiben": [
     {
       "char": "犃犈是犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "gezhao": [
@@ -11824,7 +11824,7 @@
   "xingqing": [
     {
       "char": "形请",
-      "en": "shape, please"
+      "en": "shape"
     }
   ],
   "bianlai": [
@@ -11836,7 +11836,7 @@
   "nengju": [
     {
       "char": "能举",
-      "en": "can raise, can show"
+      "en": "can raise"
     }
   ],
   "mingjiao": [
@@ -11858,7 +11858,7 @@
   "rutuzhipouzhiben": [
     {
       "char": "如图犆犃犆犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "zhengdongfang": [
@@ -11870,37 +11870,37 @@
   "rutuzaipougangzhizhongben": [
     {
       "char": "如图在犃犅犆中犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "shigangzhidezhongdianben": [
     {
       "char": "是犅犆的中点犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "quanpougangben": [
     {
       "char": "犈犃犅犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "rutupouzhigangpouzhigangzhipouben": [
     {
       "char": "如图犃犆犅犃犆犅犆犃犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "quanditipouben": [
     {
       "char": "犈第题犃犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "qiupouquanben": [
     {
       "char": "求犃犈犇",
-      "en": "(Stylized character, no direct translation)"
+      "en": "(Stylized character"
     }
   ],
   "rutupougangzhipougangzhipouben": [
@@ -11964,7 +11964,7 @@
   "pouganggangben": [
     {
       "char": "犃犅犅犇",
-      "en": "(This appears to be a repeated element, likely a stylistic marker -  Illustration/Image)"
+      "en": "(This appears to be a repeated element"
     }
   ],
   "yuben": [
@@ -11974,7 +11974,7 @@
     },
     {
       "char": "于犇",
-      "en": "(于犇 - likely a name or specific term, no direct translation)"
+      "en": "(于犇 - likely a name or specific term"
     }
   ],
   "tujiao": [
@@ -11984,7 +11984,7 @@
     },
     {
       "char": "图交",
-      "en": "Drawing exchange/Illustration exchange"
+      "en": "Drawing exchange"
     }
   ],
   "tuzaipougangzhizhongben": [
@@ -12032,7 +12032,7 @@
   "farutu": [
     {
       "char": "法如图",
-      "en": "Mathematical diagram/figure"
+      "en": "Mathematical diagram"
     }
   ],
   "yanta": [
@@ -12074,7 +12074,7 @@
   "jiedian": [
     {
       "char": "解点",
-      "en": "Solve the point/problem"
+      "en": "Solve the point"
     }
   ],
   "pouganggangzhizhiben": [
@@ -12092,19 +12092,19 @@
   "chuyan": [
     {
       "char": "处沿",
-      "en": "Along the edge/boundary"
+      "en": "Along the edge"
     }
   ],
   "zhuangshang": [
     {
       "char": "狀上",
-      "en": "Upward/Increase"
+      "en": "Upward"
     }
   ],
   "jianguo": [
     {
       "char": "剪过",
-      "en": "Cut through/Passed through"
+      "en": "Cut through"
     }
   ],
   "chengdengbian": [
@@ -12140,7 +12140,7 @@
   "jingfan": [
     {
       "char": "经翻",
-      "en": "After turning/After flipping"
+      "en": "After turning"
     }
   ],
   "zaipouzhishangqiegangben": [
@@ -12170,7 +12170,7 @@
   "gangzhigangpouben": [
     {
       "char": "犅犆犅犃犇",
-      "en": "(This appears to be a complex character combination, likely a typo or specific notation.  A reasonable translation would be: \"Complex Diagram/Figure\")"
+      "en": "(This appears to be a complex character combination"
     }
   ],
   "tuzaipougangzhizhongpougangpouben": [
@@ -12230,13 +12230,13 @@
   "qiuzuo": [
     {
       "char": "求作",
-      "en": "\"Construct\" / \"To make\""
+      "en": "\"Construct\""
     }
   ],
   "zhishiben": [
     {
       "char": "犆使犇",
-      "en": "\"Making the figure\" / \"To make the figure\""
+      "en": "\"Making the figure\""
     }
   ],
   "xingrutupouben": [
@@ -12248,7 +12248,7 @@
   "rutupouzhihegangben": [
     {
       "char": "如图犃犆和犅犇",
-      "en": "\"As shown in the figure, with the figure and height\""
+      "en": "\"As shown in the figure"
     }
   ],
   "yudianjieqiepougangben": [
@@ -12260,7 +12260,7 @@
   "jiezhijieben": [
     {
       "char": "犗犆犗犇",
-      "en": "\"Point X, figure X, height X\" (likely representing coordinates or specific points)"
+      "en": "\"Point X"
     }
   ],
   "jiaopougangpouzhiyudianben": [
@@ -12320,19 +12320,19 @@
   "matupouben": [
     {
       "char": "吗图犃犇",
-      "en": "\"Diagram showing\" / \"Figure indicating\""
+      "en": "\"Diagram showing\""
     }
   ],
   "zaiyoupouzhigangben": [
     {
       "char": "再由犃犆犅犇",
-      "en": "\"Further, from the figure and height\""
+      "en": "\"Further"
     }
   ],
   "kedegangzhizhiben": [
     {
       "char": "可得犅犆犆犇",
-      "en": "\"Therefore, the figure, figure, and height\""
+      "en": "\"Therefore"
     }
   ],
   "wujia": [
@@ -12350,13 +12350,13 @@
   "quanpouzhigangzhipouzhipoupougangben": [
     {
       "char": "犈犃犆犅犆犃犆犃犃犅犇",
-      "en": "(Character sequence with no clear meaning; transliterated as \"Complex Character Sequence\")"
+      "en": "(Character sequence with no clear meaning"
     }
   ],
   "gangzhiyoupouben": [
     {
       "char": "犅犆又犃犇",
-      "en": "(Character sequence with no clear meaning; transliterated as \"Yu Jie Fen\")"
+      "en": "(Character sequence with no clear meaning"
     }
   ],
   "gangzhidezhangshiben": [
@@ -12374,7 +12374,7 @@
   "gangpouzhigangzhigangpouben": [
     {
       "char": "犅犃犆犅犆犅犃犇",
-      "en": "(Character sequence with no clear meaning; transliterated as \"Complex Character Sequence\")"
+      "en": "(Character sequence with no clear meaning"
     }
   ],
   "rutupougangzhiquanben": [
@@ -12386,7 +12386,7 @@
   "quanzaipougangzhidebiangangzhishangpougangpouzhipouben": [
     {
       "char": "犈在犃犅犆的边犅犆上犃犅犃犆犃犇",
-      "en": "(Character sequence with no clear meaning; transliterated as \"Character on the side of (the) (character) on (the) (character)\")"
+      "en": "(Character sequence with no clear meaning"
     }
   ],
   "xianbeiluojiaopouzhiyudianben": [
@@ -12458,7 +12458,7 @@
   "jiaogangzhiyudianquanzezhipouben": [
     {
       "char": "交犅犆于点犈则犆犃犇",
-      "en": "If (the) (character) and (the) (character) intersect at (the) (character), then (the) (character) and (the) (character)"
+      "en": "If (the) (character) and (the) (character) intersect at (the) (character)"
     }
   ],
   "xiaoliang": [
@@ -12512,13 +12512,13 @@
   "shangzao": [
     {
       "char": "上造",
-      "en": "Construct, build"
+      "en": "Construct"
     }
   ],
   "qiaoyao": [
     {
       "char": "桥要",
-      "en": "Bridge point, key point of the bridge"
+      "en": "Bridge point"
     }
   ],
   "dianluo": [
@@ -12542,25 +12542,25 @@
   "buqi": [
     {
       "char": "补齐",
-      "en": "Complete, fill in"
+      "en": "Complete"
     }
   ],
   "xiangtu": [
     {
       "char": "镶图",
-      "en": "Insert image, mount (an image)"
+      "en": "Insert image"
     }
   ],
   "benquanyuben": [
     {
       "char": "犇犈与犇",
-      "en": "(Difficult to translate precisely - likely refers to a specific type of animal or pattern, context needed)"
+      "en": "(Difficult to translate precisely - likely refers to a specific type of animal or pattern"
     }
   ],
   "huopouben": [
     {
       "char": "或犃犇",
-      "en": "(Difficult to translate precisely - likely refers to a specific type of animal or pattern, context needed)"
+      "en": "(Difficult to translate precisely - likely refers to a specific type of animal or pattern"
     }
   ],
   "chengzhoudui": [
@@ -12578,7 +12578,7 @@
   "dedianpougangzhiben": [
     {
       "char": "的点犃犅犆犇",
-      "en": "Point of 犃犅, 犃犆, and 犇"
+      "en": "Point of 犃犅"
     }
   ],
   "shiben": [
@@ -12594,13 +12594,13 @@
   "pouquanqiuben": [
     {
       "char": "犃犈求犇",
-      "en": "(Difficult to translate precisely - likely a technical term, context needed)"
+      "en": "(Difficult to translate precisely - likely a technical term"
     }
   ],
   "gangzhipouzhigangben": [
     {
       "char": "犅犆犃犆犅犇",
-      "en": "(Difficult to translate precisely - likely a technical term, context needed)"
+      "en": "(Difficult to translate precisely - likely a technical term"
     }
   ],
   "tuzaipougangzhizhongpouzhigangzhiben": [
@@ -12612,7 +12612,7 @@
   "shipougangben": [
     {
       "char": "是犃犅犇",
-      "en": "(Difficult to translate precisely - likely a technical term, context needed)"
+      "en": "(Difficult to translate precisely - likely a technical term"
     }
   ],
   "qudianben": [
@@ -12640,7 +12640,7 @@
   "gangzhizhiquanshizhiquanzhiben": [
     {
       "char": "犅犆至犈使犆犈犆犇",
-      "en": "From 犃犆 to 犈, creating 犃犆犈犆"
+      "en": "From 犃犆 to 犈"
     }
   ],
   "yanghuaben": [
@@ -12658,7 +12658,7 @@
   "pouquanyugangben": [
     {
       "char": "犃犈与犅犇",
-      "en": "(Difficult to translate precisely - likely a technical term, context needed)"
+      "en": "(Difficult to translate precisely - likely a technical term"
     }
   ],
   "xiandao": [
@@ -12676,7 +12676,7 @@
   "lvwei": [
     {
       "char": "律为",
-      "en": "Law/Rule"
+      "en": "Law"
     },
     {
       "char": "率为",
@@ -12686,25 +12686,25 @@
   "paihangbang": [
     {
       "char": "排行榜",
-      "en": "Leaderboard/Ranking"
+      "en": "Leaderboard"
     }
   ],
   "shoutai": [
     {
       "char": "首台",
-      "en": "First/Initial"
+      "en": "First"
     }
   ],
   "tianhe": [
     {
       "char": "天河",
-      "en": "Great River/Celestial River"
+      "en": "Great River"
     }
   ],
   "xiongju": [
     {
       "char": "雄居",
-      "en": "Dominating/Leading"
+      "en": "Dominating"
     }
   ],
   "wanyici": [
@@ -12716,7 +12716,7 @@
   "jiji": [
     {
       "char": "即积",
-      "en": "Accumulate/As it accumulates"
+      "en": "Accumulate"
     },
     {
       "char": "即记",
@@ -12726,37 +12726,37 @@
   "baji": [
     {
       "char": "把积",
-      "en": "To pile up/To accumulate"
+      "en": "To pile up"
     }
   ],
   "zhaoshedao": [
     {
       "char": "照射到",
-      "en": "To shine on/To irradiate"
+      "en": "To shine on"
     }
   ],
   "lvji": [
     {
       "char": "律及",
-      "en": "Law and/or Regulations"
+      "en": "Law and"
     }
   ],
   "xinzeng": [
     {
       "char": "新增",
-      "en": "Newly added/New"
+      "en": "Newly added"
     }
   ],
   "zhici": [
     {
       "char": "至此",
-      "en": "Until now/Thus far"
+      "en": "Until now"
     }
   ],
   "shangwei": [
     {
       "char": "商为",
-      "en": "Business/Trade"
+      "en": "Business"
     }
   ],
   "cunchushebei": [
@@ -12786,7 +12786,7 @@
   "shancunpan": [
     {
       "char": "闪存盘",
-      "en": "Flash drive/Flash memory"
+      "en": "Flash drive"
     }
   ],
   "yuzhousudu": [
@@ -13138,7 +13138,7 @@
   "maogangzhibiandezhangweikuizegaopouben": [
     {
       "char": "犛犅犆边的长为犪则高犃犇",
-      "en": "The length of the flute's sides is 'x', then the height is 'y' (This appears to be a formula or notation)"
+      "en": "The length of the flute's sides is 'x'"
     }
   ],
   "shaoyong": [
@@ -13234,7 +13234,7 @@
   "liyao": [
     {
       "char": "李要",
-      "en": "Li’s matter/concern"
+      "en": "Li’s matter"
     },
     {
       "char": "例要",
@@ -13250,7 +13250,7 @@
   "lingyou": [
     {
       "char": "另有",
-      "en": "Also, furthermore"
+      "en": "Also"
     }
   ],
   "chuda": [
@@ -13262,7 +13262,7 @@
   "tianda": [
     {
       "char": "天大",
-      "en": "Huge, immense"
+      "en": "Huge"
     }
   ],
   "yuxia": [
@@ -13274,7 +13274,7 @@
   "gaogaode": [
     {
       "char": "高高的",
-      "en": "Tall, high"
+      "en": "Tall"
     }
   ],
   "xuzhuangtian": [
@@ -13316,7 +13316,7 @@
   "rushou": [
     {
       "char": "入手",
-      "en": "To start with, to grasp"
+      "en": "To start with"
     }
   ],
   "yongfu": [
@@ -13346,19 +13346,19 @@
   "qianyou": [
     {
       "char": "前有",
-      "en": "There was/were"
+      "en": "There was"
     }
   ],
   "jianxi": [
     {
       "char": "间隙",
-      "en": "Gap/space"
+      "en": "Gap"
     }
   ],
   "hulvebuji": [
     {
       "char": "忽略不计",
-      "en": "Neglecting/Ignoring"
+      "en": "Neglecting"
     }
   ],
   "namijishu": [
@@ -13430,19 +13430,19 @@
   "wanshui": [
     {
       "char": "完水",
-      "en": "Finished water/Water finished"
+      "en": "Finished water"
     }
   ],
   "dizhuang": [
     {
       "char": "第狀",
-      "en": "The state/situation"
+      "en": "The state"
     }
   ],
   "dangdao": [
     {
       "char": "当倒",
-      "en": "When inverted/When flipped"
+      "en": "When inverted"
     }
   ],
   "shijicaozuo": [
@@ -13460,7 +13460,7 @@
   "dezhuang": [
     {
       "char": "得狀",
-      "en": "State/Situation"
+      "en": "State"
     }
   ],
   "zhuangjia": [
@@ -13690,7 +13690,7 @@
     },
     {
       "char": "后移",
-      "en": "Retain (a note) / Shift backward"
+      "en": "Retain (a note)"
     }
   ],
   "shiqiu": [
@@ -13700,7 +13700,7 @@
     },
     {
       "char": "试求",
-      "en": "Attempt to find/Calculate"
+      "en": "Attempt to find"
     },
     {
       "char": "时球",
@@ -13788,7 +13788,7 @@
   "haobangshou": [
     {
       "char": "好帮手",
-      "en": "Helpful hand / Good helper"
+      "en": "Helpful hand"
     }
   ],
   "jichukexue": [
@@ -13806,7 +13806,7 @@
   "zhida": [
     {
       "char": "之大",
-      "en": "The great / The vast"
+      "en": "The great"
     },
     {
       "char": "之答",
@@ -13822,7 +13822,7 @@
   "huagong": [
     {
       "char": "化工",
-      "en": "Chemical Industry / Chemistry"
+      "en": "Chemical Industry"
     },
     {
       "char": "华共",
@@ -13832,13 +13832,13 @@
   "zhiqiao": [
     {
       "char": "之巧",
-      "en": "The skill / The cleverness"
+      "en": "The skill"
     }
   ],
   "zhibian": [
     {
       "char": "之变",
-      "en": "The change / The transformation"
+      "en": "The change"
     }
   ],
   "zhimi": [
@@ -13850,13 +13850,13 @@
   "riyong": [
     {
       "char": "日用",
-      "en": "Daily necessities / Household items"
+      "en": "Daily necessities"
     }
   ],
   "zhifan": [
     {
       "char": "之繁",
-      "en": "The complexity / The intricacy"
+      "en": "The complexity"
     }
   ],
   "jisuanjijishu": [
@@ -13868,7 +13868,7 @@
   "shentoudao": [
     {
       "char": "渗透到",
-      "en": "Penetrate into / Spread into"
+      "en": "Penetrate into"
     }
   ],
   "yurijuzeng": [
@@ -13928,7 +13928,7 @@
   "tuoguang": [
     {
       "char": "拓广",
-      "en": "Expand/Broaden"
+      "en": "Expand"
     }
   ],
   "dulisikao": [
@@ -13952,7 +13952,7 @@
   "lizu": [
     {
       "char": "立足",
-      "en": "Foundation/Take root"
+      "en": "Foundation"
     }
   ],
   "tongjindagu": [
@@ -13964,7 +13964,7 @@
   "bodajingshen": [
     {
       "char": "博大精深",
-      "en": "Profound/Extensive"
+      "en": "Profound"
     }
   ],
   "aomiaowuqiong": [
@@ -14022,7 +14022,7 @@
   "zuijiashiqi": [
     {
       "char": "最佳时期",
-      "en": "Best time/Optimal period"
+      "en": "Best time"
     }
   ],
   "yuzhu": [
@@ -14034,13 +14034,13 @@
   "zhengtu": [
     {
       "char": "征途",
-      "en": "Journey/Route"
+      "en": "Journey"
     }
   ],
   "fenjin": [
     {
       "char": "奋进",
-      "en": "To strive/To advance"
+      "en": "To strive"
     }
   ],
   "xiaxin": [
@@ -14052,7 +14052,7 @@
   "jizan": [
     {
       "char": "积攒",
-      "en": "To accumulate/To save up"
+      "en": "To accumulate"
     }
   ],
   "linghuaqian": [
@@ -14064,7 +14064,7 @@
   "qingkuangbiao": [
     {
       "char": "情况表",
-      "en": "Situation table/Report"
+      "en": "Situation table"
     }
   ],
   "qianbixin": [
@@ -14088,19 +14088,19 @@
   "kongwei": [
     {
       "char": "空位",
-      "en": "Empty space/Vacancy"
+      "en": "Empty space"
     }
   ],
   "fenwu": [
     {
       "char": "分物",
-      "en": "To divide/To separate"
+      "en": "To divide"
     }
   ],
   "kuikong": [
     {
       "char": "亏空",
-      "en": "Deficit/Shortfall"
+      "en": "Deficit"
     }
   ],
   "neixiaoming": [
@@ -14142,7 +14142,7 @@
   "zengzhangliang": [
     {
       "char": "增长量",
-      "en": "Growth amount/Increase"
+      "en": "Growth amount"
     }
   ],
   "dixingtu": [
@@ -14160,13 +14160,13 @@
   "jizhang": [
     {
       "char": "记账",
-      "en": "Ledger/Accounting"
+      "en": "Ledger"
     }
   ],
   "biaotu": [
     {
       "char": "表图",
-      "en": "Chart/Map"
+      "en": "Chart"
     }
   ],
   "xiangdongzou": [
@@ -14196,7 +14196,7 @@
   "yichuang": [
     {
       "char": "一幢",
-      "en": "One building/Unit"
+      "en": "One building"
     }
   ],
   "cede": [
@@ -14226,7 +14226,7 @@
   "gedai": [
     {
       "char": "各带",
-      "en": "Each section/Each area"
+      "en": "Each section"
     }
   ],
   "liuguo": [
@@ -14244,7 +14244,7 @@
   "huixiang": [
     {
       "char": "回想",
-      "en": "Recall/Remember"
+      "en": "Recall"
     }
   ],
   "rulingfu": [
@@ -14328,7 +14328,7 @@
   "shangqu": [
     {
       "char": "上取",
-      "en": "Upper point/reference"
+      "en": "Upper point"
     }
   ],
   "xice": [
@@ -14358,7 +14358,7 @@
   "shangdianpougangzhiben": [
     {
       "char": "上点犃犅犆犇",
-      "en": "Top point/reference (likely a specific symbol)"
+      "en": "Top point"
     }
   ],
   "congtong": [
@@ -14376,7 +14376,7 @@
   "shangyue": [
     {
       "char": "上越",
-      "en": "Above/Over"
+      "en": "Above"
     }
   ],
   "kaoyou": [
@@ -14388,7 +14388,7 @@
   "shangli": [
     {
       "char": "上离",
-      "en": "Above/Away from"
+      "en": "Above"
     }
   ],
   "yueyuan": [
@@ -14490,7 +14490,7 @@
   "qingzhong": [
     {
       "char": "轻重",
-      "en": "Light/Heavy (weight or importance)"
+      "en": "Light"
     }
   ],
   "genian": [
@@ -14502,7 +14502,7 @@
   "youfu": [
     {
       "char": "有负",
-      "en": "Has a deficit/negative"
+      "en": "Has a deficit"
     }
   ],
   "houchu": [
@@ -14526,7 +14526,7 @@
   "zuicheng": [
     {
       "char": "最成",
-      "en": "Most complete/perfect"
+      "en": "Most complete"
     }
   ],
   "qidianchu": [
@@ -14538,7 +14538,7 @@
   "dixiang": [
     {
       "char": "第向",
-      "en": "The direction/stage"
+      "en": "The direction"
     }
   ],
   "yuandibudong": [
@@ -14550,13 +14550,13 @@
   "rengde": [
     {
       "char": "仍得",
-      "en": "Still obtain/get"
+      "en": "Still obtain"
     }
   ],
   "jiexianding": [
     {
       "char": "解先定",
-      "en": "Solve first, then determine"
+      "en": "Solve first"
     }
   ],
   "zaisuan": [
@@ -14574,7 +14574,7 @@
   "lidai": [
     {
       "char": "例袋",
-      "en": "Example bag/case"
+      "en": "Example bag"
     }
   ],
   "chenghou": [
@@ -14616,7 +14616,7 @@
   "youru": [
     {
       "char": "有如",
-      "en": "Like/As"
+      "en": "Like"
     }
   ],
   "bigao": [
@@ -14628,7 +14628,7 @@
   "congshi": [
     {
       "char": "从式",
-      "en": "From the pattern/formula"
+      "en": "From the pattern"
     },
     {
       "char": "从时",
@@ -14734,7 +14734,7 @@
   "yuanyuanyuanyuanyuan": [
     {
       "char": "元元元元元",
-      "en": "(This one is difficult to translate directly, likely referring to a specific numerical pattern or concept - perhaps a repeating sequence of '1's)"
+      "en": "(This one is difficult to translate directly"
     }
   ],
   "meikuang": [
@@ -14746,19 +14746,19 @@
   "weizhun": [
     {
       "char": "为准",
-      "en": "As expected/According to standard"
+      "en": "As expected"
     }
   ],
   "zuofu": [
     {
       "char": "作负",
-      "en": "Making a deficit/Negative"
+      "en": "Making a deficit"
     }
   ],
   "shucheng": [
     {
       "char": "数称",
-      "en": "Counting/Weighing"
+      "en": "Counting"
     }
   ],
   "zhekuang": [
@@ -14776,7 +14776,7 @@
   "gupiao": [
     {
       "char": "股票",
-      "en": "Stocks/Shares"
+      "en": "Stocks"
     }
   ],
   "disantian": [
@@ -14806,7 +14806,7 @@
   "liutong": [
     {
       "char": "流通",
-      "en": "Circulation/Flow"
+      "en": "Circulation"
     }
   ],
   "shuxueshi": [
@@ -14824,7 +14824,7 @@
   "zhuzhongyong": [
     {
       "char": "注中用",
-      "en": "Used in the note/Referenced in the note"
+      "en": "Used in the note"
     }
   ],
   "xiaogun": [
@@ -14842,7 +14842,7 @@
   "jiyi": [
     {
       "char": "即异",
-      "en": "That is/It means"
+      "en": "That is"
     }
   ],
   "jianzheng": [
@@ -14860,7 +14860,7 @@
   "shiliao": [
     {
       "char": "史料",
-      "en": "Historical records/Documents"
+      "en": "Historical records"
     }
   ],
   "shangyehuodong": [
@@ -14872,7 +14872,7 @@
   "fuyi": [
     {
       "char": "负以",
-      "en": "With a negative (prefix/concept)"
+      "en": "With a negative (prefix"
     }
   ],
   "kuiqian": [
@@ -14896,7 +14896,7 @@
   "shuyao": [
     {
       "char": "数要",
-      "en": "numerical value/amount"
+      "en": "numerical value"
     }
   ],
   "shencong": [
@@ -14938,7 +14938,7 @@
   "shihao": [
     {
       "char": "时号",
-      "en": "time code/reference"
+      "en": "time code"
     }
   ],
   "yunsuanliang": [
@@ -14974,7 +14974,7 @@
   "jieji": [
     {
       "char": "解记",
-      "en": "solve/record"
+      "en": "solve"
     }
   ],
   "kuisune": [
@@ -15250,7 +15250,7 @@
   "zhongshuxing": [
     {
       "char": "中数形",
-      "en": "mathematical reasoning/understanding"
+      "en": "mathematical reasoning"
     }
   ],
   "shuxuekaoshi": [
@@ -15262,7 +15262,7 @@
   "guzhi": [
     {
       "char": "估值",
-      "en": "valuation/assessment"
+      "en": "valuation"
     }
   ],
   "wenjudian": [
@@ -15316,7 +15316,7 @@
   "tuwu": [
     {
       "char": "涂污",
-      "en": "staining/smudging"
+      "en": "staining"
     }
   ],
   "shangshengshi": [
@@ -15334,7 +15334,7 @@
   "duicuo": [
     {
       "char": "对错",
-      "en": "right/wrong"
+      "en": "right"
     }
   ],
   "shudou": [
@@ -15364,13 +15364,13 @@
   "youhui": [
     {
       "char": "优惠",
-      "en": "discount/offer"
+      "en": "discount"
     }
   ],
   "gaode": [
     {
       "char": "高得",
-      "en": "high (e.g., high price)"
+      "en": "high (e.g."
     }
   ],
   "zhesuo": [
@@ -15604,7 +15604,7 @@
   "mengya": [
     {
       "char": "萌芽",
-      "en": "Germination, bud"
+      "en": "Germination"
     }
   ],
   "bizu": [
@@ -15628,13 +15628,13 @@
   "leixiang": [
     {
       "char": "类项",
-      "en": "Similar items/Categories"
+      "en": "Similar items"
     }
   ],
   "getong": [
     {
       "char": "各同",
-      "en": "Same/Equal"
+      "en": "Same"
     }
   ],
   "congdadao": [
@@ -15724,7 +15724,7 @@
   "zuoda": [
     {
       "char": "做大",
-      "en": "Enlarge/Increase"
+      "en": "Enlarge"
     }
   ],
   "jiexiao": [
@@ -15916,7 +15916,7 @@
   "gepao": [
     {
       "char": "各跑",
-      "en": "Various runs/activities"
+      "en": "Various runs"
     }
   ],
   "libi": [
@@ -15952,7 +15952,7 @@
   "jiya": [
     {
       "char": "积压",
-      "en": "Stored up/Accumulated"
+      "en": "Stored up"
     },
     {
       "char": "机压",
@@ -15968,7 +15968,7 @@
   "jisuansuo": [
     {
       "char": "计算所",
-      "en": "Calculation center/Department"
+      "en": "Calculation center"
     }
   ],
   "tongfangxiang": [
@@ -15998,19 +15998,19 @@
   "renyuanwu": [
     {
       "char": "人元物",
-      "en": "People, currency, and goods"
+      "en": "People"
     }
   ],
   "xianshe": [
     {
       "char": "先设",
-      "en": "Set initially/Pre-determine"
+      "en": "Set initially"
     }
   ],
   "jianxiu": [
     {
       "char": "检修",
-      "en": "Maintenance/Inspection"
+      "en": "Maintenance"
     }
   ],
   "didang": [
@@ -16040,13 +16040,13 @@
   "jieyi": [
     {
       "char": "解以",
-      "en": "Interpret/Explain with"
+      "en": "Interpret"
     }
   ],
   "zhongyaoyiju": [
     {
       "char": "重要依据",
-      "en": "Important basis/evidence"
+      "en": "Important basis"
     }
   ],
   "jiangxuejin": [
@@ -16070,29 +16070,29 @@
   "mouzhen": [
     {
       "char": "某镇",
-      "en": "A certain town/village"
+      "en": "A certain town"
     }
   ],
   "waiyan": [
     {
       "char": "外沿",
-      "en": "Outer boundary/edge"
+      "en": "Outer boundary"
     }
   ],
   "neiyan": [
     {
       "char": "内沿",
-      "en": "Inner boundary/edge"
+      "en": "Inner boundary"
     }
   ],
   "zaiqu": [
     {
       "char": "灾区",
-      "en": "Disaster area/Affected area"
+      "en": "Disaster area"
     },
     {
       "char": "再取",
-      "en": "Take again/Re-take"
+      "en": "Take again"
     }
   ],
   "shubi": [
@@ -16122,25 +16122,25 @@
   "duidiao": [
     {
       "char": "对调",
-      "en": "Exchange/Switch"
+      "en": "Exchange"
     }
   ],
   "zhuanyoumingcheng": [
     {
       "char": "专有名称",
-      "en": "Proprietary name/Unique name"
+      "en": "Proprietary name"
     }
   ],
   "shangsu": [
     {
       "char": "上溯",
-      "en": "Trace back/Ascend"
+      "en": "Trace back"
     }
   ],
   "henzaoyiqian": [
     {
       "char": "很早以前",
-      "en": "Very early times/Long ago"
+      "en": "Very early times"
     }
   ],
   "yuyanwenzi": [
@@ -16152,7 +16152,7 @@
   "yanbiancheng": [
     {
       "char": "演变成",
-      "en": "Evolved into/Became"
+      "en": "Evolved into"
     }
   ],
   "jifa": [
@@ -16266,7 +16266,7 @@
   "dingzhi": [
     {
       "char": "定值",
-      "en": "Set value/Fixed value"
+      "en": "Set value"
     }
   ],
   "bianhao": [
@@ -16290,13 +16290,13 @@
   "xingongyi": [
     {
       "char": "新工艺",
-      "en": "New technology/New process"
+      "en": "New technology"
     }
   ],
   "chaqiu": [
     {
       "char": "差求",
-      "en": "(Asking for) a favor/A small request"
+      "en": "(Asking for) a favor"
     }
   ],
   "xiaoxin": [
@@ -16308,7 +16308,7 @@
   "xingxing": [
     {
       "char": "型型",
-      "en": "(Referring to a person or thing) Great/Excellent"
+      "en": "(Referring to a person or thing) Great"
     },
     {
       "char": "星形",
@@ -16318,7 +16318,7 @@
   "weichu": [
     {
       "char": "围出",
-      "en": "Enclose/Surround"
+      "en": "Enclose"
     }
   ],
   "jieshuixing": [
@@ -16336,7 +16336,7 @@
   "disankuai": [
     {
       "char": "第三块",
-      "en": "Third piece/Third block"
+      "en": "Third piece"
     }
   ],
   "zaozhichang": [
@@ -16378,19 +16378,19 @@
   "queke": [
     {
       "char": "缺棵",
-      "en": "Missing a tree/plant"
+      "en": "Missing a tree"
     }
   ],
   "beijia": [
     {
       "char": "倍加",
-      "en": "Double, greatly, intensified"
+      "en": "Double"
     }
   ],
   "rushe": [
     {
       "char": "如设",
-      "en": "As if set, like a setup"
+      "en": "As if set"
     }
   ],
   "duoxie": [
@@ -16408,7 +16408,7 @@
   "dianliang": [
     {
       "char": "电量",
-      "en": "Electrical power, electricity"
+      "en": "Electrical power"
     }
   ],
   "dianqi": [
@@ -16450,7 +16450,7 @@
   "caoshu": [
     {
       "char": "草书",
-      "en": "Bamboo slips, cursive script"
+      "en": "Bamboo slips"
     }
   ],
   "renyong": [
@@ -16468,7 +16468,7 @@
   "yazhi": [
     {
       "char": "压制",
-      "en": "To suppress, to crush"
+      "en": "To suppress"
     }
   ],
   "caopian": [
@@ -16492,13 +16492,13 @@
   "suansuan": [
     {
       "char": "算算",
-      "en": "Calculate/Let's calculate"
+      "en": "Calculate"
     }
   ],
   "shiyi": [
     {
       "char": "使以",
-      "en": "In order to/To use"
+      "en": "In order to"
     }
   ],
   "weijie": [
@@ -16510,13 +16510,13 @@
   "erfenzhiyi": [
     {
       "char": "二分之一",
-      "en": "One-half/One-fifth"
+      "en": "One-half"
     }
   ],
   "dengshang": [
     {
       "char": "登上",
-      "en": "To climb/To ascend"
+      "en": "To climb"
     }
   ],
   "shanding": [
@@ -16528,13 +16528,13 @@
   "shezhanghua": [
     {
       "char": "设张华",
-      "en": "Set Zhang Hua (likely a name/character)"
+      "en": "Set Zhang Hua (likely a name"
     }
   ],
   "chushan": [
     {
       "char": "出山",
-      "en": "To retire/To leave the field"
+      "en": "To retire"
     }
   ],
   "nengshangao": [
@@ -16558,7 +16558,7 @@
   "yongqiu": [
     {
       "char": "用求",
-      "en": "Using to seek/Using to find"
+      "en": "Using to seek"
     }
   ],
   "wufengshi": [
@@ -16570,19 +16570,19 @@
   "jiafeiji": [
     {
       "char": "架飞机",
-      "en": "To fly a plane/To launch an airplane"
+      "en": "To fly a plane"
     }
   ],
   "hangcheng": [
     {
       "char": "航程",
-      "en": "Flight range/Route"
+      "en": "Flight range"
     }
   ],
   "gonghua": [
     {
       "char": "共花",
-      "en": "Total expenditure/Total cost"
+      "en": "Total expenditure"
     }
   ],
   "lanbu": [
@@ -16606,7 +16606,7 @@
   "laideji": [
     {
       "char": "来得及",
-      "en": "In time/In a timely manner"
+      "en": "In time"
     }
   ],
   "neiming": [
@@ -16654,7 +16654,7 @@
   "peige": [
     {
       "char": "配个",
-      "en": "To pair/match"
+      "en": "To pair"
     }
   ],
   "yingxian": [
@@ -16666,25 +16666,25 @@
   "shewei": [
     {
       "char": "设为",
-      "en": "Set to/as"
+      "en": "Set to"
     }
   ],
   "renhou": [
     {
       "char": "人后",
-      "en": "After person/person afterwards"
+      "en": "After person"
     }
   ],
   "zuoliang": [
     {
       "char": "作量",
-      "en": "Amount/Quantity"
+      "en": "Amount"
     }
   ],
   "shiduan": [
     {
       "char": "时段",
-      "en": "Time period/Segment of time"
+      "en": "Time period"
     }
   ],
   "shelie": [
@@ -16726,19 +16726,19 @@
   "mouyishijian": [
     {
       "char": "某一时间",
-      "en": "A certain time/At a specific time"
+      "en": "A certain time"
     }
   ],
   "buying": [
     {
       "char": "不盈",
-      "en": "Not full/Not overflowing"
+      "en": "Not full"
     }
   ],
   "bukui": [
     {
       "char": "不亏",
-      "en": "Not deficient/Not lacking"
+      "en": "Not deficient"
     }
   ],
   "gongmai": [
@@ -16756,7 +16756,7 @@
   "zhejia": [
     {
       "char": "这家",
-      "en": "This company/This establishment"
+      "en": "This company"
     }
   ],
   "zhongshe": [
@@ -16792,7 +16792,7 @@
   "changci": [
     {
       "char": "场次",
-      "en": "Round/Game number"
+      "en": "Round"
     }
   ],
   "xiongying": [
@@ -16804,13 +16804,13 @@
   "yuanda": [
     {
       "char": "远大",
-      "en": "Grand/Vast"
+      "en": "Grand"
     }
   ],
   "shengfu": [
     {
       "char": "胜负",
-      "en": "Win/Loss"
+      "en": "Win"
     }
   ],
   "moudui": [
@@ -16852,7 +16852,7 @@
   "feiyuan": [
     {
       "char": "费元",
-      "en": "Dollars/Currency"
+      "en": "Dollars"
     }
   ],
   "neiyong": [
@@ -16870,7 +16870,7 @@
   "jiashou": [
     {
       "char": "加收",
-      "en": "Add to/Increase"
+      "en": "Add to"
     }
   ],
   "yuezhang": [
@@ -16912,55 +16912,55 @@
   "tengyinshe": [
     {
       "char": "誊印社",
-      "en": "Photocopying company/Publisher"
+      "en": "Photocopying company"
     }
   ],
   "jiangwei": [
     {
       "char": "降为",
-      "en": "Reduced to/Decreased to"
+      "en": "Reduced to"
     }
   ],
   "zhangshu": [
     {
       "char": "张数",
-      "en": "Number of sheets/Copies"
+      "en": "Number of sheets"
     }
   ],
   "genianji": [
     {
       "char": "各年级",
-      "en": "All grades/Each grade"
+      "en": "All grades"
     }
   ],
   "wenyi": [
     {
       "char": "文艺",
-      "en": "Arts and literature/Cultural"
+      "en": "Arts and literature"
     }
   ],
   "lihou": [
     {
       "char": "例后",
-      "en": "After an example/Following an example"
+      "en": "After an example"
     }
   ],
   "tiannei": [
     {
       "char": "天内",
-      "en": "Within a day/Within a few days"
+      "en": "Within a day"
     }
   ],
   "chengtao": [
     {
       "char": "成套",
-      "en": "Set (of something)/Complete set"
+      "en": "Set (of something)"
     }
   ],
   "tianmou": [
     {
       "char": "天某",
-      "en": "Certain day/A specific day"
+      "en": "Certain day"
     }
   ],
   "caochang": [
@@ -16978,37 +16978,37 @@
   "gongxu": [
     {
       "char": "共需",
-      "en": "In total needed/Together needed"
+      "en": "In total needed"
     }
   ],
   "baochou": [
     {
       "char": "报酬",
-      "en": "Payment/Remuneration"
+      "en": "Payment"
     }
   ],
   "nianzhong": [
     {
       "char": "年终",
-      "en": "Year-end/At the end of the year"
+      "en": "Year-end"
     }
   ],
   "mange": [
     {
       "char": "满个",
-      "en": "Full (of something)/Complete"
+      "en": "Full (of something)"
     }
   ],
   "jiezhang": [
     {
       "char": "结账",
-      "en": "Close account/Clear payment"
+      "en": "Close account"
     }
   ],
   "yongxing": [
     {
       "char": "用型",
-      "en": "Type of use/Usage type"
+      "en": "Type of use"
     }
   ],
   "meitaixing": [
@@ -17026,7 +17026,7 @@
   "gaodian": [
     {
       "char": "糕点",
-      "en": "Cakes/Pastries"
+      "en": "Cakes"
     },
     {
       "char": "高点",
@@ -17054,7 +17054,7 @@
   "geyong": [
     {
       "char": "各用",
-      "en": "Each use/For each"
+      "en": "Each use"
     }
   ],
   "yantong": [
@@ -17120,7 +17120,7 @@
   "shierfen": [
     {
       "char": "十二分",
-      "en": "Completely/Perfectly"
+      "en": "Completely"
     }
   ],
   "liangjia": [
@@ -17142,7 +17142,7 @@
   "xixide": [
     {
       "char": "细细的",
-      "en": "Fine/Thin"
+      "en": "Fine"
     }
   ],
   "huxu": [
@@ -17178,13 +17178,13 @@
   "beitong": [
     {
       "char": "悲痛",
-      "en": "Sorrow/Grief"
+      "en": "Sorrow"
     }
   ],
   "yushichangci": [
     {
       "char": "与世长辞",
-      "en": "Pass away/Died peacefully"
+      "en": "Pass away"
     }
   ],
   "sishi": [
@@ -17202,7 +17202,7 @@
   "kouchu": [
     {
       "char": "扣除",
-      "en": "deduct, subtract"
+      "en": "deduct"
     }
   ],
   "nongdong": [
@@ -17232,7 +17232,7 @@
   "diaoqi": [
     {
       "char": "吊起",
-      "en": "hoist, raise"
+      "en": "hoist"
     }
   ],
   "diaosheng": [
@@ -17256,7 +17256,7 @@
   "zhonghua": [
     {
       "char": "中化",
-      "en": "to be processed/transformed"
+      "en": "to be processed"
     }
   ],
   "lvshi": [
@@ -17268,25 +17268,25 @@
   "huagui": [
     {
       "char": "化归",
-      "en": "reduction to the essentials, integration"
+      "en": "reduction to the essentials"
     }
   ],
   "erdejie": [
     {
       "char": "而得解",
-      "en": "to understand, to grasp"
+      "en": "to understand"
     }
   ],
   "guanjianxing": [
     {
       "char": "关键性",
-      "en": "key characteristic, importance"
+      "en": "key characteristic"
     }
   ],
   "bianchu": [
     {
       "char": "编出",
-      "en": "to create, to compile"
+      "en": "to create"
     }
   ],
   "beixian": [
@@ -17400,7 +17400,7 @@
   "daoti": [
     {
       "char": "道题",
-      "en": "Question/Problem"
+      "en": "Question"
     }
   ],
   "gouzheng": [
@@ -17424,19 +17424,19 @@
   "baifendian": [
     {
       "char": "百分点",
-      "en": "Percent/Decimal Point"
+      "en": "Percent"
     }
   ],
   "gaizhong": [
     {
       "char": "改种",
-      "en": "Change Category/Type"
+      "en": "Change Category"
     }
   ],
   "suochan": [
     {
       "char": "所产",
-      "en": "Produced/Manufactured"
+      "en": "Produced"
     }
   ],
   "chanyouliang": [
@@ -17472,7 +17472,7 @@
   "suanxue": [
     {
       "char": "算学",
-      "en": "Mathematics/Arithmetic"
+      "en": "Mathematics"
     }
   ],
   "qimeng": [
@@ -17502,7 +17502,7 @@
   "xianxing": [
     {
       "char": "先行",
-      "en": "Proceed First/Advance"
+      "en": "Proceed First"
     }
   ],
   "shierri": [
@@ -17514,7 +17514,7 @@
   "zhuiji": [
     {
       "char": "追及",
-      "en": "Catch Up With/Overtake"
+      "en": "Catch Up With"
     }
   ],
   "ershiri": [
@@ -17532,7 +17532,7 @@
   "zuohao": [
     {
       "char": "作好",
-      "en": "To do well / To prepare"
+      "en": "To do well"
     }
   ],
   "aolinpikegongyuan": [
@@ -17556,7 +17556,7 @@
   "rongna": [
     {
       "char": "容纳",
-      "en": "To accommodate / To hold"
+      "en": "To accommodate"
     }
   ],
   "niaochao": [
@@ -17580,19 +17580,19 @@
   "changguan": [
     {
       "char": "场馆",
-      "en": "Venue / Stadium"
+      "en": "Venue"
     }
   ],
   "sitongbada": [
     {
       "char": "四通八达",
-      "en": "Extensive / Well-connected"
+      "en": "Extensive"
     }
   ],
   "lijiaoqiao": [
     {
       "char": "立交桥",
-      "en": "Overpass / Flyover"
+      "en": "Overpass"
     }
   ],
   "jietouxiangwei": [
@@ -17646,43 +17646,43 @@
   "getu": [
     {
       "char": "各图",
-      "en": "Various diagrams/illustrations"
+      "en": "Various diagrams"
     }
   ],
   "huxianglianxi": [
     {
       "char": "互相联系",
-      "en": "Interconnected/Linked"
+      "en": "Interconnected"
     }
   ],
   "jianzhugongcheng": [
     {
       "char": "建筑工程",
-      "en": "Architectural project/Construction project"
+      "en": "Architectural project"
     }
   ],
   "lititu": [
     {
       "char": "立体图",
-      "en": "3D diagram/Perspective diagram"
+      "en": "3D diagram"
     }
   ],
   "caijian": [
     {
       "char": "裁剪",
-      "en": "Cut/Trim"
+      "en": "Cut"
     }
   ],
   "zhantie": [
     {
       "char": "粘贴",
-      "en": "Paste/Glue"
+      "en": "Paste"
     }
   ],
   "sanfu": [
     {
       "char": "三幅",
-      "en": "Three pictures/Three illustrations"
+      "en": "Three pictures"
     }
   ],
   "tuyongxian": [
@@ -17700,13 +17700,13 @@
   "zheti": [
     {
       "char": "着体",
-      "en": "Related to the body/Referring to the body"
+      "en": "Related to the body"
     }
   ],
   "youping": [
     {
       "char": "有平",
-      "en": "Flat/Level"
+      "en": "Flat"
     }
   ],
   "mianhequ": [
@@ -17718,7 +17718,7 @@
   "tuze": [
     {
       "char": "图则",
-      "en": "Rules/Principles (of a diagram)"
+      "en": "Rules"
     }
   ],
   "liuxing": [
@@ -17730,7 +17730,7 @@
   "huaguo": [
     {
       "char": "划过",
-      "en": "Pass through/Cross"
+      "en": "Pass through"
     }
   ],
   "mianhuomian": [
@@ -17766,7 +17766,7 @@
   "shuodiandong": [
     {
       "char": "说点动",
-      "en": "Say a little move/action"
+      "en": "Say a little move"
     }
   ],
   "dangfengboli": [
@@ -17778,7 +17778,7 @@
   "shuoxiandong": [
     {
       "char": "说线动",
-      "en": "Say line move/action"
+      "en": "Say line move"
     }
   ],
   "mianzhong": [
@@ -17796,7 +17796,7 @@
   "daxing": [
     {
       "char": "答形",
-      "en": "Answer form/Response shape"
+      "en": "Answer form"
     }
   ],
   "tuanticao": [
@@ -17860,7 +17860,7 @@
   "xingwei": [
     {
       "char": "形为",
-      "en": "Shape, form"
+      "en": "Shape"
     }
   ],
   "fanlan": [
@@ -17932,7 +17932,7 @@
   "dazhi": [
     {
       "char": "打制",
-      "en": "To cast, to forge"
+      "en": "To cast"
     }
   ],
   "xinshiqi": [
@@ -17974,7 +17974,7 @@
   "weiming": [
     {
       "char": "为名",
-      "en": "For the sake of name/In honor of"
+      "en": "For the sake of name"
     }
   ],
   "caitao": [
@@ -18046,13 +18046,13 @@
   "diangangluozaizhiben": [
     {
       "char": "点犅落在犆犇",
-      "en": "(This is a complex, archaic term - a possible translation is \"points marking cattle were recorded\")"
+      "en": "(This is a complex"
     }
   ],
   "dechajizuopouben": [
     {
       "char": "的差记作犃犇",
-      "en": "(This is a complex, archaic term - a possible translation is \"differences were recorded as 'Bhen'\")"
+      "en": "(This is a complex"
     }
   ],
   "huoyong": [
@@ -18064,13 +18064,13 @@
   "rutudianben": [
     {
       "char": "如图点犇",
-      "en": "(This is a complex, archaic term - a possible translation is \"as shown in the diagram with 'Bhen'\")"
+      "en": "(This is a complex"
     }
   ],
   "zaixiu": [
     {
       "char": "再修",
-      "en": "Repair/Rebuild"
+      "en": "Repair"
     }
   ],
   "luxiantu": [
@@ -18100,7 +18100,7 @@
   "huditi": [
     {
       "char": "湖第题",
-      "en": "Lake diagram/map"
+      "en": "Lake diagram"
     }
   ],
   "qiumian": [
@@ -18226,7 +18226,7 @@
   "jiaojiaojiao": [
     {
       "char": "角角角",
-      "en": "Angle, angle, angle"
+      "en": "Angle"
     }
   ],
   "bianxian": [
@@ -18284,7 +18284,7 @@
   "shifenmiao": [
     {
       "char": "时分秒",
-      "en": "Hours, minutes, seconds"
+      "en": "Hours"
     }
   ],
   "yidu": [
@@ -18320,7 +18320,7 @@
   "shizheng": [
     {
       "char": "时整",
-      "en": "Time (as in, whole time)"
+      "en": "Time (as in"
     }
   ],
   "rukouchu": [
@@ -18362,7 +18362,7 @@
   "tujiegangjiezhishipoujieben": [
     {
       "char": "图犗犅犗犆是犃犗犇",
-      "en": "(This appears to be a garbled character string, likely a typo.  No reasonable translation.)"
+      "en": "(This appears to be a garbled character string"
     }
   ],
   "zuojiao": [
@@ -18374,7 +18374,7 @@
   "jianyao": [
     {
       "char": "减要",
-      "en": "Subtracting (as in, subtraction process)"
+      "en": "Subtracting (as in"
     }
   ],
   "jiangdu": [
@@ -18464,7 +18464,7 @@
   "fayi": [
     {
       "char": "法以",
-      "en": "By law/According to law"
+      "en": "By law"
     }
   ],
   "weijiao": [
@@ -18488,7 +18488,7 @@
   "qieben": [
     {
       "char": "且犇",
-      "en": "And strong/powerful (animal)"
+      "en": "And strong"
     }
   ],
   "poujieganggangjiezhigangjieben": [
@@ -18572,25 +18572,25 @@
   "nashaodu": [
     {
       "char": "哪少度",
-      "en": "What degree/amount"
+      "en": "What degree"
     }
   ],
   "fenzhong": [
     {
       "char": "分种",
-      "en": "Classification/Categorization"
+      "en": "Classification"
     }
   ],
   "guancezhan": [
     {
       "char": "观测站",
-      "en": "Observation station/Observatory"
+      "en": "Observation station"
     }
   ],
   "shizai": [
     {
       "char": "试在",
-      "en": "Try in/Attempt to"
+      "en": "Try in"
     }
   ],
   "huyuqie": [
@@ -18614,7 +18614,7 @@
   "zaihuan": [
     {
       "char": "再换",
-      "en": "Change again/Re-evaluate"
+      "en": "Change again"
     }
   ],
   "wenjuhe": [
@@ -18782,7 +18782,7 @@
   "rudiandong": [
     {
       "char": "如点动",
-      "en": "As if moving/Like a dot moving"
+      "en": "As if moving"
     }
   ],
   "xiandong": [
@@ -18794,7 +18794,7 @@
   "jianduandi": [
     {
       "char": "简短地",
-      "en": "Briefly/In short"
+      "en": "Briefly"
     }
   ],
   "chizi": [
@@ -18806,7 +18806,7 @@
   "pinzaiyiqi": [
     {
       "char": "拼在一起",
-      "en": "Pinned together/Assembled"
+      "en": "Pinned together"
     }
   ],
   "jiachi": [
@@ -18848,13 +18848,13 @@
   "shangguo": [
     {
       "char": "上过",
-      "en": "Have been through/Experienced"
+      "en": "Have been through"
     }
   ],
   "xianjiang": [
     {
       "char": "现将",
-      "en": "Now/Hereby"
+      "en": "Now"
     }
   ],
   "zaizhe": [
@@ -18890,13 +18890,13 @@
   "dehejiepoujiegangjiezhijieben": [
     {
       "char": "的和犗犃犗犅犗犆犗犇",
-      "en": "(This appears to be a nonsensical string of characters, likely a typo.  A reasonable translation would be:  N/A - Unintelligible)"
+      "en": "(This appears to be a nonsensical string of characters"
     }
   ],
   "tuti": [
     {
       "char": "图体",
-      "en": "Figure/Image"
+      "en": "Figure"
     }
   ],
   "mianxian": [
@@ -18914,19 +18914,19 @@
   "shengru": [
     {
       "char": "升入",
-      "en": "To enter (often used in educational contexts, like \"to enter a higher grade\")"
+      "en": "To enter (often used in educational contexts"
     }
   ],
   "diwuce": [
     {
       "char": "第五册",
-      "en": "Fifth Volume/Book"
+      "en": "Fifth Volume"
     }
   ],
   "anci": [
     {
       "char": "按此",
-      "en": "According to this/As follows"
+      "en": "According to this"
     }
   ],
   "deshushushu": [
@@ -18944,7 +18944,7 @@
   "yingqie": [
     {
       "char": "应切",
-      "en": "Should be/It is important"
+      "en": "Should be"
     }
   ],
   "sheqie": [
@@ -18962,19 +18962,19 @@
   "suoqie": [
     {
       "char": "所切",
-      "en": "Cut/Sliced (referring to something cut or sliced)"
+      "en": "Cut"
     }
   ],
   "yaoqingsai": [
     {
       "char": "邀请赛",
-      "en": "Invitation Tournament/Competition"
+      "en": "Invitation Tournament"
     }
   ],
   "saicheng": [
     {
       "char": "赛程",
-      "en": "Race Schedule/Competition Schedule"
+      "en": "Race Schedule"
     }
   ],
   "zuzhizhe": [
@@ -19004,13 +19004,13 @@
   "xiangwei": [
     {
       "char": "项为",
-      "en": "Item for/Regarding"
+      "en": "Item for"
     }
   ],
   "qiujiao": [
     {
       "char": "求较",
-      "en": "To compare/To seek comparison"
+      "en": "To compare"
     }
   ],
   "woshou": [
@@ -19034,13 +19034,13 @@
   "zhetong": [
     {
       "char": "这桶",
-      "en": "This barrel/bucket"
+      "en": "This barrel"
     }
   ],
   "wange": [
     {
       "char": "完个",
-      "en": "Complete/Finish"
+      "en": "Complete"
     }
   ],
   "nengsuanchu": [
@@ -19052,7 +19052,7 @@
   "wushi": [
     {
       "char": "无实",
-      "en": "Without real/actual"
+      "en": "Without real"
     }
   ],
   "shugen": [
@@ -19064,13 +19064,13 @@
   "jiajia": [
     {
       "char": "加加",
-      "en": "Add together/Addition"
+      "en": "Add together"
     }
   ],
   "genxiang": [
     {
       "char": "根像",
-      "en": "Root-like/Resembling roots"
+      "en": "Root-like"
     }
   ],
   "genshushushu": [
@@ -19106,7 +19106,7 @@
   "shiluo": [
     {
       "char": "时落",
-      "en": "At this time/Falling at this time"
+      "en": "At this time"
     }
   ],
   "cike": [
@@ -19118,7 +19118,7 @@
   "zhongyoudao": [
     {
       "char": "中由到",
-      "en": "Within/In the process of reaching"
+      "en": "Within"
     }
   ],
   "kaipingfang": [
@@ -19136,7 +19136,7 @@
   "fayao": [
     {
       "char": "法要",
-      "en": "Method/Way"
+      "en": "Method"
     }
   ],
   "fazaijie": [
@@ -19154,7 +19154,7 @@
   "qiuxiao": [
     {
       "char": "求小",
-      "en": "Find the small one/Minimize"
+      "en": "Find the small one"
     }
   ],
   "genyu": [
@@ -19172,7 +19172,7 @@
   "youtiao": [
     {
       "char": "有条",
-      "en": "With a line/Clearly"
+      "en": "With a line"
     }
   ],
   "duobian": [
@@ -19184,7 +19184,7 @@
   "biying": [
     {
       "char": "比应",
-      "en": "Compared to/In proportion to"
+      "en": "Compared to"
     }
   ],
   "yibanhua": [
@@ -19196,7 +19196,7 @@
   "qijian": [
     {
       "char": "起见",
-      "en": "For the sake of/For the purpose of"
+      "en": "For the sake of"
     }
   ],
   "meishujia": [
@@ -19262,7 +19262,7 @@
   "buhe": [
     {
       "char": "不合",
-      "en": "Not suitable/Disagree"
+      "en": "Not suitable"
     }
   ],
   "shequ": [
@@ -19280,7 +19280,7 @@
   "eyuan": [
     {
       "char": "额元",
-      "en": "euro (or dollar, depending on context)"
+      "en": "euro (or dollar"
     }
   ],
   "dengtongyu": [
@@ -19316,7 +19316,7 @@
   "mianxing": [
     {
       "char": "面形",
-      "en": "shape, form"
+      "en": "shape"
     }
   ],
   "sifenzhisan": [
@@ -19382,7 +19382,7 @@
   "pouzhishangdedianben": [
     {
       "char": "犃犆上的点犇",
-      "en": "(This appears to be a character combination with no standard translation; likely a typo or specialized term.  Needs context for a proper translation.)"
+      "en": "(This appears to be a character combination with no standard translation"
     }
   ],
   "gexiaoti": [
@@ -19436,55 +19436,55 @@
   "tanjiuchu": [
     {
       "char": "探究出",
-      "en": "Investigate/Explore"
+      "en": "Investigate"
     }
   ],
   "qianzhuangxing": [
     {
       "char": "前狀行",
-      "en": "Former Regiment/Military Unit"
+      "en": "Former Regiment"
     }
   ],
   "zaijie": [
     {
       "char": "再解",
-      "en": "Further Explanation/Solution"
+      "en": "Further Explanation"
     }
   ],
   "keling": [
     {
       "char": "可令",
-      "en": "Permitted/Allowed"
+      "en": "Permitted"
     }
   ],
   "dipei": [
     {
       "char": "地配",
-      "en": "Local Allocation/Distribution"
+      "en": "Local Allocation"
     }
   ],
   "panbie": [
     {
       "char": "判别",
-      "en": "Distinguish/Differentiate"
+      "en": "Distinguish"
     }
   ],
   "tijie": [
     {
       "char": "题解",
-      "en": "Solution to Problems/Questions"
+      "en": "Solution to Problems"
     }
   ],
   "jiweiqiu": [
     {
       "char": "积为求",
-      "en": "Summation to Find/Calculate"
+      "en": "Summation to Find"
     }
   ],
   "kuanqiu": [
     {
       "char": "宽求",
-      "en": "Broad Search/Wide Range"
+      "en": "Broad Search"
     }
   ],
   "gaobi": [
@@ -19502,7 +19502,7 @@
   "saizhi": [
     {
       "char": "赛制",
-      "en": "Competition System/Rules"
+      "en": "Competition System"
     }
   ],
   "qiangqiang": [
@@ -19568,13 +19568,13 @@
   "runeng": [
     {
       "char": "如能",
-      "en": "If Possible/If Able"
+      "en": "If Possible"
     }
   ],
   "weifa": [
     {
       "char": "围法",
-      "en": "Surrounding Law/Regulations"
+      "en": "Surrounding Law"
     }
   ],
   "zhangxia": [
@@ -19586,7 +19586,7 @@
   "chuyou": [
     {
       "char": "处有",
-      "en": "There is/Located"
+      "en": "There is"
     }
   ],
   "zongxiang": [
@@ -19604,7 +19604,7 @@
   "biansu": [
     {
       "char": "变速",
-      "en": "Variable speed/Changing speed"
+      "en": "Variable speed"
     }
   ],
   "zhixianyundong": [
@@ -19634,7 +19634,7 @@
   "tushe": [
     {
       "char": "图设",
-      "en": "Diagram/Illustration"
+      "en": "Diagram"
     }
   ],
   "duiyidui": [
@@ -19646,19 +19646,19 @@
   "suoding": [
     {
       "char": "所定",
-      "en": "Specified/Determined"
+      "en": "Specified"
     }
   ],
   "maoyu": [
     {
       "char": "犛与",
-      "en": "(Likely a specific term, needs context - possibly \"wind resistance\")"
+      "en": "(Likely a specific term"
     }
   ],
   "zhongmiaodian": [
     {
       "char": "中描点",
-      "en": "Intermediate marking/Central point marking"
+      "en": "Intermediate marking"
     }
   ],
   "fahua": [
@@ -19700,7 +19700,7 @@
   "chusuo": [
     {
       "char": "处所",
-      "en": "Place/Location"
+      "en": "Place"
     }
   ],
   "xixishi": [
@@ -19724,7 +19724,7 @@
   "dianying": [
     {
       "char": "点应",
-      "en": "Point of response/answer"
+      "en": "Point of response"
     }
   ],
   "neirongfenxi": [
@@ -19736,13 +19736,13 @@
   "daiding": [
     {
       "char": "待定",
-      "en": "Pending/To be determined"
+      "en": "Pending"
     }
   ],
   "fayou": [
     {
       "char": "法由",
-      "en": "Method from/based on"
+      "en": "Method from"
     }
   ],
   "hanqiu": [
@@ -19760,7 +19760,7 @@
   "jingzhi": [
     {
       "char": "静止",
-      "en": "Still/Stationary"
+      "en": "Still"
     }
   ],
   "zhongjuli": [
@@ -19772,7 +19772,7 @@
   "duanyong": [
     {
       "char": "端用",
-      "en": "Useful/Applicable"
+      "en": "Useful"
     }
   ],
   "kongqizuli": [
@@ -19784,13 +19784,13 @@
   "hehu": [
     {
       "char": "合乎",
-      "en": "Conform to/Meet"
+      "en": "Conform to"
     }
   ],
   "jieze": [
     {
       "char": "解则",
-      "en": "If solved/Solution"
+      "en": "If solved"
     }
   ],
   "weishushushu": [
@@ -19814,7 +19814,7 @@
   "yougen": [
     {
       "char": "有根",
-      "en": "With roots/Having a basis"
+      "en": "With roots"
     }
   ],
   "xiaogen": [
@@ -19826,7 +19826,7 @@
   "gaoci": [
     {
       "char": "高次",
-      "en": "High degree/Higher order"
+      "en": "High degree"
     }
   ],
   "yiyuanfangcheng": [
@@ -19916,7 +19916,7 @@
   "dangpouzhigangben": [
     {
       "char": "当犃犆犅犇",
-      "en": "(This is a historical reference, likely a horse breed)"
+      "en": "(This is a historical reference"
     }
   ],
   "yingxuan": [
@@ -19928,7 +19928,7 @@
   "weiyuanshi": [
     {
       "char": "为元时",
-      "en": "When (as in, for a certain amount)"
+      "en": "When (as in"
     }
   ],
   "kongxian": [
@@ -19946,7 +19946,7 @@
   "feiyong": [
     {
       "char": "费用",
-      "en": "Expense/Fee"
+      "en": "Expense"
     }
   ],
   "fangjia": [
@@ -19982,13 +19982,13 @@
   "shangxiazuoyou": [
     {
       "char": "上下左右",
-      "en": "Up, down, left, right"
+      "en": "Up"
     }
   ],
   "lingwudao": [
     {
       "char": "领悟到",
-      "en": "Realized/Understood"
+      "en": "Realized"
     }
   ],
   "miqielianxi": [
@@ -20024,13 +20024,13 @@
   "suoqu": [
     {
       "char": "所取",
-      "en": "Taken/Collected"
+      "en": "Taken"
     }
   ],
   "shuiche": [
     {
       "char": "水车",
-      "en": "Water cart/wheelbarrow"
+      "en": "Water cart"
     }
   ],
   "fadianji": [
@@ -20282,7 +20282,7 @@
   "yuanzheng": [
     {
       "char": "原正",
-      "en": "Original, correct"
+      "en": "Original"
     }
   ],
   "chengci": [
@@ -20300,7 +20300,7 @@
   "banzhuan": [
     {
       "char": "扳转",
-      "en": "Turn over, reverse"
+      "en": "Turn over"
     }
   ],
   "pubiancunzai": [
@@ -20330,13 +20330,13 @@
   "yuanman": [
     {
       "char": "圆满",
-      "en": "Complete, perfect"
+      "en": "Complete"
     }
   ],
   "tuanyuan": [
     {
       "char": "团圆",
-      "en": "Reunion, family gathering"
+      "en": "Reunion"
     }
   ],
   "bidagelasi": [
@@ -20444,7 +20444,7 @@
   "guodianpouzuopoupouzhiben": [
     {
       "char": "过点犃作犃犃犆犇",
-      "en": "Passing through the point, making a shape (likely a specific drawing instruction)"
+      "en": "Passing through the point"
     }
   ],
   "xingyoupoupouzhiben": [
@@ -20456,13 +20456,13 @@
   "poubeibeipoujizhiben": [
     {
       "char": "犃犕犕犃即犆犇",
-      "en": "Oxen's horns, this (likely a specific drawing detail)"
+      "en": "Oxen's horns"
     }
   ],
   "jishushushu": [
     {
       "char": "即书书书",
-      "en": "This book, this book, this book (likely a reference to a specific text)"
+      "en": "This book"
     }
   ],
   "yupouzhipouben": [
@@ -20474,7 +20474,7 @@
   "poubeipoubeipouzhipouzhipouben": [
     {
       "char": "犃犕犃犕犃犆犃犆犃犇",
-      "en": "Oxen's horns, repeated (likely a specific drawing detail)"
+      "en": "Oxen's horns"
     }
   ],
   "huli": [
@@ -20498,19 +20498,19 @@
   "jujin": [
     {
       "char": "距今",
-      "en": "Present day, current time"
+      "en": "Present day"
     }
   ],
   "kuadu": [
     {
       "char": "跨度",
-      "en": "Span, extent"
+      "en": "Span"
     }
   ],
   "benshipougangdezhongdianzhishipougangdezhongdianzhiben": [
     {
       "char": "犇是犃犅的中点犆是犃犅的中点犆犇",
-      "en": "Oxen is the midpoint, oxen is the midpoint (likely a specific drawing instruction)"
+      "en": "Oxen is the midpoint"
     }
   ],
   "gonggaopougangzhiben": [
@@ -20588,7 +20588,7 @@
   "zhongchu": [
     {
       "char": "中除",
-      "en": "(This likely refers to a division or cut, context dependent - possibly \"middle divide\")"
+      "en": "(This likely refers to a division or cut"
     }
   ],
   "fuzhuxian": [
@@ -20624,7 +20624,7 @@
   "youzaipougangben": [
     {
       "char": "又在犃犅犇",
-      "en": "also in/at (specific point)"
+      "en": "also in"
     }
   ],
   "tuyuan": [
@@ -20690,7 +20690,7 @@
   "beishijiezhongxianzhiben": [
     {
       "char": "犕是犗中弦犆犇",
-      "en": "(This likely refers to a chord, context dependent)"
+      "en": "(This likely refers to a chord"
     }
   ],
   "dexianpougangjiaoxiaoyuanyuzhiben": [
@@ -20726,7 +20726,7 @@
   "rutupouganghezhiben": [
     {
       "char": "如图犃犅和犆犇",
-      "en": "(This appears to be a specific diagram/illustration - translation would require context, but likely refers to a specific shape or object depicted)"
+      "en": "(This appears to be a specific diagram"
     }
   ],
   "jiaohui": [
@@ -20756,7 +20756,7 @@
   "chuanzhi": [
     {
       "char": "船只",
-      "en": "Vessels/Ships"
+      "en": "Vessels"
     }
   ],
   "celiangchuan": [
@@ -20780,7 +20780,7 @@
   "yingderongyu": [
     {
       "char": "赢得荣誉",
-      "en": "To earn honor/reputation"
+      "en": "To earn honor"
     }
   ],
   "bashang": [
@@ -20792,7 +20792,7 @@
   "waishe": [
     {
       "char": "外设",
-      "en": "External/Peripheral"
+      "en": "External"
     }
   ],
   "dengjia": [
@@ -20828,19 +20828,19 @@
   "dianneng": [
     {
       "char": "点能",
-      "en": "Pointable/Possible point"
+      "en": "Pointable"
     }
   ],
   "yuanshe": [
     {
       "char": "圆设",
-      "en": "Circle set/established"
+      "en": "Circle set"
     }
   ],
   "duanding": [
     {
       "char": "断定",
-      "en": "Conclude/Determine"
+      "en": "Conclude"
     }
   ],
   "pingtu": [
@@ -20858,7 +20858,7 @@
   "kedepougangzhiben": [
     {
       "char": "可得犃犅犆犇",
-      "en": "obtainable/achievable cow (likely referring to a specific breed)"
+      "en": "obtainable"
     }
   ],
   "gongli": [
@@ -20870,7 +20870,7 @@
   "tuci": [
     {
       "char": "图此",
-      "en": "draw this/as shown"
+      "en": "draw this"
     }
   ],
   "tiyuke": [
@@ -20894,13 +20894,13 @@
   "touchu": [
     {
       "char": "投出",
-      "en": "throw out/launch"
+      "en": "throw out"
     }
   ],
   "bieluo": [
     {
       "char": "别落",
-      "en": "don't fall/stay put"
+      "en": "don't fall"
     }
   ],
   "rutuzhiben": [
@@ -20936,19 +20936,19 @@
   "damo": [
     {
       "char": "打磨",
-      "en": "to grind/polish"
+      "en": "to grind"
     }
   ],
   "chuyuan": [
     {
       "char": "出圆",
-      "en": "to round out/to form a circle"
+      "en": "to round out"
     }
   ],
   "leerjieben": [
     {
       "char": "了而犗犇",
-      "en": "(likely a specific term or name, context needed)"
+      "en": "(likely a specific term or name"
     }
   ],
   "congyuanwai": [
@@ -20966,13 +20966,13 @@
   "jiexia": [
     {
       "char": "截下",
-      "en": "cut off/trim"
+      "en": "cut off"
     }
   ],
   "keben": [
     {
       "char": "犐犇",
-      "en": "(likely a specific term or name, context needed)"
+      "en": "(likely a specific term or name"
     }
   ],
   "qieyuan": [
@@ -20984,19 +20984,19 @@
   "yujie": [
     {
       "char": "于解",
-      "en": "in solution/regarding the solution"
+      "en": "in solution"
     }
   ],
   "yougangben": [
     {
       "char": "由犅犇",
-      "en": "(likely a specific term or name, context needed)"
+      "en": "(likely a specific term or name"
     }
   ],
   "xingjia": [
     {
       "char": "形架",
-      "en": "framework/structure support"
+      "en": "framework"
     }
   ],
   "yuanneng": [
@@ -21014,55 +21014,55 @@
   "youtong": [
     {
       "char": "油桶",
-      "en": "Oil drum/barrel"
+      "en": "Oil drum"
     }
   ],
   "qiangbian": [
     {
       "char": "墙边",
-      "en": "By the wall/along the wall"
+      "en": "By the wall"
     }
   ],
   "yourutupouganggangzhizhiben": [
     {
       "char": "油如图犃犅犅犆犆犇",
-      "en": "(Likely a specific type of oil, needs further context - transliterated)"
+      "en": "(Likely a specific type of oil"
     }
   ],
   "qiepougangzhiben": [
     {
       "char": "且犃犅犆犇",
-      "en": "(Likely a specific term, needs further context - transliterated)"
+      "en": "(Likely a specific term"
     }
   ],
   "zhidie": [
     {
       "char": "纸叠",
-      "en": "Stack of paper/folded paper"
+      "en": "Stack of paper"
     }
   ],
   "yuanxiangli": [
     {
       "char": "圆相离",
-      "en": "Circular separation/distance"
+      "en": "Circular separation"
     }
   ],
   "juwei": [
     {
       "char": "距为",
-      "en": "Distance is/equals"
+      "en": "Distance is"
     }
   ],
   "quanpouganggangzhizhiben": [
     {
       "char": "犈犃犅犅犆犆犇",
-      "en": "(Likely a specific term, needs further context - transliterated)"
+      "en": "(Likely a specific term"
     }
   ],
   "benquanquanpoupouganggangzhizhiben": [
     {
       "char": "犇犈犈犃犃犅犅犆犆犇",
-      "en": "(Likely a specific term, needs further context - transliterated)"
+      "en": "(Likely a specific term"
     }
   ],
   "benquanquanpougangzhiquanpougangzhiben": [
@@ -21080,7 +21080,7 @@
   "laizuo": [
     {
       "char": "来作",
-      "en": "To make/to do"
+      "en": "To make"
     }
   ],
   "yuanliudengfen": [
@@ -21092,13 +21092,13 @@
   "jiechu": [
     {
       "char": "截出",
-      "en": "Cut out/extracted"
+      "en": "Cut out"
     }
   ],
   "ningkai": [
     {
       "char": "拧开",
-      "en": "Unscrew/loosen"
+      "en": "Unscrew"
     }
   ],
   "liujiaoxing": [
@@ -21116,13 +21116,13 @@
   "jisuanchulai": [
     {
       "char": "计算出来",
-      "en": "Calculated/figured out"
+      "en": "Calculated"
     }
   ],
   "mouzhongyiyi": [
     {
       "char": "某种意义",
-      "en": "In a certain sense/in some respects"
+      "en": "In a certain sense"
     }
   ],
   "yongyuan": [
@@ -21134,7 +21134,7 @@
   "yuanzhuang": [
     {
       "char": "圆狀",
-      "en": "Circular shape/form"
+      "en": "Circular shape"
     }
   ],
   "xingzaiqu": [
@@ -21284,7 +21284,7 @@
   "tufeimengjin": [
     {
       "char": "突飞猛进",
-      "en": "Breakthrough, Rapid advancement"
+      "en": "Breakthrough"
     }
   ],
   "qianwei": [
@@ -21302,7 +21302,7 @@
   "chaogao": [
     {
       "char": "超高",
-      "en": "Ultra-high, Extremely high"
+      "en": "Ultra-high"
     }
   ],
   "changyuan": [
@@ -21356,7 +21356,7 @@
   "wandao": [
     {
       "char": "弯道",
-      "en": "Turn, Curve"
+      "en": "Turn"
     }
   ],
   "weikuiben": [
@@ -21404,13 +21404,13 @@
   "chuansong": [
     {
       "char": "传送",
-      "en": "Convey, Transfer"
+      "en": "Convey"
     }
   ],
   "hanghai": [
     {
       "char": "航海",
-      "en": "Navigation, Maritime"
+      "en": "Navigation"
     }
   ],
   "qiuti": [
@@ -21578,19 +21578,19 @@
   "chexiang": [
     {
       "char": "车厢",
-      "en": "Compartment/Carriage"
+      "en": "Compartment"
     }
   ],
   "zhuangzai": [
     {
       "char": "装在",
-      "en": "Stored in/Placed in"
+      "en": "Stored in"
     }
   ],
   "lumian": [
     {
       "char": "路面",
-      "en": "Road surface/Pavement"
+      "en": "Road surface"
     }
   ],
   "tuoyuanxing": [
@@ -21644,19 +21644,19 @@
   "pougangshijiedexianpougangzhiben": [
     {
       "char": "犃犅是犗的弦犃犅犆犇",
-      "en": "(This appears to be a complex character, likely related to string or line.  A reasonable translation would be \"String of [something]\" or \"Line of [something]\")"
+      "en": "(This appears to be a complex character"
     }
   ],
   "ditirutujiezhongxianpougangzhiben": [
     {
       "char": "第题如图犗中弦犃犅犆犇",
-      "en": "(Similar complex character, likely \"Figure [number] as shown with the string/line\")"
+      "en": "(Similar complex character"
     }
   ],
   "yudianmapoupoumaben": [
     {
       "char": "于点犘犃犃犘犇",
-      "en": "(Complex character, likely \"At the point\")"
+      "en": "(Complex character"
     }
   ],
   "rutupouzhizhigangben": [
@@ -21680,7 +21680,7 @@
   "zhongjia": [
     {
       "char": "中甲",
-      "en": "(Likely a specific designation, possibly \"Middle A\" or a technical term. Requires further context)"
+      "en": "(Likely a specific designation"
     }
   ],
   "qiumen": [
@@ -21698,19 +21698,19 @@
   "yirang": [
     {
       "char": "乙让",
-      "en": "(乙让 - likely a name or specific term, no direct translation)"
+      "en": "(乙让 - likely a name or specific term"
     }
   ],
   "haojin": [
     {
       "char": "好仅",
-      "en": "(好仅 - likely a name or specific term, no direct translation)"
+      "en": "(好仅 - likely a name or specific term"
     }
   ],
   "zhengben": [
     {
       "char": "证犇",
-      "en": "(证犇 - likely a name or specific term, no direct translation)"
+      "en": "(证犇 - likely a name or specific term"
     }
   ],
   "chenchuan": [
@@ -21728,7 +21728,7 @@
   "shepouben": [
     {
       "char": "设犃犇",
-      "en": "(设犃犇 - likely a name or specific term, no direct translation)"
+      "en": "(设犃犇 - likely a name or specific term"
     }
   ],
   "yugangzhidezhongdianben": [
@@ -21794,7 +21794,7 @@
   "jietong": [
     {
       "char": "接通",
-      "en": "Connected / Establish connection"
+      "en": "Connected"
     }
   ],
   "choujiang": [
@@ -21848,7 +21848,7 @@
   "tuanqing": [
     {
       "char": "团请",
-      "en": "Invitation to a group/team"
+      "en": "Invitation to a group"
     }
   ],
   "keyou": [
@@ -21896,7 +21896,7 @@
   "mingzhong": [
     {
       "char": "命中",
-      "en": "Hit/Successful"
+      "en": "Hit"
     }
   ],
   "heiqiuge": [
@@ -22302,7 +22302,7 @@
   "yaojiang": [
     {
       "char": "摇奖",
-      "en": "Raffle/Lucky draw"
+      "en": "Raffle"
     }
   ],
   "zhongjianglv": [
@@ -22332,7 +22332,7 @@
   "zhongzhong": [
     {
       "char": "中中",
-      "en": "Both/Both times"
+      "en": "Both"
     }
   ],
   "weihuqiwei": [
@@ -22362,13 +22362,13 @@
   "diliege": [
     {
       "char": "第列个",
-      "en": "Row/Column"
+      "en": "Row"
     }
   ],
   "biaozhu": [
     {
       "char": "标注",
-      "en": "Label/Mark"
+      "en": "Label"
     }
   ],
   "jianbiao": [
@@ -22398,13 +22398,13 @@
   "zhuangbiao": [
     {
       "char": "狀表",
-      "en": "Form/Table"
+      "en": "Form"
     }
   ],
   "zongzai": [
     {
       "char": "总在",
-      "en": "Always/Entirely"
+      "en": "Always"
     }
   ],
   "gailvlun": [
@@ -22428,25 +22428,25 @@
   "faneng": [
     {
       "char": "法能",
-      "en": "Law (as in, a law of probability)"
+      "en": "Law (as in"
     }
   ],
   "zhenjian": [
     {
       "char": "针尖",
-      "en": "Pinpoint/Sharp"
+      "en": "Pinpoint"
     }
   ],
   "cilianxu": [
     {
       "char": "次连续",
-      "en": "Second-order/Subsequential"
+      "en": "Second-order"
     }
   ],
   "dashi": [
     {
       "char": "大时",
-      "en": "Big Time/Large Scale"
+      "en": "Big Time"
     }
   ],
   "zhitouzi": [
@@ -22464,7 +22464,7 @@
   "kongque": [
     {
       "char": "空缺",
-      "en": "Vacant/Missing"
+      "en": "Vacant"
     }
   ],
   "biaoxia": [
@@ -22620,7 +22620,7 @@
   "honghuanglv": [
     {
       "char": "红黄绿",
-      "en": "Red, yellow, green"
+      "en": "Red"
     }
   ],
   "diwang": [
@@ -22668,7 +22668,7 @@
   "honglvlan": [
     {
       "char": "红绿蓝",
-      "en": "red, green, blue"
+      "en": "red"
     }
   ],
   "lanfen": [
@@ -22746,7 +22746,7 @@
   "hunjin": [
     {
       "char": "混进",
-      "en": "To sneak in, to infiltrate"
+      "en": "To sneak in"
     }
   ],
   "shubaoshu": [
@@ -22776,7 +22776,7 @@
   "shangzhongxia": [
     {
       "char": "上中下",
-      "en": "Top, middle, bottom"
+      "en": "Top"
     }
   ],
   "sandui": [
@@ -22818,7 +22818,7 @@
   "xinqie": [
     {
       "char": "心切",
-      "en": "Anxious, eager"
+      "en": "Anxious"
     }
   ]
 }

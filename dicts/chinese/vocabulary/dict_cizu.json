@@ -146,7 +146,7 @@
   "cheshang": [
     {
       "char": "车上",
-      "en": "On the bus/train"
+      "en": "On the bus"
     }
   ],
   "chezhan": [
@@ -330,7 +330,7 @@
   "duoshao": [
     {
       "char": "多少",
-      "en": "How many/much"
+      "en": "How many"
     }
   ],
   "erzi": [
@@ -464,13 +464,13 @@
   "haishi": [
     {
       "char": "还是",
-      "en": "Or/Still"
+      "en": "Or"
     }
   ],
   "haiyou": [
     {
       "char": "还有",
-      "en": "Also/Still have"
+      "en": "Also"
     }
   ],
   "haizi": [
@@ -672,7 +672,7 @@
   "juede": [
     {
       "char": "觉得",
-      "en": "Think/Feel"
+      "en": "Think"
     }
   ],
   "kaiche": [
@@ -824,7 +824,7 @@
   "meiyou": [
     {
       "char": "没有",
-      "en": "No/Not have"
+      "en": "No"
     }
   ],
   "meimei": [
@@ -1086,7 +1086,7 @@
   "renshi": [
     {
       "char": "认识",
-      "en": "Know/Recognize"
+      "en": "Know"
     },
     {
       "char": "人士",
@@ -1140,7 +1140,7 @@
   "shangche": [
     {
       "char": "上车",
-      "en": "Get on (bus/train)"
+      "en": "Get on (bus"
     }
   ],
   "shangci": [
@@ -1248,7 +1248,7 @@
   "shibushi": [
     {
       "char": "是不是",
-      "en": "Is it?/Are they?"
+      "en": "Is it?"
     },
     {
       "char": "时不时",
@@ -1298,7 +1298,7 @@
   "tamen": [
     {
       "char": "他们",
-      "en": "They (masc./mixed)"
+      "en": "They (masc."
     },
     {
       "char": "她们",
@@ -1448,7 +1448,7 @@
   "xiache": [
     {
       "char": "下车",
-      "en": "Get off (bus/train)"
+      "en": "Get off (bus"
     }
   ],
   "xiaci": [
@@ -1478,7 +1478,7 @@
   "xiansheng": [
     {
       "char": "先生",
-      "en": "Mr./Sir"
+      "en": "Mr."
     }
   ],
   "xianzai": [
@@ -1984,7 +1984,7 @@
   "airen": [
     {
       "char": "爱人",
-      "en": "Lover/Spouse"
+      "en": "Lover"
     }
   ],
   "anjing": [
@@ -2118,7 +2118,7 @@
   "buguo": [
     {
       "char": "不过",
-      "en": "But/However"
+      "en": "But"
     }
   ],
   "butai": [
@@ -2188,7 +2188,7 @@
   "buxing": [
     {
       "char": "不行",
-      "en": "No good/Can't"
+      "en": "No good"
     },
     {
       "char": "步行",
@@ -2534,7 +2534,7 @@
   "danwei": [
     {
       "char": "单位",
-      "en": "Unit/Company"
+      "en": "Unit"
     }
   ],
   "danshi": [
@@ -3226,7 +3226,7 @@
   "jiayou": [
     {
       "char": "加油",
-      "en": "Come on/Refuel"
+      "en": "Come on"
     }
   ],
   "jiating": [
@@ -5166,7 +5166,7 @@
   "yiding": [
     {
       "char": "一定",
-      "en": "Must/Certain"
+      "en": "Must"
     }
   ],
   "yigong": [
@@ -5498,7 +5498,7 @@
   "yundong": [
     {
       "char": "运动",
-      "en": "Sports/Exercise"
+      "en": "Sports"
     }
   ],
   "zanmen": [
@@ -19978,7 +19978,7 @@
   "suantiankula": [
     {
       "char": "酸甜苦辣",
-      "en": "Sweet, sour, bitter and spicy"
+      "en": "Sweet"
     }
   ],
   "suihou": [
@@ -29570,7 +29570,7 @@
   "chihewanle": [
     {
       "char": "吃喝玩乐",
-      "en": "Eat, drink and be merry"
+      "en": "Eat"
     }
   ],
   "chiku": [
@@ -34248,7 +34248,7 @@
   "gujinzhongwai": [
     {
       "char": "古今中外",
-      "en": "Ancient and modern, Chinese and foreign"
+      "en": "Ancient and modern"
     }
   ],
   "guren": [

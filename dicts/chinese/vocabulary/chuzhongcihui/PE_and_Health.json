@@ -24,7 +24,7 @@
   "ziji": [
     {
       "char": "字迹",
-      "en": "Handwriting/script"
+      "en": "Handwriting"
     }
   ],
   "tiyuduanlian": [
@@ -118,7 +118,7 @@
   "sunshang": [
     {
       "char": "损伤",
-      "en": "injury, damage"
+      "en": "injury"
     }
   ],
   "jiji": [
@@ -146,7 +146,7 @@
   "qitiao": [
     {
       "char": "起跳",
-      "en": "to start, to leap"
+      "en": "to start"
     }
   ],
   "toulan": [
@@ -158,7 +158,7 @@
   "shiyong": [
     {
       "char": "食用",
-      "en": "To eat / Consumption"
+      "en": "To eat"
     }
   ],
   "paiqiu": [
@@ -168,7 +168,7 @@
     },
     {
       "char": "拍球",
-      "en": "Tap/Hit the ball"
+      "en": "Tap"
     }
   ],
   "fuhe": [
@@ -220,7 +220,7 @@
   "shiwu": [
     {
       "char": "失误",
-      "en": "Mistake/Error"
+      "en": "Mistake"
     }
   ],
   "lilunzhishi": [
@@ -236,7 +236,7 @@
     },
     {
       "char": "应向",
-      "en": "Should direct/orient"
+      "en": "Should direct"
     }
   ],
   "chiqiu": [
@@ -254,7 +254,7 @@
   "tianjing": [
     {
       "char": "田径",
-      "en": "Athletics/Track and Field"
+      "en": "Athletics"
     }
   ],
   "xinfei": [
@@ -348,7 +348,7 @@
   "jineng": [
     {
       "char": "机能",
-      "en": "Function/Capacity"
+      "en": "Function"
     }
   ],
   "zhongchangpao": [
@@ -366,13 +366,13 @@
   "yizhipinzhi": [
     {
       "char": "意志品质",
-      "en": "Willpower, character"
+      "en": "Willpower"
     }
   ],
   "lingmin": [
     {
       "char": "灵敏",
-      "en": "Agile, nimble"
+      "en": "Agile"
     }
   ],
   "luodi": [
@@ -440,7 +440,7 @@
   "zhongcha": [
     {
       "char": "中差",
-      "en": "(This is a complex term, best translated as) Average/Mediocre"
+      "en": "(This is a complex term"
     }
   ],
   "shangti": [
@@ -480,7 +480,7 @@
   "zhuanti": [
     {
       "char": "转体",
-      "en": "rotation/turnover"
+      "en": "rotation"
     }
   ],
   "tiqiu": [
@@ -492,11 +492,11 @@
   "tengyue": [
     {
       "char": "腾越",
-      "en": "leap/jump"
+      "en": "leap"
     },
     {
       "char": "腾跃",
-      "en": "To leap/spring"
+      "en": "To leap"
     }
   ],
   "laiqiu": [
@@ -520,7 +520,7 @@
   "zhiyi": [
     {
       "char": "指以",
-      "en": "Point to/refer to"
+      "en": "Point to"
     }
   ],
   "liangtui": [
@@ -544,19 +544,19 @@
   "huayang": [
     {
       "char": "花样",
-      "en": "Style/Pattern"
+      "en": "Style"
     }
   ],
   "tizhi": [
     {
       "char": "体质",
-      "en": "Constitution/Physique"
+      "en": "Constitution"
     }
   ],
   "chuxian": [
     {
       "char": "出线",
-      "en": "To qualify/advance"
+      "en": "To qualify"
     }
   ],
   "kualan": [
@@ -574,13 +574,13 @@
   "bufa": [
     {
       "char": "步法",
-      "en": "Footwork / Gait"
+      "en": "Footwork"
     }
   ],
   "shili": [
     {
       "char": "视力",
-      "en": "Vision / Sight"
+      "en": "Vision"
     }
   ],
   "peidai": [
@@ -604,7 +604,7 @@
   "cuozhe": [
     {
       "char": "挫折",
-      "en": "Setback / Failure"
+      "en": "Setback"
     }
   ],
   "dibazhang": [
@@ -656,7 +656,7 @@
   "shanshi": [
     {
       "char": "膳食",
-      "en": "Meal/Diet"
+      "en": "Meal"
     }
   ],
   "qutui": [
@@ -848,11 +848,11 @@
   "shiji": [
     {
       "char": "时机",
-      "en": "Opportunity/Moment"
+      "en": "Opportunity"
     },
     {
       "char": "事迹",
-      "en": "Event/Incident"
+      "en": "Event"
     },
     {
       "char": "时即",
@@ -868,7 +868,7 @@
   "minzuminjian": [
     {
       "char": "民族民间",
-      "en": "folk/ethnic"
+      "en": "folk"
     }
   ],
   "bapai": [
@@ -880,7 +880,7 @@
   "fuheliang": [
     {
       "char": "负荷量",
-      "en": "load/burden"
+      "en": "load"
     }
   ],
   "jiti": [
@@ -910,7 +910,7 @@
   "yixiang": [
     {
       "char": "意向",
-      "en": "Intention, Preference"
+      "en": "Intention"
     }
   ],
   "houchang": [
@@ -956,7 +956,7 @@
   "lingminxing": [
     {
       "char": "灵敏性",
-      "en": "Agility/Nimbleness"
+      "en": "Agility"
     }
   ],
   "gunfan": [
@@ -978,7 +978,7 @@
   "qingchunqi": [
     {
       "char": "青春期",
-      "en": "Adolescence/Teenage years"
+      "en": "Adolescence"
     }
   ],
   "feipang": [
@@ -1032,7 +1032,7 @@
   "gandao": [
     {
       "char": "赶到",
-      "en": "Arrive/Rush to"
+      "en": "Arrive"
     }
   ],
   "tujing": [
@@ -1056,7 +1056,7 @@
   "youxiupinzhi": [
     {
       "char": "优秀品质",
-      "en": "Excellent Qualities / Good Traits"
+      "en": "Excellent Qualities"
     }
   ],
   "quxi": [
@@ -1074,7 +1074,7 @@
   "kuayueshi": [
     {
       "char": "跨越式",
-      "en": "Breakthrough / Leapfrog"
+      "en": "Breakthrough"
     }
   ],
   "henggan": [
@@ -1086,13 +1086,13 @@
   "molian": [
     {
       "char": "磨炼",
-      "en": "To train / To hone"
+      "en": "To train"
     }
   ],
   "paodong": [
     {
       "char": "跑动",
-      "en": "To run / To move around"
+      "en": "To run"
     }
   ],
   "zhuanshen": [
@@ -1122,7 +1122,7 @@
   "fali": [
     {
       "char": "发力",
-      "en": "Power/Force"
+      "en": "Power"
     },
     {
       "char": "乏力",
@@ -1138,7 +1138,7 @@
   "dunli": [
     {
       "char": "蹲立",
-      "en": "Squatting/Standing"
+      "en": "Squatting"
     }
   ],
   "qubi": [
@@ -1150,7 +1150,7 @@
   "chuangbian": [
     {
       "char": "创编",
-      "en": "Creation/Composition"
+      "en": "Creation"
     }
   ],
   "shuangren": [
@@ -1268,7 +1268,7 @@
   "tengkong": [
     {
       "char": "腾空",
-      "en": "To leap into the air; to rise into the air"
+      "en": "To leap into the air"
     }
   ],
   "kongzhinengli": [
@@ -1280,7 +1280,7 @@
   "guogan": [
     {
       "char": "过杆",
-      "en": "Over-swinging; to exceed the target"
+      "en": "Over-swinging"
     },
     {
       "char": "过竿",
@@ -1290,7 +1290,7 @@
   "chushou": [
     {
       "char": "出手",
-      "en": "To take a shot; to launch"
+      "en": "To take a shot"
     }
   ],
   "boqiu": [
@@ -1302,7 +1302,7 @@
   "changshang": [
     {
       "char": "场上",
-      "en": "On the field; in play"
+      "en": "On the field"
     }
   ],
   "xinxin": [
@@ -1320,7 +1320,7 @@
   "faqiuqu": [
     {
       "char": "发球区",
-      "en": "Service area; service box"
+      "en": "Service area"
     }
   ],
   "shuanggang": [
@@ -1356,7 +1356,7 @@
   "huanchong": [
     {
       "char": "缓冲",
-      "en": "Buffer; cushioning"
+      "en": "Buffer"
     }
   ],
   "quanzhong": [
@@ -1366,19 +1366,19 @@
     },
     {
       "char": "权重",
-      "en": "Weight, importance"
+      "en": "Weight"
     }
   ],
   "shanshen": [
     {
       "char": "闪身",
-      "en": "Flash/Appear briefly"
+      "en": "Flash"
     }
   ],
   "changquan": [
     {
       "char": "长拳",
-      "en": "Long Fist/Long Boxing"
+      "en": "Long Fist"
     }
   ],
   "weisheng": [
@@ -1390,19 +1390,19 @@
   "tansuan": [
     {
       "char": "碳酸",
-      "en": "Carbonated/Soda"
+      "en": "Carbonated"
     }
   ],
   "huxidao": [
     {
       "char": "呼吸道",
-      "en": "Respiratory System/Airway"
+      "en": "Respiratory System"
     }
   ],
   "changdao": [
     {
       "char": "肠道",
-      "en": "Intestine/Digestive System"
+      "en": "Intestine"
     }
   ],
   "jietingqiu": [
@@ -1414,25 +1414,25 @@
   "bianxiang": [
     {
       "char": "变向",
-      "en": "Change Direction/Dribble"
+      "en": "Change Direction"
     }
   ],
   "hengpai": [
     {
       "char": "横拍",
-      "en": "Horizontal Shot/Side Shot"
+      "en": "Horizontal Shot"
     }
   ],
   "langan": [
     {
       "char": "栏杆",
-      "en": "Railing/Barrier"
+      "en": "Railing"
     }
   ],
   "tabu": [
     {
       "char": "踏步",
-      "en": "Step/Marching Step"
+      "en": "Step"
     }
   ],
   "shixian": [
@@ -1456,19 +1456,19 @@
   "shangyuan": [
     {
       "char": "伤员",
-      "en": "Injured Person/Wounded Person"
+      "en": "Injured Person"
     }
   ],
   "wanqiangpinbo": [
     {
       "char": "顽强拼搏",
-      "en": "Perseverance/Fighting Spirit"
+      "en": "Perseverance"
     }
   ],
   "lanjia": [
     {
       "char": "栏架",
-      "en": "Frame/Structure"
+      "en": "Frame"
     },
     {
       "char": "拦架",
@@ -1478,7 +1478,7 @@
   "pinbo": [
     {
       "char": "拼搏",
-      "en": "Struggle/Effort"
+      "en": "Struggle"
     }
   ],
   "shoufu": [
@@ -1552,13 +1552,13 @@
   "sheru": [
     {
       "char": "摄入",
-      "en": "Intake/Consumption"
+      "en": "Intake"
     }
   ],
   "yongyan": [
     {
       "char": "用眼",
-      "en": "Eye use/Visual examination"
+      "en": "Eye use"
     }
   ],
   "shoushu": [
@@ -1628,7 +1628,7 @@
     },
     {
       "char": "委屈",
-      "en": "Misunderstanding, resentment"
+      "en": "Misunderstanding"
     }
   ],
   "xiongqian": [
@@ -1700,7 +1700,7 @@
   "tili": [
     {
       "char": "体力",
-      "en": "Physical strength/fitness"
+      "en": "Physical strength"
     }
   ],
   "zhuyili": [
@@ -1736,7 +1736,7 @@
   "jiaozheng": [
     {
       "char": "矫正",
-      "en": "Correct, adjust"
+      "en": "Correct"
     }
   ],
   "kaifangxing": [
@@ -1754,7 +1754,7 @@
   "anshang": [
     {
       "char": "岸上",
-      "en": "Shore, land"
+      "en": "Shore"
     }
   ],
   "jiuyi": [
@@ -1800,7 +1800,7 @@
     },
     {
       "char": "步是",
-      "en": "Step/Movement"
+      "en": "Step"
     }
   ],
   "tiaode": [
@@ -1826,19 +1826,19 @@
     },
     {
       "char": "真性",
-      "en": "Genuine / Real"
+      "en": "Genuine"
     }
   ],
   "yizhi": [
     {
       "char": "抑制",
-      "en": "To suppress/inhibit"
+      "en": "To suppress"
     }
   ],
   "zuoyoujiao": [
     {
       "char": "左右脚",
-      "en": "Left Foot/Right Foot"
+      "en": "Left Foot"
     }
   ],
   "yuewei": [
@@ -1856,7 +1856,7 @@
   "qieru": [
     {
       "char": "切入",
-      "en": "Penetrate/Cut In"
+      "en": "Penetrate"
     }
   ],
   "qiuwang": [
@@ -1880,7 +1880,7 @@
   "xiashou": [
     {
       "char": "下手",
-      "en": "Action/Move"
+      "en": "Action"
     }
   ],
   "yongqi": [
@@ -1892,7 +1892,7 @@
   "tixing": [
     {
       "char": "体形",
-      "en": "Physique/Build"
+      "en": "Physique"
     }
   ],
   "dingxiang": [
@@ -1922,19 +1922,19 @@
   "fangshen": [
     {
       "char": "防身",
-      "en": "Self-defense/Personal defense"
+      "en": "Self-defense"
     }
   ],
   "yubei": [
     {
       "char": "预备",
-      "en": "Prepare/Ready"
+      "en": "Prepare"
     }
   ],
   "zijuezunshou": [
     {
       "char": "自觉遵守",
-      "en": "Self-discipline/Voluntarily comply"
+      "en": "Self-discipline"
     }
   ],
   "yaosheng": [
@@ -1988,7 +1988,7 @@
   "hubang": [
     {
       "char": "互帮",
-      "en": "Mutual help, assist each other"
+      "en": "Mutual help"
     }
   ],
   "hulian": [
@@ -2012,7 +2012,7 @@
   "chengtao": [
     {
       "char": "成套",
-      "en": "Set, complete set"
+      "en": "Set"
     }
   ],
   "hengxiang": [
@@ -2030,7 +2030,7 @@
   "huanqi": [
     {
       "char": "换气",
-      "en": "Breathe, exchange air"
+      "en": "Breathe"
     }
   ],
   "dishiyizhang": [
@@ -2072,13 +2072,13 @@
   "yundongliang": [
     {
       "char": "运动量",
-      "en": "Exercise amount/intensity"
+      "en": "Exercise amount"
     }
   ],
   "zhijie": [
     {
       "char": "指节",
-      "en": "joints, knuckles"
+      "en": "joints"
     }
   ],
   "shizhi": [
@@ -2090,7 +2090,7 @@
   "suzhi": [
     {
       "char": "素质",
-      "en": "Quality/fitness"
+      "en": "Quality"
     }
   ],
   "leguan": [
@@ -2126,7 +2126,7 @@
   "koujue": [
     {
       "char": "口诀",
-      "en": "Formula/Secret"
+      "en": "Formula"
     }
   ],
   "xiaotui": [
@@ -2162,7 +2162,7 @@
   "tiqian": [
     {
       "char": "体前",
-      "en": "Forward-leaning/Body Forward"
+      "en": "Forward-leaning"
     }
   ],
   "yijiao": [
@@ -2182,13 +2182,13 @@
     },
     {
       "char": "收势",
-      "en": "Closing, Finishing"
+      "en": "Closing"
     }
   ],
   "bisaiguize": [
     {
       "char": "比赛规则",
-      "en": "Rules of the game/Competition rules"
+      "en": "Rules of the game"
     }
   ],
   "jiaodeng": [
@@ -2200,13 +2200,13 @@
   "jida": [
     {
       "char": "击打",
-      "en": "Strike/Hit"
+      "en": "Strike"
     }
   ],
   "duikang": [
     {
       "char": "对抗",
-      "en": "Confrontation/Oppose"
+      "en": "Confrontation"
     }
   ],
   "wangqianqiu": [
@@ -2236,7 +2236,7 @@
   "chuji": [
     {
       "char": "触及",
-      "en": "Touch/Reach"
+      "en": "Touch"
     },
     {
       "char": "出击",
@@ -2252,7 +2252,7 @@
   "shoufa": [
     {
       "char": "手法",
-      "en": "Technique/Method"
+      "en": "Technique"
     }
   ],
   "tuanshen": [
@@ -2264,7 +2264,7 @@
   "xialuo": [
     {
       "char": "下落",
-      "en": "Fall/Drop"
+      "en": "Fall"
     }
   ],
   "zhili": [
@@ -2276,7 +2276,7 @@
   "fanzhuan": [
     {
       "char": "翻转",
-      "en": "Flip/Rotate"
+      "en": "Flip"
     }
   ],
   "zihaogan": [
@@ -2288,13 +2288,13 @@
   "gunfa": [
     {
       "char": "棍法",
-      "en": "Staff techniques/Staff fighting style"
+      "en": "Staff techniques"
     }
   ],
   "buliang": [
     {
       "char": "不良",
-      "en": "Bad/Poor"
+      "en": "Bad"
     }
   ],
   "zhengzhuang": [
@@ -2312,7 +2312,7 @@
   "dingshi": [
     {
       "char": "定时",
-      "en": "Scheduled/On time"
+      "en": "Scheduled"
     }
   ],
   "zaocan": [
@@ -2412,7 +2412,7 @@
   "shuixing": [
     {
       "char": "水性",
-      "en": "Water affinity/ability"
+      "en": "Water affinity"
     }
   ],
   "piaofu": [
@@ -2454,7 +2454,7 @@
   "fachu": [
     {
       "char": "发怵",
-      "en": "to be afraid of, to feel apprehensive"
+      "en": "to be afraid of"
     }
   ],
   "cuoqiu": [
@@ -2470,7 +2470,7 @@
     },
     {
       "char": "起撑",
-      "en": "To rise up/Support"
+      "en": "To rise up"
     }
   ],
   "zuobi": [
@@ -2510,7 +2510,7 @@
   "chengshou": [
     {
       "char": "承受",
-      "en": "Bear, endure"
+      "en": "Bear"
     }
   ],
   "guoda": [
@@ -2528,7 +2528,7 @@
   "houyao": [
     {
       "char": "后要",
-      "en": "Later, subsequently"
+      "en": "Later"
     }
   ],
   "raodongmai": [
@@ -2576,7 +2576,7 @@
   "youshi": [
     {
       "char": "诱使",
-      "en": "Entice/Persuade"
+      "en": "Entice"
     }
   ],
   "moshengren": [
@@ -2618,7 +2618,7 @@
   "yisheng": [
     {
       "char": "以声",
-      "en": "By sound/voice"
+      "en": "By sound"
     }
   ],
   "yueshi": [
@@ -2666,7 +2666,7 @@
   "jiewaiqiu": [
     {
       "char": "界外球",
-      "en": "Long ball/Out-of-bounds ball"
+      "en": "Long ball"
     }
   ],
   "huibi": [
@@ -2684,13 +2684,13 @@
   "laqiu": [
     {
       "char": "拉球",
-      "en": "Pull/Draw back the ball"
+      "en": "Pull"
     }
   ],
   "qiuxing": [
     {
       "char": "球性",
-      "en": "Ball control/Ballistic"
+      "en": "Ball control"
     }
   ],
   "duiqiu": [
@@ -2714,13 +2714,13 @@
   "bianlu": [
     {
       "char": "边路",
-      "en": "Touchline/Flank"
+      "en": "Touchline"
     }
   ],
   "jizhanshu": [
     {
       "char": "技战术",
-      "en": "Tactics/Technical"
+      "en": "Tactics"
     }
   ],
   "lijie": [
@@ -2732,13 +2732,13 @@
   "dingren": [
     {
       "char": "盯人",
-      "en": "Mark/Watch"
+      "en": "Mark"
     }
   ],
   "dujie": [
     {
       "char": "堵截",
-      "en": "Intercept/Block"
+      "en": "Intercept"
     }
   ],
   "wuqiu": [
@@ -2832,19 +2832,19 @@
   "dachu": [
     {
       "char": "打出",
-      "en": "Achieve, Score (depending on context)"
+      "en": "Achieve"
     }
   ],
   "jinli": [
     {
       "char": "劲力",
-      "en": "Effort, Strength"
+      "en": "Effort"
     }
   ],
   "xingshiduoyang": [
     {
       "char": "形式多样",
-      "en": "Diverse forms, Various forms"
+      "en": "Diverse forms"
     }
   ],
   "guanjianshiqi": [
@@ -2856,7 +2856,7 @@
   "jijizhudong": [
     {
       "char": "积极主动",
-      "en": "Proactive, Initiative"
+      "en": "Proactive"
     }
   ],
   "zhanxian": [
@@ -2868,13 +2868,13 @@
   "tipo": [
     {
       "char": "体魄",
-      "en": "Physical constitution, Body"
+      "en": "Physical constitution"
     }
   ],
   "yuena": [
     {
       "char": "悦纳",
-      "en": "Accept, Welcome"
+      "en": "Accept"
     }
   ],
   "jiaxingjinshi": [
@@ -2890,7 +2890,7 @@
     },
     {
       "char": "移出",
-      "en": "Remove/Take Out"
+      "en": "Remove"
     }
   ],
   "geqiguan": [
@@ -2924,7 +2924,7 @@
     },
     {
       "char": "击起",
-      "en": "Strike Up/Initiate Strike"
+      "en": "Strike Up"
     }
   ],
   "nuoru": [
@@ -2954,7 +2954,7 @@
   "jijixiangshang": [
     {
       "char": "积极向上",
-      "en": "Optimistic/Positive"
+      "en": "Optimistic"
     }
   ],
   "toude": [
@@ -2966,7 +2966,7 @@
   "kuaiman": [
     {
       "char": "快慢",
-      "en": "Fast/Slow"
+      "en": "Fast"
     }
   ],
   "jianbu": [
@@ -2996,7 +2996,7 @@
   "foudui": [
     {
       "char": "否对",
-      "en": "No/Yes"
+      "en": "No"
     }
   ],
   "gongshou": [
@@ -3024,7 +3024,7 @@
     },
     {
       "char": "末期",
-      "en": "Late period/End"
+      "en": "Late period"
     }
   ],
   "panfa": [
@@ -3328,13 +3328,13 @@
     },
     {
       "char": "第一届",
-      "en": "First session/First term"
+      "en": "First session"
     }
   ],
   "shengli": [
     {
       "char": "省力",
-      "en": "Save Effort, Efficient"
+      "en": "Save Effort"
     }
   ],
   "qieji": [
@@ -3376,7 +3376,7 @@
   "zhongzhi": [
     {
       "char": "中止",
-      "en": "Stop/Terminate"
+      "en": "Stop"
     },
     {
       "char": "中掷",
@@ -3396,7 +3396,7 @@
     },
     {
       "char": "位移",
-      "en": "Displacement/Shift"
+      "en": "Displacement"
     }
   ],
   "chenqi": [
@@ -3546,7 +3546,7 @@
   "ganwu": [
     {
       "char": "感悟",
-      "en": "Insight/Realization"
+      "en": "Insight"
     }
   ],
   "gonglan": [
@@ -3558,7 +3558,7 @@
   "zhengqianfang": [
     {
       "char": "正前方",
-      "en": "Straight ahead/Forward"
+      "en": "Straight ahead"
     }
   ],
   "duanjuli": [
@@ -3598,7 +3598,7 @@
   "guanjianhuanjie": [
     {
       "char": "关键环节",
-      "en": "Key stage/Critical point"
+      "en": "Key stage"
     }
   ],
   "yangwo": [
@@ -3616,7 +3616,7 @@
   "youdai": [
     {
       "char": "有待",
-      "en": "Needs/Requires"
+      "en": "Needs"
     }
   ],
   "zhucibiao": [
@@ -3646,7 +3646,7 @@
   "zhiren": [
     {
       "char": "指人",
-      "en": "To point at/To indicate a person"
+      "en": "To point at"
     }
   ],
   "zhongchang": [
@@ -3700,7 +3700,7 @@
   "shoujiao": [
     {
       "char": "手脚",
-      "en": "Hands and feet (figuratively: actions, movements)"
+      "en": "Hands and feet (figuratively: actions"
     }
   ],
   "zhangkai": [
@@ -3776,7 +3776,7 @@
     },
     {
       "char": "球技",
-      "en": "Skill/Technique"
+      "en": "Skill"
     }
   ],
   "qiuchang": [
@@ -3812,7 +3812,7 @@
   "gaiju": [
     {
       "char": "该局",
-      "en": "This game/set"
+      "en": "This game"
     }
   ],
   "zhongneng": [
@@ -3824,7 +3824,7 @@
   "jianrenbuba": [
     {
       "char": "坚韧不拔",
-      "en": "Steadfast/Unwavering"
+      "en": "Steadfast"
     },
     {
       "char": "坚忍不拔",
@@ -3834,7 +3834,7 @@
   "guansai": [
     {
       "char": "观赛",
-      "en": "To watch/Attend"
+      "en": "To watch"
     }
   ],
   "hukou": [
@@ -3846,13 +3846,13 @@
   "huiji": [
     {
       "char": "回击",
-      "en": "Counterattack/Rebuttal"
+      "en": "Counterattack"
     }
   ],
   "houying": [
     {
       "char": "后应",
-      "en": "Response/Follow-up"
+      "en": "Response"
     }
   ],
   "pingfen": [
@@ -3868,13 +3868,13 @@
   "jiwei": [
     {
       "char": "记为",
-      "en": "Record as/Consider"
+      "en": "Record as"
     }
   ],
   "huxiangbangzhu": [
     {
       "char": "互相帮助",
-      "en": "Mutual help/Help each other"
+      "en": "Mutual help"
     }
   ],
   "tuanjiehezuo": [
@@ -3886,7 +3886,7 @@
   "lianxizhe": [
     {
       "char": "练习者",
-      "en": "Player/Practitioner"
+      "en": "Player"
     }
   ],
   "miannei": [
@@ -3910,13 +3910,13 @@
   "xinlisuzhi": [
     {
       "char": "心理素质",
-      "en": "Psychological state/Mental fortitude"
+      "en": "Psychological state"
     }
   ],
   "shuzhan": [
     {
       "char": "舒展",
-      "en": "Stretch/Extend"
+      "en": "Stretch"
     }
   ],
   "qizuo": [
@@ -3952,13 +3952,13 @@
   "songjin": [
     {
       "char": "松紧",
-      "en": "Tight-loose (referring to tension/control)"
+      "en": "Tight-loose (referring to tension"
     }
   ],
   "yanshen": [
     {
       "char": "眼神",
-      "en": "Eyesight/Gaze"
+      "en": "Eyesight"
     }
   ],
   "quantao": [
@@ -3976,7 +3976,7 @@
   "dantiao": [
     {
       "char": "弹跳",
-      "en": "Jump/Bounce"
+      "en": "Jump"
     },
     {
       "char": "单跳",
@@ -3992,13 +3992,13 @@
   "xingmingxue": [
     {
       "char": "姓名学",
-      "en": "Name Study/Numerology"
+      "en": "Name Study"
     }
   ],
   "haoxue": [
     {
       "char": "号学",
-      "en": "Number Study/Numerology"
+      "en": "Number Study"
     }
   ],
   "tiyuke": [
@@ -4010,7 +4010,7 @@
   "qishi": [
     {
       "char": "气势",
-      "en": "Atmosphere/Momentum"
+      "en": "Atmosphere"
     },
     {
       "char": "起势",
@@ -4044,7 +4044,7 @@
   "mohu": [
     {
       "char": "模糊",
-      "en": "Vague/Unclear"
+      "en": "Vague"
     }
   ],
   "jinshiyan": [
@@ -4062,7 +4062,7 @@
   "yichuan": [
     {
       "char": "遗传",
-      "en": "Heredity/Genetic"
+      "en": "Heredity"
     },
     {
       "char": "一传",
@@ -4078,7 +4078,7 @@
   "zijue": [
     {
       "char": "自觉",
-      "en": "Voluntary/Self-Aware"
+      "en": "Voluntary"
     }
   ],
   "zhenggui": [
@@ -4156,7 +4156,7 @@
   "xinxing": [
     {
       "char": "新兴",
-      "en": "Emerging/new"
+      "en": "Emerging"
     }
   ],
   "guanzhuangbingdu": [
@@ -4174,7 +4174,7 @@
   "jidai": [
     {
       "char": "系带",
-      "en": "Strap/Lace"
+      "en": "Strap"
     }
   ],
   "bingyin": [
@@ -4186,7 +4186,7 @@
   "chuanran": [
     {
       "char": "传染",
-      "en": "Contagious/Transmission"
+      "en": "Contagious"
     }
   ],
   "ganranzhe": [
@@ -4210,7 +4210,7 @@
   "tuijiao": [
     {
       "char": "腿脚",
-      "en": "Legs/Feet"
+      "en": "Legs"
     }
   ],
   "xiaojiqingxu": [
@@ -4222,19 +4222,19 @@
   "xuanxie": [
     {
       "char": "宣泄",
-      "en": "Release/Vent"
+      "en": "Release"
     }
   ],
   "xintai": [
     {
       "char": "心态",
-      "en": "Attitude/Mindset"
+      "en": "Attitude"
     }
   ],
   "yongwangzhiqian": [
     {
       "char": "勇往直前",
-      "en": "Press on/Charge forward"
+      "en": "Press on"
     }
   ],
   "fenyong": [
@@ -4312,7 +4312,7 @@
   "haoqiu": [
     {
       "char": "好球",
-      "en": "Good shot/ball"
+      "en": "Good shot"
     }
   ],
   "guoren": [
@@ -4414,7 +4414,7 @@
   "paoqi": [
     {
       "char": "抛起",
-      "en": "Lift/Throw up"
+      "en": "Lift"
     }
   ],
   "faping": [
@@ -4456,7 +4456,7 @@
   "shangwu": [
     {
       "char": "尚武",
-      "en": "Martial spirit/Fighting spirit"
+      "en": "Martial spirit"
     }
   ],
   "erxuelian": [
@@ -4480,7 +4480,7 @@
   "yanlian": [
     {
       "char": "演练",
-      "en": "Drill/Rehearsal"
+      "en": "Drill"
     }
   ],
   "shenxinjiankang": [
@@ -4492,7 +4492,7 @@
   "xiashui": [
     {
       "char": "下水",
-      "en": "Submerge/Dive"
+      "en": "Submerge"
     }
   ],
   "lashen": [
@@ -4540,7 +4540,7 @@
   "zhuozhuang": [
     {
       "char": "着装",
-      "en": "Attire/Clothing"
+      "en": "Attire"
     }
   ],
   "reshen": [
@@ -4576,7 +4576,7 @@
   "shangchu": [
     {
       "char": "伤处",
-      "en": "Wound/Injury Site"
+      "en": "Wound"
     }
   ],
   "ziai": [
@@ -4672,7 +4672,7 @@
   "jiaqiao": [
     {
       "char": "架桥",
-      "en": "Bridge (as in, building a bridge or a technique)"
+      "en": "Bridge (as in"
     }
   ],
   "baoshui": [
@@ -4820,7 +4820,7 @@
   "benjie": [
     {
       "char": "本节",
-      "en": "This Section/Lesson"
+      "en": "This Section"
     }
   ],
   "midu": [
@@ -4850,7 +4850,7 @@
   "baoming": [
     {
       "char": "报名",
-      "en": "Registration, enrollment"
+      "en": "Registration"
     }
   ],
   "like": [
@@ -4862,13 +4862,13 @@
   "zhenduixing": [
     {
       "char": "针对性",
-      "en": "Targeted, specific"
+      "en": "Targeted"
     }
   ],
   "chixuxing": [
     {
       "char": "持续性",
-      "en": "Persistence, continuity"
+      "en": "Persistence"
     }
   ],
   "canjiaduanlian": [
@@ -4880,7 +4880,7 @@
   "tuisuan": [
     {
       "char": "推算",
-      "en": "Estimate, calculate"
+      "en": "Estimate"
     }
   ],
   "chusan": [
@@ -4904,13 +4904,13 @@
   "huansuan": [
     {
       "char": "换算",
-      "en": "Convert, change"
+      "en": "Convert"
     }
   ],
   "jike": [
     {
       "char": "即刻",
-      "en": "Instantaneously, immediately"
+      "en": "Instantaneously"
     }
   ],
   "jiankangren": [
@@ -4940,7 +4940,7 @@
   "minjie": [
     {
       "char": "敏捷",
-      "en": "Agile, nimble"
+      "en": "Agile"
     }
   ],
   "jiyili": [
@@ -4958,7 +4958,7 @@
   "fenmi": [
     {
       "char": "分泌",
-      "en": "Secretion, release"
+      "en": "Secretion"
     }
   ],
   "xiaoxuesheng": [
@@ -4988,19 +4988,19 @@
   "dangcheng": [
     {
       "char": "当成",
-      "en": "Consider, treat as"
+      "en": "Consider"
     }
   ],
   "bibei": [
     {
       "char": "必备",
-      "en": "Essential, necessary"
+      "en": "Essential"
     }
   ],
   "dizhi": [
     {
       "char": "抵制",
-      "en": "Resist, withstand"
+      "en": "Resist"
     }
   ],
   "tangshang": [
@@ -5030,13 +5030,13 @@
   "xiaochuyinhuan": [
     {
       "char": "消除隐患",
-      "en": "Eliminate risks/Mitigate dangers"
+      "en": "Eliminate risks"
     }
   ],
   "yinhuan": [
     {
       "char": "隐患",
-      "en": "Risk/Dangers"
+      "en": "Risk"
     }
   ],
   "zhuizhu": [
@@ -5048,7 +5048,7 @@
   "jiayi": [
     {
       "char": "贾易",
-      "en": "(No direct translation, likely a name)"
+      "en": "(No direct translation"
     }
   ],
   "renxingdao": [
@@ -5078,13 +5078,13 @@
   "weiji": [
     {
       "char": "危急",
-      "en": "Danger/Critical situation"
+      "en": "Danger"
     }
   ],
   "jiuzhu": [
     {
       "char": "救助",
-      "en": "Rescue/Aid"
+      "en": "Rescue"
     }
   ],
   "shuaidao": [
@@ -5108,13 +5108,13 @@
   "fangkong": [
     {
       "char": "防控",
-      "en": "Prevention/Control"
+      "en": "Prevention"
     }
   ],
   "qiuyuan": [
     {
       "char": "求援",
-      "en": "Request help/Call for help"
+      "en": "Request help"
     },
     {
       "char": "球员",
@@ -5124,13 +5124,13 @@
   "weichengnianren": [
     {
       "char": "未成年人",
-      "en": "Minor/Child"
+      "en": "Minor"
     }
   ],
   "weixianxing": [
     {
       "char": "危险性",
-      "en": "Danger/Hazardity"
+      "en": "Danger"
     }
   ],
   "baojing": [
@@ -5142,7 +5142,7 @@
   "kaiwanxiao": [
     {
       "char": "开玩笑",
-      "en": "To joke, to make a joke"
+      "en": "To joke"
     }
   ],
   "haoqi": [
@@ -5154,7 +5154,7 @@
   "jiuhu": [
     {
       "char": "救护",
-      "en": "To rescue, to save"
+      "en": "To rescue"
     }
   ],
   "jiuhuche": [
@@ -5178,7 +5178,7 @@
   "buweijiannan": [
     {
       "char": "不畏艰难",
-      "en": "Brave, fearless in the face of difficulty"
+      "en": "Brave"
     }
   ],
   "dishi": [
@@ -5190,31 +5190,31 @@
   "waizhan": [
     {
       "char": "外展",
-      "en": "Extended, outstretched"
+      "en": "Extended"
     }
   ],
   "baitu": [
     {
       "char": "摆图",
-      "en": "To draw a diagram, to illustrate"
+      "en": "To draw a diagram"
     }
   ],
   "liangkuai": [
     {
       "char": "两快",
-      "en": "Two sides, two parts"
+      "en": "Two sides"
     }
   ],
   "baofali": [
     {
       "char": "爆发力",
-      "en": "Explosive power, burst of energy"
+      "en": "Explosive power"
     }
   ],
   "shizhong": [
     {
       "char": "适中",
-      "en": "Moderate, appropriate"
+      "en": "Moderate"
     }
   ],
   "lance": [
@@ -5250,7 +5250,7 @@
   "yueqi": [
     {
       "char": "跃起",
-      "en": "Rise up, leap up"
+      "en": "Rise up"
     }
   ],
   "xuanchui": [
@@ -5262,7 +5262,7 @@
   "fuzhong": [
     {
       "char": "负重",
-      "en": "Carry a load, bear weight"
+      "en": "Carry a load"
     }
   ],
   "jiandai": [
@@ -5280,7 +5280,7 @@
   "guiji": [
     {
       "char": "轨迹",
-      "en": "Trajectory, path"
+      "en": "Trajectory"
     }
   ],
   "zhuiqiu": [
@@ -5292,7 +5292,7 @@
   "tiaokong": [
     {
       "char": "调控",
-      "en": "Control, regulate"
+      "en": "Control"
     }
   ],
   "fuwo": [
@@ -5304,7 +5304,7 @@
   "yousuotigao": [
     {
       "char": "有所提高",
-      "en": "Improve, advance"
+      "en": "Improve"
     }
   ],
   "duanqiu": [
@@ -5346,7 +5346,7 @@
   "zhonglu": [
     {
       "char": "中路",
-      "en": "Middle way, center"
+      "en": "Middle way"
     }
   ],
   "chuchang": [
@@ -5358,13 +5358,13 @@
   "guyi": [
     {
       "char": "故意",
-      "en": "Intentional, deliberate"
+      "en": "Intentional"
     }
   ],
   "beipan": [
     {
       "char": "被判",
-      "en": "To be judged, to be penalized"
+      "en": "To be judged"
     }
   ],
   "qiangduan": [
@@ -5376,13 +5376,13 @@
   "pengdao": [
     {
       "char": "碰到",
-      "en": "To encounter, to bump into"
+      "en": "To encounter"
     }
   ],
   "xiaochangdi": [
     {
       "char": "小场地",
-      "en": "Small area, close range"
+      "en": "Small area"
     }
   ],
   "yiduiyi": [
@@ -5452,7 +5452,7 @@
   "xiachang": [
     {
       "char": "下场",
-      "en": "outcome, result"
+      "en": "outcome"
     }
   ],
   "shangchang": [
@@ -5554,7 +5554,7 @@
   "zhizhi": [
     {
       "char": "纸质",
-      "en": "Paper material/paper"
+      "en": "Paper material"
     }
   ],
   "shengju": [
@@ -5584,7 +5584,7 @@
   "xuanshou": [
     {
       "char": "选手",
-      "en": "Player/Competitor"
+      "en": "Player"
     }
   ],
   "shunliwancheng": [
@@ -5602,13 +5602,13 @@
   "zhichengdian": [
     {
       "char": "支撑点",
-      "en": "Support point/Anchor"
+      "en": "Support point"
     }
   ],
   "youtou": [
     {
       "char": "由头",
-      "en": "Origin/Source"
+      "en": "Origin"
     }
   ],
   "chashou": [
@@ -5714,7 +5714,7 @@
     },
     {
       "char": "环握",
-      "en": "to grasp around, to encircle with hands"
+      "en": "to grasp around"
     }
   ],
   "qushen": [
@@ -5756,13 +5756,13 @@
   "gongtongtigao": [
     {
       "char": "共同提高",
-      "en": "Mutual Improvement, Enhance Together"
+      "en": "Mutual Improvement"
     }
   ],
   "youxuelian": [
     {
       "char": "有学练",
-      "en": "Practice-Oriented, Learning and Practice"
+      "en": "Practice-Oriented"
     }
   ],
   "jiezougan": [
@@ -5774,13 +5774,13 @@
   "shiliao": [
     {
       "char": "史料",
-      "en": "Historical Records, Historical Documents"
+      "en": "Historical Records"
     }
   ],
   "yuti": [
     {
       "char": "于体",
-      "en": "Within the Body, In the Body"
+      "en": "Within the Body"
     }
   ],
   "zengjian": [
@@ -5838,31 +5838,31 @@
   "xiaoming": [
     {
       "char": "小鸣",
-      "en": "(No direct translation, likely a name)"
+      "en": "(No direct translation"
     }
   ],
   "wuhuiyun": [
     {
       "char": "吴慧云",
-      "en": "(No direct translation, likely a name)"
+      "en": "(No direct translation"
     }
   ],
   "gaowanxin": [
     {
       "char": "高琬鑫",
-      "en": "(No direct translation, likely a name)"
+      "en": "(No direct translation"
     }
   ],
   "zhenqie": [
     {
       "char": "真切",
-      "en": "Genuine / Sincere"
+      "en": "Genuine"
     }
   ],
   "buru": [
     {
       "char": "步入",
-      "en": "To enter / To embark on"
+      "en": "To enter"
     }
   ],
   "lixing": [
@@ -5874,7 +5874,7 @@
   "haiying": [
     {
       "char": "还应",
-      "en": "Should also / It should also be"
+      "en": "Should also"
     }
   ],
   "shentizhuangkuang": [
@@ -5886,17 +5886,17 @@
   "anshi": [
     {
       "char": "按时",
-      "en": "On time / Punctual"
+      "en": "On time"
     },
     {
       "char": "暗示",
-      "en": "Hint/Suggestion"
+      "en": "Hint"
     }
   ],
   "jiena": [
     {
       "char": "接纳",
-      "en": "To accept / To welcome"
+      "en": "To accept"
     }
   ],
   "buliangxiguan": [
@@ -5908,13 +5908,13 @@
   "shuolai": [
     {
       "char": "说来",
-      "en": "To say, To explain"
+      "en": "To say"
     }
   ],
   "zuolai": [
     {
       "char": "做来",
-      "en": "To do, To make"
+      "en": "To do"
     }
   ],
   "qiguan": [
@@ -5926,13 +5926,13 @@
   "dangzhong": [
     {
       "char": "当中",
-      "en": "In the middle, Within"
+      "en": "In the middle"
     }
   ],
   "jili": [
     {
       "char": "机理",
-      "en": "Mechanism, Principle"
+      "en": "Mechanism"
     }
   ],
   "quguang": [
@@ -5944,7 +5944,7 @@
   "mohubuqing": [
     {
       "char": "模糊不清",
-      "en": "Blurry, Unclear"
+      "en": "Blurry"
     }
   ],
   "jingzhuangti": [
@@ -6004,7 +6004,7 @@
   "zhengqueduidai": [
     {
       "char": "正确对待",
-      "en": "Treat correctly / Handle properly"
+      "en": "Treat correctly"
     }
   ],
   "yanke": [
@@ -6068,19 +6068,19 @@
   "qiangjian": [
     {
       "char": "强健",
-      "en": "Strong / Robust"
+      "en": "Strong"
     }
   ],
   "daode": [
     {
       "char": "道德",
-      "en": "Morality / Ethics"
+      "en": "Morality"
     }
   ],
   "wuqu": [
     {
       "char": "误区",
-      "en": "Pitfall / Misconception"
+      "en": "Pitfall"
     }
   ],
   "yangchangbuduan": [
@@ -6116,13 +6116,13 @@
   "kuaibu": [
     {
       "char": "快步",
-      "en": "Quick step/Run"
+      "en": "Quick step"
     }
   ],
   "jianshencao": [
     {
       "char": "健身操",
-      "en": "Gymnastics/Exercise class"
+      "en": "Gymnastics"
     }
   ],
   "shiyu": [
@@ -6346,7 +6346,7 @@
   "liuxingxing": [
     {
       "char": "流行性",
-      "en": "Epidemic/Contagious"
+      "en": "Epidemic"
     }
   ],
   "feijiehe": [
@@ -6418,13 +6418,13 @@
   "zhukou": [
     {
       "char": "住口",
-      "en": "Be quiet/Shut up"
+      "en": "Be quiet"
     }
   ],
   "gongyong": [
     {
       "char": "功用",
-      "en": "Function/use"
+      "en": "Function"
     }
   ],
   "huanjingweisheng": [
@@ -6448,7 +6448,7 @@
   "bingcongkouru": [
     {
       "char": "病从口入",
-      "en": "Illness comes from the mouth (i.e., through food/drink)"
+      "en": "Illness comes from the mouth (i.e."
     }
   ],
   "xiaoduji": [
@@ -6472,7 +6472,7 @@
   "quexian": [
     {
       "char": "缺陷",
-      "en": "Defect / Flaw"
+      "en": "Defect"
     }
   ],
   "xingxingwei": [
@@ -6496,19 +6496,19 @@
   "nanmianhui": [
     {
       "char": "难免会",
-      "en": "Inevitably will / Bound to"
+      "en": "Inevitably will"
     }
   ],
   "chaoyueziwo": [
     {
       "char": "超越自我",
-      "en": "Transcend oneself / Exceed oneself"
+      "en": "Transcend oneself"
     }
   ],
   "jianren": [
     {
       "char": "坚忍",
-      "en": "Perseverance / Steadfastness"
+      "en": "Perseverance"
     }
   ],
   "zizhili": [
@@ -6532,19 +6532,19 @@
   "chuzhi": [
     {
       "char": "处置",
-      "en": "Handling/Dealing with"
+      "en": "Handling"
     }
   ],
   "tuzhong": [
     {
       "char": "途中",
-      "en": "On the way/En route"
+      "en": "On the way"
     }
   ],
   "tingcong": [
     {
       "char": "听从",
-      "en": "Obey/Follow orders"
+      "en": "Obey"
     }
   ],
   "weiguozhengguang": [
@@ -6592,7 +6592,7 @@
   "dingzhu": [
     {
       "char": "顶住",
-      "en": "Endure/Hold on"
+      "en": "Endure"
     }
   ],
   "shiyingnengli": [
@@ -6610,13 +6610,13 @@
   "qingxudiluo": [
     {
       "char": "情绪低落",
-      "en": "Low spirits/Depressed mood"
+      "en": "Low spirits"
     }
   ],
   "jingzhi": [
     {
       "char": "静止",
-      "en": "Stillness/Stationary"
+      "en": "Stillness"
     }
   ],
   "zuozi": [
@@ -6628,7 +6628,7 @@
   "tiaoguo": [
     {
       "char": "跳过",
-      "en": "Skip/Omit"
+      "en": "Skip"
     }
   ],
   "zhangaiwu": [
@@ -6656,7 +6656,7 @@
     },
     {
       "char": "前局",
-      "en": "First game/set"
+      "en": "First game"
     }
   ],
   "xiachui": [
@@ -6746,7 +6746,7 @@
   "yifanger": [
     {
       "char": "一防二",
-      "en": "First defense, second defense"
+      "en": "First defense"
     }
   ],
   "zhongyouci": [
@@ -6758,7 +6758,7 @@
   "rushou": [
     {
       "char": "入手",
-      "en": "Take possession of / Grab"
+      "en": "Take possession of"
     },
     {
       "char": "如手",
@@ -6768,13 +6768,13 @@
   "kuaigong": [
     {
       "char": "快攻",
-      "en": "Fast attack / Aggressive attack"
+      "en": "Fast attack"
     }
   ],
   "huqiu": [
     {
       "char": "护球",
-      "en": "Protect the ball / Keep possession"
+      "en": "Protect the ball"
     }
   ],
   "shuangxi": [
@@ -6806,19 +6806,19 @@
   "cuoshang": [
     {
       "char": "挫伤",
-      "en": "Bruise / Wound"
+      "en": "Bruise"
     }
   ],
   "tachu": [
     {
       "char": "踏出",
-      "en": "Step out / Advance"
+      "en": "Step out"
     }
   ],
   "touqiu": [
     {
       "char": "投球",
-      "en": "Throw / Pitch"
+      "en": "Throw"
     }
   ],
   "quwan": [
@@ -6836,7 +6836,7 @@
   "zhongshu": [
     {
       "char": "中枢",
-      "en": "Central / Core"
+      "en": "Central"
     },
     {
       "char": "中暑",
@@ -6852,7 +6852,7 @@
   "tingliu": [
     {
       "char": "停留",
-      "en": "Stop / Pause"
+      "en": "Stop"
     }
   ],
   "gewang": [
@@ -6936,13 +6936,13 @@
   "fanmian": [
     {
       "char": "反面",
-      "en": "Opposite, reverse"
+      "en": "Opposite"
     }
   ],
   "yazhu": [
     {
       "char": "压住",
-      "en": "Hold down, suppress"
+      "en": "Hold down"
     }
   ],
   "youjian": [
@@ -7038,7 +7038,7 @@
   "duhou": [
     {
       "char": "度后",
-      "en": "After the degree/level"
+      "en": "After the degree"
     }
   ],
   "shanyang": [
@@ -7110,7 +7110,7 @@
   "wulin": [
     {
       "char": "武林",
-      "en": "Martial World/Wulin"
+      "en": "Martial World"
     }
   ],
   "rusong": [
@@ -7122,7 +7122,7 @@
   "zhongxing": [
     {
       "char": "钟行",
-      "en": "Steady pace/Walking steadily"
+      "en": "Steady pace"
     }
   ],
   "rufeng": [
@@ -7224,7 +7224,7 @@
     },
     {
       "char": "矫治",
-      "en": "Correct/cure (often referring to a medical correction)"
+      "en": "Correct"
     }
   ],
   "yingliji": [
@@ -7266,7 +7266,7 @@
   "pingding": [
     {
       "char": "评定",
-      "en": "Assess, evaluate"
+      "en": "Assess"
     }
   ],
   "yangwoqizuo": [
@@ -7278,7 +7278,7 @@
   "dacheng": [
     {
       "char": "达成",
-      "en": "Achieve, reach"
+      "en": "Achieve"
     }
   ],
   "pingban": [
@@ -7308,7 +7308,7 @@
   "qidong": [
     {
       "char": "起动",
-      "en": "Start, initiate"
+      "en": "Start"
     }
   ],
   "zhuguanyuanyin": [
@@ -7338,13 +7338,13 @@
   "kongjuxinli": [
     {
       "char": "恐惧心理",
-      "en": "Fear response, psychological fear"
+      "en": "Fear response"
     }
   ],
   "elie": [
     {
       "char": "恶劣",
-      "en": "Adverse, harsh"
+      "en": "Adverse"
     }
   ],
   "huju": [
@@ -7362,19 +7362,19 @@
   "jianjue": [
     {
       "char": "坚决",
-      "en": "Firm, resolute"
+      "en": "Firm"
     }
   ],
   "chuangmian": [
     {
       "char": "创面",
-      "en": "Wound, sore"
+      "en": "Wound"
     }
   ],
   "wanzhengxing": [
     {
       "char": "完整性",
-      "en": "Integrity, wholeness"
+      "en": "Integrity"
     }
   ],
   "xueliu": [
@@ -7408,7 +7408,7 @@
     },
     {
       "char": "畸形",
-      "en": "Deformed/Abnormal"
+      "en": "Deformed"
     }
   ],
   "ruanzuzhi": [
@@ -7420,7 +7420,7 @@
   "shangzhe": [
     {
       "char": "伤者",
-      "en": "Patient/Victim"
+      "en": "Patient"
     }
   ],
   "lengliao": [
@@ -7432,7 +7432,7 @@
   "shangqing": [
     {
       "char": "伤情",
-      "en": "Injury/Wound"
+      "en": "Injury"
     }
   ],
   "bengdai": [
@@ -7444,7 +7444,7 @@
   "menglie": [
     {
       "char": "猛烈",
-      "en": "Severe/Intense"
+      "en": "Severe"
     }
   ],
   "qianbigu": [
@@ -7462,7 +7462,7 @@
   "bijingzhilu": [
     {
       "char": "必经之路",
-      "en": "Main road/Main route"
+      "en": "Main road"
     }
   ],
   "juece": [
@@ -7498,13 +7498,13 @@
   "xiangpeihe": [
     {
       "char": "相配合",
-      "en": "Coordinate/Work together"
+      "en": "Coordinate"
     }
   ],
   "liangsanbu": [
     {
       "char": "两三步",
-      "en": "A few steps/Two or three steps"
+      "en": "A few steps"
     }
   ],
   "fanhou": [
@@ -7516,7 +7516,7 @@
   "niuzhuan": [
     {
       "char": "扭转",
-      "en": "Turn around/Reverse"
+      "en": "Turn around"
     }
   ],
   "zhangliang": [
@@ -7546,13 +7546,13 @@
   "zhashi": [
     {
       "char": "扎实",
-      "en": "Solid/Firm"
+      "en": "Solid"
     }
   ],
   "changmian": [
     {
       "char": "场面",
-      "en": "Scene/Situation"
+      "en": "Scene"
     }
   ],
   "xianshu": [
@@ -7576,7 +7576,7 @@
   "qiangdao": [
     {
       "char": "抢到",
-      "en": "Grab/Get"
+      "en": "Grab"
     }
   ],
   "qiuhou": [
@@ -7624,7 +7624,7 @@
   "yinbixing": [
     {
       "char": "隐蔽性",
-      "en": "Concealment/Cover"
+      "en": "Concealment"
     }
   ],
   "tongce": [
@@ -7666,7 +7666,7 @@
   "youshangfang": [
     {
       "char": "右上方",
-      "en": "Right above/upper right"
+      "en": "Right above"
     }
   ],
   "qianpai": [
@@ -7678,7 +7678,7 @@
   "lunhuan": [
     {
       "char": "轮换",
-      "en": "Rotation/Substitution"
+      "en": "Rotation"
     }
   ],
   "jijijinqu": [
@@ -7702,13 +7702,13 @@
   "donggan": [
     {
       "char": "动感",
-      "en": "Dynamic/Energetic"
+      "en": "Dynamic"
     }
   ],
   "fuyu": [
     {
       "char": "扶于",
-      "en": "To support/lean on"
+      "en": "To support"
     }
   ],
   "diwuge": [
@@ -7756,7 +7756,7 @@
   "quanshi": [
     {
       "char": "拳势",
-      "en": "Fist form/Style"
+      "en": "Fist form"
     }
   ],
   "qiaofa": [
@@ -7804,7 +7804,7 @@
   "youmi": [
     {
       "char": "游米",
-      "en": "(This appears to be a regional term, likely referring to a specific type of rice or rice cultivation - translation difficult without context, best to leave as is)"
+      "en": "(This appears to be a regional term"
     }
   ],
   "dashui": [
@@ -7840,13 +7840,13 @@
   "kaikai": [
     {
       "char": "开开",
-      "en": "(This appears to be a rhythmic movement or gesture - translation difficult without context, best to leave as is)"
+      "en": "(This appears to be a rhythmic movement or gesture - translation difficult without context"
     }
   ],
   "hehe": [
     {
       "char": "合合",
-      "en": "(This appears to be a rhythmic movement or gesture - translation difficult without context, best to leave as is)"
+      "en": "(This appears to be a rhythmic movement or gesture - translation difficult without context"
     }
   ],
   "modao": [
@@ -7868,7 +7868,7 @@
     },
     {
       "char": "提起",
-      "en": "Raise/Pick up"
+      "en": "Raise"
     }
   ],
   "lianti": [
@@ -7886,7 +7886,7 @@
   "ruanchangji": [
     {
       "char": "阮唱纪",
-      "en": "阮 (阮琴) Music (阮琴 music genre/collection)"
+      "en": "阮 (阮琴) Music (阮琴 music genre"
     }
   ],
   "lishilong": [
@@ -8000,7 +8000,7 @@
   "dadazhekou": [
     {
       "char": "大打折扣",
-      "en": "Largely unrealized/Significantly reduced"
+      "en": "Largely unrealized"
     }
   ],
   "jiejing": [
@@ -8024,7 +8024,7 @@
   "chizhiyiheng": [
     {
       "char": "持之以恒",
-      "en": "Perseverance/Consistent effort"
+      "en": "Perseverance"
     }
   ],
   "shijianjingyan": [
@@ -8048,7 +8048,7 @@
   "chengshounengli": [
     {
       "char": "承受能力",
-      "en": "Bearing capacity/Resilience"
+      "en": "Bearing capacity"
     }
   ],
   "guoxiaoze": [
@@ -8090,7 +8090,7 @@
   "heliang": [
     {
       "char": "和量",
-      "en": "Proportion/Ratio"
+      "en": "Proportion"
     }
   ],
   "dashi": [
@@ -8114,7 +8114,7 @@
   "chaoliang": [
     {
       "char": "超量",
-      "en": "Excessive/Overdose"
+      "en": "Excessive"
     }
   ],
   "xiaci": [
@@ -8126,19 +8126,19 @@
   "ziwoganjue": [
     {
       "char": "自我感觉",
-      "en": "Self-feeling/Subjective feeling"
+      "en": "Self-feeling"
     }
   ],
   "jingshenbaoman": [
     {
       "char": "精神饱满",
-      "en": "Full of energy/Spiritually full"
+      "en": "Full of energy"
     }
   ],
   "gaozhang": [
     {
       "char": "高涨",
-      "en": "Elevated/Excited"
+      "en": "Elevated"
     }
   ],
   "duori": [
@@ -8168,7 +8168,7 @@
   "guilvxing": [
     {
       "char": "规律性",
-      "en": "Regular/Periodic"
+      "en": "Regular"
     }
   ],
   "zaishijianzhong": [
@@ -8186,7 +8186,7 @@
   "duanlianzhe": [
     {
       "char": "锻炼者",
-      "en": "Exerciser/Athlete"
+      "en": "Exerciser"
     }
   ],
   "fener": [
@@ -8228,7 +8228,7 @@
   "lvlai": [
     {
       "char": "率来",
-      "en": "As is/As it comes"
+      "en": "As is"
     }
   ],
   "baifenbi": [
@@ -8358,7 +8358,7 @@
   "dafu": [
     {
       "char": "大幅",
-      "en": "greatly, significantly"
+      "en": "greatly"
     }
   ],
   "fenjiedaixie": [
@@ -8388,7 +8388,7 @@
   "qingxing": [
     {
       "char": "清醒",
-      "en": "awake, conscious"
+      "en": "awake"
     }
   ],
   "zhonggongzhongyangguowuyuan": [
@@ -8454,7 +8454,7 @@
   "yousun": [
     {
       "char": "有损",
-      "en": "Damaging, harmful"
+      "en": "Damaging"
     }
   ],
   "huoquxinxi": [
@@ -8490,7 +8490,7 @@
   "meiti": [
     {
       "char": "没提",
-      "en": "Not mentioned/Not raised"
+      "en": "Not mentioned"
     },
     {
       "char": "美体",
@@ -8506,25 +8506,25 @@
   "yanlun": [
     {
       "char": "言论",
-      "en": "Speech, opinion"
+      "en": "Speech"
     }
   ],
   "nanshou": [
     {
       "char": "难受",
-      "en": "To feel unwell, distressed"
+      "en": "To feel unwell"
     }
   ],
   "jusang": [
     {
       "char": "沮丧",
-      "en": "Discouraged, depressed"
+      "en": "Discouraged"
     }
   ],
   "meiwei": [
     {
       "char": "美为",
-      "en": "Beauty as/for"
+      "en": "Beauty as"
     }
   ],
   "jiweizhongyao": [
@@ -8582,7 +8582,7 @@
     },
     {
       "char": "中度",
-      "en": "Moderate degree/Medium"
+      "en": "Moderate degree"
     }
   ],
   "lumang": [
@@ -8600,7 +8600,7 @@
   "gongyi": [
     {
       "char": "公益",
-      "en": "Charity/Public benefit"
+      "en": "Charity"
     }
   ],
   "rexian": [
@@ -8648,13 +8648,13 @@
   "longzhao": [
     {
       "char": "笼罩",
-      "en": "Envelop/Cover"
+      "en": "Envelop"
     }
   ],
   "mimanzhe": [
     {
       "char": "弥漫着",
-      "en": "Spreading/Pervading"
+      "en": "Spreading"
     }
   ],
   "zhiming": [
@@ -8784,7 +8784,7 @@
   "zhangbuqu": [
     {
       "char": "长不去",
-      "en": "Cannot be forgotten / Cannot be escaped"
+      "en": "Cannot be forgotten"
     }
   ],
   "shuibian": [
@@ -8796,7 +8796,7 @@
   "jianguan": [
     {
       "char": "监管",
-      "en": "supervision, regulation"
+      "en": "supervision"
     }
   ],
   "qianshui": [
@@ -8808,19 +8808,19 @@
   "jinghuangshicuo": [
     {
       "char": "惊慌失措",
-      "en": "panic, terrified"
+      "en": "panic"
     }
   ],
   "zhenjing": [
     {
       "char": "镇静",
-      "en": "calm, tranquil"
+      "en": "calm"
     }
   ],
   "jingdi": [
     {
       "char": "境地",
-      "en": "situation, circumstances"
+      "en": "situation"
     }
   ],
   "qiuzhu": [
@@ -8844,7 +8844,7 @@
   "wuxu": [
     {
       "char": "无需",
-      "en": "unnecessary, no need"
+      "en": "unnecessary"
     }
   ],
   "kongshui": [
@@ -8856,7 +8856,7 @@
   "tongqi": [
     {
       "char": "通气",
-      "en": "ventilation, airing"
+      "en": "ventilation"
     }
   ],
   "kaichuang": [
@@ -8868,7 +8868,7 @@
   "xianjing": [
     {
       "char": "险境",
-      "en": "dangerous situation, perilous situation"
+      "en": "dangerous situation"
     }
   ],
   "qiangjiu": [
@@ -8898,7 +8898,7 @@
   "yuanshou": [
     {
       "char": "援手",
-      "en": "assistance, help"
+      "en": "assistance"
     }
   ],
   "shiwuzhongdu": [
@@ -8952,19 +8952,19 @@
   "baohufa": [
     {
       "char": "保护法",
-      "en": "Protective Law/Regulations"
+      "en": "Protective Law"
     }
   ],
   "qiangxian": [
     {
       "char": "抢险",
-      "en": "Disaster Relief/Emergency Rescue"
+      "en": "Disaster Relief"
     }
   ],
   "hanlai": [
     {
       "char": "喊来",
-      "en": "Call/Summon"
+      "en": "Call"
     }
   ],
   "jiuming": [
@@ -8988,7 +8988,7 @@
   "bingqing": [
     {
       "char": "病情",
-      "en": "Condition/Illness"
+      "en": "Condition"
     }
   ],
   "lianxifangfa": [
@@ -9000,7 +9000,7 @@
   "xianzhubiaozhi": [
     {
       "char": "显著标志",
-      "en": "Prominent Sign/Marker"
+      "en": "Prominent Sign"
     }
   ],
   "weizhong": [
@@ -9012,7 +9012,7 @@
   "hundao": [
     {
       "char": "昏倒",
-      "en": "Faint/Collapse"
+      "en": "Faint"
     }
   ],
   "dachuxue": [
@@ -9048,7 +9048,7 @@
   "renshou": [
     {
       "char": "人手",
-      "en": "Manpower/Staff"
+      "en": "Manpower"
     }
   ],
   "rukou": [
@@ -9066,7 +9066,7 @@
   "yingjie": [
     {
       "char": "迎接",
-      "en": "To greet/receive"
+      "en": "To greet"
     }
   ],
   "kezhong": [
@@ -9078,31 +9078,31 @@
   "yongdeshang": [
     {
       "char": "用得上",
-      "en": "Useful/Can be used"
+      "en": "Useful"
     }
   ],
   "nengyong": [
     {
       "char": "能勇",
-      "en": "Brave/Capable"
+      "en": "Brave"
     }
   ],
   "jijiyiyi": [
     {
       "char": "积极意义",
-      "en": "Positive Significance/Positive Value"
+      "en": "Positive Significance"
     }
   ],
   "lanhou": [
     {
       "char": "栏后",
-      "en": "Behind the railing/barrier"
+      "en": "Behind the railing"
     }
   ],
   "qianfangbaiji": [
     {
       "char": "千方百计",
-      "en": "By all means/Every possible way"
+      "en": "By all means"
     }
   ],
   "qianya": [
@@ -9132,7 +9132,7 @@
   "bandao": [
     {
       "char": "绊倒",
-      "en": "Trip/Fall"
+      "en": "Trip"
     }
   ],
   "kuaiqi": [
@@ -9144,13 +9144,13 @@
   "chuanglan": [
     {
       "char": "窗栏",
-      "en": "Window sill/Window frame"
+      "en": "Window sill"
     }
   ],
   "lanjian": [
     {
       "char": "栏间",
-      "en": "Between the railings/barrier"
+      "en": "Between the railings"
     }
   ],
   "sibu": [
@@ -9186,7 +9186,7 @@
   "buluo": [
     {
       "char": "部落",
-      "en": "Tribe/Community"
+      "en": "Tribe"
     },
     {
       "char": "不落",
@@ -9268,7 +9268,7 @@
   "baiqi": [
     {
       "char": "摆起",
-      "en": "To set up/To initiate"
+      "en": "To set up"
     }
   ],
   "shensong": [
@@ -9304,7 +9304,7 @@
   "xiaoche": [
     {
       "char": "小车",
-      "en": "Cart/Small car"
+      "en": "Cart"
     }
   ],
   "liangtou": [
@@ -9382,7 +9382,7 @@
   "shugen": [
     {
       "char": "数根",
-      "en": "Several roots/pieces"
+      "en": "Several roots"
     }
   ],
   "ligan": [
@@ -9430,7 +9430,7 @@
   "jiding": [
     {
       "char": "既定",
-      "en": "Determined/fixed"
+      "en": "Determined"
     }
   ],
   "erdeng": [
@@ -9576,7 +9576,7 @@
   "gaiming": [
     {
       "char": "该名",
-      "en": "That person/one"
+      "en": "That person"
     }
   ],
   "huhuan": [
@@ -9978,7 +9978,7 @@
   "saishi": [
     {
       "char": "赛事",
-      "en": "Tournament/Competition"
+      "en": "Tournament"
     }
   ],
   "wenbuerdeng": [
@@ -9990,7 +9990,7 @@
   "dongfangshi": [
     {
       "char": "东方式",
-      "en": "Eastern way (e.g., Eastern style)"
+      "en": "Eastern way (e.g."
     }
   ],
   "ruzuo": [
@@ -10008,7 +10008,7 @@
   "jinchang": [
     {
       "char": "进场",
-      "en": "To enter the field/arena"
+      "en": "To enter the field"
     }
   ],
   "zoudong": [
@@ -10024,7 +10024,7 @@
     },
     {
       "char": "其理",
-      "en": "Its principle/Reason"
+      "en": "Its principle"
     }
   ],
   "huoqiu": [
@@ -10052,19 +10052,19 @@
   "zhuwei": [
     {
       "char": "助威",
-      "en": "To cheer for / To support"
+      "en": "To cheer for"
     }
   ],
   "jiaohao": [
     {
       "char": "叫好",
-      "en": "Applause / Praise"
+      "en": "Applause"
     }
   ],
   "shanguangdeng": [
     {
       "char": "闪光灯",
-      "en": "Flashlight / Strobe light"
+      "en": "Flashlight"
     }
   ],
   "feiru": [
@@ -10076,7 +10076,7 @@
   "guanzhongxi": [
     {
       "char": "观众席",
-      "en": "Audience area / Spectator seating"
+      "en": "Audience area"
     }
   ],
   "renghui": [
@@ -10088,25 +10088,25 @@
   "genbu": [
     {
       "char": "根部",
-      "en": "Root / Base"
+      "en": "Root"
     }
   ],
   "mianer": [
     {
       "char": "面二",
-      "en": "Second phase / Second stage"
+      "en": "Second phase"
     }
   ],
   "lisan": [
     {
       "char": "力三",
-      "en": "Third shot / Third stroke"
+      "en": "Third shot"
     }
   ],
   "diqian": [
     {
       "char": "地前",
-      "en": "Before the ground / Forehand"
+      "en": "Before the ground"
     }
   ],
   "guowang": [
@@ -10118,7 +10118,7 @@
   "youqu": [
     {
       "char": "右区",
-      "en": "Right court / Right side"
+      "en": "Right court"
     }
   ],
   "shuangfa": [
@@ -10130,7 +10130,7 @@
   "deshi": [
     {
       "char": "得失",
-      "en": "Gain and loss / Score differential"
+      "en": "Gain and loss"
     }
   ],
   "houfa": [
@@ -10148,19 +10148,19 @@
   "huanqu": [
     {
       "char": "换区",
-      "en": "Change court / Switch sides"
+      "en": "Change court"
     }
   ],
   "zhongxiansheng": [
     {
       "char": "中先胜",
-      "en": "Middle first win / Middle game advantage"
+      "en": "Middle first win"
     }
   ],
   "fenzhe": [
     {
       "char": "分者",
-      "en": "Divider / Separator"
+      "en": "Divider"
     }
   ],
   "jingsheng": [
@@ -10388,7 +10388,7 @@
   "danliang": [
     {
       "char": "胆量",
-      "en": "Courage/Potential"
+      "en": "Courage"
     }
   ],
   "zuocheng": [
@@ -10538,7 +10538,7 @@
   "dixue": [
     {
       "char": "地学",
-      "en": "Earth learning/geology"
+      "en": "Earth learning"
     }
   ],
   "yiduangun": [
@@ -10556,7 +10556,7 @@
   "koudian": [
     {
       "char": "扣点",
-      "en": "Key point/focus"
+      "en": "Key point"
     }
   ],
   "chuangduangun": [
@@ -10580,7 +10580,7 @@
   "gunshao": [
     {
       "char": "棍梢",
-      "en": "Stick tip/handle"
+      "en": "Stick tip"
     }
   ],
   "gunshen": [
@@ -10598,7 +10598,7 @@
   "gunxuelian": [
     {
       "char": "棍学练",
-      "en": "Stick learning/training"
+      "en": "Stick learning"
     }
   ],
   "zhongduangun": [
@@ -10610,7 +10610,7 @@
   "bufazhitu": [
     {
       "char": "不法之徒",
-      "en": "Criminals/wrongdoers"
+      "en": "Criminals"
     }
   ],
   "zhengdangfangwei": [
@@ -10712,7 +10712,7 @@
   "tiaobaisuo": [
     {
       "char": "跳百索",
-      "en": "Skipping a rope (literally, \"jumping a hundred ropes\")"
+      "en": "Skipping a rope (literally"
     }
   ],
   "gaotiao": [
@@ -10952,7 +10952,7 @@
   "taru": [
     {
       "char": "踏入",
-      "en": "Step into / Enter"
+      "en": "Step into"
     }
   ],
   "xiaomen": [
@@ -10964,19 +10964,19 @@
   "shaonianshidai": [
     {
       "char": "少年时代",
-      "en": "Youthful Times / The Years of Youth"
+      "en": "Youthful Times"
     }
   ],
   "yangyi": [
     {
       "char": "洋溢",
-      "en": "Overflow / Abound"
+      "en": "Overflow"
     }
   ],
   "xinzhi": [
     {
       "char": "心智",
-      "en": "Moral Character / Mental Strength"
+      "en": "Moral Character"
     },
     {
       "char": "心直",
@@ -10986,13 +10986,13 @@
   "qiansuoweiyou": [
     {
       "char": "前所未有",
-      "en": "Never Before Seen / Unprecedented"
+      "en": "Never Before Seen"
     }
   ],
   "chuancha": [
     {
       "char": "穿插",
-      "en": "Interspersed / Inserted"
+      "en": "Interspersed"
     }
   ],
   "shijiewutai": [
@@ -11010,13 +11010,13 @@
   "dezhitimei": [
     {
       "char": "德智体美",
-      "en": "Morality, wisdom, physique, and aesthetics"
+      "en": "Morality"
     }
   ],
   "jianshezhe": [
     {
       "char": "建设者",
-      "en": "Builder, constructor"
+      "en": "Builder"
     }
   ],
   "jiebanren": [
@@ -11046,13 +11046,13 @@
   "xianzhang": [
     {
       "char": "宪章",
-      "en": "Charter, constitution"
+      "en": "Charter"
     }
   ],
   "wanhao": [
     {
       "char": "完好",
-      "en": "Intact, complete"
+      "en": "Intact"
     }
   ],
   "qiangzhuang": [
@@ -11064,19 +11064,19 @@
   "suochu": [
     {
       "char": "所处",
-      "en": "Situated, located"
+      "en": "Situated"
     }
   ],
   "dupin": [
     {
       "char": "毒品",
-      "en": "Poisonous drugs, narcotics"
+      "en": "Poisonous drugs"
     }
   ],
   "jincan": [
     {
       "char": "进餐",
-      "en": "To dine, to eat"
+      "en": "To dine"
     }
   ],
   "jiandingxinnian": [
@@ -11106,7 +11106,7 @@
   "nayou": [
     {
       "char": "哪有",
-      "en": "where could it be?; there is none"
+      "en": "where could it be?"
     }
   ],
   "baohushili": [
@@ -11118,13 +11118,13 @@
   "wucaibinfen": [
     {
       "char": "五彩缤纷",
-      "en": "colorful; polychromatic"
+      "en": "colorful"
     }
   ],
   "wuji": [
     {
       "char": "无极",
-      "en": "boundless; without center"
+      "en": "boundless"
     }
   ],
   "bianjiao": [
@@ -11142,7 +11142,7 @@
   "wuxiang": [
     {
       "char": "物象",
-      "en": "object; image"
+      "en": "object"
     }
   ],
   "renyan": [
@@ -11226,17 +11226,17 @@
   "dixia": [
     {
       "char": "低下",
-      "en": "Low/Down"
+      "en": "Low"
     }
   ],
   "xixiao": [
     {
       "char": "细小",
-      "en": "Small/Minute"
+      "en": "Small"
     },
     {
       "char": "嬉笑",
-      "en": "Giggling/Laughing"
+      "en": "Giggling"
     }
   ],
   "yanbu": [
@@ -11266,7 +11266,7 @@
   "songchi": [
     {
       "char": "松弛",
-      "en": "Relaxed/Loose"
+      "en": "Relaxed"
     }
   ],
   "daiyanjing": [
@@ -11278,7 +11278,7 @@
   "xiantian": [
     {
       "char": "先天",
-      "en": "Congenital/Innate"
+      "en": "Congenital"
     }
   ],
   "quguangdu": [
@@ -11296,7 +11296,7 @@
   "fayubuliang": [
     {
       "char": "发育不良",
-      "en": "Malnutrition/Underdevelopment"
+      "en": "Malnutrition"
     }
   ],
   "jinjuli": [
@@ -11308,19 +11308,19 @@
   "jinzhangzhuangtai": [
     {
       "char": "紧张状态",
-      "en": "State of anxiety/nervousness"
+      "en": "State of anxiety"
     }
   ],
   "huobian": [
     {
       "char": "或边",
-      "en": "Or the side/edge"
+      "en": "Or the side"
     }
   ],
   "caiguang": [
     {
       "char": "采光",
-      "en": "Natural light/illumination"
+      "en": "Natural light"
     }
   ],
   "zhuoyi": [
@@ -11332,7 +11332,7 @@
   "pipei": [
     {
       "char": "匹配",
-      "en": "Match/correspond"
+      "en": "Match"
     }
   ],
   "yichi": [
@@ -11378,7 +11378,7 @@
   "chuangshe": [
     {
       "char": "创设",
-      "en": "Creation/establishment"
+      "en": "Creation"
     }
   ],
   "zitidaxiao": [
@@ -11396,19 +11396,19 @@
   "duwu": [
     {
       "char": "读物",
-      "en": "Reading material/book"
+      "en": "Reading material"
     }
   ],
   "huangdong": [
     {
       "char": "晃动",
-      "en": "Shake/tremble"
+      "en": "Shake"
     }
   ],
   "hunan": [
     {
       "char": "昏暗",
-      "en": "Dim/dark"
+      "en": "Dim"
     }
   ],
   "qiangguang": [
@@ -11438,13 +11438,13 @@
   "didu": [
     {
       "char": "低度",
-      "en": "Low degree/Low alcohol"
+      "en": "Low degree"
     }
   ],
   "zhidu": [
     {
       "char": "至度",
-      "en": "Maximum degree/To the fullest extent"
+      "en": "Maximum degree"
     }
   ],
   "binglixing": [
@@ -11468,7 +11468,7 @@
   "bianxing": [
     {
       "char": "变性",
-      "en": "Transformation/Change"
+      "en": "Transformation"
     }
   ],
   "shiming": [
@@ -11492,13 +11492,13 @@
   "yanguang": [
     {
       "char": "验光",
-      "en": "Eye examination/Refraction"
+      "en": "Eye examination"
     }
   ],
   "anqi": [
     {
       "char": "按期",
-      "en": "Regularly/On schedule"
+      "en": "Regularly"
     }
   ],
   "jiguang": [
@@ -11510,7 +11510,7 @@
   "dingxing": [
     {
       "char": "定型",
-      "en": "Maturation/Stabilization"
+      "en": "Maturation"
     }
   ],
   "zhuanyong": [
@@ -11534,7 +11534,7 @@
   "shouqi": [
     {
       "char": "收起",
-      "en": "Fold/Roll up"
+      "en": "Fold"
     }
   ],
   "mohua": [
@@ -11558,7 +11558,7 @@
   "chongxue": [
     {
       "char": "充血",
-      "en": "Bloated/filled with blood"
+      "en": "Bloated"
     }
   ],
   "yanya": [
@@ -11570,7 +11570,7 @@
   "shenchang": [
     {
       "char": "伸长",
-      "en": "Lengthen/grow longer"
+      "en": "Lengthen"
     }
   ],
   "congxianzaiqi": [
@@ -11582,7 +11582,7 @@
   "moda": [
     {
       "char": "莫大",
-      "en": "Not too much/excessive"
+      "en": "Not too much"
     }
   ],
   "shijianzhengming": [
@@ -11594,13 +11594,13 @@
   "tongxiang": [
     {
       "char": "通向",
-      "en": "Lead to/connect to"
+      "en": "Lead to"
     }
   ],
   "qingnianshidai": [
     {
       "char": "青年时代",
-      "en": "Youth/young age"
+      "en": "Youth"
     }
   ],
   "xiangjiang": [
@@ -11624,49 +11624,49 @@
   "zhuangju": [
     {
       "char": "壮举",
-      "en": "Heroic deed/achievement"
+      "en": "Heroic deed"
     }
   ],
   "fengchuilangda": [
     {
       "char": "风吹浪打",
-      "en": "Stormy weather/rough seas"
+      "en": "Stormy weather"
     }
   ],
   "shengsi": [
     {
       "char": "胜似",
-      "en": "Better than/more than"
+      "en": "Better than"
     }
   ],
   "xiantingxinbu": [
     {
       "char": "闲庭信步",
-      "en": "Leisurely stroll/wandering in the courtyard"
+      "en": "Leisurely stroll"
     }
   ],
   "haomai": [
     {
       "char": "豪迈",
-      "en": "Brave/magnanimous"
+      "en": "Brave"
     }
   ],
   "ciju": [
     {
       "char": "词句",
-      "en": "Words/phrases"
+      "en": "Words"
     }
   ],
   "zhiche": [
     {
       "char": "之车",
-      "en": "The vehicle/cart"
+      "en": "The vehicle"
     }
   ],
   "zhishe": [
     {
       "char": "之舍",
-      "en": "The house/mansion"
+      "en": "The house"
     }
   ],
   "deyu": [
@@ -11678,85 +11678,85 @@
   "erdezhi": [
     {
       "char": "而德智",
-      "en": "And morality/wisdom"
+      "en": "And morality"
     }
   ],
   "chengcai": [
     {
       "char": "成才",
-      "en": "To become successful/accomplished"
+      "en": "To become successful"
     }
   ],
   "dezhiti": [
     {
       "char": "德智体",
-      "en": "Morality, intellect, and physical fitness"
+      "en": "Morality"
     }
   ],
   "bingyu": [
     {
       "char": "并于",
-      "en": "And also/as well"
+      "en": "And also"
     }
   ],
   "tiyushiye": [
     {
       "char": "体育事业",
-      "en": "Physical education/sports industry"
+      "en": "Physical education"
     }
   ],
   "yuren": [
     {
       "char": "育人",
-      "en": "Education/cultivation of people"
+      "en": "Education"
     }
   ],
   "youheganxiang": [
     {
       "char": "有何感想",
-      "en": "What are your thoughts/impressions?"
+      "en": "What are your thoughts"
     }
   ],
   "mairu": [
     {
       "char": "迈入",
-      "en": "To enter/to step into"
+      "en": "To enter"
     }
   ],
   "congbu": [
     {
       "char": "从不",
-      "en": "Never/not at all"
+      "en": "Never"
     }
   ],
   "danwu": [
     {
       "char": "耽误",
-      "en": "To delay/hinder/interrupt"
+      "en": "To delay"
     }
   ],
   "duanban": [
     {
       "char": "短板",
-      "en": "Weakness/shortcoming"
+      "en": "Weakness"
     }
   ],
   "jianshi": [
     {
       "char": "剪式",
-      "en": "Clip style/Cut style"
+      "en": "Clip style"
     }
   ],
   "naoli": [
     {
       "char": "脑力",
-      "en": "Mental power/brainpower"
+      "en": "Mental power"
     }
   ],
   "shichi": [
     {
       "char": "是持",
-      "en": "To agree/to be consistent"
+      "en": "To agree"
     }
   ],
   "duishe": [
@@ -11768,19 +11768,19 @@
   "xingweibiaoxian": [
     {
       "char": "行为表现",
-      "en": "Behavior/performance"
+      "en": "Behavior"
     }
   ],
   "huazhengweiling": [
     {
       "char": "化整为零",
-      "en": "Break down into small parts/simplify"
+      "en": "Break down into small parts"
     }
   ],
   "diandi": [
     {
       "char": "点滴",
-      "en": "Details/gradual accumulation"
+      "en": "Details"
     }
   ],
   "kongqizhiliang": [
@@ -11822,7 +11822,7 @@
   "quweixing": [
     {
       "char": "趣味性",
-      "en": "Interest/Fun"
+      "en": "Interest"
     }
   ],
   "kejiancao": [
@@ -11846,7 +11846,7 @@
   "lizuyu": [
     {
       "char": "立足于",
-      "en": "Based on/Rooted in"
+      "en": "Based on"
     }
   ],
   "tiyulaoshi": [
@@ -11882,7 +11882,7 @@
   "genbentujing": [
     {
       "char": "根本途径",
-      "en": "Main way/Root cause"
+      "en": "Main way"
     }
   ],
   "wudalei": [
@@ -11924,7 +11924,7 @@
   "rouqindan": [
     {
       "char": "肉禽蛋",
-      "en": "Meat, poultry, and eggs"
+      "en": "Meat"
     }
   ],
   "disilei": [
@@ -11948,7 +11948,7 @@
   "zadou": [
     {
       "char": "杂豆",
-      "en": "Broad beans/Mixed legumes"
+      "en": "Broad beans"
     }
   ],
   "keshui": [
@@ -12020,7 +12020,7 @@
   "youfa": [
     {
       "char": "诱发",
-      "en": "To induce/To trigger"
+      "en": "To induce"
     }
   ],
   "xiaohuadao": [
@@ -12092,13 +12092,13 @@
   "zoushen": [
     {
       "char": "走神",
-      "en": "Daydreaming / Distracted"
+      "en": "Daydreaming"
     }
   ],
   "huodongliang": [
     {
       "char": "活动量",
-      "en": "Activity level / Exercise volume"
+      "en": "Activity level"
     }
   ],
   "shenglixing": [
@@ -12110,7 +12110,7 @@
   "liushi": [
     {
       "char": "流失",
-      "en": "Loss / Depletion"
+      "en": "Loss"
     }
   ],
   "shense": [
@@ -12176,7 +12176,7 @@
   "junzhi": [
     {
       "char": "均值",
-      "en": "Average / Mean"
+      "en": "Average"
     }
   ],
   "niurougan": [
@@ -12224,7 +12224,7 @@
   "jiecai": [
     {
       "char": "芥菜",
-      "en": "Rapeseed greens / Chinese cabbage"
+      "en": "Rapeseed greens"
     }
   ],
   "guiyuanrou": [
@@ -12296,7 +12296,7 @@
   "buli": [
     {
       "char": "不力",
-      "en": "Ineffectively/Weakly"
+      "en": "Ineffectively"
     }
   ],
   "hantangliang": [
@@ -12428,7 +12428,7 @@
   "pangshou": [
     {
       "char": "胖瘦",
-      "en": "Thin/fat"
+      "en": "Thin"
     }
   ],
   "kougan": [
@@ -12572,7 +12572,7 @@
   "penghuashipin": [
     {
       "char": "膨化食品",
-      "en": "Puff food/Expanded food"
+      "en": "Puff food"
     }
   ],
   "xishi": [
@@ -12644,31 +12644,31 @@
   "wanshi": [
     {
       "char": "万是",
-      "en": "All are/All of them"
+      "en": "All are"
     }
   ],
   "chuanrangei": [
     {
       "char": "传染给",
-      "en": "Infect/Transmit to"
+      "en": "Infect"
     }
   ],
   "haofei": [
     {
       "char": "耗费",
-      "en": "Consume/Cost"
+      "en": "Consume"
     }
   ],
   "huohui": [
     {
       "char": "或会",
-      "en": "Or will/Or may"
+      "en": "Or will"
     }
   ],
   "jianchibuxie": [
     {
       "char": "坚持不懈",
-      "en": "Persevere/Remain steadfast"
+      "en": "Persevere"
     }
   ],
   "yiqianduonian": [
@@ -12680,7 +12680,7 @@
   "shuyi": [
     {
       "char": "数以",
-      "en": "By/In number of"
+      "en": "By"
     },
     {
       "char": "鼠疫",
@@ -12720,7 +12720,7 @@
   "xiankai": [
     {
       "char": "掀开",
-      "en": "Unfold/Raise"
+      "en": "Unfold"
     }
   ],
   "xinpianzhang": [
@@ -12852,7 +12852,7 @@
   "rouca": [
     {
       "char": "揉擦",
-      "en": "Rub/Wipe"
+      "en": "Rub"
     }
   ],
   "heyong": [
@@ -13032,7 +13032,7 @@
   "tizheng": [
     {
       "char": "体征",
-      "en": "Sign/Symptom"
+      "en": "Sign"
     }
   ],
   "yewen": [
@@ -13104,31 +13104,31 @@
   "bingcheng": [
     {
       "char": "病程",
-      "en": "Illness course/Disease progression"
+      "en": "Illness course"
     }
   ],
   "yinman": [
     {
       "char": "隐瞒",
-      "en": "Concealment/To hide"
+      "en": "Concealment"
     }
   ],
   "jingkou": [
     {
       "char": "经口",
-      "en": "Oral/By mouth"
+      "en": "Oral"
     }
   ],
   "fenbian": [
     {
       "char": "粪便",
-      "en": "Feces/Stool"
+      "en": "Feces"
     }
   ],
   "yifa": [
     {
       "char": "易发",
-      "en": "Prone to/Susceptible to"
+      "en": "Prone to"
     }
   ],
   "xiaqiu": [
@@ -13152,7 +13152,7 @@
   "fabing": [
     {
       "char": "发病",
-      "en": "Incubation/Onset of disease"
+      "en": "Incubation"
     }
   ],
   "chuanbosudu": [
@@ -13176,19 +13176,19 @@
   "baofa": [
     {
       "char": "暴发",
-      "en": "Outbreak/Epidemic"
+      "en": "Outbreak"
     }
   ],
   "gaofa": [
     {
       "char": "高发",
-      "en": "High incidence/Prevalent"
+      "en": "High incidence"
     }
   ],
   "bianyi": [
     {
       "char": "变异",
-      "en": "Mutation/Variation"
+      "en": "Mutation"
     }
   ],
   "duinuo": [
@@ -13200,13 +13200,13 @@
   "wuxiao": [
     {
       "char": "无效",
-      "en": "Ineffective/Useless"
+      "en": "Ineffective"
     }
   ],
   "shamie": [
     {
       "char": "杀灭",
-      "en": "Kill/Eradicate"
+      "en": "Kill"
     }
   ],
   "hanfu": [
@@ -13236,7 +13236,7 @@
   "kejing": [
     {
       "char": "可经",
-      "en": "Can be/Possible via"
+      "en": "Can be"
     }
   ],
   "xixue": [
@@ -13302,7 +13302,7 @@
   "bazhu": [
     {
       "char": "把住",
-      "en": "Contain, restrain"
+      "en": "Contain"
     }
   ],
   "bujie": [
@@ -13314,13 +13314,13 @@
   "fulanbianzhi": [
     {
       "char": "腐烂变质",
-      "en": "Rotting, decaying"
+      "en": "Rotting"
     }
   ],
   "shutou": [
     {
       "char": "熟透",
-      "en": "Ripened, mature"
+      "en": "Ripened"
     }
   ],
   "shengfanshengcai": [
@@ -13404,37 +13404,37 @@
   "zhongtong": [
     {
       "char": "中同",
-      "en": "(This term needs context - likely refers to a specific medical or scientific concept, but without context, a direct translation isn't possible.  A possible interpretation is \"Central-Tongue\" - but this is speculative.)"
+      "en": "(This term needs context - likely refers to a specific medical or scientific concept"
     }
   ],
   "jiashu": [
     {
       "char": "家属",
-      "en": "Family members/Relatives"
+      "en": "Family members"
     }
   ],
   "shandai": [
     {
       "char": "善待",
-      "en": "Treat well/Be kind to"
+      "en": "Treat well"
     }
   ],
   "kuansong": [
     {
       "char": "宽松",
-      "en": "Relaxed/Loose"
+      "en": "Relaxed"
     }
   ],
   "tiaoli": [
     {
       "char": "条例",
-      "en": "Regulations/Rules"
+      "en": "Regulations"
     }
   ],
   "lijiexing": [
     {
       "char": "礼节性",
-      "en": "Formal/Ceremonial"
+      "en": "Formal"
     }
   ],
   "jiewen": [
@@ -13452,7 +13452,7 @@
   "qingyi": [
     {
       "char": "请以",
-      "en": "Please use/Refer to"
+      "en": "Please use"
     }
   ],
   "lilai": [
@@ -13524,7 +13524,7 @@
   "anchuang": [
     {
       "char": "暗疮",
-      "en": "Pimples/Acne"
+      "en": "Pimples"
     }
   ],
   "zhendeng": [
@@ -13584,7 +13584,7 @@
   "zujie": [
     {
       "char": "阻截",
-      "en": "block, intercept"
+      "en": "block"
     }
   ],
   "youyubujue": [
@@ -13608,7 +13608,7 @@
   "laiding": [
     {
       "char": "来定",
-      "en": "coming soon, to arrive"
+      "en": "coming soon"
     }
   ],
   "jiaoruo": [
@@ -13620,13 +13620,13 @@
   "tiansheng": [
     {
       "char": "天生",
-      "en": "innate, born with"
+      "en": "innate"
     }
   ],
   "jianqiangyizhi": [
     {
       "char": "坚强意志",
-      "en": "strong will, willpower"
+      "en": "strong will"
     }
   ],
   "beishang": [
@@ -13638,7 +13638,7 @@
   "jietuo": [
     {
       "char": "解脱",
-      "en": "relief, liberation"
+      "en": "relief"
     }
   ],
   "yeyudui": [
@@ -13668,11 +13668,11 @@
   "zhuli": [
     {
       "char": "主力",
-      "en": "Main player/Star player"
+      "en": "Main player"
     },
     {
       "char": "助力",
-      "en": "Assistance/Support"
+      "en": "Assistance"
     }
   ],
   "qinxuekulian": [
@@ -13684,13 +13684,13 @@
   "jiren": [
     {
       "char": "己任",
-      "en": "Self-assigned/Personal responsibility"
+      "en": "Self-assigned"
     }
   ],
   "pingchang": [
     {
       "char": "平昌",
-      "en": "Peaceful/Tranquil"
+      "en": "Peaceful"
     }
   ],
   "zhongguodui": [
@@ -13702,7 +13702,7 @@
   "lvci": [
     {
       "char": "屡次",
-      "en": "Repeatedly/Many times"
+      "en": "Repeatedly"
     }
   ],
   "lingdetupo": [
@@ -13714,43 +13714,43 @@
   "diqijie": [
     {
       "char": "第七届",
-      "en": "Seventh session/Seventh period"
+      "en": "Seventh session"
     }
   ],
   "mofan": [
     {
       "char": "模范",
-      "en": "Model/Example"
+      "en": "Model"
     }
   ],
   "rongyuchenghao": [
     {
       "char": "荣誉称号",
-      "en": "Honorary title/Honorary award"
+      "en": "Honorary title"
     }
   ],
   "yayi": [
     {
       "char": "压抑",
-      "en": "Suppress/Repress"
+      "en": "Suppress"
     }
   ],
   "youlv": [
     {
       "char": "忧虑",
-      "en": "Worry/Concern"
+      "en": "Worry"
     }
   ],
   "nanguo": [
     {
       "char": "难过",
-      "en": "Sad/Unhappy"
+      "en": "Sad"
     }
   ],
   "yanwu": [
     {
       "char": "厌恶",
-      "en": "Dislike/Detest"
+      "en": "Dislike"
     }
   ],
   "yiyu": [
@@ -13762,19 +13762,19 @@
   "biaoxiang": [
     {
       "char": "表象",
-      "en": "Appearance/Phenomenon"
+      "en": "Appearance"
     }
   ],
   "naohaizhong": [
     {
       "char": "脑海中",
-      "en": "In one's mind/In one's thoughts"
+      "en": "In one's mind"
     }
   ],
   "chongxian": [
     {
       "char": "重现",
-      "en": "Recreate/Relive"
+      "en": "Recreate"
     }
   ],
   "wendingqingxu": [
@@ -13792,73 +13792,73 @@
   "youyishi": [
     {
       "char": "有意识",
-      "en": "Conscious/Aware"
+      "en": "Conscious"
     }
   ],
   "fayi": [
     {
       "char": "法以",
-      "en": "According to the law/By law"
+      "en": "According to the law"
     }
   ],
   "kumen": [
     {
       "char": "苦闷",
-      "en": "Torment/Suffering"
+      "en": "Torment"
     }
   ],
   "diluo": [
     {
       "char": "低落",
-      "en": "Depressed, discouraged"
+      "en": "Depressed"
     }
   ],
   "ziwoanshi": [
     {
       "char": "自我暗示",
-      "en": "Self-suggestion, self-deception"
+      "en": "Self-suggestion"
     }
   ],
   "qingxudichen": [
     {
       "char": "情绪低沉",
-      "en": "Low spirits, depressed mood"
+      "en": "Low spirits"
     }
   ],
   "gandaotongku": [
     {
       "char": "感到痛苦",
-      "en": "Feel pain, suffer"
+      "en": "Feel pain"
     }
   ],
   "shouyifeiqian": [
     {
       "char": "受益匪浅",
-      "en": "Benefit greatly, gain much"
+      "en": "Benefit greatly"
     }
   ],
   "banjiaoshi": [
     {
       "char": "绊脚石",
-      "en": "Obstacle, stumbling block"
+      "en": "Obstacle"
     }
   ],
   "dianjiaoshi": [
     {
       "char": "垫脚石",
-      "en": "Stepping stone, supporting stone"
+      "en": "Stepping stone"
     }
   ],
   "zhuoyanyu": [
     {
       "char": "着眼于",
-      "en": "Focus on, take into account"
+      "en": "Focus on"
     }
   ],
   "yuanqi": [
     {
       "char": "远期",
-      "en": "Long-term, distant future"
+      "en": "Long-term"
     }
   ],
   "zhongqi": [
@@ -13870,7 +13870,7 @@
   "jinqi": [
     {
       "char": "近期",
-      "en": "Short-term, near future"
+      "en": "Short-term"
     }
   ],
   "zhuazhujihui": [
@@ -13888,13 +13888,13 @@
   "chongxiang": [
     {
       "char": "冲向",
-      "en": "Rush towards, charge towards"
+      "en": "Rush towards"
     }
   ],
   "zhimu": [
     {
       "char": "之母",
-      "en": "Source, origin"
+      "en": "Source"
     }
   ],
   "tiansai": [
@@ -14086,7 +14086,7 @@
   "yicici": [
     {
       "char": "一次次",
-      "en": "Repeatedly/One by one"
+      "en": "Repeatedly"
     }
   ],
   "xuewan": [
@@ -14098,7 +14098,7 @@
   "dengta": [
     {
       "char": "蹬踏",
-      "en": "To step/To push off"
+      "en": "To step"
     }
   ],
   "zuiyuan": [
@@ -14122,7 +14122,7 @@
   "tiaoxuelian": [
     {
       "char": "跳学练",
-      "en": "Jump training/Practice jumping"
+      "en": "Jump training"
     }
   ],
   "manli": [
@@ -14206,7 +14206,7 @@
   "qixuelian": [
     {
       "char": "起学练",
-      "en": "Initial practice/training"
+      "en": "Initial practice"
     }
   ],
   "xibu": [
@@ -14224,7 +14224,7 @@
   "zhenfen": [
     {
       "char": "振奋",
-      "en": "Inspiring/Exciting"
+      "en": "Inspiring"
     }
   ],
   "sheqiurumen": [
@@ -14248,7 +14248,7 @@
   "feiwu": [
     {
       "char": "飞舞",
-      "en": "To flutter/dance"
+      "en": "To flutter"
     }
   ],
   "guanchali": [
@@ -14260,7 +14260,7 @@
   "panduanli": [
     {
       "char": "判断力",
-      "en": "Judgment/Decision-making skills"
+      "en": "Judgment"
     }
   ],
   "yueqiang": [
@@ -14296,7 +14296,7 @@
   "jixiang": [
     {
       "char": "几项",
-      "en": "Several items/exercises"
+      "en": "Several items"
     }
   ],
   "zhengxiafang": [
@@ -14308,7 +14308,7 @@
   "bengjin": [
     {
       "char": "绷紧",
-      "en": "Tense/Tighten"
+      "en": "Tense"
     }
   ],
   "digunqiu": [
@@ -14332,13 +14332,13 @@
   "shishidi": [
     {
       "char": "适时地",
-      "en": "Appropriately / In time"
+      "en": "Appropriately"
     }
   ],
   "gengwen": [
     {
       "char": "更稳",
-      "en": "More stable / More secure"
+      "en": "More stable"
     }
   ],
   "chuqiuwai": [
@@ -14350,13 +14350,13 @@
   "houche": [
     {
       "char": "后撤",
-      "en": "Pull back / Retreat"
+      "en": "Pull back"
     }
   ],
   "huajie": [
     {
       "char": "化解",
-      "en": "Resolve / Defuse"
+      "en": "Resolve"
     }
   ],
   "chongli": [
@@ -14380,13 +14380,13 @@
   "renxuan": [
     {
       "char": "人选",
-      "en": "Choice of player / Player selection"
+      "en": "Choice of player"
     }
   ],
   "zuohuangyou": [
     {
       "char": "左晃右",
-      "en": "Left-to-right movement / Shifting left to right"
+      "en": "Left-to-right movement"
     }
   ],
   "yuguang": [
@@ -14410,13 +14410,13 @@
   "duikangxing": [
     {
       "char": "对抗性",
-      "en": "Confrontational / Competitive"
+      "en": "Confrontational"
     }
   ],
   "zhandouli": [
     {
       "char": "战斗力",
-      "en": "Combat effectiveness / Fighting power"
+      "en": "Combat effectiveness"
     }
   ],
   "chengbai": [
@@ -14428,7 +14428,7 @@
   "qiangshi": [
     {
       "char": "墙式",
-      "en": "Wall play / Wall technique"
+      "en": "Wall play"
     },
     {
       "char": "强是",
@@ -14438,7 +14438,7 @@
   "yifangershi": [
     {
       "char": "一防二是",
-      "en": "One defense, two strategies"
+      "en": "One defense"
     }
   ],
   "richangxingwei": [
@@ -14522,7 +14522,7 @@
   "qianzhi": [
     {
       "char": "牵制",
-      "en": "Restrain/Control"
+      "en": "Restrain"
     }
   ],
   "zhongce": [
@@ -14546,13 +14546,13 @@
   "xiachen": [
     {
       "char": "下沉",
-      "en": "Submerge/Descend"
+      "en": "Submerge"
     }
   ],
   "yaochi": [
     {
       "char": "要持",
-      "en": "Maintain/Keep"
+      "en": "Maintain"
     }
   ],
   "xuzhuyi": [
@@ -14564,7 +14564,7 @@
   "kaili": [
     {
       "char": "开立",
-      "en": "Open/Establish"
+      "en": "Open"
     }
   ],
   "shangshen": [
@@ -14670,7 +14670,7 @@
   "rulan": [
     {
       "char": "入篮",
-      "en": "Basket/Make a shot"
+      "en": "Basket"
     }
   ],
   "wenzhu": [
@@ -14836,7 +14836,7 @@
   "qinshen": [
     {
       "char": "亲身",
-      "en": "Personally/By oneself"
+      "en": "Personally"
     }
   ],
   "pinbojingshen": [
@@ -14866,7 +14866,7 @@
   "zhengqu": [
     {
       "char": "争取",
-      "en": "Strive for/Pursue"
+      "en": "Strive for"
     }
   ],
   "zuiheshi": [
@@ -14878,7 +14878,7 @@
   "congrong": [
     {
       "char": "从容",
-      "en": "Calmly/Composedly"
+      "en": "Calmly"
     }
   ],
   "yuxianpanduan": [
@@ -14896,19 +14896,19 @@
   "qingkuai": [
     {
       "char": "轻快",
-      "en": "light, brisk"
+      "en": "light"
     }
   ],
   "dianchu": [
     {
       "char": "垫出",
-      "en": "set up, lay out"
+      "en": "set up"
     }
   ],
   "gaodibuping": [
     {
       "char": "高低不平",
-      "en": "uneven, undulating"
+      "en": "uneven"
     }
   ],
   "taibi": [
@@ -14920,7 +14920,7 @@
   "tiya": [
     {
       "char": "提压",
-      "en": "press down, exert pressure"
+      "en": "press down"
     }
   ],
   "eqian": [
@@ -14944,7 +14944,7 @@
   "wenhe": [
     {
       "char": "吻合",
-      "en": "match, align"
+      "en": "match"
     }
   ],
   "shendan": [
@@ -14968,7 +14968,7 @@
   "xiangge": [
     {
       "char": "相隔",
-      "en": "apart, separated"
+      "en": "apart"
     }
   ],
   "chuandianqiu": [
@@ -15016,19 +15016,19 @@
   "guoqiu": [
     {
       "char": "国球",
-      "en": "national ball (e.g., national football)"
+      "en": "national ball (e.g."
     }
   ],
   "dasai": [
     {
       "char": "大赛",
-      "en": "competition, tournament"
+      "en": "competition"
     }
   ],
   "duode": [
     {
       "char": "夺得",
-      "en": "win, obtain"
+      "en": "win"
     }
   ],
   "shijieguanjun": [
@@ -15040,67 +15040,67 @@
   "yingbiannengli": [
     {
       "char": "应变能力",
-      "en": "adaptability, ability to respond"
+      "en": "adaptability"
     }
   ],
   "yupan": [
     {
       "char": "预判",
-      "en": "prediction, forecasting"
+      "en": "prediction"
     }
   ],
   "yili": [
     {
       "char": "毅力",
-      "en": "perseverance, tenacity"
+      "en": "perseverance"
     }
   ],
   "qieyi": [
     {
       "char": "惬意",
-      "en": "contentment, satisfaction"
+      "en": "contentment"
     }
   ],
   "qianzhu": [
     {
       "char": "钳住",
-      "en": "to grasp, to hold tightly"
+      "en": "to grasp"
     }
   ],
   "wozhu": [
     {
       "char": "握住",
-      "en": "to hold, to grasp"
+      "en": "to hold"
     }
   ],
   "daneng": [
     {
       "char": "大能",
-      "en": "great power, powerful being"
+      "en": "great power"
     }
   ],
   "duigong": [
     {
       "char": "对攻",
-      "en": "mutual attack, reciprocal attack"
+      "en": "mutual attack"
     }
   ],
   "shilve": [
     {
       "char": "时略",
-      "en": "at that time, at that moment"
+      "en": "at that time"
     }
   ],
   "qiangyu": [
     {
       "char": "强于",
-      "en": "better than, superior to"
+      "en": "better than"
     }
   ],
   "zhudongxing": [
     {
       "char": "主动性",
-      "en": "proactivity, initiative"
+      "en": "proactivity"
     }
   ],
   "xianfazhiren": [
@@ -15118,7 +15118,7 @@
   "jingmiao": [
     {
       "char": "精妙",
-      "en": "exquisite, ingenious"
+      "en": "exquisite"
     }
   ],
   "shineiwai": [
@@ -15154,7 +15154,7 @@
   "yingbianli": [
     {
       "char": "应变力",
-      "en": "Reactivity/Response force"
+      "en": "Reactivity"
     }
   ],
   "zuoqian": [
@@ -15178,13 +15178,13 @@
   "qianhouzuoyou": [
     {
       "char": "前后左右",
-      "en": "Front, back, left, right"
+      "en": "Front"
     }
   ],
   "chutai": [
     {
       "char": "出台",
-      "en": "To emerge/To come out"
+      "en": "To emerge"
     }
   ],
   "zhengquexing": [
@@ -15202,7 +15202,7 @@
   "youhoufang": [
     {
       "char": "右后方",
-      "en": "Right rear/back"
+      "en": "Right rear"
     }
   ],
   "zuoqianfang": [
@@ -15214,7 +15214,7 @@
   "zuohoufang": [
     {
       "char": "左后方",
-      "en": "Left rear/back"
+      "en": "Left rear"
     }
   ],
   "paiyu": [
@@ -15238,13 +15238,13 @@
   "luoru": [
     {
       "char": "落入",
-      "en": "To fall into/To drop"
+      "en": "To fall into"
     }
   ],
   "jifang": [
     {
       "char": "己方",
-      "en": "Own side/Our side"
+      "en": "Own side"
     }
   ],
   "qiuzhuo": [
@@ -15262,7 +15262,7 @@
   "dabi": [
     {
       "char": "大臂",
-      "en": "Bicep/Upper arm"
+      "en": "Bicep"
     }
   ],
   "paixing": [
@@ -15280,19 +15280,19 @@
   "jizhun": [
     {
       "char": "击准",
-      "en": "Aiming/To hit accurately"
+      "en": "Aiming"
     }
   ],
   "duimian": [
     {
       "char": "对面",
-      "en": "Opposite side/Across"
+      "en": "Opposite side"
     }
   ],
   "huading": [
     {
       "char": "画定",
-      "en": "To fix/determine"
+      "en": "To fix"
     }
   ],
   "jizhongmubiao": [
@@ -15316,13 +15316,13 @@
   "xieshang": [
     {
       "char": "协商",
-      "en": "To consult/negotiate"
+      "en": "To consult"
     }
   ],
   "jushu": [
     {
       "char": "局数",
-      "en": "Number of sets/rounds"
+      "en": "Number of sets"
     }
   ],
   "weishengwu": [
@@ -15334,13 +15334,13 @@
   "caolian": [
     {
       "char": "操练",
-      "en": "Practice/Training"
+      "en": "Practice"
     }
   ],
   "jingxian": [
     {
       "char": "惊险",
-      "en": "Dangerous/Perilous"
+      "en": "Dangerous"
     }
   ],
   "jingtan": [
@@ -15352,13 +15352,13 @@
   "jingxianciji": [
     {
       "char": "惊险刺激",
-      "en": "Thrilling/Exciting"
+      "en": "Thrilling"
     }
   ],
   "shixiang": [
     {
       "char": "试想",
-      "en": "To imagine/Consider"
+      "en": "To imagine"
     }
   ],
   "baizaiqianmian": [
@@ -15376,19 +15376,19 @@
   "ziru": [
     {
       "char": "自如",
-      "en": "Freely/Naturally"
+      "en": "Freely"
     }
   ],
   "tengshen": [
     {
       "char": "腾身",
-      "en": "To move/shift one's body"
+      "en": "To move"
     }
   ],
   "lixuelian": [
     {
       "char": "立学练",
-      "en": "To practice/learn (principles)"
+      "en": "To practice"
     }
   ],
   "yueruan": [
@@ -15494,7 +15494,7 @@
   "qizhan": [
     {
       "char": "其展",
-      "en": "Their expansion/extension"
+      "en": "Their expansion"
     }
   ],
   "kuanyong": [
@@ -15560,7 +15560,7 @@
   "xuepai": [
     {
       "char": "学派",
-      "en": "School/Faction/School of thought"
+      "en": "School"
     }
   ],
   "xianhou": [
@@ -15596,7 +15596,7 @@
   "tiaocheng": [
     {
       "char": "跳程",
-      "en": "Skipping steps/Leaping"
+      "en": "Skipping steps"
     }
   ],
   "tunfen": [
@@ -15614,25 +15614,25 @@
   "dafen": [
     {
       "char": "大分",
-      "en": "Large division/Segment"
+      "en": "Large division"
     }
   ],
   "wenxuelian": [
     {
       "char": "稳学练",
-      "en": "Steady learning/Practice"
+      "en": "Steady learning"
     }
   ],
   "xinlizhangai": [
     {
       "char": "心理障碍",
-      "en": "Psychological barrier/Mental block"
+      "en": "Psychological barrier"
     }
   ],
   "chebu": [
     {
       "char": "撤步",
-      "en": "Retreating/Pulling back"
+      "en": "Retreating"
     }
   ],
   "zhuabi": [
@@ -15644,7 +15644,7 @@
   "futuo": [
     {
       "char": "扶托",
-      "en": "Supporting/Assisting"
+      "en": "Supporting"
     }
   ],
   "erhengxiang": [
@@ -15656,7 +15656,7 @@
   "baicheng": [
     {
       "char": "摆撑",
-      "en": "Bent stretch/Arched stretch"
+      "en": "Bent stretch"
     }
   ],
   "jiankuai": [
@@ -15668,13 +15668,13 @@
   "laxialai": [
     {
       "char": "落下来",
-      "en": "Fall down/Come down"
+      "en": "Fall down"
     }
   ],
   "taigaohui": [
     {
       "char": "太高会",
-      "en": "Too high/Excessively high"
+      "en": "Too high"
     }
   ],
   "quebaoanquan": [
@@ -15758,7 +15758,7 @@
   "xuntao": [
     {
       "char": "熏陶",
-      "en": "Influence/Imbue"
+      "en": "Influence"
     }
   ],
   "weiwubuqu": [
@@ -15870,7 +15870,7 @@
     },
     {
       "char": "拳谚",
-      "en": "Fist sayings/Principles"
+      "en": "Fist sayings"
     }
   ],
   "quanlunquan": [
@@ -15924,7 +15924,7 @@
   "quanfa": [
     {
       "char": "拳法",
-      "en": "Fist style, fist technique"
+      "en": "Fist style"
     }
   ],
   "zuoxing": [
@@ -15942,7 +15942,7 @@
   "pingping": [
     {
       "char": "评评",
-      "en": "(Referring to a martial arts assessment or opinion) Assessment/Evaluation"
+      "en": "(Referring to a martial arts assessment or opinion) Assessment"
     }
   ],
   "shougou": [
@@ -15960,37 +15960,37 @@
   "youqiu": [
     {
       "char": "又求",
-      "en": "Seeking/Desiring"
+      "en": "Seeking"
     }
   ],
   "jingqi": [
     {
       "char": "精气",
-      "en": "Vital energy/Essence"
+      "en": "Vital energy"
     }
   ],
   "chuanshen": [
     {
       "char": "传神",
-      "en": "Expressing/Conveying perfectly"
+      "en": "Expressing"
     }
   ],
   "zhengtao": [
     {
       "char": "整套",
-      "en": "Complete set/System"
+      "en": "Complete set"
     }
   ],
   "chuaimo": [
     {
       "char": "揣摩",
-      "en": "To ponder/Analyze deeply"
+      "en": "To ponder"
     }
   ],
   "xuli": [
     {
       "char": "蓄力",
-      "en": "To accumulate/Store energy"
+      "en": "To accumulate"
     }
   ],
   "baibian": [
@@ -16002,7 +16002,7 @@
   "zitong": [
     {
       "char": "自通",
-      "en": "Self-evident/Naturally understood"
+      "en": "Self-evident"
     }
   ],
   "chongquandan": [
@@ -16020,31 +16020,31 @@
   "zuinengtixian": [
     {
       "char": "最能体现",
-      "en": "Most representative/Best exemplifies"
+      "en": "Most representative"
     }
   ],
   "shanbi": [
     {
       "char": "闪避",
-      "en": "To evade/Dodge"
+      "en": "To evade"
     }
   ],
   "shankai": [
     {
       "char": "闪开",
-      "en": "To spread out/Deflect"
+      "en": "To spread out"
     }
   ],
   "xunmeng": [
     {
       "char": "迅猛",
-      "en": "Rapid/Swift"
+      "en": "Rapid"
     }
   ],
   "daoshou": [
     {
       "char": "到手",
-      "en": "Within reach/Acquired"
+      "en": "Within reach"
     }
   ],
   "anzhang": [
@@ -16056,7 +16056,7 @@
   "xincun": [
     {
       "char": "心存",
-      "en": "With a heart of/With intention"
+      "en": "With a heart of"
     }
   ],
   "shengcunnengli": [
@@ -16228,13 +16228,13 @@
   "zoude": [
     {
       "char": "走得",
-      "en": "Moving forward/Getting along"
+      "en": "Moving forward"
     }
   ],
   "wenjian": [
     {
       "char": "稳健",
-      "en": "Steady/Secure"
+      "en": "Steady"
     }
   ],
   "qingwa": [
@@ -16276,7 +16276,7 @@
   "fuban": [
     {
       "char": "扶板",
-      "en": "Brace/Support board"
+      "en": "Brace"
     },
     {
       "char": "浮板",
@@ -16382,7 +16382,7 @@
   "jiaban": [
     {
       "char": "夹板",
-      "en": "Brace, Support"
+      "en": "Brace"
     }
   ],
   "nannvsheng": [
@@ -16412,7 +16412,7 @@
   "shoushou": [
     {
       "char": "收手",
-      "en": "Stop, Withdraw"
+      "en": "Stop"
     }
   ],
   "xianshen": [
@@ -16460,7 +16460,7 @@
   "qianla": [
     {
       "char": "牵拉",
-      "en": "Pull, Stretch"
+      "en": "Pull"
     }
   ],
   "shanganshi": [
@@ -16662,7 +16662,7 @@
     },
     {
       "char": "人制",
-      "en": "Human system/rule"
+      "en": "Human system"
     }
   ],
   "gengkuai": [
@@ -16782,13 +16782,13 @@
   "lingsu": [
     {
       "char": "灵速",
-      "en": "Speed, agility"
+      "en": "Speed"
     }
   ],
   "mindu": [
     {
       "char": "敏度",
-      "en": "Sensitivity, perception"
+      "en": "Sensitivity"
     }
   ],
   "pinghengxing": [
@@ -16818,19 +16818,19 @@
   "xiangfuxiangcheng": [
     {
       "char": "相辅相成",
-      "en": "Complementary, interdependent"
+      "en": "Complementary"
     }
   ],
   "cezhongdian": [
     {
       "char": "侧重点",
-      "en": "Focus, emphasis"
+      "en": "Focus"
     }
   ],
   "zongheti": [
     {
       "char": "综合体",
-      "en": "Comprehensive, holistic"
+      "en": "Comprehensive"
     }
   ],
   "danshuanggang": [
@@ -16860,7 +16860,7 @@
   "duanzheng": [
     {
       "char": "端正",
-      "en": "Neat, proper"
+      "en": "Neat"
     }
   ],
   "zuoli": [
@@ -16884,25 +16884,25 @@
   "tingba": [
     {
       "char": "挺拔",
-      "en": "Upright, straight"
+      "en": "Upright"
     }
   ],
   "bujia": [
     {
       "char": "不佳",
-      "en": "Unfavorable, poor"
+      "en": "Unfavorable"
     }
   ],
   "xiaoqiaomen": [
     {
       "char": "小窍门",
-      "en": "Little trick/Tip"
+      "en": "Little trick"
     }
   ],
   "danci": [
     {
       "char": "单次",
-      "en": "Once/Single"
+      "en": "Once"
     }
   ],
   "qiulei": [
@@ -16914,7 +16914,7 @@
   "lianzi": [
     {
       "char": "练字",
-      "en": "Copying characters/Practice writing"
+      "en": "Copying characters"
     }
   ],
   "xiangxian": [
@@ -16968,7 +16968,7 @@
   "zunzhao": [
     {
       "char": "遵照",
-      "en": "According to/As per"
+      "en": "According to"
     }
   ],
   "fashengyiwai": [
@@ -16980,7 +16980,7 @@
   "budang": [
     {
       "char": "不当",
-      "en": "Improper/Incorrect"
+      "en": "Improper"
     }
   ],
   "shoushangzhe": [
@@ -16998,7 +16998,7 @@
   "diqi": [
     {
       "char": "第期",
-      "en": "Issue/Period"
+      "en": "Issue"
     }
   ],
   "tiyuchangdi": [
@@ -17040,7 +17040,7 @@
   "jianxi": [
     {
       "char": "见习",
-      "en": "Trial run/Practice"
+      "en": "Trial run"
     }
   ],
   "wanhaowusun": [
@@ -17052,7 +17052,7 @@
   "nuanhuo": [
     {
       "char": "暖和",
-      "en": "Mild/Warm"
+      "en": "Mild"
     }
   ],
   "yundongguodu": [
@@ -17064,13 +17064,13 @@
   "cuye": [
     {
       "char": "粗野",
-      "en": "Crude/Rough"
+      "en": "Crude"
     }
   ],
   "qingwei": [
     {
       "char": "轻微",
-      "en": "Slight/Minor"
+      "en": "Slight"
     }
   ],
   "biaopi": [
@@ -17088,7 +17088,7 @@
   "shenchu": [
     {
       "char": "渗出",
-      "en": "Seepage/Exudation"
+      "en": "Seepage"
     }
   ],
   "shengliyanshui": [
@@ -17106,7 +17106,7 @@
   "tumo": [
     {
       "char": "涂抹",
-      "en": "Applying/Rubbing"
+      "en": "Applying"
     }
   ],
   "chuangketie": [
@@ -17250,7 +17250,7 @@
   "shangbing": [
     {
       "char": "伤病",
-      "en": "Injury/Illness"
+      "en": "Injury"
     }
   ],
   "penshe": [
@@ -17268,13 +17268,13 @@
   "chonglin": [
     {
       "char": "冲淋",
-      "en": "Sprinkler/Spraying"
+      "en": "Sprinkler"
     }
   ],
   "fangke": [
     {
       "char": "方可",
-      "en": "Allowed/Permitted"
+      "en": "Allowed"
     }
   ],
   "zhuanwei": [
@@ -17298,13 +17298,13 @@
   "zuduan": [
     {
       "char": "阻断",
-      "en": "Block/Cut off"
+      "en": "Block"
     }
   ],
   "chongzhuang": [
     {
       "char": "冲撞",
-      "en": "Impact/Collision"
+      "en": "Impact"
     }
   ],
   "bijiaoyanzhong": [
@@ -17316,13 +17316,13 @@
   "fashenglv": [
     {
       "char": "发生率",
-      "en": "Incidence/Rate"
+      "en": "Incidence"
     }
   ],
   "yatong": [
     {
       "char": "压痛",
-      "en": "Tenderness/Pain"
+      "en": "Tenderness"
     }
   ],
   "pixia": [
@@ -17382,7 +17382,7 @@
   "laokao": [
     {
       "char": "牢靠",
-      "en": "Firm, Stable"
+      "en": "Firm"
     }
   ],
   "jianchahe": [
@@ -17406,13 +17406,13 @@
   "bianshi": [
     {
       "char": "辨识",
-      "en": "Recognition, Identification"
+      "en": "Recognition"
     }
   ],
   "tuanjieyouai": [
     {
       "char": "团结友爱",
-      "en": "Solidarity, Fraternity"
+      "en": "Solidarity"
     }
   ],
   "duocai": [
@@ -17424,7 +17424,7 @@
   "ganyou": [
     {
       "char": "感有",
-      "en": "Feeling, Sensing"
+      "en": "Feeling"
     }
   ],
   "ziwoyishi": [
@@ -17436,19 +17436,19 @@
   "zaiyi": [
     {
       "char": "在意",
-      "en": "To care about, To take into account"
+      "en": "To care about"
     }
   ],
   "paihuai": [
     {
       "char": "徘徊",
-      "en": "To wander, To hesitate"
+      "en": "To wander"
     }
   ],
   "guogao": [
     {
       "char": "过高",
-      "en": "Excessive, Too high"
+      "en": "Excessive"
     }
   ],
   "ziwoguanli": [
@@ -17460,7 +17460,7 @@
   "juexing": [
     {
       "char": "觉醒",
-      "en": "Awakening, Enlightenment"
+      "en": "Awakening"
     }
   ],
   "xingyishi": [
@@ -17490,13 +17490,13 @@
   "biranguilv": [
     {
       "char": "必然规律",
-      "en": "Inevitable Law/Pattern"
+      "en": "Inevitable Law"
     }
   ],
   "tanran": [
     {
       "char": "坦然",
-      "en": "Calmly/Without worry"
+      "en": "Calmly"
     }
   ],
   "shehuihua": [
@@ -17508,13 +17508,13 @@
   "zhongxuejieduan": [
     {
       "char": "中学阶段",
-      "en": "Middle School Stage/Years"
+      "en": "Middle School Stage"
     }
   ],
   "shouxin": [
     {
       "char": "守信",
-      "en": "Be faithful/Honest"
+      "en": "Be faithful"
     }
   ],
   "qianxujinshen": [
@@ -17526,7 +17526,7 @@
   "youzhi": [
     {
       "char": "幼稚",
-      "en": "Naive/Childish"
+      "en": "Naive"
     }
   ],
   "jitishenghuo": [
@@ -17538,7 +17538,7 @@
   "qianrang": [
     {
       "char": "谦让",
-      "en": "Yield/Give way"
+      "en": "Yield"
     }
   ],
   "zhuren": [
@@ -17652,7 +17652,7 @@
   "yuxing": [
     {
       "char": "与性",
-      "en": "With sex/sexual"
+      "en": "With sex"
     }
   ],
   "weifan": [
@@ -17670,7 +17670,7 @@
   "xingyu": [
     {
       "char": "性欲",
-      "en": "Lust/sexual desire"
+      "en": "Lust"
     }
   ],
   "chufadian": [
@@ -17688,13 +17688,13 @@
   "yanyu": [
     {
       "char": "言语",
-      "en": "Words/speech"
+      "en": "Words"
     }
   ],
   "tiaodou": [
     {
       "char": "挑逗",
-      "en": "Flirt with/tease"
+      "en": "Flirt with"
     }
   ],
   "buyue": [
@@ -17748,13 +17748,13 @@
   "qingxin": [
     {
       "char": "轻信",
-      "en": "gullible/credulous"
+      "en": "gullible"
     }
   ],
   "qiancai": [
     {
       "char": "钱财",
-      "en": "money/wealth"
+      "en": "money"
     }
   ],
   "jiaguoye": [
@@ -17832,7 +17832,7 @@
   "zhanyi": [
     {
       "char": "战役",
-      "en": "Campaign/Battle"
+      "en": "Campaign"
     }
   ],
   "changtu": [
@@ -17844,13 +17844,13 @@
   "sishiduo": [
     {
       "char": "四十多",
-      "en": "Forty-plus/In the forty's"
+      "en": "Forty-plus"
     }
   ],
   "jiebao": [
     {
       "char": "捷报",
-      "en": "Good news/Breaking news"
+      "en": "Good news"
     }
   ],
   "yixi": [
@@ -17886,37 +17886,37 @@
   "wenluan": [
     {
       "char": "紊乱",
-      "en": "Disorder/Disruption"
+      "en": "Disorder"
     }
   ],
   "jiejuebanfa": [
     {
       "char": "解决办法",
-      "en": "Solution/Way out"
+      "en": "Solution"
     }
   ],
   "xuqing": [
     {
       "char": "需请",
-      "en": "Need to request/Please note"
+      "en": "Need to request"
     }
   ],
   "chongfenzhunbei": [
     {
       "char": "充分准备",
-      "en": "Adequate preparation/Full preparation"
+      "en": "Adequate preparation"
     }
   ],
   "julieyundong": [
     {
       "char": "剧烈运动",
-      "en": "Intense exercise/Strenuous activity"
+      "en": "Intense exercise"
     }
   ],
   "baibai": [
     {
       "char": "摆摆",
-      "en": "Shaking/Wiggling"
+      "en": "Shaking"
     }
   ],
   "dongtui": [
@@ -17946,7 +17946,7 @@
   "yicileitui": [
     {
       "char": "依此类推",
-      "en": "And so on/Following this"
+      "en": "And so on"
     }
   ],
   "xiaowai": [
@@ -17994,13 +17994,13 @@
   "dianyong": [
     {
       "char": "点用",
-      "en": "Spot use/Point use"
+      "en": "Spot use"
     }
   ],
   "yousheng": [
     {
       "char": "优胜",
-      "en": "Victory/Win"
+      "en": "Victory"
     }
   ],
   "jiejuekunnan": [
@@ -18042,7 +18042,7 @@
   "tiaojiao": [
     {
       "char": "跳脚",
-      "en": "Fit of rage/Fit"
+      "en": "Fit of rage"
     }
   ],
   "huipao": [
@@ -18072,7 +18072,7 @@
   "taozou": [
     {
       "char": "逃走",
-      "en": "to flee, to escape"
+      "en": "to flee"
     }
   ],
   "yanli": [
@@ -18090,7 +18090,7 @@
   "qiaqiao": [
     {
       "char": "恰巧",
-      "en": "just by chance, coincidentally"
+      "en": "just by chance"
     }
   ],
   "heibaixiangjian": [
@@ -18102,13 +18102,13 @@
   "naduan": [
     {
       "char": "那段",
-      "en": "that period, that time"
+      "en": "that period"
     }
   ],
   "yilun": [
     {
       "char": "议论",
-      "en": "to discuss, to comment on"
+      "en": "to discuss"
     }
   ],
   "yipi": [
@@ -18126,7 +18126,7 @@
   "chicheng": [
     {
       "char": "驰骋",
-      "en": "to gallop, to roam freely"
+      "en": "to gallop"
     }
   ],
   "jingguonuli": [
@@ -18156,13 +18156,13 @@
   "quanshenxing": [
     {
       "char": "全身性",
-      "en": "all-around, comprehensive"
+      "en": "all-around"
     }
   ],
   "dianqu": [
     {
       "char": "点取",
-      "en": "To point out/indicate"
+      "en": "To point out"
     }
   ],
   "xianying": [
@@ -18210,7 +18210,7 @@
   "lache": [
     {
       "char": "拉扯",
-      "en": "Pulling/Tugging"
+      "en": "Pulling"
     }
   ],
   "congxiadaoshang": [
@@ -18252,7 +18252,7 @@
   "tuiju": [
     {
       "char": "推举",
-      "en": "To press/push"
+      "en": "To press"
     }
   ],
   "jianshenhuodong": [
@@ -18264,7 +18264,7 @@
   "jinqing": [
     {
       "char": "尽情",
-      "en": "Freely/With abandon"
+      "en": "Freely"
     }
   ],
   "xuanwei": [
@@ -18282,7 +18282,7 @@
   "touyao": [
     {
       "char": "头要",
-      "en": "Head needs/should"
+      "en": "Head needs"
     }
   ],
   "houtou": [
@@ -18318,7 +18318,7 @@
   "quanju": [
     {
       "char": "全局",
-      "en": "Overall/Big Picture"
+      "en": "Overall"
     }
   ],
   "zhuangong": [
@@ -18348,7 +18348,7 @@
   "dangzhu": [
     {
       "char": "挡住",
-      "en": "Block/Stop"
+      "en": "Block"
     }
   ],
   "jiaomian": [
@@ -18366,7 +18366,7 @@
   "zhuiping": [
     {
       "char": "追平",
-      "en": "Tie/Equalize"
+      "en": "Tie"
     }
   ],
   "qiangjie": [
@@ -18408,13 +18408,13 @@
   "sanmen": [
     {
       "char": "三门",
-      "en": "Three gates/doors"
+      "en": "Three gates"
     }
   ],
   "meizhi": [
     {
       "char": "每支",
-      "en": "Each (stem/branch)"
+      "en": "Each (stem"
     }
   ],
   "yidui": [
@@ -18426,7 +18426,7 @@
   "duozhi": [
     {
       "char": "多支",
-      "en": "Multiple stems/branches"
+      "en": "Multiple stems"
     }
   ],
   "bendui": [
@@ -18438,7 +18438,7 @@
   "juemiao": [
     {
       "char": "绝妙",
-      "en": "Brilliant/Wonderful"
+      "en": "Brilliant"
     }
   ],
   "xingfenbuyi": [
@@ -18528,13 +18528,13 @@
   "zulan": [
     {
       "char": "阻拦",
-      "en": "Harassment/Interception"
+      "en": "Harassment"
     }
   ],
   "tuifang": [
     {
       "char": "推放",
-      "en": "Push-off/Discharge"
+      "en": "Push-off"
     }
   ],
   "mingzhonglv": [
@@ -18570,7 +18570,7 @@
   "lada": [
     {
       "char": "拉大",
-      "en": "Expand/Increase"
+      "en": "Expand"
     }
   ],
   "mianke": [
@@ -18582,13 +18582,13 @@
   "huoqiuzhe": [
     {
       "char": "获球者",
-      "en": "Ball Winner/Receiver"
+      "en": "Ball Winner"
     }
   ],
   "duikangsai": [
     {
       "char": "对抗赛",
-      "en": "Match/Competition"
+      "en": "Match"
     }
   ],
   "sandui": [
@@ -18612,7 +18612,7 @@
   "saichang": [
     {
       "char": "赛场",
-      "en": "Court/Arena"
+      "en": "Court"
     }
   ],
   "jingongxing": [
@@ -18648,7 +18648,7 @@
   "paoyu": [
     {
       "char": "抛于",
-      "en": "thrown to/upon"
+      "en": "thrown to"
     }
   ],
   "houyin": [
@@ -18672,13 +18672,13 @@
   "shashangli": [
     {
       "char": "杀伤力",
-      "en": "lethality/power to injure"
+      "en": "lethality"
     }
   ],
   "houjiao": [
     {
       "char": "后脚",
-      "en": "last step/final move"
+      "en": "last step"
     }
   ],
   "qianshang": [
@@ -18810,25 +18810,25 @@
   "benchang": [
     {
       "char": "本场",
-      "en": "This game/match"
+      "en": "This game"
     }
   ],
   "qunei": [
     {
       "char": "区内",
-      "en": "Within the zone/area"
+      "en": "Within the zone"
     }
   ],
   "cixu": [
     {
       "char": "次序",
-      "en": "Order/Sequence"
+      "en": "Order"
     }
   ],
   "buzuo": [
     {
       "char": "不作",
-      "en": "Not applicable/Invalid"
+      "en": "Not applicable"
     }
   ],
   "jianshangtu": [
@@ -18852,13 +18852,13 @@
   "fendiju": [
     {
       "char": "分第局",
-      "en": "Score the [number]th game/set"
+      "en": "Score the [number]th game"
     }
   ],
   "jueshengju": [
     {
       "char": "决胜局",
-      "en": "Deciding game/set"
+      "en": "Deciding game"
     }
   ],
   "jufen": [
@@ -18906,7 +18906,7 @@
   "jingxi": [
     {
       "char": "精细",
-      "en": "Fine/Detailed"
+      "en": "Fine"
     }
   ],
   "quanmiantigao": [
@@ -18918,7 +18918,7 @@
   "shangben": [
     {
       "char": "上本",
-      "en": "Up to date/Current"
+      "en": "Up to date"
     }
   ],
   "duolun": [
@@ -18972,7 +18972,7 @@
   "aomiao": [
     {
       "char": "奥妙",
-      "en": "Secret, intricacy"
+      "en": "Secret"
     }
   ],
   "qiufa": [
@@ -19086,7 +19086,7 @@
   "chuilian": [
     {
       "char": "锤炼",
-      "en": "To refine, to train"
+      "en": "To refine"
     }
   ],
   "panpa": [
@@ -19230,37 +19230,37 @@
   "yijianli": [
     {
       "char": "以健力",
-      "en": "With strength/vigor"
+      "en": "With strength"
     }
   ],
   "taoyeqingcao": [
     {
       "char": "陶冶情操",
-      "en": "Cultivate sentiments/refine character"
+      "en": "Cultivate sentiments"
     }
   ],
   "dafangxiang": [
     {
       "char": "大方向",
-      "en": "Overall direction/main trend"
+      "en": "Overall direction"
     }
   ],
   "yunlvgan": [
     {
       "char": "韵律感",
-      "en": "Rhythm sense/rhythmic feeling"
+      "en": "Rhythm sense"
     }
   ],
   "biaoxianli": [
     {
       "char": "表现力",
-      "en": "Expressiveness/performance ability"
+      "en": "Expressiveness"
     }
   ],
   "jinqujingshen": [
     {
       "char": "进取精神",
-      "en": "Spirit of initiative/enterprising spirit"
+      "en": "Spirit of initiative"
     }
   ],
   "jianfangda": [
@@ -19272,19 +19272,19 @@
   "jingjixing": [
     {
       "char": "竞技性",
-      "en": "Competition/Competitive nature"
+      "en": "Competition"
     }
   ],
   "zhice": [
     {
       "char": "至侧",
-      "en": "At the side/extreme side"
+      "en": "At the side"
     }
   ],
   "zhuandu": [
     {
       "char": "转度",
-      "en": "Transition/Change of degree"
+      "en": "Transition"
     }
   ],
   "disige": [
@@ -19326,13 +19326,13 @@
   "huanyuancheng": [
     {
       "char": "还原成",
-      "en": "Restore to/Return to"
+      "en": "Restore to"
     }
   ],
   "tongshou": [
     {
       "char": "同收",
-      "en": "Same collection/Same gathering"
+      "en": "Same collection"
     }
   ],
   "cepingju": [
@@ -19452,7 +19452,7 @@
   "liupai": [
     {
       "char": "流派",
-      "en": "School/Faction"
+      "en": "School"
     }
   ],
   "gejutese": [
@@ -19494,7 +19494,7 @@
   "jiaoshao": [
     {
       "char": "较少",
-      "en": "Few/Limited"
+      "en": "Few"
     }
   ],
   "wushubisai": [
@@ -19542,7 +19542,7 @@
   "liqishi": [
     {
       "char": "礼起势",
-      "en": "Salute/Starting Position"
+      "en": "Salute"
     }
   ],
   "qiaoqie": [
@@ -19650,19 +19650,19 @@
   "qixin": [
     {
       "char": "齐心",
-      "en": "Same Heart/United Spirit"
+      "en": "Same Heart"
     }
   ],
   "fayang": [
     {
       "char": "发扬",
-      "en": "Promote/Spread"
+      "en": "Promote"
     }
   ],
   "quanzhang": [
     {
       "char": "拳掌",
-      "en": "Fist Technique/Hand Style"
+      "en": "Fist Technique"
     }
   ],
   "erchang": [
@@ -19674,19 +19674,19 @@
   "duancu": [
     {
       "char": "短促",
-      "en": "Brief/Short"
+      "en": "Brief"
     }
   ],
   "hansheng": [
     {
       "char": "喊声",
-      "en": "Shouting/Call"
+      "en": "Shouting"
     }
   ],
   "xiangxing": [
     {
       "char": "象形",
-      "en": "Pictorial/Representational"
+      "en": "Pictorial"
     }
   ],
   "ruhequan": [
@@ -19704,31 +19704,31 @@
   "tuqi": [
     {
       "char": "吐气",
-      "en": "Exhale/Project Energy"
+      "en": "Exhale"
     }
   ],
   "zhengjin": [
     {
       "char": "整劲",
-      "en": "Gather Strength/Form a Whole"
+      "en": "Gather Strength"
     }
   ],
   "cuili": [
     {
       "char": "催力",
-      "en": "Stimulate/Encourage"
+      "en": "Stimulate"
     }
   ],
   "weifeng": [
     {
       "char": "威风",
-      "en": "Imposing/Magnificent"
+      "en": "Imposing"
     }
   ],
   "jingqishen": [
     {
       "char": "精气神",
-      "en": "Vital Energy/Spirit"
+      "en": "Vital Energy"
     }
   ],
   "shuangdie": [
@@ -19878,7 +19878,7 @@
   "bodou": [
     {
       "char": "搏斗",
-      "en": "Combat, Fighting"
+      "en": "Combat"
     }
   ],
   "payong": [
@@ -19896,7 +19896,7 @@
   "shitou": [
     {
       "char": "时头",
-      "en": "Beginning, Start"
+      "en": "Beginning"
     }
   ],
   "shaogaoyu": [
@@ -19926,7 +19926,7 @@
   "sizi": [
     {
       "char": "私自",
-      "en": "Secretly, Privately"
+      "en": "Secretly"
     }
   ],
   "qianyong": [
@@ -19938,7 +19938,7 @@
   "chuandai": [
     {
       "char": "穿戴",
-      "en": "Wearing, Putting on"
+      "en": "Wearing"
     }
   ],
   "rushui": [
@@ -20152,19 +20152,19 @@
   "pengjisheng": [
     {
       "char": "碰击声",
-      "en": "Sound of impact/Collision"
+      "en": "Sound of impact"
     }
   ],
   "fenhe": [
     {
       "char": "分合",
-      "en": "Separation and reunion/Division and union"
+      "en": "Separation and reunion"
     }
   ],
   "youpingbu": [
     {
       "char": "有平步",
-      "en": "Have a step/Take a step"
+      "en": "Have a step"
     }
   ],
   "dachai": [
@@ -20218,7 +20218,7 @@
   "zhuanquan": [
     {
       "char": "转圈",
-      "en": "Turn around/Make a circle"
+      "en": "Turn around"
     }
   ],
   "shoulashou": [
@@ -20248,7 +20248,7 @@
   "youpan": [
     {
       "char": "有盘",
-      "en": "Have a disc/Have a hoop"
+      "en": "Have a disc"
     }
   ],
   "xuduozhong": [
@@ -20266,37 +20266,37 @@
   "duanping": [
     {
       "char": "端平",
-      "en": "Level/Even"
+      "en": "Level"
     }
   ],
   "neikou": [
     {
       "char": "内扣",
-      "en": "Inward Turn/Fold"
+      "en": "Inward Turn"
     }
   ],
   "taiyong": [
     {
       "char": "抬用",
-      "en": "Raise and Use/Lift and Apply"
+      "en": "Raise and Use"
     }
   ],
   "jiejiao": [
     {
       "char": "接交",
-      "en": "Connect/Exchange"
+      "en": "Connect"
     }
   ],
   "shangtou": [
     {
       "char": "上头",
-      "en": "Above/On Top"
+      "en": "Above"
     }
   ],
   "chadui": [
     {
       "char": "差对",
-      "en": "Difference/Discrepancy"
+      "en": "Difference"
     }
   ],
   "huxiangpeihe": [

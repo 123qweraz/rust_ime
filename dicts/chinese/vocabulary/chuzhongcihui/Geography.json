@@ -2,13 +2,13 @@
   "shengchan": [
     {
       "char": "盛产",
-      "en": "Abundant in/Rich in"
+      "en": "Abundant in"
     }
   ],
   "jingji": [
     {
       "char": "荆棘",
-      "en": "Thorns/Briars"
+      "en": "Thorns"
     }
   ],
   "difang": [
@@ -26,7 +26,7 @@
   "qiwen": [
     {
       "char": "奇文",
-      "en": "Qiwén (Likely a word or phrase, needs context)"
+      "en": "Qiwén (Likely a word or phrase"
     }
   ],
   "ditu": [
@@ -38,7 +38,7 @@
   "bujin": [
     {
       "char": "不尽",
-      "en": "Endless; inexhaustible"
+      "en": "Endless"
     }
   ],
   "nanfei": [
@@ -172,7 +172,7 @@
   "dishi": [
     {
       "char": "地势",
-      "en": "Terrain/Landscape"
+      "en": "Terrain"
     },
     {
       "char": "低时",
@@ -182,7 +182,7 @@
   "tushuo": [
     {
       "char": "图说",
-      "en": "Caption/Illustration"
+      "en": "Caption"
     }
   ],
   "beihuiguixian": [
@@ -254,7 +254,7 @@
   "shuidao": [
     {
       "char": "水道",
-      "en": "Canal/Waterway"
+      "en": "Canal"
     }
   ],
   "jiehe": [
@@ -332,13 +332,13 @@
   "shiyong": [
     {
       "char": "食用",
-      "en": "Edible/for consumption"
+      "en": "Edible"
     }
   ],
   "gezurenmin": [
     {
       "char": "各族人民",
-      "en": "Ethnic Groups/Various Peoples"
+      "en": "Ethnic Groups"
     }
   ],
   "diliweizhi": [
@@ -368,23 +368,23 @@
   "guotu": [
     {
       "char": "国土",
-      "en": "Territory/Land"
+      "en": "Territory"
     },
     {
       "char": "过图",
-      "en": "(Likely a specific term, context needed - possibly \"Past\" or \"Former\")"
+      "en": "(Likely a specific term"
     }
   ],
   "weizhitu": [
     {
       "char": "位置图",
-      "en": "Map/Location map"
+      "en": "Map"
     }
   ],
   "qundao": [
     {
       "char": "群岛",
-      "en": "Archipelago/Island group"
+      "en": "Archipelago"
     }
   ],
   "nanhai": [
@@ -400,13 +400,13 @@
     },
     {
       "char": "熠熠",
-      "en": "Gleaming/Sparkling"
+      "en": "Gleaming"
     }
   ],
   "shixian": [
     {
       "char": "市县",
-      "en": "County-level Cities/Counties"
+      "en": "County-level Cities"
     }
   ],
   "jifengqihou": [
@@ -436,13 +436,13 @@
   "yiji": [
     {
       "char": "遗迹",
-      "en": "Relics/Ruins"
+      "en": "Relics"
     }
   ],
   "biaoshi": [
     {
       "char": "标示",
-      "en": "Marker/Sign"
+      "en": "Marker"
     }
   ],
   "disike": [
@@ -524,7 +524,7 @@
   "youyu": [
     {
       "char": "由鱼",
-      "en": "By fish (literally, \"by fish\")"
+      "en": "By fish (literally"
     }
   ],
   "shishi": [
@@ -598,7 +598,7 @@
   "chengqu": [
     {
       "char": "城区",
-      "en": "Urban Area/District"
+      "en": "Urban Area"
     }
   ],
   "yunhe": [
@@ -652,7 +652,7 @@
   "chuliang": [
     {
       "char": "储量",
-      "en": "Reserves/Quantity"
+      "en": "Reserves"
     }
   ],
   "chukou": [
@@ -664,7 +664,7 @@
   "mucao": [
     {
       "char": "牧草",
-      "en": "Pasture/Grassland"
+      "en": "Pasture"
     }
   ],
   "beibingyang": [
@@ -694,7 +694,7 @@
   "jijie": [
     {
       "char": "集结",
-      "en": "gather; assemble"
+      "en": "gather"
     }
   ],
   "duanque": [
@@ -724,7 +724,7 @@
   "sheshi": [
     {
       "char": "设施",
-      "en": "Facility/Infrastructure"
+      "en": "Facility"
     }
   ],
   "tushang": [
@@ -846,13 +846,13 @@
   "tuli": [
     {
       "char": "图例",
-      "en": "Legend / Key"
+      "en": "Legend"
     }
   ],
   "juluo": [
     {
       "char": "聚落",
-      "en": "Settlement / Village"
+      "en": "Settlement"
     }
   ],
   "jingxian": [
@@ -874,7 +874,7 @@
   "shanchuan": [
     {
       "char": "山川",
-      "en": "Mountains / Ranges"
+      "en": "Mountains"
     }
   ],
   "hainandao": [
@@ -892,13 +892,13 @@
   "zhongnian": [
     {
       "char": "终年",
-      "en": "Perpetually / Throughout the year"
+      "en": "Perpetually"
     }
   ],
   "shiyi": [
     {
       "char": "示意",
-      "en": "Illustration / Diagram"
+      "en": "Illustration"
     }
   ],
   "dongnan": [
@@ -916,7 +916,7 @@
   "hangyun": [
     {
       "char": "航运",
-      "en": "Shipping/Navigation"
+      "en": "Shipping"
     },
     {
       "char": "杭运",
@@ -944,7 +944,7 @@
   "jingying": [
     {
       "char": "晶莹",
-      "en": "Translucent; Lustrous"
+      "en": "Translucent"
     }
   ],
   "daxing": [
@@ -1128,7 +1128,7 @@
   "cunluo": [
     {
       "char": "村落",
-      "en": "Village, settlement"
+      "en": "Village"
     }
   ],
   "gongnongye": [
@@ -1146,13 +1146,13 @@
   "muqu": [
     {
       "char": "牧区",
-      "en": "Pastoral area/Ranchland"
+      "en": "Pastoral area"
     }
   ],
   "kaifaliyong": [
     {
       "char": "开发利用",
-      "en": "Develop/Utilize"
+      "en": "Develop"
     }
   ],
   "xiqidong": [
@@ -1164,11 +1164,11 @@
   "zhuji": [
     {
       "char": "注记",
-      "en": "Note/Annotation"
+      "en": "Note"
     },
     {
       "char": "逐级",
-      "en": "Step by step; Gradually"
+      "en": "Step by step"
     },
     {
       "char": "诸暨",
@@ -1196,7 +1196,7 @@
   "yuye": [
     {
       "char": "渔业",
-      "en": "Fisheries/Fishing"
+      "en": "Fisheries"
     }
   ],
   "banqiu": [
@@ -1220,7 +1220,7 @@
   "wanglai": [
     {
       "char": "往来",
-      "en": "Exchange/Communicate"
+      "en": "Exchange"
     }
   ],
   "zhengce": [
@@ -1292,7 +1292,7 @@
   "wadi": [
     {
       "char": "洼地",
-      "en": "Low-lying area/Depression"
+      "en": "Low-lying area"
     }
   ],
   "fengpei": [
@@ -1304,7 +1304,7 @@
   "shuyu": [
     {
       "char": "束于",
-      "en": "Tied to/Around"
+      "en": "Tied to"
     }
   ],
   "minju": [
@@ -1322,19 +1322,19 @@
   "youren": [
     {
       "char": "游人",
-      "en": "Traveler; tourist"
+      "en": "Traveler"
     }
   ],
   "muye": [
     {
       "char": "牧业",
-      "en": "Ranching/Pastoralism"
+      "en": "Ranching"
     }
   ],
   "cunmin": [
     {
       "char": "村民",
-      "en": "Villager/Farmer"
+      "en": "Villager"
     }
   ],
   "fadaguojia": [
@@ -1352,7 +1352,7 @@
   "yanan": [
     {
       "char": "沿岸",
-      "en": "Coast/Shoreline"
+      "en": "Coast"
     }
   ],
   "lvyouye": [
@@ -1464,7 +1464,7 @@
   "didai": [
     {
       "char": "地带",
-      "en": "Area/Region"
+      "en": "Area"
     }
   ],
   "minjiang": [
@@ -1486,19 +1486,19 @@
   "sitongbada": [
     {
       "char": "四通八达",
-      "en": "Well-connected/Comprehensive"
+      "en": "Well-connected"
     }
   ],
   "xietong": [
     {
       "char": "协同",
-      "en": "Collaborative/Cooperation"
+      "en": "Collaborative"
     }
   ],
   "waidi": [
     {
       "char": "外地",
-      "en": "Foreign/Out-of-town"
+      "en": "Foreign"
     },
     {
       "char": "外敌",
@@ -1508,7 +1508,7 @@
   "wuchan": [
     {
       "char": "物产",
-      "en": "Resources/Goods"
+      "en": "Resources"
     }
   ],
   "zhiwuyuan": [
@@ -1526,7 +1526,7 @@
   "kaicai": [
     {
       "char": "开采",
-      "en": "Mining/Extraction"
+      "en": "Mining"
     }
   ],
   "yaodong": [
@@ -1538,7 +1538,7 @@
   "kaitong": [
     {
       "char": "开通",
-      "en": "Open/Connect"
+      "en": "Open"
     }
   ],
   "chengshiqun": [
@@ -1550,7 +1550,7 @@
   "bizhong": [
     {
       "char": "比重",
-      "en": "Proportion/Weight"
+      "en": "Proportion"
     }
   ],
   "sichouzhilu": [
@@ -1590,7 +1590,7 @@
   "lvdi": [
     {
       "char": "绿地",
-      "en": "Green space/Green area"
+      "en": "Green space"
     }
   ],
   "andisishanmai": [
@@ -1712,7 +1712,7 @@
   "guangbu": [
     {
       "char": "广布",
-      "en": "Spread widely/Extensively"
+      "en": "Spread widely"
     }
   ],
   "daluxingqihou": [
@@ -1730,13 +1730,13 @@
   "youyue": [
     {
       "char": "优越",
-      "en": "Superior/Excellent/Favorable"
+      "en": "Superior"
     }
   ],
   "baodi": [
     {
       "char": "宝地",
-      "en": "Valuable land/Treasure land"
+      "en": "Valuable land"
     }
   ],
   "shatealabo": [
@@ -1760,7 +1760,7 @@
   "ganliu": [
     {
       "char": "干流",
-      "en": "Mainstream/Main channel"
+      "en": "Mainstream"
     }
   ],
   "xiayou": [
@@ -1788,7 +1788,7 @@
   "hanghai": [
     {
       "char": "航海",
-      "en": "Navigation/Seafaring"
+      "en": "Navigation"
     }
   ],
   "changqi": [
@@ -1880,7 +1880,7 @@
   "tubiao": [
     {
       "char": "图表",
-      "en": "Chart/Graph"
+      "en": "Chart"
     }
   ],
   "zengzhanglv": [
@@ -1904,7 +1904,7 @@
   "buyu": [
     {
       "char": "哺育",
-      "en": "Nourish, raise"
+      "en": "Nourish"
     }
   ],
   "kaiyuan": [
@@ -1916,7 +1916,7 @@
   "jieliu": [
     {
       "char": "节流",
-      "en": "Cutback/Conservation"
+      "en": "Cutback"
     }
   ],
   "meitanziyuan": [
@@ -1928,7 +1928,7 @@
   "yindizhiyi": [
     {
       "char": "因地制宜",
-      "en": "Localized/Tailored to local conditions"
+      "en": "Localized"
     }
   ],
   "jiazhu": [
@@ -1994,7 +1994,7 @@
   "renyuan": [
     {
       "char": "人缘",
-      "en": "Personal connections/Good relationships"
+      "en": "Personal connections"
     }
   ],
   "hasakesitan": [
@@ -2024,7 +2024,7 @@
   "xiangtong": [
     {
       "char": "相通",
-      "en": "Connected / Linked"
+      "en": "Connected"
     }
   ],
   "moxigewan": [
@@ -2084,7 +2084,7 @@
   "geju": [
     {
       "char": "各具",
-      "en": "Each unique/distinct"
+      "en": "Each unique"
     }
   ],
   "zhongxiayou": [
@@ -2096,7 +2096,7 @@
   "zhicheng": [
     {
       "char": "之称",
-      "en": "Known as, referred to as"
+      "en": "Known as"
     },
     {
       "char": "枝城",
@@ -2142,7 +2142,7 @@
   "yanxian": [
     {
       "char": "沿线",
-      "en": "Along the line, along the route"
+      "en": "Along the line"
     }
   ],
   "shuiwang": [
@@ -2154,13 +2154,13 @@
   "weijie": [
     {
       "char": "为界",
-      "en": "For the sake of, for the benefit of"
+      "en": "For the sake of"
     }
   ],
   "natiao": [
     {
       "char": "哪条",
-      "en": "Which one, which clause"
+      "en": "Which one"
     }
   ],
   "dadao": [
@@ -2184,7 +2184,7 @@
   "ziranfengguang": [
     {
       "char": "自然风光",
-      "en": "Natural scenery, landscape"
+      "en": "Natural scenery"
     }
   ],
   "zhibei": [
@@ -2202,25 +2202,25 @@
   "yunji": [
     {
       "char": "云集",
-      "en": "Gather/Congregate"
+      "en": "Gather"
     }
   ],
   "zhaokai": [
     {
       "char": "召开",
-      "en": "Hold/Convene"
+      "en": "Hold"
     }
   ],
   "deyiyu": [
     {
       "char": "得益于",
-      "en": "Benefiting from/Due to"
+      "en": "Benefiting from"
     }
   ],
   "laodongli": [
     {
       "char": "劳动力",
-      "en": "Labor force/Workforce"
+      "en": "Labor force"
     }
   ],
   "dongnanya": [
@@ -2232,7 +2232,7 @@
   "chejian": [
     {
       "char": "车间",
-      "en": "Workshop/Factory floor"
+      "en": "Workshop"
     }
   ],
   "yuegangao": [
@@ -2256,7 +2256,7 @@
   "bolanhui": [
     {
       "char": "博览会",
-      "en": "Trade fair/Exhibition"
+      "en": "Trade fair"
     }
   ],
   "xiangxi": [
@@ -2278,7 +2278,7 @@
   "fengqing": [
     {
       "char": "风情",
-      "en": "Charm/Scenery/Style"
+      "en": "Charm"
     },
     {
       "char": "凤庆",
@@ -2452,11 +2452,11 @@
   "yangyang": [
     {
       "char": "洋洋",
-      "en": "Vast/Extensive"
+      "en": "Vast"
     },
     {
       "char": "样样",
-      "en": "Everything, all"
+      "en": "Everything"
     },
     {
       "char": "养羊",
@@ -2662,7 +2662,7 @@
   "dushang": [
     {
       "char": "读上",
-      "en": "Upper (e.g., Upper reaches)"
+      "en": "Upper (e.g."
     }
   ],
   "huabeipingyuan": [
@@ -2702,7 +2702,7 @@
     },
     {
       "char": "淤积",
-      "en": "To accumulate, to silt up"
+      "en": "To accumulate"
     }
   ],
   "hekou": [
@@ -2774,7 +2774,7 @@
   "xiagu": [
     {
       "char": "峡谷",
-      "en": "Gorge/Canyon"
+      "en": "Gorge"
     }
   ],
   "gaoda": [
@@ -2786,19 +2786,19 @@
   "gedian": [
     {
       "char": "各点",
-      "en": "Each point/Location"
+      "en": "Each point"
     }
   ],
   "xiri": [
     {
       "char": "昔日",
-      "en": "In the past/Formerly"
+      "en": "In the past"
     }
   ],
   "pinkundiqu": [
     {
       "char": "贫困地区",
-      "en": "Poor areas/Impoverished regions"
+      "en": "Poor areas"
     }
   ],
   "youshihubu": [
@@ -2810,7 +2810,7 @@
   "duozuo": [
     {
       "char": "多座",
-      "en": "Many/Several"
+      "en": "Many"
     }
   ],
   "xianlu": [
@@ -2840,7 +2840,7 @@
   "juxing": [
     {
       "char": "巨型",
-      "en": "Gigantic/Huge"
+      "en": "Gigantic"
     }
   ],
   "kexuecheng": [
@@ -2868,7 +2868,7 @@
   "shide": [
     {
       "char": "时得",
-      "en": "As Needed, When Necessary"
+      "en": "As Needed"
     }
   ],
   "shenzhen": [
@@ -2892,7 +2892,7 @@
   "huanbao": [
     {
       "char": "环抱",
-      "en": "Embraced/Enclosed"
+      "en": "Embraced"
     }
   ],
   "feiji": [
@@ -2958,7 +2958,7 @@
   "danyi": [
     {
       "char": "丹依",
-      "en": "(This appears to be a proper noun - likely a place or person, no direct translation)"
+      "en": "(This appears to be a proper noun - likely a place or person"
     }
   ],
   "yuegao": [
@@ -3012,7 +3012,7 @@
   "bushi": [
     {
       "char": "不失",
-      "en": "not lacking, still retaining"
+      "en": "not lacking"
     }
   ],
   "huanjingwuranwenti": [
@@ -3036,7 +3036,7 @@
   "chandi": [
     {
       "char": "产地",
-      "en": "Origin/Source"
+      "en": "Origin"
     }
   ],
   "yicong": [
@@ -3054,7 +3054,7 @@
   "renjia": [
     {
       "char": "人家",
-      "en": "House/Residence"
+      "en": "House"
     }
   ],
   "diwuke": [
@@ -3102,7 +3102,7 @@
   "fenqu": [
     {
       "char": "分区",
-      "en": "Zone/Division"
+      "en": "Zone"
     }
   ],
   "aerbeisishanmai": [
@@ -3132,13 +3132,13 @@
   "dingju": [
     {
       "char": "定居",
-      "en": "To settle/Reside"
+      "en": "To settle"
     }
   ],
   "heiserenzhong": [
     {
       "char": "黑色人种",
-      "en": "Black People/Black Race"
+      "en": "Black People"
     }
   ],
   "guoqi": [
@@ -3326,7 +3326,7 @@
   "gehaixiangwang": [
     {
       "char": "隔海相望",
-      "en": "Across the sea, looking at each other"
+      "en": "Across the sea"
     }
   ],
   "afuhan": [
@@ -3462,7 +3462,7 @@
     },
     {
       "char": "游历",
-      "en": "Travel/Tour"
+      "en": "Travel"
     }
   ],
   "liyade": [
@@ -3474,7 +3474,7 @@
   "liuyu": [
     {
       "char": "流域",
-      "en": "basin/watershed"
+      "en": "basin"
     }
   ],
   "yibei": [
@@ -3486,7 +3486,7 @@
   "zaipei": [
     {
       "char": "栽培",
-      "en": "cultivation/planting"
+      "en": "cultivation"
     }
   ],
   "jiebing": [
@@ -3538,7 +3538,7 @@
   "faxiangdi": [
     {
       "char": "发祥地",
-      "en": "Origin/Birthplace"
+      "en": "Origin"
     }
   ],
   "huangheliuyu": [
@@ -3550,7 +3550,7 @@
   "fenjie": [
     {
       "char": "分界",
-      "en": "Boundary/Division"
+      "en": "Boundary"
     }
   ],
   "zhiliu": [
@@ -3568,13 +3568,13 @@
   "gaochu": [
     {
       "char": "高出",
-      "en": "Higher/Above"
+      "en": "Higher"
     }
   ],
   "zongheng": [
     {
       "char": "纵横",
-      "en": "Extensive/Interlaced"
+      "en": "Extensive"
     }
   ],
   "shuiwei": [
@@ -3608,7 +3608,7 @@
     },
     {
       "char": "同行",
-      "en": "To accompany, to travel together"
+      "en": "To accompany"
     }
   ],
   "shuilu": [
@@ -3624,7 +3624,7 @@
   "jingjidai": [
     {
       "char": "经济带",
-      "en": "Economic Zone/Belt"
+      "en": "Economic Zone"
     }
   ],
   "shuiwuran": [
@@ -3654,7 +3654,7 @@
   "chanqu": [
     {
       "char": "产区",
-      "en": "region, area"
+      "en": "region"
     }
   ],
   "hetian": [
@@ -3672,25 +3672,25 @@
   "jianshezhe": [
     {
       "char": "建设者",
-      "en": "builder, constructor"
+      "en": "builder"
     }
   ],
   "youhua": [
     {
       "char": "优化",
-      "en": "optimization, to optimize"
+      "en": "optimization"
     }
   ],
   "gongtongti": [
     {
       "char": "共同体",
-      "en": "community, entity"
+      "en": "community"
     }
   ],
   "kuangchan": [
     {
       "char": "矿产",
-      "en": "mineral, ore"
+      "en": "mineral"
     }
   ],
   "dachengshi": [
@@ -3702,7 +3702,7 @@
   "biaozhixing": [
     {
       "char": "标志性",
-      "en": "landmark, iconic"
+      "en": "landmark"
     }
   ],
   "xinzhu": [
@@ -3714,7 +3714,7 @@
   "chengpian": [
     {
       "char": "成片",
-      "en": "in blocks, in a continuous area"
+      "en": "in blocks"
     }
   ],
   "gucheng": [
@@ -3768,7 +3768,7 @@
   "yiyou": [
     {
       "char": "宜游",
-      "en": "Suitable for tourism/Tourist-friendly"
+      "en": "Suitable for tourism"
     }
   ],
   "yaogu": [
@@ -3780,7 +3780,7 @@
   "duyou": [
     {
       "char": "独有",
-      "en": "Unique, exclusive"
+      "en": "Unique"
     }
   ],
   "zuotu": [
@@ -3810,7 +3810,7 @@
   "jianqi": [
     {
       "char": "建起",
-      "en": "built up, constructed"
+      "en": "built up"
     }
   ],
   "gonggongsheshi": [
@@ -3822,7 +3822,7 @@
   "zhidi": [
     {
       "char": "之地",
-      "en": "place, location"
+      "en": "place"
     },
     {
       "char": "直抵",
@@ -3880,7 +3880,7 @@
   "yilu": [
     {
       "char": "一路",
-      "en": "All along/The whole way"
+      "en": "All along"
     }
   ],
   "wencha": [
@@ -3892,7 +3892,7 @@
   "caizhai": [
     {
       "char": "采摘",
-      "en": "To harvest/Pick"
+      "en": "To harvest"
     }
   ],
   "chileige": [
@@ -3916,7 +3916,7 @@
   "jisandi": [
     {
       "char": "集散地",
-      "en": "Gathering/Distribution point"
+      "en": "Gathering"
     }
   ],
   "wuqiahui": [
@@ -3976,7 +3976,7 @@
   "mingyun": [
     {
       "char": "命运",
-      "en": "Fate, Destiny"
+      "en": "Fate"
     }
   ],
   "qianchu": [
@@ -4018,13 +4018,13 @@
   "yanglao": [
     {
       "char": "养老",
-      "en": "Retirement, Elderly care"
+      "en": "Retirement"
     }
   ],
   "jiazhi": [
     {
       "char": "加之",
-      "en": "Moreover/In addition"
+      "en": "Moreover"
     }
   ],
   "zaisheng": [
@@ -4066,7 +4066,7 @@
   "xieding": [
     {
       "char": "协定",
-      "en": "Agreement/Protocol"
+      "en": "Agreement"
     }
   ],
   "kaifajihua": [
@@ -4078,11 +4078,11 @@
   "shili": [
     {
       "char": "实力",
-      "en": "strength, power"
+      "en": "strength"
     },
     {
       "char": "势力",
-      "en": "Power/Influence/Force"
+      "en": "Power"
     }
   ],
   "ningbo": [
@@ -4094,7 +4094,7 @@
   "sheyou": [
     {
       "char": "设有",
-      "en": "Established/Located"
+      "en": "Established"
     }
   ],
   "diyishou": [
@@ -4112,7 +4112,7 @@
   "dapian": [
     {
       "char": "大片",
-      "en": "Vast/Large"
+      "en": "Vast"
     }
   ],
   "youju": [
@@ -4148,7 +4148,7 @@
   "shanding": [
     {
       "char": "山顶",
-      "en": "Peak/Summit"
+      "en": "Peak"
     }
   ],
   "changtuqichezhan": [
@@ -4166,7 +4166,7 @@
   "jiequ": [
     {
       "char": "街区",
-      "en": "District/Neighborhood"
+      "en": "District"
     }
   ],
   "qidazhou": [
@@ -4178,7 +4178,7 @@
   "fenjiexian": [
     {
       "char": "分界线",
-      "en": "Boundary Line/Divisional Line"
+      "en": "Boundary Line"
     }
   ],
   "bailinghai": [
@@ -4196,19 +4196,19 @@
   "yangda": [
     {
       "char": "洋大",
-      "en": "Big Ocean/Oceanic"
+      "en": "Big Ocean"
     }
   ],
   "yangtu": [
     {
       "char": "洋图",
-      "en": "Ocean Chart/Map"
+      "en": "Ocean Chart"
     }
   ],
   "shusongdao": [
     {
       "char": "输送到",
-      "en": "Delivered to/Sent to"
+      "en": "Delivered to"
     }
   ],
   "xixiboliya": [
@@ -4220,7 +4220,7 @@
   "wula": [
     {
       "char": "乌拉",
-      "en": "Ura (a place name, likely in Siberia)"
+      "en": "Ura (a place name"
     }
   ],
   "handai": [
@@ -4446,7 +4446,7 @@
   "bosi": [
     {
       "char": "波斯",
-      "en": "Persia/Iran"
+      "en": "Persia"
     }
   ],
   "meishu": [
@@ -4464,19 +4464,19 @@
   "yiju": [
     {
       "char": "宜居",
-      "en": "Livable; habitable"
+      "en": "Livable"
     }
   ],
   "shouwang": [
     {
       "char": "守望",
-      "en": "Guarding/Watching"
+      "en": "Guarding"
     }
   ],
   "zhepian": [
     {
       "char": "这片",
-      "en": "This area/This piece"
+      "en": "This area"
     }
   ],
   "duowan": [
@@ -4648,7 +4648,7 @@
   "fushi": [
     {
       "char": "服饰",
-      "en": "apparel/clothing"
+      "en": "apparel"
     },
     {
       "char": "副食",
@@ -4688,7 +4688,7 @@
   "suyou": [
     {
       "char": "素有",
-      "en": "traditionally/originally"
+      "en": "traditionally"
     },
     {
       "char": "酥油",
@@ -4716,13 +4716,13 @@
   "maomi": [
     {
       "char": "茂密",
-      "en": "lush/dense"
+      "en": "lush"
     }
   ],
   "fenbuqu": [
     {
       "char": "分布区",
-      "en": "distribution area/range"
+      "en": "distribution area"
     }
   ],
   "shandiqihou": [
@@ -4734,13 +4734,13 @@
   "shengxing": [
     {
       "char": "盛行",
-      "en": "prevalent/dominant"
+      "en": "prevalent"
     }
   ],
   "lianmian": [
     {
       "char": "连绵",
-      "en": "continuous/contiguous"
+      "en": "continuous"
     }
   ],
   "huangmo": [
@@ -4776,7 +4776,7 @@
   "taohua": [
     {
       "char": "桃花",
-      "en": "Peaches (specifically, the flower pea shrub)"
+      "en": "Peaches (specifically"
     }
   ],
   "hukou": [
@@ -4810,7 +4810,7 @@
   "gungun": [
     {
       "char": "滚滚",
-      "en": "Rolling, surging"
+      "en": "Rolling"
     }
   ],
   "duoqianmi": [
@@ -4844,7 +4844,7 @@
   "shangzhongxiayou": [
     {
       "char": "上中下游",
-      "en": "Upper, middle, and lower reaches"
+      "en": "Upper"
     }
   ],
   "gouqu": [
@@ -4892,7 +4892,7 @@
   "mibu": [
     {
       "char": "密布",
-      "en": "Dense with/Covered with"
+      "en": "Dense with"
     }
   ],
   "daomi": [
@@ -4908,7 +4908,7 @@
   "shuichanpin": [
     {
       "char": "水产品",
-      "en": "Seafood/Aquatic Products"
+      "en": "Seafood"
     }
   ],
   "sanxiagongcheng": [
@@ -4932,13 +4932,13 @@
   "jucuo": [
     {
       "char": "举措",
-      "en": "Measure/Action"
+      "en": "Measure"
     }
   ],
   "dujia": [
     {
       "char": "度假",
-      "en": "Vacation/Holiday"
+      "en": "Vacation"
     }
   ],
   "lulu": [
@@ -4954,7 +4954,7 @@
   "suochu": [
     {
       "char": "所处",
-      "en": "Located/Situated"
+      "en": "Located"
     }
   ],
   "mohe": [
@@ -4990,25 +4990,25 @@
   "chaju": [
     {
       "char": "差距",
-      "en": "Gap/Difference"
+      "en": "Gap"
     }
   ],
   "shifanqu": [
     {
       "char": "示范区",
-      "en": "Pilot area/Demonstration zone"
+      "en": "Pilot area"
     }
   ],
   "sandi": [
     {
       "char": "三地",
-      "en": "Three places/Locations"
+      "en": "Three places"
     }
   ],
   "jiurang": [
     {
       "char": "就让",
-      "en": "Let it be/Just let it"
+      "en": "Let it be"
     }
   ],
   "gaoxiong": [
@@ -5062,7 +5062,7 @@
   "jingse": [
     {
       "char": "景色",
-      "en": "Scenery/Landscape"
+      "en": "Scenery"
     }
   ],
   "tainan": [
@@ -5154,7 +5154,7 @@
   "zhuanxing": [
     {
       "char": "转型",
-      "en": "Transformation, transition"
+      "en": "Transformation"
     }
   ],
   "yuanli": [
@@ -5172,13 +5172,13 @@
   "dujutese": [
     {
       "char": "独具特色",
-      "en": "Unique, distinctive"
+      "en": "Unique"
     }
   ],
   "yinji": [
     {
       "char": "印记",
-      "en": "Mark, imprint"
+      "en": "Mark"
     },
     {
       "char": "印迹",
@@ -5194,7 +5194,7 @@
   "taxian": [
     {
       "char": "塌陷",
-      "en": "Collapse, subsidence"
+      "en": "Collapse"
     },
     {
       "char": "塔线",
@@ -5246,19 +5246,19 @@
   "yiliu": [
     {
       "char": "一流",
-      "en": "First-class/Excellent"
+      "en": "First-class"
     }
   ],
   "maijin": [
     {
       "char": "迈进",
-      "en": "Advance/Step forward"
+      "en": "Advance"
     }
   ],
   "fushu": [
     {
       "char": "富庶",
-      "en": "Prosperous/Wealthy"
+      "en": "Prosperous"
     }
   ],
   "wuxi": [
@@ -5270,13 +5270,13 @@
   "dianpu": [
     {
       "char": "店铺",
-      "en": "Shop/Store"
+      "en": "Shop"
     }
   ],
   "gongshangye": [
     {
       "char": "工商业",
-      "en": "Commerce/Business"
+      "en": "Commerce"
     }
   ],
   "guzhen": [
@@ -5288,7 +5288,7 @@
   "fanhua": [
     {
       "char": "繁华",
-      "en": "Prosperous/Thriving"
+      "en": "Prosperous"
     }
   ],
   "maoyiwanglai": [
@@ -5300,7 +5300,7 @@
   "baihuo": [
     {
       "char": "百货",
-      "en": "General merchandise / Variety goods"
+      "en": "General merchandise"
     }
   ],
   "chuxing": [
@@ -5312,19 +5312,19 @@
   "muzhuang": [
     {
       "char": "木桩",
-      "en": "Stake / Post"
+      "en": "Stake"
     }
   ],
   "zhoubiandiqu": [
     {
       "char": "周边地区",
-      "en": "Surrounding areas / Peripheral regions"
+      "en": "Surrounding areas"
     }
   ],
   "yizuozuo": [
     {
       "char": "一座座",
-      "en": "One by one / Each"
+      "en": "One by one"
     }
   ],
   "xinanbu": [
@@ -5336,7 +5336,7 @@
   "wenhe": [
     {
       "char": "温和",
-      "en": "Mild / Temperate"
+      "en": "Mild"
     }
   ],
   "tianfuzhiguo": [
@@ -5348,13 +5348,13 @@
   "guoshang": [
     {
       "char": "过上",
-      "en": "To live / To get oneself"
+      "en": "To live"
     }
   ],
   "fenshui": [
     {
       "char": "分水",
-      "en": "Divert / Branch (river)"
+      "en": "Divert"
     }
   ],
   "neijiang": [
@@ -5366,7 +5366,7 @@
   "dongnanbu": [
     {
       "char": "东南部",
-      "en": "East-southeast / Southeast"
+      "en": "East-southeast"
     }
   ],
   "xianhua": [
@@ -5390,7 +5390,7 @@
   "dazao": [
     {
       "char": "打造",
-      "en": "To build, to create, to develop"
+      "en": "To build"
     }
   ],
   "shijieji": [
@@ -5402,7 +5402,7 @@
   "dapi": [
     {
       "char": "大批",
-      "en": "A large number, a great quantity"
+      "en": "A large number"
     }
   ],
   "hexin": [
@@ -5414,7 +5414,7 @@
   "jidian": [
     {
       "char": "积淀",
-      "en": "Accumulation, foundation, experience"
+      "en": "Accumulation"
     }
   ],
   "jinkou": [
@@ -5468,19 +5468,19 @@
   "zhuangjia": [
     {
       "char": "庄稼",
-      "en": "Grain, crops"
+      "en": "Grain"
     }
   ],
   "guangzhao": [
     {
       "char": "光照",
-      "en": "Sunlight, illumination"
+      "en": "Sunlight"
     }
   ],
   "liyu": [
     {
       "char": "利于",
-      "en": "Beneficial to, advantageous for"
+      "en": "Beneficial to"
     },
     {
       "char": "李煜",
@@ -5572,7 +5572,7 @@
   "shiyu": [
     {
       "char": "始于",
-      "en": "Beginning with/Started"
+      "en": "Beginning with"
     }
   ],
   "quxiantu": [
@@ -5644,13 +5644,13 @@
   "laozuo": [
     {
       "char": "劳作",
-      "en": "Work/Labor"
+      "en": "Work"
     }
   ],
   "zhuoyanyu": [
     {
       "char": "着眼于",
-      "en": "Focus on/Take into account"
+      "en": "Focus on"
     }
   ],
   "zisunhoudai": [
@@ -5704,7 +5704,7 @@
   "shifei": [
     {
       "char": "是非",
-      "en": "right and wrong/true and false"
+      "en": "right and wrong"
     },
     {
       "char": "试飞",
@@ -5720,7 +5720,7 @@
   "bujun": [
     {
       "char": "不均",
-      "en": "uneven/unequal"
+      "en": "uneven"
     }
   ],
   "daoguo": [
@@ -5770,7 +5770,7 @@
   "damianji": [
     {
       "char": "大面积",
-      "en": "Extensive/Large-scale"
+      "en": "Extensive"
     }
   ],
   "anli": [
@@ -5782,7 +5782,7 @@
   "feiqi": [
     {
       "char": "废弃",
-      "en": "Waste/Discarded"
+      "en": "Waste"
     }
   ],
   "yicheng": [
@@ -5808,7 +5808,7 @@
     },
     {
       "char": "高校",
-      "en": "University/Higher Education Institution"
+      "en": "University"
     }
   ],
   "xihe": [
@@ -5838,7 +5838,7 @@
   "duojia": [
     {
       "char": "多家",
-      "en": "Many/Several"
+      "en": "Many"
     }
   ],
   "zhizhong": [
@@ -5850,7 +5850,7 @@
   "fuchi": [
     {
       "char": "扶持",
-      "en": "Support/Promote"
+      "en": "Support"
     }
   ],
   "dongcun": [
@@ -5868,7 +5868,7 @@
   "geyi": [
     {
       "char": "各异",
-      "en": "Various, Different"
+      "en": "Various"
     }
   ],
   "sianzhen": [
@@ -5886,7 +5886,7 @@
   "yijian": [
     {
       "char": "一间",
-      "en": "Room/Apartment"
+      "en": "Room"
     }
   ],
   "shikong": [
@@ -5904,7 +5904,7 @@
   "liangfu": [
     {
       "char": "两幅",
-      "en": "Two (pictures/images)"
+      "en": "Two (pictures"
     }
   ],
   "jiagongchang": [
@@ -5916,7 +5916,7 @@
   "jumindian": [
     {
       "char": "居民点",
-      "en": "Settlement, Residential Point"
+      "en": "Settlement"
     }
   ],
   "shuichan": [
@@ -5928,7 +5928,7 @@
   "yeshou": [
     {
       "char": "野兽",
-      "en": "Beast, Animal"
+      "en": "Beast"
     }
   ],
   "chengqiang": [
@@ -6032,7 +6032,7 @@
   "xiuzhu": [
     {
       "char": "修筑",
-      "en": "To Construct/Build"
+      "en": "To Construct"
     }
   ],
   "atelasi": [
@@ -6168,7 +6168,7 @@
   "weidian": [
     {
       "char": "为点",
-      "en": "To pinpoint / To mark"
+      "en": "To pinpoint"
     }
   ],
   "diweidu": [
@@ -6192,7 +6192,7 @@
   "suichukejian": [
     {
       "char": "随处可见",
-      "en": "Ubiquitous / Everywhere"
+      "en": "Ubiquitous"
     }
   ],
   "xiulunhu": [
@@ -6406,7 +6406,7 @@
   "gongxu": [
     {
       "char": "工序",
-      "en": "Process/Procedure"
+      "en": "Process"
     }
   ],
   "saerwaduo": [
@@ -6496,7 +6496,7 @@
   "nandao": [
     {
       "char": "南岛",
-      "en": "Southern Island / Austronesian languages"
+      "en": "Southern Island"
     },
     {
       "char": "南到",
@@ -6536,11 +6536,11 @@
   "zhengyi": [
     {
       "char": "争议",
-      "en": "Dispute / Controversy"
+      "en": "Dispute"
     },
     {
       "char": "正以",
-      "en": "Currently, Presently"
+      "en": "Currently"
     }
   ],
   "deleike": [
@@ -6576,7 +6576,7 @@
   "faxing": [
     {
       "char": "发行",
-      "en": "Distribution / Publication"
+      "en": "Distribution"
     }
   ],
   "benshe": [
@@ -6696,7 +6696,7 @@
   "yisi": [
     {
       "char": "伊斯",
-      "en": "Iris (likely referring to Iris, a type of flower or a name)"
+      "en": "Iris (likely referring to Iris"
     }
   ],
   "xindeli": [
@@ -6750,7 +6750,7 @@
   "guanxia": [
     {
       "char": "管辖",
-      "en": "Administered/Governed"
+      "en": "Administered"
     }
   ],
   "congbeidao": [
@@ -6930,7 +6930,7 @@
   "qiqubuping": [
     {
       "char": "崎岖不平",
-      "en": "Rugged/Rough"
+      "en": "Rugged"
     }
   ],
   "guanguang": [
@@ -6942,7 +6942,7 @@
   "youwan": [
     {
       "char": "游玩",
-      "en": "recreation/leisure activities"
+      "en": "recreation"
     }
   ],
   "xixiangdong": [
@@ -6990,7 +6990,7 @@
   "yuelaiyueshao": [
     {
       "char": "越来越少",
-      "en": "decreasing/fewer"
+      "en": "decreasing"
     }
   ],
   "fengtai": [
@@ -7012,7 +7012,7 @@
   "tongqi": [
     {
       "char": "同期",
-      "en": "simultaneously/at the same time"
+      "en": "simultaneously"
     }
   ],
   "zhujiangliuyu": [
@@ -7024,19 +7024,19 @@
   "lvye": [
     {
       "char": "绿野",
-      "en": "green fields/meadows"
+      "en": "green fields"
     }
   ],
   "furao": [
     {
       "char": "富饶",
-      "en": "prosperous/wealthy"
+      "en": "prosperous"
     }
   ],
   "shahai": [
     {
       "char": "沙海",
-      "en": "sandy sea/desert"
+      "en": "sandy sea"
     }
   ],
   "xianhai": [
@@ -7064,7 +7064,7 @@
     },
     {
       "char": "唱和",
-      "en": "Harmony/Duet singing"
+      "en": "Harmony"
     }
   ],
   "hainan": [
@@ -7082,7 +7082,7 @@
   "laide": [
     {
       "char": "来得",
-      "en": "coming/arriving"
+      "en": "coming"
     }
   ],
   "hanzai": [
@@ -7196,7 +7196,7 @@
   "jiaozhi": [
     {
       "char": "交织",
-      "en": "interwoven, interlaced"
+      "en": "interwoven"
     }
   ],
   "biankuan": [
@@ -7224,7 +7224,7 @@
   "taigao": [
     {
       "char": "抬高",
-      "en": "raise, elevate"
+      "en": "raise"
     }
   ],
   "diba": [
@@ -7248,7 +7248,7 @@
   "hemai": [
     {
       "char": "河脉",
-      "en": "river system, river course"
+      "en": "river system"
     }
   ],
   "yalongjiang": [
@@ -7266,13 +7266,13 @@
   "fayuandi": [
     {
       "char": "发源地",
-      "en": "source, origin"
+      "en": "source"
     }
   ],
   "lianyun": [
     {
       "char": "联运",
-      "en": "coordinated transport, combined transport"
+      "en": "coordinated transport"
     }
   ],
   "yumizhixiang": [
@@ -7302,7 +7302,7 @@
   "gaocheng": [
     {
       "char": "高程",
-      "en": "elevation, height"
+      "en": "elevation"
     }
   ],
   "hangyunye": [
@@ -7326,7 +7326,7 @@
   "ganxiang": [
     {
       "char": "感想",
-      "en": "Reflection/Thoughts"
+      "en": "Reflection"
     }
   ],
   "mifan": [
@@ -7338,7 +7338,7 @@
   "yinshixiguan": [
     {
       "char": "饮食习惯",
-      "en": "Dietary Habit/Eating Habits"
+      "en": "Dietary Habit"
     }
   ],
   "jingjiqu": [
@@ -7356,7 +7356,7 @@
   "jietu": [
     {
       "char": "界图",
-      "en": "Map/Boundary Map"
+      "en": "Map"
     }
   ],
   "zhongguobeifangdiqu": [
@@ -7374,7 +7374,7 @@
   "kuhuang": [
     {
       "char": "枯黄",
-      "en": "Yellow-brown/Mustard Yellow"
+      "en": "Yellow-brown"
     }
   ],
   "sanshu": [
@@ -7392,7 +7392,7 @@
   "shuniu": [
     {
       "char": "枢纽",
-      "en": "Hub/Nexus"
+      "en": "Hub"
     }
   ],
   "manzhouli": [
@@ -7422,7 +7422,7 @@
   "shuaixian": [
     {
       "char": "率先",
-      "en": "To take the lead; pioneer"
+      "en": "To take the lead"
     }
   ],
   "ningxia": [
@@ -7462,7 +7462,7 @@
   "huoshao": [
     {
       "char": "火烧",
-      "en": "Burning with fire; (archaic) to burn down"
+      "en": "Burning with fire"
     }
   ],
   "riyuetan": [
@@ -7586,7 +7586,7 @@
   "zhuanti": [
     {
       "char": "专题",
-      "en": "Topic / Focus"
+      "en": "Topic"
     }
   ],
   "mudidi": [
@@ -7604,7 +7604,7 @@
   "yuanshisenlin": [
     {
       "char": "原始森林",
-      "en": "Primitive Forest / Primary Forest"
+      "en": "Primitive Forest"
     }
   ],
   "qianli": [
@@ -7632,11 +7632,11 @@
   "zongguan": [
     {
       "char": "纵贯",
-      "en": "Traversing / Running Through"
+      "en": "Traversing"
     },
     {
       "char": "纵观",
-      "en": "Overall, from a broad perspective"
+      "en": "Overall"
     }
   ],
   "linxia": [
@@ -7648,7 +7648,7 @@
   "wajue": [
     {
       "char": "挖掘",
-      "en": "Excavation / Digging"
+      "en": "Excavation"
     }
   ],
   "yanzhongpohuai": [
@@ -7666,7 +7666,7 @@
   "caifa": [
     {
       "char": "采伐",
-      "en": "Logging / Harvesting"
+      "en": "Logging"
     }
   ],
   "jingjixiaoyi": [
@@ -7706,11 +7706,11 @@
   "qixi": [
     {
       "char": "气息",
-      "en": "fragrance, scent"
+      "en": "fragrance"
     },
     {
       "char": "栖息",
-      "en": "To dwell/To reside"
+      "en": "To dwell"
     }
   ],
   "dongqi": [
@@ -7734,13 +7734,13 @@
   "pinghuan": [
     {
       "char": "平缓",
-      "en": "gentle, level"
+      "en": "gentle"
     }
   ],
   "kaiken": [
     {
       "char": "开垦",
-      "en": "to cultivate, to develop"
+      "en": "to cultivate"
     }
   ],
   "yucitongshi": [
@@ -7764,7 +7764,7 @@
   "pinji": [
     {
       "char": "贫瘠",
-      "en": "barren, poor"
+      "en": "barren"
     }
   ],
   "yidaodao": [
@@ -7776,7 +7776,7 @@
   "zanmen": [
     {
       "char": "咱们",
-      "en": "we, us"
+      "en": "we"
     }
   ],
   "shanbei": [
@@ -7788,7 +7788,7 @@
   "yigan": [
     {
       "char": "一杆",
-      "en": "one rod, one stick"
+      "en": "one rod"
     }
   ],
   "ansai": [
@@ -7806,7 +7806,7 @@
   "xiachen": [
     {
       "char": "下沉",
-      "en": "downward movement, sinking"
+      "en": "downward movement"
     }
   ],
   "yinyuewudao": [
@@ -7830,7 +7830,7 @@
   "guankou": [
     {
       "char": "关口",
-      "en": "Strategic outpost/border crossing"
+      "en": "Strategic outpost"
     }
   ],
   "haidian": [
@@ -7848,13 +7848,13 @@
   "pingzhang": [
     {
       "char": "屏障",
-      "en": "Barrier/Defense"
+      "en": "Barrier"
     }
   ],
   "guojiajiguan": [
     {
       "char": "国家机关",
-      "en": "State organs/Government institutions"
+      "en": "State organs"
     }
   ],
   "guowuyuan": [
@@ -7890,13 +7890,13 @@
   "shangyan": [
     {
       "char": "上演",
-      "en": "To take place/To perform"
+      "en": "To take place"
     }
   ],
   "maixiang": [
     {
       "char": "迈向",
-      "en": "Moving towards/Approaching"
+      "en": "Moving towards"
     }
   ],
   "dadushi": [
@@ -7932,7 +7932,7 @@
   "yicaifencheng": [
     {
       "char": "异彩纷呈",
-      "en": "Vivid and colorful; diverse"
+      "en": "Vivid and colorful"
     }
   ],
   "keyanjigou": [
@@ -7962,19 +7962,19 @@
   "yinling": [
     {
       "char": "引领",
-      "en": "Lead; pioneer"
+      "en": "Lead"
     }
   ],
   "yiqu": [
     {
       "char": "一区",
-      "en": "Area one; first zone"
+      "en": "Area one"
     }
   ],
   "fushe": [
     {
       "char": "辐射",
-      "en": "Radiate; spread"
+      "en": "Radiate"
     }
   ],
   "nanyuan": [
@@ -8128,7 +8128,7 @@
   "wuzi": [
     {
       "char": "物资",
-      "en": "Supplies, materials"
+      "en": "Supplies"
     }
   ],
   "zhouzhuang": [
@@ -8152,19 +8152,19 @@
   "hunjia": [
     {
       "char": "婚嫁",
-      "en": "Wedding, marriage ceremony"
+      "en": "Wedding"
     }
   ],
   "kuaichuan": [
     {
       "char": "快船",
-      "en": "Gondola, punt boat"
+      "en": "Gondola"
     }
   ],
   "yulehuodong": [
     {
       "char": "娱乐活动",
-      "en": "Recreational activities, entertainment"
+      "en": "Recreational activities"
     }
   ],
   "waixiangxing": [
@@ -8176,7 +8176,7 @@
   "xingqi": [
     {
       "char": "兴起",
-      "en": "Rise, emerge, arise"
+      "en": "Rise"
     }
   ],
   "gaozhiliang": [
@@ -8194,11 +8194,11 @@
   "fuyu": [
     {
       "char": "富裕",
-      "en": "Wealthy, prosperous"
+      "en": "Wealthy"
     },
     {
       "char": "抚育",
-      "en": "Nurturing/Raising"
+      "en": "Nurturing"
     },
     {
       "char": "富余",
@@ -8220,7 +8220,7 @@
   "gengzhong": [
     {
       "char": "耕种",
-      "en": "To farm, to cultivate"
+      "en": "To farm"
     }
   ],
   "shayan": [
@@ -8244,7 +8244,7 @@
   "maicang": [
     {
       "char": "埋藏",
-      "en": "Buried/contained"
+      "en": "Buried"
     }
   ],
   "kuangcang": [
@@ -8268,7 +8268,7 @@
   "zhongdianbaohu": [
     {
       "char": "重点保护",
-      "en": "Key protection/Priority protection"
+      "en": "Key protection"
     }
   ],
   "daxiongmao": [
@@ -8346,7 +8346,7 @@
   "zhongzhiye": [
     {
       "char": "种植业",
-      "en": "Agriculture/Cultivation"
+      "en": "Agriculture"
     }
   ],
   "dadajiangdi": [
@@ -8388,13 +8388,13 @@
   "zhongshu": [
     {
       "char": "中枢",
-      "en": "central, core"
+      "en": "central"
     }
   ],
   "zhaozhaokan": [
     {
       "char": "找找看",
-      "en": "look into it, take a look"
+      "en": "look into it"
     }
   ],
   "jianghai": [
@@ -8406,7 +8406,7 @@
   "qiquan": [
     {
       "char": "齐全",
-      "en": "complete, comprehensive"
+      "en": "complete"
     }
   ],
   "xinjiyu": [
@@ -8448,7 +8448,7 @@
   "chuangye": [
     {
       "char": "创业",
-      "en": "start a business, entrepreneurship"
+      "en": "start a business"
     }
   ],
   "jingzhengli": [
@@ -8570,7 +8570,7 @@
   "simian": [
     {
       "char": "四面",
-      "en": "all sides, everywhere"
+      "en": "all sides"
     }
   ],
   "jiaoshui": [
@@ -8594,7 +8594,7 @@
   "yiwangwuji": [
     {
       "char": "一望无际",
-      "en": "endless, boundless"
+      "en": "endless"
     }
   ],
   "eerduosi": [
@@ -8668,7 +8668,7 @@
   "guojun": [
     {
       "char": "国君",
-      "en": "Local ruler, Chief"
+      "en": "Local ruler"
     }
   ],
   "lvcaoruyin": [
@@ -8722,13 +8722,13 @@
   "guantong": [
     {
       "char": "贯通",
-      "en": "Open, Connected"
+      "en": "Open"
     }
   ],
   "wanbei": [
     {
       "char": "完备",
-      "en": "Complete, Comprehensive"
+      "en": "Complete"
     }
   ],
   "liti": [
@@ -8740,7 +8740,7 @@
   "hengguan": [
     {
       "char": "横贯",
-      "en": "cross; traverse"
+      "en": "cross"
     }
   ],
   "huoerguosi": [
@@ -8782,7 +8782,7 @@
   "jinqing": [
     {
       "char": "尽情",
-      "en": "freely; wholeheartedly"
+      "en": "freely"
     }
   ],
   "chixuzengzhang": [
@@ -8794,13 +8794,13 @@
   "renwenjingguan": [
     {
       "char": "人文景观",
-      "en": "human landscape; cultural landscape"
+      "en": "human landscape"
     }
   ],
   "huiji": [
     {
       "char": "汇集",
-      "en": "gather; converge"
+      "en": "gather"
     }
   ],
   "hanji": [
@@ -8824,7 +8824,7 @@
   "lianmianqifu": [
     {
       "char": "连绵起伏",
-      "en": "undulating; hilly and mountainous"
+      "en": "undulating"
     }
   ],
   "yingyangchengfen": [
@@ -8918,13 +8918,13 @@
   "shifenzhongshi": [
     {
       "char": "十分重视",
-      "en": "Highly value, attach great importance to"
+      "en": "Highly value"
     }
   ],
   "zhongyaotujing": [
     {
       "char": "重要途径",
-      "en": "Important channels, key routes"
+      "en": "Important channels"
     }
   ],
   "qingchu": [
@@ -8936,7 +8936,7 @@
   "niding": [
     {
       "char": "拟订",
-      "en": "Draft, formulate"
+      "en": "Draft"
     }
   ],
   "shenghuozhuangkuang": [
@@ -8948,7 +8948,7 @@
   "yitiaotiao": [
     {
       "char": "一条条",
-      "en": "One by one, item by item"
+      "en": "One by one"
     }
   ],
   "lantianbaiyun": [
@@ -8972,7 +8972,7 @@
   "xiaohuozi": [
     {
       "char": "小伙子",
-      "en": "Young man/guy"
+      "en": "Young man"
     }
   ],
   "disibu": [
@@ -8990,7 +8990,7 @@
   "qingshuochu": [
     {
       "char": "请说出",
-      "en": "Please say/tell"
+      "en": "Please say"
     }
   ],
   "zongqushi": [
@@ -9086,7 +9086,7 @@
   "zhanyouliang": [
     {
       "char": "占有量",
-      "en": "Possession, amount controlled"
+      "en": "Possession"
     }
   ],
   "kongchao": [
@@ -9120,7 +9120,7 @@
   "shunying": [
     {
       "char": "顺应",
-      "en": "Conform, comply"
+      "en": "Conform"
     }
   ],
   "haojie": [
@@ -9156,7 +9156,7 @@
   "tanmingchuliang": [
     {
       "char": "探明储量",
-      "en": "To explore/assess reserves"
+      "en": "To explore"
     }
   ],
   "kaifaxin": [
@@ -9204,7 +9204,7 @@
   "shengyu": [
     {
       "char": "生育",
-      "en": "Birth, procreation"
+      "en": "Birth"
     }
   ],
   "chengxiangjumin": [
@@ -9234,7 +9234,7 @@
   "chengxiao": [
     {
       "char": "成效",
-      "en": "Effectiveness/Results"
+      "en": "Effectiveness"
     }
   ],
   "chongfenkaolv": [
@@ -9270,7 +9270,7 @@
   "gonghai": [
     {
       "char": "公害",
-      "en": "Pollution, detriment to the environment"
+      "en": "Pollution"
     }
   ],
   "miejue": [
@@ -9314,7 +9314,7 @@
   "naru": [
     {
       "char": "纳入",
-      "en": "Incorporate, include"
+      "en": "Incorporate"
     }
   ],
   "linchang": [
@@ -9326,23 +9326,23 @@
   "huangyuan": [
     {
       "char": "荒原",
-      "en": "Wasteland, wilderness"
+      "en": "Wasteland"
     }
   ],
   "weishi": [
     {
       "char": "卫士",
-      "en": "Guardian, protector"
+      "en": "Guardian"
     },
     {
       "char": "为食",
-      "en": "Herbivorous/For eating"
+      "en": "Herbivorous"
     }
   ],
   "senlincaoyuan": [
     {
       "char": "森林草原",
-      "en": "Forest grassland, forest fire hazard"
+      "en": "Forest grassland"
     }
   ],
   "zhiyuan": [
@@ -9362,7 +9362,7 @@
   "tuchu": [
     {
       "char": "凸出",
-      "en": "Project, Protrude"
+      "en": "Project"
     }
   ],
   "shizilukou": [
@@ -9386,13 +9386,13 @@
   "shenghuofuyu": [
     {
       "char": "生活富裕",
-      "en": "Living well/Prosperity"
+      "en": "Living well"
     }
   ],
   "cuozongfuza": [
     {
       "char": "错综复杂",
-      "en": "Complex/Intricate"
+      "en": "Complex"
     }
   ],
   "manaosi": [
@@ -9488,31 +9488,31 @@
   "jue": [
     {
       "char": "巨额",
-      "en": "Huge sum / Massive amount"
+      "en": "Huge sum"
     }
   ],
   "mipu": [
     {
       "char": "米铺",
-      "en": "Rice shop / Rice merchant"
+      "en": "Rice shop"
     }
   ],
   "yewu": [
     {
       "char": "业务",
-      "en": "Business / Affair"
+      "en": "Business"
     }
   ],
   "zhudao": [
     {
       "char": "主导",
-      "en": "Lead / Dominate"
+      "en": "Lead"
     }
   ],
   "shengli": [
     {
       "char": "省力",
-      "en": "Save Effort/Labor-saving"
+      "en": "Save Effort"
     }
   ],
   "zhongdagongxian": [
@@ -9536,7 +9536,7 @@
   "nonghuo": [
     {
       "char": "农活",
-      "en": "Agricultural work / Farming"
+      "en": "Agricultural work"
     }
   ],
   "hongshu": [
@@ -9572,7 +9572,7 @@
   "shenhe": [
     {
       "char": "审核",
-      "en": "Review/Audit"
+      "en": "Review"
     }
   ],
   "xiwang": [
@@ -9584,25 +9584,25 @@
   "menkou": [
     {
       "char": "门口",
-      "en": "Doorway/Entrance"
+      "en": "Doorway"
     }
   ],
   "zouneng": [
     {
       "char": "走能",
-      "en": "Able to walk/Walking ability"
+      "en": "Able to walk"
     }
   ],
   "wangpengjia": [
     {
       "char": "王朋家",
-      "en": "Wang Peng's home/family"
+      "en": "Wang Peng's home"
     }
   ],
   "pandu": [
     {
       "char": "判读",
-      "en": "Interpretation/Reading (of something like a map)"
+      "en": "Interpretation"
     }
   ],
   "guandao": [
@@ -9614,13 +9614,13 @@
   "pushe": [
     {
       "char": "铺设",
-      "en": "Laying/Installation"
+      "en": "Laying"
     }
   ],
   "shibie": [
     {
       "char": "识别",
-      "en": "Recognition/Identification"
+      "en": "Recognition"
     }
   ],
   "zhoujie": [
@@ -9632,7 +9632,7 @@
   "weiding": [
     {
       "char": "未定",
-      "en": "Undetermined/Unspecified"
+      "en": "Undetermined"
     }
   ],
   "huoshan": [
@@ -9708,13 +9708,13 @@
   "qinxi": [
     {
       "char": "侵袭",
-      "en": "Invade, attack"
+      "en": "Invade"
     }
   ],
   "guimohongda": [
     {
       "char": "规模宏大",
-      "en": "Vast, extensive"
+      "en": "Vast"
     }
   ],
   "youdayouxiao": [
@@ -9916,7 +9916,7 @@
   "xiaotieshi": [
     {
       "char": "小贴士",
-      "en": "Tip/Note"
+      "en": "Tip"
     }
   ],
   "lvyoujingdian": [
@@ -9974,7 +9974,7 @@
   "leyuan": [
     {
       "char": "乐园",
-      "en": "Amusement park/Pleasure garden"
+      "en": "Amusement park"
     }
   ],
   "hulishan": [
@@ -9992,19 +9992,19 @@
   "gouhuachu": [
     {
       "char": "勾画出",
-      "en": "Sketch/Draw out"
+      "en": "Sketch"
     }
   ],
   "changjianyu": [
     {
       "char": "常见于",
-      "en": "Common in/Found in"
+      "en": "Common in"
     }
   ],
   "zijia": [
     {
       "char": "自家",
-      "en": "One's own/Home"
+      "en": "One's own"
     }
   ],
   "buyuan": [
@@ -10230,13 +10230,13 @@
   "lvyoushengdi": [
     {
       "char": "旅游胜地",
-      "en": "Tourist attraction/Scenic spot"
+      "en": "Tourist attraction"
     }
   ],
   "jianyou": [
     {
       "char": "建有",
-      "en": "Built/Constructed"
+      "en": "Built"
     }
   ],
   "duonaohe": [
@@ -10314,7 +10314,7 @@
   "shencai": [
     {
       "char": "身材",
-      "en": "Physique / Build"
+      "en": "Physique"
     }
   ],
   "bikong": [
@@ -10398,7 +10398,7 @@
   "meitiao": [
     {
       "char": "每条",
-      "en": "Each / Every"
+      "en": "Each"
     }
   ],
   "wudai": [
@@ -10456,7 +10456,7 @@
   "pianpian": [
     {
       "char": "片片",
-      "en": "Pieces, fragments"
+      "en": "Pieces"
     }
   ],
   "dagu": [
@@ -10618,13 +10618,13 @@
   "shougou": [
     {
       "char": "收购",
-      "en": "Purchase/Procurement"
+      "en": "Purchase"
     }
   ],
   "yuedi": [
     {
       "char": "越低",
-      "en": "Lower regions/Depression"
+      "en": "Lower regions"
     }
   ],
   "shanti": [
@@ -10636,7 +10636,7 @@
   "xianzhi": [
     {
       "char": "闲置",
-      "en": "Idle/Vacant"
+      "en": "Idle"
     }
   ],
   "shanpo": [
@@ -10708,13 +10708,13 @@
   "shengdi": [
     {
       "char": "胜地",
-      "en": "Wilderness / Wilderness area"
+      "en": "Wilderness"
     }
   ],
   "zhiming": [
     {
       "char": "知名",
-      "en": "Famous / Well-known"
+      "en": "Famous"
     }
   ],
   "kuaiche": [
@@ -10726,7 +10726,7 @@
   "xiaxiao": [
     {
       "char": "狭小",
-      "en": "Narrow / Small"
+      "en": "Narrow"
     }
   ],
   "lifa": [
@@ -10738,7 +10738,7 @@
   "zhaibian": [
     {
       "char": "摘编",
-      "en": "Compilation / Extracting (often referring to text)"
+      "en": "Compilation"
     }
   ],
   "daobei": [
@@ -10856,7 +10856,7 @@
   "lailin": [
     {
       "char": "来临",
-      "en": "Arrive/Approach"
+      "en": "Arrive"
     }
   ],
   "fengshi": [
@@ -10994,7 +10994,7 @@
   "yuanyuanbuduan": [
     {
       "char": "源源不断",
-      "en": "Abundant/Continuous"
+      "en": "Abundant"
     }
   ],
   "telaweifu": [
@@ -11106,7 +11106,7 @@
   "sitan": [
     {
       "char": "斯坦",
-      "en": "(Often used as a suffix, meaning \"state\" or \"nation\")"
+      "en": "(Often used as a suffix"
     }
   ],
   "penguan": [
@@ -11118,7 +11118,7 @@
   "chuli": [
     {
       "char": "矗立",
-      "en": "Stand/Erect"
+      "en": "Stand"
     }
   ],
   "danhua": [
@@ -11142,7 +11142,7 @@
   "zhisuoyi": [
     {
       "char": "之所以",
-      "en": "Because/For the reason that"
+      "en": "Because"
     }
   ],
   "fujiazhi": [
@@ -11212,7 +11212,7 @@
     },
     {
       "char": "劣势",
-      "en": "Disadvantage/Weakness"
+      "en": "Disadvantage"
     }
   ],
   "wenhuadiyun": [
@@ -11230,7 +11230,7 @@
   "diantang": [
     {
       "char": "殿堂",
-      "en": "Hall, Shrine"
+      "en": "Hall"
     }
   ],
   "huanjingyoumei": [
@@ -11248,11 +11248,11 @@
   "pinwei": [
     {
       "char": "品位",
-      "en": "Taste, Quality"
+      "en": "Taste"
     },
     {
       "char": "品味",
-      "en": "Taste, flavor, style"
+      "en": "Taste"
     }
   ],
   "xidaidao": [
@@ -11414,7 +11414,7 @@
   "yidao": [
     {
       "char": "一到",
-      "en": "One to; From one to"
+      "en": "One to"
     }
   ],
   "zhengche": [
@@ -11516,7 +11516,7 @@
   "zhiminzhe": [
     {
       "char": "殖民者",
-      "en": "Colonizer / Settler"
+      "en": "Colonizer"
     }
   ],
   "zhimin": [
@@ -11534,7 +11534,7 @@
   "tongzhi": [
     {
       "char": "统治",
-      "en": "Rule / Governance"
+      "en": "Rule"
     }
   ],
   "shimian": [
@@ -11716,7 +11716,7 @@
     },
     {
       "char": "依恋",
-      "en": "Attachment, fondness"
+      "en": "Attachment"
     }
   ],
   "beidao": [
@@ -11800,7 +11800,7 @@
   "jielu": [
     {
       "char": "解路",
-      "en": "Jelu (Likely a place name, needs context for a better translation)"
+      "en": "Jelu (Likely a place name"
     }
   ],
   "chuanwu": [
@@ -11872,7 +11872,7 @@
   "wenlu": [
     {
       "char": "文鲁",
-      "en": "Wenlu (Likely a word or phrase, needs context)"
+      "en": "Wenlu (Likely a word or phrase"
     }
   ],
   "tanchunlin": [
@@ -11902,19 +11902,19 @@
   "dibanyin": [
     {
       "char": "第版印",
-      "en": "Edition Print (e.g., \"First Edition Print\")"
+      "en": "Edition Print (e.g."
     }
   ],
   "ciyinshua": [
     {
       "char": "次印刷",
-      "en": "Print Run/Printing (e.g., \"Second Print Run\")"
+      "en": "Print Run"
     }
   ],
   "yinzhang": [
     {
       "char": "印张",
-      "en": "Printing Plate/Print Sheet"
+      "en": "Printing Plate"
     }
   ],
   "shuqian": [
@@ -11932,19 +11932,19 @@
   "haojingfa": [
     {
       "char": "号京发",
-      "en": "Official notice/edict"
+      "en": "Official notice"
     }
   ],
   "gaiguihao": [
     {
       "char": "改规号",
-      "en": "Amended regulations/rules"
+      "en": "Amended regulations"
     }
   ],
   "shentu": [
     {
       "char": "审图",
-      "en": "Reviewing diagrams/plans"
+      "en": "Reviewing diagrams"
     }
   ],
   "wuchanfengfu": [
@@ -11956,7 +11956,7 @@
   "renwenhuicui": [
     {
       "char": "人文荟萃",
-      "en": "Rich in humanities/culture"
+      "en": "Rich in humanities"
     }
   ],
   "quyujian": [
@@ -11968,7 +11968,7 @@
   "huangu": [
     {
       "char": "环顾",
-      "en": "Look around/survey"
+      "en": "Look around"
     }
   ],
   "genji": [
@@ -11992,7 +11992,7 @@
   "yangmeinan": [
     {
       "char": "洋美南",
-      "en": "Southern US/American"
+      "en": "Southern US"
     }
   ],
   "xidaquan": [
@@ -12028,7 +12028,7 @@
   "huihechu": [
     {
       "char": "汇合处",
-      "en": "Meeting point/Convergence"
+      "en": "Meeting point"
     }
   ],
   "wulanbatuo": [
@@ -12256,7 +12256,7 @@
   "jianbei": [
     {
       "char": "兼备",
-      "en": "Comprehensive, All-inclusive"
+      "en": "Comprehensive"
     }
   ],
   "haiyangqihou": [
@@ -12292,7 +12292,7 @@
   "quxian": [
     {
       "char": "区县",
-      "en": "County-level Districts/Counties"
+      "en": "County-level Districts"
     }
   ],
   "minzuzizhi": [
@@ -12344,19 +12344,19 @@
   "yiguoliangzhi": [
     {
       "char": "一国两制",
-      "en": "One Country, Two Systems"
+      "en": "One Country"
     }
   ],
   "guroutongbao": [
     {
       "char": "骨肉同胞",
-      "en": "Blood Relatives, Kin"
+      "en": "Blood Relatives"
     }
   ],
   "gongtongyuanwang": [
     {
       "char": "共同愿望",
-      "en": "Common Wishes, Shared Aspirations"
+      "en": "Common Wishes"
     }
   ],
   "genbenliyi": [
@@ -12488,19 +12488,19 @@
   "suzhewan": [
     {
       "char": "苏浙皖",
-      "en": "Sichuan, Zhejiang, Anhui"
+      "en": "Sichuan"
     }
   ],
   "minganlu": [
     {
       "char": "闽赣鲁",
-      "en": "Fujian, Jiangxi, Shandong"
+      "en": "Fujian"
     }
   ],
   "yue": [
     {
       "char": "豫鄂",
-      "en": "Henan, Hubei"
+      "en": "Henan"
     }
   ],
   "qingningxin": [
@@ -12512,7 +12512,7 @@
   "gangaotai": [
     {
       "char": "港澳台",
-      "en": "Hong Kong, Macao, Taiwan"
+      "en": "Hong Kong"
     }
   ],
   "yinzai": [
@@ -12548,7 +12548,7 @@
   "lingshi": [
     {
       "char": "零时",
-      "en": "Short break/interval"
+      "en": "Short break"
     }
   ],
   "yida": [
@@ -12640,7 +12640,7 @@
   "lizu": [
     {
       "char": "立足",
-      "en": "Foundation, foothold"
+      "en": "Foundation"
     }
   ],
   "lisuzu": [
@@ -12880,7 +12880,7 @@
   "shouzu": [
     {
       "char": "手足",
-      "en": "family/relatives"
+      "en": "family"
     }
   ],
   "xiangqin": [
@@ -12916,7 +12916,7 @@
   "dage": [
     {
       "char": "大歌",
-      "en": "Big song/Epic song"
+      "en": "Big song"
     }
   ],
   "jiechudaibiao": [
@@ -12934,7 +12934,7 @@
   "chaida": [
     {
       "char": "柴达",
-      "en": "Shidi (historical figure, often translated as \"Shidi\")"
+      "en": "Shidi (historical figure"
     }
   ],
   "xiaolong": [
@@ -13016,7 +13016,7 @@
     },
     {
       "char": "将领",
-      "en": "General/Commander"
+      "en": "General"
     }
   ],
   "maiyuan": [
@@ -13072,7 +13072,7 @@
   "qianqu": [
     {
       "char": "前去",
-      "en": "To go to; To visit"
+      "en": "To go to"
     }
   ],
   "shulin": [
@@ -13096,19 +13096,19 @@
   "zuoche": [
     {
       "char": "坐车",
-      "en": "To take a car; To ride a vehicle"
+      "en": "To take a car"
     }
   ],
   "diande": [
     {
       "char": "颠得",
-      "en": "Shaking; Bouncing violently"
+      "en": "Shaking"
     }
   ],
   "gouqiang": [
     {
       "char": "够呛",
-      "en": "Just enough; Barely enough"
+      "en": "Just enough"
     }
   ],
   "xigaodong": [
@@ -13120,7 +13120,7 @@
   "dizi": [
     {
       "char": "低自",
-      "en": "Low self; Low esteem (context dependent)"
+      "en": "Low self"
     }
   ],
   "dongxiangbei": [
@@ -13132,13 +13132,13 @@
   "dongmian": [
     {
       "char": "东面",
-      "en": "East side; East"
+      "en": "East side"
     }
   ],
   "jubudiqu": [
     {
       "char": "局部地区",
-      "en": "Local area; Specific region"
+      "en": "Local area"
     }
   ],
   "tuyan": [
@@ -13150,13 +13150,13 @@
   "donglengxiare": [
     {
       "char": "冬冷夏热",
-      "en": "Cold in winter, hot in summer"
+      "en": "Cold in winter"
     }
   ],
   "shaoyou": [
     {
       "char": "少有",
-      "en": "Rare; Few"
+      "en": "Rare"
     }
   ],
   "changlv": [
@@ -13262,7 +13262,7 @@
   "gonglao": [
     {
       "char": "功劳",
-      "en": "Credit, merit"
+      "en": "Credit"
     }
   ],
   "guangre": [
@@ -13286,7 +13286,7 @@
   "chonghe": [
     {
       "char": "重合",
-      "en": "Overlap, coincide"
+      "en": "Overlap"
     }
   ],
   "xire": [
@@ -13322,7 +13322,7 @@
   "baofa": [
     {
       "char": "暴发",
-      "en": "Burst, outbreak"
+      "en": "Burst"
     }
   ],
   "yuanyuan": [
@@ -13388,7 +13388,7 @@
   "ere": [
     {
       "char": "尔额",
-      "en": "(This appears to be a misspelling, likely intended to be a place name - needs clarification for accurate translation)"
+      "en": "(This appears to be a misspelling"
     }
   ],
   "qihe": [
@@ -13418,7 +13418,7 @@
   "jiangjiang": [
     {
       "char": "江江",
-      "en": "River (literally \"River River,\" often referring to the Yellow River)"
+      "en": "River (literally \"River River"
     }
   ],
   "xingkaihu": [
@@ -13484,7 +13484,7 @@
   "yuezhang": [
     {
       "char": "乐章",
-      "en": "Melody, Musical Piece"
+      "en": "Melody"
     }
   ],
   "menghaoran": [
@@ -13584,7 +13584,7 @@
   "pengpai": [
     {
       "char": "澎湃",
-      "en": "Roaring, Tumultuous"
+      "en": "Roaring"
     }
   ],
   "wanzhang": [
@@ -13608,7 +13608,7 @@
   "wanzhuan": [
     {
       "char": "宛转",
-      "en": "Serene, Graceful"
+      "en": "Serene"
     }
   ],
   "jiuqu": [
@@ -13632,7 +13632,7 @@
   "zhibian": [
     {
       "char": "之边",
-      "en": "Border/Edge"
+      "en": "Border"
     }
   ],
   "picheng": [
@@ -13790,7 +13790,7 @@
   "qiguan": [
     {
       "char": "奇观",
-      "en": "Wonder/Scenic spot"
+      "en": "Wonder"
     }
   ],
   "saishangjiangnan": [
@@ -13820,7 +13820,7 @@
   "jiangjieyuan": [
     {
       "char": "讲解员",
-      "en": "Lecturer/Instructor"
+      "en": "Lecturer"
     }
   ],
   "yinhuang": [
@@ -13868,13 +13868,13 @@
   "diaoshui": [
     {
       "char": "调水",
-      "en": "Water Adjustment/Regulation"
+      "en": "Water Adjustment"
     }
   ],
   "chongsha": [
     {
       "char": "冲沙",
-      "en": "Sand Cutting/Erosion Control"
+      "en": "Sand Cutting"
     }
   ],
   "tanggulashanmai": [
@@ -14114,7 +14114,7 @@
   "zhanghui": [
     {
       "char": "长徽",
-      "en": "Long stripe/band (often referring to a riverbank)"
+      "en": "Long stripe"
     }
   ],
   "shengjiang": [
@@ -14214,7 +14214,7 @@
   "dazai": [
     {
       "char": "大再",
-      "en": "Large again/Increased significantly"
+      "en": "Large again"
     }
   ],
   "pujiang": [
@@ -14232,7 +14232,7 @@
   "mengzhang": [
     {
       "char": "猛涨",
-      "en": "Sudden surge/Rapid rise"
+      "en": "Sudden surge"
     }
   ],
   "chixushijian": [
@@ -14408,7 +14408,7 @@
     },
     {
       "char": "面世",
-      "en": "To be released, to come out"
+      "en": "To be released"
     }
   ],
   "wenhuaqu": [
@@ -14480,7 +14480,7 @@
   "qiangyouli": [
     {
       "char": "强有力",
-      "en": "Powerful/Strong"
+      "en": "Powerful"
     }
   ],
   "tieluyunshu": [
@@ -14504,7 +14504,7 @@
   "kuayueshi": [
     {
       "char": "跨越式",
-      "en": "Leapfrog/Breakthrough"
+      "en": "Leapfrog"
     }
   ],
   "suifenhe": [
@@ -14558,7 +14558,7 @@
   "jueqi": [
     {
       "char": "崛起",
-      "en": "Rise; emerge"
+      "en": "Rise"
     }
   ],
   "jinjiao": [
@@ -14580,23 +14580,23 @@
     },
     {
       "char": "出自",
-      "en": "Origin, source"
+      "en": "Origin"
     },
     {
       "char": "初子",
-      "en": "Beginning/start"
+      "en": "Beginning"
     }
   ],
   "taishi": [
     {
       "char": "态势",
-      "en": "Situation; state of affairs"
+      "en": "Situation"
     }
   ],
   "laoli": [
     {
       "char": "劳力",
-      "en": "Labor; manpower"
+      "en": "Labor"
     }
   ],
   "kongjianjiegou": [
@@ -14608,13 +14608,13 @@
   "shenyi": [
     {
       "char": "审议",
-      "en": "Review; consider"
+      "en": "Review"
     }
   ],
   "gangyao": [
     {
       "char": "纲要",
-      "en": "Outline; syllabus"
+      "en": "Outline"
     }
   ],
   "zhongguoyouzheng": [
@@ -14668,7 +14668,7 @@
   "yuli": [
     {
       "char": "玉里",
-      "en": "Yuli (Name/Place)"
+      "en": "Yuli (Name"
     }
   ],
   "yushan": [
@@ -14858,7 +14858,7 @@
   "kaituo": [
     {
       "char": "开拓",
-      "en": "Exploration, Development"
+      "en": "Exploration"
     }
   ],
   "jintou": [
@@ -14868,7 +14868,7 @@
     },
     {
       "char": "尽头",
-      "en": "End, conclusion"
+      "en": "End"
     }
   ],
   "yimaixiangcheng": [
@@ -14892,7 +14892,7 @@
   "qinqing": [
     {
       "char": "亲情",
-      "en": "Affection/Family love"
+      "en": "Affection"
     }
   ],
   "yanhaigongye": [
@@ -15096,7 +15096,7 @@
   "gengxiang": [
     {
       "char": "更想",
-      "en": "More so/even more"
+      "en": "More so"
     }
   ],
   "qiangouwanhe": [
@@ -15108,19 +15108,19 @@
   "ronghui": [
     {
       "char": "融汇",
-      "en": "Integrate/merge"
+      "en": "Integrate"
     }
   ],
   "jinxian": [
     {
       "char": "尽显",
-      "en": "Fully display/reveal"
+      "en": "Fully display"
     }
   ],
   "dongbeisansheng": [
     {
       "char": "东北三省",
-      "en": "Northeast Three Provinces (Liaoning, Jilin, Heilongjiang)"
+      "en": "Northeast Three Provinces (Liaoning"
     }
   ],
   "zhongbeibu": [
@@ -15162,13 +15162,13 @@
   "jiantu": [
     {
       "char": "尖图",
-      "en": "Diagram/Illustration (specifically a pointed one)"
+      "en": "Diagram"
     }
   ],
   "heixiaoxing": [
     {
       "char": "黑小兴",
-      "en": "Hei Xiao Xing (This is a name, best left untranslated)"
+      "en": "Hei Xiao Xing (This is a name"
     }
   ],
   "songhuajiang": [
@@ -15192,7 +15192,7 @@
   "bupa": [
     {
       "char": "不怕",
-      "en": "Fearless/Unafraid"
+      "en": "Fearless"
     }
   ],
   "naifushi": [
@@ -15210,7 +15210,7 @@
   "yongcai": [
     {
       "char": "用材",
-      "en": "Material Selection/Utilization"
+      "en": "Material Selection"
     }
   ],
   "songzhi": [
@@ -15222,7 +15222,7 @@
   "tilianchu": [
     {
       "char": "提炼出",
-      "en": "Extracted/Refined"
+      "en": "Extracted"
     }
   ],
   "songjieyou": [
@@ -15258,7 +15258,7 @@
   "huazhi": [
     {
       "char": "滑至",
-      "en": "Slide to/Down to"
+      "en": "Slide to"
     }
   ],
   "hemianshang": [
@@ -15276,19 +15276,19 @@
   "shunshui": [
     {
       "char": "顺水",
-      "en": "Downstream/With the current"
+      "en": "Downstream"
     }
   ],
   "piaoliudao": [
     {
       "char": "漂流到",
-      "en": "Drift to/Float to"
+      "en": "Drift to"
     }
   ],
   "pingzhe": [
     {
       "char": "凭着",
-      "en": "Relying on/By means of"
+      "en": "Relying on"
     }
   ],
   "xiaoxingtu": [
@@ -15318,7 +15318,7 @@
   "yaocai": [
     {
       "char": "药材",
-      "en": "Medicinal materials/Herbs"
+      "en": "Medicinal materials"
     }
   ],
   "huimiexing": [
@@ -15330,7 +15330,7 @@
   "xinjucuo": [
     {
       "char": "新举措",
-      "en": "New measures/Initiatives"
+      "en": "New measures"
     }
   ],
   "buliangyingxiang": [
@@ -15348,13 +15348,13 @@
   "renzheng": [
     {
       "char": "认证",
-      "en": "Authentication/Verification"
+      "en": "Authentication"
     }
   ],
   "renzhengbiaozhi": [
     {
       "char": "认证标志",
-      "en": "Authentication mark/Sign"
+      "en": "Authentication mark"
     }
   ],
   "muzhipin": [
@@ -15366,7 +15366,7 @@
   "bianjiaoliao": [
     {
       "char": "边角料",
-      "en": "Edges and scraps/Offcuts"
+      "en": "Edges and scraps"
     }
   ],
   "mushang": [
@@ -15384,7 +15384,7 @@
   "suibian": [
     {
       "char": "随便",
-      "en": "Randomly/Whatever"
+      "en": "Randomly"
     }
   ],
   "gengkuai": [
@@ -15396,7 +15396,7 @@
   "xuanxiao": [
     {
       "char": "喧嚣",
-      "en": "Noisy/Crowded"
+      "en": "Noisy"
     }
   ],
   "kongqiqingxin": [
@@ -15486,13 +15486,13 @@
   "zhiliposui": [
     {
       "char": "支离破碎",
-      "en": "In pieces, shattered"
+      "en": "In pieces"
     }
   ],
   "shusong": [
     {
       "char": "输送",
-      "en": "transportation, conveyance"
+      "en": "transportation"
     }
   ],
   "chongshua": [
@@ -15504,7 +15504,7 @@
   "liushi": [
     {
       "char": "流失",
-      "en": "Lost, vanished"
+      "en": "Lost"
     }
   ],
   "shenshen": [
@@ -15588,7 +15588,7 @@
   "kaoyashi": [
     {
       "char": "靠崖式",
-      "en": "Cliff-based/Cliff-supported"
+      "en": "Cliff-based"
     }
   ],
   "kaiwa": [
@@ -15600,19 +15600,19 @@
   "kaizao": [
     {
       "char": "开凿",
-      "en": "Dig/Carve (a tunnel or channel)"
+      "en": "Dig"
     }
   ],
   "jusuo": [
     {
       "char": "居所",
-      "en": "Residence/Location"
+      "en": "Residence"
     }
   ],
   "tuda": [
     {
       "char": "土打",
-      "en": "Earthwork/Groundwork"
+      "en": "Earthwork"
     },
     {
       "char": "图打",
@@ -15646,7 +15646,7 @@
   "baonuan": [
     {
       "char": "保暖",
-      "en": "Warming/Insulation"
+      "en": "Warming"
     }
   ],
   "yongshouxian": [
@@ -15670,7 +15670,7 @@
   "fengyu": [
     {
       "char": "封育",
-      "en": "Enclose/Confine"
+      "en": "Enclose"
     },
     {
       "char": "丰雨",
@@ -15680,13 +15680,13 @@
   "huanjingzhili": [
     {
       "char": "环境治理",
-      "en": "Environmental Protection/Management"
+      "en": "Environmental Protection"
     }
   ],
   "youwang": [
     {
       "char": "有望",
-      "en": "Promising/With Hope"
+      "en": "Promising"
     }
   ],
   "zaizao": [
@@ -15930,7 +15930,7 @@
   "chayicha": [
     {
       "char": "查一查",
-      "en": "Check it out / Look it up"
+      "en": "Check it out"
     }
   ],
   "chaodai": [
@@ -15954,11 +15954,11 @@
   "jiejian": [
     {
       "char": "接见",
-      "en": "Reception / Meeting"
+      "en": "Reception"
     },
     {
       "char": "节俭",
-      "en": "Frugal, thrifty"
+      "en": "Frugal"
     }
   ],
   "waibin": [
@@ -15976,7 +15976,7 @@
   "yiyun": [
     {
       "char": "意蕴",
-      "en": "Implication / Connotation"
+      "en": "Implication"
     }
   ],
   "quanguorenmindaibiaodahuichangwuweiyuanhui": [
@@ -15988,7 +15988,7 @@
   "youyi": [
     {
       "char": "有以",
-      "en": "With / Having"
+      "en": "With"
     }
   ],
   "huiyiting": [
@@ -16000,13 +16000,13 @@
   "bingzhong": [
     {
       "char": "并重",
-      "en": "Both Important / Equally Important"
+      "en": "Both Important"
     }
   ],
   "cangpin": [
     {
       "char": "藏品",
-      "en": "Collection / Artifacts"
+      "en": "Collection"
     }
   ],
   "niaokantu": [
@@ -16024,7 +16024,7 @@
   "rongna": [
     {
       "char": "容纳",
-      "en": "Accommodate / Hold"
+      "en": "Accommodate"
     }
   ],
   "baiwan": [
@@ -16072,7 +16072,7 @@
   "guocui": [
     {
       "char": "国粹",
-      "en": "National Essence/Cultural Heritage"
+      "en": "National Essence"
     }
   ],
   "shoudubowuguan": [
@@ -16084,7 +16084,7 @@
   "yuanxiao": [
     {
       "char": "院校",
-      "en": "Educational Institutions/Schools"
+      "en": "Educational Institutions"
     }
   ],
   "waijiaojigou": [
@@ -16102,7 +16102,7 @@
   "luohu": [
     {
       "char": "落户",
-      "en": "Establish Residence/Set Up"
+      "en": "Establish Residence"
     }
   ],
   "ziyuanyoushi": [
@@ -16132,7 +16132,7 @@
   "qiangzhan": [
     {
       "char": "抢占",
-      "en": "Seize/Capture"
+      "en": "Seize"
     }
   ],
   "zhigaodian": [
@@ -16192,7 +16192,7 @@
   "danhangjin": [
     {
       "char": "丹杭金",
-      "en": "Red Lake Gold (likely referring to a specific area/resource)"
+      "en": "Red Lake Gold (likely referring to a specific area"
     }
   ],
   "zhangdanghu": [
@@ -16306,19 +16306,19 @@
   "baixing": [
     {
       "char": "百姓",
-      "en": "Common people, Peasants"
+      "en": "Common people"
     }
   ],
   "zuofang": [
     {
       "char": "作坊",
-      "en": "Workshop, Small factory"
+      "en": "Workshop"
     }
   ],
   "yanbiancheng": [
     {
       "char": "演变成",
-      "en": "Developed into, Transformed into"
+      "en": "Developed into"
     }
   ],
   "xiaochengzhen": [
@@ -16330,19 +16330,19 @@
   "yixikejian": [
     {
       "char": "依稀可见",
-      "en": "Barely visible, Faintly seen"
+      "en": "Barely visible"
     }
   ],
   "wangri": [
     {
       "char": "往日",
-      "en": "In the past, Formerly"
+      "en": "In the past"
     }
   ],
   "lianghaotiaojian": [
     {
       "char": "良好条件",
-      "en": "Good conditions, Favorable conditions"
+      "en": "Good conditions"
     }
   ],
   "nongfuye": [
@@ -16372,7 +16372,7 @@
   "jiaohui": [
     {
       "char": "交汇",
-      "en": "Converge, Meet"
+      "en": "Converge"
     }
   ],
   "choumi": [
@@ -16384,13 +16384,13 @@
   "yongxianchu": [
     {
       "char": "涌现出",
-      "en": "Emerge, Appear"
+      "en": "Emerge"
     }
   ],
   "xingsheng": [
     {
       "char": "兴盛",
-      "en": "Flourish, Prosper"
+      "en": "Flourish"
     }
   ],
   "shengze": [
@@ -16420,13 +16420,13 @@
   "jinchu": [
     {
       "char": "进出",
-      "en": "In and out, Entering and exiting"
+      "en": "In and out"
     }
   ],
   "xidi": [
     {
       "char": "洗涤",
-      "en": "Washing, Cleaning"
+      "en": "Washing"
     }
   ],
   "qushui": [
@@ -16486,13 +16486,13 @@
   "bafang": [
     {
       "char": "八方",
-      "en": "All directions; everywhere"
+      "en": "All directions"
     }
   ],
   "chengzai": [
     {
       "char": "城在",
-      "en": "The city is/was"
+      "en": "The city is"
     }
   ],
   "tuguo": [
@@ -16528,7 +16528,7 @@
   "tongli": [
     {
       "char": "同里",
-      "en": "Same place; same person"
+      "en": "Same place"
     }
   ],
   "taipingqiao": [
@@ -16540,7 +16540,7 @@
   "jili": [
     {
       "char": "吉利",
-      "en": "Auspicious; lucky"
+      "en": "Auspicious"
     }
   ],
   "zhangqing": [
@@ -16558,7 +16558,7 @@
   "jienan": [
     {
       "char": "解难",
-      "en": "Solve puzzles; entertain"
+      "en": "Solve puzzles"
     }
   ],
   "dashou": [
@@ -16576,7 +16576,7 @@
   "qipan": [
     {
       "char": "祈盼",
-      "en": "Yearning/Praying"
+      "en": "Yearning"
     }
   ],
   "fuqi": [
@@ -16600,7 +16600,7 @@
   "liangchen": [
     {
       "char": "良辰",
-      "en": "Auspicious time/Good weather"
+      "en": "Auspicious time"
     }
   ],
   "jiajie": [
@@ -16612,7 +16612,7 @@
   "yingqin": [
     {
       "char": "迎亲",
-      "en": "To receive the bride/groom"
+      "en": "To receive the bride"
     }
   ],
   "xiwenlejian": [
@@ -16624,7 +16624,7 @@
   "tuyao": [
     {
       "char": "图摇",
-      "en": "(This term is difficult to translate directly, likely referring to a specific type of decorative scroll or painting -  \"scroll painting\" or \"decorative scroll\" might be a reasonable approximation)"
+      "en": "(This term is difficult to translate directly"
     }
   ],
   "chengzhenjumin": [
@@ -16654,25 +16654,25 @@
   "minying": [
     {
       "char": "民营",
-      "en": "Private sector/Private enterprise"
+      "en": "Private sector"
     }
   ],
   "zhuangda": [
     {
       "char": "壮大",
-      "en": "To strengthen/To expand"
+      "en": "To strengthen"
     }
   ],
   "pengbo": [
     {
       "char": "蓬勃",
-      "en": "Flourishing/Vibrant"
+      "en": "Flourishing"
     }
   ],
   "xinshi": [
     {
       "char": "新式",
-      "en": "New style/Modern"
+      "en": "New style"
     }
   ],
   "chengzhenhua": [
@@ -16684,19 +16684,19 @@
   "qiaoranxingqi": [
     {
       "char": "悄然兴起",
-      "en": "Gradually rise/Emerge quietly"
+      "en": "Gradually rise"
     }
   ],
   "huanfa": [
     {
       "char": "焕发",
-      "en": "To revive/To rejuvenate"
+      "en": "To revive"
     }
   ],
   "chuxin": [
     {
       "char": "出新",
-      "en": "To introduce new products/To innovate"
+      "en": "To introduce new products"
     }
   ],
   "dajiaba": [
@@ -16890,7 +16890,7 @@
   "fanlanchengzai": [
     {
       "char": "泛滥成灾",
-      "en": "To spread chaos/disaster"
+      "en": "To spread chaos"
     }
   ],
   "qinguo": [
@@ -16926,7 +16926,7 @@
   "huangnian": [
     {
       "char": "荒年",
-      "en": "Bad year/Years of hardship"
+      "en": "Bad year"
     },
     {
       "char": "黄年",
@@ -16990,7 +16990,7 @@
   "jinshuikou": [
     {
       "char": "进水口",
-      "en": "Intake/Inlet"
+      "en": "Intake"
     }
   ],
   "shuiliuliang": [
@@ -17014,7 +17014,7 @@
   "zhiguan": [
     {
       "char": "之冠",
-      "en": "The best/The crown"
+      "en": "The best"
     }
   ],
   "yandou": [
@@ -17044,7 +17044,7 @@
   "sifang": [
     {
       "char": "四方",
-      "en": "All directions/Everywhere"
+      "en": "All directions"
     }
   ],
   "yanshang": [
@@ -17056,7 +17056,7 @@
   "shezao": [
     {
       "char": "设灶",
-      "en": "To set up a stove/kitchen"
+      "en": "To set up a stove"
     }
   ],
   "yeshengzhiwu": [
@@ -17074,7 +17074,7 @@
   "xiyuan": [
     {
       "char": "西缘",
-      "en": "Western bank/shore"
+      "en": "Western bank"
     }
   ],
   "jinsihou": [
@@ -17092,7 +17092,7 @@
   "guojiayiji": [
     {
       "char": "国家一级",
-      "en": "National Level/First Class"
+      "en": "National Level"
     }
   ],
   "suoluo": [
@@ -17110,7 +17110,7 @@
   "jianrong": [
     {
       "char": "兼容",
-      "en": "To be compatible/to accommodate"
+      "en": "To be compatible"
     }
   ],
   "bashu": [
@@ -17122,7 +17122,7 @@
   "huankuai": [
     {
       "char": "欢快",
-      "en": "Cheerful/Joyful"
+      "en": "Cheerful"
     }
   ],
   "xinla": [
@@ -17146,7 +17146,7 @@
   "fengrao": [
     {
       "char": "丰饶",
-      "en": "Fertile/Abundant"
+      "en": "Fertile"
     }
   ],
   "bianlian": [
@@ -17242,7 +17242,7 @@
   "yamentu": [
     {
       "char": "崖门图",
-      "en": "Yamen chart/records"
+      "en": "Yamen chart"
     }
   ],
   "dongjiu": [
@@ -17290,7 +17290,7 @@
   "jiangzhuao": [
     {
       "char": "江珠澳",
-      "en": "Jiangzhuao (River, Zhuhai, and Ao – Ao likely refers to a bay or inlet)"
+      "en": "Jiangzhuao (River"
     }
   ],
   "gaolan": [
@@ -17444,7 +17444,7 @@
     },
     {
       "char": "尖端",
-      "en": "Cutting-edge/Advanced"
+      "en": "Cutting-edge"
     }
   ],
   "juminxiaofei": [
@@ -17510,13 +17510,13 @@
   "diyuan": [
     {
       "char": "地缘",
-      "en": "Geopolitical/Geographical"
+      "en": "Geopolitical"
     }
   ],
   "shangyuan": [
     {
       "char": "商缘",
-      "en": "Business opportunity/Business connection"
+      "en": "Business opportunity"
     }
   ],
   "jinxienian": [
@@ -17534,7 +17534,7 @@
   "qiangguo": [
     {
       "char": "强国",
-      "en": "Strong nation/Powerful nation"
+      "en": "Strong nation"
     }
   ],
   "kuajing": [
@@ -17546,7 +17546,7 @@
   "tourushiyong": [
     {
       "char": "投入使用",
-      "en": "Put into use/Commissioned"
+      "en": "Put into use"
     }
   ],
   "fazhanqianli": [
@@ -17564,13 +17564,13 @@
   "yiye": [
     {
       "char": "宜业",
-      "en": "Suitable for business/Business-friendly"
+      "en": "Suitable for business"
     }
   ],
   "shenghuoquan": [
     {
       "char": "生活圈",
-      "en": "Lifestyle circle/Living area"
+      "en": "Lifestyle circle"
     }
   ],
   "wanqu": [
@@ -17582,19 +17582,19 @@
   "tandang": [
     {
       "char": "坦荡",
-      "en": "Open and honest/Frank"
+      "en": "Open and honest"
     }
   ],
   "wenrun": [
     {
       "char": "温润",
-      "en": "Mild and pleasant/Warm and moist"
+      "en": "Mild and pleasant"
     }
   ],
   "gaoxian": [
     {
       "char": "高线",
-      "en": "Elevated line/High-speed line"
+      "en": "Elevated line"
     }
   ],
   "hangxian": [
@@ -17604,7 +17604,7 @@
     },
     {
       "char": "航线",
-      "en": "Flight route/Shipping route"
+      "en": "Flight route"
     }
   ],
   "tieluxian": [
@@ -17682,7 +17682,7 @@
   "tuzhang": [
     {
       "char": "图张",
-      "en": "Illustration/Diagram"
+      "en": "Illustration"
     }
   ],
   "jianggao": [
@@ -17718,7 +17718,7 @@
   "feisheng": [
     {
       "char": "蜚声",
-      "en": "Fame/Reputation"
+      "en": "Fame"
     }
   ],
   "gaocengci": [
@@ -17742,7 +17742,7 @@
   "zhizhu": [
     {
       "char": "植株",
-      "en": "plant/plantlet"
+      "en": "plant"
     }
   ],
   "youxianfazhan": [
@@ -17790,7 +17790,7 @@
   "shoujia": [
     {
       "char": "首架",
-      "en": "First model/prototype"
+      "en": "First model"
     }
   ],
   "zongzhuang": [
@@ -17802,13 +17802,13 @@
   "xiaxian": [
     {
       "char": "下线",
-      "en": "Take off/decommissioning"
+      "en": "Take off"
     }
   ],
   "zhengxiang": [
     {
       "char": "正向",
-      "en": "Positive/forward"
+      "en": "Positive"
     }
   ],
   "guojihangyun": [
@@ -17826,7 +17826,7 @@
   "xiaoying": [
     {
       "char": "效应",
-      "en": "Effect/impact"
+      "en": "Effect"
     }
   ],
   "yataijinghezuzhi": [
@@ -17838,7 +17838,7 @@
   "shiren": [
     {
       "char": "时任",
-      "en": "Former (as in, former position)"
+      "en": "Former (as in"
     }
   ],
   "judachengjiu": [
@@ -17856,13 +17856,13 @@
   "shiyanqu": [
     {
       "char": "试验区",
-      "en": "Pilot area/experimental zone"
+      "en": "Pilot area"
     }
   ],
   "lingrenshenwang": [
     {
       "char": "令人神往",
-      "en": "Inspiring/attractive"
+      "en": "Inspiring"
     }
   ],
   "xibeibu": [
@@ -17880,7 +17880,7 @@
   "xingxingdiandian": [
     {
       "char": "星星点点",
-      "en": "Scattered/dotted"
+      "en": "Scattered"
     }
   ],
   "xinjiangweiwuer": [
@@ -17946,7 +17946,7 @@
   "minfeng": [
     {
       "char": "民丰",
-      "en": "People are prosperous / Flourishing people"
+      "en": "People are prosperous"
     },
     {
       "char": "民风",
@@ -17968,7 +17968,7 @@
   "shanglv": [
     {
       "char": "商旅",
-      "en": "Merchants / Business travelers"
+      "en": "Merchants"
     }
   ],
   "alamutu": [
@@ -18004,67 +18004,67 @@
   "mianqu": [
     {
       "char": "免去",
-      "en": "To be relieved of / To be exempted"
+      "en": "To be relieved of"
     }
   ],
   "yunshui": [
     {
       "char": "运水",
-      "en": "Irrigation water / Water transport"
+      "en": "Irrigation water"
     }
   ],
   "zhilao": [
     {
       "char": "之劳",
-      "en": "The trouble / The effort"
+      "en": "The trouble"
     }
   ],
   "chushuikou": [
     {
       "char": "出水口",
-      "en": "Outlet / Confluence"
+      "en": "Outlet"
     }
   ],
   "mingqu": [
     {
       "char": "明渠",
-      "en": "Clear channel / Open canal"
+      "en": "Clear channel"
     }
   ],
   "mingmai": [
     {
       "char": "命脉",
-      "en": "Lifeblood / Vital artery"
+      "en": "Lifeblood"
     }
   ],
   "zijizizu": [
     {
       "char": "自给自足",
-      "en": "Self-sufficient / Able to provide for oneself"
+      "en": "Self-sufficient"
     }
   ],
   "fangtu": [
     {
       "char": "房图",
-      "en": "House plan / Floor plan"
+      "en": "House plan"
     }
   ],
   "tangfen": [
     {
       "char": "糖分",
-      "en": "Sugar content / Sugar"
+      "en": "Sugar content"
     }
   ],
   "fangli": [
     {
       "char": "房里",
-      "en": "Inside the house / In the room"
+      "en": "Inside the house"
     }
   ],
   "guaman": [
     {
       "char": "挂满",
-      "en": "Hanging full / Laden with"
+      "en": "Hanging full"
     }
   ],
   "qingtian": [
@@ -18076,13 +18076,13 @@
   "wenju": [
     {
       "char": "稳居",
-      "en": "Stable ranking / Secure position"
+      "en": "Stable ranking"
     }
   ],
   "shouwei": [
     {
       "char": "首位",
-      "en": "First place / Top position"
+      "en": "First place"
     }
   ],
   "changrongmian": [
@@ -18094,7 +18094,7 @@
   "xiangyu": [
     {
       "char": "享誉",
-      "en": "To be renowned / To gain fame"
+      "en": "To be renowned"
     }
   ],
   "jiankong": [
@@ -18106,7 +18106,7 @@
   "ditou": [
     {
       "char": "地头",
-      "en": "Head (of a table/shop); Leader"
+      "en": "Head (of a table"
     },
     {
       "char": "滴头",
@@ -18122,7 +18122,7 @@
   "chuanchuan": [
     {
       "char": "串串",
-      "en": "(Regional Chinese food - spicy, cold skin noodles)"
+      "en": "(Regional Chinese food - spicy"
     }
   ],
   "guadibian": [
@@ -18146,13 +18146,13 @@
   "xiaoshan": [
     {
       "char": "小山",
-      "en": "Little mountain; Large pile"
+      "en": "Little mountain"
     }
   ],
   "fangun": [
     {
       "char": "翻滚",
-      "en": "Rolling; Tumbling"
+      "en": "Rolling"
     }
   ],
   "mailang": [
@@ -18164,7 +18164,7 @@
   "quyou": [
     {
       "char": "区有",
-      "en": "There is/are in the district"
+      "en": "There is"
     }
   ],
   "longda": [
@@ -18182,7 +18182,7 @@
   "heinen": [
     {
       "char": "黑嫩",
-      "en": "Dark green; Fresh green"
+      "en": "Dark green"
     }
   ],
   "jianglu": [
@@ -18278,7 +18278,7 @@
   "shadi": [
     {
       "char": "沙地",
-      "en": "Sandland/Sandy Area"
+      "en": "Sandland"
     }
   ],
   "shenghe": [
@@ -18290,7 +18290,7 @@
   "huangqu": [
     {
       "char": "黄区",
-      "en": "Yellow Zone/Yellow Area"
+      "en": "Yellow Zone"
     }
   ],
   "wulanhaote": [
@@ -18320,13 +18320,13 @@
   "dangqihuichang": [
     {
       "char": "荡气回肠",
-      "en": "Heart-wrenching/Moving"
+      "en": "Heart-wrenching"
     }
   ],
   "chaixie": [
     {
       "char": "拆卸",
-      "en": "Disassemble/Take Apart"
+      "en": "Disassemble"
     }
   ],
   "wakeng": [
@@ -18344,13 +18344,13 @@
   "paoshen": [
     {
       "char": "袍身",
-      "en": "Toga/Loose-fitting robe"
+      "en": "Toga"
     }
   ],
   "feida": [
     {
       "char": "肥大",
-      "en": "Fat/Large"
+      "en": "Fat"
     }
   ],
   "mabeishang": [
@@ -18404,19 +18404,19 @@
   "yizhu": [
     {
       "char": "衣住",
-      "en": "Dress/Clothing"
+      "en": "Dress"
     }
   ],
   "youshou": [
     {
       "char": "有首",
-      "en": "A piece (of music/poetry)"
+      "en": "A piece (of music"
     }
   ],
   "chushen": [
     {
       "char": "出身",
-      "en": "Background/Origin"
+      "en": "Background"
     }
   ],
   "chilei": [
@@ -18440,13 +18440,13 @@
   "xingwang": [
     {
       "char": "兴旺",
-      "en": "Prosperous/Flourishing"
+      "en": "Prosperous"
     }
   ],
   "shenhouganqing": [
     {
       "char": "深厚感情",
-      "en": "Deep affection/Strong emotions"
+      "en": "Deep affection"
     }
   ],
   "chileichuan": [
@@ -18480,7 +18480,7 @@
   "longgai": [
     {
       "char": "笼盖",
-      "en": "Covering/Enclosing"
+      "en": "Covering"
     }
   ],
   "siye": [
@@ -18504,7 +18504,7 @@
   "fengchuicaodijianniuyang": [
     {
       "char": "风吹草低见牛羊",
-      "en": "The wind blows down the grass, revealing cattle and sheep"
+      "en": "The wind blows down the grass"
     }
   ],
   "qiba": [
@@ -18528,13 +18528,13 @@
   "simianbafang": [
     {
       "char": "四面八方",
-      "en": "Everywhere; from all directions"
+      "en": "Everywhere"
     }
   ],
   "ganlai": [
     {
       "char": "赶来",
-      "en": "Arrived; came rushing"
+      "en": "Arrived"
     }
   ],
   "saima": [
@@ -18558,7 +18558,7 @@
   "bisaixiangmu": [
     {
       "char": "比赛项目",
-      "en": "Competition item; event"
+      "en": "Competition item"
     }
   ],
   "jingqi": [
@@ -18576,7 +18576,7 @@
   "yixianshenshou": [
     {
       "char": "一显身手",
-      "en": "To show one's abilities; to demonstrate skill"
+      "en": "To show one's abilities"
     }
   ],
   "mabu": [
@@ -18588,13 +18588,13 @@
   "feiben": [
     {
       "char": "飞奔",
-      "en": "To gallop; to run swiftly"
+      "en": "To gallop"
     }
   ],
   "shuzhan": [
     {
       "char": "舒展",
-      "en": "Relaxed; expansive"
+      "en": "Relaxed"
     },
     {
       "char": "数占",
@@ -18622,7 +18622,7 @@
   "kaitianpidi": [
     {
       "char": "开天辟地",
-      "en": "To create the world; to establish something momentous"
+      "en": "To create the world"
     }
   ],
   "tianshannanbei": [
@@ -18640,13 +18640,13 @@
   "quanxianguantong": [
     {
       "char": "全线贯通",
-      "en": "All lines connected; fully operational"
+      "en": "All lines connected"
     }
   ],
   "zhongxindian": [
     {
       "char": "中心点",
-      "en": "Central point; hub"
+      "en": "Central point"
     }
   ],
   "boerni": [
@@ -18674,11 +18674,11 @@
     },
     {
       "char": "几幅",
-      "en": "Several paintings/drawings"
+      "en": "Several paintings"
     },
     {
       "char": "极富",
-      "en": "Extremely rich/abundant"
+      "en": "Extremely rich"
     }
   ],
   "weiyena": [
@@ -18942,7 +18942,7 @@
     },
     {
       "char": "补给",
-      "en": "Supply/Replenishment"
+      "en": "Supply"
     }
   ],
   "mucaodi": [
@@ -18966,13 +18966,13 @@
   "aixiao": [
     {
       "char": "矮小",
-      "en": "stunted/dwarf"
+      "en": "stunted"
     }
   ],
   "jinggan": [
     {
       "char": "茎秆",
-      "en": "stem/stalk"
+      "en": "stem"
     }
   ],
   "shaoer": [
@@ -18990,7 +18990,7 @@
   "fanqing": [
     {
       "char": "返青",
-      "en": "rejuvenation/green regrowth"
+      "en": "rejuvenation"
     }
   ],
   "qijiuhui": [
@@ -19002,7 +19002,7 @@
   "tuichi": [
     {
       "char": "推迟",
-      "en": "postpone/delay"
+      "en": "postpone"
     }
   ],
   "shanyang": [
@@ -19020,25 +19020,25 @@
   "mashang": [
     {
       "char": "马上",
-      "en": "immediately/right away"
+      "en": "immediately"
     }
   ],
   "chuqun": [
     {
       "char": "畜群",
-      "en": "herd/flock"
+      "en": "herd"
     }
   ],
   "zhujin": [
     {
       "char": "住进",
-      "en": "enter/dwell"
+      "en": "enter"
     }
   ],
   "pengjuan": [
     {
       "char": "棚圈",
-      "en": "pen/enclosure"
+      "en": "pen"
     }
   ],
   "maohou": [
@@ -19080,7 +19080,7 @@
   "fuzhong": [
     {
       "char": "负重",
-      "en": "Weightlifting/Load bearing"
+      "en": "Weightlifting"
     }
   ],
   "pashan": [
@@ -19110,7 +19110,7 @@
   "suishen": [
     {
       "char": "随身",
-      "en": "On the person/With you"
+      "en": "On the person"
     }
   ],
   "tianre": [
@@ -19134,7 +19134,7 @@
   "gancui": [
     {
       "char": "干脆",
-      "en": "Simply/Directly"
+      "en": "Simply"
     }
   ],
   "xiuzi": [
@@ -19188,7 +19188,7 @@
   "jishou": [
     {
       "char": "既受",
-      "en": "Both/Also"
+      "en": "Both"
     }
   ],
   "nongmumin": [
@@ -19318,7 +19318,7 @@
   "guyou": [
     {
       "char": "故有",
-      "en": "Former/Original"
+      "en": "Former"
     }
   ],
   "chengzhicheng": [
@@ -19390,13 +19390,13 @@
   "guanhuai": [
     {
       "char": "关怀",
-      "en": "Care/Concern"
+      "en": "Care"
     }
   ],
   "fantianfudi": [
     {
       "char": "翻天覆地",
-      "en": "Turn over a new leaf/Radically"
+      "en": "Turn over a new leaf"
     }
   ],
   "yichuangchuang": [
@@ -19414,7 +19414,7 @@
   "jiaoxianghuiying": [
     {
       "char": "交相辉映",
-      "en": "Reflecting each other/Intertwined"
+      "en": "Reflecting each other"
     }
   ],
   "yuehao": [
@@ -19432,7 +19432,7 @@
   "juminxiaoqu": [
     {
       "char": "居民小区",
-      "en": "Residential complex/Community"
+      "en": "Residential complex"
     }
   ],
   "jianzhufengge": [
@@ -19456,19 +19456,19 @@
   "fengherili": [
     {
       "char": "风和日丽",
-      "en": "Fine weather, sunny and breezy"
+      "en": "Fine weather"
     }
   ],
   "jiaowai": [
     {
       "char": "郊外",
-      "en": "Outskirts, countryside"
+      "en": "Outskirts"
     }
   ],
   "xishui": [
     {
       "char": "溪水",
-      "en": "Stream, brook"
+      "en": "Stream"
     }
   ],
   "shanlin": [
@@ -19480,7 +19480,7 @@
   "zhiqi": [
     {
       "char": "支起",
-      "en": "Set up, erect"
+      "en": "Set up"
     }
   ],
   "qingkejiu": [
@@ -19504,7 +19504,7 @@
   "wenyiyanchu": [
     {
       "char": "文艺演出",
-      "en": "Artistic performance, cultural show"
+      "en": "Artistic performance"
     }
   ],
   "renlai": [
@@ -19522,7 +19522,7 @@
   "zhuangban": [
     {
       "char": "装扮",
-      "en": "Dress up, adorn"
+      "en": "Dress up"
     }
   ],
   "suozaiquyu": [
@@ -19534,7 +19534,7 @@
   "tuijie": [
     {
       "char": "推介",
-      "en": "Promote, introduce"
+      "en": "Promote"
     }
   ],
   "jutibuzhou": [
@@ -19546,13 +19546,13 @@
   "zhashi": [
     {
       "char": "扎实",
-      "en": "Solid, firm, thorough"
+      "en": "Solid"
     }
   ],
   "rushou": [
     {
       "char": "入手",
-      "en": "Get started, begin with"
+      "en": "Get started"
     }
   ],
   "danyishi": [
@@ -19606,13 +19606,13 @@
   "xiangtu": [
     {
       "char": "乡土",
-      "en": "Folkways/Rural traditions"
+      "en": "Folkways"
     }
   ],
   "difangzhi": [
     {
       "char": "地方志",
-      "en": "Gazetteer/Local annals"
+      "en": "Gazetteer"
     }
   ],
   "sizu": [
@@ -19630,7 +19630,7 @@
   "tuce": [
     {
       "char": "图册",
-      "en": "Album/Photographic collection"
+      "en": "Album"
     }
   ],
   "sijiruhua": [
@@ -19654,7 +19654,7 @@
   "feijian": [
     {
       "char": "飞溅",
-      "en": "Splashing/Spraying"
+      "en": "Splashing"
     }
   ],
   "congtianerjiang": [
@@ -19690,13 +19690,13 @@
   "xiamoqiu": [
     {
       "char": "夏末秋",
-      "en": "Late summer/early autumn"
+      "en": "Late summer"
     }
   ],
   "fangyanwangqu": [
     {
       "char": "放眼望去",
-      "en": "Look out over/Cast a wide view"
+      "en": "Look out over"
     }
   ],
   "yimianmian": [
@@ -19708,7 +19708,7 @@
   "guangliang": [
     {
       "char": "光亮",
-      "en": "Bright/Shiny"
+      "en": "Bright"
     }
   ],
   "yingzhao": [
@@ -19774,7 +19774,7 @@
   "wenjuandiaocha": [
     {
       "char": "问卷调查",
-      "en": "Questionnaire/Survey"
+      "en": "Questionnaire"
     }
   ],
   "shoufangzhe": [
@@ -19804,13 +19804,13 @@
   "tanfang": [
     {
       "char": "探访",
-      "en": "Visit/Investigate"
+      "en": "Visit"
     }
   ],
   "cunzhai": [
     {
       "char": "村寨",
-      "en": "Village/Hamlet"
+      "en": "Village"
     }
   ],
   "suyu": [
@@ -19828,7 +19828,7 @@
   "nenggan": [
     {
       "char": "能干",
-      "en": "Able, competent"
+      "en": "Able"
     }
   ],
   "fenleizhengli": [
@@ -19852,13 +19852,13 @@
   "xieming": [
     {
       "char": "写明",
-      "en": "To specify, to indicate"
+      "en": "To specify"
     }
   ],
   "piao": [
     {
       "char": "皮袄",
-      "en": "Leather jacket/coat"
+      "en": "Leather jacket"
     }
   ],
   "wuchuan": [
@@ -19870,7 +19870,7 @@
   "weizhe": [
     {
       "char": "围着",
-      "en": "To surround, to circle"
+      "en": "To surround"
     }
   ],
   "huolu": [
@@ -19918,7 +19918,7 @@
   "lizuyu": [
     {
       "char": "立足于",
-      "en": "Based on, rooted in"
+      "en": "Based on"
     }
   ],
   "bingjian": [
@@ -19984,7 +19984,7 @@
   "xunmeng": [
     {
       "char": "迅猛",
-      "en": "Rapidly, vigorous"
+      "en": "Rapidly"
     }
   ],
   "jisuanjieguo": [
@@ -20096,13 +20096,13 @@
   "yongji": [
     {
       "char": "用极",
-      "en": "With/Using"
+      "en": "With"
     }
   ],
   "weiju": [
     {
       "char": "位居",
-      "en": "To be situated; to hold a position"
+      "en": "To be situated"
     }
   ],
   "laoling": [
@@ -20166,17 +20166,17 @@
     },
     {
       "char": "年现",
-      "en": "(Referring to a year) Existing / Present"
+      "en": "(Referring to a year) Existing"
     }
   ],
   "renshou": [
     {
       "char": "人手",
-      "en": "Labor force; manpower"
+      "en": "Labor force"
     },
     {
       "char": "忍受",
-      "en": "To endure/tolerate"
+      "en": "To endure"
     }
   ],
   "shengchanzhe": [
@@ -20278,13 +20278,13 @@
   "ruohua": [
     {
       "char": "弱化",
-      "en": "Weaken, diminish"
+      "en": "Weaken"
     }
   ],
   "baojian": [
     {
       "char": "保健",
-      "en": "Health care, wellness"
+      "en": "Health care"
     }
   ],
   "xunzhen": [
@@ -20332,7 +20332,7 @@
   "feike": [
     {
       "char": "非可",
-      "en": "Impossible/Unfeasible"
+      "en": "Impossible"
     }
   ],
   "qihouziyuan": [
@@ -20344,37 +20344,37 @@
   "anshenliming": [
     {
       "char": "安身立命",
-      "en": "To have a livelihood/To make a living"
+      "en": "To have a livelihood"
     }
   ],
   "yike": [
     {
       "char": "一刻",
-      "en": "One moment/Instant"
+      "en": "One moment"
     }
   ],
   "xiaohaoliang": [
     {
       "char": "消耗量",
-      "en": "Consumption/Rate of consumption"
+      "en": "Consumption"
     }
   ],
   "zengzhi": [
     {
       "char": "增殖",
-      "en": "Reproduction/Increase"
+      "en": "Reproduction"
     }
   ],
   "yuncangliang": [
     {
       "char": "蕴藏量",
-      "en": "Reserves/Potential"
+      "en": "Reserves"
     }
   ],
   "pipei": [
     {
       "char": "匹配",
-      "en": "Match/Correspond"
+      "en": "Match"
     }
   ],
   "yibainian": [
@@ -20386,7 +20386,7 @@
   "shangyexing": [
     {
       "char": "商业性",
-      "en": "Commercial/For profit"
+      "en": "Commercial"
     }
   ],
   "nantaipingyang": [
@@ -20404,7 +20404,7 @@
   "yinlai": [
     {
       "char": "引来",
-      "en": "Attract/Draw"
+      "en": "Attract"
     }
   ],
   "hainiao": [
@@ -20422,7 +20422,7 @@
   "houdami": [
     {
       "char": "厚达米",
-      "en": "(Assuming a specific unit - needs context, but likely a measurement)"
+      "en": "(Assuming a specific unit - needs context"
     }
   ],
   "quandao": [
@@ -20440,7 +20440,7 @@
   "lveduo": [
     {
       "char": "掠夺",
-      "en": "Plunder/Exploitation"
+      "en": "Plunder"
     }
   ],
   "caikuang": [
@@ -20674,7 +20674,7 @@
   "chulu": [
     {
       "char": "出路",
-      "en": "Solution, way out"
+      "en": "Solution"
     }
   ],
   "yilaiyu": [
@@ -20710,7 +20710,7 @@
   "tuoqi": [
     {
       "char": "托起",
-      "en": "Support, lift up"
+      "en": "Support"
     }
   ],
   "pinyin": [
@@ -20728,7 +20728,7 @@
   "yuyi": [
     {
       "char": "予以",
-      "en": "Provide, give"
+      "en": "Provide"
     },
     {
       "char": "语意",
@@ -20750,25 +20750,25 @@
   "huicheng": [
     {
       "char": "汇成",
-      "en": "To converge; to flow into"
+      "en": "To converge"
     }
   ],
   "jinqi": [
     {
       "char": "近期",
-      "en": "Recent; near"
+      "en": "Recent"
     }
   ],
   "zongtibuju": [
     {
       "char": "总体布局",
-      "en": "Overall planning; master plan"
+      "en": "Overall planning"
     }
   ],
   "gezhansuozhang": [
     {
       "char": "各展所长",
-      "en": "To show one's strengths; to specialize"
+      "en": "To show one's strengths"
     }
   ],
   "shengcuntiaojian": [
@@ -20780,13 +20780,13 @@
   "yuyanyulie": [
     {
       "char": "愈演愈烈",
-      "en": "Increasingly intense; worsening"
+      "en": "Increasingly intense"
     }
   ],
   "yinei": [
     {
       "char": "以内",
-      "en": "Within; internally"
+      "en": "Within"
     }
   ],
   "chanshengmaodun": [
@@ -20822,7 +20822,7 @@
   "yixue": [
     {
       "char": "已学",
-      "en": "Learned; studied"
+      "en": "Learned"
     }
   ],
   "youhaiwuzhi": [
@@ -20906,13 +20906,13 @@
   "cengchubuqiong": [
     {
       "char": "层出不穷",
-      "en": "Endless, countless"
+      "en": "Endless"
     }
   ],
   "ruijian": [
     {
       "char": "锐减",
-      "en": "Decline, reduction"
+      "en": "Decline"
     }
   ],
   "quanrenlei": [
@@ -20948,7 +20948,7 @@
   "binggai": [
     {
       "char": "冰盖",
-      "en": "Ice sheet, glacier"
+      "en": "Ice sheet"
     }
   ],
   "yanzihua": [
@@ -20960,7 +20960,7 @@
   "kongdong": [
     {
       "char": "空洞",
-      "en": "Void, hollow"
+      "en": "Void"
     }
   ],
   "bianjingdiqu": [
@@ -20984,7 +20984,7 @@
   "piaoyi": [
     {
       "char": "飘移",
-      "en": "Drift, fluctuation"
+      "en": "Drift"
     }
   ],
   "yuanjuli": [
@@ -21002,7 +21002,7 @@
   "zhengduan": [
     {
       "char": "争端",
-      "en": "Dispute, conflict"
+      "en": "Dispute"
     }
   ],
   "jingshipai": [
@@ -21026,19 +21026,19 @@
   "benguo": [
     {
       "char": "本国",
-      "en": "Domestic, native"
+      "en": "Domestic"
     }
   ],
   "yueshuli": [
     {
       "char": "约束力",
-      "en": "Restraint, coercive power"
+      "en": "Restraint"
     }
   ],
   "xuejian": [
     {
       "char": "削减",
-      "en": "Reduce, cut down"
+      "en": "Reduce"
     }
   ],
   "paifangliang": [
@@ -21050,13 +21050,13 @@
   "jinlai": [
     {
       "char": "进来",
-      "en": "Come in, enter"
+      "en": "Come in"
     }
   ],
   "tuihua": [
     {
       "char": "退化",
-      "en": "Deterioration, degradation"
+      "en": "Deterioration"
     }
   ],
   "weidabiao": [
@@ -21116,13 +21116,13 @@
   "pinbo": [
     {
       "char": "拼搏",
-      "en": "Strive/Persevere"
+      "en": "Strive"
     }
   ],
   "lianpian": [
     {
       "char": "连片",
-      "en": "Continuous/Large Area"
+      "en": "Continuous"
     }
   ],
   "rengonglin": [
@@ -21134,7 +21134,7 @@
   "disanjie": [
     {
       "char": "第三届",
-      "en": "Third Session/Level"
+      "en": "Third Session"
     }
   ],
   "fugailv": [
@@ -21158,7 +21158,7 @@
   "jishushouduan": [
     {
       "char": "技术手段",
-      "en": "Technical Means/Methods"
+      "en": "Technical Means"
     }
   ],
   "xinwenmeiti": [
@@ -21170,7 +21170,7 @@
   "ziyan": [
     {
       "char": "字眼",
-      "en": "Keywords/Catchwords"
+      "en": "Keywords"
     }
   ],
   "baoweizhan": [
@@ -21182,7 +21182,7 @@
   "jingtu": [
     {
       "char": "净土",
-      "en": "Pristine Land/Clean Soil"
+      "en": "Pristine Land"
     }
   ],
   "wushuigongzhi": [
@@ -21344,13 +21344,13 @@
   "xianrukunjing": [
     {
       "char": "陷入困境",
-      "en": "To be in difficulty/a predicament"
+      "en": "To be in difficulty"
     }
   ],
   "xianghuyingxiang": [
     {
       "char": "相互影响",
-      "en": "Mutual influence/interact"
+      "en": "Mutual influence"
     }
   ],
   "jiantou": [
@@ -21362,25 +21362,25 @@
   "poshi": [
     {
       "char": "迫使",
-      "en": "To compel/force"
+      "en": "To compel"
     }
   ],
   "shenshi": [
     {
       "char": "审视",
-      "en": "To examine/review"
+      "en": "To examine"
     }
   ],
   "kake": [
     {
       "char": "卡可",
-      "en": "(Likely referring to a specific type of plant or material - context needed for a precise translation, but could be translated as \"Kakao\" or \"a particular species\")"
+      "en": "(Likely referring to a specific type of plant or material - context needed for a precise translation"
     }
   ],
   "mingquetichu": [
     {
       "char": "明确提出",
-      "en": "To state clearly/explicitly"
+      "en": "To state clearly"
     }
   ],
   "xingdongjihua": [
@@ -21392,43 +21392,43 @@
   "hangai": [
     {
       "char": "涵盖",
-      "en": "To cover/include"
+      "en": "To cover"
     }
   ],
   "dangdairen": [
     {
       "char": "当代人",
-      "en": "Contemporary people/Modern people"
+      "en": "Contemporary people"
     }
   ],
   "houdairen": [
     {
       "char": "后代人",
-      "en": "Future generations/Descendants"
+      "en": "Future generations"
     }
   ],
   "yingfu": [
     {
       "char": "应负",
-      "en": "Should bear/be responsible"
+      "en": "Should bear"
     }
   ],
   "queyibuke": [
     {
       "char": "缺一不可",
-      "en": "All must be present/None can be missing"
+      "en": "All must be present"
     }
   ],
   "daijia": [
     {
       "char": "代价",
-      "en": "Cost/Sacrifice"
+      "en": "Cost"
     }
   ],
   "chengzhong": [
     {
       "char": "程中",
-      "en": "During the process/In progress"
+      "en": "During the process"
     },
     {
       "char": "城中",
@@ -21438,7 +21438,7 @@
   "jiangu": [
     {
       "char": "兼顾",
-      "en": "To consider both/To balance"
+      "en": "To consider both"
     }
   ],
   "daiji": [
@@ -21462,7 +21462,7 @@
   "guanche": [
     {
       "char": "贯彻",
-      "en": "Implement, Carry out"
+      "en": "Implement"
     }
   ],
   "youxiaolv": [
@@ -21480,7 +21480,7 @@
   "wenbu": [
     {
       "char": "稳步",
-      "en": "Step by step, Steadily"
+      "en": "Step by step"
     }
   ],
   "pogengdi": [
@@ -21516,13 +21516,13 @@
   "jingjixing": [
     {
       "char": "经济型",
-      "en": "Economical, Budget-friendly"
+      "en": "Economical"
     }
   ],
   "huanranyixin": [
     {
       "char": "焕然一新",
-      "en": "Brand New, Completely Renewed"
+      "en": "Brand New"
     }
   ],
   "lvshuiqingshan": [
@@ -21558,7 +21558,7 @@
   "xingeju": [
     {
       "char": "新格局",
-      "en": "New Pattern, New Framework"
+      "en": "New Pattern"
     }
   ],
   "moufazhan": [
@@ -21690,7 +21690,7 @@
   "siyang": [
     {
       "char": "饲养",
-      "en": "Raising/Feeding"
+      "en": "Raising"
     }
   ],
   "zhurou": [
@@ -21720,7 +21720,7 @@
   "danei": [
     {
       "char": "大内",
-      "en": "Inner Court/Palace"
+      "en": "Inner Court"
     }
   ],
   "longxiaoxingjiang": [
@@ -22120,13 +22120,13 @@
   "yaochong": [
     {
       "char": "要冲",
-      "en": "Strategic Pass/Key Point"
+      "en": "Strategic Pass"
     }
   ],
   "chengjie": [
     {
       "char": "承接",
-      "en": "Undertake/Contract"
+      "en": "Undertake"
     }
   ],
   "jinrongshichang": [
@@ -22138,7 +22138,7 @@
   "tongsu": [
     {
       "char": "通俗",
-      "en": "Simple/Popular"
+      "en": "Simple"
     }
   ],
   "shijiepaiming": [
@@ -22150,7 +22150,7 @@
   "banshijigou": [
     {
       "char": "办事机构",
-      "en": "Administrative Agency/Office"
+      "en": "Administrative Agency"
     }
   ],
   "lupai": [
@@ -22172,7 +22172,7 @@
     },
     {
       "char": "演讲",
-      "en": "Speech/Presentation"
+      "en": "Speech"
     }
   ],
   "chanyebuju": [
@@ -22202,7 +22202,7 @@
   "fangzaishouwei": [
     {
       "char": "放在首位",
-      "en": "Prioritize/Place First"
+      "en": "Prioritize"
     }
   ],
   "jianshi": [
@@ -22214,7 +22214,7 @@
   "duofang": [
     {
       "char": "多方",
-      "en": "Various/Multiple"
+      "en": "Various"
     }
   ],
   "fuyouchengxiao": [
@@ -22256,7 +22256,7 @@
   "jianju": [
     {
       "char": "艰巨",
-      "en": "Serious, grave"
+      "en": "Serious"
     }
   ],
   "nongcunjumin": [
@@ -22328,43 +22328,43 @@
   "laobaixing": [
     {
       "char": "老百姓",
-      "en": "Common people/The people"
+      "en": "Common people"
     }
   ],
   "dazaochu": [
     {
       "char": "打造出",
-      "en": "To create/To develop"
+      "en": "To create"
     }
   ],
   "wowo": [
     {
       "char": "窝窝",
-      "en": "(Referring to a small, cozy space - context dependent, often translated as \"nook\" or \"corner\")"
+      "en": "(Referring to a small"
     }
   ],
   "yiliangxiang": [
     {
       "char": "一两项",
-      "en": "One item/One aspect"
+      "en": "One item"
     }
   ],
   "jizhi": [
     {
       "char": "机制",
-      "en": "Mechanism/System"
+      "en": "Mechanism"
     }
   ],
   "xinlinian": [
     {
       "char": "新理念",
-      "en": "New concept/New idea"
+      "en": "New concept"
     }
   ],
   "shengtaijianshe": [
     {
       "char": "生态建设",
-      "en": "Ecological construction/Ecological development"
+      "en": "Ecological construction"
     }
   ],
   "zuochunuli": [
@@ -22376,7 +22376,7 @@
   "gongzheng": [
     {
       "char": "公正",
-      "en": "Fair/Just"
+      "en": "Fair"
     }
   ],
   "qieshiyouxiao": [
@@ -22388,7 +22388,7 @@
   "dangshiren": [
     {
       "char": "当事人",
-      "en": "The involved party/The person concerned"
+      "en": "The involved party"
     }
   ],
   "mujizhe": [
@@ -22400,7 +22400,7 @@
   "zhuanshu": [
     {
       "char": "转述",
-      "en": "To report/To quote"
+      "en": "To report"
     }
   ],
   "xiaoli": [
@@ -22412,11 +22412,11 @@
   "yuanqu": [
     {
       "char": "源区",
-      "en": "Source area/Source district"
+      "en": "Source area"
     },
     {
       "char": "园区",
-      "en": "Park/Zone"
+      "en": "Park"
     }
   ],
   "haizai": [
@@ -22446,7 +22446,7 @@
   "zhici": [
     {
       "char": "至此",
-      "en": "Until now/Here"
+      "en": "Until now"
     }
   ],
   "hemian": [
@@ -22476,7 +22476,7 @@
   "denggao": [
     {
       "char": "登高",
-      "en": "Climb/Ascend"
+      "en": "Climb"
     }
   ],
   "yekong": [
@@ -22488,7 +22488,7 @@
   "shanshuo": [
     {
       "char": "闪烁",
-      "en": "Flicker/Twinkle"
+      "en": "Flicker"
     }
   ],
   "xingxing": [
@@ -22530,13 +22530,13 @@
   "kaizhe": [
     {
       "char": "开着",
-      "en": "Driving/With"
+      "en": "Driving"
     }
   ],
   "jiaoche": [
     {
       "char": "轿车",
-      "en": "Sedan/Carriage"
+      "en": "Sedan"
     }
   ],
   "jiajiahuhu": [
@@ -22740,7 +22740,7 @@
   "qihang": [
     {
       "char": "启航",
-      "en": "Setting sail/Embarking"
+      "en": "Setting sail"
     }
   ],
   "wangpengdou": [
@@ -22770,7 +22770,7 @@
   "juzhuxiaoqu": [
     {
       "char": "居住小区",
-      "en": "Residential complex/Housing estate"
+      "en": "Residential complex"
     }
   ],
   "tuwang": [
@@ -22818,13 +22818,13 @@
   "shangbeixia": [
     {
       "char": "上北下",
-      "en": "Upper North, Lower South"
+      "en": "Upper North"
     }
   ],
   "xiyoudong": [
     {
       "char": "西右东",
-      "en": "West, Right, East"
+      "en": "West"
     }
   ],
   "xianduan": [
@@ -22848,7 +22848,7 @@
   "xianglve": [
     {
       "char": "详略",
-      "en": "Detailed, Brief"
+      "en": "Detailed"
     }
   ],
   "wangcun": [
@@ -22968,7 +22968,7 @@
   "canyin": [
     {
       "char": "餐饮",
-      "en": "Catering/Restaurants"
+      "en": "Catering"
     }
   ],
   "qunzhongyundong": [
@@ -23004,19 +23004,19 @@
   "xiaofangdui": [
     {
       "char": "消防队",
-      "en": "Firefighting squad/Fire department"
+      "en": "Firefighting squad"
     }
   ],
   "jiulou": [
     {
       "char": "酒楼",
-      "en": "Restaurant/Inn"
+      "en": "Restaurant"
     }
   ],
   "tumou": [
     {
       "char": "图某",
-      "en": "Figure/Diagram X"
+      "en": "Figure"
     }
   ],
   "toupiaoxuanju": [
@@ -23028,7 +23028,7 @@
   "weishengshi": [
     {
       "char": "卫生室",
-      "en": "Clinic/Health center"
+      "en": "Clinic"
     }
   ],
   "huandu": [
@@ -23058,7 +23058,7 @@
   "zaishenghuoshang": [
     {
       "char": "在生活上",
-      "en": "In life/Regarding life"
+      "en": "In life"
     }
   ],
   "sheyingzhan": [
@@ -23082,7 +23082,7 @@
   "rentonggan": [
     {
       "char": "认同感",
-      "en": "Sense of identity, feeling of belonging"
+      "en": "Sense of identity"
     }
   ],
   "jieranbutong": [
@@ -23094,7 +23094,7 @@
   "touxiang": [
     {
       "char": "投向",
-      "en": "Directed at, aimed at"
+      "en": "Directed at"
     }
   ],
   "honglao": [
@@ -23112,7 +23112,7 @@
   "fangwujianzhu": [
     {
       "char": "房屋建筑",
-      "en": "Buildings, housing"
+      "en": "Buildings"
     }
   ],
   "zhumu": [
@@ -23124,7 +23124,7 @@
   "xuanli": [
     {
       "char": "悬离",
-      "en": "Suspended, detached"
+      "en": "Suspended"
     }
   ],
   "qianghouchuang": [
@@ -23136,7 +23136,7 @@
   "meifu": [
     {
       "char": "每幅",
-      "en": "Each (painting/picture)"
+      "en": "Each (painting"
     }
   ],
   "guanlizhongxin": [
@@ -23148,7 +23148,7 @@
   "houchang": [
     {
       "char": "后常",
-      "en": "Behind, later"
+      "en": "Behind"
     }
   ],
   "shuijing": [
@@ -23160,25 +23160,25 @@
   "panggu": [
     {
       "char": "旁故",
-      "en": "Former residence, nearby dwelling"
+      "en": "Former residence"
     }
   ],
   "shijing": [
     {
       "char": "市井",
-      "en": "Urban life, street life"
+      "en": "Urban life"
     }
   ],
   "tongzhizhe": [
     {
       "char": "统治者",
-      "en": "Ruler, authority figure"
+      "en": "Ruler"
     }
   ],
   "fangcai": [
     {
       "char": "方才",
-      "en": "Just now, previously"
+      "en": "Just now"
     }
   ],
   "zhuzhailou": [
@@ -23190,13 +23190,13 @@
   "zonghengjiaocuo": [
     {
       "char": "纵横交错",
-      "en": "Interlaced, crisscrossing"
+      "en": "Interlaced"
     }
   ],
   "xirang": [
     {
       "char": "熙攘",
-      "en": "Bustling, crowded"
+      "en": "Bustling"
     }
   ],
   "shangyezhongxin": [
@@ -23208,19 +23208,19 @@
   "cuoluoyouzhi": [
     {
       "char": "错落有致",
-      "en": "Picturesque, well-spaced"
+      "en": "Picturesque"
     }
   ],
   "pianzhongyu": [
     {
       "char": "偏重于",
-      "en": "Primarily focused on, leaning towards"
+      "en": "Primarily focused on"
     }
   ],
   "houzhong": [
     {
       "char": "厚重",
-      "en": "Heavy, substantial"
+      "en": "Heavy"
     }
   ],
   "wangfujingdajie": [
@@ -23316,7 +23316,7 @@
   "chengfu": [
     {
       "char": "成府",
-      "en": "Grand Mansion/Estate"
+      "en": "Grand Mansion"
     }
   ],
   "kexueyiqi": [
@@ -23376,7 +23376,7 @@
   "yanjiushengyuan": [
     {
       "char": "研究生院",
-      "en": "Graduate School/Institute"
+      "en": "Graduate School"
     }
   ],
   "qucunlu": [
@@ -23466,7 +23466,7 @@
   "zonggongsi": [
     {
       "char": "总公司",
-      "en": "Head Office/Headquarters"
+      "en": "Head Office"
     }
   ],
   "daliushu": [
@@ -23742,19 +23742,19 @@
   "tajia": [
     {
       "char": "她家",
-      "en": "Her Home/Her Place"
+      "en": "Her Home"
     }
   ],
   "linlangmanmu": [
     {
       "char": "琳琅满目",
-      "en": "A Wide Variety/A Plethora of"
+      "en": "A Wide Variety"
     }
   ],
   "choucha": [
     {
       "char": "抽查",
-      "en": "Random Inspection/Check"
+      "en": "Random Inspection"
     }
   ],
   "bendichan": [
@@ -23896,7 +23896,7 @@
   "getiao": [
     {
       "char": "各条",
-      "en": "Each line/Various lines"
+      "en": "Each line"
     }
   ],
   "douhuan": [
@@ -23974,13 +23974,13 @@
   "tazuo": [
     {
       "char": "他作",
-      "en": "His work/creation"
+      "en": "His work"
     }
   ],
   "zhaolai": [
     {
       "char": "找来",
-      "en": "To fetch/find"
+      "en": "To fetch"
     }
   ],
   "nanpingshi": [
@@ -24116,7 +24116,7 @@
   "lufei": [
     {
       "char": "路费",
-      "en": "Transportation cost/fare"
+      "en": "Transportation cost"
     }
   ],
   "huaxiao": [
@@ -24128,7 +24128,7 @@
   "jiding": [
     {
       "char": "既定",
-      "en": "Fixed/Established"
+      "en": "Fixed"
     }
   ],
   "chenghuoche": [
@@ -24152,13 +24152,13 @@
   "luluxiang": [
     {
       "char": "路路祥",
-      "en": "Lu Lu Xiang (Often refers to a specific business or area, translating roughly to \"Prosperous Road\")"
+      "en": "Lu Lu Xiang (Often refers to a specific business or area"
     }
   ],
   "donghe": [
     {
       "char": "东禾",
-      "en": "Dong He (East Grain/Harvest)"
+      "en": "Dong He (East Grain"
     },
     {
       "char": "东河",
@@ -24168,7 +24168,7 @@
   "tonghuyuan": [
     {
       "char": "同虎园",
-      "en": "Tong Hu Yuan (Similar to \"Tiger Garden,\" likely a park or garden)"
+      "en": "Tong Hu Yuan (Similar to \"Tiger Garden"
     }
   ],
   "luhu": [
@@ -24252,7 +24252,7 @@
   "pinggong": [
     {
       "char": "屏功",
-      "en": "Ping Gong (Barrier Skill/Technique)"
+      "en": "Ping Gong (Barrier Skill"
     }
   ],
   "yuping": [
@@ -24336,7 +24336,7 @@
   "tuji": [
     {
       "char": "图集",
-      "en": "Photo Album/Collection of Pictures"
+      "en": "Photo Album"
     }
   ],
   "xinglin": [
@@ -24564,7 +24564,7 @@
   "shixiang": [
     {
       "char": "事项",
-      "en": "Matter/Issue"
+      "en": "Matter"
     }
   ],
   "gexinghua": [
@@ -24576,7 +24576,7 @@
   "biaoshang": [
     {
       "char": "标上",
-      "en": "Mark/Label"
+      "en": "Mark"
     }
   ],
   "yimolu": [
@@ -24636,17 +24636,17 @@
   "shanwen": [
     {
       "char": "山文",
-      "en": "Shan Wen (Mountain Literature/Culture)"
+      "en": "Shan Wen (Mountain Literature"
     }
   ],
   "hehuan": [
     {
       "char": "河环",
-      "en": "River Ring/Circumference"
+      "en": "River Ring"
     },
     {
       "char": "和缓",
-      "en": "Gentle / Calm"
+      "en": "Gentle"
     }
   ],
   "chengxi": [
@@ -24688,7 +24688,7 @@
   "gongdi": [
     {
       "char": "公堤",
-      "en": "Public Levee/Embankment"
+      "en": "Public Levee"
     },
     {
       "char": "宫蒂",
@@ -24698,7 +24698,7 @@
   "yunchang": [
     {
       "char": "运场",
-      "en": "Transportation Yard/Warehouse"
+      "en": "Transportation Yard"
     }
   ],
   "shanmen": [
@@ -24782,13 +24782,13 @@
   "wailairenyuan": [
     {
       "char": "外来人员",
-      "en": "Foreigner/Outsider"
+      "en": "Foreigner"
     }
   ],
   "chuanmen": [
     {
       "char": "串门",
-      "en": "To visit (someone); to drop in"
+      "en": "To visit (someone)"
     }
   ],
   "shididiaocha": [
@@ -24800,37 +24800,37 @@
   "shenghuoziliao": [
     {
       "char": "生活资料",
-      "en": "Living supplies/Living expenses"
+      "en": "Living supplies"
     }
   ],
   "zhuoyandian": [
     {
       "char": "着眼点",
-      "en": "Focus/Perspective"
+      "en": "Focus"
     }
   ],
   "fenyi": [
     {
       "char": "分异",
-      "en": "Differentiation/Division"
+      "en": "Differentiation"
     }
   ],
   "shengcunkongjian": [
     {
       "char": "生存空间",
-      "en": "Living space/Habitat"
+      "en": "Living space"
     }
   ],
   "qixidi": [
     {
       "char": "栖息地",
-      "en": "Habitat/Residence"
+      "en": "Habitat"
     }
   ],
   "jinyue": [
     {
       "char": "仅约",
-      "en": "Approximately/Around"
+      "en": "Approximately"
     }
   ],
   "biaomianji": [
@@ -24842,13 +24842,13 @@
   "xingqiu": [
     {
       "char": "星球",
-      "en": "Planet/Star"
+      "en": "Planet"
     }
   ],
   "kaozheng": [
     {
       "char": "考证",
-      "en": "To verify/To authenticate"
+      "en": "To verify"
     }
   ],
   "dabenying": [
@@ -24860,7 +24860,7 @@
   "shengxifanyan": [
     {
       "char": "生息繁衍",
-      "en": "Propagation, Sustenance"
+      "en": "Propagation"
     }
   ],
   "huanshui": [
@@ -24884,7 +24884,7 @@
   "gouhua": [
     {
       "char": "勾画",
-      "en": "Outline, Sketch"
+      "en": "Outline"
     }
   ],
   "gekai": [
@@ -25016,7 +25016,7 @@
   "nandi": [
     {
       "char": "南地",
-      "en": "Southern Lands/Regions"
+      "en": "Southern Lands"
     }
   ],
   "yadong": [
@@ -25046,7 +25046,7 @@
   "yangmian": [
     {
       "char": "洋面",
-      "en": "Ocean surface/Coastal area"
+      "en": "Ocean surface"
     }
   ],
   "suifeng": [
@@ -25064,25 +25064,25 @@
   "binhai": [
     {
       "char": "滨海",
-      "en": "Coastal/Seaside"
+      "en": "Coastal"
     }
   ],
   "zhenxi": [
     {
       "char": "珍稀",
-      "en": "Rare/Valuable"
+      "en": "Rare"
     }
   ],
   "guanshangjiazhi": [
     {
       "char": "观赏价值",
-      "en": "Aesthetic value/Scenic value"
+      "en": "Aesthetic value"
     }
   ],
   "wuzijiaoliu": [
     {
       "char": "物资交流",
-      "en": "Exchange of materials/Trade"
+      "en": "Exchange of materials"
     }
   ],
   "raodao": [
@@ -25136,13 +25136,13 @@
   "fukan": [
     {
       "char": "俯瞰",
-      "en": "To overlook / To survey"
+      "en": "To overlook"
     }
   ],
   "fengluanqifu": [
     {
       "char": "峰峦起伏",
-      "en": "Rolling hills / Undulating mountains"
+      "en": "Rolling hills"
     }
   ],
   "doujun": [
@@ -25160,7 +25160,7 @@
   "mailuofenming": [
     {
       "char": "脉络分明",
-      "en": "Clear and logical / Well-structured"
+      "en": "Clear and logical"
     }
   ],
   "douqiao": [
@@ -25172,13 +25172,13 @@
   "shanluanqifu": [
     {
       "char": "山峦起伏",
-      "en": "Rolling hills / Undulating mountains"
+      "en": "Rolling hills"
     }
   ],
   "aotubuping": [
     {
       "char": "凹凸不平",
-      "en": "Uneven / Irregular"
+      "en": "Uneven"
     }
   ],
   "qunshanhuanrao": [
@@ -25226,7 +25226,7 @@
   "hebo": [
     {
       "char": "河伯",
-      "en": "River god / River official"
+      "en": "River god"
     }
   ],
   "xidong": [
@@ -25444,13 +25444,13 @@
   "danbo": [
     {
       "char": "单薄",
-      "en": "Thin, fragile"
+      "en": "Thin"
     }
   ],
   "fanmao": [
     {
       "char": "繁茂",
-      "en": "Lush, abundant"
+      "en": "Lush"
     }
   ],
   "zuileng": [
@@ -25610,7 +25610,7 @@
   "yangliao": [
     {
       "char": "养料",
-      "en": "Food/Provision"
+      "en": "Food"
     }
   ],
   "yexiaoerhou": [
@@ -25916,7 +25916,7 @@
   "jiongyi": [
     {
       "char": "迥异",
-      "en": "Different, distinct"
+      "en": "Different"
     }
   ],
   "bingfeng": [
@@ -25928,7 +25928,7 @@
   "bingyuan": [
     {
       "char": "冰原",
-      "en": "Ice sheet/Glacier"
+      "en": "Ice sheet"
     }
   ],
   "jimuyuantiao": [
@@ -26010,7 +26010,7 @@
   "shanshanfaguang": [
     {
       "char": "闪闪发光",
-      "en": "Sparkling, glittering"
+      "en": "Sparkling"
     }
   ],
   "youdang": [
@@ -26446,7 +26446,7 @@
   "qilie": [
     {
       "char": "其列",
-      "en": "in that row/series"
+      "en": "in that row"
     }
   ],
   "meizhoudiqu": [
@@ -26464,13 +26464,13 @@
   "fuwusheshi": [
     {
       "char": "服务设施",
-      "en": "facilities/services"
+      "en": "facilities"
     }
   ],
   "ningjing": [
     {
       "char": "宁静",
-      "en": "tranquil/peaceful"
+      "en": "tranquil"
     }
   ],
   "xiaocheng": [
@@ -26506,7 +26506,7 @@
   "fanzhong": [
     {
       "char": "繁重",
-      "en": "heavy/burdensome"
+      "en": "heavy"
     }
   ],
   "tililaodong": [
@@ -26530,7 +26530,7 @@
   "jishen": [
     {
       "char": "跻身",
-      "en": "to enter/join"
+      "en": "to enter"
     },
     {
       "char": "机身",
@@ -26582,19 +26582,19 @@
   "taida": [
     {
       "char": "太大",
-      "en": "Too much/large"
+      "en": "Too much"
     }
   ],
   "yixiazi": [
     {
       "char": "一下子",
-      "en": "All at once/suddenly"
+      "en": "All at once"
     }
   ],
   "quanmao": [
     {
       "char": "全貌",
-      "en": "Whole picture/overview"
+      "en": "Whole picture"
     }
   ],
   "bendong": [
@@ -26630,7 +26630,7 @@
   "benchu": [
     {
       "char": "本初",
-      "en": "Original/primitive"
+      "en": "Original"
     }
   ],
   "zibandong": [
@@ -26642,7 +26642,7 @@
   "qiyong": [
     {
       "char": "其用",
-      "en": "Its use/application"
+      "en": "Its use"
     }
   ],
   "beibeixi": [
@@ -26696,7 +26696,7 @@
   "shanghua": [
     {
       "char": "上画",
-      "en": "Upper Painting/Drawing"
+      "en": "Upper Painting"
     }
   ],
   "congnandaobei": [
@@ -26708,7 +26708,7 @@
   "dijiuci": [
     {
       "char": "第九次",
-      "en": "Ninth Time/Occurrence"
+      "en": "Ninth Time"
     }
   ],
   "huiwu": [
@@ -26720,25 +26720,25 @@
   "huobanguanxi": [
     {
       "char": "伙伴关系",
-      "en": "Partner Relationship/Cooperation"
+      "en": "Partner Relationship"
     }
   ],
   "chuchuang": [
     {
       "char": "橱窗",
-      "en": "Window Display/Showcase"
+      "en": "Window Display"
     }
   ],
   "toushi": [
     {
       "char": "透视",
-      "en": "Perspective/Point of View"
+      "en": "Perspective"
     }
   ],
   "yimapingchuan": [
     {
       "char": "一马平川",
-      "en": "Flat Plain/Level Ground"
+      "en": "Flat Plain"
     }
   ],
   "zhongnanbandao": [
@@ -26778,13 +26778,13 @@
   "doukou": [
     {
       "char": "豆蔻",
-      "en": "Anise/Star Anise"
+      "en": "Anise"
     }
   ],
   "tailu": [
     {
       "char": "泰陆",
-      "en": "Thai Land/Thailand"
+      "en": "Thai Land"
     }
   ],
   "gaomiguo": [
@@ -26880,7 +26880,7 @@
   "yangmiao": [
     {
       "char": "秧苗",
-      "en": "Seedlings/young rice plants"
+      "en": "Seedlings"
     }
   ],
   "yimuzhu": [
@@ -26898,19 +26898,19 @@
   "xuankong": [
     {
       "char": "悬空",
-      "en": "Suspended/Hanging"
+      "en": "Suspended"
     }
   ],
   "jiashe": [
     {
       "char": "架设",
-      "en": "Erect/Install"
+      "en": "Erect"
     }
   ],
   "diceng": [
     {
       "char": "底层",
-      "en": "Lower level/floor"
+      "en": "Lower level"
     }
   ],
   "quanyang": [
@@ -27268,13 +27268,13 @@
   "jiaozhicheng": [
     {
       "char": "交织成",
-      "en": "Interwoven/Woven"
+      "en": "Interwoven"
     }
   ],
   "yifufu": [
     {
       "char": "一幅幅",
-      "en": "One by one/Each"
+      "en": "One by one"
     }
   ],
   "fengjinghua": [
@@ -27304,13 +27304,13 @@
   "jiuerjiuzhi": [
     {
       "char": "久而久之",
-      "en": "In the long run/Over time"
+      "en": "In the long run"
     }
   ],
   "chucang": [
     {
       "char": "储藏",
-      "en": "Store/Keep"
+      "en": "Store"
     }
   ],
   "chukouguo": [
@@ -27362,13 +27362,13 @@
   "dongpo": [
     {
       "char": "东坡",
-      "en": "Dongpo (Refers to Su Shi, a famous poet)"
+      "en": "Dongpo (Refers to Su Shi"
     }
   ],
   "xibo": [
     {
       "char": "稀薄",
-      "en": "Thin/Sparse"
+      "en": "Thin"
     }
   ],
   "shishidaidai": [
@@ -27608,7 +27608,7 @@
   "dimai": [
     {
       "char": "地脉",
-      "en": "Earth vein/energy line"
+      "en": "Earth vein"
     }
   ],
   "bolangfeng": [
@@ -27620,7 +27620,7 @@
   "erguo": [
     {
       "char": "尔国",
-      "en": "Your country/Nation"
+      "en": "Your country"
     }
   ],
   "yadeliyahai": [
@@ -27632,19 +27632,19 @@
   "dianlu": [
     {
       "char": "点陆",
-      "en": "Landing point/Location"
+      "en": "Landing point"
     }
   ],
   "qibei": [
     {
       "char": "齐备",
-      "en": "Complete, adequate"
+      "en": "Complete"
     }
   ],
   "xizhiruwei": [
     {
       "char": "细致入微",
-      "en": "Meticulous, detailed"
+      "en": "Meticulous"
     }
   ],
   "lvyouzhe": [
@@ -27686,7 +27686,7 @@
   "pengwu": [
     {
       "char": "棚屋",
-      "en": "Hut, shack"
+      "en": "Hut"
     }
   ],
   "shengjing": [
@@ -27716,13 +27716,13 @@
   "huayang": [
     {
       "char": "花样",
-      "en": "Style/Form/Routine"
+      "en": "Style"
     }
   ],
   "tiaotai": [
     {
       "char": "跳台",
-      "en": "Highboard/Springboard"
+      "en": "Highboard"
     }
   ],
   "xueqiao": [
@@ -27734,7 +27734,7 @@
   "liaoyangdi": [
     {
       "char": "疗养地",
-      "en": "Resort/Sanatorium"
+      "en": "Resort"
     }
   ],
   "liangda": [
@@ -27746,37 +27746,37 @@
   "chuanxing": [
     {
       "char": "穿行",
-      "en": "Wander/Pass through"
+      "en": "Wander"
     }
   ],
   "jinshouyandi": [
     {
       "char": "尽收眼底",
-      "en": "See with utmost care/Observe completely"
+      "en": "See with utmost care"
     }
   ],
   "zhimingdu": [
     {
       "char": "知名度",
-      "en": "Fame/Recognition"
+      "en": "Fame"
     }
   ],
   "lvyoure": [
     {
       "char": "旅游热",
-      "en": "Tourist craze/Popularity"
+      "en": "Tourist craze"
     }
   ],
   "houai": [
     {
       "char": "厚爱",
-      "en": "Generous/Kind"
+      "en": "Generous"
     }
   ],
   "youjia": [
     {
       "char": "有加",
-      "en": "Fully/With enthusiasm"
+      "en": "Fully"
     }
   ],
   "senlinfa": [
@@ -27788,7 +27788,7 @@
   "yanghu": [
     {
       "char": "养护",
-      "en": "Maintenance/Care"
+      "en": "Maintenance"
     }
   ],
   "yehua": [
@@ -27884,13 +27884,13 @@
   "shouchu": [
     {
       "char": "手除",
-      "en": "Hands removed/clean"
+      "en": "Hands removed"
     }
   ],
   "fangfangmianmian": [
     {
       "char": "方方面面",
-      "en": "All aspects, various aspects"
+      "en": "All aspects"
     }
   ],
   "hupan": [
@@ -27908,7 +27908,7 @@
   "genghaimuyu": [
     {
       "char": "耕海牧鱼",
-      "en": "Cultivating the sea, raising fish"
+      "en": "Cultivating the sea"
     }
   ],
   "benzhou": [
@@ -27920,13 +27920,13 @@
   "siguo": [
     {
       "char": "四国",
-      "en": "Shikoku, Kyushu, Taiwan, and Shikoku"
+      "en": "Shikoku"
     }
   ],
   "jiuzhou": [
     {
       "char": "九州",
-      "en": "Kyushu, the Great Land"
+      "en": "Kyushu"
     }
   ],
   "xiachang": [
@@ -27986,7 +27986,7 @@
   "suozao": [
     {
       "char": "所造",
-      "en": "Made, created"
+      "en": "Made"
     }
   ],
   "baoxian": [
@@ -28004,7 +28004,7 @@
   "nonglie": [
     {
       "char": "浓烈",
-      "en": "Intense/Strong"
+      "en": "Intense"
     }
   ],
   "bingchang": [
@@ -28040,7 +28040,7 @@
   "caigou": [
     {
       "char": "采购",
-      "en": "Procurement/Purchase"
+      "en": "Procurement"
     }
   ],
   "cangku": [
@@ -28082,7 +28082,7 @@
   "enci": [
     {
       "char": "恩赐",
-      "en": "Blessing/Gift"
+      "en": "Blessing"
     }
   ],
   "gongyefeishui": [
@@ -28094,7 +28094,7 @@
   "shuiyu": [
     {
       "char": "水域",
-      "en": "Water body/Waters"
+      "en": "Water body"
     }
   ],
   "tianhaizaodi": [
@@ -28106,7 +28106,7 @@
   "fanzhi": [
     {
       "char": "繁殖",
-      "en": "Reproduction/Breeding"
+      "en": "Reproduction"
     }
   ],
   "haiyangyuye": [
@@ -28124,7 +28124,7 @@
   "shoudaopohuai": [
     {
       "char": "受到破坏",
-      "en": "damaged/destroyed"
+      "en": "damaged"
     }
   ],
   "riquyanzhong": [
@@ -28136,7 +28136,7 @@
   "buzhanghuiyi": [
     {
       "char": "部长会议",
-      "en": "ministerial meeting/cabinet meeting"
+      "en": "ministerial meeting"
     }
   ],
   "tongnian": [
@@ -28154,13 +28154,13 @@
   "weiken": [
     {
       "char": "围垦",
-      "en": "poldering/reclamation"
+      "en": "poldering"
     }
   ],
   "shoudaoxianzhi": [
     {
       "char": "受到限制",
-      "en": "restricted/limited"
+      "en": "restricted"
     }
   ],
   "zhibu": [
@@ -28172,13 +28172,13 @@
   "buyang": [
     {
       "char": "不养",
-      "en": "do not raise/feed"
+      "en": "do not raise"
     }
   ],
   "zhuaner": [
     {
       "char": "转而",
-      "en": "turn to/shift to"
+      "en": "turn to"
     }
   ],
   "yapingningbandao": [
@@ -28232,7 +28232,7 @@
   "gaiqi": [
     {
       "char": "盖起",
-      "en": "build/erect"
+      "en": "build"
     }
   ],
   "haimian": [
@@ -28788,7 +28788,7 @@
   "ousanzhou": [
     {
       "char": "欧三洲",
-      "en": "Europe, Russia, and China"
+      "en": "Europe"
     }
   ],
   "maoyizhongxin": [
@@ -28806,13 +28806,13 @@
   "duoyi": [
     {
       "char": "多以",
-      "en": "Mostly, mainly"
+      "en": "Mostly"
     }
   ],
   "sifa": [
     {
       "char": "司法",
-      "en": "Judiciary, legal system"
+      "en": "Judiciary"
     }
   ],
   "zuoluoyu": [
@@ -28854,7 +28854,7 @@
   "zonghengjiaozhi": [
     {
       "char": "纵横交织",
-      "en": "Intertwined, crisscrossed"
+      "en": "Intertwined"
     }
   ],
   "dajiexiaoxiang": [
@@ -28878,7 +28878,7 @@
   "gejia": [
     {
       "char": "各家",
-      "en": "Each company, every firm"
+      "en": "Each company"
     }
   ],
   "qiting": [
@@ -28914,7 +28914,7 @@
   "qingdian": [
     {
       "char": "庆典",
-      "en": "Festival, celebration"
+      "en": "Festival"
     }
   ],
   "huazhe": [
@@ -29070,7 +29070,7 @@
   "jiyue": [
     {
       "char": "季月",
-      "en": "Season/Term"
+      "en": "Season"
     }
   ],
   "ganfeng": [
@@ -29124,7 +29124,7 @@
   "jianlou": [
     {
       "char": "简陋",
-      "en": "Simple/Poor"
+      "en": "Simple"
     }
   ],
   "yifang": [
@@ -29190,7 +29190,7 @@
   "shenling": [
     {
       "char": "神灵",
-      "en": "God, deity"
+      "en": "God"
     }
   ],
   "yibanzuoyou": [
@@ -29202,13 +29202,13 @@
   "ala": [
     {
       "char": "阿拉",
-      "en": "(Slang) Dude, man"
+      "en": "(Slang) Dude"
     }
   ],
   "fulahai": [
     {
       "char": "弗拉海",
-      "en": "(Slang) Dude, man"
+      "en": "(Slang) Dude"
     }
   ],
   "kabenta": [
@@ -29316,7 +29316,7 @@
   "shuiyanglu": [
     {
       "char": "水洋陆",
-      "en": "Water, sea, land"
+      "en": "Water"
     }
   ],
   "basi": [
@@ -29352,7 +29352,7 @@
   "daitu": [
     {
       "char": "带图",
-      "en": "With diagram/illustration"
+      "en": "With diagram"
     }
   ],
   "qiangongqing": [
@@ -29382,13 +29382,13 @@
   "zhenshixiezhao": [
     {
       "char": "真实写照",
-      "en": "True depiction/photograph"
+      "en": "True depiction"
     }
   ],
   "zongying": [
     {
       "char": "踪影",
-      "en": "Trace/Sign"
+      "en": "Trace"
     }
   ],
   "shoupi": [
@@ -29400,13 +29400,13 @@
   "daiqu": [
     {
       "char": "带去",
-      "en": "Take away/Bring"
+      "en": "Take away"
     }
   ],
   "cunhuo": [
     {
       "char": "存活",
-      "en": "Survive/Live"
+      "en": "Survive"
     }
   ],
   "huanlan": [
@@ -29418,13 +29418,13 @@
   "buzhi": [
     {
       "char": "不治",
-      "en": "Died/No recovery"
+      "en": "Died"
     }
   ],
   "yujia": [
     {
       "char": "愈加",
-      "en": "Improve/Get better"
+      "en": "Improve"
     }
   ],
   "fuhan": [
@@ -29442,13 +29442,13 @@
   "shimei": [
     {
       "char": "使美",
-      "en": "Make beautiful/Improve"
+      "en": "Make beautiful"
     }
   ],
   "fanyan": [
     {
       "char": "繁衍",
-      "en": "Breed/Reproduce"
+      "en": "Breed"
     }
   ],
   "tumei": [
@@ -29484,7 +29484,7 @@
   "guangze": [
     {
       "char": "光泽",
-      "en": "Shine/Gloss"
+      "en": "Shine"
     }
   ],
   "rouren": [
@@ -29574,7 +29574,7 @@
   "haoyong": [
     {
       "char": "耗用",
-      "en": "consume/utilize"
+      "en": "consume"
     }
   ],
   "shaosuochan": [
@@ -29754,31 +29754,31 @@
   "shangdui": [
     {
       "char": "商队",
-      "en": "Caravan/Merchant Group"
+      "en": "Caravan"
     }
   ],
   "yuwai": [
     {
       "char": "域外",
-      "en": "Foreign/External"
+      "en": "Foreign"
     }
   ],
   "zhenbao": [
     {
       "char": "珍宝",
-      "en": "Treasure/Gem"
+      "en": "Treasure"
     }
   ],
   "erjin": [
     {
       "char": "而今",
-      "en": "Now/Present"
+      "en": "Now"
     }
   ],
   "shichu": [
     {
       "char": "驶出",
-      "en": "Depart/Sail Out"
+      "en": "Depart"
     }
   ],
   "youlun": [
@@ -30030,7 +30030,7 @@
   "touqixing": [
     {
       "char": "透气性",
-      "en": "permeability, aeration"
+      "en": "permeability"
     }
   ],
   "guanqu": [
@@ -30048,7 +30048,7 @@
   "datu": [
     {
       "char": "达图",
-      "en": "charting, graphing"
+      "en": "charting"
     }
   ],
   "bulitiaojian": [
@@ -30066,13 +30066,13 @@
   "jishenyu": [
     {
       "char": "跻身于",
-      "en": "to enter, to rise to"
+      "en": "to enter"
     }
   ],
   "mianshou": [
     {
       "char": "免受",
-      "en": "to be spared from, to avoid"
+      "en": "to be spared from"
     }
   ],
   "jinliangbimian": [
@@ -30108,13 +30108,13 @@
   "gaojin": [
     {
       "char": "高仅",
-      "en": "High only/high in price"
+      "en": "High only"
     }
   ],
   "jizhongliliang": [
     {
       "char": "集中力量",
-      "en": "Concentrate strength/mobilize resources"
+      "en": "Concentrate strength"
     }
   ],
   "fanjijie": [
@@ -30138,7 +30138,7 @@
   "kegong": [
     {
       "char": "可供",
-      "en": "Available/capable of"
+      "en": "Available"
     }
   ],
   "zhengzhiwenming": [
@@ -30156,7 +30156,7 @@
   "hengkua": [
     {
       "char": "横跨",
-      "en": "Spanning/crossing"
+      "en": "Spanning"
     }
   ],
   "haibai": [
@@ -30516,13 +30516,13 @@
   "qingdianhuodong": [
     {
       "char": "庆典活动",
-      "en": "Festival/Celebration"
+      "en": "Festival"
     }
   ],
   "maizang": [
     {
       "char": "埋葬",
-      "en": "Buried/To bury"
+      "en": "Buried"
     }
   ],
   "shenhongse": [
@@ -30534,13 +30534,13 @@
   "lingmu": [
     {
       "char": "陵墓",
-      "en": "Tomb/Mausoleum"
+      "en": "Tomb"
     }
   ],
   "chenshe": [
     {
       "char": "陈设",
-      "en": "Arrangement/Display"
+      "en": "Arrangement"
     }
   ],
   "gangkui": [
@@ -30570,13 +30570,13 @@
   "penzhong": [
     {
       "char": "盆中",
-      "en": "In a pot/vessel"
+      "en": "In a pot"
     }
   ],
   "xiongxiongranshao": [
     {
       "char": "熊熊燃烧",
-      "en": "Burning brightly/Flames"
+      "en": "Burning brightly"
     }
   ],
   "minghuo": [
@@ -30588,7 +30588,7 @@
   "yongchuibuxiu": [
     {
       "char": "永垂不朽",
-      "en": "Immortal/Eternal"
+      "en": "Immortal"
     }
   ],
   "wenmingshijie": [
@@ -30600,13 +30600,13 @@
   "quanshi": [
     {
       "char": "诠释",
-      "en": "Interpret/Explain"
+      "en": "Interpret"
     }
   ],
   "duosuo": [
     {
       "char": "多所",
-      "en": "Many/Various"
+      "en": "Many"
     }
   ],
   "meishuguan": [
@@ -30642,25 +30642,25 @@
   "ruchi": [
     {
       "char": "如痴",
-      "en": "Like a madman/obsessed"
+      "en": "Like a madman"
     }
   ],
   "guanzhe": [
     {
       "char": "观者",
-      "en": "Observer/Spectator"
+      "en": "Observer"
     }
   ],
   "ruzui": [
     {
       "char": "如醉",
-      "en": "Like a drunkard/intoxicated"
+      "en": "Like a drunkard"
     }
   ],
   "huali": [
     {
       "char": "华丽",
-      "en": "Beautiful/Elegant/Luxurious"
+      "en": "Beautiful"
     }
   ],
   "shenye": [
@@ -30678,13 +30678,13 @@
   "sichu": [
     {
       "char": "四处",
-      "en": "Everywhere/All around"
+      "en": "Everywhere"
     }
   ],
   "jingqiaoqiao": [
     {
       "char": "静悄悄",
-      "en": "Quietly/Silently"
+      "en": "Quietly"
     }
   ],
   "fenger": [
@@ -30696,13 +30696,13 @@
   "huihong": [
     {
       "char": "恢宏",
-      "en": "Grand/Magnificent/Imposing"
+      "en": "Grand"
     }
   ],
   "zhangxian": [
     {
       "char": "彰显",
-      "en": "Highlight/Showcase/Demonstrate"
+      "en": "Highlight"
     }
   ],
   "sainahe": [
@@ -30846,7 +30846,7 @@
   "zhanshen": [
     {
       "char": "战神",
-      "en": "War God/Mars"
+      "en": "War God"
     }
   ],
   "luodan": [
@@ -30858,7 +30858,7 @@
   "rierman": [
     {
       "char": "日尔曼",
-      "en": "Germanic/German"
+      "en": "Germanic"
     }
   ],
   "xialegong": [
@@ -30984,7 +30984,7 @@
   "xianjie": [
     {
       "char": "衔接",
-      "en": "Connected/Linking"
+      "en": "Connected"
     }
   ],
   "jufu": [
@@ -31026,13 +31026,13 @@
   "qianshen": [
     {
       "char": "前身",
-      "en": "Former Building/Original Structure"
+      "en": "Former Building"
     }
   ],
   "gaijian": [
     {
       "char": "改建",
-      "en": "Renovated/Reconstructed"
+      "en": "Renovated"
     }
   ],
   "wanggong": [
@@ -31062,25 +31062,25 @@
   "milian": [
     {
       "char": "迷恋",
-      "en": "Obsessed with / Infatuated with"
+      "en": "Obsessed with"
     }
   ],
   "chaichu": [
     {
       "char": "拆除",
-      "en": "Demolish / Remove"
+      "en": "Demolish"
     }
   ],
   "jingyu": [
     {
       "char": "境遇",
-      "en": "Situation / Circumstances"
+      "en": "Situation"
     }
   ],
   "tiyi": [
     {
       "char": "提议",
-      "en": "Proposal / Suggestion"
+      "en": "Proposal"
     }
   ],
   "jianzhushi": [
@@ -31092,7 +31092,7 @@
   "cidi": [
     {
       "char": "此地",
-      "en": "Here / This place"
+      "en": "Here"
     }
   ],
   "jinshengwei": [
@@ -31122,11 +31122,11 @@
   "shuxiang": [
     {
       "char": "书箱",
-      "en": "Writing box / Desk"
+      "en": "Writing box"
     },
     {
       "char": "书香",
-      "en": "Book smell / Literary fragrance"
+      "en": "Book smell"
     }
   ],
   "jingnian": [
@@ -31138,7 +31138,7 @@
   "nongnongde": [
     {
       "char": "浓浓的",
-      "en": "Intense / Rich"
+      "en": "Intense"
     }
   ],
   "aishuren": [
@@ -31150,7 +31150,7 @@
   "jiushutan": [
     {
       "char": "旧书摊",
-      "en": "Used book stall / Secondhand book stand"
+      "en": "Used book stall"
     }
   ],
   "zuoan": [
@@ -31162,7 +31162,7 @@
   "gujiu": [
     {
       "char": "古旧",
-      "en": "Ancient / Old-fashioned"
+      "en": "Ancient"
     }
   ],
   "kafeiguan": [
@@ -31180,7 +31180,7 @@
   "huaren": [
     {
       "char": "华人",
-      "en": "Chinese person / Chinese"
+      "en": "Chinese person"
     }
   ],
   "beiyuming": [
@@ -31210,13 +31210,13 @@
   "lijingpandao": [
     {
       "char": "离经叛道",
-      "en": "Outlaw, rebel"
+      "en": "Outlaw"
     }
   ],
   "youdun": [
     {
       "char": "由吨",
-      "en": "(This appears to be a typo, likely meant to be \"由\") By"
+      "en": "(This appears to be a typo"
     }
   ],
   "gangcai": [
@@ -31246,7 +31246,7 @@
   "shipotianjing": [
     {
       "char": "石破天惊",
-      "en": "Thunderous, earth-shattering"
+      "en": "Thunderous"
     }
   ],
   "zhongxinqu": [
@@ -31258,7 +31258,7 @@
   "jiexiang": [
     {
       "char": "街巷",
-      "en": "Alleys, lanes"
+      "en": "Alleys"
     }
   ],
   "zhongjian": [
@@ -31282,7 +31282,7 @@
   "jianjie": [
     {
       "char": "见解",
-      "en": "Opinion, view"
+      "en": "Opinion"
     }
   ],
   "jingzhong": [
@@ -31324,13 +31324,13 @@
   "renju": [
     {
       "char": "人居",
-      "en": "Residential/Habitation"
+      "en": "Residential"
     }
   ],
   "qinzhan": [
     {
       "char": "侵占",
-      "en": "Encroachment/Occupation"
+      "en": "Encroachment"
     }
   ],
   "junshijidi": [
@@ -31354,7 +31354,7 @@
   "keyan": [
     {
       "char": "科研",
-      "en": "Scientific Research/Research and Development"
+      "en": "Scientific Research"
     }
   ],
   "yinduzhengfu": [
@@ -31408,13 +31408,13 @@
   "yunzuo": [
     {
       "char": "运作",
-      "en": "Operation/Function"
+      "en": "Operation"
     }
   ],
   "houtai": [
     {
       "char": "后台",
-      "en": "Background/Backend"
+      "en": "Background"
     }
   ],
   "zhichixitong": [
@@ -31444,7 +31444,7 @@
   "chaoda": [
     {
       "char": "超大",
-      "en": "Large/Extra Large"
+      "en": "Large"
     }
   ],
   "shipinhuiyi": [
@@ -31468,7 +31468,7 @@
   "shangtan": [
     {
       "char": "商谈",
-      "en": "Discussion/Negotiation"
+      "en": "Discussion"
     }
   ],
   "hezuohuoban": [
@@ -31504,13 +31504,13 @@
   "pingxuan": [
     {
       "char": "评选",
-      "en": "Selection/Judging"
+      "en": "Selection"
     }
   ],
   "jiaogei": [
     {
       "char": "交给",
-      "en": "Hand over/Deliver"
+      "en": "Hand over"
     }
   ],
   "gaosuzhi": [
@@ -31570,13 +31570,13 @@
   "daimingci": [
     {
       "char": "代名词",
-      "en": "Buzzword/Catchphrase"
+      "en": "Buzzword"
     }
   ],
   "congyerenyuan": [
     {
       "char": "从业人员",
-      "en": "Practitioner/Worker"
+      "en": "Practitioner"
     }
   ],
   "jinlin": [
@@ -31588,13 +31588,13 @@
   "guangyu": [
     {
       "char": "广域",
-      "en": "Metropolitan/Wide area"
+      "en": "Metropolitan"
     }
   ],
   "benjing": [
     {
       "char": "本经",
-      "en": "Classic/Book"
+      "en": "Classic"
     }
   ],
   "haizhi": [
@@ -31660,7 +31660,7 @@
   "shiyanchang": [
     {
       "char": "试验场",
-      "en": "Test site/Field"
+      "en": "Test site"
     }
   ],
   "yanchuan": [
@@ -31678,7 +31678,7 @@
   "huiguan": [
     {
       "char": "会馆",
-      "en": "Clubhouse/Meeting hall"
+      "en": "Clubhouse"
     }
   ],
   "lvwei": [
@@ -31762,7 +31762,7 @@
   "sanwanduo": [
     {
       "char": "三万多",
-      "en": "Over 30,000"
+      "en": "Over 30"
     }
   ],
   "wanliang": [
@@ -31864,7 +31864,7 @@
   "wandunji": [
     {
       "char": "万吨级",
-      "en": "10,000-ton class"
+      "en": "10"
     }
   ],
   "dansou": [
@@ -31876,13 +31876,13 @@
   "chechang": [
     {
       "char": "车场",
-      "en": "Parking lot/Garage"
+      "en": "Parking lot"
     }
   ],
   "xiaowang": [
     {
       "char": "销往",
-      "en": "Sold to/Exported to"
+      "en": "Sold to"
     }
   ],
   "chengpin": [
@@ -31894,19 +31894,19 @@
   "kaiwang": [
     {
       "char": "开往",
-      "en": "Sent to/Shipped to"
+      "en": "Sent to"
     }
   ],
   "yanran": [
     {
       "char": "俨然",
-      "en": "Resembling/Like a real"
+      "en": "Resembling"
     }
   ],
   "peijian": [
     {
       "char": "配件",
-      "en": "Spare parts/Accessories"
+      "en": "Spare parts"
     }
   ],
   "yuancailiao": [
@@ -31918,13 +31918,13 @@
   "lingbujian": [
     {
       "char": "零部件",
-      "en": "Components/Parts"
+      "en": "Components"
     }
   ],
   "peiji": [
     {
       "char": "配给",
-      "en": "Allocation/Distribution"
+      "en": "Allocation"
     }
   ],
   "shouhoufuwu": [
@@ -31942,7 +31942,7 @@
   "jiaoyizhongxin": [
     {
       "char": "交易中心",
-      "en": "Trading center/Exchange center"
+      "en": "Trading center"
     }
   ],
   "ranliaodianchi": [
@@ -31960,13 +31960,13 @@
   "kejihanliang": [
     {
       "char": "科技含量",
-      "en": "Technological content/Level of technology"
+      "en": "Technological content"
     }
   ],
   "chulichang": [
     {
       "char": "处理厂",
-      "en": "Processing plant/Treatment plant"
+      "en": "Processing plant"
     }
   ],
   "shebeichang": [
@@ -31978,7 +31978,7 @@
   "lingrenjingtan": [
     {
       "char": "令人惊叹",
-      "en": "Astonishing/Amazing"
+      "en": "Astonishing"
     }
   ],
   "chaodaguimo": [
@@ -31990,25 +31990,25 @@
   "yingruyanlian": [
     {
       "char": "映入眼帘",
-      "en": "Visible/Apparent"
+      "en": "Visible"
     }
   ],
   "zhengjie": [
     {
       "char": "整洁",
-      "en": "Neat, Tidy"
+      "en": "Neat"
     }
   ],
   "duanduan": [
     {
       "char": "短短",
-      "en": "Short, Brief"
+      "en": "Short"
     }
   ],
   "momowuwen": [
     {
       "char": "默默无闻",
-      "en": "Unknown, Unrecognized"
+      "en": "Unknown"
     }
   ],
   "yucun": [
@@ -32020,13 +32020,13 @@
   "fazhanzhuangda": [
     {
       "char": "发展壮大",
-      "en": "Develop and Grow, Flourish"
+      "en": "Develop and Grow"
     }
   ],
   "haibin": [
     {
       "char": "海滨",
-      "en": "Coastal, Seaside"
+      "en": "Coastal"
     }
   ],
   "jiandu": [
@@ -32086,7 +32086,7 @@
   "youshizhishi": [
     {
       "char": "有识之士",
-      "en": "Intellectuals, Persons of Vision"
+      "en": "Intellectuals"
     }
   ],
   "titu": [
@@ -32098,13 +32098,13 @@
   "chuxiang": [
     {
       "char": "出像",
-      "en": "Portrait, Representation"
+      "en": "Portrait"
     }
   ],
   "yingjian": [
     {
       "char": "应建",
-      "en": "To be built, Planned"
+      "en": "To be built"
     }
   ],
   "neiludiqu": [
@@ -32116,7 +32116,7 @@
   "qianzhi": [
     {
       "char": "迁至",
-      "en": "Migrate to, Move to"
+      "en": "Migrate to"
     }
   ],
   "zhizhengjijing": [
@@ -32140,7 +32140,7 @@
   "niaokan": [
     {
       "char": "鸟瞰",
-      "en": "aerial view, bird's-eye view"
+      "en": "aerial view"
     }
   ],
   "penqishi": [
@@ -32164,31 +32164,31 @@
   "jiaoxiang": [
     {
       "char": "交相",
-      "en": "interlinked, interwoven"
+      "en": "interlinked"
     }
   ],
   "yingchen": [
     {
       "char": "映衬",
-      "en": "enhance, highlight, complement"
+      "en": "enhance"
     }
   ],
   "zhengzuo": [
     {
       "char": "整座",
-      "en": "the whole, entire"
+      "en": "the whole"
     }
   ],
   "guizheng": [
     {
       "char": "规整",
-      "en": "neat, orderly, regular"
+      "en": "neat"
     }
   ],
   "yihui": [
     {
       "char": "议会",
-      "en": "parliament, council"
+      "en": "parliament"
     }
   ],
   "sanquan": [
@@ -32212,7 +32212,7 @@
   "bangongqu": [
     {
       "char": "办公区",
-      "en": "office area, business district"
+      "en": "office area"
     }
   ],
   "zhongyangshangwuqu": [
@@ -32230,7 +32230,7 @@
   "wanzhengxing": [
     {
       "char": "完整性",
-      "en": "integrity, completeness"
+      "en": "integrity"
     }
   ],
   "zhuba": [
@@ -32242,7 +32242,7 @@
   "jiezhu": [
     {
       "char": "截住",
-      "en": "to cut off, to intercept"
+      "en": "to cut off"
     }
   ],
   "shidu": [
@@ -32266,7 +32266,7 @@
   "duopingfangmi": [
     {
       "char": "多平方米",
-      "en": "Several/Many square meters"
+      "en": "Several"
     }
   ],
   "chenggongjingyan": [
@@ -32296,7 +32296,7 @@
   "yangzhiye": [
     {
       "char": "养殖业",
-      "en": "Animal husbandry/Farming"
+      "en": "Animal husbandry"
     }
   ],
   "lumian": [
@@ -32314,7 +32314,7 @@
   "wujia": [
     {
       "char": "物价",
-      "en": "Price level/Commodity prices"
+      "en": "Price level"
     }
   ],
   "chengnei": [
@@ -32350,19 +32350,19 @@
   "nongmozhongcai": [
     {
       "char": "浓墨重彩",
-      "en": "A resounding success/A major achievement"
+      "en": "A resounding success"
     }
   ],
   "yibi": [
     {
       "char": "一笔",
-      "en": "A stroke/A sum of money"
+      "en": "A stroke"
     }
   ],
   "ruchu": [
     {
       "char": "如初",
-      "en": "As before/As in the past"
+      "en": "As before"
     }
   ],
   "congmingcaizhi": [
@@ -32374,13 +32374,13 @@
   "huoshiwu": [
     {
       "char": "或事物",
-      "en": "Or thing, or object"
+      "en": "Or thing"
     }
   ],
   "moutiao": [
     {
       "char": "某条",
-      "en": "A certain, specific"
+      "en": "A certain"
     }
   ],
   "dihai": [
@@ -32404,7 +32404,7 @@
   "jiaohuidian": [
     {
       "char": "交汇点",
-      "en": "Convergence point, intersection"
+      "en": "Convergence point"
     }
   ],
   "suyang": [
@@ -32416,13 +32416,13 @@
   "bijingzhidi": [
     {
       "char": "必经之地",
-      "en": "Well-trodden path, crucial location"
+      "en": "Well-trodden path"
     }
   ],
   "pingxi": [
     {
       "char": "评析",
-      "en": "Critique, analysis"
+      "en": "Critique"
     }
   ],
   "mibo": [
@@ -32518,7 +32518,7 @@
   "zhihe": [
     {
       "char": "治河",
-      "en": "River management, river control"
+      "en": "River management"
     }
   ],
   "bozu": [
@@ -32698,7 +32698,7 @@
   "bixuan": [
     {
       "char": "必选",
-      "en": "Required/Mandatory"
+      "en": "Required"
     }
   ],
   "qiumi": [
@@ -32734,7 +32734,7 @@
   "duozhu": [
     {
       "char": "多逐",
-      "en": "Multiple/Various"
+      "en": "Multiple"
     }
   ],
   "erjuyou": [
@@ -33366,7 +33366,7 @@
   "taitai": [
     {
       "char": "太太",
-      "en": "Madam/Mrs."
+      "en": "Madam"
     }
   ],
   "lani": [
@@ -34044,7 +34044,7 @@
   "yimei": [
     {
       "char": "夷美",
-      "en": "Yimei (likely referring to the Yamei Islands, a disputed area)"
+      "en": "Yimei (likely referring to the Yamei Islands"
     }
   ],
   "mozhouxi": [
@@ -34402,7 +34402,7 @@
   "nisai": [
     {
       "char": "尼塞",
-      "en": "Nice (French city, often used as a geographical reference)"
+      "en": "Nice (French city"
     }
   ],
   "yage": [
