@@ -14814,5 +14814,233 @@
       "char": "搪瓷",
       "en": "enamel"
     }
+  ],
+  "sanlvhuatie": [
+    {
+      "char": "三氯化铁",
+      "en": "iron(III) chloride"
+    }
+  ],
+  "bubaoherongye": [
+    {
+      "char": "不饱和溶液",
+      "en": "unsaturated solution"
+    }
+  ],
+  "zhonghefanying": [
+    {
+      "char": "中和反应",
+      "en": "neutralization reaction"
+    }
+  ],
+  "qinshuixing": [
+    {
+      "char": "亲水性",
+      "en": "hydrophilicity"
+    }
+  ],
+  "cuihuaxiaolv": [
+    {
+      "char": "催化效率",
+      "en": "catalytic efficiency"
+    }
+  ],
+  "yuansuzhouqilv": [
+    {
+      "char": "元素周期律",
+      "en": "periodic law of elements"
+    }
+  ],
+  "lengquerebaoherongye": [
+    {
+      "char": "冷却热饱和溶液",
+      "en": "cooling hot saturated solution"
+    }
+  ],
+  "zhiquyangqi": [
+    {
+      "char": "制取氧气",
+      "en": "oxygen production"
+    }
+  ],
+  "huaxuefangchengshi": [
+    {
+      "char": "化学方程式",
+      "en": "chemical equation"
+    }
+  ],
+  "danweitiji": [
+    {
+      "char": "单位体积",
+      "en": "unit volume"
+    }
+  ],
+  "guyechangwenxing": [
+    {
+      "char": "固液常温型",
+      "en": "solid-liquid at room temperature type"
+    }
+  ],
+  "gutiyaopin": [
+    {
+      "char": "固体药品",
+      "en": "solid chemicals"
+    }
+  ],
+  "kuaizhuangguti": [
+    {
+      "char": "块状固体",
+      "en": "bulky solid"
+    }
+  ],
+  "fufenjiefanying": [
+    {
+      "char": "复分解反应",
+      "en": "double displacement reaction"
+    }
+  ],
+  "shiyanxianxiang": [
+    {
+      "char": "实验现象",
+      "en": "experimental phenomenon"
+    }
+  ],
+  "duizhaoshiyan": [
+    {
+      "char": "对照实验",
+      "en": "control experiment"
+    }
+  ],
+  "hengwenzhengfa": [
+    {
+      "char": "恒温蒸发",
+      "en": "isothermal evaporation"
+    }
+  ],
+  "chengjian": [
+    {
+      "char": "成键",
+      "en": "chemical bonding"
+    }
+  ],
+  "shouchidanmu": [
+    {
+      "char": "手持弹幕",
+      "en": "portable indicator (context dependent)"
+    }
+  ],
+  "jiaoban": [
+    {
+      "char": "搅拌",
+      "en": "stirring"
+    }
+  ],
+  "wuseyeti": [
+    {
+      "char": "无色液体",
+      "en": "colorless liquid"
+    }
+  ],
+  "jixingjian": [
+    {
+      "char": "极性键",
+      "en": "polar bond"
+    }
+  ],
+  "yanghuahuanyuan": [
+    {
+      "char": "氧化还原",
+      "en": "redox (oxidation-reduction)"
+    }
+  ],
+  "huopojinshu": [
+    {
+      "char": "活泼金属",
+      "en": "active metal"
+    }
+  ],
+  "rongzhizhiliang": [
+    {
+      "char": "溶质质量",
+      "en": "mass of solute"
+    }
+  ],
+  "rongyepeizhi": [
+    {
+      "char": "溶液配制",
+      "en": "solution preparation"
+    }
+  ],
+  "ranshaotiaojian": [
+    {
+      "char": "燃烧条件",
+      "en": "combustion conditions"
+    }
+  ],
+  "wuzhixunhuan": [
+    {
+      "char": "物质循环",
+      "en": "material cycle"
+    }
+  ],
+  "shushuixing": [
+    {
+      "char": "疏水性",
+      "en": "hydrophobicity"
+    }
+  ],
+  "xiangduiyuanzizhiliang": [
+    {
+      "char": "相对原子质量",
+      "en": "relative atomic mass"
+    }
+  ],
+  "shiruirongye": [
+    {
+      "char": "石蕊溶液",
+      "en": "litmus solution"
+    }
+  ],
+  "zhihuanfanying": [
+    {
+      "char": "置换反应",
+      "en": "single displacement reaction"
+    }
+  ],
+  "jinshuhuodongxing": [
+    {
+      "char": "金属活动性",
+      "en": "metal activity"
+    }
+  ],
+  "lvrefanying": [
+    {
+      "char": "铝热反应",
+      "en": "aluminothermic reaction"
+    }
+  ],
+  "jianjieyinliu": [
+    {
+      "char": "间接引流",
+      "en": "indirect drainage"
+    }
+  ],
+  "gejuekongqi": [
+    {
+      "char": "隔绝空气",
+      "en": "isolate from air"
+    }
+  ],
+  "baoherongye": [
+    {
+      "char": "饱和溶液",
+      "en": "saturated solution"
+    }
+  ],
+  "heisefenmo": [
+    {
+      "char": "黑色粉末",
+      "en": "black powder"
+    }
   ]
 }
