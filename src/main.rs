@@ -663,12 +663,9 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         while let Ok(event) = notify_rx.recv() {
             match event {
                 NotifyEvent::Update(summary, body) => {
-                    // Close previous notification to prevent leak
-                    if let Some(old_handle) = cand_handle.take() {
-                        old_handle.close();
-                    }
-
                     // 候选词列表 ID 9999
+                    // We use the same ID to update/replace the existing notification.
+                    // Do NOT close the old one explicitly, as it causes flickering or disappearance.
                     let res = Notification::new()
                         .summary(&summary)
                         .body(&body)
