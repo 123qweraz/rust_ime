@@ -702,7 +702,7 @@ impl Ime {
                     };
                     
                     // 智能寻找主元音并上标声调
-                    let mut new_buffer = self.buffer.clone();
+                    let new_buffer = self.buffer.clone();
                     let vowels = ['a', 'e', 'i', 'o', 'u', 'v', 'A', 'E', 'I', 'O', 'U', 'V'];
                     
                     // 逆向寻找最后一个元音位置
