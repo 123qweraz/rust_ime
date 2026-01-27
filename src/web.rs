@@ -68,7 +68,7 @@ impl WebServer {
     }
 
     pub async fn start(self) {
-        let addr = SocketAddr::from(([0, 0, 0, 0], self.port));
+        let addr = SocketAddr::from(([127, 0, 0, 1], self.port));
         println!("[Web] 服务器启动在 http://{}", addr);
 
         let state: WebState = (self.config, self.tries, self.clipboard_tx);
