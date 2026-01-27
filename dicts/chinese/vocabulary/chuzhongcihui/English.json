@@ -31,6 +31,10 @@
     {
       "char": "介词",
       "en": "Preposition"
+    },
+    {
+      "char": "借词",
+      "en": "Term from English"
     }
   ],
   "zhuyu": [
@@ -301,6 +305,10 @@
     {
       "char": "不定",
       "en": "Indefinite"
+    },
+    {
+      "char": "布丁",
+      "en": "pudding"
     }
   ],
   "xunwen": [
@@ -463,6 +471,14 @@
     {
       "char": "遗迹",
       "en": "Ruins"
+    },
+    {
+      "char": "一季",
+      "en": "Term from English"
+    },
+    {
+      "char": "一辑",
+      "en": "Term from English"
     }
   ],
   "quanchu": [
@@ -1001,6 +1017,14 @@
     {
       "char": "集市",
       "en": "Market"
+    },
+    {
+      "char": "集是",
+      "en": "Term from English"
+    },
+    {
+      "char": "记是",
+      "en": "Term from English"
     }
   ],
   "gongkai": [
@@ -1173,6 +1197,10 @@
     {
       "char": "句首",
       "en": "Beginning of a sentence"
+    },
+    {
+      "char": "巨兽",
+      "en": "Term from English"
     }
   ],
   "youyisi": [
@@ -1465,6 +1493,10 @@
     {
       "char": "艾丽斯",
       "en": "Alice"
+    },
+    {
+      "char": "爱丽丝",
+      "en": "Term from English"
     }
   ],
   "lijie": [
@@ -1521,6 +1553,10 @@
     {
       "char": "一事",
       "en": "One thing"
+    },
+    {
+      "char": "一试",
+      "en": "Term from English"
     }
   ],
   "xiangqi": [
@@ -1665,6 +1701,10 @@
     {
       "char": "汽船",
       "en": "Sailboat"
+    },
+    {
+      "char": "弃船",
+      "en": "Term from English"
     }
   ],
   "haolaiwu": [
@@ -1677,6 +1717,14 @@
     {
       "char": "意为",
       "en": "Mean"
+    },
+    {
+      "char": "一维",
+      "en": "Term from English"
+    },
+    {
+      "char": "已为",
+      "en": "Term from English"
     }
   ],
   "taitai": [
@@ -1745,6 +1793,14 @@
     {
       "char": "使役",
       "en": "To serve"
+    },
+    {
+      "char": "十亿",
+      "en": "one billion"
+    },
+    {
+      "char": "时意",
+      "en": "Term from English"
     }
   ],
   "zhineng": [
@@ -1853,6 +1909,10 @@
     {
       "char": "私人",
       "en": "Private"
+    },
+    {
+      "char": "死人",
+      "en": "Term from English"
     }
   ],
   "zhiwu": [
@@ -1867,6 +1927,10 @@
     {
       "char": "之物",
       "en": "Thing"
+    },
+    {
+      "char": "织物",
+      "en": "Term from English"
     }
   ],
   "daota": [
@@ -2219,6 +2283,10 @@
     {
       "char": "厕所",
       "en": "Toilet"
+    },
+    {
+      "char": "侧索",
+      "en": "Term from English"
     }
   ],
   "chuchan": [
@@ -2597,6 +2665,14 @@
     {
       "char": "费力",
       "en": "Effort"
+    },
+    {
+      "char": "非礼",
+      "en": "Term from English"
+    },
+    {
+      "char": "费莉",
+      "en": "Term from English"
     }
   ],
   "laibuji": [
@@ -2693,6 +2769,10 @@
     {
       "char": "大事",
       "en": "Important matter"
+    },
+    {
+      "char": "大食",
+      "en": "Term from English"
     }
   ],
   "daoyan": [
@@ -2823,6 +2903,10 @@
     {
       "char": "笔记",
       "en": "Note"
+    },
+    {
+      "char": "笔迹",
+      "en": "a person's handwriting"
     }
   ],
   "yetu": [
@@ -2975,6 +3059,14 @@
     {
       "char": "吉利",
       "en": "favorable"
+    },
+    {
+      "char": "吉里",
+      "en": "Term from English"
+    },
+    {
+      "char": "几例",
+      "en": "Term from English"
     }
   ],
   "xiaoqian": [
@@ -3627,6 +3719,10 @@
     {
       "char": "启程",
       "en": "Depart"
+    },
+    {
+      "char": "起称",
+      "en": "Term from English"
     }
   ],
   "chengshouzhe": [
@@ -3989,6 +4085,10 @@
     {
       "char": "母鸡",
       "en": "Hen"
+    },
+    {
+      "char": "目及",
+      "en": "Term from English"
     }
   ],
   "yanjuan": [
@@ -4173,6 +4273,10 @@
     {
       "char": "指指",
       "en": "Point to"
+    },
+    {
+      "char": "指至",
+      "en": "Term from English"
     }
   ],
   "keshi": [
@@ -4209,6 +4313,10 @@
     {
       "char": "笑声",
       "en": "Laughter"
+    },
+    {
+      "char": "箫声",
+      "en": "Term from English"
     }
   ],
   "xuannao": [
@@ -4233,6 +4341,10 @@
     {
       "char": "抵达",
       "en": "Arrive"
+    },
+    {
+      "char": "嘀嗒",
+      "en": "Term from English"
     }
   ],
   "chumo": [
@@ -4341,6 +4453,10 @@
     {
       "char": "菜单",
       "en": "Menu"
+    },
+    {
+      "char": "彩蛋",
+      "en": "Term from English"
     }
   ],
   "wancan": [
@@ -4741,6 +4857,10 @@
     {
       "char": "愈加",
       "en": "Increasingly"
+    },
+    {
+      "char": "瑜伽",
+      "en": "yoga"
     }
   ],
   "zancheng": [
@@ -4879,6 +4999,10 @@
     {
       "char": "谷物",
       "en": "Grains"
+    },
+    {
+      "char": "古物",
+      "en": "antique"
     }
   ],
   "zaodong": [
@@ -5145,6 +5269,10 @@
     {
       "char": "浇水",
       "en": "To water (plants)"
+    },
+    {
+      "char": "叫水",
+      "en": "Term from English"
     }
   ],
   "panwang": [
@@ -5243,6 +5371,10 @@
     {
       "char": "游历",
       "en": "Traveling"
+    },
+    {
+      "char": "尤里",
+      "en": "Term from English"
     }
   ],
   "dailiren": [
@@ -6531,6 +6663,10 @@
     {
       "char": "他会",
       "en": "He will"
+    },
+    {
+      "char": "他绘",
+      "en": "Term from English"
     }
   ],
   "miansecangbai": [
@@ -6561,6 +6697,10 @@
     {
       "char": "隐喻",
       "en": "Metaphor"
+    },
+    {
+      "char": "因语",
+      "en": "Term from English"
     }
   ],
   "mouyishijian": [
@@ -6619,6 +6759,10 @@
     {
       "char": "胜地",
       "en": "Scenic Spot"
+    },
+    {
+      "char": "声低",
+      "en": "Term from English"
     }
   ],
   "mijue": [
@@ -6817,6 +6961,10 @@
     {
       "char": "盛名",
       "en": "Reputation"
+    },
+    {
+      "char": "声名",
+      "en": "Term from English"
     }
   ],
   "shengyi": [
@@ -6859,6 +7007,10 @@
     {
       "char": "浴室",
       "en": "bathroom"
+    },
+    {
+      "char": "羽饰",
+      "en": "Term from English"
     }
   ],
   "cangcu": [
@@ -7003,6 +7155,10 @@
     {
       "char": "沉默",
       "en": "Silence"
+    },
+    {
+      "char": "沉没",
+      "en": "to sink"
     }
   ],
   "jinqiu": [
@@ -7109,6 +7265,10 @@
     {
       "char": "银器",
       "en": "Silverware"
+    },
+    {
+      "char": "因其",
+      "en": "Term from English"
     }
   ],
   "yinse": [
@@ -7771,6 +7931,14 @@
     {
       "char": "惊异",
       "en": "Astonished"
+    },
+    {
+      "char": "静宜",
+      "en": "Term from English"
+    },
+    {
+      "char": "竞艺",
+      "en": "Term from English"
     }
   ],
   "rongxing": [
@@ -9139,6 +9307,10 @@
     {
       "char": "出意",
       "en": "To have a clear idea"
+    },
+    {
+      "char": "除移",
+      "en": "Term from English"
     }
   ],
   "xianluchulai": [
@@ -9933,6 +10105,10 @@
     {
       "char": "实话",
       "en": "Truthful statement"
+    },
+    {
+      "char": "使花",
+      "en": "Term from English"
     }
   ],
   "kuaiqian": [
@@ -9975,6 +10151,10 @@
     {
       "char": "备考",
       "en": "prepare for exams"
+    },
+    {
+      "char": "焙烤",
+      "en": "Term from English"
     }
   ],
   "zuijiu": [
@@ -10485,6 +10665,10 @@
     {
       "char": "几张",
       "en": "Several Sheets"
+    },
+    {
+      "char": "机长",
+      "en": "Term from English"
     }
   ],
   "jiangtao": [
@@ -10903,6 +11087,10 @@
     {
       "char": "几位",
       "en": "Several"
+    },
+    {
+      "char": "几维",
+      "en": "Term from English"
     }
   ],
   "zhigai": [
@@ -11911,6 +12099,10 @@
     {
       "char": "附加",
       "en": "Add"
+    },
+    {
+      "char": "富家",
+      "en": "Term from English"
     }
   ],
   "jieshi": [
@@ -12223,6 +12415,10 @@
     {
       "char": "易于",
       "en": "Easy"
+    },
+    {
+      "char": "以语",
+      "en": "Term from English"
     }
   ],
   "xiaoshiyizhuang": [
@@ -12977,6 +13173,10 @@
     {
       "char": "陶人",
       "en": "Earthenware figure"
+    },
+    {
+      "char": "讨人",
+      "en": "Term from English"
     }
   ],
   "bizhen": [
@@ -13689,6 +13889,10 @@
     {
       "char": "珍重",
       "en": "Take care"
+    },
+    {
+      "char": "震中",
+      "en": "earthquake epicenter"
     }
   ],
   "shejiaoshenghuo": [
@@ -13983,6 +14187,10 @@
     {
       "char": "眼下",
       "en": "Now"
+    },
+    {
+      "char": "咽下",
+      "en": "Term from English"
     }
   ],
   "huaixiaoxi": [
@@ -14475,6 +14683,10 @@
     {
       "char": "词有",
       "en": "(This appears to be a transliteration and doesn't have a direct English equivalent - context would be needed for a proper translation.  Perhaps \"word has it\".)"
+    },
+    {
+      "char": "词由",
+      "en": "Term from English"
     }
   ],
   "zhirenzuo": [
@@ -14941,6 +15153,10 @@
     {
       "char": "韦尔斯",
       "en": "Wells"
+    },
+    {
+      "char": "威尔斯",
+      "en": "Term from English"
     }
   ],
   "jiasen": [
@@ -15031,6 +15247,10252 @@
     {
       "char": "时吨",
       "en": "(This appears to be a typo or a specific term needing context. Assuming it refers to \"time\" - Time)"
+    }
+  ],
+  "putonggaozhong": [
+    {
+      "char": "普通高中",
+      "en": "Term from English"
+    }
+  ],
+  "kuawenhua": [
+    {
+      "char": "跨文化",
+      "en": "Term from English"
+    }
+  ],
+  "baiti": [
+    {
+      "char": "白体",
+      "en": "lean type"
+    }
+  ],
+  "gaozhongyingyu": [
+    {
+      "char": "高中英语",
+      "en": "Term from English"
+    }
+  ],
+  "dierce": [
+    {
+      "char": "第二册",
+      "en": "Term from English"
+    }
+  ],
+  "renjiao": [
+    {
+      "char": "人教",
+      "en": "Term from English"
+    }
+  ],
+  "shisihangshi": [
+    {
+      "char": "十四行诗",
+      "en": "sonnet"
+    }
+  ],
+  "dishini": [
+    {
+      "char": "迪士尼",
+      "en": "Disney (name)"
+    }
+  ],
+  "kaola": [
+    {
+      "char": "考拉",
+      "en": "Term from English"
+    }
+  ],
+  "guluoma": [
+    {
+      "char": "古罗马",
+      "en": "ancient Rome"
+    }
+  ],
+  "niudunliuti": [
+    {
+      "char": "牛顿流体",
+      "en": "Term from English"
+    }
+  ],
+  "wuxin": [
+    {
+      "char": "吴欣",
+      "en": "Term from English"
+    }
+  ],
+  "hubai": [
+    {
+      "char": "胡白",
+      "en": "Term from English"
+    }
+  ],
+  "gongjuxing": [
+    {
+      "char": "工具性",
+      "en": "Term from English"
+    }
+  ],
+  "zhengzhisuzhi": [
+    {
+      "char": "政治素质",
+      "en": "Term from English"
+    }
+  ],
+  "jianquanrenge": [
+    {
+      "char": "健全人格",
+      "en": "Term from English"
+    }
+  ],
+  "guanwei": [
+    {
+      "char": "观为",
+      "en": "Term from English"
+    }
+  ],
+  "dukan": [
+    {
+      "char": "读看",
+      "en": "Term from English"
+    }
+  ],
+  "jingdianxing": [
+    {
+      "char": "经典性",
+      "en": "Term from English"
+    }
+  ],
+  "jiaoxueneirong": [
+    {
+      "char": "教学内容",
+      "en": "Term from English"
+    }
+  ],
+  "yingyujiaoxue": [
+    {
+      "char": "英语教学",
+      "en": "Term from English"
+    }
+  ],
+  "jiaoxueziyuan": [
+    {
+      "char": "教学资源",
+      "en": "Term from English"
+    }
+  ],
+  "jiaoxuexiaoguo": [
+    {
+      "char": "教学效果",
+      "en": "Term from English"
+    }
+  ],
+  "shake": [
+    {
+      "char": "沙克",
+      "en": "Term from English"
+    }
+  ],
+  "erdun": [
+    {
+      "char": "尔顿",
+      "en": "Term from English"
+    }
+  ],
+  "bulangning": [
+    {
+      "char": "布朗宁",
+      "en": "Term from English"
+    }
+  ],
+  "aisake": [
+    {
+      "char": "艾萨克",
+      "en": "Term from English"
+    }
+  ],
+  "leinuoa": [
+    {
+      "char": "雷诺阿",
+      "en": "Term from English"
+    }
+  ],
+  "masaqiao": [
+    {
+      "char": "马萨乔",
+      "en": "Term from English"
+    }
+  ],
+  "jiaolvbuan": [
+    {
+      "char": "焦虑不安",
+      "en": "Term from English"
+    }
+  ],
+  "disice": [
+    {
+      "char": "第四册",
+      "en": "Term from English"
+    }
+  ],
+  "yuanzu": [
+    {
+      "char": "远足",
+      "en": "excursion"
+    }
+  ],
+  "shangyehua": [
+    {
+      "char": "商业化",
+      "en": "to commercialize"
+    }
+  ],
+  "huojin": [
+    {
+      "char": "霍金",
+      "en": "Term from English"
+    }
+  ],
+  "duolunduo": [
+    {
+      "char": "多伦多",
+      "en": "(n) Toronto (city in Canada)"
+    }
+  ],
+  "tianebao": [
+    {
+      "char": "天鹅堡",
+      "en": "Term from English"
+    }
+  ],
+  "maqiubiqiu": [
+    {
+      "char": "马丘比丘",
+      "en": "Term from English"
+    }
+  ],
+  "zhuxiu": [
+    {
+      "char": "主修",
+      "en": "(school) major"
+    }
+  ],
+  "leike": [
+    {
+      "char": "勒克",
+      "en": "Term from English"
+    }
+  ],
+  "shengchu": [
+    {
+      "char": "圣出",
+      "en": "Term from English"
+    }
+  ],
+  "huaban": [
+    {
+      "char": "滑板",
+      "en": "skateboard"
+    }
+  ],
+  "lunbolang": [
+    {
+      "char": "伦勃朗",
+      "en": "Term from English"
+    }
+  ],
+  "poxi": [
+    {
+      "char": "珀西",
+      "en": "Term from English"
+    }
+  ],
+  "paiju": [
+    {
+      "char": "俳句",
+      "en": "haiku"
+    }
+  ],
+  "xiusi": [
+    {
+      "char": "休斯",
+      "en": "Term from English"
+    }
+  ],
+  "jueshiyue": [
+    {
+      "char": "爵士乐",
+      "en": "jazz"
+    }
+  ],
+  "jufa": [
+    {
+      "char": "句法",
+      "en": "Term from English"
+    }
+  ],
+  "binbu": [
+    {
+      "char": "宾补",
+      "en": "Term from English"
+    }
+  ],
+  "fuwuyuan": [
+    {
+      "char": "服务员",
+      "en": "waiter"
+    }
+  ],
+  "ganlanqiu": [
+    {
+      "char": "橄榄球",
+      "en": "football"
+    }
+  ],
+  "yaocao": [
+    {
+      "char": "药草",
+      "en": "Term from English"
+    }
+  ],
+  "duguan": [
+    {
+      "char": "杜管",
+      "en": "Term from English"
+    }
+  ],
+  "xiaba": [
+    {
+      "char": "下巴",
+      "en": "chin"
+    }
+  ],
+  "youjian": [
+    {
+      "char": "油煎",
+      "en": "Term from English"
+    }
+  ],
+  "chengrenjie": [
+    {
+      "char": "成人节",
+      "en": "Term from English"
+    }
+  ],
+  "mengguyu": [
+    {
+      "char": "蒙古语",
+      "en": "Mongolian language"
+    }
+  ],
+  "dadu": [
+    {
+      "char": "打赌",
+      "en": "(make a) bet"
+    }
+  ],
+  "xiushici": [
+    {
+      "char": "修饰词",
+      "en": "Term from English"
+    }
+  ],
+  "luyisi": [
+    {
+      "char": "路易斯",
+      "en": "Louis"
+    }
+  ],
+  "maxiaolei": [
+    {
+      "char": "马晓蕾",
+      "en": "Term from English"
+    }
+  ],
+  "yingyongchengxu": [
+    {
+      "char": "应用程序",
+      "en": "Term from English"
+    }
+  ],
+  "yidabiqian": [
+    {
+      "char": "一大笔钱",
+      "en": "Term from English"
+    }
+  ],
+  "lixi": [
+    {
+      "char": "利希",
+      "en": "Term from English"
+    }
+  ],
+  "kakahu": [
+    {
+      "char": "喀喀湖",
+      "en": "Term from English"
+    }
+  ],
+  "nandinggeer": [
+    {
+      "char": "南丁格尔",
+      "en": "Term from English"
+    }
+  ],
+  "sami": [
+    {
+      "char": "萨米",
+      "en": "Term from English"
+    }
+  ],
+  "xunlu": [
+    {
+      "char": "驯鹿",
+      "en": "reindeer"
+    }
+  ],
+  "yixueyuan": [
+    {
+      "char": "医学院",
+      "en": "Term from English"
+    }
+  ],
+  "cixing": [
+    {
+      "char": "词性",
+      "en": "lexical category"
+    }
+  ],
+  "ouneisite": [
+    {
+      "char": "欧内斯特",
+      "en": "Term from English"
+    }
+  ],
+  "gongxing": [
+    {
+      "char": "拱形",
+      "en": "arch"
+    },
+    {
+      "char": "弓形",
+      "en": "circular segment"
+    }
+  ],
+  "shicheng": [
+    {
+      "char": "使成",
+      "en": "Term from English"
+    }
+  ],
+  "jinianwu": [
+    {
+      "char": "纪念物",
+      "en": "Term from English"
+    }
+  ],
+  "xiadingjuexin": [
+    {
+      "char": "下定决心",
+      "en": "Term from English"
+    }
+  ],
+  "jiaoluan": [
+    {
+      "char": "搅乱",
+      "en": "to confuse"
+    }
+  ],
+  "rennaili": [
+    {
+      "char": "忍耐力",
+      "en": "Term from English"
+    }
+  ],
+  "kexinlai": [
+    {
+      "char": "可信赖",
+      "en": "Term from English"
+    }
+  ],
+  "shangxinshi": [
+    {
+      "char": "伤心事",
+      "en": "Term from English"
+    }
+  ],
+  "paoguang": [
+    {
+      "char": "抛光",
+      "en": "Term from English"
+    }
+  ],
+  "bianti": [
+    {
+      "char": "变体",
+      "en": "variant"
+    }
+  ],
+  "huanglaihuangqu": [
+    {
+      "char": "晃来晃去",
+      "en": "Term from English"
+    }
+  ],
+  "yuyishang": [
+    {
+      "char": "语义上",
+      "en": "Term from English"
+    }
+  ],
+  "tuixiaoyuan": [
+    {
+      "char": "推销员",
+      "en": "(n) sales representative"
+    }
+  ],
+  "kaojia": [
+    {
+      "char": "烤架",
+      "en": "Term from English"
+    }
+  ],
+  "tasimaniya": [
+    {
+      "char": "塔斯马尼亚",
+      "en": "Term from English"
+    }
+  ],
+  "chisheng": [
+    {
+      "char": "吃剩",
+      "en": "Term from English"
+    }
+  ],
+  "jingquan": [
+    {
+      "char": "颈圈",
+      "en": "Term from English"
+    }
+  ],
+  "baiwanyingbang": [
+    {
+      "char": "百万英镑",
+      "en": "Term from English"
+    }
+  ],
+  "shishi": [
+    {
+      "char": "失事",
+      "en": "(have an) accident"
+    }
+  ],
+  "amusitelang": [
+    {
+      "char": "阿姆斯特朗",
+      "en": "Armstrong"
+    }
+  ],
+  "tanshuaidi": [
+    {
+      "char": "坦率地",
+      "en": "Term from English"
+    }
+  ],
+  "lingrenzhenjing": [
+    {
+      "char": "令人震惊",
+      "en": "Term from English"
+    }
+  ],
+  "qiukui": [
+    {
+      "char": "秋葵",
+      "en": "Term from English"
+    }
+  ],
+  "yueyu": [
+    {
+      "char": "粤语",
+      "en": "Cantonese language"
+    }
+  ],
+  "jiekuan": [
+    {
+      "char": "借款",
+      "en": "loan"
+    }
+  ],
+  "nuomanren": [
+    {
+      "char": "诺曼人",
+      "en": "Term from English"
+    }
+  ],
+  "gudianyinyue": [
+    {
+      "char": "古典音乐",
+      "en": "classical music"
+    }
+  ],
+  "take": [
+    {
+      "char": "塔克",
+      "en": "Term from English"
+    }
+  ],
+  "lianheguoertongjijinhui": [
+    {
+      "char": "联合国儿童基金会",
+      "en": "United Nations Children's Fund"
+    }
+  ],
+  "xiangqing": [
+    {
+      "char": "详情",
+      "en": "details"
+    }
+  ],
+  "cishanjigou": [
+    {
+      "char": "慈善机构",
+      "en": "charity"
+    }
+  ],
+  "zangzuren": [
+    {
+      "char": "藏族人",
+      "en": "Term from English"
+    }
+  ],
+  "zuixinxiaoxi": [
+    {
+      "char": "最新消息",
+      "en": "Term from English"
+    }
+  ],
+  "gaozhongkecheng": [
+    {
+      "char": "高中课程",
+      "en": "Term from English"
+    }
+  ],
+  "shidifen": [
+    {
+      "char": "史蒂芬",
+      "en": "Term from English"
+    }
+  ],
+  "antai": [
+    {
+      "char": "安泰",
+      "en": "Term from English"
+    }
+  ],
+  "ermu": [
+    {
+      "char": "尔姆",
+      "en": "Term from English"
+    }
+  ],
+  "buliya": [
+    {
+      "char": "布里亚",
+      "en": "Term from English"
+    }
+  ],
+  "sawalan": [
+    {
+      "char": "萨瓦兰",
+      "en": "Term from English"
+    }
+  ],
+  "aidemengdun": [
+    {
+      "char": "埃德蒙顿",
+      "en": "Edmonton"
+    }
+  ],
+  "niyajiala": [
+    {
+      "char": "尼亚加拉",
+      "en": "Term from English"
+    }
+  ],
+  "shanghang": [
+    {
+      "char": "商行",
+      "en": "Term from English"
+    }
+  ],
+  "jileng": [
+    {
+      "char": "极冷",
+      "en": "Term from English"
+    }
+  ],
+  "shixue": [
+    {
+      "char": "失血",
+      "en": "Term from English"
+    }
+  ],
+  "yugang": [
+    {
+      "char": "浴缸",
+      "en": "bathtub"
+    }
+  ],
+  "yupen": [
+    {
+      "char": "浴盆",
+      "en": "bathtub"
+    }
+  ],
+  "yongshouzhang": [
+    {
+      "char": "用手掌",
+      "en": "Term from English"
+    }
+  ],
+  "laogudi": [
+    {
+      "char": "牢固地",
+      "en": "Term from English"
+    }
+  ],
+  "rengonghuxi": [
+    {
+      "char": "人工呼吸",
+      "en": "Term from English"
+    }
+  ],
+  "dianzijingji": [
+    {
+      "char": "电子竞技",
+      "en": "Term from English"
+    }
+  ],
+  "dengjizhuce": [
+    {
+      "char": "登记注册",
+      "en": "Term from English"
+    }
+  ],
+  "fachuxinhao": [
+    {
+      "char": "发出信号",
+      "en": "Term from English"
+    }
+  ],
+  "tubulvxing": [
+    {
+      "char": "徒步旅行",
+      "en": "hiking"
+    }
+  ],
+  "qingkou": [
+    {
+      "char": "轻叩",
+      "en": "Term from English"
+    }
+  ],
+  "chuikoushao": [
+    {
+      "char": "吹口哨",
+      "en": "whistle"
+    }
+  ],
+  "jinling": [
+    {
+      "char": "禁令",
+      "en": "prohibition"
+    }
+  ],
+  "jijia": [
+    {
+      "char": "极佳",
+      "en": "Term from English"
+    },
+    {
+      "char": "几家",
+      "en": "Term from English"
+    }
+  ],
+  "yundou": [
+    {
+      "char": "熨斗",
+      "en": "(an) iron"
+    }
+  ],
+  "waikexue": [
+    {
+      "char": "外科学",
+      "en": "surgery"
+    }
+  ],
+  "qiaotuodibang": [
+    {
+      "char": "乔托迪邦",
+      "en": "Term from English"
+    }
+  ],
+  "qiaotuo": [
+    {
+      "char": "乔托",
+      "en": "Term from English"
+    }
+  ],
+  "laiangnaduo": [
+    {
+      "char": "莱昂纳多",
+      "en": "Leonardo"
+    }
+  ],
+  "libaitang": [
+    {
+      "char": "礼拜堂",
+      "en": "chapel"
+    }
+  ],
+  "xiaokedou": [
+    {
+      "char": "小蝌蚪",
+      "en": "Term from English"
+    }
+  ],
+  "mudi": [
+    {
+      "char": "牧笛",
+      "en": "Term from English"
+    }
+  ],
+  "shanshuiqing": [
+    {
+      "char": "山水情",
+      "en": "Term from English"
+    }
+  ],
+  "yuekan": [
+    {
+      "char": "月刊",
+      "en": "Term from English"
+    }
+  ],
+  "hezhang": [
+    {
+      "char": "河长",
+      "en": "Term from English"
+    }
+  ],
+  "weiershi": [
+    {
+      "char": "威尔士",
+      "en": "Wales"
+    }
+  ],
+  "kazhu": [
+    {
+      "char": "卡住",
+      "en": "Term from English"
+    }
+  ],
+  "yunshi": [
+    {
+      "char": "韵式",
+      "en": "Term from English"
+    }
+  ],
+  "jiandanmingliao": [
+    {
+      "char": "简单明了",
+      "en": "Term from English"
+    }
+  ],
+  "baleite": [
+    {
+      "char": "巴雷特",
+      "en": "Term from English"
+    }
+  ],
+  "meiguoheiren": [
+    {
+      "char": "美国黑人",
+      "en": "Term from English"
+    }
+  ],
+  "shizhe": [
+    {
+      "char": "侍者",
+      "en": "waiter"
+    },
+    {
+      "char": "逝者",
+      "en": "Term from English"
+    }
+  ],
+  "yanxuxing": [
+    {
+      "char": "延续性",
+      "en": "Term from English"
+    }
+  ],
+  "ciqian": [
+    {
+      "char": "词前",
+      "en": "Term from English"
+    }
+  ],
+  "tuanban": [
+    {
+      "char": "团版",
+      "en": "Term from English"
+    }
+  ],
+  "xunhui": [
+    {
+      "char": "巡回",
+      "en": "Term from English"
+    },
+    {
+      "char": "寻回",
+      "en": "Term from English"
+    }
+  ],
+  "qiuzhixin": [
+    {
+      "char": "求职信",
+      "en": "Term from English"
+    }
+  ],
+  "disi": [
+    {
+      "char": "迪丝",
+      "en": "Term from English"
+    }
+  ],
+  "shijianjiqi": [
+    {
+      "char": "时间机器",
+      "en": "Term from English"
+    }
+  ],
+  "yourou": [
+    {
+      "char": "有肉",
+      "en": "Term from English"
+    }
+  ],
+  "dulingfengsao": [
+    {
+      "char": "独领风骚",
+      "en": "Term from English"
+    }
+  ],
+  "bijibendiannao": [
+    {
+      "char": "笔记本电脑",
+      "en": "Term from English"
+    }
+  ],
+  "danqi": [
+    {
+      "char": "弹起",
+      "en": "Term from English"
+    }
+  ],
+  "danlaidanqu": [
+    {
+      "char": "弹来弹去",
+      "en": "Term from English"
+    }
+  ],
+  "nengliqingxiang": [
+    {
+      "char": "能力倾向",
+      "en": "Term from English"
+    }
+  ],
+  "jiefu": [
+    {
+      "char": "杰夫",
+      "en": "Term from English"
+    }
+  ],
+  "mingshi": [
+    {
+      "char": "名使",
+      "en": "Term from English"
+    }
+  ],
+  "jingbaoqi": [
+    {
+      "char": "警报器",
+      "en": "siren"
+    }
+  ],
+  "aobao": [
+    {
+      "char": "敖包",
+      "en": "Term from English"
+    }
+  ],
+  "miliuzhiji": [
+    {
+      "char": "弥留之际",
+      "en": "Term from English"
+    }
+  ],
+  "yindian": [
+    {
+      "char": "印第安",
+      "en": "Term from English"
+    }
+  ],
+  "taojinre": [
+    {
+      "char": "淘金热",
+      "en": "Term from English"
+    }
+  ],
+  "jialifuniya": [
+    {
+      "char": "加利福尼亚",
+      "en": "California"
+    }
+  ],
+  "zaoxian": [
+    {
+      "char": "早先",
+      "en": "previously"
+    }
+  ],
+  "qiyu": [
+    {
+      "char": "奇遇",
+      "en": "Term from English"
+    }
+  ],
+  "tuode": [
+    {
+      "char": "托德",
+      "en": "Term from English"
+    }
+  ],
+  "huojirou": [
+    {
+      "char": "火鸡肉",
+      "en": "Term from English"
+    }
+  ],
+  "nuoman": [
+    {
+      "char": "诺曼",
+      "en": "Term from English"
+    }
+  ],
+  "waxili": [
+    {
+      "char": "瓦西里",
+      "en": "Vasily"
+    }
+  ],
+  "baihao": [
+    {
+      "char": "摆好",
+      "en": "Term from English"
+    }
+  ],
+  "weijing": [
+    {
+      "char": "维京",
+      "en": "Term from English"
+    }
+  ],
+  "kaituo": [
+    {
+      "char": "开脱",
+      "en": "Term from English"
+    }
+  ],
+  "xiha": [
+    {
+      "char": "嘻哈",
+      "en": "hip-hop (music genre)"
+    }
+  ],
+  "yicai": [
+    {
+      "char": "怡彩",
+      "en": "Term from English"
+    }
+  ],
+  "gebingfang": [
+    {
+      "char": "葛炳芳",
+      "en": "Term from English"
+    }
+  ],
+  "guiliping": [
+    {
+      "char": "贵丽萍",
+      "en": "Term from English"
+    }
+  ],
+  "hongshaorou": [
+    {
+      "char": "红烧肉",
+      "en": "red-cooked (pork) meat"
+    }
+  ],
+  "juwosuozhi": [
+    {
+      "char": "据我所知",
+      "en": "Term from English"
+    }
+  ],
+  "liuxingbingxue": [
+    {
+      "char": "流行病学",
+      "en": "epidemiology"
+    }
+  ],
+  "tongjixue": [
+    {
+      "char": "统计学",
+      "en": "statistics"
+    }
+  ],
+  "liuti": [
+    {
+      "char": "流体",
+      "en": "fluid"
+    }
+  ],
+  "xielei": [
+    {
+      "char": "谢蕾",
+      "en": "Term from English"
+    }
+  ],
+  "shushi": [
+    {
+      "char": "属实",
+      "en": "turn out to be true"
+    }
+  ],
+  "jiediao": [
+    {
+      "char": "戒掉",
+      "en": "Term from English"
+    }
+  ],
+  "beimeidiqu": [
+    {
+      "char": "北美地区",
+      "en": "Term from English"
+    }
+  ],
+  "yangzasui": [
+    {
+      "char": "羊杂碎",
+      "en": "Term from English"
+    }
+  ],
+  "fuheci": [
+    {
+      "char": "复合词",
+      "en": "Term from English"
+    }
+  ],
+  "halifakesi": [
+    {
+      "char": "哈利法克斯",
+      "en": "Halifax"
+    }
+  ],
+  "kuibeikesheng": [
+    {
+      "char": "魁北克省",
+      "en": "Term from English"
+    }
+  ],
+  "tangrenjie": [
+    {
+      "char": "唐人街",
+      "en": "Chinatown"
+    }
+  ],
+  "shiyongshouce": [
+    {
+      "char": "使用手册",
+      "en": "Term from English"
+    },
+    {
+      "char": "实用手册",
+      "en": "Term from English"
+    }
+  ],
+  "beidongshi": [
+    {
+      "char": "被动式",
+      "en": "Term from English"
+    }
+  ],
+  "huadao": [
+    {
+      "char": "滑倒",
+      "en": "slip"
+    }
+  ],
+  "bujipin": [
+    {
+      "char": "补给品",
+      "en": "Term from English"
+    }
+  ],
+  "wulu": [
+    {
+      "char": "乌鲁",
+      "en": "Term from English"
+    }
+  ],
+  "shufayishu": [
+    {
+      "char": "书法艺术",
+      "en": "Term from English"
+    }
+  ],
+  "jiangdiao": [
+    {
+      "char": "降调",
+      "en": "Term from English"
+    }
+  ],
+  "xiongxing": [
+    {
+      "char": "雄性",
+      "en": "male"
+    }
+  ],
+  "tiquwu": [
+    {
+      "char": "提取物",
+      "en": "Term from English"
+    }
+  ],
+  "fuluolunsi": [
+    {
+      "char": "弗洛伦斯",
+      "en": "Term from English"
+    }
+  ],
+  "paidazhe": [
+    {
+      "char": "拍打着",
+      "en": "Term from English"
+    }
+  ],
+  "mengji": [
+    {
+      "char": "猛击",
+      "en": "Term from English"
+    }
+  ],
+  "zizhucan": [
+    {
+      "char": "自助餐",
+      "en": "buffet"
+    }
+  ],
+  "lapa": [
+    {
+      "char": "拉帕",
+      "en": "Term from English"
+    }
+  ],
+  "youle": [
+    {
+      "char": "游乐",
+      "en": "(v) amuse oneself"
+    }
+  ],
+  "zhutileyuan": [
+    {
+      "char": "主题乐园",
+      "en": "Term from English"
+    }
+  ],
+  "feixin": [
+    {
+      "char": "费心",
+      "en": "Term from English"
+    }
+  ],
+  "xiaofeiwang": [
+    {
+      "char": "肖菲王",
+      "en": "Term from English"
+    }
+  ],
+  "shengjun": [
+    {
+      "char": "生军",
+      "en": "Term from English"
+    }
+  ],
+  "guanggaogongsi": [
+    {
+      "char": "广告公司",
+      "en": "Term from English"
+    }
+  ],
+  "zhenzuoqilai": [
+    {
+      "char": "振作起来",
+      "en": "Term from English"
+    }
+  ],
+  "yingyi": [
+    {
+      "char": "英译",
+      "en": "Term from English"
+    }
+  ],
+  "jingshen": [
+    {
+      "char": "景深",
+      "en": "depth of field"
+    }
+  ],
+  "liugeyue": [
+    {
+      "char": "六个月",
+      "en": "Term from English"
+    }
+  ],
+  "hezhangzhi": [
+    {
+      "char": "河长制",
+      "en": "Term from English"
+    }
+  ],
+  "jiyu": [
+    {
+      "char": "季语",
+      "en": "Term from English"
+    }
+  ],
+  "zhongken": [
+    {
+      "char": "中肯",
+      "en": "Term from English"
+    }
+  ],
+  "wangfushi": [
+    {
+      "char": "望夫石",
+      "en": "Amah Rock"
+    }
+  ],
+  "halaimu": [
+    {
+      "char": "哈莱姆",
+      "en": "Term from English"
+    }
+  ],
+  "yinhao": [
+    {
+      "char": "引号",
+      "en": "quotation mark"
+    }
+  ],
+  "xianshizhuyizhe": [
+    {
+      "char": "现实主义者",
+      "en": "Term from English"
+    }
+  ],
+  "youyu": [
+    {
+      "char": "优于",
+      "en": "surpass"
+    }
+  ],
+  "chushengaogui": [
+    {
+      "char": "出身高贵",
+      "en": "Term from English"
+    }
+  ],
+  "paichenghang": [
+    {
+      "char": "排成行",
+      "en": "Term from English"
+    }
+  ],
+  "weituoren": [
+    {
+      "char": "委托人",
+      "en": "trustor"
+    }
+  ],
+  "zhaoxiangshu": [
+    {
+      "char": "照相术",
+      "en": "Term from English"
+    }
+  ],
+  "litizhuyi": [
+    {
+      "char": "立体主义",
+      "en": "Term from English"
+    }
+  ],
+  "litipai": [
+    {
+      "char": "立体派",
+      "en": "Term from English"
+    }
+  ],
+  "diaokepin": [
+    {
+      "char": "雕刻品",
+      "en": "sculpture"
+    }
+  ],
+  "diaokeshu": [
+    {
+      "char": "雕刻术",
+      "en": "Term from English"
+    }
+  ],
+  "touzie": [
+    {
+      "char": "投资额",
+      "en": "Term from English"
+    }
+  ],
+  "xiangkuang": [
+    {
+      "char": "镶框",
+      "en": "Term from English"
+    }
+  ],
+  "xiejue": [
+    {
+      "char": "谢绝",
+      "en": "(v) politely refuse"
+    }
+  ],
+  "qingtongse": [
+    {
+      "char": "青铜色",
+      "en": "Term from English"
+    }
+  ],
+  "taocizhipin": [
+    {
+      "char": "陶瓷制品",
+      "en": "Term from English"
+    }
+  ],
+  "baoxiudan": [
+    {
+      "char": "保修单",
+      "en": "Term from English"
+    }
+  ],
+  "danbaowu": [
+    {
+      "char": "担保物",
+      "en": "Term from English"
+    }
+  ],
+  "tongdairen": [
+    {
+      "char": "同代人",
+      "en": "Term from English"
+    }
+  ],
+  "kelaode": [
+    {
+      "char": "克劳德",
+      "en": "Term from English"
+    }
+  ],
+  "jiweini": [
+    {
+      "char": "吉维尼",
+      "en": "Term from English"
+    }
+  ],
+  "hanguan": [
+    {
+      "char": "函关",
+      "en": "Term from English"
+    }
+  ],
+  "xuejitu": [
+    {
+      "char": "雪霁图",
+      "en": "Term from English"
+    }
+  ],
+  "tangyin": [
+    {
+      "char": "唐寅",
+      "en": "Term from English"
+    }
+  ],
+  "zhanyouyoushi": [
+    {
+      "char": "占有优势",
+      "en": "Term from English"
+    }
+  ],
+  "zixijiancha": [
+    {
+      "char": "仔细检查",
+      "en": "Term from English"
+    }
+  ],
+  "gunti": [
+    {
+      "char": "滚梯",
+      "en": "Term from English"
+    }
+  ],
+  "beiguanzhuyi": [
+    {
+      "char": "悲观主义",
+      "en": "Term from English"
+    }
+  ],
+  "gualian": [
+    {
+      "char": "刮脸",
+      "en": "Term from English"
+    }
+  ],
+  "luosaihuzi": [
+    {
+      "char": "络腮胡子",
+      "en": "Term from English"
+    }
+  ],
+  "juanyan": [
+    {
+      "char": "卷烟",
+      "en": "Term from English"
+    }
+  ],
+  "zhuankeyisheng": [
+    {
+      "char": "专科医生",
+      "en": "Term from English"
+    }
+  ],
+  "gaojiguwen": [
+    {
+      "char": "高级顾问",
+      "en": "Term from English"
+    }
+  ],
+  "xinlijiaocui": [
+    {
+      "char": "心力交瘁",
+      "en": "Term from English"
+    }
+  ],
+  "baolingqiu": [
+    {
+      "char": "保龄球",
+      "en": "bowling (balls)"
+    }
+  ],
+  "paifangwu": [
+    {
+      "char": "排放物",
+      "en": "Term from English"
+    }
+  ],
+  "wupaifang": [
+    {
+      "char": "物排放",
+      "en": "Term from English"
+    }
+  ],
+  "aie": [
+    {
+      "char": "挨饿",
+      "en": "go hungry"
+    }
+  ],
+  "eryanghuawu": [
+    {
+      "char": "二氧化物",
+      "en": "Term from English"
+    }
+  ],
+  "zhengcefangzhen": [
+    {
+      "char": "政策方针",
+      "en": "Term from English"
+    }
+  ],
+  "niankan": [
+    {
+      "char": "年刊",
+      "en": "Term from English"
+    }
+  ],
+  "redaiconglin": [
+    {
+      "char": "热带丛林",
+      "en": "Term from English"
+    }
+  ],
+  "yida": [
+    {
+      "char": "一打",
+      "en": "dozen"
+    }
+  ],
+  "katelina": [
+    {
+      "char": "卡特里娜",
+      "en": "Term from English"
+    }
+  ],
+  "weiku": [
+    {
+      "char": "味苦",
+      "en": "Term from English"
+    }
+  ],
+  "naijiuli": [
+    {
+      "char": "耐久力",
+      "en": "Term from English"
+    }
+  ],
+  "bichu": [
+    {
+      "char": "壁橱",
+      "en": "a built-in wardrobe or cupboard"
+    }
+  ],
+  "yahuai": [
+    {
+      "char": "压坏",
+      "en": "Term from English"
+    }
+  ],
+  "yasui": [
+    {
+      "char": "压碎",
+      "en": "crush"
+    }
+  ],
+  "dongchan": [
+    {
+      "char": "动产",
+      "en": "Term from English"
+    }
+  ],
+  "banzhuoqin": [
+    {
+      "char": "班卓琴",
+      "en": "Term from English"
+    }
+  ],
+  "zhengpai": [
+    {
+      "char": "正派",
+      "en": "Term from English"
+    }
+  ],
+  "piqihao": [
+    {
+      "char": "脾气好",
+      "en": "Term from English"
+    }
+  ],
+  "xingyundi": [
+    {
+      "char": "幸运地",
+      "en": "Term from English"
+    }
+  ],
+  "jiaofei": [
+    {
+      "char": "叫吠",
+      "en": "Term from English"
+    }
+  ],
+  "yongqiuban": [
+    {
+      "char": "用球板",
+      "en": "Term from English"
+    }
+  ],
+  "huida": [
+    {
+      "char": "挥打",
+      "en": "Term from English"
+    }
+  ],
+  "shiqi": [
+    {
+      "char": "湿气",
+      "en": "moisture"
+    }
+  ],
+  "guanggaoye": [
+    {
+      "char": "广告业",
+      "en": "Term from English"
+    }
+  ],
+  "hangxingzhe": [
+    {
+      "char": "航行者",
+      "en": "Term from English"
+    }
+  ],
+  "mada": [
+    {
+      "char": "马达",
+      "en": "motor"
+    }
+  ],
+  "yingshizhe": [
+    {
+      "char": "应试者",
+      "en": "Term from English"
+    }
+  ],
+  "reguang": [
+    {
+      "char": "热光",
+      "en": "Term from English"
+    }
+  ],
+  "nanqiaozhiyadao": [
+    {
+      "char": "南乔治亚岛",
+      "en": "Term from English"
+    }
+  ],
+  "huaierde": [
+    {
+      "char": "怀尔德",
+      "en": "Term from English"
+    }
+  ],
+  "aode": [
+    {
+      "char": "奥德",
+      "en": "Term from English"
+    }
+  ],
+  "lisi": [
+    {
+      "char": "利斯",
+      "en": "Term from English"
+    }
+  ],
+  "wosili": [
+    {
+      "char": "沃斯利",
+      "en": "Term from English"
+    }
+  ],
+  "kelin": [
+    {
+      "char": "克林",
+      "en": "Term from English"
+    }
+  ],
+  "xiubote": [
+    {
+      "char": "休伯特",
+      "en": "Term from English"
+    }
+  ],
+  "hedesen": [
+    {
+      "char": "赫德森",
+      "en": "Term from English"
+    }
+  ],
+  "laiang": [
+    {
+      "char": "莱昂",
+      "en": "Term from English"
+    }
+  ],
+  "sitelite": [
+    {
+      "char": "斯特里特",
+      "en": "Term from English"
+    }
+  ],
+  "aihaowenxue": [
+    {
+      "char": "爱好文学",
+      "en": "Term from English"
+    }
+  ],
+  "youerjiaoyu": [
+    {
+      "char": "幼儿教育",
+      "en": "Term from English"
+    }
+  ],
+  "tuoersuo": [
+    {
+      "char": "托儿所",
+      "en": "nursery"
+    }
+  ],
+  "baoyu": [
+    {
+      "char": "保育",
+      "en": "child care"
+    }
+  ],
+  "mingqin": [
+    {
+      "char": "鸣禽",
+      "en": "songbird"
+    }
+  ],
+  "gongniu": [
+    {
+      "char": "公牛",
+      "en": "bull"
+    }
+  ],
+  "sanyecao": [
+    {
+      "char": "三叶草",
+      "en": "Term from English"
+    }
+  ],
+  "dounong": [
+    {
+      "char": "逗弄",
+      "en": "Term from English"
+    }
+  ],
+  "geshihua": [
+    {
+      "char": "格式化",
+      "en": "to format"
+    }
+  ],
+  "huacu": [
+    {
+      "char": "花簇",
+      "en": "Term from English"
+    }
+  ],
+  "lingwuli": [
+    {
+      "char": "领悟力",
+      "en": "Term from English"
+    }
+  ],
+  "geban": [
+    {
+      "char": "搁板",
+      "en": "shelf"
+    }
+  ],
+  "huer": [
+    {
+      "char": "核儿",
+      "en": "Term from English"
+    }
+  ],
+  "yingtaoshu": [
+    {
+      "char": "樱桃树",
+      "en": "Term from English"
+    }
+  ],
+  "jiyuan": [
+    {
+      "char": "纪元",
+      "en": "beginning of an era"
+    }
+  ],
+  "shangguangji": [
+    {
+      "char": "上光剂",
+      "en": "Term from English"
+    }
+  ],
+  "caliang": [
+    {
+      "char": "擦亮",
+      "en": "(vt) burnish"
+    }
+  ],
+  "xianzhi": [
+    {
+      "char": "线织",
+      "en": "Term from English"
+    }
+  ],
+  "bianzouqu": [
+    {
+      "char": "变奏曲",
+      "en": "variation (music)"
+    }
+  ],
+  "gaotong": [
+    {
+      "char": "高通",
+      "en": "Term from English"
+    }
+  ],
+  "zhongbiao": [
+    {
+      "char": "中标",
+      "en": "Term from English"
+    }
+  ],
+  "jiaozhunke": [
+    {
+      "char": "教准科",
+      "en": "Term from English"
+    }
+  ],
+  "luxiqingu": [
+    {
+      "char": "陆锡钦辜",
+      "en": "Term from English"
+    }
+  ],
+  "duanpian": [
+    {
+      "char": "短篇",
+      "en": "Term from English"
+    }
+  ],
+  "duhuan": [
+    {
+      "char": "杜环",
+      "en": "Term from English"
+    }
+  ],
+  "ceshizhe": [
+    {
+      "char": "测试者",
+      "en": "Term from English"
+    }
+  ],
+  "xuniyuqi": [
+    {
+      "char": "虚拟语气",
+      "en": "Term from English"
+    }
+  ],
+  "xingzhuang": [
+    {
+      "char": "性状",
+      "en": "Term from English"
+    }
+  ],
+  "baiwenburuyijian": [
+    {
+      "char": "百闻不如一见",
+      "en": "seeing for oneself is a hundred times better than hearing from others"
+    }
+  ],
+  "liqing": [
+    {
+      "char": "厘清",
+      "en": "Term from English"
+    }
+  ],
+  "fuyouzeren": [
+    {
+      "char": "负有责任",
+      "en": "Term from English"
+    }
+  ],
+  "zhijia": [
+    {
+      "char": "趾甲",
+      "en": "Term from English"
+    }
+  ],
+  "dinglao": [
+    {
+      "char": "钉牢",
+      "en": "Term from English"
+    }
+  ],
+  "zanhuan": [
+    {
+      "char": "暂缓",
+      "en": "Term from English"
+    }
+  ],
+  "chuanfei": [
+    {
+      "char": "船费",
+      "en": "Term from English"
+    }
+  ],
+  "hesuan": [
+    {
+      "char": "核算",
+      "en": "Term from English"
+    }
+  ],
+  "waixing": [
+    {
+      "char": "外星",
+      "en": "Term from English"
+    }
+  ],
+  "zhanshangfeng": [
+    {
+      "char": "占上风",
+      "en": "Term from English"
+    }
+  ],
+  "kongzhiban": [
+    {
+      "char": "控制板",
+      "en": "Term from English"
+    }
+  ],
+  "yibiaopan": [
+    {
+      "char": "仪表盘",
+      "en": "Term from English"
+    }
+  ],
+  "zixunzu": [
+    {
+      "char": "咨询组",
+      "en": "Term from English"
+    }
+  ],
+  "waishengnv": [
+    {
+      "char": "外甥女",
+      "en": "sister's daughter"
+    }
+  ],
+  "liquan": [
+    {
+      "char": "力劝",
+      "en": "Term from English"
+    }
+  ],
+  "beiermeng": [
+    {
+      "char": "贝尔蒙",
+      "en": "Term from English"
+    }
+  ],
+  "tudian": [
+    {
+      "char": "凸点",
+      "en": "Term from English"
+    }
+  ],
+  "santi": [
+    {
+      "char": "三体",
+      "en": "Term from English"
+    }
+  ],
+  "gaobingdian": [
+    {
+      "char": "糕饼店",
+      "en": "Term from English"
+    }
+  ],
+  "roufan": [
+    {
+      "char": "肉贩",
+      "en": "Term from English"
+    }
+  ],
+  "tufu": [
+    {
+      "char": "屠夫",
+      "en": "butcher"
+    }
+  ],
+  "caoben": [
+    {
+      "char": "草本",
+      "en": "herb"
+    }
+  ],
+  "waijiaoshijie": [
+    {
+      "char": "外交使节",
+      "en": "Term from English"
+    }
+  ],
+  "piting": [
+    {
+      "char": "皮艇",
+      "en": "kayak"
+    }
+  ],
+  "changyizhe": [
+    {
+      "char": "倡议者",
+      "en": "Term from English"
+    }
+  ],
+  "zanzhuzhe": [
+    {
+      "char": "赞助者",
+      "en": "Term from English"
+    }
+  ],
+  "huoguan": [
+    {
+      "char": "或馆",
+      "en": "Term from English"
+    }
+  ],
+  "jianxiequan": [
+    {
+      "char": "间歇泉",
+      "en": "Term from English"
+    }
+  ],
+  "liuhuang": [
+    {
+      "char": "硫黄",
+      "en": "Term from English"
+    }
+  ],
+  "luka": [
+    {
+      "char": "卢卡",
+      "en": "Lucca (city in Tuscany)"
+    }
+  ],
+  "bengjitiao": [
+    {
+      "char": "蹦极跳",
+      "en": "Term from English"
+    }
+  ],
+  "niaowo": [
+    {
+      "char": "鸟窝",
+      "en": "Term from English"
+    }
+  ],
+  "wodian": [
+    {
+      "char": "窝点",
+      "en": "Term from English"
+    }
+  ],
+  "weilan": [
+    {
+      "char": "围栏",
+      "en": "(n) fencing"
+    }
+  ],
+  "fugaifanwei": [
+    {
+      "char": "覆盖范围",
+      "en": "Term from English"
+    }
+  ],
+  "bangdi": [
+    {
+      "char": "邦迪",
+      "en": "Term from English"
+    }
+  ],
+  "hakawu": [
+    {
+      "char": "哈卡舞",
+      "en": "Term from English"
+    }
+  ],
+  "maoli": [
+    {
+      "char": "毛利",
+      "en": "Term from English"
+    }
+  ],
+  "bange": [
+    {
+      "char": "伴歌",
+      "en": "Term from English"
+    }
+  ],
+  "zhanwu": [
+    {
+      "char": "战舞",
+      "en": "Term from English"
+    }
+  ],
+  "aidemeng": [
+    {
+      "char": "埃德蒙",
+      "en": "Term from English"
+    }
+  ],
+  "yazuishou": [
+    {
+      "char": "鸭嘴兽",
+      "en": "platypus"
+    }
+  ],
+  "xuren": [
+    {
+      "char": "需人",
+      "en": "Term from English"
+    }
+  ],
+  "keqianchuan": [
+    {
+      "char": "可潜船",
+      "en": "Term from English"
+    }
+  ],
+  "taikongcang": [
+    {
+      "char": "太空舱",
+      "en": "Term from English"
+    }
+  ],
+  "kaihang": [
+    {
+      "char": "开航",
+      "en": "Term from English"
+    }
+  ],
+  "jiqun": [
+    {
+      "char": "机群",
+      "en": "Term from English"
+    }
+  ],
+  "kegongshiyong": [
+    {
+      "char": "可供使用",
+      "en": "Term from English"
+    }
+  ],
+  "bianxieshidiannao": [
+    {
+      "char": "便携式电脑",
+      "en": "Term from English"
+    }
+  ],
+  "fanduizhe": [
+    {
+      "char": "反对者",
+      "en": "Term from English"
+    }
+  ],
+  "yuanmu": [
+    {
+      "char": "原木",
+      "en": "logs"
+    }
+  ],
+  "haisheng": [
+    {
+      "char": "海生",
+      "en": "Term from English"
+    }
+  ],
+  "feidinande": [
+    {
+      "char": "费迪南德",
+      "en": "Term from English"
+    }
+  ],
+  "zhake": [
+    {
+      "char": "扎克",
+      "en": "Term from English"
+    }
+  ],
+  "sangdelan": [
+    {
+      "char": "桑德兰",
+      "en": "Term from English"
+    }
+  ],
+  "luobin": [
+    {
+      "char": "罗宾",
+      "en": "Term from English"
+    }
+  ],
+  "guohao": [
+    {
+      "char": "裹好",
+      "en": "Term from English"
+    }
+  ],
+  "yougei": [
+    {
+      "char": "邮给",
+      "en": "Term from English"
+    }
+  ],
+  "shatu": [
+    {
+      "char": "沙土",
+      "en": "(n) sandy soil"
+    }
+  ],
+  "huibu": [
+    {
+      "char": "灰布",
+      "en": "Term from English"
+    }
+  ],
+  "manhuichen": [
+    {
+      "char": "满灰尘",
+      "en": "Term from English"
+    }
+  ],
+  "hechangqu": [
+    {
+      "char": "合唱曲",
+      "en": "Term from English"
+    }
+  ],
+  "qiebushuo": [
+    {
+      "char": "且不说",
+      "en": "Term from English"
+    }
+  ],
+  "bianjianben": [
+    {
+      "char": "便笺本",
+      "en": "Term from English"
+    }
+  ],
+  "heibanca": [
+    {
+      "char": "黑板擦",
+      "en": "Term from English"
+    }
+  ],
+  "siban": [
+    {
+      "char": "死板",
+      "en": "rigid"
+    }
+  ],
+  "qipao": [
+    {
+      "char": "起泡",
+      "en": "Term from English"
+    }
+  ],
+  "maxituan": [
+    {
+      "char": "马戏团",
+      "en": "circus"
+    }
+  ],
+  "yaojishi": [
+    {
+      "char": "药剂师",
+      "en": "druggist"
+    }
+  ],
+  "yaofang": [
+    {
+      "char": "药房",
+      "en": "pharmacy"
+    }
+  ],
+  "tuan": [
+    {
+      "char": "涂暗",
+      "en": "Term from English"
+    }
+  ],
+  "zhouqi": [
+    {
+      "char": "皱起",
+      "en": "Term from English"
+    }
+  ],
+  "pengshe": [
+    {
+      "char": "棚舍",
+      "en": "Term from English"
+    }
+  ],
+  "chadie": [
+    {
+      "char": "茶碟",
+      "en": "Term from English"
+    }
+  ],
+  "beituo": [
+    {
+      "char": "杯托",
+      "en": "Term from English"
+    }
+  ],
+  "pingdiguo": [
+    {
+      "char": "平底锅",
+      "en": "saucepan"
+    }
+  ],
+  "kaopan": [
+    {
+      "char": "烤盘",
+      "en": "Term from English"
+    }
+  ],
+  "guanzi": [
+    {
+      "char": "罐子",
+      "en": "Term from English"
+    }
+  ],
+  "shijichengshu": [
+    {
+      "char": "时机成熟",
+      "en": "Term from English"
+    }
+  ],
+  "churukou": [
+    {
+      "char": "出入口",
+      "en": "gateway"
+    }
+  ],
+  "yiliuwu": [
+    {
+      "char": "遗留物",
+      "en": "Term from English"
+    }
+  ],
+  "tuozhuai": [
+    {
+      "char": "拖拽",
+      "en": "Term from English"
+    }
+  ],
+  "youhuidaiyu": [
+    {
+      "char": "优惠待遇",
+      "en": "Term from English"
+    }
+  ],
+  "dusewu": [
+    {
+      "char": "堵塞物",
+      "en": "Term from English"
+    }
+  ],
+  "sangshinengli": [
+    {
+      "char": "丧失能力",
+      "en": "Term from English"
+    }
+  ],
+  "tiaoyin": [
+    {
+      "char": "调音",
+      "en": "Term from English"
+    }
+  ],
+  "tiaopin": [
+    {
+      "char": "调频",
+      "en": "(n) frequency modulation"
+    }
+  ],
+  "zixunhui": [
+    {
+      "char": "咨询会",
+      "en": "Term from English"
+    }
+  ],
+  "zhuanfagei": [
+    {
+      "char": "转发给",
+      "en": "Term from English"
+    }
+  ],
+  "wanguanjie": [
+    {
+      "char": "腕关节",
+      "en": "Term from English"
+    }
+  ],
+  "qiankuan": [
+    {
+      "char": "欠款",
+      "en": "Term from English"
+    }
+  ],
+  "eyao": [
+    {
+      "char": "扼要",
+      "en": "Term from English"
+    }
+  ],
+  "canjiazhe": [
+    {
+      "char": "参加者",
+      "en": "Term from English"
+    }
+  ],
+  "yichengmima": [
+    {
+      "char": "译成密码",
+      "en": "Term from English"
+    }
+  ],
+  "jingtan": [
+    {
+      "char": "警探",
+      "en": "Term from English"
+    }
+  ],
+  "kuaijishi": [
+    {
+      "char": "会计师",
+      "en": "accountant"
+    }
+  ],
+  "jiandiehuodong": [
+    {
+      "char": "间谍活动",
+      "en": "(n) espionage"
+    }
+  ],
+  "tanxin": [
+    {
+      "char": "贪心",
+      "en": "greedy"
+    }
+  ],
+  "jiedaiyuan": [
+    {
+      "char": "接待员",
+      "en": "Term from English"
+    }
+  ],
+  "lvli": [
+    {
+      "char": "履历",
+      "en": "(n) curriculum vitae"
+    }
+  ],
+  "guangaiqu": [
+    {
+      "char": "灌溉渠",
+      "en": "Term from English"
+    }
+  ],
+  "youchao": [
+    {
+      "char": "油炒",
+      "en": "Term from English"
+    }
+  ],
+  "pijiazi": [
+    {
+      "char": "皮夹子",
+      "en": "Term from English"
+    }
+  ],
+  "nvyong": [
+    {
+      "char": "女用",
+      "en": "Term from English"
+    }
+  ],
+  "fengzuo": [
+    {
+      "char": "缝做",
+      "en": "Term from English"
+    }
+  ],
+  "zhenxianhuo": [
+    {
+      "char": "针线活",
+      "en": "Term from English"
+    }
+  ],
+  "zhenzhishan": [
+    {
+      "char": "针织衫",
+      "en": "Term from English"
+    }
+  ],
+  "maoliao": [
+    {
+      "char": "毛料",
+      "en": "Term from English"
+    }
+  ],
+  "miezao": [
+    {
+      "char": "灭蚤",
+      "en": "Term from English"
+    }
+  ],
+  "caizhengjinrong": [
+    {
+      "char": "财政金融",
+      "en": "Term from English"
+    }
+  ],
+  "hegezhengshu": [
+    {
+      "char": "合格证书",
+      "en": "Term from English"
+    }
+  ],
+  "aoliwei": [
+    {
+      "char": "奥利维",
+      "en": "Term from English"
+    }
+  ],
+  "yingyudengji": [
+    {
+      "char": "英语等级",
+      "en": "Term from English"
+    }
+  ],
+  "weimingming": [
+    {
+      "char": "未命名",
+      "en": "Term from English"
+    }
+  ],
+  "xiaofei": [
+    {
+      "char": "肖菲",
+      "en": "Term from English"
+    }
+  ],
+  "yinyuejie": [
+    {
+      "char": "音乐节",
+      "en": "Term from English"
+    }
+  ],
+  "zhaiqi": [
+    {
+      "char": "斋期",
+      "en": "Term from English"
+    }
+  ],
+  "yuhu": [
+    {
+      "char": "玉壶",
+      "en": "Term from English"
+    }
+  ],
+  "guangzhuan": [
+    {
+      "char": "光转",
+      "en": "Term from English"
+    }
+  ],
+  "longwu": [
+    {
+      "char": "龙舞",
+      "en": "Term from English"
+    }
+  ],
+  "chengrenshi": [
+    {
+      "char": "成人式",
+      "en": "Term from English"
+    }
+  ],
+  "baile": [
+    {
+      "char": "百乐",
+      "en": "Term from English"
+    }
+  ],
+  "zhongwenfanyi": [
+    {
+      "char": "中文翻译",
+      "en": "Term from English"
+    }
+  ],
+  "jinkuang": [
+    {
+      "char": "金矿",
+      "en": "Term from English"
+    }
+  ],
+  "jianzhang": [
+    {
+      "char": "舰长",
+      "en": "commander"
+    }
+  ],
+  "xizhuang": [
+    {
+      "char": "戏装",
+      "en": "Term from English"
+    }
+  ],
+  "daohe": [
+    {
+      "char": "道贺",
+      "en": "compliment"
+    }
+  ],
+  "exing": [
+    {
+      "char": "恶行",
+      "en": "Term from English"
+    }
+  ],
+  "mouli": [
+    {
+      "char": "牟利",
+      "en": "Term from English"
+    }
+  ],
+  "chuanbomeijie": [
+    {
+      "char": "传播媒介",
+      "en": "Term from English"
+    }
+  ],
+  "nongyi": [
+    {
+      "char": "农艺",
+      "en": "(n) agriculture"
+    }
+  ],
+  "shengdankuaile": [
+    {
+      "char": "圣诞快乐",
+      "en": "Term from English"
+    }
+  ],
+  "canmo": [
+    {
+      "char": "餐末",
+      "en": "Term from English"
+    }
+  ],
+  "tudouni": [
+    {
+      "char": "土豆泥",
+      "en": "Term from English"
+    }
+  ],
+  "tanbaishuo": [
+    {
+      "char": "坦白说",
+      "en": "Term from English"
+    }
+  ],
+  "zouhuo": [
+    {
+      "char": "走火",
+      "en": "Term from English"
+    }
+  ],
+  "huashao": [
+    {
+      "char": "花哨",
+      "en": "garish"
+    }
+  ],
+  "qingmu": [
+    {
+      "char": "倾慕",
+      "en": "Term from English"
+    }
+  ],
+  "paofu": [
+    {
+      "char": "袍服",
+      "en": "Term from English"
+    }
+  ],
+  "lipao": [
+    {
+      "char": "礼袍",
+      "en": "Term from English"
+    }
+  ],
+  "guanhu": [
+    {
+      "char": "罐壶",
+      "en": "Term from English"
+    }
+  ],
+  "buniao": [
+    {
+      "char": "布尼奥",
+      "en": "Term from English"
+    }
+  ],
+  "yunjue": [
+    {
+      "char": "晕厥",
+      "en": "Term from English"
+    }
+  ],
+  "falaosao": [
+    {
+      "char": "发牢骚",
+      "en": "whine"
+    }
+  ],
+  "fuwufei": [
+    {
+      "char": "服务费",
+      "en": "service charge"
+    }
+  ],
+  "neikeyisheng": [
+    {
+      "char": "内科医生",
+      "en": "Term from English"
+    }
+  ],
+  "zhuyuanyishi": [
+    {
+      "char": "住院医师",
+      "en": "Term from English"
+    }
+  ],
+  "menzhenbu": [
+    {
+      "char": "门诊部",
+      "en": "Term from English"
+    }
+  ],
+  "chuxujin": [
+    {
+      "char": "储蓄金",
+      "en": "Term from English"
+    }
+  ],
+  "xueqianban": [
+    {
+      "char": "学前班",
+      "en": "Term from English"
+    }
+  ],
+  "shoujingxia": [
+    {
+      "char": "受惊吓",
+      "en": "Term from English"
+    }
+  ],
+  "baoxianye": [
+    {
+      "char": "保险业",
+      "en": "Term from English"
+    }
+  ],
+  "yaochuan": [
+    {
+      "char": "谣传",
+      "en": "rumor"
+    }
+  ],
+  "jinkoushangpin": [
+    {
+      "char": "进口商品",
+      "en": "Term from English"
+    }
+  ],
+  "chukoushangpin": [
+    {
+      "char": "出口商品",
+      "en": "export product"
+    }
+  ],
+  "yichu": [
+    {
+      "char": "溢出",
+      "en": "overflow"
+    }
+  ],
+  "boxing": [
+    {
+      "char": "跛行",
+      "en": "Term from English"
+    }
+  ],
+  "yiqueyiguai": [
+    {
+      "char": "一瘸一拐",
+      "en": "Term from English"
+    }
+  ],
+  "liuzhelei": [
+    {
+      "char": "流着泪",
+      "en": "Term from English"
+    }
+  ],
+  "guanxijinzhang": [
+    {
+      "char": "关系紧张",
+      "en": "Term from English"
+    }
+  ],
+  "wenhai": [
+    {
+      "char": "文海",
+      "en": "Term from English"
+    }
+  ],
+  "yaodingzhe": [
+    {
+      "char": "咬叮蜇",
+      "en": "Term from English"
+    }
+  ],
+  "yaoyao": [
+    {
+      "char": "咬咬",
+      "en": "Term from English"
+    }
+  ],
+  "nvfuwuyuan": [
+    {
+      "char": "女服务员",
+      "en": "Term from English"
+    }
+  ],
+  "renshen": [
+    {
+      "char": "妊娠",
+      "en": "pregnancy"
+    }
+  ],
+  "quqi": [
+    {
+      "char": "曲奇",
+      "en": "Term from English"
+    }
+  ],
+  "tangyong": [
+    {
+      "char": "汤用",
+      "en": "Term from English"
+    }
+  ],
+  "yumipian": [
+    {
+      "char": "玉米片",
+      "en": "Term from English"
+    }
+  ],
+  "yingzha": [
+    {
+      "char": "英炸",
+      "en": "Term from English"
+    }
+  ],
+  "tudoutiao": [
+    {
+      "char": "土豆条",
+      "en": "Term from English"
+    }
+  ],
+  "meizha": [
+    {
+      "char": "美炸",
+      "en": "Term from English"
+    }
+  ],
+  "huxie": [
+    {
+      "char": "胡写",
+      "en": "Term from English"
+    }
+  ],
+  "xijuyanyuan": [
+    {
+      "char": "喜剧演员",
+      "en": "Term from English"
+    }
+  ],
+  "chuangshijie": [
+    {
+      "char": "闯世界",
+      "en": "Term from English"
+    }
+  ],
+  "zhengde": [
+    {
+      "char": "挣得",
+      "en": "Term from English"
+    }
+  ],
+  "waiqiao": [
+    {
+      "char": "外侨",
+      "en": "Term from English"
+    }
+  ],
+  "duyao": [
+    {
+      "char": "毒药",
+      "en": "poison"
+    }
+  ],
+  "kezhe": [
+    {
+      "char": "可折",
+      "en": "Term from English"
+    }
+  ],
+  "xiaoke": [
+    {
+      "char": "小可",
+      "en": "Term from English"
+    }
+  ],
+  "dieping": [
+    {
+      "char": "叠平",
+      "en": "Term from English"
+    }
+  ],
+  "shoucangpin": [
+    {
+      "char": "收藏品",
+      "en": "Term from English"
+    }
+  ],
+  "jinju": [
+    {
+      "char": "仅举",
+      "en": "Term from English"
+    }
+  ],
+  "manzuxuyao": [
+    {
+      "char": "满足需要",
+      "en": "Term from English"
+    }
+  ],
+  "napagu": [
+    {
+      "char": "纳帕谷",
+      "en": "Term from English"
+    }
+  ],
+  "tianhou": [
+    {
+      "char": "天后",
+      "en": "Tin Hau (another name for the goddess Matsu)"
+    }
+  ],
+  "sidiwensen": [
+    {
+      "char": "斯蒂文森",
+      "en": "Term from English"
+    }
+  ],
+  "faxinhao": [
+    {
+      "char": "发信号",
+      "en": "Term from English"
+    }
+  ],
+  "huojiandan": [
+    {
+      "char": "火箭弹",
+      "en": "Term from English"
+    }
+  ],
+  "tiandiwanwu": [
+    {
+      "char": "天地万物",
+      "en": "Term from English"
+    }
+  ],
+  "yueguo": [
+    {
+      "char": "跃过",
+      "en": "Term from English"
+    }
+  ],
+  "dailichu": [
+    {
+      "char": "代理处",
+      "en": "Term from English"
+    }
+  ],
+  "jingang": [
+    {
+      "char": "进港",
+      "en": "Term from English"
+    }
+  ],
+  "zainanxing": [
+    {
+      "char": "灾难性",
+      "en": "Term from English"
+    }
+  ],
+  "jianshiqi": [
+    {
+      "char": "监视器",
+      "en": "Term from English"
+    }
+  ],
+  "jianceyi": [
+    {
+      "char": "监测仪",
+      "en": "Term from English"
+    }
+  ],
+  "cailiwuli": [
+    {
+      "char": "财力物力",
+      "en": "Term from English"
+    }
+  ],
+  "xibang": [
+    {
+      "char": "系绑",
+      "en": "Term from English"
+    }
+  ],
+  "lvban": [
+    {
+      "char": "旅伴",
+      "en": "Term from English"
+    }
+  ],
+  "xushuzhe": [
+    {
+      "char": "叙述者",
+      "en": "Term from English"
+    }
+  ],
+  "jieshuoyuan": [
+    {
+      "char": "解说员",
+      "en": "Term from English"
+    }
+  ],
+  "hangtianju": [
+    {
+      "char": "航天局",
+      "en": "Term from English"
+    }
+  ],
+  "tiaozhanzhe": [
+    {
+      "char": "挑战者",
+      "en": "(n) defier"
+    }
+  ],
+  "yutu": [
+    {
+      "char": "玉兔",
+      "en": "Term from English"
+    }
+  ],
+  "yueqiuche": [
+    {
+      "char": "月球车",
+      "en": "Term from English"
+    }
+  ],
+  "jidian": [
+    {
+      "char": "基点",
+      "en": "Term from English"
+    }
+  ],
+  "xiezui": [
+    {
+      "char": "谢罪",
+      "en": "Term from English"
+    }
+  ],
+  "wuji": [
+    {
+      "char": "污迹",
+      "en": "Term from English"
+    }
+  ],
+  "wangxiamian": [
+    {
+      "char": "往下面",
+      "en": "Term from English"
+    }
+  ],
+  "yifangwanyi": [
+    {
+      "char": "以防万一",
+      "en": "(phr) just in case"
+    }
+  ],
+  "baojin": [
+    {
+      "char": "抱紧",
+      "en": "Term from English"
+    }
+  ],
+  "zhiqin": [
+    {
+      "char": "值勤",
+      "en": "Term from English"
+    }
+  ],
+  "nanzhuang": [
+    {
+      "char": "男装",
+      "en": "Term from English"
+    }
+  ],
+  "juzhixingwei": [
+    {
+      "char": "举止行为",
+      "en": "Term from English"
+    }
+  ],
+  "xuanzequan": [
+    {
+      "char": "选择权",
+      "en": "Term from English"
+    }
+  ],
+  "weixiubaoyang": [
+    {
+      "char": "维修保养",
+      "en": "Term from English"
+    }
+  ],
+  "luodelike": [
+    {
+      "char": "罗德里克",
+      "en": "Term from English"
+    }
+  ],
+  "aolifu": [
+    {
+      "char": "奥利弗",
+      "en": "Term from English"
+    }
+  ],
+  "lide": [
+    {
+      "char": "里德",
+      "en": "Term from English"
+    }
+  ],
+  "xiya": [
+    {
+      "char": "希亚",
+      "en": "Term from English"
+    }
+  ],
+  "lanemu": [
+    {
+      "char": "兰厄姆",
+      "en": "Term from English"
+    }
+  ],
+  "wangshengjun": [
+    {
+      "char": "王生军",
+      "en": "Term from English"
+    }
+  ],
+  "qiangtang": [
+    {
+      "char": "羌塘",
+      "en": "Term from English"
+    }
+  ],
+  "honggou": [
+    {
+      "char": "鸿沟",
+      "en": "Term from English"
+    }
+  ],
+  "daigou": [
+    {
+      "char": "代沟",
+      "en": "generation gap"
+    }
+  ],
+  "wozi": [
+    {
+      "char": "沃兹",
+      "en": "Term from English"
+    }
+  ],
+  "wosilang": [
+    {
+      "char": "沃斯朗",
+      "en": "Term from English"
+    }
+  ],
+  "yaogunyue": [
+    {
+      "char": "摇滚乐",
+      "en": "rock music"
+    }
+  ],
+  "zhuliya": [
+    {
+      "char": "茱莉亚",
+      "en": "Term from English"
+    }
+  ],
+  "yinyuexueyuan": [
+    {
+      "char": "音乐学院",
+      "en": "Term from English"
+    }
+  ],
+  "guogai": [
+    {
+      "char": "过该",
+      "en": "Term from English"
+    }
+  ],
+  "miaosi": [
+    {
+      "char": "庙寺",
+      "en": "Term from English"
+    }
+  ],
+  "busike": [
+    {
+      "char": "部司科",
+      "en": "Term from English"
+    }
+  ],
+  "zhuankuan": [
+    {
+      "char": "专款",
+      "en": "Term from English"
+    }
+  ],
+  "jinji": [
+    {
+      "char": "晋级",
+      "en": "Term from English"
+    }
+  ],
+  "yingyongruanjian": [
+    {
+      "char": "应用软件",
+      "en": "application software"
+    }
+  ],
+  "lanheba": [
+    {
+      "char": "拦河坝",
+      "en": "Term from English"
+    }
+  ],
+  "wendang": [
+    {
+      "char": "文档",
+      "en": "(computer) file"
+    }
+  ],
+  "shujuziliao": [
+    {
+      "char": "数据资料",
+      "en": "Term from English"
+    }
+  ],
+  "chuangdan": [
+    {
+      "char": "床单",
+      "en": "sheet"
+    }
+  ],
+  "beidan": [
+    {
+      "char": "被单",
+      "en": "Term from English"
+    }
+  ],
+  "chiwen": [
+    {
+      "char": "鸱吻",
+      "en": "Term from English"
+    }
+  ],
+  "duiqun": [
+    {
+      "char": "堆群",
+      "en": "Term from English"
+    }
+  ],
+  "qinwang": [
+    {
+      "char": "亲王",
+      "en": "prince"
+    }
+  ],
+  "lingling": [
+    {
+      "char": "羚羚",
+      "en": "Term from English"
+    }
+  ],
+  "chucangliang": [
+    {
+      "char": "储藏量",
+      "en": "Term from English"
+    }
+  ],
+  "muqun": [
+    {
+      "char": "牧群",
+      "en": "Term from English"
+    }
+  ],
+  "shouqun": [
+    {
+      "char": "兽群",
+      "en": "Term from English"
+    }
+  ],
+  "sheshang": [
+    {
+      "char": "射伤",
+      "en": "Term from English"
+    }
+  ],
+  "shuangtong": [
+    {
+      "char": "双筒",
+      "en": "Term from English"
+    }
+  ],
+  "tujian": [
+    {
+      "char": "图鉴",
+      "en": "Term from English"
+    }
+  ],
+  "baitun": [
+    {
+      "char": "白豚",
+      "en": "Term from English"
+    }
+  ],
+  "shudaixiong": [
+    {
+      "char": "树袋熊",
+      "en": "Term from English"
+    }
+  ],
+  "bowen": [
+    {
+      "char": "博文",
+      "en": "Term from English"
+    }
+  ],
+  "bozhu": [
+    {
+      "char": "博主",
+      "en": "Term from English"
+    }
+  ],
+  "liubo": [
+    {
+      "char": "流播",
+      "en": "Term from English"
+    }
+  ],
+  "ziliaoku": [
+    {
+      "char": "资料库",
+      "en": "database"
+    }
+  ],
+  "wangzhuang": [
+    {
+      "char": "网状",
+      "en": "Term from English"
+    }
+  ],
+  "renjiwang": [
+    {
+      "char": "人际网",
+      "en": "Term from English"
+    }
+  ],
+  "lianbo": [
+    {
+      "char": "联播",
+      "en": "Term from English"
+    }
+  ],
+  "mianjian": [
+    {
+      "char": "面见",
+      "en": "Term from English"
+    }
+  ],
+  "xinong": [
+    {
+      "char": "戏弄",
+      "en": "caper"
+    }
+  ],
+  "shuzhi": [
+    {
+      "char": "熟知",
+      "en": "acquaintance"
+    }
+  ],
+  "hexiang": [
+    {
+      "char": "盒箱",
+      "en": "Term from English"
+    }
+  ],
+  "zhuyuanyisheng": [
+    {
+      "char": "住院医生",
+      "en": "Term from English"
+    }
+  ],
+  "yantaohui": [
+    {
+      "char": "研讨会",
+      "en": "discussion forum"
+    }
+  ],
+  "lingjia": [
+    {
+      "char": "另加",
+      "en": "Term from English"
+    }
+  ],
+  "baozhen": [
+    {
+      "char": "保真",
+      "en": "Term from English"
+    }
+  ],
+  "wangxian": [
+    {
+      "char": "网线",
+      "en": "Term from English"
+    }
+  ],
+  "chuanshushuju": [
+    {
+      "char": "传输数据",
+      "en": "Term from English"
+    }
+  ],
+  "wenjianjia": [
+    {
+      "char": "文件夹",
+      "en": "Term from English"
+    }
+  ],
+  "zhuangkuanglianghao": [
+    {
+      "char": "状况良好",
+      "en": "Term from English"
+    }
+  ],
+  "daoqiezui": [
+    {
+      "char": "盗窃罪",
+      "en": "Term from English"
+    }
+  ],
+  "wangba": [
+    {
+      "char": "网霸",
+      "en": "Term from English"
+    }
+  ],
+  "wanweiwang": [
+    {
+      "char": "万维网",
+      "en": "World Wide Web (WWW)"
+    }
+  ],
+  "xinxiwang": [
+    {
+      "char": "信息网",
+      "en": "Term from English"
+    }
+  ],
+  "jianxiamanni": [
+    {
+      "char": "简夏曼尼",
+      "en": "Term from English"
+    }
+  ],
+  "gongguan": [
+    {
+      "char": "公馆",
+      "en": "Term from English"
+    }
+  ],
+  "akaliusi": [
+    {
+      "char": "阿喀琉斯",
+      "en": "Term from English"
+    }
+  ],
+  "qiuzhang": [
+    {
+      "char": "酋长",
+      "en": "(n) amir"
+    }
+  ],
+  "tonghuo": [
+    {
+      "char": "通货",
+      "en": "Term from English"
+    }
+  ],
+  "jieqia": [
+    {
+      "char": "接洽",
+      "en": "(v) discuss a matter with sb"
+    }
+  ],
+  "guojiu": [
+    {
+      "char": "果酒",
+      "en": "cider"
+    }
+  ],
+  "duncai": [
+    {
+      "char": "炖菜",
+      "en": "Term from English"
+    }
+  ],
+  "heisitingsi": [
+    {
+      "char": "黑斯廷斯",
+      "en": "Term from English"
+    }
+  ],
+  "aierlanren": [
+    {
+      "char": "爱尔兰人",
+      "en": "Term from English"
+    }
+  ],
+  "huoyu": [
+    {
+      "char": "或语",
+      "en": "Term from English"
+    }
+  ],
+  "xiaoyuandian": [
+    {
+      "char": "小圆点",
+      "en": "Term from English"
+    }
+  ],
+  "aierlanyu": [
+    {
+      "char": "爱尔兰语",
+      "en": "Term from English"
+    }
+  ],
+  "taike": [
+    {
+      "char": "泰克",
+      "en": "Term from English"
+    }
+  ],
+  "jiezoukuai": [
+    {
+      "char": "节奏快",
+      "en": "Term from English"
+    }
+  ],
+  "fengdi": [
+    {
+      "char": "风笛",
+      "en": "Term from English"
+    }
+  ],
+  "luyinpeng": [
+    {
+      "char": "录音棚",
+      "en": "Term from English"
+    }
+  ],
+  "zuoquzhe": [
+    {
+      "char": "作曲者",
+      "en": "Term from English"
+    }
+  ],
+  "aishang": [
+    {
+      "char": "爱上",
+      "en": "to fall in love with"
+    }
+  ],
+  "duchuang": [
+    {
+      "char": "独创",
+      "en": "Term from English"
+    }
+  ],
+  "yuanjian": [
+    {
+      "char": "原件",
+      "en": "Term from English"
+    }
+  ],
+  "nianbai": [
+    {
+      "char": "念白",
+      "en": "Term from English"
+    }
+  ],
+  "daiye": [
+    {
+      "char": "待业",
+      "en": "to await job assignment (term used only in mainland China)"
+    }
+  ],
+  "jiyoubu": [
+    {
+      "char": "集邮簿",
+      "en": "Term from English"
+    }
+  ],
+  "shiyan": [
+    {
+      "char": "试演",
+      "en": "Term from English"
+    }
+  ],
+  "wuchu": [
+    {
+      "char": "物除",
+      "en": "Term from English"
+    }
+  ],
+  "neihuadazhou": [
+    {
+      "char": "内华达州",
+      "en": "Nevada"
+    }
+  ],
+  "gequming": [
+    {
+      "char": "歌曲名",
+      "en": "Term from English"
+    }
+  ],
+  "luogen": [
+    {
+      "char": "洛根",
+      "en": "Term from English"
+    }
+  ],
+  "guoyan": [
+    {
+      "char": "郭砚",
+      "en": "Term from English"
+    }
+  ],
+  "quanjingwang": [
+    {
+      "char": "全景网",
+      "en": "Term from English"
+    }
+  ],
+  "daibiaochu": [
+    {
+      "char": "代表处",
+      "en": "Term from English"
+    }
+  ],
+  "yuxiangdao": [
+    {
+      "char": "预想到",
+      "en": "Term from English"
+    }
+  ],
+  "fenziliang": [
+    {
+      "char": "分子量",
+      "en": "molecular mass"
+    }
+  ],
+  "wenhuachongtu": [
+    {
+      "char": "文化冲突",
+      "en": "Term from English"
+    }
+  ],
+  "caixi": [
+    {
+      "char": "菜系",
+      "en": "Term from English"
+    }
+  ],
+  "jimu": [
+    {
+      "char": "吉姆",
+      "en": "Term from English"
+    }
+  ],
+  "jiasipo": [
+    {
+      "char": "贾斯珀",
+      "en": "Term from English"
+    }
+  ],
+  "cikuai": [
+    {
+      "char": "词块",
+      "en": "Term from English"
+    }
+  ],
+  "xuanchuance": [
+    {
+      "char": "宣传册",
+      "en": "Term from English"
+    }
+  ],
+  "fenmiaobizheng": [
+    {
+      "char": "分秒必争",
+      "en": "Term from English"
+    }
+  ],
+  "tuoshui": [
+    {
+      "char": "脱水",
+      "en": "(n) desiccate"
+    }
+  ],
+  "huifei": [
+    {
+      "char": "会费",
+      "en": "due"
+    }
+  ],
+  "choushuiji": [
+    {
+      "char": "抽水机",
+      "en": "water pump"
+    }
+  ],
+  "yiyou": [
+    {
+      "char": "疑有",
+      "en": "Term from English"
+    }
+  ],
+  "tongjishuzi": [
+    {
+      "char": "统计数字",
+      "en": "Term from English"
+    }
+  ],
+  "gaiguan": [
+    {
+      "char": "改观",
+      "en": "Term from English"
+    }
+  ],
+  "danjian": [
+    {
+      "char": "单间",
+      "en": "Term from English"
+    }
+  ],
+  "beiguang": [
+    {
+      "char": "背光",
+      "en": "be in a poor light"
+    }
+  ],
+  "jixieshi": [
+    {
+      "char": "机械师",
+      "en": "Term from English"
+    }
+  ],
+  "xiuligong": [
+    {
+      "char": "修理工",
+      "en": "Term from English"
+    }
+  ],
+  "xiaobing": [
+    {
+      "char": "小病",
+      "en": "Term from English"
+    }
+  ],
+  "zaizhe": [
+    {
+      "char": "再者",
+      "en": "furthermore"
+    }
+  ],
+  "jianqiao": [
+    {
+      "char": "剑桥",
+      "en": "Cambridge (city)"
+    }
+  ],
+  "yuzhoulun": [
+    {
+      "char": "宇宙论",
+      "en": "Term from English"
+    }
+  ],
+  "yier": [
+    {
+      "char": "伊尔",
+      "en": "Term from English"
+    },
+    {
+      "char": "义而",
+      "en": "Term from English"
+    }
+  ],
+  "fuwei": [
+    {
+      "char": "抚慰",
+      "en": "Term from English"
+    }
+  ],
+  "yingguodaxue": [
+    {
+      "char": "英国大学",
+      "en": "Term from English"
+    }
+  ],
+  "zhujiao": [
+    {
+      "char": "助教",
+      "en": "teaching assistant"
+    }
+  ],
+  "songxinren": [
+    {
+      "char": "送信人",
+      "en": "Term from English"
+    }
+  ],
+  "yadaoxing": [
+    {
+      "char": "压倒性",
+      "en": "overwhelming"
+    }
+  ],
+  "sixiangbing": [
+    {
+      "char": "思乡病",
+      "en": "Term from English"
+    }
+  ],
+  "heqingli": [
+    {
+      "char": "合情理",
+      "en": "Term from English"
+    }
+  ],
+  "aisha": [
+    {
+      "char": "艾莎",
+      "en": "Term from English"
+    }
+  ],
+  "tianjiao": [
+    {
+      "char": "甜椒",
+      "en": "Term from English"
+    }
+  ],
+  "denglongjiao": [
+    {
+      "char": "灯笼椒",
+      "en": "Term from English"
+    }
+  ],
+  "pengrenfa": [
+    {
+      "char": "烹饪法",
+      "en": "Term from English"
+    }
+  ],
+  "zhuchu": [
+    {
+      "char": "主厨",
+      "en": "Term from English"
+    }
+  ],
+  "tianman": [
+    {
+      "char": "填满",
+      "en": "cram"
+    }
+  ],
+  "congtou": [
+    {
+      "char": "葱头",
+      "en": "Term from English"
+    }
+  ],
+  "yanggaorou": [
+    {
+      "char": "羊羔肉",
+      "en": "Term from English"
+    }
+  ],
+  "gaoyang": [
+    {
+      "char": "羔羊",
+      "en": "Term from English"
+    }
+  ],
+  "kaoyangrouchuan": [
+    {
+      "char": "烤羊肉串",
+      "en": "Term from English"
+    }
+  ],
+  "chihe": [
+    {
+      "char": "吃喝",
+      "en": "Term from English"
+    }
+  ],
+  "huoqi": [
+    {
+      "char": "火气",
+      "en": "Term from English"
+    }
+  ],
+  "xianrou": [
+    {
+      "char": "咸肉",
+      "en": "salt-cured meat"
+    }
+  ],
+  "lachang": [
+    {
+      "char": "腊肠",
+      "en": "sausage"
+    }
+  ],
+  "yangbaicai": [
+    {
+      "char": "洋白菜",
+      "en": "Term from English"
+    }
+  ],
+  "youganlan": [
+    {
+      "char": "油橄榄",
+      "en": "Term from English"
+    }
+  ],
+  "wuhuaguo": [
+    {
+      "char": "无花果",
+      "en": "fig"
+    }
+  ],
+  "zizhucanting": [
+    {
+      "char": "自助餐厅",
+      "en": "Term from English"
+    }
+  ],
+  "tianbing": [
+    {
+      "char": "甜饼",
+      "en": "Term from English"
+    }
+  ],
+  "kaluli": [
+    {
+      "char": "卡路里",
+      "en": "calorie"
+    }
+  ],
+  "xianweizhipin": [
+    {
+      "char": "纤维制品",
+      "en": "Term from English"
+    }
+  ],
+  "rupinye": [
+    {
+      "char": "乳品业",
+      "en": "Term from English"
+    }
+  ],
+  "rupin": [
+    {
+      "char": "乳品",
+      "en": "Term from English"
+    }
+  ],
+  "jibenguilv": [
+    {
+      "char": "基本规律",
+      "en": "Term from English"
+    }
+  ],
+  "meishijia": [
+    {
+      "char": "美食家",
+      "en": "Term from English"
+    }
+  ],
+  "andelusi": [
+    {
+      "char": "安德鲁斯",
+      "en": "Term from English"
+    }
+  ],
+  "hangkonggongsi": [
+    {
+      "char": "航空公司",
+      "en": "airline"
+    }
+  ],
+  "jianxing": [
+    {
+      "char": "尖形",
+      "en": "Term from English"
+    }
+  ],
+  "huixiong": [
+    {
+      "char": "灰熊",
+      "en": "grizzly bear"
+    }
+  ],
+  "zuankong": [
+    {
+      "char": "钻孔",
+      "en": "bore a hole"
+    }
+  ],
+  "dayan": [
+    {
+      "char": "打眼",
+      "en": "Term from English"
+    }
+  ],
+  "anbin": [
+    {
+      "char": "岸滨",
+      "en": "Term from English"
+    }
+  ],
+  "gangtiegongye": [
+    {
+      "char": "钢铁工业",
+      "en": "Term from English"
+    }
+  ],
+  "zhaiqing": [
+    {
+      "char": "债情",
+      "en": "Term from English"
+    }
+  ],
+  "kaomianbaopian": [
+    {
+      "char": "烤面包片",
+      "en": "Term from English"
+    }
+  ],
+  "tusi": [
+    {
+      "char": "吐司",
+      "en": "toast"
+    }
+  ],
+  "shuchuan": [
+    {
+      "char": "束串",
+      "en": "Term from English"
+    }
+  ],
+  "honglongsheng": [
+    {
+      "char": "轰隆声",
+      "en": "Term from English"
+    }
+  ],
+  "shimengshang": [
+    {
+      "char": "使蒙上",
+      "en": "Term from English"
+    }
+  ],
+  "jieshuang": [
+    {
+      "char": "结霜",
+      "en": "Term from English"
+    }
+  ],
+  "bianjiediqu": [
+    {
+      "char": "边界地区",
+      "en": "Term from English"
+    }
+  ],
+  "caishichang": [
+    {
+      "char": "采石场",
+      "en": "stone pit"
+    }
+  ],
+  "wengehua": [
+    {
+      "char": "温哥华",
+      "en": "Vancouver (city in Canada)"
+    }
+  ],
+  "chate": [
+    {
+      "char": "查特",
+      "en": "Term from English"
+    }
+  ],
+  "kuibeike": [
+    {
+      "char": "魁北克",
+      "en": "Quebec"
+    }
+  ],
+  "shenglaolunsi": [
+    {
+      "char": "圣劳伦斯",
+      "en": "Term from English"
+    }
+  ],
+  "xinsikeshesheng": [
+    {
+      "char": "新斯科舍省",
+      "en": "Term from English"
+    }
+  ],
+  "sanye": [
+    {
+      "char": "散页",
+      "en": "Term from English"
+    }
+  ],
+  "redian": [
+    {
+      "char": "热电",
+      "en": "(n) thermoelectricity"
+    }
+  ],
+  "suansuande": [
+    {
+      "char": "酸酸的",
+      "en": "Term from English"
+    }
+  ],
+  "zhushezhen": [
+    {
+      "char": "注射针",
+      "en": "Term from English"
+    }
+  ],
+  "jingmaizhushe": [
+    {
+      "char": "静脉注射",
+      "en": "Term from English"
+    }
+  ],
+  "qianfenzhiyi": [
+    {
+      "char": "千分之一",
+      "en": "Term from English"
+    }
+  ],
+  "jijin": [
+    {
+      "char": "系紧",
+      "en": "Term from English"
+    }
+  ],
+  "hulirenyuan": [
+    {
+      "char": "护理人员",
+      "en": "Term from English"
+    }
+  ],
+  "wanci": [
+    {
+      "char": "婉辞",
+      "en": "Term from English"
+    }
+  ],
+  "jiexianyuan": [
+    {
+      "char": "接线员",
+      "en": "Term from English"
+    }
+  ],
+  "caozuoyuan": [
+    {
+      "char": "操作员",
+      "en": "Term from English"
+    }
+  ],
+  "jiucanzhe": [
+    {
+      "char": "就餐者",
+      "en": "Term from English"
+    }
+  ],
+  "gengye": [
+    {
+      "char": "哽咽",
+      "en": "Term from English"
+    }
+  ],
+  "niupairou": [
+    {
+      "char": "牛排肉",
+      "en": "Term from English"
+    }
+  ],
+  "guzhuyizhi": [
+    {
+      "char": "孤注一掷",
+      "en": "Term from English"
+    }
+  ],
+  "jisheng": [
+    {
+      "char": "击声",
+      "en": "Term from English"
+    }
+  ],
+  "zhuaqu": [
+    {
+      "char": "抓取",
+      "en": "Term from English"
+    }
+  ],
+  "shangchao": [
+    {
+      "char": "上朝",
+      "en": "Term from English"
+    },
+    {
+      "char": "商朝",
+      "en": "Shang Dynasty"
+    }
+  ],
+  "yinbing": [
+    {
+      "char": "因病",
+      "en": "Term from English"
+    }
+  ],
+  "taile": [
+    {
+      "char": "泰勒",
+      "en": "Taylor (name)"
+    }
+  ],
+  "shoukong": [
+    {
+      "char": "手控",
+      "en": "Term from English"
+    }
+  ],
+  "chiqi": [
+    {
+      "char": "迟起",
+      "en": "Term from English"
+    }
+  ],
+  "shuilanjiao": [
+    {
+      "char": "睡懒觉",
+      "en": "Term from English"
+    }
+  ],
+  "youwu": [
+    {
+      "char": "有雾",
+      "en": "Term from English"
+    }
+  ],
+  "meishizuqiu": [
+    {
+      "char": "美式足球",
+      "en": "American football"
+    }
+  ],
+  "zhidaolaoshi": [
+    {
+      "char": "指导老师",
+      "en": "Term from English"
+    }
+  ],
+  "bafaliya": [
+    {
+      "char": "巴伐利亚",
+      "en": "Bavaria"
+    }
+  ],
+  "guyinjia": [
+    {
+      "char": "古印加",
+      "en": "Term from English"
+    }
+  ],
+  "shiqiang": [
+    {
+      "char": "石墙",
+      "en": "Term from English"
+    }
+  ],
+  "tiyujingsai": [
+    {
+      "char": "体育竞赛",
+      "en": "Term from English"
+    }
+  ],
+  "xiangnian": [
+    {
+      "char": "项年",
+      "en": "Term from English"
+    }
+  ],
+  "lidui": [
+    {
+      "char": "离队",
+      "en": "leave one's post"
+    }
+  ],
+  "xiandingci": [
+    {
+      "char": "限定词",
+      "en": "Term from English"
+    }
+  ],
+  "shengdiao": [
+    {
+      "char": "升调",
+      "en": "Term from English"
+    }
+  ],
+  "shiduo": [
+    {
+      "char": "时多",
+      "en": "Term from English"
+    }
+  ],
+  "wuqian": [
+    {
+      "char": "午前",
+      "en": "Term from English"
+    }
+  ],
+  "dizhe": [
+    {
+      "char": "低者",
+      "en": "Term from English"
+    }
+  ],
+  "hehuoren": [
+    {
+      "char": "合伙人",
+      "en": "Term from English"
+    }
+  ],
+  "nuanfang": [
+    {
+      "char": "暖房",
+      "en": "Term from English"
+    }
+  ],
+  "zhicheng": [
+    {
+      "char": "职称",
+      "en": "(n) title"
+    }
+  ],
+  "youyin": [
+    {
+      "char": "有瘾",
+      "en": "Term from English"
+    }
+  ],
+  "chengyin": [
+    {
+      "char": "成瘾",
+      "en": "Term from English"
+    }
+  ],
+  "jixinsheng": [
+    {
+      "char": "级新生",
+      "en": "Term from English"
+    }
+  ],
+  "ruji": [
+    {
+      "char": "乳剂",
+      "en": "emulsion"
+    }
+  ],
+  "dabao": [
+    {
+      "char": "大包",
+      "en": "Term from English"
+    }
+  ],
+  "yaoyuan": [
+    {
+      "char": "要员",
+      "en": "Term from English"
+    }
+  ],
+  "shansu": [
+    {
+      "char": "膳宿",
+      "en": "Term from English"
+    }
+  ],
+  "jianzhusheji": [
+    {
+      "char": "建筑设计",
+      "en": "Term from English"
+    }
+  ],
+  "baojia": [
+    {
+      "char": "包价",
+      "en": "Term from English"
+    }
+  ],
+  "liuhan": [
+    {
+      "char": "流汗",
+      "en": "(v) to sweat"
+    }
+  ],
+  "zhunshidaoda": [
+    {
+      "char": "准时到达",
+      "en": "Term from English"
+    }
+  ],
+  "jianer": [
+    {
+      "char": "健儿",
+      "en": "Term from English"
+    }
+  ],
+  "guanjunsai": [
+    {
+      "char": "冠军赛",
+      "en": "Term from English"
+    }
+  ],
+  "youshang": [
+    {
+      "char": "有伤",
+      "en": "Term from English"
+    }
+  ],
+  "yundongdui": [
+    {
+      "char": "运动队",
+      "en": "Term from English"
+    }
+  ],
+  "hehuqingli": [
+    {
+      "char": "合乎情理",
+      "en": "Term from English"
+    }
+  ],
+  "wubi": [
+    {
+      "char": "舞弊",
+      "en": "fraud"
+    }
+  ],
+  "mengpian": [
+    {
+      "char": "蒙骗",
+      "en": "Term from English"
+    }
+  ],
+  "jiuhan": [
+    {
+      "char": "久旱",
+      "en": "Term from English"
+    }
+  ],
+  "guanman": [
+    {
+      "char": "灌满",
+      "en": "Term from English"
+    }
+  ],
+  "qingpai": [
+    {
+      "char": "轻拍",
+      "en": "Term from English"
+    }
+  ],
+  "yanbi": [
+    {
+      "char": "掩蔽",
+      "en": "Term from English"
+    }
+  ],
+  "gongyingliang": [
+    {
+      "char": "供应量",
+      "en": "Term from English"
+    }
+  ],
+  "youzhixi": [
+    {
+      "char": "尤指西",
+      "en": "Term from English"
+    }
+  ],
+  "chengtaoshebei": [
+    {
+      "char": "成套设备",
+      "en": "Term from English"
+    }
+  ],
+  "jijiuxiang": [
+    {
+      "char": "急救箱",
+      "en": "Term from English"
+    }
+  ],
+  "zhuangche": [
+    {
+      "char": "撞车",
+      "en": "car crash"
+    }
+  ],
+  "qingsao": [
+    {
+      "char": "清扫",
+      "en": "to tidy up"
+    }
+  ],
+  "chedixiaochu": [
+    {
+      "char": "彻底消除",
+      "en": "Term from English"
+    }
+  ],
+  "disong": [
+    {
+      "char": "递送",
+      "en": "Term from English"
+    }
+  ],
+  "mengfeisi": [
+    {
+      "char": "孟菲斯",
+      "en": "Term from English"
+    }
+  ],
+  "aibotasheng": [
+    {
+      "char": "艾伯塔省",
+      "en": "Term from English"
+    }
+  ],
+  "kelunpo": [
+    {
+      "char": "科伦坡",
+      "en": "Colombo (capital of Sri Lanka)"
+    }
+  ],
+  "sumendaladao": [
+    {
+      "char": "苏门答腊岛",
+      "en": "Term from English"
+    }
+  ],
+  "qiandela": [
+    {
+      "char": "钱德拉",
+      "en": "Term from English"
+    }
+  ],
+  "tela": [
+    {
+      "char": "特拉",
+      "en": "Term from English"
+    }
+  ],
+  "bendiren": [
+    {
+      "char": "本地人",
+      "en": "Term from English"
+    }
+  ],
+  "yiti": [
+    {
+      "char": "异体",
+      "en": "Term from English"
+    }
+  ],
+  "neiku": [
+    {
+      "char": "内裤",
+      "en": "underwear"
+    }
+  ],
+  "hanguoyu": [
+    {
+      "char": "韩国语",
+      "en": "Term from English"
+    }
+  ],
+  "danmaiyu": [
+    {
+      "char": "丹麦语",
+      "en": "Term from English"
+    }
+  ],
+  "guojizulian": [
+    {
+      "char": "国际足联",
+      "en": "Term from English"
+    }
+  ],
+  "guojizuqiu": [
+    {
+      "char": "国际足球",
+      "en": "Term from English"
+    }
+  ],
+  "pilipala": [
+    {
+      "char": "噼里啪啦",
+      "en": "Term from English"
+    }
+  ],
+  "duolishan": [
+    {
+      "char": "多莉山",
+      "en": "Term from English"
+    }
+  ],
+  "rutu": [
+    {
+      "char": "如屠",
+      "en": "Term from English"
+    }
+  ],
+  "daiweisi": [
+    {
+      "char": "戴维斯",
+      "en": "Davis (English surname)"
+    }
+  ],
+  "jinxinjinli": [
+    {
+      "char": "尽心尽力",
+      "en": "Term from English"
+    }
+  ],
+  "zhuanke": [
+    {
+      "char": "专科",
+      "en": "(n) vocational school"
+    }
+  ],
+  "zhukai": [
+    {
+      "char": "煮开",
+      "en": "Term from English"
+    }
+  ],
+  "zhijing": [
+    {
+      "char": "指经",
+      "en": "Term from English"
+    },
+    {
+      "char": "制经",
+      "en": "Term from English"
+    }
+  ],
+  "pannixilin": [
+    {
+      "char": "盘尼西林",
+      "en": "penicillin"
+    }
+  ],
+  "tuiding": [
+    {
+      "char": "推定",
+      "en": "Term from English"
+    }
+  ],
+  "congzhengzhe": [
+    {
+      "char": "从政者",
+      "en": "Term from English"
+    }
+  ],
+  "xiangduilun": [
+    {
+      "char": "相对论",
+      "en": "theory of relativity"
+    }
+  ],
+  "xiangduixing": [
+    {
+      "char": "相对性",
+      "en": "Term from English"
+    }
+  ],
+  "zhuanlizhengshu": [
+    {
+      "char": "专利证书",
+      "en": "Term from English"
+    }
+  ],
+  "kuai": [
+    {
+      "char": "酷爱",
+      "en": "Term from English"
+    }
+  ],
+  "zhangquan": [
+    {
+      "char": "掌权",
+      "en": "wield (political"
+    }
+  ],
+  "shangchun": [
+    {
+      "char": "上唇",
+      "en": "upper lip"
+    }
+  ],
+  "xiehou": [
+    {
+      "char": "邂逅",
+      "en": "Term from English"
+    }
+  ],
+  "ailong": [
+    {
+      "char": "埃隆",
+      "en": "Term from English"
+    }
+  ],
+  "masike": [
+    {
+      "char": "马斯克",
+      "en": "Term from English"
+    }
+  ],
+  "youtaijiao": [
+    {
+      "char": "犹太教",
+      "en": "Judaism"
+    }
+  ],
+  "guankai": [
+    {
+      "char": "关开",
+      "en": "Term from English"
+    }
+  ],
+  "kongtiaoshebei": [
+    {
+      "char": "空调设备",
+      "en": "Term from English"
+    }
+  ],
+  "minganyuanjian": [
+    {
+      "char": "敏感元件",
+      "en": "Term from English"
+    }
+  ],
+  "sushi": [
+    {
+      "char": "速食",
+      "en": "Term from English"
+    }
+  ],
+  "surong": [
+    {
+      "char": "速溶",
+      "en": "Term from English"
+    }
+  ],
+  "xianzhao": [
+    {
+      "char": "先兆",
+      "en": "Term from English"
+    }
+  ],
+  "changliang": [
+    {
+      "char": "常量",
+      "en": "Term from English"
+    }
+  ],
+  "duliu": [
+    {
+      "char": "毒瘤",
+      "en": "Term from English"
+    }
+  ],
+  "qianzaidi": [
+    {
+      "char": "潜在地",
+      "en": "Term from English"
+    }
+  ],
+  "huoxian": [
+    {
+      "char": "或线",
+      "en": "Term from English"
+    }
+  ],
+  "jingxinzuzhi": [
+    {
+      "char": "精心组织",
+      "en": "Term from English"
+    }
+  ],
+  "bufaxingwei": [
+    {
+      "char": "不法行为",
+      "en": "Term from English"
+    }
+  ],
+  "wuxingfanzhi": [
+    {
+      "char": "无性繁殖",
+      "en": "Term from English"
+    }
+  ],
+  "wanggu": [
+    {
+      "char": "亡故",
+      "en": "Term from English"
+    }
+  ],
+  "tichangzhe": [
+    {
+      "char": "提倡者",
+      "en": "Term from English"
+    }
+  ],
+  "yonghuzhe": [
+    {
+      "char": "拥护者",
+      "en": "supporter (person)"
+    }
+  ],
+  "guanzhang": [
+    {
+      "char": "馆长",
+      "en": "Term from English"
+    }
+  ],
+  "jidujiaotu": [
+    {
+      "char": "基督教徒",
+      "en": "Christian"
+    }
+  ],
+  "mennuopai": [
+    {
+      "char": "门诺派",
+      "en": "Term from English"
+    }
+  ],
+  "dalaidaqu": [
+    {
+      "char": "打来打去",
+      "en": "Term from English"
+    }
+  ],
+  "jiabian": [
+    {
+      "char": "加边",
+      "en": "Term from English"
+    }
+  ],
+  "xiaobieshu": [
+    {
+      "char": "小别墅",
+      "en": "Term from English"
+    }
+  ],
+  "youzhiyong": [
+    {
+      "char": "尤指用",
+      "en": "Term from English"
+    }
+  ],
+  "hufushuang": [
+    {
+      "char": "护肤霜",
+      "en": "Term from English"
+    }
+  ],
+  "naiyouse": [
+    {
+      "char": "奶油色",
+      "en": "Term from English"
+    }
+  ],
+  "zhutisixiang": [
+    {
+      "char": "主题思想",
+      "en": "Term from English"
+    }
+  ],
+  "daobanzhe": [
+    {
+      "char": "盗版者",
+      "en": "software pirate"
+    }
+  ],
+  "daoyin": [
+    {
+      "char": "盗印",
+      "en": "Term from English"
+    }
+  ],
+  "qieyong": [
+    {
+      "char": "窃用",
+      "en": "Term from English"
+    }
+  ],
+  "zhanlanpin": [
+    {
+      "char": "展览品",
+      "en": "Term from English"
+    }
+  ],
+  "zhuxing": [
+    {
+      "char": "柱形",
+      "en": "Term from English"
+    }
+  ],
+  "lapuren": [
+    {
+      "char": "拉普人",
+      "en": "Term from English"
+    }
+  ],
+  "turanzhuanxiang": [
+    {
+      "char": "突然转向",
+      "en": "Term from English"
+    }
+  ],
+  "dangchangkandao": [
+    {
+      "char": "当场看到",
+      "en": "Term from English"
+    }
+  ],
+  "zhutie": [
+    {
+      "char": "铸铁",
+      "en": "Term from English"
+    }
+  ],
+  "yuntang": [
+    {
+      "char": "熨烫",
+      "en": "Term from English"
+    }
+  ],
+  "banshu": [
+    {
+      "char": "半熟",
+      "en": "Term from English"
+    }
+  ],
+  "kouyi": [
+    {
+      "char": "口译",
+      "en": "interpreting"
+    }
+  ],
+  "hudiejie": [
+    {
+      "char": "蝴蝶结",
+      "en": "Term from English"
+    }
+  ],
+  "chuitou": [
+    {
+      "char": "垂头",
+      "en": "Term from English"
+    }
+  ],
+  "zuodeng": [
+    {
+      "char": "坐等",
+      "en": "Term from English"
+    }
+  ],
+  "guzuozitai": [
+    {
+      "char": "故作姿态",
+      "en": "Term from English"
+    }
+  ],
+  "shenggou": [
+    {
+      "char": "声钩",
+      "en": "Term from English"
+    }
+  ],
+  "fangdi": [
+    {
+      "char": "放低",
+      "en": "Term from English"
+    }
+  ],
+  "buliangfanying": [
+    {
+      "char": "不良反应",
+      "en": "Term from English"
+    }
+  ],
+  "qiangdiao": [
+    {
+      "char": "腔调",
+      "en": "accent"
+    }
+  ],
+  "hechengwu": [
+    {
+      "char": "合成物",
+      "en": "Term from English"
+    }
+  ],
+  "dongliche": [
+    {
+      "char": "动力车",
+      "en": "Term from English"
+    }
+  ],
+  "shuchuliang": [
+    {
+      "char": "输出量",
+      "en": "Term from English"
+    }
+  ],
+  "gaoliangmi": [
+    {
+      "char": "高粱米",
+      "en": "Term from English"
+    }
+  ],
+  "jinquehua": [
+    {
+      "char": "金雀花",
+      "en": "Term from English"
+    }
+  ],
+  "guli": [
+    {
+      "char": "谷粒",
+      "en": "Term from English"
+    }
+  ],
+  "hanyan": [
+    {
+      "char": "含盐",
+      "en": "Term from English"
+    }
+  ],
+  "dixiatongdao": [
+    {
+      "char": "地下通道",
+      "en": "Term from English"
+    }
+  ],
+  "fenji": [
+    {
+      "char": "分机",
+      "en": "(telephone) extension"
+    }
+  ],
+  "yingyangwu": [
+    {
+      "char": "营养物",
+      "en": "Term from English"
+    }
+  ],
+  "chuhai": [
+    {
+      "char": "除害",
+      "en": "Term from English"
+    }
+  ],
+  "wenzhai": [
+    {
+      "char": "文摘",
+      "en": "Term from English"
+    }
+  ],
+  "wanquanbiyao": [
+    {
+      "char": "完全必要",
+      "en": "Term from English"
+    }
+  ],
+  "zahuo": [
+    {
+      "char": "杂货",
+      "en": "groceries"
+    }
+  ],
+  "genjing": [
+    {
+      "char": "根茎",
+      "en": "stolon"
+    }
+  ],
+  "diditi": [
+    {
+      "char": "滴滴涕",
+      "en": "DDT"
+    }
+  ],
+  "huhua": [
+    {
+      "char": "扈华",
+      "en": "Term from English"
+    }
+  ],
+  "weizhuangli": [
+    {
+      "char": "唯庄力",
+      "en": "Term from English"
+    }
+  ],
+  "dunkeerke": [
+    {
+      "char": "敦刻尔克",
+      "en": "Term from English"
+    }
+  ],
+  "cuowuxinxi": [
+    {
+      "char": "错误信息",
+      "en": "Term from English"
+    }
+  ],
+  "gongsiyuangong": [
+    {
+      "char": "公司员工",
+      "en": "Term from English"
+    }
+  ],
+  "zhudongquan": [
+    {
+      "char": "主动权",
+      "en": "Term from English"
+    }
+  ],
+  "sanbo": [
+    {
+      "char": "散播",
+      "en": "to spread"
+    }
+  ],
+  "zhaqilai": [
+    {
+      "char": "扎起来",
+      "en": "Term from English"
+    }
+  ],
+  "yiliyate": [
+    {
+      "char": "伊利亚特",
+      "en": "Term from English"
+    }
+  ],
+  "aodesai": [
+    {
+      "char": "奥德赛",
+      "en": "The Odyssey"
+    }
+  ],
+  "gongchengsheji": [
+    {
+      "char": "工程设计",
+      "en": "Term from English"
+    }
+  ],
+  "luomashi": [
+    {
+      "char": "罗马式",
+      "en": "Term from English"
+    }
+  ],
+  "geteshi": [
+    {
+      "char": "哥特式",
+      "en": "gothic"
+    }
+  ],
+  "yiweiwei": [
+    {
+      "char": "意为维",
+      "en": "Term from English"
+    }
+  ],
+  "weidu": [
+    {
+      "char": "维度",
+      "en": "(math.) dimension"
+    }
+  ],
+  "yishushi": [
+    {
+      "char": "艺术史",
+      "en": "Term from English"
+    }
+  ],
+  "shenxing": [
+    {
+      "char": "神性",
+      "en": "divinity"
+    }
+  ],
+  "qiansuoweijian": [
+    {
+      "char": "前所未见",
+      "en": "Term from English"
+    }
+  ],
+  "tianwendili": [
+    {
+      "char": "天文地理",
+      "en": "Term from English"
+    }
+  ],
+  "zhuozhu": [
+    {
+      "char": "卓著",
+      "en": "Term from English"
+    }
+  ],
+  "quancai": [
+    {
+      "char": "全才",
+      "en": "Term from English"
+    }
+  ],
+  "youyi": [
+    {
+      "char": "尤以",
+      "en": "Term from English"
+    }
+  ],
+  "jianzhujia": [
+    {
+      "char": "建筑家",
+      "en": "Term from English"
+    }
+  ],
+  "zhuangwei": [
+    {
+      "char": "壮伟",
+      "en": "Term from English"
+    }
+  ],
+  "xisiting": [
+    {
+      "char": "西斯廷",
+      "en": "Term from English"
+    }
+  ],
+  "youcai": [
+    {
+      "char": "油彩",
+      "en": "Term from English"
+    }
+  ],
+  "huafeng": [
+    {
+      "char": "画风",
+      "en": "Term from English"
+    }
+  ],
+  "youye": [
+    {
+      "char": "有夜",
+      "en": "Term from English"
+    }
+  ],
+  "xundeng": [
+    {
+      "char": "巡等",
+      "en": "Term from English"
+    }
+  ],
+  "huapai": [
+    {
+      "char": "画派",
+      "en": "Term from English"
+    }
+  ],
+  "huihuashi": [
+    {
+      "char": "绘画史",
+      "en": "Term from English"
+    }
+  ],
+  "yongse": [
+    {
+      "char": "用色",
+      "en": "Term from English"
+    }
+  ],
+  "manai": [
+    {
+      "char": "马奈",
+      "en": "Term from English"
+    }
+  ],
+  "bishaluo": [
+    {
+      "char": "毕沙罗",
+      "en": "Term from English"
+    }
+  ],
+  "mihuan": [
+    {
+      "char": "迷幻",
+      "en": "Term from English"
+    }
+  ],
+  "shenglachaer": [
+    {
+      "char": "圣拉查尔",
+      "en": "Term from English"
+    }
+  ],
+  "zuowai": [
+    {
+      "char": "作外",
+      "en": "Term from English"
+    }
+  ],
+  "jianbing": [
+    {
+      "char": "煎饼",
+      "en": "Term from English"
+    }
+  ],
+  "paixing": [
+    {
+      "char": "派性",
+      "en": "Term from English"
+    }
+  ],
+  "xiandaipai": [
+    {
+      "char": "现代派",
+      "en": "Term from English"
+    }
+  ],
+  "zhizuozhe": [
+    {
+      "char": "制作者",
+      "en": "producer"
+    }
+  ],
+  "meishudianying": [
+    {
+      "char": "美术电影",
+      "en": "Term from English"
+    }
+  ],
+  "zhipianchang": [
+    {
+      "char": "制片厂",
+      "en": "Term from English"
+    }
+  ],
+  "gaipian": [
+    {
+      "char": "该片",
+      "en": "Term from English"
+    }
+  ],
+  "fanghuizhen": [
+    {
+      "char": "方惠珍",
+      "en": "Term from English"
+    }
+  ],
+  "shenglude": [
+    {
+      "char": "盛璐德",
+      "en": "Term from English"
+    }
+  ],
+  "kandian": [
+    {
+      "char": "看点",
+      "en": "Term from English"
+    }
+  ],
+  "baijian": [
+    {
+      "char": "百件",
+      "en": "Term from English"
+    }
+  ],
+  "huoshi": [
+    {
+      "char": "或事",
+      "en": "Term from English"
+    }
+  ],
+  "bunengziba": [
+    {
+      "char": "不能自拔",
+      "en": "Term from English"
+    }
+  ],
+  "wangyong": [
+    {
+      "char": "妄用",
+      "en": "Term from English"
+    }
+  ],
+  "jidachengzhe": [
+    {
+      "char": "集大成者",
+      "en": "Term from English"
+    }
+  ],
+  "panyan": [
+    {
+      "char": "攀岩",
+      "en": "climbing"
+    }
+  ],
+  "yuexin": [
+    {
+      "char": "月薪",
+      "en": "Term from English"
+    }
+  ],
+  "yubian": [
+    {
+      "char": "欲变",
+      "en": "Term from English"
+    }
+  ],
+  "xianbian": [
+    {
+      "char": "先变",
+      "en": "Term from English"
+    }
+  ],
+  "jieliu": [
+    {
+      "char": "截留",
+      "en": "Term from English"
+    }
+  ],
+  "youkeliang": [
+    {
+      "char": "游客量",
+      "en": "Term from English"
+    }
+  ],
+  "rengru": [
+    {
+      "char": "扔入",
+      "en": "Term from English"
+    }
+  ],
+  "tuntuliang": [
+    {
+      "char": "吞吐量",
+      "en": "Term from English"
+    }
+  ],
+  "jinnianxiatian": [
+    {
+      "char": "今年夏天",
+      "en": "Term from English"
+    }
+  ],
+  "kebi": [
+    {
+      "char": "可比",
+      "en": "comparable"
+    }
+  ],
+  "jiaotongliuliang": [
+    {
+      "char": "交通流量",
+      "en": "Term from English"
+    }
+  ],
+  "yiqieshunli": [
+    {
+      "char": "一切顺利",
+      "en": "Term from English"
+    }
+  ],
+  "benjin": [
+    {
+      "char": "本金",
+      "en": "capital"
+    }
+  ],
+  "huanbaobu": [
+    {
+      "char": "环保部",
+      "en": "Term from English"
+    }
+  ],
+  "guihuayuan": [
+    {
+      "char": "规划院",
+      "en": "Term from English"
+    }
+  ],
+  "wenzezhi": [
+    {
+      "char": "问责制",
+      "en": "Term from English"
+    }
+  ],
+  "liangxingxunhuan": [
+    {
+      "char": "良性循环",
+      "en": "Term from English"
+    }
+  ],
+  "zhihe": [
+    {
+      "char": "制河",
+      "en": "Term from English"
+    }
+  ],
+  "zhangzhi": [
+    {
+      "char": "长制",
+      "en": "Term from English"
+    }
+  ],
+  "dangzheng": [
+    {
+      "char": "党政",
+      "en": "party policy"
+    }
+  ],
+  "shuilibu": [
+    {
+      "char": "水利部",
+      "en": "Term from English"
+    }
+  ],
+  "tiaomu": [
+    {
+      "char": "条目",
+      "en": "article (publishing)"
+    }
+  ],
+  "burushuoshi": [
+    {
+      "char": "不如说是",
+      "en": "Term from English"
+    }
+  ],
+  "cuishengchu": [
+    {
+      "char": "催生出",
+      "en": "Term from English"
+    }
+  ],
+  "dajian": [
+    {
+      "char": "大件",
+      "en": "Term from English"
+    }
+  ],
+  "aide": [
+    {
+      "char": "艾德",
+      "en": "Term from English"
+    }
+  ],
+  "wensidun": [
+    {
+      "char": "温斯顿",
+      "en": "Winston (name)"
+    }
+  ],
+  "cuimianqu": [
+    {
+      "char": "催眠曲",
+      "en": "lullaby"
+    }
+  ],
+  "shizhi": [
+    {
+      "char": "诗指",
+      "en": "Term from English"
+    }
+  ],
+  "disanxing": [
+    {
+      "char": "第三行",
+      "en": "Term from English"
+    }
+  ],
+  "wuyunshi": [
+    {
+      "char": "无韵诗",
+      "en": "Term from English"
+    }
+  ],
+  "wuyin": [
+    {
+      "char": "五音",
+      "en": "Term from English"
+    }
+  ],
+  "bushi": [
+    {
+      "char": "步诗",
+      "en": "Term from English"
+    }
+  ],
+  "youxing": [
+    {
+      "char": "由行",
+      "en": "Term from English"
+    }
+  ],
+  "telake": [
+    {
+      "char": "特拉克",
+      "en": "Term from English"
+    }
+  ],
+  "wangjianwang": [
+    {
+      "char": "王建望",
+      "en": "Term from English"
+    }
+  ],
+  "fuchujiang": [
+    {
+      "char": "夫处江",
+      "en": "Term from English"
+    }
+  ],
+  "shibu": [
+    {
+      "char": "石不",
+      "en": "Term from English"
+    }
+  ],
+  "fengfuyu": [
+    {
+      "char": "风复雨",
+      "en": "Term from English"
+    }
+  ],
+  "shiyingyu": [
+    {
+      "char": "石应语",
+      "en": "Term from English"
+    }
+  ],
+  "yizizhongchu": [
+    {
+      "char": "一字仲初",
+      "en": "Term from English"
+    }
+  ],
+  "xuchangshi": [
+    {
+      "char": "许昌市",
+      "en": "Term from English"
+    }
+  ],
+  "guoguan": [
+    {
+      "char": "过官",
+      "en": "Term from English"
+    }
+  ],
+  "tianjia": [
+    {
+      "char": "田家",
+      "en": "Term from English"
+    }
+  ],
+  "shuifuyao": [
+    {
+      "char": "水夫谣",
+      "en": "Term from English"
+    }
+  ],
+  "yulinxing": [
+    {
+      "char": "羽林行",
+      "en": "Term from English"
+    }
+  ],
+  "xinggu": [
+    {
+      "char": "行古",
+      "en": "Term from English"
+    }
+  ],
+  "labin": [
+    {
+      "char": "拉宾",
+      "en": "Term from English"
+    }
+  ],
+  "lanate": [
+    {
+      "char": "拉纳特",
+      "en": "Term from English"
+    }
+  ],
+  "mengjialayu": [
+    {
+      "char": "孟加拉语",
+      "en": "Bengalese"
+    }
+  ],
+  "congsui": [
+    {
+      "char": "从岁",
+      "en": "Term from English"
+    }
+  ],
+  "qiangong": [
+    {
+      "char": "前共",
+      "en": "Term from English"
+    }
+  ],
+  "buzhong": [
+    {
+      "char": "部中",
+      "en": "Term from English"
+    }
+  ],
+  "jinpian": [
+    {
+      "char": "近篇",
+      "en": "Term from English"
+    }
+  ],
+  "sanwensuibi": [
+    {
+      "char": "散文随笔",
+      "en": "Term from English"
+    }
+  ],
+  "xiewen": [
+    {
+      "char": "写文",
+      "en": "Term from English"
+    }
+  ],
+  "zhengyidouzheng": [
+    {
+      "char": "正义斗争",
+      "en": "Term from English"
+    }
+  ],
+  "nvshiren": [
+    {
+      "char": "女诗人",
+      "en": "Term from English"
+    }
+  ],
+  "daleimu": [
+    {
+      "char": "达勒姆",
+      "en": "Term from English"
+    }
+  ],
+  "zhuima": [
+    {
+      "char": "坠马",
+      "en": "Term from English"
+    }
+  ],
+  "wobing": [
+    {
+      "char": "卧病",
+      "en": "Term from English"
+    }
+  ],
+  "jingyang": [
+    {
+      "char": "静养",
+      "en": "Term from English"
+    }
+  ],
+  "chengming": [
+    {
+      "char": "成名",
+      "en": "Term from English"
+    }
+  ],
+  "xiangai": [
+    {
+      "char": "相爱",
+      "en": "Term from English"
+    }
+  ],
+  "chenghun": [
+    {
+      "char": "成婚",
+      "en": "Term from English"
+    }
+  ],
+  "aiqingshi": [
+    {
+      "char": "爱情诗",
+      "en": "Term from English"
+    }
+  ],
+  "jinglian": [
+    {
+      "char": "精炼",
+      "en": "refine"
+    }
+  ],
+  "caiqihengyi": [
+    {
+      "char": "才气横溢",
+      "en": "Term from English"
+    }
+  ],
+  "zhuanlanzuojia": [
+    {
+      "char": "专栏作家",
+      "en": "Term from English"
+    }
+  ],
+  "misulizhou": [
+    {
+      "char": "密苏里州",
+      "en": "Missouri"
+    }
+  ],
+  "qiaopulin": [
+    {
+      "char": "乔普林",
+      "en": "Term from English"
+    }
+  ],
+  "shizu": [
+    {
+      "char": "市卒",
+      "en": "Term from English"
+    }
+  ],
+  "kanmenren": [
+    {
+      "char": "看门人",
+      "en": "Term from English"
+    }
+  ],
+  "xiyifang": [
+    {
+      "char": "洗衣房",
+      "en": "laundry room"
+    }
+  ],
+  "guiguanshiren": [
+    {
+      "char": "桂冠诗人",
+      "en": "Term from English"
+    }
+  ],
+  "zhongzuqishi": [
+    {
+      "char": "种族歧视",
+      "en": "(n) racism"
+    }
+  ],
+  "gongnengfengfu": [
+    {
+      "char": "功能丰富",
+      "en": "Term from English"
+    }
+  ],
+  "yuanhua": [
+    {
+      "char": "原话",
+      "en": "Term from English"
+    }
+  ],
+  "shitaibianhua": [
+    {
+      "char": "时态变化",
+      "en": "Term from English"
+    }
+  ],
+  "zhishiqie": [
+    {
+      "char": "之时且",
+      "en": "Term from English"
+    }
+  ],
+  "zuoguanggao": [
+    {
+      "char": "做广告",
+      "en": "Term from English"
+    }
+  ],
+  "maxiaojiechangzhen": [
+    {
+      "char": "马小洁常贞",
+      "en": "Term from English"
+    }
+  ],
+  "miniban": [
+    {
+      "char": "迷你版",
+      "en": "Term from English"
+    }
+  ],
+  "zhengshou": [
+    {
+      "char": "正受",
+      "en": "Term from English"
+    }
+  ],
+  "xianchangzhibo": [
+    {
+      "char": "现场直播",
+      "en": "live broadcast"
+    }
+  ],
+  "nagai": [
+    {
+      "char": "那该",
+      "en": "Term from English"
+    }
+  ],
+  "nianyueqi": [
+    {
+      "char": "年月期",
+      "en": "Term from English"
+    }
+  ],
+  "eyi": [
+    {
+      "char": "俄裔",
+      "en": "Term from English"
+    }
+  ],
+  "siwubai": [
+    {
+      "char": "四五百",
+      "en": "Term from English"
+    }
+  ],
+  "yuanyang": [
+    {
+      "char": "远扬",
+      "en": "Term from English"
+    }
+  ],
+  "tuonidui": [
+    {
+      "char": "托尼对",
+      "en": "Term from English"
+    }
+  ],
+  "tangnade": [
+    {
+      "char": "唐纳德",
+      "en": "Term from English"
+    }
+  ],
+  "tuoni": [
+    {
+      "char": "托尼",
+      "en": "Term from English"
+    }
+  ],
+  "huidao": [
+    {
+      "char": "会到",
+      "en": "Term from English"
+    }
+  ],
+  "wenbeidi": [
+    {
+      "char": "问贝蒂",
+      "en": "Term from English"
+    }
+  ],
+  "dafazou": [
+    {
+      "char": "打发走",
+      "en": "Term from English"
+    }
+  ],
+  "qiansan": [
+    {
+      "char": "遣散",
+      "en": "(n) demobilization"
+    }
+  ],
+  "diyidier": [
+    {
+      "char": "第一第二",
+      "en": "Term from English"
+    }
+  ],
+  "hebote": [
+    {
+      "char": "赫伯特",
+      "en": "Herbert (name)"
+    }
+  ],
+  "tongleiticai": [
+    {
+      "char": "同类题材",
+      "en": "Term from English"
+    }
+  ],
+  "xuduobu": [
+    {
+      "char": "许多部",
+      "en": "Term from English"
+    }
+  ],
+  "moluo": [
+    {
+      "char": "莫洛",
+      "en": "Term from English"
+    }
+  ],
+  "yinshenren": [
+    {
+      "char": "隐身人",
+      "en": "Term from English"
+    }
+  ],
+  "shichangfene": [
+    {
+      "char": "市场份额",
+      "en": "Term from English"
+    }
+  ],
+  "tachang": [
+    {
+      "char": "它常",
+      "en": "Term from English"
+    }
+  ],
+  "zhongshi": [
+    {
+      "char": "中式",
+      "en": "Chinese style"
+    }
+  ],
+  "guangshi": [
+    {
+      "char": "广式",
+      "en": "Term from English"
+    }
+  ],
+  "chadian": [
+    {
+      "char": "茶点",
+      "en": "Term from English"
+    }
+  ],
+  "dijieli": [
+    {
+      "char": "狄洁里",
+      "en": "Term from English"
+    }
+  ],
+  "zhucheng": [
+    {
+      "char": "蛀成",
+      "en": "Term from English"
+    }
+  ],
+  "zhandong": [
+    {
+      "char": "颤动",
+      "en": "to tremble"
+    }
+  ],
+  "yongsi": [
+    {
+      "char": "用思",
+      "en": "Term from English"
+    }
+  ],
+  "zhidayou": [
+    {
+      "char": "之大有",
+      "en": "Term from English"
+    }
+  ],
+  "leiruquanyong": [
+    {
+      "char": "泪如泉涌",
+      "en": "Term from English"
+    }
+  ],
+  "huawan": [
+    {
+      "char": "花完",
+      "en": "Term from English"
+    }
+  ],
+  "chengshan": [
+    {
+      "char": "成山",
+      "en": "Term from English"
+    }
+  ],
+  "weishubuduo": [
+    {
+      "char": "为数不多",
+      "en": "Term from English"
+    }
+  ],
+  "xingguolai": [
+    {
+      "char": "醒过来",
+      "en": "Term from English"
+    }
+  ],
+  "jiduhuan": [
+    {
+      "char": "记杜环",
+      "en": "Term from English"
+    }
+  ],
+  "zicheng": [
+    {
+      "char": "兹城",
+      "en": "Term from English"
+    }
+  ],
+  "duyou": [
+    {
+      "char": "杜佑",
+      "en": "Term from English"
+    }
+  ],
+  "tongdian": [
+    {
+      "char": "通典",
+      "en": "Term from English"
+    }
+  ],
+  "bashiji": [
+    {
+      "char": "八世纪",
+      "en": "Term from English"
+    }
+  ],
+  "jiyaqunfang": [
+    {
+      "char": "技压群芳",
+      "en": "Term from English"
+    }
+  ],
+  "zhenghe": [
+    {
+      "char": "郑和",
+      "en": "Zheng He"
+    }
+  ],
+  "chongti": [
+    {
+      "char": "重提",
+      "en": "Term from English"
+    }
+  ],
+  "zaifang": [
+    {
+      "char": "再访",
+      "en": "Term from English"
+    }
+  ],
+  "zhongyou": [
+    {
+      "char": "重游",
+      "en": "Term from English"
+    }
+  ],
+  "bieti": [
+    {
+      "char": "别提",
+      "en": "Term from English"
+    }
+  ],
+  "tangbei": [
+    {
+      "char": "汤贝",
+      "en": "Term from English"
+    }
+  ],
+  "biangua": [
+    {
+      "char": "变卦",
+      "en": "Term from English"
+    }
+  ],
+  "zhibenglai": [
+    {
+      "char": "指蹦来",
+      "en": "Term from English"
+    }
+  ],
+  "shangbenglai": [
+    {
+      "char": "上蹦来",
+      "en": "Term from English"
+    }
+  ],
+  "huolai": [
+    {
+      "char": "或来",
+      "en": "Term from English"
+    }
+  ],
+  "baozhiguanggao": [
+    {
+      "char": "报纸广告",
+      "en": "Term from English"
+    }
+  ],
+  "tianjiawu": [
+    {
+      "char": "添加物",
+      "en": "Term from English"
+    }
+  ],
+  "gangxue": [
+    {
+      "char": "刚学",
+      "en": "Term from English"
+    }
+  ],
+  "xiangshi": [
+    {
+      "char": "乡时",
+      "en": "Term from English"
+    }
+  ],
+  "huocheng": [
+    {
+      "char": "或称",
+      "en": "also called"
+    }
+  ],
+  "huqiu": [
+    {
+      "char": "虎丘",
+      "en": "Term from English"
+    }
+  ],
+  "suzhoucheng": [
+    {
+      "char": "苏州城",
+      "en": "Term from English"
+    }
+  ],
+  "xialisa": [
+    {
+      "char": "下莉萨",
+      "en": "Term from English"
+    }
+  ],
+  "zuobin": [
+    {
+      "char": "作宾",
+      "en": "Term from English"
+    }
+  ],
+  "buyong": [
+    {
+      "char": "补用",
+      "en": "Term from English"
+    }
+  ],
+  "ouwen": [
+    {
+      "char": "欧文",
+      "en": "(n) Erwin"
+    }
+  ],
+  "nongshang": [
+    {
+      "char": "弄伤",
+      "en": "Term from English"
+    }
+  ],
+  "beihushi": [
+    {
+      "char": "被忽视",
+      "en": "Term from English"
+    }
+  ],
+  "danzu": [
+    {
+      "char": "单足",
+      "en": "Term from English"
+    }
+  ],
+  "pozaimeijie": [
+    {
+      "char": "迫在眉睫",
+      "en": "Term from English"
+    }
+  ],
+  "zuobinbu": [
+    {
+      "char": "作宾补",
+      "en": "Term from English"
+    }
+  ],
+  "duxie": [
+    {
+      "char": "读些",
+      "en": "Term from English"
+    }
+  ],
+  "jufajiegou": [
+    {
+      "char": "句法结构",
+      "en": "Term from English"
+    }
+  ],
+  "fenshi": [
+    {
+      "char": "分是",
+      "en": "Term from English"
+    }
+  ],
+  "binzhuang": [
+    {
+      "char": "宾状",
+      "en": "Term from English"
+    }
+  ],
+  "baobao": [
+    {
+      "char": "抱抱",
+      "en": "Term from English"
+    }
+  ],
+  "aifu": [
+    {
+      "char": "爱抚",
+      "en": "to show tender care for"
+    }
+  ],
+  "diyiceng": [
+    {
+      "char": "第一层",
+      "en": "Term from English"
+    }
+  ],
+  "xibiao": [
+    {
+      "char": "系表",
+      "en": "Term from English"
+    }
+  ],
+  "zhuxibiao": [
+    {
+      "char": "主系表",
+      "en": "Term from English"
+    }
+  ],
+  "chishui": [
+    {
+      "char": "吃睡",
+      "en": "Term from English"
+    }
+  ],
+  "huizhi": [
+    {
+      "char": "回指",
+      "en": "Term from English"
+    }
+  ],
+  "xiangxianjie": [
+    {
+      "char": "相衔接",
+      "en": "Term from English"
+    }
+  ],
+  "chimai": [
+    {
+      "char": "池麦",
+      "en": "Term from English"
+    }
+  ],
+  "zifeili": [
+    {
+      "char": "兹费莉",
+      "en": "Term from English"
+    }
+  ],
+  "xididui": [
+    {
+      "char": "西蒂对",
+      "en": "Term from English"
+    }
+  ],
+  "xidi": [
+    {
+      "char": "西蒂",
+      "en": "Term from English"
+    }
+  ],
+  "fene": [
+    {
+      "char": "粉额",
+      "en": "Term from English"
+    }
+  ],
+  "kuke": [
+    {
+      "char": "库克",
+      "en": "Term from English"
+    }
+  ],
+  "jianghua": [
+    {
+      "char": "奖划",
+      "en": "Term from English"
+    }
+  ],
+  "xuzhuozhuangli": [
+    {
+      "char": "徐卓庄力",
+      "en": "Term from English"
+    }
+  ],
+  "zhuangbancheng": [
+    {
+      "char": "装扮成",
+      "en": "Term from English"
+    }
+  ],
+  "caozasheng": [
+    {
+      "char": "嘈杂声",
+      "en": "Term from English"
+    }
+  ],
+  "xuexia": [
+    {
+      "char": "雪下",
+      "en": "Term from English"
+    }
+  ],
+  "sailongzhou": [
+    {
+      "char": "赛龙舟",
+      "en": "Term from English"
+    }
+  ],
+  "lingrenxingfen": [
+    {
+      "char": "令人兴奋",
+      "en": "Term from English"
+    }
+  ],
+  "banru": [
+    {
+      "char": "搬入",
+      "en": "Term from English"
+    }
+  ],
+  "yaoleyikou": [
+    {
+      "char": "咬了一口",
+      "en": "Term from English"
+    }
+  ],
+  "anyangyuan": [
+    {
+      "char": "安养院",
+      "en": "Term from English"
+    }
+  ],
+  "qinqin": [
+    {
+      "char": "亲亲",
+      "en": "Term from English"
+    },
+    {
+      "char": "秦秦",
+      "en": "Term from English"
+    }
+  ],
+  "errenminrenmin": [
+    {
+      "char": "而仁民仁民",
+      "en": "Term from English"
+    }
+  ],
+  "aiwu": [
+    {
+      "char": "爱物",
+      "en": "Term from English"
+    }
+  ],
+  "yuyu": [
+    {
+      "char": "喻于",
+      "en": "Term from English"
+    },
+    {
+      "char": "语域",
+      "en": "Term from English"
+    }
+  ],
+  "lizi": [
+    {
+      "char": "利子",
+      "en": "Term from English"
+    }
+  ],
+  "feiliwushi": [
+    {
+      "char": "非礼勿视",
+      "en": "Term from English"
+    }
+  ],
+  "wuyan": [
+    {
+      "char": "勿言",
+      "en": "Term from English"
+    }
+  ],
+  "wudong": [
+    {
+      "char": "勿动",
+      "en": "Term from English"
+    }
+  ],
+  "shengerzhizhi": [
+    {
+      "char": "生而知之",
+      "en": "Term from English"
+    }
+  ],
+  "gumin": [
+    {
+      "char": "古敏",
+      "en": "Term from English"
+    }
+  ],
+  "taizhangtai": [
+    {
+      "char": "太长太",
+      "en": "Term from English"
+    }
+  ],
+  "hepinghao": [
+    {
+      "char": "和平号",
+      "en": "Term from English"
+    }
+  ],
+  "rentai": [
+    {
+      "char": "人太",
+      "en": "Term from English"
+    }
+  ],
+  "huocang": [
+    {
+      "char": "货仓",
+      "en": "Term from English"
+    }
+  ],
+  "fenlicang": [
+    {
+      "char": "分离舱",
+      "en": "Term from English"
+    }
+  ],
+  "shichang": [
+    {
+      "char": "试唱",
+      "en": "Term from English"
+    }
+  ],
+  "xingtan": [
+    {
+      "char": "星探",
+      "en": "Term from English"
+    }
+  ],
+  "xiaojiaose": [
+    {
+      "char": "小角色",
+      "en": "Term from English"
+    }
+  ],
+  "jujiang": [
+    {
+      "char": "剧讲",
+      "en": "Term from English"
+    }
+  ],
+  "zhouyoushijie": [
+    {
+      "char": "周游世界",
+      "en": "Term from English"
+    }
+  ],
+  "xiangkao": [
+    {
+      "char": "想考",
+      "en": "Term from English"
+    }
+  ],
+  "xijuxueyuan": [
+    {
+      "char": "戏剧学院",
+      "en": "Term from English"
+    }
+  ],
+  "duikai": [
+    {
+      "char": "兑开",
+      "en": "Term from English"
+    }
+  ],
+  "liansheng": [
+    {
+      "char": "连声",
+      "en": "Term from English"
+    }
+  ],
+  "qingyuan": [
+    {
+      "char": "青玉案",
+      "en": "Term from English"
+    }
+  ],
+  "yuanxi": [
+    {
+      "char": "元夕",
+      "en": "Term from English"
+    }
+  ],
+  "yicong": [
+    {
+      "char": "译丛",
+      "en": "Term from English"
+    }
+  ],
+  "songci": [
+    {
+      "char": "宋词",
+      "en": "Term from English"
+    }
+  ],
+  "yangxianyi": [
+    {
+      "char": "杨宪益",
+      "en": "Term from English"
+    }
+  ],
+  "dainaidie": [
+    {
+      "char": "戴乃迭",
+      "en": "Term from English"
+    }
+  ],
+  "jingren": [
+    {
+      "char": "景人",
+      "en": "Term from English"
+    }
+  ],
+  "yefanghua": [
+    {
+      "char": "夜放花",
+      "en": "Term from English"
+    }
+  ],
+  "luoxing": [
+    {
+      "char": "落星",
+      "en": "Term from English"
+    }
+  ],
+  "baoma": [
+    {
+      "char": "宝马",
+      "en": "Term from English"
+    }
+  ],
+  "diaoche": [
+    {
+      "char": "雕车",
+      "en": "Term from English"
+    }
+  ],
+  "xiangman": [
+    {
+      "char": "香满",
+      "en": "Term from English"
+    }
+  ],
+  "lufeng": [
+    {
+      "char": "路凤",
+      "en": "Term from English"
+    }
+  ],
+  "eer": [
+    {
+      "char": "蛾儿",
+      "en": "Term from English"
+    }
+  ],
+  "xueliu": [
+    {
+      "char": "雪柳",
+      "en": "Term from English"
+    }
+  ],
+  "zhongli": [
+    {
+      "char": "众里",
+      "en": "Term from English"
+    }
+  ],
+  "qianbaidu": [
+    {
+      "char": "千百度",
+      "en": "Term from English"
+    }
+  ],
+  "moranhuishou": [
+    {
+      "char": "蓦然回首",
+      "en": "Term from English"
+    }
+  ],
+  "denghuolanshan": [
+    {
+      "char": "灯火阑珊",
+      "en": "Term from English"
+    }
+  ],
+  "juxingyishi": [
+    {
+      "char": "举行仪式",
+      "en": "Term from English"
+    }
+  ],
+  "chengrenli": [
+    {
+      "char": "成人礼",
+      "en": "Term from English"
+    }
+  ],
+  "zhenxiu": [
+    {
+      "char": "振袖",
+      "en": "Term from English"
+    }
+  ],
+  "hefu": [
+    {
+      "char": "和服",
+      "en": "kimono"
+    }
+  ],
+  "zhongdong": [
+    {
+      "char": "仲冬",
+      "en": "Term from English"
+    }
+  ],
+  "jifu": [
+    {
+      "char": "极负",
+      "en": "Term from English"
+    }
+  ],
+  "wuzhi": [
+    {
+      "char": "五至",
+      "en": "Term from English"
+    }
+  ],
+  "tuantizhijian": [
+    {
+      "char": "团体之间",
+      "en": "Term from English"
+    }
+  ],
+  "gongshang": [
+    {
+      "char": "共赏",
+      "en": "Term from English"
+    }
+  ],
+  "suolie": [
+    {
+      "char": "所列",
+      "en": "Term from English"
+    }
+  ],
+  "guilong": [
+    {
+      "char": "归拢",
+      "en": "Term from English"
+    }
+  ],
+  "lihua": [
+    {
+      "char": "里花",
+      "en": "Term from English"
+    }
+  ],
+  "kaikan": [
+    {
+      "char": "开堪",
+      "en": "Term from English"
+    }
+  ],
+  "zhezhi": [
+    {
+      "char": "折直",
+      "en": "Term from English"
+    }
+  ],
+  "xuzhe": [
+    {
+      "char": "需折",
+      "en": "Term from English"
+    }
+  ],
+  "zhengwan": [
+    {
+      "char": "整晚",
+      "en": "Term from English"
+    }
+  ],
+  "dianfen": [
+    {
+      "char": "点分",
+      "en": "Term from English"
+    }
+  ],
+  "bayuejie": [
+    {
+      "char": "八月节",
+      "en": "Term from English"
+    }
+  ],
+  "qiyizhi": [
+    {
+      "char": "期一至",
+      "en": "Term from English"
+    }
+  ],
+  "duofu": [
+    {
+      "char": "多福",
+      "en": "Term from English"
+    }
+  ],
+  "nongyefengshou": [
+    {
+      "char": "农业丰收",
+      "en": "Term from English"
+    }
+  ],
+  "muxian": [
+    {
+      "char": "牧闲",
+      "en": "Term from English"
+    }
+  ],
+  "yiqi": [
+    {
+      "char": "一旗",
+      "en": "Term from English"
+    }
+  ],
+  "shuqi": [
+    {
+      "char": "数旗",
+      "en": "Term from English"
+    }
+  ],
+  "maqiu": [
+    {
+      "char": "马球",
+      "en": "Term from English"
+    }
+  ],
+  "mashu": [
+    {
+      "char": "马术",
+      "en": "(n) equestrianism"
+    }
+  ],
+  "qubuqu": [
+    {
+      "char": "去不去",
+      "en": "Term from English"
+    }
+  ],
+  "huowai": [
+    {
+      "char": "或外",
+      "en": "Term from English"
+    }
+  ],
+  "kuijian": [
+    {
+      "char": "窥见",
+      "en": "Term from English"
+    }
+  ],
+  "yixuejia": [
+    {
+      "char": "医学家",
+      "en": "medical scientist"
+    }
+  ],
+  "beipingxieheyixueyuan": [
+    {
+      "char": "北平协和医学院",
+      "en": "Term from English"
+    }
+  ],
+  "xieheyiyuan": [
+    {
+      "char": "协和医院",
+      "en": "Term from English"
+    }
+  ],
+  "gaiyuan": [
+    {
+      "char": "该院",
+      "en": "Term from English"
+    }
+  ],
+  "liuyuan": [
+    {
+      "char": "留院",
+      "en": "Term from English"
+    }
+  ],
+  "nvyisheng": [
+    {
+      "char": "女医生",
+      "en": "Term from English"
+    }
+  ],
+  "zhonghuayixuehui": [
+    {
+      "char": "中华医学会",
+      "en": "Term from English"
+    }
+  ],
+  "xuebuweiyuan": [
+    {
+      "char": "学部委员",
+      "en": "Term from English"
+    }
+  ],
+  "fuchan": [
+    {
+      "char": "妇产",
+      "en": "Term from English"
+    }
+  ],
+  "fuyoubaojian": [
+    {
+      "char": "妇幼保健",
+      "en": "Term from English"
+    }
+  ],
+  "yongchuang": [
+    {
+      "char": "勇闯",
+      "en": "Term from English"
+    }
+  ],
+  "samuzhu": [
+    {
+      "char": "萨姆住",
+      "en": "Term from English"
+    }
+  ],
+  "diannian": [
+    {
+      "char": "惦念",
+      "en": "Term from English"
+    }
+  ],
+  "yiguan": [
+    {
+      "char": "一罐",
+      "en": "Term from English"
+    }
+  ],
+  "shuibenju": [
+    {
+      "char": "水本句",
+      "en": "Term from English"
+    }
+  ],
+  "tianqiyanre": [
+    {
+      "char": "天气炎热",
+      "en": "Term from English"
+    }
+  ],
+  "canshi": [
+    {
+      "char": "餐是",
+      "en": "Term from English"
+    }
+  ],
+  "quyi": [
+    {
+      "char": "取意",
+      "en": "Term from English"
+    }
+  ],
+  "zhengqiaoyou": [
+    {
+      "char": "正巧有",
+      "en": "Term from English"
+    }
+  ],
+  "zhifei": [
+    {
+      "char": "指非",
+      "en": "Term from English"
+    }
+  ],
+  "jiachangbianfan": [
+    {
+      "char": "家常便饭",
+      "en": "Term from English"
+    }
+  ],
+  "canhou": [
+    {
+      "char": "餐后",
+      "en": "Term from English"
+    }
+  ],
+  "menggurenzhong": [
+    {
+      "char": "蒙古人种",
+      "en": "Term from English"
+    }
+  ],
+  "zhixi": [
+    {
+      "char": "支系",
+      "en": "Term from English"
+    }
+  ],
+  "yindianyu": [
+    {
+      "char": "印第安语",
+      "en": "Term from English"
+    }
+  ],
+  "yuzu": [
+    {
+      "char": "语族",
+      "en": "language branch"
+    }
+  ],
+  "liangsanwan": [
+    {
+      "char": "两三万",
+      "en": "Term from English"
+    }
+  ],
+  "duopi": [
+    {
+      "char": "多批",
+      "en": "Term from English"
+    }
+  ],
+  "chuyue": [
+    {
+      "char": "初约",
+      "en": "Term from English"
+    }
+  ],
+  "mushu": [
+    {
+      "char": "木薯",
+      "en": "cassava"
+    }
+  ],
+  "andisidiqu": [
+    {
+      "char": "安第斯地区",
+      "en": "Term from English"
+    }
+  ],
+  "dujuyige": [
+    {
+      "char": "独具一格",
+      "en": "Term from English"
+    }
+  ],
+  "fengyongerzhi": [
+    {
+      "char": "蜂拥而至",
+      "en": "Term from English"
+    }
+  ],
+  "taojin": [
+    {
+      "char": "淘金",
+      "en": "panning (for precious metals)"
+    }
+  ],
+  "sanfanshi": [
+    {
+      "char": "三藩市",
+      "en": "Term from English"
+    }
+  ],
+  "zhengjuhua": [
+    {
+      "char": "整句话",
+      "en": "Term from English"
+    }
+  ],
+  "mihang": [
+    {
+      "char": "迷航",
+      "en": "Term from English"
+    }
+  ],
+  "meiyiji": [
+    {
+      "char": "每一集",
+      "en": "Term from English"
+    }
+  ],
+  "guojihangkong": [
+    {
+      "char": "国际航空",
+      "en": "Term from English"
+    }
+  ],
+  "jinzhijiangzhang": [
+    {
+      "char": "金质奖章",
+      "en": "Term from English"
+    }
+  ],
+  "rubie": [
+    {
+      "char": "如别",
+      "en": "Term from English"
+    }
+  ],
+  "lieangnuofu": [
+    {
+      "char": "列昂诺夫",
+      "en": "Term from English"
+    }
+  ],
+  "gongyang": [
+    {
+      "char": "供氧",
+      "en": "Term from English"
+    }
+  ],
+  "qidai": [
+    {
+      "char": "脐带",
+      "en": "umbilical cord"
+    }
+  ],
+  "dachao": [
+    {
+      "char": "大钞",
+      "en": "Term from English"
+    }
+  ],
+  "fangxin": [
+    {
+      "char": "芳心",
+      "en": "Term from English"
+    }
+  ],
+  "saimouer": [
+    {
+      "char": "塞缪尔",
+      "en": "Term from English"
+    }
+  ],
+  "lanhuoen": [
+    {
+      "char": "兰霍恩",
+      "en": "Term from English"
+    }
+  ],
+  "kelaimensi": [
+    {
+      "char": "克莱门斯",
+      "en": "Term from English"
+    }
+  ],
+  "ezhu": [
+    {
+      "char": "恶主",
+      "en": "Term from English"
+    }
+  ],
+  "zuigai": [
+    {
+      "char": "最该",
+      "en": "Term from English"
+    }
+  ],
+  "zhuweijiegou": [
+    {
+      "char": "主谓结构",
+      "en": "Term from English"
+    }
+  ],
+  "chengqilai": [
+    {
+      "char": "撑起来",
+      "en": "Term from English"
+    }
+  ],
+  "chuangbian": [
+    {
+      "char": "窗边",
+      "en": "Term from English"
+    }
+  ],
+  "duihuati": [
+    {
+      "char": "对话体",
+      "en": "Term from English"
+    }
+  ],
+  "juming": [
+    {
+      "char": "剧名",
+      "en": "Term from English"
+    }
+  ],
+  "shangxiachang": [
+    {
+      "char": "上下场",
+      "en": "Term from English"
+    }
+  ],
+  "chengding": [
+    {
+      "char": "成定",
+      "en": "Term from English"
+    }
+  ],
+  "fenyu": [
+    {
+      "char": "分语",
+      "en": "Term from English"
+    }
+  ],
+  "qianzuo": [
+    {
+      "char": "前作",
+      "en": "Term from English"
+    }
+  ],
+  "houzuo": [
+    {
+      "char": "后作",
+      "en": "Term from English"
+    }
+  ],
+  "biaobin": [
+    {
+      "char": "表宾",
+      "en": "Term from English"
+    }
+  ],
+  "xinhui": [
+    {
+      "char": "信会",
+      "en": "Term from English"
+    }
+  ],
+  "nanyanyuan": [
+    {
+      "char": "男演员",
+      "en": "Term from English"
+    }
+  ],
+  "liangdianzhong": [
+    {
+      "char": "两点钟",
+      "en": "Term from English"
+    }
+  ],
+  "duju": [
+    {
+      "char": "赌局",
+      "en": "Term from English"
+    }
+  ],
+  "tangmusen": [
+    {
+      "char": "汤姆森",
+      "en": "Term from English"
+    }
+  ],
+  "kanju": [
+    {
+      "char": "看剧",
+      "en": "Term from English"
+    }
+  ],
+  "dianhuaxiang": [
+    {
+      "char": "电话响",
+      "en": "Term from English"
+    }
+  ],
+  "kaohuo": [
+    {
+      "char": "烤火",
+      "en": "Term from English"
+    }
+  ],
+  "qizai": [
+    {
+      "char": "期在",
+      "en": "Term from English"
+    }
+  ],
+  "shisa": [
+    {
+      "char": "使洒",
+      "en": "Term from English"
+    }
+  ],
+  "miyong": [
+    {
+      "char": "谜用",
+      "en": "Term from English"
+    }
+  ],
+  "dichuan": [
+    {
+      "char": "地船",
+      "en": "Term from English"
+    }
+  ],
+  "jibo": [
+    {
+      "char": "极波",
+      "en": "Term from English"
+    }
+  ],
+  "xuzhuo": [
+    {
+      "char": "徐卓",
+      "en": "Term from English"
+    }
+  ],
+  "zhaoyulian": [
+    {
+      "char": "赵钰莲",
+      "en": "Term from English"
+    }
+  ],
+  "diaoxiong": [
+    {
+      "char": "貂熊",
+      "en": "wolverine"
+    }
+  ],
+  "huanlesong": [
+    {
+      "char": "欢乐颂",
+      "en": "Term from English"
+    }
+  ],
+  "kelai": [
+    {
+      "char": "克莱",
+      "en": "Term from English"
+    }
+  ],
+  "saimoling": [
+    {
+      "char": "塞默灵",
+      "en": "Term from English"
+    }
+  ],
+  "nanfeigongheguo": [
+    {
+      "char": "南非共和国",
+      "en": "South Africa"
+    }
+  ],
+  "jiulongbi": [
+    {
+      "char": "九龙壁",
+      "en": "Term from English"
+    }
+  ],
+  "taijiling": [
+    {
+      "char": "泰姬陵",
+      "en": "Taj Mahal (mausoleum in India)"
+    }
+  ],
+  "wugeku": [
+    {
+      "char": "吴哥窟",
+      "en": "Term from English"
+    }
+  ],
+  "kelongdajiaotang": [
+    {
+      "char": "科隆大教堂",
+      "en": "Term from English"
+    }
+  ],
+  "yezhu": [
+    {
+      "char": "野猪",
+      "en": "boar"
+    }
+  ],
+  "liangkuan": [
+    {
+      "char": "两款",
+      "en": "Term from English"
+    }
+  ],
+  "boke": [
+    {
+      "char": "播客",
+      "en": "radio broadcast"
+    }
+  ],
+  "shuita": [
+    {
+      "char": "水獭",
+      "en": "Term from English"
+    }
+  ],
+  "nanxiang": [
+    {
+      "char": "南向",
+      "en": "Term from English"
+    }
+  ],
+  "liuguan": [
+    {
+      "char": "流贯",
+      "en": "Term from English"
+    }
+  ],
+  "gudi": [
+    {
+      "char": "谷地",
+      "en": "valley"
+    }
+  ],
+  "lianheguojingjijishehuilishihui": [
+    {
+      "char": "联合国经济及社会理事会",
+      "en": "Term from English"
+    }
+  ],
+  "guojifayuan": [
+    {
+      "char": "国际法院",
+      "en": "International Court of Justice"
+    }
+  ],
+  "nianya": [
+    {
+      "char": "碾轧",
+      "en": "Term from English"
+    }
+  ],
+  "yasi": [
+    {
+      "char": "轧死",
+      "en": "Term from English"
+    }
+  ],
+  "laoshishangke": [
+    {
+      "char": "老师上课",
+      "en": "Term from English"
+    }
+  ],
+  "chuangshiguo": [
+    {
+      "char": "创始国",
+      "en": "Term from English"
+    }
+  ],
+  "chujuguimo": [
+    {
+      "char": "初具规模",
+      "en": "Term from English"
+    }
+  ],
+  "mosikehongchang": [
+    {
+      "char": "莫斯科红场",
+      "en": "Term from English"
+    }
+  ],
+  "pilian": [
+    {
+      "char": "毗连",
+      "en": "adjoin"
+    }
+  ],
+  "zhongta": [
+    {
+      "char": "钟塔",
+      "en": "Term from English"
+    }
+  ],
+  "qianfudong": [
+    {
+      "char": "千佛洞",
+      "en": "Term from English"
+    }
+  ],
+  "yungangshiku": [
+    {
+      "char": "云冈石窟",
+      "en": "Term from English"
+    }
+  ],
+  "mingshashan": [
+    {
+      "char": "鸣沙山",
+      "en": "Term from English"
+    }
+  ],
+  "donglu": [
+    {
+      "char": "东麓",
+      "en": "Term from English"
+    }
+  ],
+  "duanya": [
+    {
+      "char": "断崖",
+      "en": "Term from English"
+    }
+  ],
+  "qianqin": [
+    {
+      "char": "前秦",
+      "en": "Former Qin"
+    }
+  ],
+  "jianyuan": [
+    {
+      "char": "建元",
+      "en": "Term from English"
+    }
+  ],
+  "chuangzao": [
+    {
+      "char": "创凿",
+      "en": "Term from English"
+    }
+  ],
+  "juewujinyou": [
+    {
+      "char": "绝无仅有",
+      "en": "Term from English"
+    }
+  ],
+  "kunei": [
+    {
+      "char": "窟内",
+      "en": "Term from English"
+    }
+  ],
+  "kunzai": [
+    {
+      "char": "捆载",
+      "en": "Term from English"
+    }
+  ],
+  "dunhuangyishuyanjiusuo": [
+    {
+      "char": "敦煌艺术研究所",
+      "en": "Term from English"
+    }
+  ],
+  "yanjiuzhe": [
+    {
+      "char": "研究者",
+      "en": "investigator"
+    }
+  ],
+  "shenghuoqu": [
+    {
+      "char": "生活区",
+      "en": "Term from English"
+    }
+  ],
+  "yaoruo": [
+    {
+      "char": "要弱",
+      "en": "Term from English"
+    }
+  ],
+  "liaoyiliao": [
+    {
+      "char": "聊一聊",
+      "en": "Term from English"
+    }
+  ],
+  "peiniqu": [
+    {
+      "char": "陪你去",
+      "en": "Term from English"
+    }
+  ],
+  "yemao": [
+    {
+      "char": "野猫",
+      "en": "wildcat"
+    }
+  ],
+  "jiwan": [
+    {
+      "char": "几碗",
+      "en": "Term from English"
+    }
+  ],
+  "juligan": [
+    {
+      "char": "距离感",
+      "en": "Term from English"
+    }
+  ],
+  "shuizhaojue": [
+    {
+      "char": "睡着觉",
+      "en": "Term from English"
+    }
+  ],
+  "chuguoshi": [
+    {
+      "char": "出国时",
+      "en": "Term from English"
+    }
+  ],
+  "kaisa": [
+    {
+      "char": "恺撒",
+      "en": "Term from English"
+    }
+  ],
+  "gongjue": [
+    {
+      "char": "公爵",
+      "en": "duke"
+    }
+  ],
+  "boduo": [
+    {
+      "char": "博多",
+      "en": "Term from English"
+    }
+  ],
+  "pingjie": [
+    {
+      "char": "评介",
+      "en": "Term from English"
+    }
+  ],
+  "xinyinggelan": [
+    {
+      "char": "新英格兰",
+      "en": "New England"
+    }
+  ],
+  "maiersi": [
+    {
+      "char": "迈尔斯",
+      "en": "Term from English"
+    }
+  ],
+  "dishen": [
+    {
+      "char": "狄什",
+      "en": "Term from English"
+    }
+  ],
+  "liuxingle": [
+    {
+      "char": "流行乐",
+      "en": "Term from English"
+    }
+  ],
+  "yijiyi": [
+    {
+      "char": "易记易",
+      "en": "Term from English"
+    }
+  ],
+  "zongjiaoyinyue": [
+    {
+      "char": "宗教音乐",
+      "en": "Term from English"
+    }
+  ],
+  "hale": [
+    {
+      "char": "哈乐",
+      "en": "Term from English"
+    }
+  ],
+  "shuochangle": [
+    {
+      "char": "说唱乐",
+      "en": "Term from English"
+    }
+  ],
+  "jiewu": [
+    {
+      "char": "街舞",
+      "en": "Term from English"
+    }
+  ],
+  "shuoshixuewei": [
+    {
+      "char": "硕士学位",
+      "en": "(n) master's"
+    }
+  ],
+  "gaituan": [
+    {
+      "char": "该团",
+      "en": "Term from English"
+    }
+  ],
+  "changshejigou": [
+    {
+      "char": "常设机构",
+      "en": "Term from English"
+    }
+  ],
+  "zhejie": [
+    {
+      "char": "这届",
+      "en": "Term from English"
+    }
+  ],
+  "shenshouguwu": [
+    {
+      "char": "深受鼓舞",
+      "en": "Term from English"
+    }
+  ],
+  "yiwuzuo": [
+    {
+      "char": "一物作",
+      "en": "Term from English"
+    }
+  ],
+  "yizhayi": [
+    {
+      "char": "一眨一",
+      "en": "Term from English"
+    }
+  ],
+  "shuangyinhao": [
+    {
+      "char": "双引号",
+      "en": "Term from English"
+    }
+  ],
+  "huannan": [
+    {
+      "char": "患难",
+      "en": "trials and tribulations"
+    }
+  ],
+  "gexie": [
+    {
+      "char": "各写",
+      "en": "Term from English"
+    }
+  ],
+  "mingquexing": [
+    {
+      "char": "明确性",
+      "en": "Term from English"
+    }
+  ],
+  "huojinsi": [
+    {
+      "char": "霍金斯",
+      "en": "Term from English"
+    }
+  ],
+  "shuangbinyu": [
+    {
+      "char": "双宾语",
+      "en": "Term from English"
+    }
+  ],
+  "yuyao": [
+    {
+      "char": "语要",
+      "en": "Term from English"
+    }
+  ],
+  "wangjing": [
+    {
+      "char": "网净",
+      "en": "Term from English"
+    }
+  ],
+  "jiyou": [
+    {
+      "char": "极有",
+      "en": "Term from English"
+    }
+  ],
+  "jiqishebei": [
+    {
+      "char": "机器设备",
+      "en": "Term from English"
+    }
+  ],
+  "diji": [
+    {
+      "char": "地极",
+      "en": "Term from English"
+    }
+  ],
+  "jingde": [
+    {
+      "char": "净得",
+      "en": "Term from English"
+    }
+  ],
+  "bingguiliping": [
+    {
+      "char": "冰贵丽萍",
+      "en": "Term from English"
+    }
+  ],
+  "tushe": [
+    {
+      "char": "图摄",
+      "en": "Term from English"
+    }
+  ],
+  "tuwang": [
+    {
+      "char": "图网",
+      "en": "Term from English"
+    }
+  ],
+  "huangzhong": [
+    {
+      "char": "黄忠",
+      "en": "Term from English"
+    }
+  ],
+  "baocai": [
+    {
+      "char": "包菜",
+      "en": "Term from English"
+    }
+  ],
+  "yuanganguo": [
+    {
+      "char": "元干锅",
+      "en": "Term from English"
+    }
+  ],
+  "jiyuanyuan": [
+    {
+      "char": "鸡元元",
+      "en": "Term from English"
+    }
+  ],
+  "doufugan": [
+    {
+      "char": "豆腐干",
+      "en": "Term from English"
+    }
+  ],
+  "baoyuanyuanjungu": [
+    {
+      "char": "包元元菌菇",
+      "en": "Term from English"
+    }
+  ],
+  "tangyuanyuan": [
+    {
+      "char": "汤元元",
+      "en": "Term from English"
+    }
+  ],
+  "shucaitang": [
+    {
+      "char": "蔬菜汤",
+      "en": "Term from English"
+    }
+  ],
+  "lawei": [
+    {
+      "char": "腊味",
+      "en": "Term from English"
+    }
+  ],
+  "hezhengyuan": [
+    {
+      "char": "合蒸元",
+      "en": "Term from English"
+    }
+  ],
+  "luli": [
+    {
+      "char": "路里",
+      "en": "Term from English"
+    }
+  ],
+  "dika": [
+    {
+      "char": "低卡",
+      "en": "Term from English"
+    }
+  ],
+  "guanchang": [
+    {
+      "char": "灌肠",
+      "en": "enema"
+    }
+  ],
+  "bianxing": [
+    {
+      "char": "变星",
+      "en": "variable star"
+    }
+  ],
+  "guangzi": [
+    {
+      "char": "光子",
+      "en": "(phys.) photon (particle or quantum of light)"
+    }
+  ],
+  "chaoyusuan": [
+    {
+      "char": "超预算",
+      "en": "Term from English"
+    }
+  ],
+  "linbie": [
+    {
+      "char": "临别",
+      "en": "Term from English"
+    }
+  ],
+  "juyuce": [
+    {
+      "char": "据预测",
+      "en": "Term from English"
+    }
+  ],
+  "yizhen": [
+    {
+      "char": "一针",
+      "en": "Term from English"
+    }
+  ],
+  "guanzhongmen": [
+    {
+      "char": "观众们",
+      "en": "Term from English"
+    }
+  ],
+  "tanzuo": [
+    {
+      "char": "瘫坐",
+      "en": "Term from English"
+    }
+  ],
+  "wangyuehan": [
+    {
+      "char": "王约翰",
+      "en": "Term from English"
+    }
+  ],
+  "bingyuan": [
+    {
+      "char": "病源",
+      "en": "Term from English"
+    }
+  ],
+  "xuezhong": [
+    {
+      "char": "学中",
+      "en": "Term from English"
+    }
+  ],
+  "qiyong": [
+    {
+      "char": "启用",
+      "en": "start using"
+    }
+  ],
+  "linshixing": [
+    {
+      "char": "临时性",
+      "en": "Term from English"
+    }
+  ],
+  "zhanliang": [
+    {
+      "char": "展两",
+      "en": "Term from English"
+    }
+  ],
+  "fanqiezhi": [
+    {
+      "char": "番茄汁",
+      "en": "Term from English"
+    }
+  ],
+  "feifou": [
+    {
+      "char": "非否",
+      "en": "Term from English"
+    }
+  ],
+  "duodai": [
+    {
+      "char": "多带",
+      "en": "Term from English"
+    }
+  ],
+  "changbudai": [
+    {
+      "char": "常不带",
+      "en": "Term from English"
+    }
+  ],
+  "rufei": [
+    {
+      "char": "如非",
+      "en": "Term from English"
+    }
+  ],
+  "qufei": [
+    {
+      "char": "区非",
+      "en": "Term from English"
+    }
+  ],
+  "xiyanzhe": [
+    {
+      "char": "吸烟者",
+      "en": "Term from English"
+    }
+  ],
+  "huyanluanyu": [
+    {
+      "char": "胡言乱语",
+      "en": "Term from English"
+    }
+  ],
+  "yipaihuyan": [
+    {
+      "char": "一派胡言",
+      "en": "Term from English"
+    }
+  ],
+  "kejishiye": [
+    {
+      "char": "科技事业",
+      "en": "Term from English"
+    }
+  ],
+  "suizhang": [
+    {
+      "char": "虽长",
+      "en": "Term from English"
+    }
+  ],
+  "liuzhe": [
+    {
+      "char": "留着",
+      "en": "Term from English"
+    }
+  ],
+  "changchang": [
+    {
+      "char": "长长",
+      "en": "Term from English"
+    }
+  ],
+  "jincheng": [
+    {
+      "char": "近程",
+      "en": "Term from English"
+    }
+  ],
+  "zhouji": [
+    {
+      "char": "洲际",
+      "en": "Term from English"
+    }
+  ],
+  "yuzhouxue": [
+    {
+      "char": "宇宙学",
+      "en": "Term from English"
+    }
+  ],
+  "yingguojianqiaodaxue": [
+    {
+      "char": "英国剑桥大学",
+      "en": "Term from English"
+    }
+  ],
+  "lukasi": [
+    {
+      "char": "卢卡斯",
+      "en": "Lucas (name)"
+    }
+  ],
+  "weisuoxing": [
+    {
+      "char": "萎缩性",
+      "en": "Term from English"
+    }
+  ],
+  "yinghuazheng": [
+    {
+      "char": "硬化症",
+      "en": "Term from English"
+    }
+  ],
+  "heidong": [
+    {
+      "char": "黑洞",
+      "en": "black hole"
+    }
+  ],
+  "haixueguo": [
+    {
+      "char": "还学过",
+      "en": "Term from English"
+    }
+  ],
+  "moguo": [
+    {
+      "char": "没过",
+      "en": "Term from English"
+    }
+  ],
+  "jizhou": [
+    {
+      "char": "几周",
+      "en": "Term from English"
+    }
+  ],
+  "tongweiyu": [
+    {
+      "char": "同位语",
+      "en": "Term from English"
+    }
+  ],
+  "changzaiju": [
+    {
+      "char": "常在句",
+      "en": "Term from English"
+    }
+  ],
+  "dadiansheng": [
+    {
+      "char": "大点声",
+      "en": "Term from English"
+    }
+  ],
+  "lichang": [
+    {
+      "char": "离场",
+      "en": "Term from English"
+    }
+  ],
+  "shangke": [
+    {
+      "char": "商科",
+      "en": "Term from English"
+    }
+  ],
+  "guiduo": [
+    {
+      "char": "贵多",
+      "en": "Term from English"
+    }
+  ],
+  "maifangzi": [
+    {
+      "char": "买房子",
+      "en": "Term from English"
+    }
+  ],
+  "renchu": [
+    {
+      "char": "人初",
+      "en": "Term from English"
+    }
+  ],
+  "bushigan": [
+    {
+      "char": "不适感",
+      "en": "Term from English"
+    }
+  ],
+  "bukefouren": [
+    {
+      "char": "不可否认",
+      "en": "Term from English"
+    }
+  ],
+  "gaikuodishuo": [
+    {
+      "char": "概括地说",
+      "en": "Term from English"
+    }
+  ],
+  "bizhu": [
+    {
+      "char": "比住",
+      "en": "Term from English"
+    }
+  ],
+  "chegang": [
+    {
+      "char": "车刚",
+      "en": "Term from English"
+    }
+  ],
+  "shicai": [
+    {
+      "char": "食材",
+      "en": "Term from English"
+    }
+  ],
+  "badacaixi": [
+    {
+      "char": "八大菜系",
+      "en": "Term from English"
+    }
+  ],
+  "lucai": [
+    {
+      "char": "鲁菜",
+      "en": "Shandong cuisine"
+    }
+  ],
+  "xiangcai": [
+    {
+      "char": "湘菜",
+      "en": "Hunan cuisine"
+    }
+  ],
+  "sucai": [
+    {
+      "char": "苏菜",
+      "en": "Term from English"
+    }
+  ],
+  "huaiyangcai": [
+    {
+      "char": "淮扬菜",
+      "en": "Term from English"
+    }
+  ],
+  "zhecai": [
+    {
+      "char": "浙菜",
+      "en": "Term from English"
+    }
+  ],
+  "yuecai": [
+    {
+      "char": "粤菜",
+      "en": "Cantonese cuisine"
+    }
+  ],
+  "mincai": [
+    {
+      "char": "闽菜",
+      "en": "Term from English"
+    }
+  ],
+  "huicai": [
+    {
+      "char": "徽菜",
+      "en": "Term from English"
+    }
+  ],
+  "chaozhoucai": [
+    {
+      "char": "潮州菜",
+      "en": "Term from English"
+    }
+  ],
+  "benbangcai": [
+    {
+      "char": "本帮菜",
+      "en": "Term from English"
+    }
+  ],
+  "dongbeicai": [
+    {
+      "char": "东北菜",
+      "en": "Term from English"
+    }
+  ],
+  "kejiacai": [
+    {
+      "char": "客家菜",
+      "en": "Term from English"
+    }
+  ],
+  "shancai": [
+    {
+      "char": "陕菜",
+      "en": "Term from English"
+    }
+  ],
+  "qianzi": [
+    {
+      "char": "千滋",
+      "en": "Term from English"
+    }
+  ],
+  "baiwei": [
+    {
+      "char": "百味",
+      "en": "Term from English"
+    }
+  ],
+  "bigeng": [
+    {
+      "char": "笔耕",
+      "en": "Term from English"
+    }
+  ],
+  "ruqi": [
+    {
+      "char": "如其",
+      "en": "Term from English"
+    }
+  ],
+  "rujina": [
+    {
+      "char": "如吉娜",
+      "en": "Term from English"
+    }
+  ],
+  "mianwuxuese": [
+    {
+      "char": "面无血色",
+      "en": "Term from English"
+    }
+  ],
+  "bingyanyan": [
+    {
+      "char": "病恹恹",
+      "en": "Term from English"
+    }
+  ],
+  "ruqiren": [
+    {
+      "char": "如其人",
+      "en": "Term from English"
+    }
+  ],
+  "dachi": [
+    {
+      "char": "大吃",
+      "en": "gobble"
+    }
+  ],
+  "tianla": [
+    {
+      "char": "甜辣",
+      "en": "Term from English"
+    }
+  ],
+  "zhuliao": [
+    {
+      "char": "主料",
+      "en": "Term from English"
+    }
+  ],
+  "jikuai": [
+    {
+      "char": "鸡块",
+      "en": "Term from English"
+    }
+  ],
+  "peiyi": [
+    {
+      "char": "配以",
+      "en": "Term from English"
+    }
+  ],
+  "jianjiao": [
+    {
+      "char": "尖椒",
+      "en": "Term from English"
+    }
+  ],
+  "weitianlve": [
+    {
+      "char": "味甜略",
+      "en": "Term from English"
+    }
+  ],
+  "bula": [
+    {
+      "char": "不辣",
+      "en": "Term from English"
+    }
+  ],
+  "wuzhengju": [
+    {
+      "char": "无证据",
+      "en": "Term from English"
+    }
+  ],
+  "changke": [
+    {
+      "char": "常可",
+      "en": "Term from English"
+    }
+  ],
+  "shuaidiao": [
+    {
+      "char": "摔掉",
+      "en": "Term from English"
+    }
+  ],
+  "xiaomeimei": [
+    {
+      "char": "小妹妹",
+      "en": "Term from English"
+    }
+  ],
+  "guangdonghua": [
+    {
+      "char": "广东话",
+      "en": "Cantonese language"
+    }
+  ],
+  "zahui": [
+    {
+      "char": "杂烩",
+      "en": "Term from English"
+    }
+  ],
+  "huntun": [
+    {
+      "char": "馄饨",
+      "en": "wonton"
+    }
+  ],
+  "qingju": [
+    {
+      "char": "请举",
+      "en": "Term from English"
+    }
+  ],
+  "zasui": [
+    {
+      "char": "杂碎",
+      "en": "Term from English"
+    }
+  ],
+  "duosui": [
+    {
+      "char": "剁碎",
+      "en": "mince"
+    }
+  ],
+  "jiaosui": [
+    {
+      "char": "搅碎",
+      "en": "Term from English"
+    }
+  ],
+  "xiaoniurou": [
+    {
+      "char": "小牛肉",
+      "en": "Term from English"
+    }
+  ],
+  "yanmai": [
+    {
+      "char": "燕麦",
+      "en": "oat"
+    }
+  ],
+  "xiangxinliao": [
+    {
+      "char": "香辛料",
+      "en": "Term from English"
+    }
+  ],
+  "xianyong": [
+    {
+      "char": "馅用",
+      "en": "Term from English"
+    }
+  ],
+  "danggai": [
+    {
+      "char": "当该",
+      "en": "Term from English"
+    }
+  ],
+  "benyuedi": [
+    {
+      "char": "本月底",
+      "en": "Term from English"
+    }
+  ],
+  "woxingwosu": [
+    {
+      "char": "我行我素",
+      "en": "Term from English"
+    }
+  ],
+  "fanbing": [
+    {
+      "char": "犯病",
+      "en": "to fall ill"
+    }
+  ],
+  "beiqu": [
+    {
+      "char": "北去",
+      "en": "Term from English"
+    }
+  ],
+  "jinzhan": [
+    {
+      "char": "进站",
+      "en": "Term from English"
+    }
+  ],
+  "chaodongnan": [
+    {
+      "char": "朝东南",
+      "en": "Term from English"
+    }
+  ],
+  "aibota": [
+    {
+      "char": "艾伯塔",
+      "en": "Term from English"
+    }
+  ],
+  "sasika": [
+    {
+      "char": "萨斯喀",
+      "en": "Term from English"
+    }
+  ],
+  "chehe": [
+    {
+      "char": "彻和",
+      "en": "Term from English"
+    }
+  ],
+  "manituoba": [
+    {
+      "char": "马尼托巴",
+      "en": "Term from English"
+    }
+  ],
+  "lidaiyu": [
+    {
+      "char": "李黛予",
+      "en": "Term from English"
+    }
+  ],
+  "houli": [
+    {
+      "char": "后离",
+      "en": "Term from English"
+    }
+  ],
+  "fayi": [
+    {
+      "char": "法裔",
+      "en": "Term from English"
+    }
+  ],
+  "banshuyishang": [
+    {
+      "char": "半数以上",
+      "en": "more than half"
+    }
+  ],
+  "niyajialadapubu": [
+    {
+      "char": "尼亚加拉大瀑布",
+      "en": "Term from English"
+    }
+  ],
+  "matixing": [
+    {
+      "char": "马蹄形",
+      "en": "Term from English"
+    }
+  ],
+  "miankuan": [
+    {
+      "char": "面宽",
+      "en": "Term from English"
+    }
+  ],
+  "huanghunshifen": [
+    {
+      "char": "黄昏时分",
+      "en": "Term from English"
+    }
+  ],
+  "genlinfei": [
+    {
+      "char": "跟林菲",
+      "en": "Term from English"
+    }
+  ],
+  "pojuguimo": [
+    {
+      "char": "颇具规模",
+      "en": "Term from English"
+    }
+  ],
+  "shangpu": [
+    {
+      "char": "商铺",
+      "en": "Term from English"
+    }
+  ],
+  "taiyangre": [
+    {
+      "char": "太阳热",
+      "en": "Term from English"
+    }
+  ],
+  "huishai": [
+    {
+      "char": "会晒",
+      "en": "Term from English"
+    }
+  ],
+  "zhongyici": [
+    {
+      "char": "中一词",
+      "en": "Term from English"
+    }
+  ],
+  "duoyi": [
+    {
+      "char": "多义",
+      "en": "Term from English"
+    }
+  ],
+  "shoujiduanxin": [
+    {
+      "char": "手机短信",
+      "en": "Term from English"
+    }
+  ],
+  "lixiyu": [
+    {
+      "char": "利希于",
+      "en": "Term from English"
+    }
+  ],
+  "yanni": [
+    {
+      "char": "淹溺",
+      "en": "Term from English"
+    }
+  ],
+  "meiyifen": [
+    {
+      "char": "每一分",
+      "en": "Term from English"
+    }
+  ],
+  "yikeqianjin": [
+    {
+      "char": "一刻千金",
+      "en": "Term from English"
+    }
+  ],
+  "baikoumobian": [
+    {
+      "char": "百口莫辩",
+      "en": "Term from English"
+    }
+  ],
+  "jinru": [
+    {
+      "char": "金如",
+      "en": "Term from English"
+    }
+  ],
+  "guohuo": [
+    {
+      "char": "过活",
+      "en": "live one's life"
+    }
+  ],
+  "yuzuo": [
+    {
+      "char": "语作",
+      "en": "Term from English"
+    }
+  ],
+  "licu": [
+    {
+      "char": "粒醋",
+      "en": "Term from English"
+    }
+  ],
+  "rensheng": [
+    {
+      "char": "人圣",
+      "en": "Term from English"
+    }
+  ],
+  "hujiasipo": [
+    {
+      "char": "湖贾斯珀",
+      "en": "Term from English"
+    }
+  ],
+  "herang": [
+    {
+      "char": "河让",
+      "en": "Term from English"
+    }
+  ],
+  "wuquan": [
+    {
+      "char": "物拳",
+      "en": "Term from English"
+    }
+  ],
+  "changyou": [
+    {
+      "char": "厂有",
+      "en": "Term from English"
+    }
+  ],
+  "paigang": [
+    {
+      "char": "排钢",
+      "en": "Term from English"
+    }
+  ],
+  "chenli": [
+    {
+      "char": "陈力",
+      "en": "Term from English"
+    }
+  ],
+  "bingzhuangli": [
+    {
+      "char": "冰庄力",
+      "en": "Term from English"
+    }
+  ],
+  "chenzhi": [
+    {
+      "char": "陈志",
+      "en": "Term from English"
+    }
+  ],
+  "liuzhang": [
+    {
+      "char": "六张",
+      "en": "Term from English"
+    }
+  ],
+  "youxiaoxia": [
+    {
+      "char": "游晓霞",
+      "en": "Term from English"
+    }
+  ],
+  "mayu": [
+    {
+      "char": "马鱼",
+      "en": "Term from English"
+    }
+  ],
+  "luniu": [
+    {
+      "char": "鹿牛",
+      "en": "Term from English"
+    }
+  ],
+  "zizhi": [
+    {
+      "char": "子止",
+      "en": "Term from English"
+    }
+  ],
+  "mayanqi": [
+    {
+      "char": "马燕齐",
+      "en": "Term from English"
+    }
+  ],
+  "zhaowei": [
+    {
+      "char": "赵魏",
+      "en": "Term from English"
+    }
+  ],
+  "hanchu": [
+    {
+      "char": "韩楚",
+      "en": "Term from English"
+    }
+  ],
+  "lingrenjidong": [
+    {
+      "char": "令人激动",
+      "en": "Term from English"
+    }
+  ],
+  "chonghuai": [
+    {
+      "char": "宠坏",
+      "en": "spoil (a child)"
+    }
+  ],
+  "dayunhe": [
+    {
+      "char": "大运河",
+      "en": "(n) Grand Canal"
+    }
+  ],
+  "aernuohe": [
+    {
+      "char": "阿尔诺河",
+      "en": "Term from English"
+    }
+  ],
+  "feilala": [
+    {
+      "char": "费拉拉",
+      "en": "Term from English"
+    }
+  ],
+  "weina": [
+    {
+      "char": "韦纳",
+      "en": "Term from English"
+    }
+  ],
+  "kebixing": [
+    {
+      "char": "可比性",
+      "en": "Term from English"
+    }
+  ],
+  "dawangqiu": [
+    {
+      "char": "打网球",
+      "en": "Term from English"
+    }
+  ],
+  "saiwuduo": [
+    {
+      "char": "赛无舵",
+      "en": "Term from English"
+    }
+  ],
+  "qiju": [
+    {
+      "char": "七局",
+      "en": "Term from English"
+    }
+  ],
+  "shenzhancao": [
+    {
+      "char": "伸展操",
+      "en": "Term from English"
+    }
+  ],
+  "zhenqu": [
+    {
+      "char": "震区",
+      "en": "Term from English"
+    }
+  ],
+  "qishen": [
+    {
+      "char": "栖身",
+      "en": "stay at"
+    }
+  ],
+  "ruyan": [
+    {
+      "char": "如谚",
+      "en": "Term from English"
+    }
+  ],
+  "shijieshi": [
+    {
+      "char": "世界史",
+      "en": "Term from English"
+    }
+  ],
+  "xuefenzhi": [
+    {
+      "char": "学分制",
+      "en": "Term from English"
+    }
+  ],
+  "wenlike": [
+    {
+      "char": "文理科",
+      "en": "Term from English"
+    }
+  ],
+  "biyezhengshu": [
+    {
+      "char": "毕业证书",
+      "en": "Term from English"
+    }
+  ],
+  "bixiukecheng": [
+    {
+      "char": "必修课程",
+      "en": "Term from English"
+    }
+  ],
+  "shengwuhuaxue": [
+    {
+      "char": "生物化学",
+      "en": "biochemistry"
+    }
+  ],
+  "kechengneirong": [
+    {
+      "char": "课程内容",
+      "en": "Term from English"
+    }
+  ],
+  "xingweiyishu": [
+    {
+      "char": "行为艺术",
+      "en": "Term from English"
+    }
+  ],
+  "qichexiuli": [
+    {
+      "char": "汽车修理",
+      "en": "Term from English"
+    }
+  ],
+  "tiyuxinwen": [
+    {
+      "char": "体育新闻",
+      "en": "Term from English"
+    }
+  ],
+  "qiangliejianyi": [
+    {
+      "char": "强烈建议",
+      "en": "Term from English"
+    }
+  ],
+  "biyou": [
+    {
+      "char": "笔友",
+      "en": "pen pal"
+    }
+  ],
+  "wujiakeguizhe": [
+    {
+      "char": "无家可归者",
+      "en": "Term from English"
+    }
+  ],
+  "jiujipinmin": [
+    {
+      "char": "救济贫民",
+      "en": "Term from English"
+    }
+  ],
+  "ershe": [
+    {
+      "char": "而设",
+      "en": "Term from English"
+    }
+  ],
+  "shijia": [
+    {
+      "char": "市价",
+      "en": "(n) market value"
+    }
+  ],
+  "maersi": [
+    {
+      "char": "马尔斯",
+      "en": "Term from English"
+    }
+  ],
+  "goujia": [
+    {
+      "char": "构架",
+      "en": "structure"
+    }
+  ],
+  "jingbiao": [
+    {
+      "char": "竞标",
+      "en": "Term from English"
+    }
+  ],
+  "sitafu": [
+    {
+      "char": "斯塔夫",
+      "en": "Term from English"
+    }
+  ],
+  "aifeier": [
+    {
+      "char": "埃菲尔",
+      "en": "Term from English"
+    }
+  ],
+  "ludeweixi": [
+    {
+      "char": "路德维希",
+      "en": "Ludwig (name)"
+    }
+  ],
+  "juzi": [
+    {
+      "char": "巨资",
+      "en": "Term from English"
+    }
+  ],
+  "jiazhou": [
+    {
+      "char": "加州",
+      "en": "California"
+    }
+  ],
+  "bilugongheguo": [
+    {
+      "char": "秘鲁共和国",
+      "en": "Term from English"
+    }
+  ],
+  "kusikesheng": [
+    {
+      "char": "库斯科省",
+      "en": "Term from English"
+    }
+  ],
+  "shilang": [
+    {
+      "char": "石廊",
+      "en": "Term from English"
+    }
+  ],
+  "xibeifang": [
+    {
+      "char": "西北方",
+      "en": "northwest"
+    }
+  ],
+  "jiefeng": [
+    {
+      "char": "接缝",
+      "en": "seam"
+    }
+  ],
+  "huijiang": [
+    {
+      "char": "灰浆",
+      "en": "Term from English"
+    }
+  ],
+  "andisi": [
+    {
+      "char": "安第斯",
+      "en": "Term from English"
+    }
+  ],
+  "keya": [
+    {
+      "char": "科亚",
+      "en": "Term from English"
+    }
+  ],
+  "yougai": [
+    {
+      "char": "有该",
+      "en": "Term from English"
+    }
+  ],
+  "hushi": [
+    {
+      "char": "湖是",
+      "en": "Term from English"
+    }
+  ],
+  "sirenye": [
+    {
+      "char": "斯人也",
+      "en": "Term from English"
+    }
+  ],
+  "zuoshi": [
+    {
+      "char": "作是",
+      "en": "Term from English"
+    }
+  ],
+  "shanxi": [
+    {
+      "char": "山系",
+      "en": "Term from English"
+    }
+  ],
+  "maya": [
+    {
+      "char": "玛雅",
+      "en": "Term from English"
+    }
+  ],
+  "aziteke": [
+    {
+      "char": "阿兹特克",
+      "en": "Term from English"
+    }
+  ],
+  "ganshi": [
+    {
+      "char": "干式",
+      "en": "Term from English"
+    }
+  ],
+  "qiegecheng": [
+    {
+      "char": "切割成",
+      "en": "Term from English"
+    }
+  ],
+  "qiangti": [
+    {
+      "char": "墙体",
+      "en": "Term from English"
+    }
+  ],
+  "daiqian": [
+    {
+      "char": "代签",
+      "en": "Term from English"
+    }
+  ],
+  "zhongguoguojiatiyuzongju": [
+    {
+      "char": "中国国家体育总局",
+      "en": "Term from English"
+    }
+  ],
+  "gaipi": [
+    {
+      "char": "改批",
+      "en": "Term from English"
+    }
+  ],
+  "banju": [
+    {
+      "char": "半句",
+      "en": "Term from English"
+    }
+  ],
+  "kaizou": [
+    {
+      "char": "开走",
+      "en": "Term from English"
+    }
+  ],
+  "duizhong": [
+    {
+      "char": "队中",
+      "en": "Term from English"
+    }
+  ],
+  "jianchuan": [
+    {
+      "char": "舰船",
+      "en": "Term from English"
+    }
+  ],
+  "qiaodan": [
+    {
+      "char": "乔丹",
+      "en": "Jordan"
+    }
+  ],
+  "dizhifang": [
+    {
+      "char": "低脂肪",
+      "en": "Term from English"
+    }
+  ],
+  "suoshi": [
+    {
+      "char": "所试",
+      "en": "Term from English"
+    }
+  ],
+  "shuangguanyu": [
+    {
+      "char": "双关语",
+      "en": "Term from English"
+    }
+  ],
+  "gouci": [
+    {
+      "char": "构词",
+      "en": "Term from English"
+    }
+  ],
+  "lianxie": [
+    {
+      "char": "连写",
+      "en": "Term from English"
+    }
+  ],
+  "keshu": [
+    {
+      "char": "可数",
+      "en": "Term from English"
+    }
+  ],
+  "bukeshu": [
+    {
+      "char": "不可数",
+      "en": "Term from English"
+    }
+  ],
+  "dasaochu": [
+    {
+      "char": "大扫除",
+      "en": "Term from English"
+    }
+  ],
+  "shijiemori": [
+    {
+      "char": "世界末日",
+      "en": "end of the world"
+    }
+  ],
+  "ruguo": [
+    {
+      "char": "如锅",
+      "en": "Term from English"
+    }
+  ],
+  "morilailin": [
+    {
+      "char": "末日来临",
+      "en": "Term from English"
+    }
+  ],
+  "zhengan": [
+    {
+      "char": "震感",
+      "en": "Term from English"
+    }
+  ],
+  "beiping": [
+    {
+      "char": "被平",
+      "en": "Term from English"
+    }
+  ],
+  "liukuai": [
+    {
+      "char": "六块",
+      "en": "Term from English"
+    }
+  ],
+  "liufen": [
+    {
+      "char": "六分",
+      "en": "Term from English"
+    }
+  ],
+  "zhier": [
+    {
+      "char": "之二",
+      "en": "Term from English"
+    }
+  ],
+  "wuyibushi": [
+    {
+      "char": "无一不是",
+      "en": "Term from English"
+    }
+  ],
+  "shoukun": [
+    {
+      "char": "受困",
+      "en": "(v) be trapped"
+    }
+  ],
+  "gaodaren": [
+    {
+      "char": "高达人",
+      "en": "Term from English"
+    }
+  ],
+  "guijia": [
+    {
+      "char": "龟甲",
+      "en": "Term from English"
+    }
+  ],
+  "shougu": [
+    {
+      "char": "兽骨",
+      "en": "Term from English"
+    }
+  ],
+  "jieyishihuo": [
+    {
+      "char": "解疑释惑",
+      "en": "Term from English"
+    }
+  ],
+  "jizaixialai": [
+    {
+      "char": "记载下来",
+      "en": "Term from English"
+    }
+  ],
+  "buci": [
+    {
+      "char": "卜辞",
+      "en": "oracle inscriptions of the Shang Dynasty (16th-11th century BC) on tortoiseshells or animal bones"
+    }
+  ],
+  "xingsheng": [
+    {
+      "char": "形声",
+      "en": "Term from English"
+    }
+  ],
+  "wangyirong": [
+    {
+      "char": "王懿荣",
+      "en": "Term from English"
+    }
+  ],
+  "wanpian": [
+    {
+      "char": "万片",
+      "en": "Term from English"
+    }
+  ],
+  "zhongheju": [
+    {
+      "char": "中和句",
+      "en": "Term from English"
+    }
+  ],
+  "dahuilang": [
+    {
+      "char": "大灰狼",
+      "en": "Term from English"
+    }
+  ],
+  "xingshu": [
+    {
+      "char": "行书",
+      "en": "semi-cursive script"
+    }
+  ],
+  "liugongquan": [
+    {
+      "char": "柳公权",
+      "en": "Liu Gongquan"
+    }
+  ],
+  "yanzhenqing": [
+    {
+      "char": "颜真卿",
+      "en": "name of a person"
+    }
+  ],
+  "ouyangxun": [
+    {
+      "char": "欧阳询",
+      "en": "Term from English"
+    }
+  ],
+  "xiushenyangxing": [
+    {
+      "char": "修身养性",
+      "en": "Term from English"
+    }
+  ],
+  "gaodong": [
+    {
+      "char": "搞懂",
+      "en": "Term from English"
+    }
+  ],
+  "kexuanxiang": [
+    {
+      "char": "可选项",
+      "en": "Term from English"
+    }
+  ],
+  "dangqianqingkuang": [
+    {
+      "char": "当前情况",
+      "en": "Term from English"
+    }
+  ],
+  "fanyi": [
+    {
+      "char": "反意",
+      "en": "Term from English"
+    }
+  ],
+  "renxiang": [
+    {
+      "char": "人向",
+      "en": "Term from English"
+    }
+  ],
+  "ruzhu": [
+    {
+      "char": "如住",
+      "en": "Term from English"
+    }
+  ],
+  "tiaozhanshu": [
+    {
+      "char": "挑战书",
+      "en": "Term from English"
+    }
+  ],
+  "zhongzhuan": [
+    {
+      "char": "中砖",
+      "en": "Term from English"
+    }
+  ],
+  "guoyanbing": [
+    {
+      "char": "郭砚冰",
+      "en": "Term from English"
+    }
+  ],
+  "wanghuan": [
+    {
+      "char": "王焕",
+      "en": "Term from English"
+    }
+  ],
+  "huijue": [
+    {
+      "char": "回绝",
+      "en": "rebuff"
+    }
+  ],
+  "henzhai": [
+    {
+      "char": "很窄",
+      "en": "Term from English"
+    }
+  ],
+  "biyelunwen": [
+    {
+      "char": "毕业论文",
+      "en": "Term from English"
+    }
+  ],
+  "xiaohuabuliang": [
+    {
+      "char": "消化不良",
+      "en": "Term from English"
+    }
+  ],
+  "shixianmubiao": [
+    {
+      "char": "实现目标",
+      "en": "Term from English"
+    }
+  ],
+  "biaotixinwen": [
+    {
+      "char": "标题新闻",
+      "en": "Term from English"
+    }
+  ],
+  "xinwenbiaoti": [
+    {
+      "char": "新闻标题",
+      "en": "Term from English"
+    }
+  ],
+  "aerfulei": [
+    {
+      "char": "阿尔弗雷",
+      "en": "Term from English"
+    }
+  ],
+  "bonade": [
+    {
+      "char": "伯纳德",
+      "en": "Term from English"
+    }
+  ],
+  "ruidiankelang": [
+    {
+      "char": "瑞典克朗",
+      "en": "Term from English"
+    }
+  ],
+  "fenxiang": [
+    {
+      "char": "分项",
+      "en": "Term from English"
+    }
+  ],
+  "dierhui": [
+    {
+      "char": "第二回",
+      "en": "Term from English"
+    }
+  ],
+  "xinzhong": [
+    {
+      "char": "新种",
+      "en": "Term from English"
+    }
+  ],
+  "qinghao": [
+    {
+      "char": "青蒿",
+      "en": "Term from English"
+    }
+  ],
+  "mingyi": [
+    {
+      "char": "名医",
+      "en": "Term from English"
+    }
+  ],
+  "yiyaoxuejia": [
+    {
+      "char": "医药学家",
+      "en": "Term from English"
+    }
+  ],
+  "gehong": [
+    {
+      "char": "葛洪",
+      "en": "Term from English"
+    }
+  ],
+  "jifangshu": [
+    {
+      "char": "急方书",
+      "en": "Term from English"
+    }
+  ],
+  "jiuji": [
+    {
+      "char": "救急",
+      "en": "Term from English"
+    }
+  ],
+  "zhenliao": [
+    {
+      "char": "诊疗",
+      "en": "diagnosis and treatment"
+    }
+  ],
+  "liangfang": [
+    {
+      "char": "良方",
+      "en": "Term from English"
+    }
+  ],
+  "zhouhou": [
+    {
+      "char": "肘后",
+      "en": "Term from English"
+    }
+  ],
+  "changbei": [
+    {
+      "char": "常备",
+      "en": "Term from English"
+    }
+  ],
+  "lvmeizhong": [
+    {
+      "char": "绿霉中",
+      "en": "Term from English"
+    }
+  ],
+  "tichun": [
+    {
+      "char": "提纯",
+      "en": "Term from English"
+    }
+  ],
+  "wuyao": [
+    {
+      "char": "无药",
+      "en": "Term from English"
+    }
+  ],
+  "hulixue": [
+    {
+      "char": "护理学",
+      "en": "nursing"
+    }
+  ],
+  "tanwangbingren": [
+    {
+      "char": "探望病人",
+      "en": "Term from English"
+    }
+  ],
+  "guojihushijie": [
+    {
+      "char": "国际护士节",
+      "en": "Term from English"
+    }
+  ],
+  "liyu": [
+    {
+      "char": "俚语",
+      "en": "slang"
+    }
+  ],
+  "yijin": [
+    {
+      "char": "一进",
+      "en": "Term from English"
+    }
+  ],
+  "huiliang": [
+    {
+      "char": "会亮",
+      "en": "Term from English"
+    }
+  ],
+  "zidongbofang": [
+    {
+      "char": "自动播放",
+      "en": "Term from English"
+    }
+  ],
+  "zhuanzhang": [
+    {
+      "char": "转账",
+      "en": "Term from English"
+    }
+  ],
+  "fengshi": [
+    {
+      "char": "风势",
+      "en": "Term from English"
+    }
+  ],
+  "buzuo": [
+    {
+      "char": "布作",
+      "en": "Term from English"
+    }
+  ],
+  "huolang": [
+    {
+      "char": "或浪",
+      "en": "Term from English"
+    }
+  ],
+  "bingchuanheliu": [
+    {
+      "char": "冰川河流",
+      "en": "Term from English"
+    }
+  ],
+  "gouxiong": [
+    {
+      "char": "狗熊",
+      "en": "Term from English"
+    }
+  ],
+  "langhuan": [
+    {
+      "char": "狼獾",
+      "en": "Term from English"
+    }
+  ],
+  "anjialuohu": [
+    {
+      "char": "安家落户",
+      "en": "make one's home in a place"
+    }
+  ],
+  "lujiao": [
+    {
+      "char": "鹿角",
+      "en": "Term from English"
+    }
+  ],
+  "jieren": [
+    {
+      "char": "接人",
+      "en": "to meet a person"
+    }
+  ],
+  "taixiang": [
+    {
+      "char": "太像",
+      "en": "Term from English"
+    }
+  ],
+  "jiantan": [
+    {
+      "char": "健谈",
+      "en": "Term from English"
+    }
+  ],
+  "kechang": [
+    {
+      "char": "可畅",
+      "en": "Term from English"
+    }
+  ],
+  "motianlun": [
+    {
+      "char": "摩天轮",
+      "en": "Term from English"
+    }
+  ],
+  "huacheyouxing": [
+    {
+      "char": "花车游行",
+      "en": "Term from English"
+    }
+  ],
+  "ana": [
+    {
+      "char": "阿纳",
+      "en": "Term from English"
+    }
+  ],
+  "aolanduo": [
+    {
+      "char": "奥兰多",
+      "en": "Orlando"
+    }
+  ],
+  "zhongguoxianggang": [
+    {
+      "char": "中国香港",
+      "en": "Term from English"
+    }
+  ],
+  "tiannaxizhou": [
+    {
+      "char": "田纳西州",
+      "en": "Tennessee"
+    }
+  ],
+  "chuantonggongyi": [
+    {
+      "char": "传统工艺",
+      "en": "Term from English"
+    }
+  ],
+  "zhanglong": [
+    {
+      "char": "长隆",
+      "en": "Term from English"
+    }
+  ],
+  "kaiyuan": [
+    {
+      "char": "开园",
+      "en": "Term from English"
+    }
+  ],
+  "chuangxia": [
+    {
+      "char": "创下",
+      "en": "Term from English"
+    }
+  ],
+  "yakeli": [
+    {
+      "char": "亚克力",
+      "en": "Term from English"
+    }
+  ],
+  "guanjingchuang": [
+    {
+      "char": "观景窗",
+      "en": "Term from English"
+    }
+  ],
+  "jinisishijiejilu": [
+    {
+      "char": "吉尼斯世界纪录",
+      "en": "Term from English"
+    }
+  ],
+  "luhua": [
+    {
+      "char": "路花",
+      "en": "Term from English"
+    }
+  ],
+  "ruqu": [
+    {
+      "char": "如去",
+      "en": "Term from English"
+    }
+  ],
+  "lingju": [
+    {
+      "char": "零句",
+      "en": "Term from English"
+    }
+  ],
+  "qikao": [
+    {
+      "char": "弃考",
+      "en": "Term from English"
+    }
+  ],
+  "haokai": [
+    {
+      "char": "好开",
+      "en": "Term from English"
+    }
+  ],
+  "xiaofangyuan": [
+    {
+      "char": "消防员",
+      "en": "Term from English"
+    }
+  ],
+  "duoju": [
+    {
+      "char": "多句",
+      "en": "Term from English"
+    }
+  ],
+  "luonade": [
+    {
+      "char": "罗纳德",
+      "en": "Term from English"
+    }
+  ],
+  "rugewen": [
+    {
+      "char": "如格温",
+      "en": "Term from English"
+    }
+  ],
+  "laogao": [
+    {
+      "char": "老高",
+      "en": "Term from English"
+    }
+  ],
+  "shaduruanjian": [
+    {
+      "char": "杀毒软件",
+      "en": "antivirus software"
+    }
+  ],
+  "fanshendaici": [
+    {
+      "char": "反身代词",
+      "en": "Term from English"
+    }
+  ],
+  "cidiao": [
+    {
+      "char": "辞掉",
+      "en": "Term from English"
+    }
+  ],
+  "dichan": [
+    {
+      "char": "低产",
+      "en": "Term from English"
+    }
+  ],
+  "juefei": [
+    {
+      "char": "绝非",
+      "en": "Term from English"
+    }
+  ],
+  "yaoyaowuqi": [
+    {
+      "char": "遥遥无期",
+      "en": "Term from English"
+    }
+  ],
+  "quanyu": [
+    {
+      "char": "痊愈",
+      "en": "Term from English"
+    }
+  ],
+  "shuidaosuo": [
+    {
+      "char": "水稻所",
+      "en": "Term from English"
+    }
+  ],
+  "laola": [
+    {
+      "char": "劳拉",
+      "en": "Term from English"
+    }
+  ],
+  "zhenyihan": [
+    {
+      "char": "真遗憾",
+      "en": "Term from English"
+    }
+  ],
+  "dianbandao": [
+    {
+      "char": "点半到",
+      "en": "Term from English"
+    }
+  ],
+  "wudian": [
+    {
+      "char": "五点",
+      "en": "Term from English"
+    }
+  ],
+  "guandeng": [
+    {
+      "char": "关灯",
+      "en": "Term from English"
+    }
+  ],
+  "haoyang": [
+    {
+      "char": "蒿洋",
+      "en": "Term from English"
+    }
+  ],
+  "aishi": [
+    {
+      "char": "艾使",
+      "en": "Term from English"
+    }
+  ],
+  "yisi": [
+    {
+      "char": "已死",
+      "en": "Term from English"
+    }
+  ],
+  "renduolishan": [
+    {
+      "char": "人多莉山",
+      "en": "Term from English"
+    }
+  ],
+  "duiqi": [
+    {
+      "char": "对起",
+      "en": "Term from English"
+    }
+  ],
+  "wushi": [
+    {
+      "char": "物使",
+      "en": "Term from English"
+    }
+  ],
+  "haoyangai": [
+    {
+      "char": "蒿洋艾",
+      "en": "Term from English"
+    }
+  ],
+  "maxiaorong": [
+    {
+      "char": "麻晓蓉",
+      "en": "Term from English"
+    }
+  ],
+  "zhongguokejiguan": [
+    {
+      "char": "中国科技馆",
+      "en": "Term from English"
+    }
+  ],
+  "tupianku": [
+    {
+      "char": "图片库",
+      "en": "Term from English"
+    }
+  ],
+  "tugu": [
+    {
+      "char": "图谷",
+      "en": "Term from English"
+    }
+  ],
+  "zhanyuan": [
+    {
+      "char": "占元",
+      "en": "Term from English"
     }
   ]
 }
