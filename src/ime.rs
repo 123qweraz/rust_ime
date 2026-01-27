@@ -51,12 +51,11 @@ pub struct Ime {
     pub phantom_text: String,
     pub is_highlighted: bool,
     pub word_en_map: HashMap<String, Vec<String>>,
-    pub en_word_map: HashMap<String, Vec<String>>,
     pub enable_fuzzy: bool,
 }
 
 impl Ime {
-    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, en_word_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool) -> Self {
+    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool) -> Self {
         let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
             "pinyin" => PhantomMode::Pinyin,
             "hanzi" => PhantomMode::Hanzi,
@@ -79,7 +78,6 @@ impl Ime {
             phantom_text: String::new(),
             is_highlighted: false,
             word_en_map,
-            en_word_map,
             enable_fuzzy,
         }
     }
@@ -288,17 +286,7 @@ impl Ime {
         let mut final_candidates = Vec::new();
         let pinyin_lower = pinyin_search.to_lowercase();
 
-        // 1. Direct English Lookup
-        let buffer_lower = self.buffer.to_lowercase();
-        if let Some(en_candidates) = self.en_word_map.get(&buffer_lower) {
-            for cand in en_candidates {
-                if !final_candidates.contains(cand) {
-                    final_candidates.push(cand.clone());
-                }
-            }
-        }
-
-        // 2. Search Logic
+        // 1. Search Logic
         // We use a larger limit (500) to ensure we find deeper words (e.g. "zhong" depth 4) 
         // even if shallow words (e.g. "zi" depth 1) are numerous.
         let mut raw_candidates = if self.enable_fuzzy {
@@ -712,10 +700,19 @@ impl Ime {
                         0 => 4,
                         _ => 0,
                     };
-                    if let Some(last_char) = self.buffer.chars().last() {
-                        if let Some(toned) = apply_tone(last_char, tone) {
-                            self.buffer.pop();
-                            self.buffer.push(toned);
+                    
+                    // 智能寻找主元音并上标声调
+                    let mut new_buffer = self.buffer.clone();
+                    let vowels = ['a', 'e', 'i', 'o', 'u', 'v', 'A', 'E', 'I', 'O', 'U', 'V'];
+                    
+                    // 逆向寻找最后一个元音位置
+                    if let Some(idx) = new_buffer.rfind(|c| vowels.contains(&c)) {
+                        let c = new_buffer.chars().nth(idx).unwrap();
+                        if let Some(toned) = apply_tone(c, tone) {
+                            // 替换该位置的字符
+                            let mut chars: Vec<char> = new_buffer.chars().collect();
+                            chars[idx] = toned;
+                            self.buffer = chars.into_iter().collect();
                             self.lookup();
                             if self.phantom_mode != PhantomMode::None {
                                 return self.update_phantom_text();
