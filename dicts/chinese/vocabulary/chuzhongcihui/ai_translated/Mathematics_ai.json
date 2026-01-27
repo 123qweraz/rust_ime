@@ -1,0 +1,134 @@
+{
+  "sanshitu": [
+    {
+      "char": "三视图",
+      "en": "three-view drawing"
+    }
+  ],
+  "zhongweishu": [
+    {
+      "char": "中位数",
+      "en": "median"
+    }
+  ],
+  "yangbenliang": [
+    {
+      "char": "样本量",
+      "en": "sample size"
+    }
+  ],
+  "buhegepin": [
+    {
+      "char": "不合格品",
+      "en": "defective product"
+    }
+  ],
+  "bugongmian": [
+    {
+      "char": "不共面",
+      "en": "non-coplanar"
+    }
+  ],
+  "xiangfanshu": [
+    {
+      "char": "相反数",
+      "en": "opposite number"
+    }
+  ],
+  "pingfanggen": [
+    {
+      "char": "平方根",
+      "en": "square root"
+    }
+  ],
+  "lifanggen": [
+    {
+      "char": "立方根",
+      "en": "cube root"
+    }
+  ],
+  "daishushi": [
+    {
+      "char": "代数式",
+      "en": "algebraic expression"
+    }
+  ],
+  "danxiangshi": [
+    {
+      "char": "单项式",
+      "en": "monomial"
+    }
+  ],
+  "duoxiangshi": [
+    {
+      "char": "多项式",
+      "en": "polynomial"
+    }
+  ],
+  "tongleixiang": [
+    {
+      "char": "同类项",
+      "en": "like terms"
+    }
+  ],
+  "ercihanshu": [
+    {
+      "char": "二次函数",
+      "en": "quadratic function"
+    }
+  ],
+  "fanbilihanshu": [
+    {
+      "char": "反比例函数",
+      "en": "inverse proportional function"
+    }
+  ],
+  "huweiyujiao": [
+    {
+      "char": "互为余角",
+      "en": "complementary angles"
+    }
+  ],
+  "huweibujiao": [
+    {
+      "char": "互为补角",
+      "en": "supplementary angles"
+    }
+  ],
+  "duidingjiao": [
+    {
+      "char": "对顶角",
+      "en": "vertical angles"
+    }
+  ],
+  "neicuojiao": [
+    {
+      "char": "内错角",
+      "en": "alternate interior angles"
+    }
+  ],
+  "tongweijiao": [
+    {
+      "char": "同位角",
+      "en": "corresponding angles"
+    }
+  ],
+  "zhongchuixian": [
+    {
+      "char": "中垂线",
+      "en": "perpendicular bisector"
+    }
+  ],
+  "panbieshi": [
+    {
+      "char": "判别式",
+      "en": "discriminant"
+    }
+  ],
+  "weidadingli": [
+    {
+      "char": "韦达定理",
+      "en": "Vieta's formulas"
+    }
+  ]
+}

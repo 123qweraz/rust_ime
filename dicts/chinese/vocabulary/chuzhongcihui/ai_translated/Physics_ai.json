@@ -298,5 +298,129 @@
       "char": "振动频率",
       "en": "vibration frequency"
     }
+  ],
+  "huadongbianzuqi": [
+    {
+      "char": "滑动变阻器",
+      "en": "sliding rheostat"
+    }
+  ],
+  "dianliubiao": [
+    {
+      "char": "电流表",
+      "en": "ammeter"
+    }
+  ],
+  "dianyabiao": [
+    {
+      "char": "电压表",
+      "en": "voltmeter"
+    }
+  ],
+  "diannengbiao": [
+    {
+      "char": "电能表",
+      "en": "electric energy meter"
+    }
+  ],
+  "duanlu": [
+    {
+      "char": "短路",
+      "en": "short circuit"
+    },
+    {
+      "char": "断路",
+      "en": "open circuit"
+    }
+  ],
+  "tonglu": [
+    {
+      "char": "通路",
+      "en": "closed circuit"
+    }
+  ],
+  "rongduanqi": [
+    {
+      "char": "熔断器",
+      "en": "fuse"
+    }
+  ],
+  "diancijidianqi": [
+    {
+      "char": "电磁继电器",
+      "en": "electromagnetic relay"
+    }
+  ],
+  "diandongji": [
+    {
+      "char": "电动机",
+      "en": "electric motor"
+    }
+  ],
+  " generator": [
+    {
+      "char": " generator",
+      "en": "generator"
+    }
+  ],
+  "gangganpingheng": [
+    {
+      "char": "杠杆平衡",
+      "en": "lever balance"
+    }
+  ],
+  "dinghualun": [
+    {
+      "char": "定滑轮",
+      "en": "fixed pulley"
+    }
+  ],
+  "donghualun": [
+    {
+      "char": "动滑轮",
+      "en": "movable pulley"
+    }
+  ],
+  "hualunzu": [
+    {
+      "char": "滑轮组",
+      "en": "pulley system"
+    }
+  ],
+  "jixiexiaolv": [
+    {
+      "char": "机械效率",
+      "en": "mechanical efficiency"
+    }
+  ],
+  "birerong": [
+    {
+      "char": "比热容",
+      "en": "specific heat capacity"
+    }
+  ],
+  "qihua": [
+    {
+      "char": "汽化",
+      "en": "vaporization"
+    }
+  ],
+  "yehua": [
+    {
+      "char": "液化",
+      "en": "liquefaction"
+    }
+  ],
+  "ninghua": [
+    {
+      "char": "凝华",
+      "en": "deposition"
+    }
+  ],
+  "shenghua": [
+    {
+      "char": "升华",
+      "en": "sublimation"
+    }
   ]
 }
