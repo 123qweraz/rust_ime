@@ -237,6 +237,14 @@ impl Ime {
         self.is_highlighted = false;
         // 关闭通知
         let _ = self.notification_tx.send(NotifyEvent::Close);
+        // 同时更新 GUI
+        self.update_gui();
+    }
+
+    fn update_gui(&self) {
+        if let Some(ref tx) = self.gui_tx {
+            let _ = tx.send((self.buffer.clone(), self.candidates.clone(), self.selected));
+        }
     }
 
     fn update_state(&mut self) {
@@ -604,7 +612,7 @@ impl Ime {
         // Sort by score descending
         scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
 
-        // Remove duplicate force-top logic to let N-gram drive the order
+        self.candidates = scored_candidates.into_iter().map(|(s, _)| s).collect();
         
         // If no Chinese candidates found, show raw buffer
         if self.candidates.is_empty() {
@@ -750,10 +758,7 @@ impl Ime {
     }
 
     fn print_preview(&self) {
-        // 同时更新 GUI
-        if let Some(ref tx) = self.gui_tx {
-            let _ = tx.send((self.buffer.clone(), self.candidates.clone(), self.selected));
-        }
+        self.update_gui();
 
         if self.buffer.is_empty() && self.candidates.is_empty() { return; }
         
@@ -894,11 +899,12 @@ impl Ime {
                         }
                     }
 
+                    self.print_preview();
+                    self.notify_preview();
+
                     if self.phantom_mode != PhantomMode::None {
                          self.update_phantom_text()
                     } else {
-                        self.print_preview();
-                        self.notify_preview();
                         Action::Consume
                     }
                 } else {
@@ -914,11 +920,11 @@ impl Ime {
                  }
                  self.selected = self.page;
                  
+                 self.print_preview();
+                 self.notify_preview();
+
                  if self.phantom_mode != PhantomMode::None {
                      return self.update_phantom_text();
-                 } else {
-                     self.print_preview();
-                     self.notify_preview();
                  }
                  Action::Consume
             }
@@ -927,15 +933,13 @@ impl Ime {
                 if self.page + 5 < self.candidates.len() {
                     self.page += 5;
                     self.selected = self.page;
-                } else if self.candidates.len() > 0 {
-                    // Jump to end logic or stay? Stay for now to avoid overshoot
                 }
+
+                self.print_preview();
+                self.notify_preview();
 
                 if self.phantom_mode != PhantomMode::None {
                      return self.update_phantom_text();
-                } else {
-                     self.print_preview();
-                     self.notify_preview();
                 }
                 Action::Consume
             }
@@ -1192,6 +1196,7 @@ mod tests {
             HashMap::new(), 
             HashMap::new(), 
             tx, 
+            None, 
             false, 
             "none", 
             false, 

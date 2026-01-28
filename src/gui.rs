@@ -11,8 +11,8 @@ pub struct CandidateApp {
 impl CandidateApp {
     pub fn new(cc: &eframe::CreationContext<'_>, rx: Receiver<(String, Vec<String>, usize)>) -> Self {
         let mut visuals = egui::Visuals::dark();
-        visuals.window_rounding = 10.0.into();
-        visuals.window_shadow = egui::epaint::Shadow::big_dark();
+        visuals.window_rounding = 8.0.into();
+        visuals.window_shadow = egui::epaint::Shadow::small_dark();
         visuals.override_text_color = Some(egui::Color32::from_rgb(220, 220, 220));
         cc.egui_ctx.set_visuals(visuals);
         
@@ -39,48 +39,76 @@ impl eframe::App for CandidateApp {
         frame.set_visible(is_visible);
 
         if is_visible {
-            egui::Area::new("candidate_area")
-                .anchor(egui::Align2::LEFT_TOP, egui::vec2(120.0, 120.0))
+            // 设置窗口背景透明
+            ctx.set_visuals(egui::Visuals {
+                panel_fill: egui::Color32::TRANSPARENT,
+                ..egui::Visuals::dark()
+            });
+
+            egui::CentralPanel::default()
+                .frame(egui::Frame::none().fill(egui::Color32::TRANSPARENT))
                 .show(ctx, |ui| {
                     egui::Frame::none()
-                        .fill(egui::Color32::from_black_alpha(220))
-                        .rounding(8.0)
-                        .inner_margin(egui::Margin::same(10.0))
-                        .stroke(egui::Stroke::new(1.0, egui::Color32::from_gray(60)))
+                        .fill(egui::Color32::from_black_alpha(210))
+                        .rounding(6.0)
+                        .inner_margin(egui::Margin::symmetric(12.0, 8.0))
+                        .stroke(egui::Stroke::new(1.0, egui::Color32::from_gray(70)))
                         .show(ui, |ui| {
-                            ui.vertical(|ui| {
-                                ui.horizontal(|ui| {
-                                    ui.label(egui::RichText::new(&self.pinyin)
-                                        .color(egui::Color32::from_rgb(100, 200, 255))
-                                        .size(18.0)
-                                        .strong());
-                                });
+                            // 使窗口可拖动
+                            if ui.interact(ui.max_rect(), ui.id(), egui::Sense::drag()).dragged() {
+                                frame.drag_window();
+                            }
+
+                            ui.horizontal(|ui| {
+                                // 拼音部分
+                                ui.label(egui::RichText::new(&self.pinyin)
+                                    .color(egui::Color32::from_rgb(100, 200, 255))
+                                    .size(18.0)
+                                    .strong());
                                 
-                                ui.add_space(8.0);
-                                
-                                ui.horizontal(|ui| {
+                                if !self.candidates.is_empty() {
+                                    ui.add_space(8.0);
+                                    ui.separator();
+                                    ui.add_space(8.0);
+                                    
+                                    // 候选词部分 (显示当前页，每页5个)
+                                    let page_start = (self.selected / 5) * 5;
+                                    let page_end = (page_start + 5).min(self.candidates.len());
+                                    
                                     ui.spacing_mut().item_spacing.x = 15.0;
-                                    for (i, cand) in self.candidates.iter().enumerate() {
+                                    for i in page_start..page_end {
+                                        let cand = &self.candidates[i];
                                         let is_selected = i == self.selected;
-                                        let text = format!("{}.{}", i + 1, cand);
+                                        let display_idx = (i % 5) + 1;
+                                        let text = format!("{}.{}", display_idx, cand);
                                         
                                         if is_selected {
                                             ui.label(egui::RichText::new(text)
                                                 .color(egui::Color32::from_rgb(255, 215, 0))
-                                                .size(18.0)
+                                                .size(19.0)
                                                 .strong());
                                         } else {
                                             ui.label(egui::RichText::new(text)
-                                                .size(17.0));
+                                                .color(egui::Color32::from_gray(210))
+                                                .size(18.0));
                                         }
                                     }
-                                });
+
+                                    if self.candidates.len() > 5 {
+                                        ui.add_space(5.0);
+                                        let total_pages = (self.candidates.len() + 4) / 5;
+                                        let current_page = (self.selected / 5) + 1;
+                                        ui.label(egui::RichText::new(format!("{}/{}", current_page, total_pages))
+                                            .color(egui::Color32::from_gray(120))
+                                            .size(14.0));
+                                    }
+                                }
                             });
                         });
                 });
         }
 
-        // Only request repaint if we got new data or if we are visible (to keep UI responsive)
+        // 保持高刷新率以保证响应速度，尤其是在输入时
         if updated || is_visible {
             ctx.request_repaint_after(std::time::Duration::from_millis(10));
         } else {
@@ -91,10 +119,11 @@ impl eframe::App for CandidateApp {
 
 pub fn start_gui(rx: Receiver<(String, Vec<String>, usize)>) {
     let options = eframe::NativeOptions {
-        initial_window_size: Some(egui::vec2(400.0, 100.0)),
+        initial_window_size: Some(egui::vec2(800.0, 60.0)),
+        initial_window_pos: Some(egui::pos2(100.0, 100.0)), // 设置一个默认位置，避免出现在屏幕中央遮挡
         always_on_top: true,
-        decorated: false, // 无边框
-        transparent: true, // 透明背景
+        decorated: false, 
+        transparent: true,
         ..Default::default()
     };
 
