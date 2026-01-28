@@ -1344,19 +1344,14 @@ fn load_punctuation_dict_quiet(path: &str) -> HashMap<String, String> {
 fn train_model(path_str: &str) -> Result<(), Box<dyn std::error::Error>> {
     let path = Path::new(path_str);
     if !path.exists() {
-        return Err(format!("File not found: {}", path_str).into());
+        return Err(format!("Path not found: {}", path_str).into());
     }
-    
-    println!("Reading file: {}", path.display());
-    let content = std::fs::read_to_string(path)?;
-    println!("Read {} chars. Training...", content.chars().count());
     
     let mut model_path = find_project_root();
     model_path.push("n-gram-model");
     model_path.push("ngram.json");
     
     if !model_path.parent().unwrap().exists() {
-        // Fallback to root if directory doesn't exist
         model_path = find_project_root();
         model_path.push("ngram.json");
     }
@@ -1371,8 +1366,39 @@ fn train_model(path_str: &str) -> Result<(), Box<dyn std::error::Error>> {
             ngram::NgramModel::new()
         }
     };
-    
-    model.train(&content);
+
+    let mut files_to_train = Vec::new();
+    if path.is_dir() {
+        println!("Scanning directory: {}", path.display());
+        for entry in walkdir::WalkDir::new(path) {
+            let entry = entry?;
+            let p = entry.path();
+            if p.is_file() {
+                if let Some(ext) = p.extension() {
+                    if ext == "txt" || ext == "md" {
+                        files_to_train.push(p.to_path_buf());
+                    }
+                }
+            }
+        }
+    } else {
+        files_to_train.push(path.to_path_buf());
+    }
+
+    if files_to_train.is_empty() {
+        println!("No valid .txt or .md files found to train.");
+        return Ok(());
+    }
+
+    for f in files_to_train {
+        println!("Training on: {}", f.display());
+        if let Ok(content) = std::fs::read_to_string(&f) {
+            println!("   Read {} chars...", content.chars().count());
+            model.train(&content);
+        } else {
+            eprintln!("   Warning: Failed to read file {}", f.display());
+        }
+    }
     
     model.save(&model_path)?;
     println!("Training complete. Model saved to {}", model_path.display());
