@@ -528,8 +528,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
             }
             "--foreground" => {
-                // 直接运行，不后台化
-                return run_ime();
+                // 前台运行模式：主线程跑 GUI，子线程跑 IME
+                let (gui_tx, gui_rx) = std::sync::mpsc::channel();
+                std::thread::spawn(move || {
+                    let _ = run_ime(Some(gui_tx));
+                });
+                
+                // 主线程启动 GUI
+                gui::start_gui(gui_rx);
+                return Ok(());
             }
             "--help" | "-h" => {
                 println!("Usage: rust-ime [OPTIONS]");
@@ -580,8 +587,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     match daemonize.start() {
         Ok(_) => {
-            // 我们现在是在后台进程中
-            run_ime()
+            // 我们现在是在后台进程中，不开启 GUI
+            run_ime(None)
         }
         Err(e) => {
             eprintln!("Error, {}", e);
@@ -590,9 +597,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 }
 
-use std::sync::{Arc, RwLock};
+use std::sync::{Arc, RwLock, mpsc::Sender};
 
-fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
+fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), Box<dyn std::error::Error>> {
     // 确保在项目根目录运行，以便找到 dicts 和 config.json
     let root = find_project_root();
     if let Err(e) = env::set_current_dir(&root) {
@@ -735,16 +742,13 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
     
-    // 初始化 GUI 通道
-    let (gui_tx, gui_rx) = std::sync::mpsc::channel();
-
     let mut ime = Ime::new(
         tries, 
         active_profile.clone(), 
         punctuation, 
         word_en_map, 
         notify_tx.clone(), 
-        Some(gui_tx), // 传入通道
+        gui_tx, // 使用传入的通道
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications,
@@ -752,12 +756,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         user_ngram,
         user_ngram_path
     );
-
-    // 启动 GUI (在独立线程，因为目前的架构 run_ime 霸占了主线程)
-    // 实际上 eframe 最好在主线程，但我们先试试线程启动，如果不行再交换
-    std::thread::spawn(move || {
-        gui::start_gui(gui_rx);
-    });
 
     // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
     let tray_handle = tray::start_tray(ime.chinese_enabled, active_profile, tray_event_tx);
