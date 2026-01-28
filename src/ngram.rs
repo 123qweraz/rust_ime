@@ -114,16 +114,16 @@ impl NgramModel {
         }
     }
 
-    pub fn update(&mut self, context_chars: &[char], next_char: char) {
-        let next_token = next_char.to_string();
-        *self.unigrams.entry(next_token.clone()).or_default() += 1;
+    pub fn update(&mut self, context_chars: &[char], next_token: &str) {
+        let token_str = next_token.to_string();
+        *self.unigrams.entry(token_str.clone()).or_default() += 1;
 
         for len in 1..self.max_n {
             if context_chars.len() < len { break; }
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
             let entry = self.transitions.entry(context).or_default();
-            *entry.entry(next_token.clone()).or_default() += 1;
+            *entry.entry(token_str.clone()).or_default() += 1;
         }
     }
 

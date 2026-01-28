@@ -290,10 +290,15 @@ impl Ime {
     }
 
     fn commit_candidate(&mut self, candidate: String) -> Action {
-        // --- Live Learning: Learn before updating context (Update User Adapter ONLY) ---
-        for next_char in candidate.chars() {
-             self.user_ngram.update(&self.context, next_char);
-             self.context.push(next_char);
+        // --- Live Learning: Learn the FULL word as a single token ---
+        self.user_ngram.update(&self.context, &candidate);
+
+        // Also learn character transitions WITHIN the word
+        let word_chars: Vec<char> = candidate.chars().collect();
+        let mut temp_context = self.context.clone();
+        for &c in &word_chars {
+            self.user_ngram.update(&temp_context, &c.to_string());
+            temp_context.push(c);
         }
 
         // Auto-save user adapter occasionally (every 10 commits)
@@ -309,8 +314,10 @@ impl Ime {
             }
         }
 
-        // Keep only last 3 characters for context (enough for 4-gram)
-        if self.context.len() > 3 {
+        // Update real context buffer
+        for c in candidate.chars() {
+            self.context.push(c);
+        }
             let start = self.context.len() - 3;
             self.context = self.context[start..].to_vec();
         }
@@ -419,6 +426,7 @@ impl Ime {
         }
 
         // 2. Multi-syllable Dynamic Combination
+        let mut combination_scores: HashMap<String, u32> = HashMap::new();
         if segments.len() > 1 {
             // Greedy combination: try to combine as many segments as possible
             // For efficiency, we'll focus on the first 4 segments (matching our 4-gram)
@@ -475,9 +483,10 @@ impl Ime {
             }
             
             // Add the best full combinations to final candidates
-            for (word, _) in current_combinations {
+            for (word, score) in current_combinations {
                 if !final_candidates.contains(&word) {
-                    final_candidates.push(word);
+                    final_candidates.push(word.clone());
+                    combination_scores.insert(word, score);
                 }
             }
         }
@@ -538,10 +547,13 @@ impl Ime {
 
         let mut scored_candidates: Vec<(String, u32)> = all_candidates.into_iter()
             .map(|cand| {
+                // Initial score from combination logic if available, otherwise 0
+                let init_score = *combination_scores.get(&cand).unwrap_or(&0);
+
                 // Score includes Unigram (base frequency) + N-gram (context boost)
                 let base_score = self.base_ngram.get_score(&self.context, &cand);
                 let user_score = self.user_ngram.get_score(&self.context, &cand);
-                let mut total_score = base_score + (user_score * 10);
+                let mut total_score = init_score + base_score + (user_score * 10);
                 
                 // 1. ABSOLUTE PRIORITY for full-pinyin exact matches (e.g., "感觉" for "ganjue")
                 if full_pinyin_exact.contains(&cand) {
@@ -556,7 +568,6 @@ impl Ime {
                 
                 // 3. JIANPIN PENALTY: If the candidate was likely from a single-letter match
                 // but the buffer is much longer, penalize it.
-                // (This is a heuristic: if it's a single character and buffer is long)
                 if char_count == 1 && pinyin_lower.len() > 3 {
                     total_score = total_score.saturating_sub(5000);
                 }
