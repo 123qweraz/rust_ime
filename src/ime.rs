@@ -963,7 +963,7 @@ mod tests {
         trie.insert("zhong", "中".to_string());
         tries.insert("default".to_string(), trie);
         
-        Ime::new(tries, "default".to_string(), HashMap::new(), HashMap::new(), tx, false, "none", false)
+        Ime::new(tries, "default".to_string(), HashMap::new(), HashMap::new(), tx, false, "none", false, BigramModel::new())
     }
 
     #[test]
