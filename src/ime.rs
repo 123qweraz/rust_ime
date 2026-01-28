@@ -318,6 +318,8 @@ impl Ime {
         for c in candidate.chars() {
             self.context.push(c);
         }
+        // Keep only last 3 characters for context (enough for 4-gram)
+        if self.context.len() > 3 {
             let start = self.context.len() - 3;
             self.context = self.context[start..].to_vec();
         }
