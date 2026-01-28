@@ -13,7 +13,7 @@
 - [ ] **反向输入 (Reverse Lookup)**:
     - 输入英文单词直接触发中文候选（利用 AI 预生成的反向词典）。
 - [x] **词组联想 (N-gram/Association)**:
-    - 实现 Bigram 模型，输入“物理”后自动推荐“实验”、“现象”等关联词。 (已实现 Bigram 预测)
+    - 实现 Bigram 模型，输入“物理”后自动推荐“实验”、“现象”等关联词。 (已实现，支持 4-gram 和基于词典的 Token 化训练)
 - [x] **模糊音支持 (Fuzzy Pinyin)**:
     - 支持 `n/l`、`z/zh`、`s/sh` 等常见模糊音匹配。 (已实现，可在 config 中开启)
 - [x] **智能纠错 (Error Correction)**:

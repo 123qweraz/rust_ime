@@ -1,84 +1,126 @@
 use std::collections::HashMap;
 use std::fs::File;
-use std::io::{self, BufReader, BufWriter};
+use std::io::{self, BufReader, BufWriter, BufRead};
 use std::path::Path;
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug, Default, Clone)]
 pub struct NgramModel {
-    // context (1 to 3 chars) -> (next_char -> frequency)
-    // Key 为 String，可以支持变长上下文
-    pub transitions: HashMap<String, HashMap<char, u32>>,
+    // context (1 to 3 tokens) -> (next_token -> frequency)
+    pub transitions: HashMap<String, HashMap<String, u32>>,
     pub max_n: usize,
+    
+    #[serde(skip)]
+    pub token_list: Vec<String>,
 }
 
 impl NgramModel {
     pub fn new() -> Self {
-        Self {
+        let mut model = Self {
             transitions: HashMap::new(),
-            max_n: 4, // 默认支持到 4-gram (3个字的上下文预测第4个字)
+            max_n: 4,
+            token_list: Vec::new(),
+        };
+        model.load_token_list();
+        model
+    }
+
+    fn load_token_list(&mut self) {
+        let path = Path::new("dicts/basic_tokens.txt");
+        if path.exists() {
+            if let Ok(file) = File::open(path) {
+                let reader = BufReader::new(file);
+                self.token_list = reader.lines().filter_map(|l| l.ok()).collect();
+                // Ensure they are sorted by length descending for greedy match
+                self.token_list.sort_by(|a, b| b.len().cmp(&a.len()));
+            }
         }
     }
 
+    fn tokenize(&self, text: &str) -> Vec<String> {
+        let mut result = Vec::new();
+        let mut current_offset = 0;
+        let chars: Vec<char> = text.chars().collect();
+        let text_len = chars.len();
+
+        while current_offset < text_len {
+            let remaining = &chars[current_offset..].iter().collect::<String>();
+            let mut found = false;
+
+            for token in &self.token_list {
+                if remaining.starts_with(token) {
+                    result.push(token.clone());
+                    current_offset += token.chars().count();
+                    found = true;
+                    break;
+                }
+            }
+
+            if !found {
+                // Fallback to single character
+                let c = chars[current_offset];
+                if (c >= '\u{4e00}' && c <= '\u{9fa5}') ||
+                   (c >= '\u{3400}' && c <= '\u{4dbf}') ||
+                   (c >= '\u{20000}' && c <= '\u{2a6df}') {
+                    result.push(c.to_string());
+                }
+                current_offset += 1;
+            }
+        }
+        result
+    }
+
     pub fn train(&mut self, text: &str) {
-        // 将文本按换行符和标点符号切分成独立的片段
         let sections = text.split(|c: char| {
             c == '\n' || c == '\r' || c == '。' || c == '，' || c == '！' || c == '？' || c == '；' || c == '：' || c == '“' || c == '”' || c == '（' || c == '）' || c == '、'
         });
 
         for section in sections {
-            // 对每个片段提取汉字
-            let chars: Vec<char> = section.chars()
-                .filter(|c| {
-                    (*c >= '\u{4e00}' && *c <= '\u{9fa5}') ||
-                    (*c >= '\u{3400}' && *c <= '\u{4dbf}') ||
-                    (*c >= '\u{20000}' && *c <= '\u{2a6df}')
-                })
-                .collect();
-
-            if chars.len() < 2 {
+            let tokens = self.tokenize(section);
+            if tokens.len() < 2 {
                 continue;
             }
 
-            // 在片段内部学习关联
             for n in 2..=self.max_n {
-                if chars.len() < n { continue; }
-                for window in chars.windows(n) {
-                    let context: String = window[..n-1].iter().collect();
-                    let next_char = window[n-1];
+                if tokens.len() < n { continue; }
+                for window in tokens.windows(n) {
+                    let context = window[..n-1].join("");
+                    let next_token = &window[n-1];
 
                     let entry = self.transitions.entry(context).or_default();
-                    *entry.entry(next_char).or_default() += 1;
+                    *entry.entry(next_token.clone()).or_default() += 1;
                 }
             }
         }
     }
 
     pub fn update(&mut self, context_chars: &[char], next_char: char) {
-        // 实时更新 2-gram 到 max_n-gram
+        // Simple character update for live learning, as it's harder to tokenize live stream reliably
+        // but we treat next_char as a single-char string
+        let next_token = next_char.to_string();
         for len in 1..self.max_n {
             if context_chars.len() < len { break; }
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
             
             let entry = self.transitions.entry(context).or_default();
-            *entry.entry(next_char).or_default() += 1;
+            *entry.entry(next_token.clone()).or_default() += 1;
         }
     }
 
     pub fn predict(&self, context_chars: &[char], limit: usize) -> Vec<String> {
-        // 实现 Back-off 逻辑：从最长上下文开始找
+        // Try different context lengths from the context buffer
         for len in (1..=context_chars.len().min(self.max_n - 1)).rev() {
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
 
             if let Some(next_map) = self.transitions.get(&context) {
-                let mut candidates: Vec<(&char, &u32)> = next_map.iter().collect();
+                let mut candidates: Vec<(&String, &u32)> = next_map.iter().collect();
                 candidates.sort_by(|a, b| b.1.cmp(a.1));
                 
                 return candidates.into_iter()
                     .take(limit)
-                    .map(|(c, _)| c.to_string())
+                    .map(|(c, _)| c.clone())
                     .collect();
             }
         }
@@ -86,14 +128,13 @@ impl NgramModel {
     }
 
     pub fn get_score(&self, context_chars: &[char], next_char: char) -> u32 {
-        // 同样实现 Back-off 打分
+        let next_token = next_char.to_string();
         for len in (1..=context_chars.len().min(self.max_n - 1)).rev() {
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
 
             if let Some(next_map) = self.transitions.get(&context) {
-                if let Some(&score) = next_map.get(&next_char) {
-                    // 越长的匹配分数权重越高
+                if let Some(&score) = next_map.get(&next_token) {
                     return score * (len as u32);
                 }
             }
@@ -111,7 +152,8 @@ impl NgramModel {
     pub fn load<P: AsRef<Path>>(path: P) -> io::Result<Self> {
         let file = File::open(path)?;
         let reader = BufReader::new(file);
-        let model = serde_json::from_reader(reader)?;
+        let mut model: Self = serde_json::from_reader(reader)?;
+        model.load_token_list();
         Ok(model)
     }
 }
