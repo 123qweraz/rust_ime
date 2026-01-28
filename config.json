@@ -59,7 +59,7 @@
         "description": "默认中文输入",
         "dicts": [
           "dicts/chars.json",
-          "dicts/words.json"
+          "dicts/basic_words.json"
         ]
       },
       {
