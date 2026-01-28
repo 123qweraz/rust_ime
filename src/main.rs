@@ -585,8 +585,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     match daemonize.start() {
         Ok(_) => {
-            // 我们现在是在后台进程中，不开启 GUI
-            run_ime(None)
+            // 后台进程也启动 GUI
+            let (gui_tx, gui_rx) = std::sync::mpsc::channel();
+            std::thread::spawn(move || {
+                let _ = run_ime(Some(gui_tx));
+            });
+            
+            gui::start_gui(gui_rx);
+            Ok(())
         }
         Err(e) => {
             eprintln!("Error, {}", e);

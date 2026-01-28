@@ -73,11 +73,23 @@ impl eframe::App for CandidateApp {
         }
 
         let is_visible = !self.pinyin.is_empty() || !self.candidates.is_empty();
-        
-        // 关键：在不需要时直接完全隐藏窗口
         frame.set_visible(is_visible);
 
         if is_visible {
+            // 动态定位到右下角
+            let screen_rect = ctx.input(|i| i.screen_rect());
+            let window_size = egui::vec2(600.0, 50.0);
+            let margin = 20.0;
+            let target_pos = egui::pos2(
+                screen_rect.max.x - window_size.x - margin,
+                screen_rect.max.y - window_size.y - margin - 40.0 // 避开可能的任务栏
+            );
+            
+            // 只有在窗口可见时才强制定位一次
+            if updated {
+                frame.set_window_pos(target_pos);
+            }
+
             // 背景完全透明
             let panel_frame = egui::Frame::none()
                 .fill(egui::Color32::TRANSPARENT);
@@ -157,13 +169,13 @@ impl eframe::App for CandidateApp {
 
 pub fn start_gui(rx: Receiver<(String, Vec<String>, usize)>) {
     let options = eframe::NativeOptions {
-        initial_window_size: Some(egui::vec2(600.0, 45.0)),
-        initial_window_pos: Some(egui::pos2(200.0, 200.0)),
+        initial_window_size: Some(egui::vec2(600.0, 50.0)),
+        initial_window_pos: Some(egui::pos2(1200.0, 800.0)), // 初始预设一个较大的值，靠近右下
         
         always_on_top: true,
         decorated: false,
         transparent: true,
-        icon_data: None, // 不设置图标
+        icon_data: None,
         
         #[cfg(target_os = "linux")]
         follow_system_theme: true,
