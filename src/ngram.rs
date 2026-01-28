@@ -98,20 +98,46 @@ impl NgramModel {
             let tokens = self.tokenize(section);
             if tokens.is_empty() { continue; }
 
-            // 1. 统计 Unigram (每个词本身出现的次数)
+            // 1. 统计 Unigram 并在 Token 内部拆解学习
+            let mut char_level_tokens = Vec::new();
             for token in &tokens {
                 *self.unigrams.entry(token.clone()).or_default() += 1;
+                
+                // 如果是长词，将其内部的字也加入 Unigram 统计，并提取字流用于后续学习
+                let chars: Vec<char> = token.chars().collect();
+                for &c in &chars {
+                    let c_str = c.to_string();
+                    if chars.len() > 1 {
+                        *self.unigrams.entry(c_str.clone()).or_default() += 1;
+                    }
+                    char_level_tokens.push(c_str);
+                }
             }
 
-            // 2. 统计 N-gram 跳转
-            if tokens.len() < 2 { continue; }
-            for n in 2..=self.max_n {
-                if tokens.len() < n { continue; }
-                for window in tokens.windows(n) {
-                    let context = window[..n-1].join("");
-                    let next_token = &window[n-1];
-                    let entry = self.transitions.entry(context).or_default();
-                    *entry.entry(next_token.clone()).or_default() += 1;
+            // 2. 学习 Token 级的 N-gram 跳转 (例如: "来到" -> "北京")
+            if tokens.len() >= 2 {
+                for n in 2..=self.max_n {
+                    if tokens.len() < n { continue; }
+                    for window in tokens.windows(n) {
+                        let context = window[..n-1].join("");
+                        let next_token = &window[n-1];
+                        let entry = self.transitions.entry(context).or_default();
+                        *entry.entry(next_token.clone()).or_default() += 1;
+                    }
+                }
+            }
+
+            // 3. 学习字级的 N-gram 跳转 (基础底力：例如 "来" -> "到", "北" -> "京")
+            // 这保证了即便用户不打全拼，单字联想也非常精准
+            if char_level_tokens.len() >= 2 {
+                for n in 2..=self.max_n {
+                    if char_level_tokens.len() < n { continue; }
+                    for window in char_level_tokens.windows(n) {
+                        let context = window[..n-1].join("");
+                        let next_token = &window[n-1];
+                        let entry = self.transitions.entry(context).or_default();
+                        *entry.entry(next_token.clone()).or_default() += 1;
+                    }
                 }
             }
         }
