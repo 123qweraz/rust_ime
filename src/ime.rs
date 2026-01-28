@@ -537,9 +537,18 @@ impl Ime {
         let mut scored_candidates: Vec<(String, u32)> = all_candidates.into_iter()
             .map(|cand| {
                 // Score includes Unigram (base frequency) + N-gram (context boost)
-                let score = self.base_ngram.get_score(&self.context, &cand) + 
-                            self.user_ngram.get_score(&self.context, &cand) * 10;
-                (cand, score)
+                let base_score = self.base_ngram.get_score(&self.context, &cand);
+                let user_score = self.user_ngram.get_score(&self.context, &cand);
+                let mut total_score = base_score + (user_score * 10);
+                
+                // LENGTH BOOST: Phrases are generally more specific and desired.
+                // We add a massive boost based on the number of characters.
+                let char_count = cand.chars().count();
+                if char_count > 1 {
+                    total_score += 10000 * (char_count as u32);
+                }
+                
+                (cand, total_score)
             })
             .collect();
 
