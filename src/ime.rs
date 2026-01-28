@@ -271,10 +271,23 @@ impl Ime {
     }
 
     fn commit_candidate(&mut self, candidate: String) -> Action {
-        // Update context buffer
-        for c in candidate.chars() {
-            self.context.push(c);
+        // --- Live Learning: Learn before updating context ---
+        for next_char in candidate.chars() {
+             self.ngram.update(&self.context, next_char);
+             self.context.push(next_char);
         }
+
+        // Auto-save model occasionally (every 10 commits)
+        static mut COMMIT_COUNT: u32 = 0;
+        unsafe {
+            COMMIT_COUNT += 1;
+            if COMMIT_COUNT % 10 == 0 {
+                let mut path = std::env::current_dir().unwrap_or_default();
+                path.push("ngram.json");
+                let _ = self.ngram.save(&path);
+            }
+        }
+
         // Keep only last 3 characters for context (enough for 4-gram)
         if self.context.len() > 3 {
             let start = self.context.len() - 3;
@@ -530,6 +543,12 @@ impl Ime {
             let mut found_len = 0;
             let current_str = &pinyin[current_offset..];
             
+            // Check for explicit divider (apostrophe)
+            if current_str.starts_with('\'') {
+                current_offset += 1;
+                continue;
+            }
+
             // Get valid char boundaries
             let mut boundaries: Vec<usize> = current_str.char_indices()
                 .map(|(idx, _)| idx)
@@ -537,11 +556,15 @@ impl Ime {
             // Add the end of the string as a valid boundary
             boundaries.push(current_str.len());
             
-            // Greedily find the longest valid syllable, max 6 chars
-            // boundaries[0] is 0, boundaries[1] is end of 1st char, ..., boundaries[n] is end of string
+            // Stop at next divider if present
+            let next_divider = current_str.find('\'').unwrap_or(current_str.len());
+            
+            // Greedily find the longest valid syllable, max 6 chars, or up to divider
             let max_check = boundaries.len().min(7); 
             for i in (1..max_check).rev() {
                 let len = boundaries[i];
+                if len > next_divider { continue; } // Don't cross divider
+                
                 let sub = &current_str[..len];
                 if dict.get_all_exact(sub).is_some() {
                     found_len = len;
@@ -985,6 +1008,7 @@ pub fn key_to_char(key: Key, shift: bool) -> Option<char> {
         Key::KEY_J => Some('j'), Key::KEY_K => Some('k'), Key::KEY_L => Some('l'), Key::KEY_Z => Some('z'),
         Key::KEY_X => Some('x'), Key::KEY_C => Some('c'), Key::KEY_V => Some('v'), Key::KEY_B => Some('b'),
         Key::KEY_N => Some('n'), Key::KEY_M => Some('m'),
+        Key::KEY_APOSTROPHE => Some('\''),
         _ => None,
     };
 

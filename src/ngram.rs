@@ -42,6 +42,18 @@ impl NgramModel {
         }
     }
 
+    pub fn update(&mut self, context_chars: &[char], next_char: char) {
+        // 实时更新 2-gram 到 max_n-gram
+        for len in 1..self.max_n {
+            if context_chars.len() < len { break; }
+            let start = context_chars.len() - len;
+            let context: String = context_chars[start..].iter().collect();
+            
+            let entry = self.transitions.entry(context).or_default();
+            *entry.entry(next_char).or_default() += 1;
+        }
+    }
+
     pub fn predict(&self, context_chars: &[char], limit: usize) -> Vec<String> {
         // 实现 Back-off 逻辑：从最长上下文开始找
         for len in (1..=context_chars.len().min(self.max_n - 1)).rev() {
