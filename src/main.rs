@@ -660,7 +660,6 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let tries = tries_arc.read().unwrap().clone();
     
     let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
-    // REMOVED: let word_en_map = load_char_en_map(&initial_config.files.char_defs);
 
     println!("[IME] Loaded {} profiles.", tries.len());
     println!("[IME] Loaded punctuation map with {} entries.", punctuation.len());
@@ -1222,48 +1221,6 @@ fn load_punctuation_dict(path: &str) -> HashMap<String, String> {
     
     println!("Loaded {} punctuation rules from {}", map.len(), path);
     map
-}
-
-#[derive(Debug, Deserialize)]
-struct CharEnEntry {
-    char: String,
-    en: String,
-}
-
-fn load_char_en_map(paths: &[String]) -> HashMap<String, Vec<String>> {
-    let mut word_en_map: HashMap<String, Vec<String>> = HashMap::new();
-
-    for path_str in paths {
-        let path = Path::new(path_str);
-        if path.is_file() {
-             if let Ok(file) = File::open(path) {
-                let reader = BufReader::new(file);
-                // Use default inference
-                if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(reader) {
-                    if let Some(obj) = v.as_object() {
-                        for (_, val) in obj {
-                            // Try to parse array of entries
-                            if let Ok(entries) = serde_json::from_value::<Vec<CharEnEntry>>(val.clone()) {
-                                for e in entries {
-                                    word_en_map.entry(e.char.clone())
-                                        .or_default()
-                                        .push(e.en.clone());
-                                }
-                            }
-                        }
-                    }
-                    println!("Loaded char-en definitions from: {}", path_str);
-                } else {
-                    eprintln!("Warning: Failed to parse JSON from {}", path_str);
-                }
-             } else {
-                 eprintln!("Warning: Failed to open file {}", path_str);
-             }
-        } else {
-            eprintln!("Warning: Char definition file not found: {}", path_str);
-        }
-    }
-    word_en_map
 }
 
 fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
