@@ -21,29 +21,35 @@ impl NgramModel {
     }
 
     pub fn train(&mut self, text: &str) {
-        // 只保留汉字进行训练，过滤掉符号、英文、数字
-        let chars: Vec<char> = text.chars()
-            .filter(|c| {
-                // 仅匹配中文字符范围 (CJK Unified Ideographs)
-                (*c >= '\u{4e00}' && *c <= '\u{9fa5}') ||
-                (*c >= '\u{3400}' && *c <= '\u{4dbf}') ||
-                (*c >= '\u{20000}' && *c <= '\u{2a6df}')
-            })
-            .collect();
+        // 将文本按换行符和标点符号切分成独立的片段
+        let sections = text.split(|c: char| {
+            c == '\n' || c == '\r' || c == '。' || c == '，' || c == '！' || c == '？' || c == '；' || c == '：' || c == '“' || c == '”' || c == '（' || c == '）' || c == '、'
+        });
 
-        if chars.len() < 2 {
-            return;
-        }
+        for section in sections {
+            // 对每个片段提取汉字
+            let chars: Vec<char> = section.chars()
+                .filter(|c| {
+                    (*c >= '\u{4e00}' && *c <= '\u{9fa5}') ||
+                    (*c >= '\u{3400}' && *c <= '\u{4dbf}') ||
+                    (*c >= '\u{20000}' && *c <= '\u{2a6df}')
+                })
+                .collect();
 
-        // 采集 2-gram 到 max_n-gram
-        for n in 2..=self.max_n {
-            if chars.len() < n { continue; }
-            for window in chars.windows(n) {
-                let context: String = window[..n-1].iter().collect();
-                let next_char = window[n-1];
+            if chars.len() < 2 {
+                continue;
+            }
 
-                let entry = self.transitions.entry(context).or_default();
-                *entry.entry(next_char).or_default() += 1;
+            // 在片段内部学习关联
+            for n in 2..=self.max_n {
+                if chars.len() < n { continue; }
+                for window in chars.windows(n) {
+                    let context: String = window[..n-1].iter().collect();
+                    let next_char = window[n-1];
+
+                    let entry = self.transitions.entry(context).or_default();
+                    *entry.entry(next_char).or_default() += 1;
+                }
             }
         }
     }

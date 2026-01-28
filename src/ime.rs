@@ -284,7 +284,11 @@ impl Ime {
         unsafe {
             COMMIT_COUNT += 1;
             if COMMIT_COUNT % 10 == 0 {
-                let _ = self.ngram.save(&self.ngram_path);
+                let model_to_save = self.ngram.clone();
+                let path_to_save = self.ngram_path.clone();
+                std::thread::spawn(move || {
+                    let _ = model_to_save.save(&path_to_save);
+                });
             }
         }
 
