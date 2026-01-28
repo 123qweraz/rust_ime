@@ -60,8 +60,10 @@ impl NgramModel {
 
         while i < n {
             let mut found_token = None;
+            
+            // 贪婪匹配：从最大可能长度开始向下查找 (4 -> 1)
             let max_len = self.max_token_len.min(n - i);
-            for len in (2..=max_len).rev() {
+            for len in (1..=max_len).rev() {
                 let sub: String = chars[i..i+len].iter().collect();
                 if self.token_set.contains(&sub) {
                     found_token = Some(sub);
@@ -74,6 +76,7 @@ impl NgramModel {
                 result.push(token);
                 i += len;
             } else {
+                // 彻底的兜底：如果连单字都没在 token_set 里，只要是汉字就当做 Token
                 let c = chars[i];
                 if (c >= '\u{4e00}' && c <= '\u{9fa5}') ||
                    (c >= '\u{3400}' && c <= '\u{4dbf}') ||
