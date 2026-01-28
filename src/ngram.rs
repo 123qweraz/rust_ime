@@ -25,7 +25,7 @@ impl NgramModel {
         let mut model = Self {
             transitions: HashMap::new(),
             unigrams: HashMap::new(),
-            max_n: 4,
+            max_n: 3, // 降级为 3-gram
             token_list: Vec::new(),
             token_set: std::collections::HashSet::new(),
             max_token_len: 0,

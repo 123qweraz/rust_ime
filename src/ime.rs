@@ -318,9 +318,9 @@ impl Ime {
         for c in candidate.chars() {
             self.context.push(c);
         }
-        // Keep only last 3 characters for context (enough for 4-gram)
-        if self.context.len() > 3 {
-            let start = self.context.len() - 3;
+        // Keep only last 2 characters for context (enough for 3-gram)
+        if self.context.len() > 2 {
+            let start = self.context.len() - 2;
             self.context = self.context[start..].to_vec();
         }
 
@@ -431,8 +431,8 @@ impl Ime {
         let mut combination_scores: HashMap<String, u32> = HashMap::new();
         if segments.len() > 1 {
             // Greedy combination: try to combine as many segments as possible
-            // For efficiency, we'll focus on the first 4 segments (matching our 4-gram)
-            let max_segments = segments.len().min(4);
+            // For efficiency, we'll focus on the first 3 segments (matching our 3-gram)
+            let max_segments = segments.len().min(3);
             let mut current_combinations: Vec<(String, u32)> = Vec::new();
 
             // Initialize with the first segment's candidates
