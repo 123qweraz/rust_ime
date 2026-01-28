@@ -530,9 +530,14 @@ impl Ime {
     }
 
     fn notify_preview(&self) {
-        if self.buffer.is_empty() { return; }
+        if self.buffer.is_empty() && self.candidates.is_empty() { return; }
 
-        let buffer = &self.buffer; // Avoid clone
+        let summary = if self.buffer.is_empty() {
+            "联想".to_string()
+        } else {
+            format!("拼音: {}", self.buffer)
+        };
+
         let mut body = String::new();
         
         if self.candidates.is_empty() {
@@ -569,14 +574,18 @@ impl Ime {
             }
         }
 
-        let _ = self.notification_tx.send(NotifyEvent::Update(format!("拼音: {}", buffer), body));
+        let _ = self.notification_tx.send(NotifyEvent::Update(summary, body));
     }
 
     fn print_preview(&self) {
-        if self.buffer.is_empty() { return; }
+        if self.buffer.is_empty() && self.candidates.is_empty() { return; }
         
         print!("\r\x1B[K"); 
-        print!("拼音: {} | ", self.buffer);
+        if self.buffer.is_empty() {
+            print!("联想: | ");
+        } else {
+            print!("拼音: {} | ", self.buffer);
+        }
         
         if self.candidates.is_empty() {
             print!("(无候选)");
