@@ -528,6 +528,8 @@ impl Ime {
         // --- GLOBAL RANKING ---
         // Combine all candidates and rank them using the N-gram/Unigram models
         let mut all_candidates = final_candidates;
+        let full_pinyin_exact = dict.get_all_exact(&pinyin_lower).unwrap_or_default();
+
         for cand in raw_candidates {
             if !all_candidates.contains(&cand) {
                 all_candidates.push(cand);
@@ -541,11 +543,22 @@ impl Ime {
                 let user_score = self.user_ngram.get_score(&self.context, &cand);
                 let mut total_score = base_score + (user_score * 10);
                 
-                // LENGTH BOOST: Phrases are generally more specific and desired.
-                // We add a massive boost based on the number of characters.
+                // 1. ABSOLUTE PRIORITY for full-pinyin exact matches (e.g., "感觉" for "ganjue")
+                if full_pinyin_exact.contains(&cand) {
+                    total_score += 1000000;
+                }
+
+                // 2. LENGTH BOOST: Phrases are generally more specific and desired.
                 let char_count = cand.chars().count();
                 if char_count > 1 {
                     total_score += 10000 * (char_count as u32);
+                }
+                
+                // 3. JIANPIN PENALTY: If the candidate was likely from a single-letter match
+                // but the buffer is much longer, penalize it.
+                // (This is a heuristic: if it's a single character and buffer is long)
+                if char_count == 1 && pinyin_lower.len() > 3 {
+                    total_score = total_score.saturating_sub(5000);
                 }
                 
                 (cand, total_score)
