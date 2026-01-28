@@ -384,7 +384,15 @@ impl Ime {
             let mut current_combinations: Vec<(String, u32)> = Vec::new();
 
             // Initialize with the first segment's candidates
-            let first_chars = dict.get_all_exact(&segments[0]).unwrap_or_default();
+            let first_segment = &segments[0];
+            let first_chars = if first_segment.len() == 1 {
+                // Jianpin: Prefix search for single letter
+                dict.search_bfs(first_segment, 100)
+            } else {
+                // Full pinyin match
+                dict.get_all_exact(first_segment).unwrap_or_default()
+            };
+
             for c in first_chars {
                 current_combinations.push((c, 0));
             }
@@ -392,7 +400,13 @@ impl Ime {
             // Iteratively add segments and score them
             for i in 1..max_segments {
                 let next_segment = &segments[i];
-                let next_chars = dict.get_all_exact(next_segment).unwrap_or_default();
+                let next_chars = if next_segment.len() == 1 {
+                    // Jianpin: Prefix search for single letter
+                    dict.search_bfs(next_segment, 100)
+                } else {
+                    // Full pinyin match
+                    dict.get_all_exact(next_segment).unwrap_or_default()
+                };
                 let mut next_combinations = Vec::new();
 
                 for (prev_word, prev_score) in current_combinations {
