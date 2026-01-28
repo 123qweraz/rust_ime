@@ -428,6 +428,19 @@ impl Ime {
             }
         });
 
+        // --- English Candidate Injection ---
+        // 1. Inject exact English word matches from word_en_map if available for this pinyin
+        //    (treating pinyin as English prefix)
+        //    We scan the word_en_map to find English words starting with the buffer.
+        //    Since this map is keyed by Chinese Char -> [English Words], this is inefficient to search in reverse.
+        //    However, usually users want the *raw buffer* or specific English mapping.
+        
+        // 2. Always append the raw buffer as a candidate (usually at the end, or specific position)
+        //    so the user can type "rust" and select "rust" even if it matches nothing.
+        if !final_candidates.contains(&self.buffer) {
+             final_candidates.push(self.buffer.clone());
+        }
+
         self.candidates = final_candidates;
         self.selected = 0;
         self.page = 0;
