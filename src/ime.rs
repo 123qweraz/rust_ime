@@ -494,7 +494,7 @@ impl Ime {
         }
 
         // --- Single-syllable / Primary Search Logic ---
-        // We still search for the prefix matches (to show single characters)
+        // We still search for the prefix matches
         let mut raw_candidates = if self.enable_fuzzy {
             let variants = self.expand_fuzzy_pinyin(&pinyin_lower);
             let mut merged = Vec::new();
@@ -504,9 +504,18 @@ impl Ime {
             }
             merged
         } else {
-            // If segmented, we might want to prioritize the first segment's characters
-            let search_term = if segments.len() > 1 { &segments[0] } else { &pinyin_lower };
-            dict.search_bfs(search_term, 200)
+            // CRITICAL FIX: Always include full-pinyin prefix matches
+            // and optionally prioritized first-segment matches.
+            let mut res = dict.search_bfs(&pinyin_lower, 100);
+            if segments.len() > 1 {
+                let first_seg_res = dict.search_bfs(&segments[0], 100);
+                for c in first_seg_res {
+                    if !res.contains(&c) {
+                        res.push(c);
+                    }
+                }
+            }
+            res
         };
 
         // Apply auxiliary filter if active (uppercase letters) to ALL candidates
