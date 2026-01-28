@@ -525,36 +525,35 @@ impl Ime {
             raw_candidates.retain(filter);
         }
 
-        // --- N-gram Reordering for Single Characters ---
-        if !self.context.is_empty() {
-            // Create a temporary list of (candidate, score)
-            let mut scored_candidates: Vec<(String, u32)> = raw_candidates.into_iter()
-                .map(|cand| {
-                    let score = self.base_ngram.get_score(&self.context, &cand) + 
-                                self.user_ngram.get_score(&self.context, &cand) * 10;
-                    (cand, score)
-                })
-                .collect();
-            
-            // Sort by score descending, but preserve relative order for same scores
-            scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
-            
-            raw_candidates = scored_candidates.into_iter().map(|(c, _)| c).collect();
-        }
-
-        // Merge and ensure uniqueness
+        // --- GLOBAL RANKING ---
+        // Combine all candidates and rank them using the N-gram/Unigram models
+        let mut all_candidates = final_candidates;
         for cand in raw_candidates {
-            if !final_candidates.contains(&cand) {
-                final_candidates.push(cand);
+            if !all_candidates.contains(&cand) {
+                all_candidates.push(cand);
             }
         }
 
+        let mut scored_candidates: Vec<(String, u32)> = all_candidates.into_iter()
+            .map(|cand| {
+                // Score includes Unigram (base frequency) + N-gram (context boost)
+                let score = self.base_ngram.get_score(&self.context, &cand) + 
+                            self.user_ngram.get_score(&self.context, &cand) * 10;
+                (cand, score)
+            })
+            .collect();
+
+        // Sort by score descending
+        scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
+
+        // Final result
+        self.candidates = scored_candidates.into_iter().map(|(c, _)| c).collect();
+        
         // If no Chinese candidates found, show raw buffer
-        if final_candidates.is_empty() {
-            final_candidates.push(self.buffer.clone());
+        if self.candidates.is_empty() {
+            self.candidates.push(self.buffer.clone());
         }
 
-        self.candidates = final_candidates;
         self.selected = 0;
         self.page = 0;
         self.update_state();
