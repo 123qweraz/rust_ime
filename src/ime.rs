@@ -344,40 +344,66 @@ impl Ime {
             return;
         };
 
-        // Unified Buffer Logic: 
-        // 1. Find the first uppercase ASCII letter that is NOT at the start.
-        // 2. If found, split into pinyin prefix and english filter.
+        // 1. Separate Pinyin and Filter String (Uppercase)
         let mut pinyin_search = self.buffer.clone();
         let mut filter_string = String::new();
-
         if let Some((idx, _)) = self.buffer.char_indices().skip(1).find(|(_, c)| c.is_ascii_uppercase()) {
             pinyin_search = self.buffer[..idx].to_string();
             filter_string = self.buffer[idx..].to_lowercase();
         }
-
-        let mut final_candidates = Vec::new();
         let pinyin_lower = pinyin_search.to_lowercase();
 
-        // 1. Search Logic
-        // We use a larger limit (500) to ensure we find deeper words (e.g. "zhong" depth 4) 
-        // even if shallow words (e.g. "zi" depth 1) are numerous.
+        // 2. Intelligent Segmentation
+        // Example: "nihao" -> ["ni", "hao"]
+        let segments = self.segment_pinyin(&pinyin_lower, dict);
+
+        let mut final_candidates = Vec::new();
+
+        if segments.len() > 1 {
+            // --- Multi-syllable Logic: Generate Dynamic Words ---
+            // For now, support 2-syllable combination (Bigram's strength)
+            let s1 = &segments[0];
+            let s2 = &segments[1];
+            
+            let chars1 = dict.get_all_exact(s1).unwrap_or_default();
+            let chars2 = dict.get_all_exact(s2).unwrap_or_default();
+            
+            let mut combinations = Vec::new();
+            for c1 in &chars1 {
+                for c2 in &chars2 {
+                    let word = format!("{}{}", c1, c2);
+                    // Score based on Bigram model
+                    let score = *self.ngram.transitions.get(&c1.chars().next().unwrap_or(' '))
+                                     .and_then(|m| m.get(&c2.chars().next().unwrap_or(' ')))
+                                     .unwrap_or(&0);
+                    combinations.push((word, score));
+                }
+            }
+            
+            // Sort combinations by Bigram score
+            combinations.sort_by(|a, b| b.1.cmp(&a.1));
+            for (word, _) in combinations.iter().take(30) {
+                final_candidates.push(word.clone());
+            }
+        }
+
+        // --- Single-syllable / Primary Search Logic ---
+        // We still search for the prefix matches (to show single characters)
         let mut raw_candidates = if self.enable_fuzzy {
             let variants = self.expand_fuzzy_pinyin(&pinyin_lower);
             let mut merged = Vec::new();
             for variant in variants {
-                let res = dict.search_bfs(&variant, 200); // 200 per variant
-                for c in res {
-                    if !merged.contains(&c) {
-                        merged.push(c);
-                    }
-                }
+                let res = dict.search_bfs(&variant, 100); 
+                for c in res { if !merged.contains(&c) { merged.push(c); } }
             }
             merged
         } else {
-            dict.search_bfs(&pinyin_lower, 500)
+            // If segmented, we might want to prioritize the first segment's characters
+            let search_term = if segments.len() > 1 { &segments[0] } else { &pinyin_lower };
+            dict.search_bfs(search_term, 200)
         };
 
-        // Apply auxiliary filter if active (uppercase letters found in buffer)
+        // Apply auxiliary filter if active (uppercase letters)
         if !filter_string.is_empty() {
             raw_candidates.retain(|cand| {
                 if let Some(en_list) = self.word_en_map.get(cand) {
@@ -391,54 +417,16 @@ impl Ime {
             });
         }
 
-        // Merge raw candidates
+        // Merge and ensure uniqueness
         for cand in raw_candidates {
             if !final_candidates.contains(&cand) {
                 final_candidates.push(cand);
             }
         }
 
-        // --- Improved Sorting ---
-        // 1. Exact Pinyin Match vs Partial
-        // We need to know which words match the pinyin EXACTLY.
-        // Since we don't have that info from search_bfs directly without checking the Trie again,
-        // we can rely on `dict.get_all_exact`.
-        let exact_matches = dict.get_all_exact(&pinyin_lower).unwrap_or_default();
-
-        final_candidates.sort_by(|a, b| {
-            let a_is_exact = exact_matches.contains(a);
-            let b_is_exact = exact_matches.contains(b);
-
-            if a_is_exact && !b_is_exact {
-                std::cmp::Ordering::Less
-            } else if !a_is_exact && b_is_exact {
-                std::cmp::Ordering::Greater
-            } else if a_is_exact && b_is_exact {
-                // Keep original dictionary order for exact matches
-                std::cmp::Ordering::Equal
-            } else {
-                // Secondary Sort: Word Length (Prefer single chars / shorter words)
-                let len_cmp = a.chars().count().cmp(&b.chars().count());
-                if len_cmp != std::cmp::Ordering::Equal {
-                    len_cmp
-                } else {
-                    // Tertiary Sort: Alphabetical (Stable)
-                    a.cmp(b)
-                }
-            }
-        });
-
-        // --- English Candidate Injection ---
-        // 1. Inject exact English word matches from word_en_map if available for this pinyin
-        //    (treating pinyin as English prefix)
-        //    We scan the word_en_map to find English words starting with the buffer.
-        //    Since this map is keyed by Chinese Char -> [English Words], this is inefficient to search in reverse.
-        //    However, usually users want the *raw buffer* or specific English mapping.
-        
-        // 2. Always append the raw buffer as a candidate (usually at the end, or specific position)
-        //    so the user can type "rust" and select "rust" even if it matches nothing.
-        if !final_candidates.contains(&self.buffer) {
-             final_candidates.push(self.buffer.clone());
+        // If no Chinese candidates found, show raw buffer
+        if final_candidates.is_empty() {
+            final_candidates.push(self.buffer.clone());
         }
 
         self.candidates = final_candidates;
@@ -449,8 +437,35 @@ impl Ime {
         if self.enable_notifications {
             self.notify_preview();
         }
-        
         self.print_preview();
+    }
+
+    fn segment_pinyin(&self, pinyin: &str, dict: &Trie) -> Vec<String> {
+        let mut segments = Vec::new();
+        let mut current = pinyin;
+
+        while !current.is_empty() {
+            let mut found_len = 0;
+            // Greedily find the longest valid syllable
+            // Pinyin syllables are typically 1-6 chars
+            for len in (1..=current.len().min(6)).rev() {
+                let sub = &current[..len];
+                if dict.get_all_exact(sub).is_some() {
+                    found_len = len;
+                    break;
+                }
+            }
+
+            if found_len > 0 {
+                segments.push(current[..found_len].to_string());
+                current = &current[found_len..];
+            } else {
+                // If no syllable found, take one char and move on (fallback)
+                segments.push(current[..1].to_string());
+                current = &current[1..];
+            }
+        }
+        segments
     }
 
     fn expand_fuzzy_pinyin(&self, pinyin: &str) -> Vec<String> {

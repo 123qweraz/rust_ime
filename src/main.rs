@@ -59,6 +59,7 @@ const LOG_FILE: &str = "/tmp/rust-ime.log";
 struct DictEntry {
     char: String,
     en: Option<String>,
+    category: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -1146,13 +1147,16 @@ pub fn load_dict_for_profile(paths: &[String], word_en_map: &mut HashMap<String,
 fn load_file_into_dict(path: &str, trie: &mut Trie, word_en_map: &mut HashMap<String, Vec<String>>) {
     let file = match File::open(path) {
         Ok(f) => f,
-        Err(_) => return,
+        Err(e) => {
+            eprintln!("[Error] Could not open dictionary file {}: {}", path, e);
+            return;
+        }
     };
     let reader = BufReader::new(file);
     let v: serde_json::Value = match serde_json::from_reader(reader) {
         Ok(v) => v,
         Err(e) => {
-            eprintln!("Failed to parse {}: {}", path, e);
+            eprintln!("[Error] Failed to parse JSON from {}: {}", path, e);
             return;
         }
     };
@@ -1166,9 +1170,11 @@ fn load_file_into_dict(path: &str, trie: &mut Trie, word_en_map: &mut HashMap<St
             if let Ok(entries) = serde_json::from_value::<Vec<DictEntry>>(val.clone()) {
                 for e in entries {
                     trie.insert(&py_lower, e.char.clone());
-                    // Collect English definition if available
-                    if let Some(en) = e.en {
-                        word_en_map.entry(e.char.clone()).or_default().push(en);
+                    // Only collect English definitions for Level-1 characters
+                    if e.category.as_deref() == Some("level-1") {
+                        if let Some(en) = e.en {
+                            word_en_map.entry(e.char.clone()).or_default().push(en);
+                        }
                     }
                     count += 1;
                 }
@@ -1182,7 +1188,7 @@ fn load_file_into_dict(path: &str, trie: &mut Trie, word_en_map: &mut HashMap<St
             }
         }
     }
-    println!("Loaded {} entries from {}", count, path);
+    println!("[Dict] Successfully loaded {} entries from {}", count, path);
 }
 
 fn load_punctuation_dict(path: &str) -> HashMap<String, String> {
