@@ -453,7 +453,7 @@ impl Ime {
 
                 for (prev_word, prev_score) in current_combinations {
                     for next_char_str in &next_chars {
-                        let next_char = next_char_str.chars().next().unwrap_or(' ');
+                        let _next_char = next_char_str.chars().next().unwrap_or(' ');
                         let context: Vec<char> = prev_word.chars().collect();
                         
                         // New score = previous path score + current transition score

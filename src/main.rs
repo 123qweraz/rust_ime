@@ -930,7 +930,17 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
                                 }
                                 tray::TrayEvent::Restart => {
                                     let exe = env::current_exe().unwrap_or_else(|_| PathBuf::from("rust-ime"));
-                                    let _ = Command::new(exe).arg("--restart").spawn();
+                                    // If we just recompiled, the old exe might be deleted or moved.
+                                    // We try to spawn the new one.
+                                    println!("[Tray] Restarting via: {:?}", exe);
+                                    let mut cmd = Command::new(exe);
+                                    cmd.arg("--restart");
+                                    
+                                    if let Err(e) = cmd.spawn() {
+                                        eprintln!("[Tray] Failed to restart using current_exe: {}. Trying fallback 'rust-ime'...", e);
+                                        let _ = Command::new("rust-ime").arg("--restart").spawn();
+                                    }
+                                    
                                     should_exit.store(true, Ordering::Relaxed);
                                 }
                                 tray::TrayEvent::Exit => {
