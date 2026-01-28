@@ -366,33 +366,61 @@ impl Ime {
 
         let mut final_candidates: Vec<String> = Vec::new();
 
-        if segments.len() > 1 {
-            // --- Multi-syllable Logic: Generate Dynamic Words ---
-            // For now, support 2-syllable combination (Bigram's strength)
-            let s1 = &segments[0];
-            let s2 = &segments[1];
-            
-            let chars1 = dict.get_all_exact(s1).unwrap_or_default();
-            let chars2 = dict.get_all_exact(s2).unwrap_or_default();
-            
-            let mut combinations = Vec::new();
-            for c1 in &chars1 {
-                for c2 in &chars2 {
-                    let word = format!("{}{}", c1, c2);
-                    // Score based on N-gram model, including current context
-                    let mut full_context = self.context.clone();
-                    for char_c1 in c1.chars() {
-                        full_context.push(char_c1);
-                    }
-                    let score = self.ngram.get_score(&full_context, c2.chars().next().unwrap_or(' '));
-                    combinations.push((word, score));
+        // 1. Full Pinyin Match (Highest Priority)
+        // If the entire buffer matches a word in the dictionary, put it first.
+        if let Some(exact_matches) = dict.get_all_exact(&pinyin_lower) {
+            for cand in exact_matches {
+                if !final_candidates.contains(&cand) {
+                    final_candidates.push(cand);
                 }
             }
+        }
+
+        // 2. Multi-syllable Dynamic Combination
+        if segments.len() > 1 {
+            // Greedy combination: try to combine as many segments as possible
+            // For efficiency, we'll focus on the first 4 segments (matching our 4-gram)
+            let max_segments = segments.len().min(4);
+            let mut current_combinations: Vec<(String, u32)> = Vec::new();
+
+            // Initialize with the first segment's candidates
+            let first_chars = dict.get_all_exact(&segments[0]).unwrap_or_default();
+            for c in first_chars {
+                current_combinations.push((c, 0));
+            }
+
+            // Iteratively add segments and score them
+            for i in 1..max_segments {
+                let next_segment = &segments[i];
+                let next_chars = dict.get_all_exact(next_segment).unwrap_or_default();
+                let mut next_combinations = Vec::new();
+
+                for (prev_word, prev_score) in current_combinations {
+                    for next_char_str in &next_chars {
+                        let next_char = next_char_str.chars().next().unwrap_or(' ');
+                        let context: Vec<char> = prev_word.chars().collect();
+                        
+                        // New score = previous path score + current transition score
+                        let transition_score = self.ngram.get_score(&context, next_char);
+                        let new_score = prev_score + transition_score;
+                        
+                        let mut new_word = prev_word.clone();
+                        new_word.push_str(next_char_str);
+                        next_combinations.push((new_word, new_score));
+                    }
+                }
+                
+                // Keep only top candidates to avoid exponential explosion
+                next_combinations.sort_by(|a, b| b.1.cmp(&a.1));
+                next_combinations.truncate(50);
+                current_combinations = next_combinations;
+            }
             
-            // Sort combinations by Bigram score
-            combinations.sort_by(|a, b| b.1.cmp(&a.1));
-            for (word, _) in combinations.iter().take(30) {
-                final_candidates.push(word.clone());
+            // Add the best full combinations to final candidates
+            for (word, _) in current_combinations {
+                if !final_candidates.contains(&word) {
+                    final_candidates.push(word);
+                }
             }
         }
 
