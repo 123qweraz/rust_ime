@@ -442,27 +442,43 @@ impl Ime {
 
     fn segment_pinyin(&self, pinyin: &str, dict: &Trie) -> Vec<String> {
         let mut segments = Vec::new();
-        let mut current = pinyin;
+        let mut current_offset = 0;
+        let pinyin_len = pinyin.len();
 
-        while !current.is_empty() {
+        while current_offset < pinyin_len {
             let mut found_len = 0;
+            let current_str = &pinyin[current_offset..];
+            
+            // Get valid char boundaries
+            let boundaries: Vec<usize> = current_str.char_indices()
+                .map(|(idx, _)| idx)
+                .take(7) // syllables are usually <= 6 chars
+                .collect();
+            
             // Greedily find the longest valid syllable
-            // Pinyin syllables are typically 1-6 chars
-            for len in (1..=current.len().min(6)).rev() {
-                let sub = &current[..len];
+            for &len in boundaries.iter().skip(1).rev() {
+                let sub = &current_str[..len];
                 if dict.get_all_exact(sub).is_some() {
                     found_len = len;
                     break;
                 }
             }
+            
+            // Special case for the whole remaining string if it's within limits
+            if found_len == 0 {
+                if dict.get_all_exact(current_str).is_some() {
+                    found_len = current_str.len();
+                }
+            }
 
             if found_len > 0 {
-                segments.push(current[..found_len].to_string());
-                current = &current[found_len..];
+                segments.push(current_str[..found_len].to_string());
+                current_offset += found_len;
             } else {
                 // If no syllable found, take one char and move on (fallback)
-                segments.push(current[..1].to_string());
-                current = &current[1..];
+                let first_char_len = current_str.chars().next().unwrap().len_utf8();
+                segments.push(current_str[..first_char_len].to_string());
+                current_offset += first_char_len;
             }
         }
         segments
