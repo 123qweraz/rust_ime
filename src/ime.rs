@@ -417,6 +417,25 @@ impl Ime {
             });
         }
 
+        // --- N-gram Reordering for Single Characters ---
+        if let Some(prev_char) = self.last_committed {
+            if let Some(next_map) = self.ngram.transitions.get(&prev_char) {
+                // Create a temporary list of (candidate, score)
+                let mut scored_candidates: Vec<(String, u32)> = raw_candidates.into_iter()
+                    .map(|cand| {
+                        let first_char = cand.chars().next().unwrap_or(' ');
+                        let score = *next_map.get(&first_char).unwrap_or(&0);
+                        (cand, score)
+                    })
+                    .collect();
+                
+                // Sort by score descending, but preserve relative order for same scores
+                scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
+                
+                raw_candidates = scored_candidates.into_iter().map(|(c, _)| c).collect();
+            }
+        }
+
         // Merge and ensure uniqueness
         for cand in raw_candidates {
             if !final_candidates.contains(&cand) {
