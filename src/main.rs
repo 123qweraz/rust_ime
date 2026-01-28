@@ -1214,11 +1214,9 @@ fn load_file_into_dict(path: &str, trie: &mut Trie, word_en_map: &mut HashMap<St
             if let Ok(entries) = serde_json::from_value::<Vec<DictEntry>>(val.clone()) {
                 for e in entries {
                     trie.insert(&py_lower, e.char.clone());
-                    // Only collect English definitions for Level-1 characters
-                    if e.category.as_deref() == Some("level-1") {
-                        if let Some(en) = e.en {
-                            word_en_map.entry(e.char.clone()).or_default().push(en);
-                        }
+                    // Collect English definitions for ALL entries that have them
+                    if let Some(en) = e.en {
+                        word_en_map.entry(e.char.clone()).or_default().push(en);
                     }
                     count += 1;
                 }

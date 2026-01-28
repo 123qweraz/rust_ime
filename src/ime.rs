@@ -594,6 +594,15 @@ impl Ime {
         // Final result
         self.candidates = scored_candidates.into_iter().map(|(c, _)| c).collect();
         
+        // Ensure exact full-pinyin matches are REALLY first
+        // If we have "好的" for "haode", it MUST be index 0
+        for exact in full_pinyin_exact.iter().rev() {
+            if let Some(pos) = self.candidates.iter().position(|x| x == exact) {
+                let item = self.candidates.remove(pos);
+                self.candidates.insert(0, item);
+            }
+        }
+        
         // If no Chinese candidates found, show raw buffer
         if self.candidates.is_empty() {
             self.candidates.push(self.buffer.clone());
