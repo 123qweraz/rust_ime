@@ -42,9 +42,13 @@ pub struct Ime {
     // Multi-profile support
     pub tries: HashMap<String, Trie>, 
     pub current_profile: String,
-    pub ngram: NgramModel,
-    pub ngram_path: std::path::PathBuf,
-    pub context: Vec<char>, // 替换 last_committed，记录最近上屏的字符流
+    
+    // LoRA-style models
+    pub base_ngram: NgramModel,
+    pub user_ngram: NgramModel,
+    pub user_ngram_path: std::path::PathBuf,
+    
+    pub context: Vec<char>, // 记录最近上屏的字符流
     
     pub punctuation: HashMap<String, String>,
     pub candidates: Vec<String>,
@@ -61,7 +65,19 @@ pub struct Ime {
 }
 
 impl Ime {
-    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool, ngram: NgramModel, ngram_path: std::path::PathBuf) -> Self {
+    pub fn new(
+        tries: HashMap<String, Trie>, 
+        initial_profile: String, 
+        punctuation: HashMap<String, String>, 
+        word_en_map: HashMap<String, Vec<String>>, 
+        notification_tx: Sender<NotifyEvent>, 
+        enable_fuzzy: bool, 
+        phantom_mode_str: &str, 
+        enable_notifications: bool, 
+        base_ngram: NgramModel, 
+        user_ngram: NgramModel,
+        user_ngram_path: std::path::PathBuf
+    ) -> Self {
         let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
             "pinyin" => PhantomMode::Pinyin,
             "hanzi" => PhantomMode::Hanzi,
@@ -73,8 +89,9 @@ impl Ime {
             buffer: String::new(),
             tries,
             current_profile: initial_profile,
-            ngram,
-            ngram_path,
+            base_ngram,
+            user_ngram,
+            user_ngram_path,
             context: Vec::new(),
             punctuation,
             candidates: vec![],
@@ -273,19 +290,19 @@ impl Ime {
     }
 
     fn commit_candidate(&mut self, candidate: String) -> Action {
-        // --- Live Learning: Learn before updating context ---
+        // --- Live Learning: Learn before updating context (Update User Adapter ONLY) ---
         for next_char in candidate.chars() {
-             self.ngram.update(&self.context, next_char);
+             self.user_ngram.update(&self.context, next_char);
              self.context.push(next_char);
         }
 
-        // Auto-save model occasionally (every 10 commits)
+        // Auto-save user adapter occasionally (every 10 commits)
         static mut COMMIT_COUNT: u32 = 0;
         unsafe {
             COMMIT_COUNT += 1;
             if COMMIT_COUNT % 10 == 0 {
-                let model_to_save = self.ngram.clone();
-                let path_to_save = self.ngram_path.clone();
+                let model_to_save = self.user_ngram.clone();
+                let path_to_save = self.user_ngram_path.clone();
                 std::thread::spawn(move || {
                     let _ = model_to_save.save(&path_to_save);
                 });
@@ -317,8 +334,16 @@ impl Ime {
         
         // Generate Predictions
         if !self.context.is_empty() {
-            // Fetch predictions based on context
-            self.candidates = self.ngram.predict(&self.context, 60); 
+            // Fetch predictions from both
+            let mut p1 = self.base_ngram.predict(&self.context, 30);
+            let p2 = self.user_ngram.predict(&self.context, 30);
+            
+            for cand in p2 {
+                if !p1.contains(&cand) {
+                    p1.insert(0, cand); // User predictions at the very front
+                }
+            }
+            self.candidates = p1; 
         } else {
             self.candidates.clear();
         }
@@ -432,7 +457,9 @@ impl Ime {
                         let context: Vec<char> = prev_word.chars().collect();
                         
                         // New score = previous path score + current transition score
-                        let transition_score = self.ngram.get_score(&context, next_char);
+                        let base_score = self.base_ngram.get_score(&context, next_char);
+                        let user_score = self.user_ngram.get_score(&context, next_char);
+                        let transition_score = base_score + (user_score * 10);
                         let new_score = prev_score + transition_score;
                         
                         let mut new_word = prev_word.clone();
@@ -504,8 +531,11 @@ impl Ime {
             let mut scored_candidates: Vec<(String, u32)> = raw_candidates.into_iter()
                 .map(|cand| {
                     let first_char = cand.chars().next().unwrap_or(' ');
-                    let score = self.ngram.get_score(&self.context, first_char);
-                    (cand, score)
+                    // Score = Base + (Alpha * User)
+                    let base_score = self.base_ngram.get_score(&self.context, first_char);
+                    let user_score = self.user_ngram.get_score(&self.context, first_char);
+                    let total_score = base_score + (user_score * 10); // Alpha = 10
+                    (cand, total_score)
                 })
                 .collect();
             
@@ -1094,7 +1124,19 @@ mod tests {
         trie.insert("zhong", "中".to_string());
         tries.insert("default".to_string(), trie);
         
-        Ime::new(tries, "default".to_string(), HashMap::new(), HashMap::new(), tx, false, "none", false, NgramModel::new(), std::path::PathBuf::from("test_ngram.json"))
+        Ime::new(
+            tries, 
+            "default".to_string(), 
+            HashMap::new(), 
+            HashMap::new(), 
+            tx, 
+            false, 
+            "none", 
+            false, 
+            NgramModel::new(), 
+            NgramModel::new(),
+            std::path::PathBuf::from("test_user_adapter.json")
+        )
     }
 
     #[test]

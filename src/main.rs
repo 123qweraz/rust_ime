@@ -422,7 +422,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     
     
-                                                                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false, ngram::NgramModel::new(), std::path::PathBuf::from("ngram.json"));
+                                                                                                let ime = Ime::new(
+                                                                                                    tries, 
+                                                                                                    active_profile_name.clone(), 
+                                                                                                    punctuation, 
+                                                                                                    HashMap::new(), 
+                                                                                                    tx, 
+                                                                                                    config.input.enable_fuzzy_pinyin, 
+                                                                                                    "none", 
+                                                                                                    false, 
+                                                                                                    ngram::NgramModel::new(), 
+                                                                                                    ngram::NgramModel::new(),
+                                                                                                    std::path::PathBuf::from("user_adapter.json")
+                                                                                                );
     
     
     
@@ -686,24 +698,37 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化托盘事件通道
     let (tray_event_tx, tray_event_rx) = std::sync::mpsc::channel();
 
-    // Load N-gram Model
-    let mut ngram_path = find_project_root();
-    ngram_path.push("n-gram-model");
-    ngram_path.push("ngram.json");
-    
-    if !ngram_path.exists() {
-        // Fallback to root
-        ngram_path = find_project_root();
-        ngram_path.push("ngram.json");
+    // Load N-gram Models (Base + User Adapter)
+    let mut base_ngram_path = find_project_root();
+    base_ngram_path.push("n-gram-model");
+    base_ngram_path.push("ngram.json");
+    if !base_ngram_path.exists() {
+        base_ngram_path = find_project_root();
+        base_ngram_path.push("ngram.json");
     }
 
-    let ngram = match ngram::NgramModel::load(&ngram_path) {
+    let mut user_ngram_path = find_project_root();
+    user_ngram_path.push("n-gram-model");
+    user_ngram_path.push("user_adapter.json");
+
+    let base_ngram = match ngram::NgramModel::load(&base_ngram_path) {
         Ok(m) => {
-            println!("[IME] Loaded N-gram Model from {}", ngram_path.display());
+            println!("[IME] Loaded Base N-gram Model from {}", base_ngram_path.display());
             m
         },
         Err(_) => {
-            println!("[IME] No N-gram Model found, creating new one.");
+            println!("[IME] No Base N-gram Model found, creating new one.");
+            ngram::NgramModel::new()
+        }
+    };
+
+    let user_ngram = match ngram::NgramModel::load(&user_ngram_path) {
+        Ok(m) => {
+            println!("[IME] Loaded User Adapter from {}", user_ngram_path.display());
+            m
+        },
+        Err(_) => {
+            println!("[IME] No User Adapter found, creating new one.");
             ngram::NgramModel::new()
         }
     };
@@ -717,8 +742,9 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications,
-        ngram,
-        ngram_path
+        base_ngram,
+        user_ngram,
+        user_ngram_path
     );
 
     // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
