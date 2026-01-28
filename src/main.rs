@@ -1,7 +1,7 @@
 use evdev::{Device, InputEventKind, Key};
 use std::collections::HashMap;
 use std::fs::File;
-use std::io::BufReader;
+use std::io::{BufReader, Write};
 use serde::Deserialize;
 use std::sync::atomic::{AtomicBool, Ordering};
 use signal_hook::consts::signal::*;
@@ -12,6 +12,8 @@ mod ime;
 mod vkbd;
 mod trie;
 mod config;
+mod tray;
+mod web;
 mod ngram;
 mod gui;
 
@@ -19,6 +21,7 @@ use ime::*;
 use vkbd::*;
 use trie::Trie;
 use config::Config;
+use users::get_effective_uid;
 use std::process::Command;
 use std::env;
 use std::path::{Path, PathBuf};
@@ -45,7 +48,6 @@ const LOG_FILE: &str = "/tmp/rust-ime.log";
 struct DictEntry {
     char: String,
     en: Option<String>,
-    #[allow(dead_code)]
     _category: Option<String>,
 }
 
@@ -55,11 +57,20 @@ struct PunctuationEntry {
 }
 
 fn detect_environment() {
-    let is_root = unsafe { libc::geteuid() == 0 };
+    println!("[环境检测] 开始检查运行环境...");
+    let is_root = get_effective_uid() == 0;
     if is_root {
-        eprintln!("❌ 错误：程序不能以 root 权限运行");
+        println!("❌ 错误：程序不能以 root 权限运行");
         std::process::exit(1);
     }
+    println!("[环境检测] 检查完成\n");
+}
+
+#[allow(dead_code)]
+fn validate_path(path_str: &str) -> Result<PathBuf, String> {
+    let path = Path::new(path_str);
+    let canonical = path.canonicalize().map_err(|e| format!("Path error: {}", e))?;
+    Ok(canonical)
 }
 
 fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
@@ -72,11 +83,9 @@ fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
     );
     let home = env::var("HOME")?;
     let autostart_dir = Path::new(&home).join(".config/autostart");
-    if !autostart_dir.exists() { std::fs::create_dir_all(&autostart_dir)?;
-    }
+    if !autostart_dir.exists() { std::fs::create_dir_all(&autostart_dir)?; }
     let desktop_file = autostart_dir.join("rust-ime.desktop");
     let mut file = File::create(&desktop_file)?;
-    use std::io::Write;
     file.write_all(desktop_entry.as_bytes())?;
     Ok(())
 }
@@ -97,6 +106,10 @@ fn is_process_running(pid: i32) -> bool {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     
+    if args.len() > 1 && !args[1].starts_with("--") {
+        // Simple CLI conversion logic would go here
+    }
+
     if args.len() > 1 {
         match args[1].as_str() {
             "--install" => return install_autostart(),
@@ -154,6 +167,7 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
 
     let config = load_config();
     let config_arc = Arc::new(RwLock::new(config));
+    let config_for_web = Arc::clone(&config_arc);
     
     let mut tries_map = HashMap::new();
     let initial_config = config_arc.read().unwrap().clone();
@@ -163,7 +177,18 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
         let trie = load_dict_for_profile(&profile.dicts, &mut word_en_map);
         tries_map.insert(profile.name.clone(), trie);
     }
-    
+    let tries_arc = Arc::new(RwLock::new(tries_map));
+    let tries_for_web = Arc::clone(&tries_arc);
+
+    // 启动 Web 配置服务器
+    std::thread::spawn(move || {
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async {
+            let server = web::WebServer::new(8765, config_for_web, tries_for_web);
+            server.start().await;
+        });
+    });
+
     let device_path = initial_config.files.device_path.clone().unwrap_or_else(|| find_keyboard().unwrap());
     let mut dev = Device::open(&device_path)?;
     let mut vkbd = Vkbd::new(&dev)?;
@@ -172,15 +197,20 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
     let active_profile = initial_config.input.default_profile.clone();
 
     let (notify_tx, _notify_rx) = std::sync::mpsc::channel();
+    let (tray_tx, _tray_rx) = std::sync::mpsc::channel();
+
+    // 启动托盘
+    let _tray_handle = tray::start_tray(false, active_profile.clone(), tray_tx);
 
     let base_ngram = ngram::NgramModel::new();
     let user_ngram = ngram::NgramModel::new();
     let user_ngram_path = find_project_root().join("user_adapter.json");
 
     let mut ime = Ime::new(
-        tries_map, active_profile, punctuation, word_en_map, notify_tx, gui_tx,
+        tries_arc.read().unwrap().clone(), active_profile, punctuation, word_en_map, notify_tx, gui_tx,
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
+        initial_config.appearance.show_notifications,
         base_ngram, user_ngram, user_ngram_path
     );
 
@@ -206,7 +236,7 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
                     Key::KEY_LEFTALT | Key::KEY_RIGHTALT => alt_held = is_press,
                     Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA => meta_held = is_press,
                     Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT => shift_held = is_press,
-                    _ => {} // Ignore other keys for modifier state
+                    _ => {}
                 }
 
                 if is_press {
