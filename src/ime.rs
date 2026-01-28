@@ -591,6 +591,17 @@ impl Ime {
         // Sort by score descending
         scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
 
+        // DEBUG: Print top 5 scores in foreground mode
+        if !self.buffer.is_empty() {
+            println!("\n[Ranking Debug] Pinyin: {}", self.buffer);
+            for (i, (cand, score)) in scored_candidates.iter().take(5).enumerate() {
+                let base = self.base_ngram.get_score(&self.context, cand);
+                let user = self.user_ngram.get_score(&self.context, cand);
+                let exact = if full_pinyin_exact.contains(cand) { 5000000 } else { 0 };
+                println!("  {}. {} | Score: {} (Base: {}, User: {}, Exact: {})", i+1, cand, score, base, user, exact);
+            }
+        }
+
         // Final result
         self.candidates = scored_candidates.into_iter().map(|(c, _)| c).collect();
         
