@@ -16,6 +16,7 @@ mod config;
 mod tray;
 mod web;
 mod ngram;
+mod gui;
 
 use ime::*;
 use vkbd::*;
@@ -428,6 +429,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                                                                                                     punctuation, 
                                                                                                     HashMap::new(), 
                                                                                                     tx, 
+                                                                                                    None, // No GUI in CLI mode
                                                                                                     config.input.enable_fuzzy_pinyin, 
                                                                                                     "none", 
                                                                                                     false, 
@@ -733,12 +735,16 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         }
     };
     
+    // 初始化 GUI 通道
+    let (gui_tx, gui_rx) = std::sync::mpsc::channel();
+
     let mut ime = Ime::new(
         tries, 
         active_profile.clone(), 
         punctuation, 
         word_en_map, 
         notify_tx.clone(), 
+        Some(gui_tx), // 传入通道
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications,
@@ -746,6 +752,12 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         user_ngram,
         user_ngram_path
     );
+
+    // 启动 GUI (在独立线程，因为目前的架构 run_ime 霸占了主线程)
+    // 实际上 eframe 最好在主线程，但我们先试试线程启动，如果不行再交换
+    std::thread::spawn(move || {
+        gui::start_gui(gui_rx);
+    });
 
     // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
     let tray_handle = tray::start_tray(ime.chinese_enabled, active_profile, tray_event_tx);

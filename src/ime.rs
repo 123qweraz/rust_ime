@@ -56,6 +56,7 @@ pub struct Ime {
     pub page: usize,
     pub chinese_enabled: bool,
     pub notification_tx: Sender<NotifyEvent>,
+    pub gui_tx: Option<Sender<(String, Vec<String>, usize)>>, // GUI 更新通道
     pub phantom_mode: PhantomMode,
     pub enable_notifications: bool,
     pub phantom_text: String,
@@ -71,6 +72,7 @@ impl Ime {
         punctuation: HashMap<String, String>, 
         word_en_map: HashMap<String, Vec<String>>, 
         notification_tx: Sender<NotifyEvent>, 
+        gui_tx: Option<Sender<(String, Vec<String>, usize)>>, // 新增
         enable_fuzzy: bool, 
         phantom_mode_str: &str, 
         enable_notifications: bool, 
@@ -99,6 +101,7 @@ impl Ime {
             page: 0,
             chinese_enabled: false,
             notification_tx,
+            gui_tx, // 初始化
             phantom_mode,
             enable_notifications,
             phantom_text: String::new(),
@@ -738,6 +741,11 @@ impl Ime {
     }
 
     fn print_preview(&self) {
+        // 同时更新 GUI
+        if let Some(ref tx) = self.gui_tx {
+            let _ = tx.send((self.buffer.clone(), self.candidates.clone(), self.selected));
+        }
+
         if self.buffer.is_empty() && self.candidates.is_empty() { return; }
         
         print!("\r\x1B[K"); 
