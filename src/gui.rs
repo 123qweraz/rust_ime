@@ -1,6 +1,5 @@
 use eframe::egui;
 use std::sync::mpsc::Receiver;
-use std::sync::{Arc, Mutex};
 
 pub struct CandidateApp {
     rx: Receiver<(String, Vec<String>, usize)>,
@@ -11,9 +10,10 @@ pub struct CandidateApp {
 
 impl CandidateApp {
     pub fn new(cc: &eframe::CreationContext<'_>, rx: Receiver<(String, Vec<String>, usize)>) -> Self {
-        // 自定义样式，使其看起来像一个输入法
         let mut visuals = egui::Visuals::dark();
-        visuals.window_rounding = 8.0.into();
+        visuals.window_rounding = 10.0.into();
+        visuals.window_shadow = egui::epaint::Shadow::big_dark();
+        visuals.override_text_color = Some(egui::Color32::from_rgb(220, 220, 220));
         cc.egui_ctx.set_visuals(visuals);
         
         Self {
@@ -27,50 +27,65 @@ impl CandidateApp {
 
 impl eframe::App for CandidateApp {
     fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
-        // 实时接收来自内核的消息
+        let mut updated = false;
         while let Ok((p, c, s)) = self.rx.try_recv() {
             self.pinyin = p;
             self.candidates = c;
             self.selected = s;
+            updated = true;
         }
 
-        // 如果没有输入，隐藏窗口
-        if self.pinyin.is_empty() && self.candidates.is_empty() {
-            frame.set_visible(false);
-        } else {
-            frame.set_visible(true);
-        }
+        let is_visible = !self.pinyin.is_empty() || !self.candidates.is_empty();
+        frame.set_visible(is_visible);
 
-        // 渲染选词框
-        egui::Area::new("candidate_area")
-            .anchor(egui::Align2::LEFT_TOP, egui::vec2(100.0, 100.0)) // 暂时固定位置，后续可优化为跟随光标
-            .show(ctx, |ui| {
-                egui::Frame::window(ui.style())
-                    .fill(egui::Color32::from_black_alpha(200))
-                    .show(ui, |ui| {
-                        ui.vertical(|ui| {
-                            ui.horizontal(|ui| {
-                                ui.label(egui::RichText::new(&self.pinyin).color(egui::Color32::LIGHT_BLUE).strong());
-                            });
-                            
-                            ui.add_space(4.0);
-                            
-                            ui.horizontal(|ui| {
-                                for (i, cand) in self.candidates.iter().enumerate() {
-                                    let text = format!("{}.{}", i + 1, cand);
-                                    if i == self.selected {
-                                        ui.label(egui::RichText::new(text).color(egui::Color32::YELLOW).strong().underline());
-                                    } else {
-                                        ui.label(text);
+        if is_visible {
+            egui::Area::new("candidate_area")
+                .anchor(egui::Align2::LEFT_TOP, egui::vec2(120.0, 120.0))
+                .show(ctx, |ui| {
+                    egui::Frame::none()
+                        .fill(egui::Color32::from_black_alpha(220))
+                        .rounding(8.0)
+                        .inner_margin(egui::Margin::same(10.0))
+                        .stroke(egui::Stroke::new(1.0, egui::Color32::from_gray(60)))
+                        .show(ui, |ui| {
+                            ui.vertical(|ui| {
+                                ui.horizontal(|ui| {
+                                    ui.label(egui::RichText::new(&self.pinyin)
+                                        .color(egui::Color32::from_rgb(100, 200, 255))
+                                        .size(18.0)
+                                        .strong());
+                                });
+                                
+                                ui.add_space(8.0);
+                                
+                                ui.horizontal(|ui| {
+                                    ui.spacing_mut().item_spacing.x = 15.0;
+                                    for (i, cand) in self.candidates.iter().enumerate() {
+                                        let is_selected = i == self.selected;
+                                        let text = format!("{}.{}", i + 1, cand);
+                                        
+                                        if is_selected {
+                                            ui.label(egui::RichText::new(text)
+                                                .color(egui::Color32::from_rgb(255, 215, 0))
+                                                .size(18.0)
+                                                .strong());
+                                        } else {
+                                            ui.label(egui::RichText::new(text)
+                                                .size(17.0));
+                                        }
                                     }
-                                }
+                                });
                             });
                         });
-                    });
-            });
+                });
+        }
 
-        // 强制每秒刷新几次，确保及时响应消息
-        ctx.request_repaint_after(std::time::Duration::from_millis(50));
+        // Only request repaint if we got new data or if we are visible (to keep UI responsive)
+        if updated || is_visible {
+            ctx.request_repaint_after(std::time::Duration::from_millis(10));
+        } else {
+            ctx.request_repaint_after(std::time::Duration::from_millis(100));
+        }
     }
 }
 

@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use evdev::Key;
 use std::sync::mpsc::Sender;
 
@@ -277,11 +277,12 @@ impl Ime {
 
         let new_text = format!("[{}]", inner_text);
 
-        let mut delete_count = self.phantom_text.chars().count();
-        if self.is_highlighted && delete_count > 0 {
-            delete_count = 1;
-        }
-        
+                let delete_count = self.phantom_text.chars().count();
+                /*
+                if self.is_highlighted && delete_count > 0 {
+                    delete_count = 1;
+                }
+                */        
         self.phantom_text = new_text.clone();
         self.is_highlighted = true;
 
@@ -329,11 +330,12 @@ impl Ime {
 
         // Prepare Action
         let action = if self.phantom_mode != PhantomMode::None {
-             let mut delete_count = self.phantom_text.chars().count();
-             if self.is_highlighted && delete_count > 0 {
-                 delete_count = 1;
-             }
-             Action::DeleteAndEmit { delete: delete_count, insert: candidate.clone(), highlight: false }
+                     let delete_count = self.phantom_text.chars().count();
+                     /*
+                     if self.is_highlighted && delete_count > 0 {
+                         delete_count = 1;
+                     }
+                     */             Action::DeleteAndEmit { delete: delete_count, insert: candidate.clone(), highlight: false }
         } else {
             print!("\r\x1B[K");
             Action::Emit(candidate.clone())
@@ -409,8 +411,8 @@ impl Ime {
         let mut pinyin_search = self.buffer.clone();
         let mut filter_string = String::new();
         if let Some((idx, _)) = self.buffer.char_indices().skip(1).find(|(_, c)| c.is_ascii_uppercase()) {
-            pinyin_search = self.buffer[..idx].to_string();
-            filter_string = self.buffer[idx..].to_lowercase();
+            pinyin_search = self.buffer.get(..idx).unwrap_or(&self.buffer).to_string();
+            filter_string = self.buffer.get(idx..).unwrap_or("").to_lowercase();
         }
         let pinyin_lower = pinyin_search.to_lowercase();
 
@@ -419,12 +421,13 @@ impl Ime {
         let segments = self.segment_pinyin(&pinyin_lower, dict);
 
         let mut final_candidates: Vec<String> = Vec::new();
+        let mut seen = HashSet::new();
 
         // 1. Full Pinyin Match (Highest Priority)
         // If the entire buffer matches a word in the dictionary, put it first.
         if let Some(exact_matches) = dict.get_all_exact(&pinyin_lower) {
             for cand in exact_matches {
-                if !final_candidates.contains(&cand) {
+                if seen.insert(cand.clone()) {
                     final_candidates.push(cand);
                 }
             }
@@ -489,7 +492,7 @@ impl Ime {
             
             // Add the best full combinations to final candidates
             for (word, score) in current_combinations {
-                if !final_candidates.contains(&word) {
+                if seen.insert(word.clone()) {
                     final_candidates.push(word.clone());
                     combination_scores.insert(word, score);
                 }
@@ -501,9 +504,14 @@ impl Ime {
         let mut raw_candidates = if self.enable_fuzzy {
             let variants = self.expand_fuzzy_pinyin(&pinyin_lower);
             let mut merged = Vec::new();
+            let mut merged_seen = HashSet::new();
             for variant in variants {
                 let res = dict.search_bfs(&variant, 100); 
-                for c in res { if !merged.contains(&c) { merged.push(c); } }
+                for c in res {
+                    if merged_seen.insert(c.clone()) {
+                        merged.push(c);
+                    }
+                }
             }
             merged
         } else {
@@ -512,8 +520,9 @@ impl Ime {
             let mut res = dict.search_bfs(&pinyin_lower, 100);
             if segments.len() > 1 {
                 let first_seg_res = dict.search_bfs(&segments[0], 100);
+                let mut res_seen: HashSet<String> = res.iter().cloned().collect();
                 for c in first_seg_res {
-                    if !res.contains(&c) {
+                    if res_seen.insert(c.clone()) {
                         res.push(c);
                     }
                 }
@@ -846,11 +855,12 @@ impl Ime {
                 self.buffer.pop();
                 if self.buffer.is_empty() {
                     print!("\r\x1B[K"); // 清除预览行
-                    let mut delete_count = self.phantom_text.chars().count();
-                    if self.is_highlighted && delete_count > 0 {
-                        delete_count = 1;
-                    }
-                    self.reset();
+                            let delete_count = self.phantom_text.chars().count();
+                            /*
+                            if self.is_highlighted && delete_count > 0 {
+                                delete_count = 1;
+                            }
+                            */                    self.reset();
                     if self.phantom_mode != PhantomMode::None && delete_count > 0 {
                          Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
                     } else {
@@ -937,11 +947,12 @@ impl Ime {
                 } else if !self.buffer.is_empty() {
                     let out = self.buffer.clone();
                     if self.phantom_mode != PhantomMode::None {
-                         let mut delete_count = self.phantom_text.chars().count();
-                         if self.is_highlighted && delete_count > 0 {
-                             delete_count = 1;
-                         }
-                         self.reset();
+                                 let delete_count = self.phantom_text.chars().count();
+                                 /*
+                                 if self.is_highlighted && delete_count > 0 {
+                                     delete_count = 1;
+                                 }
+                                 */                         self.reset();
                          Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
                     } else {
                         print!("\r\x1B[K");
@@ -956,11 +967,12 @@ impl Ime {
             Key::KEY_ENTER => {
                 let out = self.buffer.clone();
                 if self.phantom_mode != PhantomMode::None {
-                     let mut delete_count = self.phantom_text.chars().count();
-                     if self.is_highlighted && delete_count > 0 {
-                         delete_count = 1;
-                     }
-                     self.reset();
+                             let delete_count = self.phantom_text.chars().count();
+                             /*
+                             if self.is_highlighted && delete_count > 0 {
+                                 delete_count = 1;
+                             }
+                             */                     self.reset();
                      Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
                 } else {
                     print!("\r\x1B[K");
@@ -971,11 +983,12 @@ impl Ime {
 
             Key::KEY_ESC => {
                 if self.phantom_mode != PhantomMode::None {
-                    let mut delete_count = self.phantom_text.chars().count();
-                    if self.is_highlighted && delete_count > 0 {
-                        delete_count = 1;
-                    }
-                    self.reset();
+                            let delete_count = self.phantom_text.chars().count();
+                            /*
+                            if self.is_highlighted && delete_count > 0 {
+                                delete_count = 1;
+                            }
+                            */                    self.reset();
                     Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
                 } else {
                     print!("\r\x1B[K");

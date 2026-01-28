@@ -74,11 +74,12 @@ fn detect_environment() {
     // 1. 是否以 root 运行
     let is_root = get_effective_uid() == 0;
     if is_root {
-        println!("⚠️  警告：程序正以 root 权限运行（检测到 effective uid = 0）");
-        println!("   这会导致剪贴板（arboard）无法访问普通用户的图形会话！");
-        println!("   建议：不要用 sudo 启动程序。");
-        println!("   正确方式：将用户加入 input 和 uinput 组后，直接运行。");
-        println!("   示例命令：sudo usermod -aG input,uinput $USER  （然后注销/重启）");
+        println!("❌ 错误：程序不能以 root 权限运行（检测到 effective uid = 0）");
+        println!("   这会导致剪贴板（arboard）无法访问普通用户的图形会话，中文无法上屏！");
+        println!("   请不要用 sudo 启动程序。");
+        println!("   正确方式：将当前用户加入 input 和 uinput 组后，直接运行：");
+        println!("   sudo usermod -aG input,uinput $USER  （操作后需注销并重新登录）");
+        std::process::exit(1);
     } else {
         println!("✓ 正常：非 root 权限运行");
     }
@@ -160,11 +161,8 @@ fn validate_path(path_str: &str) -> Result<PathBuf, String> {
     let canonical = path.canonicalize().map_err(|e| format!("Path error: {}", e))?;
     let project_root = find_project_root().canonicalize().unwrap_or(PathBuf::from("/"));
     
-    // For now, just warn but allow, to fix the "dictionary not found" regression.
-    // Strict enforcement can be re-enabled once path resolution is verified.
     if !canonical.starts_with(&project_root) {
-        eprintln!("Security Warning: Path {} is outside project root: {:?}", path_str, canonical);
-        // return Err(format!("Access denied: Path {} is outside project root.", path_str));
+        return Err(format!("Access denied: Path {} is outside project root.", path_str));
     }
     Ok(canonical)
 }

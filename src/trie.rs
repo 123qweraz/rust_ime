@@ -1,4 +1,4 @@
-use std::collections::{HashMap, VecDeque};
+use std::collections::{HashMap, VecDeque, HashSet};
 
 #[derive(Debug, Default, Clone)]
 struct TrieNode {
@@ -78,9 +78,10 @@ impl Trie {
         let mut queue = VecDeque::new();
         queue.push_back(node);
 
+        let mut seen = HashSet::new();
         while let Some(curr) = queue.pop_front() {
             for word in &curr.words {
-                if !results.contains(word) {
+                if seen.insert(word) {
                     results.push(word.clone());
                     if results.len() >= limit {
                         return results;
