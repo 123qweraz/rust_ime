@@ -59,7 +59,7 @@ const LOG_FILE: &str = "/tmp/rust-ime.log";
 struct DictEntry {
     char: String,
     en: Option<String>,
-    category: Option<String>,
+    _category: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
