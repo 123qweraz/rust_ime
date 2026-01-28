@@ -454,18 +454,31 @@ impl Ime {
             dict.search_bfs(search_term, 200)
         };
 
-        // Apply auxiliary filter if active (uppercase letters)
+        // Apply auxiliary filter if active (uppercase letters) to ALL candidates
         if !filter_string.is_empty() {
-            raw_candidates.retain(|cand| {
+            let filter = |cand: &String| {
                 if let Some(en_list) = self.word_en_map.get(cand) {
                     en_list.iter().any(|en| {
                         en.split(|c: char| !c.is_alphanumeric())
                           .any(|word| word.to_lowercase().starts_with(&filter_string))
                     })
                 } else {
+                    // For phrases/combinations, we check if the FIRST character matches the filter
+                    // This allows "nihaoM" to work by checking "ni" (you)
+                    if let Some(first_char) = cand.chars().next() {
+                        if let Some(en_list) = self.word_en_map.get(&first_char.to_string()) {
+                            return en_list.iter().any(|en| {
+                                en.split(|c: char| !c.is_alphanumeric())
+                                  .any(|word| word.to_lowercase().starts_with(&filter_string))
+                            });
+                        }
+                    }
                     false 
                 }
-            });
+            };
+            
+            final_candidates.retain(filter);
+            raw_candidates.retain(filter);
         }
 
         // --- N-gram Reordering for Single Characters ---
