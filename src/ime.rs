@@ -56,7 +56,7 @@ pub struct Ime {
     pub page: usize,
     pub chinese_enabled: bool,
     pub notification_tx: Sender<NotifyEvent>,
-    pub gui_tx: Option<Sender<(String, Vec<String>, usize)>>, // 改回 Sender
+    pub gui_tx: Option<Sender<crate::gui::GuiEvent>>, // 改回 Sender
     pub phantom_mode: PhantomMode,
     pub enable_notifications: bool,
     pub phantom_text: String,
@@ -72,7 +72,7 @@ impl Ime {
         punctuation: HashMap<String, String>, 
         word_en_map: HashMap<String, Vec<String>>, 
         notification_tx: Sender<NotifyEvent>, 
-        gui_tx: Option<Sender<(String, Vec<String>, usize)>>, // 更新
+        gui_tx: Option<Sender<crate::gui::GuiEvent>>, // 更新
         enable_fuzzy: bool, 
         phantom_mode_str: &str, 
         enable_notifications: bool, 
@@ -249,7 +249,22 @@ impl Ime {
 
     fn update_gui(&self) {
         if let Some(ref tx) = self.gui_tx {
-            let _ = tx.send((self.buffer.clone(), self.candidates.clone(), self.selected));
+            let mut hints = Vec::new();
+            for cand in &self.candidates {
+                let hint = if let Some(en_list) = self.word_en_map.get(cand) {
+                    en_list.first().cloned().unwrap_or_default()
+                } else {
+                    String::new()
+                };
+                hints.push(hint);
+            }
+
+            let _ = tx.send(crate::gui::GuiEvent::Update {
+                pinyin: self.buffer.clone(),
+                candidates: self.candidates.clone(),
+                hints,
+                selected: self.selected,
+            });
         }
     }
 
@@ -718,7 +733,10 @@ impl Ime {
     }
 
     fn notify_preview(&self) {
-        if self.buffer.is_empty() && self.candidates.is_empty() { return; }
+        if self.buffer.is_empty() && self.candidates.is_empty() { 
+            let _ = self.notification_tx.send(NotifyEvent::Close);
+            return; 
+        }
 
         let summary = if self.buffer.is_empty() {
             "联想".to_string()

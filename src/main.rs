@@ -91,10 +91,34 @@ fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn stop_daemon() -> Result<(), Box<dyn std::error::Error>> {
-    if !Path::new(PID_FILE).exists() { return Ok(()) }
+    if !Path::new(PID_FILE).exists() { 
+        println!("未发现 PID 文件，程序可能未在运行。");
+        return Ok(()) 
+    }
     let pid_str = std::fs::read_to_string(PID_FILE)?;
     let pid: i32 = pid_str.trim().parse()?;
-    let _ = Command::new("kill").arg("-15").arg(pid.to_string()).status()?;
+    
+    if !is_process_running(pid) {
+        println!("发现过期的 PID 文件，正在清理...");
+        let _ = std::fs::remove_file(PID_FILE);
+        return Ok(());
+    }
+
+    println!("正在停止 rust-ime (PID: {})...", pid);
+    let _ = Command::new("kill").arg("-15").arg(pid.to_string()).status();
+    
+    // 等待进程退出
+    for _ in 0..50 {
+        if !is_process_running(pid) {
+            println!("已停止。");
+            let _ = std::fs::remove_file(PID_FILE);
+            return Ok(());
+        }
+        std::thread::sleep(std::time::Duration::from_millis(100));
+    }
+    
+    println!("进程未能在 5 秒内停止，强制结束...");
+    let _ = Command::new("kill").arg("-9").arg(pid.to_string()).status();
     let _ = std::fs::remove_file(PID_FILE);
     Ok(())
 }
@@ -114,13 +138,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         match args[1].as_str() {
             "--install" => return install_autostart(),
             "--stop" => return stop_daemon(),
-            "--restart" => { let _ = stop_daemon(); },
+            "--restart" => { 
+                let _ = stop_daemon(); 
+                std::thread::sleep(std::time::Duration::from_millis(200));
+            },
             "--foreground" => {
                 let (gui_tx, gui_rx) = std::sync::mpsc::channel();
-                std::thread::spawn(move || {
+                let ime_handle = std::thread::spawn(move || {
                     let _ = run_ime(Some(gui_tx));
                 });
                 gui::start_gui(gui_rx);
+                let _ = ime_handle.join();
                 return Ok(())
             }
             _ => {}
@@ -143,10 +171,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     match daemonize.start() {
         Ok(_) => {
             let (gui_tx, gui_rx) = std::sync::mpsc::channel();
-            std::thread::spawn(move || {
+            let ime_handle = std::thread::spawn(move || {
                 let _ = run_ime(Some(gui_tx));
             });
             gui::start_gui(gui_rx);
+            let _ = ime_handle.join();
             Ok(())
         }
         Err(e) => Err(e.into())
@@ -155,7 +184,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 use std::sync::{Arc, RwLock, mpsc::Sender};
 
-fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), Box<dyn std::error::Error>> {
+fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn std::error::Error>> {
     let root = find_project_root();
     let _ = env::set_current_dir(&root);
 
@@ -222,6 +251,7 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
                 NotifyEvent::Close => {
                     let _ = Notification::new()
                         .summary(" ")
+                        .body(" ")
                         .id(9999)
                         .timeout(Timeout::Milliseconds(1))
                         .show();
@@ -238,7 +268,7 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
     let user_ngram_path = find_project_root().join("user_adapter.json");
 
     let mut ime = Ime::new(
-        tries_arc.read().unwrap().clone(), active_profile, punctuation, word_en_map, notify_tx, gui_tx,
+        tries_arc.read().unwrap().clone(), active_profile, punctuation, word_en_map, notify_tx.clone(), gui_tx.clone(),
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications,
@@ -271,7 +301,11 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
                     let _ = Command::new("xdg-open").arg("http://localhost:8765").spawn();
                 }
                 tray::TrayEvent::Restart => {
-                    let _ = Command::new("rust-ime").arg("--restart").spawn();
+                    if let Ok(exe) = std::env::current_exe() {
+                        let _ = Command::new(exe).spawn();
+                    } else {
+                        let _ = Command::new("rust-ime").spawn();
+                    }
                     should_exit.store(true, Ordering::Relaxed);
                 }
                 tray::TrayEvent::Exit => {
@@ -333,6 +367,10 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
     }
 
     let _ = dev.ungrab();
+    let _ = notify_tx.send(NotifyEvent::Close);
+    if let Some(tx) = gui_tx {
+        let _ = tx.send(crate::gui::GuiEvent::Exit);
+    }
     Ok(())
 }
 
