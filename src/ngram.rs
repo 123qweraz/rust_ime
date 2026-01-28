@@ -176,11 +176,17 @@ impl NgramModel {
     }
 
     pub fn load<P: AsRef<Path>>(path: P) -> io::Result<Self> {
-        let file = File::open(path)?;
+        let path_ref = path.as_ref();
+        let file = File::open(path_ref)?;
         let reader = BufReader::new(file);
         let mut model: Self = serde_json::from_reader(reader)?;
         model.token_set = std::collections::HashSet::new();
         model.load_token_list();
+        
+        println!("[NgramModel] Successfully loaded from: {:?}", path_ref);
+        println!("             Transitions: {}", model.transitions.len());
+        println!("             Unigrams:    {}", model.unigrams.len());
+        
         Ok(model)
     }
 }
