@@ -449,14 +449,17 @@ impl Ime {
             let mut found_len = 0;
             let current_str = &pinyin[current_offset..];
             
-            // Get valid char boundaries up to 6 characters (pinyin syllables max length)
-            let boundaries: Vec<usize> = current_str.char_indices()
+            // Get valid char boundaries
+            let mut boundaries: Vec<usize> = current_str.char_indices()
                 .map(|(idx, _)| idx)
                 .collect();
+            // Add the end of the string as a valid boundary
+            boundaries.push(current_str.len());
             
             // Greedily find the longest valid syllable, max 6 chars
-            let max_len_idx = boundaries.len().min(7); // index of 7th boundary or end
-            for i in (1..max_len_idx).rev() {
+            // boundaries[0] is 0, boundaries[1] is end of 1st char, ..., boundaries[n] is end of string
+            let max_check = boundaries.len().min(7); 
+            for i in (1..max_check).rev() {
                 let len = boundaries[i];
                 let sub = &current_str[..len];
                 if dict.get_all_exact(sub).is_some() {
