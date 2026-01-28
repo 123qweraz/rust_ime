@@ -9,6 +9,10 @@ Cargo.lock
 *.log
 
 # Configuration
+config.json
+ngram.json
+user_adapter.json
+ref/
 
 # Reference/External project
 webime/
