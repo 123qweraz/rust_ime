@@ -58,6 +58,7 @@ const LOG_FILE: &str = "/tmp/rust-ime.log";
 #[derive(Debug, Deserialize)]
 struct DictEntry {
     char: String,
+    en: Option<String>,
 }
 
 #[derive(Debug, Deserialize)]
@@ -598,11 +599,16 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     
     let mut tries_map = HashMap::new();
     let initial_config = config_arc.read().unwrap().clone();
+    
+    // Global map to store English definitions for characters
+    // We load this WHILE loading the dictionaries now.
+    let mut word_en_map: HashMap<String, Vec<String>> = HashMap::new();
 
     // Pre-load dictionaries to share them with Web server
     println!("[Config] Loading dictionaries...");
     for profile in &initial_config.files.profiles {
-        let trie = load_dict_for_profile(&profile.dicts);
+        // Pass word_en_map to collect definitions
+        let trie = load_dict_for_profile(&profile.dicts, &mut word_en_map);
         tries_map.insert(profile.name.clone(), trie);
     }
     let tries_arc = Arc::new(RwLock::new(tries_map));
@@ -653,7 +659,7 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     let tries = tries_arc.read().unwrap().clone();
     
     let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
-    let word_en_map = load_char_en_map(&initial_config.files.char_defs);
+    // REMOVED: let word_en_map = load_char_en_map(&initial_config.files.char_defs);
 
     println!("[IME] Loaded {} profiles.", tries.len());
     println!("[IME] Loaded punctuation map with {} entries.", punctuation.len());
@@ -1099,7 +1105,7 @@ pub fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-pub fn load_dict_for_profile(paths: &[String]) -> Trie {
+pub fn load_dict_for_profile(paths: &[String], word_en_map: &mut HashMap<String, Vec<String>>) -> Trie {
     let mut trie = Trie::new();
     
     println!("[Config] Loading dictionary profile with {} paths...", paths.len());
@@ -1126,10 +1132,10 @@ pub fn load_dict_for_profile(paths: &[String]) -> Trie {
                 if sub_path_str.ends_with("punctuation.json") {
                     continue;
                 }
-                load_file_into_dict(sub_path_str, &mut trie);
+                load_file_into_dict(sub_path_str, &mut trie, word_en_map);
              }
         } else if path.is_file() {
-             load_file_into_dict(path_str, &mut trie);
+             load_file_into_dict(path_str, &mut trie, word_en_map);
         } else {
             println!("Warning: Path not found or invalid: {}", path_str);
         }
@@ -1137,7 +1143,7 @@ pub fn load_dict_for_profile(paths: &[String]) -> Trie {
     trie
 }
 
-fn load_file_into_dict(path: &str, trie: &mut Trie) {
+fn load_file_into_dict(path: &str, trie: &mut Trie, word_en_map: &mut HashMap<String, Vec<String>>) {
     let file = match File::open(path) {
         Ok(f) => f,
         Err(_) => return,
@@ -1159,7 +1165,11 @@ fn load_file_into_dict(path: &str, trie: &mut Trie) {
             // Handle Vec<DictEntry>
             if let Ok(entries) = serde_json::from_value::<Vec<DictEntry>>(val.clone()) {
                 for e in entries {
-                    trie.insert(&py_lower, e.char);
+                    trie.insert(&py_lower, e.char.clone());
+                    // Collect English definition if available
+                    if let Some(en) = e.en {
+                        word_en_map.entry(e.char.clone()).or_default().push(en);
+                    }
                     count += 1;
                 }
             } 

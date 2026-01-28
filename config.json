@@ -58,9 +58,7 @@
         "name": "Chinese",
         "description": "默认中文输入",
         "dicts": [
-          "dicts/chinese/vocabulary/words.json",
-          "dicts/chinese/character/chars.json",
-          "dicts/chinese/other"
+          "dicts/chars.json"
         ]
       },
       {

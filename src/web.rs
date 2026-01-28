@@ -1453,7 +1453,8 @@ async fn convert_handler(
 
 
 
-            let trie = load_dict_for_profile(&profile.dicts);
+            let mut dummy_map = HashMap::new();
+            let trie = load_dict_for_profile(&profile.dicts, &mut dummy_map);
 
 
 
