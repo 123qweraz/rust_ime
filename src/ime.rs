@@ -555,23 +555,24 @@ impl Ime {
                 // Score includes Unigram (base frequency) + N-gram (context boost)
                 let base_score = self.base_ngram.get_score(&self.context, &cand);
                 let user_score = self.user_ngram.get_score(&self.context, &cand);
-                let mut total_score = init_score + base_score + (user_score * 10);
+                // User habit is much more important than base model
+                let mut total_score = init_score + base_score + (user_score * 20);
                 
                 // 1. ABSOLUTE PRIORITY for full-pinyin exact matches (e.g., "感觉" for "ganjue")
                 if full_pinyin_exact.contains(&cand) {
-                    total_score += 1000000;
+                    total_score += 2000000;
                 }
 
-                // 2. LENGTH BOOST: Phrases are generally more specific and desired.
+                // 2. MODERATE LENGTH BOOST: Only add significant boost for 2-3 char words.
+                // Too much boost for 4+ char words can hide common shorter ones.
                 let char_count = cand.chars().count();
                 if char_count > 1 {
-                    total_score += 10000 * (char_count as u32);
+                    total_score += 5000 * (char_count as u32).min(3);
                 }
                 
-                // 3. JIANPIN PENALTY: If the candidate was likely from a single-letter match
-                // but the buffer is much longer, penalize it.
-                if char_count == 1 && pinyin_lower.len() > 3 {
-                    total_score = total_score.saturating_sub(5000);
+                // 3. JIANPIN PENALTY: Heavily penalize single-char results for long buffers
+                if char_count == 1 && pinyin_lower.len() > 2 {
+                    total_score = total_score.saturating_sub(10000);
                 }
                 
                 (cand, total_score)

@@ -156,9 +156,9 @@ impl NgramModel {
 
             if let Some(next_map) = self.transitions.get(&context) {
                 if let Some(&score) = next_map.get(next_token_str) {
-                    // N-gram 分数给予极大的加权，len 越长加权越大
-                    total_score += score * 100 * (len as u32).pow(2);
-                    break; // 找到了最长匹配就不再找短的，防止分数重复计算
+                    // 更加平衡的加权：使用线性 len，乘数降为 10
+                    total_score += score * 10 * (len as u32);
+                    break; 
                 }
             }
         }
