@@ -56,7 +56,7 @@ pub struct Ime {
     pub page: usize,
     pub chinese_enabled: bool,
     pub notification_tx: Sender<NotifyEvent>,
-    pub gui_tx: Option<Sender<(String, Vec<String>, usize)>>, // GUI 更新通道
+    pub gui_tx: Option<Sender<(String, Vec<String>, usize)>>, // 改回 Sender
     pub phantom_mode: PhantomMode,
     pub enable_notifications: bool,
     pub phantom_text: String,
@@ -72,7 +72,7 @@ impl Ime {
         punctuation: HashMap<String, String>, 
         word_en_map: HashMap<String, Vec<String>>, 
         notification_tx: Sender<NotifyEvent>, 
-        gui_tx: Option<Sender<(String, Vec<String>, usize)>>, // 新增
+        gui_tx: Option<Sender<(String, Vec<String>, usize)>>, // 更新
         enable_fuzzy: bool, 
         phantom_mode_str: &str, 
         enable_notifications: bool, 
