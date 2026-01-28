@@ -6,7 +6,7 @@ pub struct CandidateApp {
     pinyin: String,
     candidates: Vec<String>,
     selected: usize,
-    last_visible: bool,
+    pos_initialized: bool,
 }
 
 impl CandidateApp {
@@ -14,10 +14,9 @@ impl CandidateApp {
         setup_custom_fonts(&cc.egui_ctx);
         
         let mut visuals = egui::Visuals::dark();
-        visuals.window_rounding = 6.0.into();
+        visuals.window_rounding = 4.0.into();
         visuals.window_shadow = egui::epaint::Shadow::small_dark();
         visuals.override_text_color = Some(egui::Color32::from_rgb(240, 240, 240));
-        visuals.widgets.noninteractive.bg_fill = egui::Color32::from_black_alpha(180);
         cc.egui_ctx.set_visuals(visuals);
         
         Self {
@@ -25,7 +24,7 @@ impl CandidateApp {
             pinyin: String::new(),
             candidates: Vec::new(),
             selected: 0,
-            last_visible: false,
+            pos_initialized: false,
         }
     }
 }
@@ -36,7 +35,6 @@ fn setup_custom_fonts(ctx: &egui::Context) {
         "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
         "/usr/share/fonts/truetype/noto/NotoSansCJK-Regular.ttc",
         "/usr/share/fonts/truetype/wqy/wqy-microhei.ttc",
-        "/usr/share/fonts/truetype/arphic/uming.ttc",
     ];
 
     let mut font_data = None;
@@ -64,39 +62,35 @@ impl eframe::App for CandidateApp {
         }
 
         let is_visible = !self.pinyin.is_empty() || !self.candidates.is_empty();
-        
-        if is_visible != self.last_visible {
-            frame.set_visible(is_visible);
-            self.last_visible = is_visible;
-        }
+        frame.set_visible(is_visible);
 
         if is_visible {
-            // 核心修复：使用 monitor_size 获取屏幕分辨率进行定位
-            let monitor_size = frame.info().window_info.monitor_size.unwrap_or(egui::vec2(1920.0, 1080.0));
-            let window_size = egui::vec2(600.0, 50.0);
-            
-            // 计算右下角坐标 (留出边距)
-            let target_pos = egui::pos2(
-                monitor_size.x - window_size.x - 30.0,
-                monitor_size.y - window_size.y - 70.0
-            );
-            
-            frame.set_window_pos(target_pos);
-            frame.set_always_on_top(true);
+            // 只在第一次显示时自动定位到右下角，之后允许用户自行拖动
+            if !self.pos_initialized {
+                if let Some(monitor_size) = frame.info().window_info.monitor_size {
+                    let window_size = egui::vec2(600.0, 50.0);
+                    let target_pos = egui::pos2(
+                        monitor_size.x - window_size.x - 40.0,
+                        monitor_size.y - window_size.y - 80.0
+                    );
+                    frame.set_window_pos(target_pos);
+                    self.pos_initialized = true;
+                }
+            }
 
             egui::CentralPanel::default()
                 .frame(egui::Frame::none().fill(egui::Color32::TRANSPARENT))
                 .show(ctx, |ui| {
-                    egui::Frame::none()
-                        .fill(egui::Color32::from_black_alpha(220))
-                        .rounding(4.0)
-                        .inner_margin(egui::Margin::symmetric(12.0, 8.0))
-                        .stroke(egui::Stroke::new(1.2, egui::Color32::from_gray(90)))
+                    let content_response = egui::Frame::none()
+                        .fill(egui::Color32::from_black_alpha(210))
+                        .rounding(2.0)
+                        .inner_margin(egui::Margin::symmetric(12.0, 6.0))
+                        .stroke(egui::Stroke::new(1.0, egui::Color32::from_gray(60)))
                         .show(ui, |ui| {
                             ui.horizontal(|ui| {
                                 ui.label(egui::RichText::new(&self.pinyin)
                                     .color(egui::Color32::from_rgb(100, 200, 255))
-                                    .size(18.0));
+                                    .size(17.0));
                                 
                                 if !self.candidates.is_empty() {
                                     ui.add_space(8.0);
@@ -106,7 +100,6 @@ impl eframe::App for CandidateApp {
                                     let page_start = (self.selected / 5) * 5;
                                     let page_end = (page_start + 5).min(self.candidates.len());
                                     
-                                    ui.spacing_mut().item_spacing.x = 15.0;
                                     for i in page_start..page_end {
                                         let cand = &self.candidates[i];
                                         let is_selected = i == self.selected;
@@ -116,19 +109,29 @@ impl eframe::App for CandidateApp {
                                         if is_selected {
                                             ui.label(egui::RichText::new(text)
                                                 .color(egui::Color32::WHITE)
-                                                .background_color(egui::Color32::from_rgb(0, 102, 204))
-                                                .size(20.0)
-                                                .strong());
+                                                .background_color(egui::Color32::from_rgb(0, 90, 200))
+                                                .size(18.0));
                                         } else {
                                             ui.label(egui::RichText::new(text)
-                                                .color(egui::Color32::from_gray(220))
-                                                .size(18.0));
+                                                .color(egui::Color32::from_gray(210))
+                                                .size(17.0));
                                         }
+                                        ui.add_space(10.0);
                                     }
                                 }
                             });
                         });
+                    
+                    // 允许通过内容区域拖动窗口
+                    if ui.interact(content_response.response.rect, ui.id(), egui::Sense::drag()).dragged() {
+                        frame.drag_window();
+                    }
                 });
+        }
+
+        // 保持置顶状态
+        if is_visible {
+            frame.set_always_on_top(true);
         }
 
         ctx.request_repaint_after(std::time::Duration::from_millis(16));
@@ -137,23 +140,20 @@ impl eframe::App for CandidateApp {
 
 pub fn start_gui(rx: Receiver<(String, Vec<String>, usize)>) {
     let options = eframe::NativeOptions {
-        initial_window_size: Some(egui::vec2(600.0, 55.0)),
-        // 初始位置设在屏幕外，防止闪烁
-        initial_window_pos: Some(egui::pos2(5000.0, 5000.0)),
-        
+        initial_window_size: Some(egui::vec2(600.0, 50.0)),
         always_on_top: true,
         decorated: false,
         transparent: true,
-        resizable: false,
+        resizable: true, // 允许调整以支持 drag_window
         
         #[cfg(target_os = "linux")]
-        follow_system_theme: false,
-        
+        run_and_return: false,
+
         ..Default::default()
     };
 
     let _ = eframe::run_native(
-        "rust-ime-overlay",
+        " ", // 使用空格作为标题，减少任务栏显示
         options,
         Box::new(|cc| Box::new(CandidateApp::new(cc, rx))),
     );
