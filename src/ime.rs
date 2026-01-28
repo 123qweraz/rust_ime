@@ -558,30 +558,31 @@ impl Ime {
 
         let mut scored_candidates: Vec<(String, u32)> = all_candidates.into_iter()
             .map(|cand| {
-                // Initial score from combination logic if available, otherwise 0
+                // Initial score from combination logic if available
                 let init_score = *combination_scores.get(&cand).unwrap_or(&0);
 
                 // Score includes Unigram (base frequency) + N-gram (context boost)
                 let base_score = self.base_ngram.get_score(&self.context, &cand);
                 let user_score = self.user_ngram.get_score(&self.context, &cand);
-                // User habit is much more important than base model
-                let mut total_score = init_score + base_score + (user_score * 20);
                 
-                // 1. ABSOLUTE PRIORITY for full-pinyin exact matches (e.g., "感觉" for "ganjue")
+                // MASSIVE BOOST for user habits (Adapter) - this ensures it "remembers"
+                // 500x ensures even a few usages beat common base words
+                let mut total_score = init_score + base_score + (user_score * 500);
+                
+                // 1. Full-pinyin exact match bonus (Moderate boost, not invincible)
                 if full_pinyin_exact.contains(&cand) {
-                    total_score += 2000000;
+                    total_score += 50000;
                 }
 
-                // 2. MODERATE LENGTH BOOST: Only add significant boost for 2-3 char words.
-                // Too much boost for 4+ char words can hide common shorter ones.
+                // 2. PHRASE LENGTH ADVANTAGE: 2-3 char phrases are almost always better than single chars
                 let char_count = cand.chars().count();
-                if char_count > 1 {
-                    total_score += 5000 * (char_count as u32).min(3);
+                if char_count >= 2 {
+                    total_score += 20000;
                 }
                 
-                // 3. JIANPIN PENALTY: Heavily penalize single-char results for long buffers
+                // 3. JIANPIN PENALTY: Prevent single-char noise for long inputs
                 if char_count == 1 && pinyin_lower.len() > 2 {
-                    total_score = total_score.saturating_sub(10000);
+                    total_score = total_score.saturating_sub(15000);
                 }
                 
                 (cand, total_score)
@@ -591,28 +592,7 @@ impl Ime {
         // Sort by score descending
         scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
 
-        // DEBUG: Print top 5 scores in foreground mode
-        if !self.buffer.is_empty() {
-            println!("\n[Ranking Debug] Pinyin: {}", self.buffer);
-            for (i, (cand, score)) in scored_candidates.iter().take(5).enumerate() {
-                let base = self.base_ngram.get_score(&self.context, cand);
-                let user = self.user_ngram.get_score(&self.context, cand);
-                let exact = if full_pinyin_exact.contains(cand) { 5000000 } else { 0 };
-                println!("  {}. {} | Score: {} (Base: {}, User: {}, Exact: {})", i+1, cand, score, base, user, exact);
-            }
-        }
-
-        // Final result
-        self.candidates = scored_candidates.into_iter().map(|(c, _)| c).collect();
-        
-        // Ensure exact full-pinyin matches are REALLY first
-        // If we have "好的" for "haode", it MUST be index 0
-        for exact in full_pinyin_exact.iter().rev() {
-            if let Some(pos) = self.candidates.iter().position(|x| x == exact) {
-                let item = self.candidates.remove(pos);
-                self.candidates.insert(0, item);
-            }
-        }
+        // Remove duplicate force-top logic to let N-gram drive the order
         
         // If no Chinese candidates found, show raw buffer
         if self.candidates.is_empty() {
