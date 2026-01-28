@@ -457,8 +457,8 @@ impl Ime {
                         let context: Vec<char> = prev_word.chars().collect();
                         
                         // New score = previous path score + current transition score
-                        let base_score = self.base_ngram.get_score(&context, next_char);
-                        let user_score = self.user_ngram.get_score(&context, next_char);
+                        let base_score = self.base_ngram.get_score(&context, next_char_str);
+                        let user_score = self.user_ngram.get_score(&context, next_char_str);
                         let transition_score = base_score + (user_score * 10);
                         let new_score = prev_score + transition_score;
                         
@@ -530,12 +530,9 @@ impl Ime {
             // Create a temporary list of (candidate, score)
             let mut scored_candidates: Vec<(String, u32)> = raw_candidates.into_iter()
                 .map(|cand| {
-                    let first_char = cand.chars().next().unwrap_or(' ');
-                    // Score = Base + (Alpha * User)
-                    let base_score = self.base_ngram.get_score(&self.context, first_char);
-                    let user_score = self.user_ngram.get_score(&self.context, first_char);
-                    let total_score = base_score + (user_score * 10); // Alpha = 10
-                    (cand, total_score)
+                    let score = self.base_ngram.get_score(&self.context, &cand) + 
+                                self.user_ngram.get_score(&self.context, &cand) * 10;
+                    (cand, score)
                 })
                 .collect();
             

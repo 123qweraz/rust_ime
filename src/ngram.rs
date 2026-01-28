@@ -8,18 +8,27 @@ use serde::{Serialize, Deserialize};
 pub struct NgramModel {
     // context (1 to 3 tokens) -> (next_token -> frequency)
     pub transitions: HashMap<String, HashMap<String, u32>>,
+    // 单个词出现的总频率 (Unigram)
+    pub unigrams: HashMap<String, u32>,
     pub max_n: usize,
     
     #[serde(skip)]
     pub token_list: Vec<String>,
+    #[serde(skip)]
+    pub token_set: std::collections::HashSet<String>,
+    #[serde(skip)]
+    pub max_token_len: usize,
 }
 
 impl NgramModel {
     pub fn new() -> Self {
         let mut model = Self {
             transitions: HashMap::new(),
+            unigrams: HashMap::new(),
             max_n: 4,
             token_list: Vec::new(),
+            token_set: std::collections::HashSet::new(),
+            max_token_len: 0,
         };
         model.load_token_list();
         model
@@ -31,40 +40,47 @@ impl NgramModel {
             if let Ok(file) = File::open(path) {
                 let reader = BufReader::new(file);
                 self.token_list = reader.lines().filter_map(|l| l.ok()).collect();
-                // Ensure they are sorted by length descending for greedy match
-                self.token_list.sort_by(|a, b| b.len().cmp(&a.len()));
+                self.max_token_len = 0;
+                for t in &self.token_list {
+                    let len = t.chars().count();
+                    if len > self.max_token_len {
+                        self.max_token_len = len;
+                    }
+                    self.token_set.insert(t.clone());
+                }
             }
         }
     }
 
     fn tokenize(&self, text: &str) -> Vec<String> {
         let mut result = Vec::new();
-        let mut current_offset = 0;
         let chars: Vec<char> = text.chars().collect();
-        let text_len = chars.len();
+        let n = chars.len();
+        let mut i = 0;
 
-        while current_offset < text_len {
-            let remaining = &chars[current_offset..].iter().collect::<String>();
-            let mut found = false;
-
-            for token in &self.token_list {
-                if remaining.starts_with(token) {
-                    result.push(token.clone());
-                    current_offset += token.chars().count();
-                    found = true;
+        while i < n {
+            let mut found_token = None;
+            let max_len = self.max_token_len.min(n - i);
+            for len in (2..=max_len).rev() {
+                let sub: String = chars[i..i+len].iter().collect();
+                if self.token_set.contains(&sub) {
+                    found_token = Some(sub);
                     break;
                 }
             }
 
-            if !found {
-                // Fallback to single character
-                let c = chars[current_offset];
+            if let Some(token) = found_token {
+                let len = token.chars().count();
+                result.push(token);
+                i += len;
+            } else {
+                let c = chars[i];
                 if (c >= '\u{4e00}' && c <= '\u{9fa5}') ||
                    (c >= '\u{3400}' && c <= '\u{4dbf}') ||
                    (c >= '\u{20000}' && c <= '\u{2a6df}') {
                     result.push(c.to_string());
                 }
-                current_offset += 1;
+                i += 1;
             }
         }
         result
@@ -77,16 +93,20 @@ impl NgramModel {
 
         for section in sections {
             let tokens = self.tokenize(section);
-            if tokens.len() < 2 {
-                continue;
+            if tokens.is_empty() { continue; }
+
+            // 1. 统计 Unigram (每个词本身出现的次数)
+            for token in &tokens {
+                *self.unigrams.entry(token.clone()).or_default() += 1;
             }
 
+            // 2. 统计 N-gram 跳转
+            if tokens.len() < 2 { continue; }
             for n in 2..=self.max_n {
                 if tokens.len() < n { continue; }
                 for window in tokens.windows(n) {
                     let context = window[..n-1].join("");
                     let next_token = &window[n-1];
-
                     let entry = self.transitions.entry(context).or_default();
                     *entry.entry(next_token.clone()).or_default() += 1;
                 }
@@ -95,21 +115,20 @@ impl NgramModel {
     }
 
     pub fn update(&mut self, context_chars: &[char], next_char: char) {
-        // Simple character update for live learning, as it's harder to tokenize live stream reliably
-        // but we treat next_char as a single-char string
         let next_token = next_char.to_string();
+        *self.unigrams.entry(next_token.clone()).or_default() += 1;
+
         for len in 1..self.max_n {
             if context_chars.len() < len { break; }
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
-            
             let entry = self.transitions.entry(context).or_default();
             *entry.entry(next_token.clone()).or_default() += 1;
         }
     }
 
     pub fn predict(&self, context_chars: &[char], limit: usize) -> Vec<String> {
-        // Try different context lengths from the context buffer
+        // 预测逻辑也应该考虑 Unigram 权重，但先保持 Back-off 逻辑
         for len in (1..=context_chars.len().min(self.max_n - 1)).rev() {
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
@@ -127,22 +146,26 @@ impl NgramModel {
         Vec::new()
     }
 
-    pub fn get_score(&self, context_chars: &[char], next_char: char) -> u32 {
-        let next_token = next_char.to_string();
+    pub fn get_score(&self, context_chars: &[char], next_token_str: &str) -> u32 {
+        let mut total_score = *self.unigrams.get(next_token_str).unwrap_or(&0);
+
+        // N-gram 权重放大
         for len in (1..=context_chars.len().min(self.max_n - 1)).rev() {
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
 
             if let Some(next_map) = self.transitions.get(&context) {
-                if let Some(&score) = next_map.get(&next_token) {
-                    return score * (len as u32);
+                if let Some(&score) = next_map.get(next_token_str) {
+                    // N-gram 分数给予极大的加权，len 越长加权越大
+                    total_score += score * 100 * (len as u32).pow(2);
+                    break; // 找到了最长匹配就不再找短的，防止分数重复计算
                 }
             }
         }
-        0
+        total_score
     }
     
-    pub fn save<P: AsRef<Path>>(&self, path: P) -> io::Result<()> {
+    pub fn save<P: AsRef<Path>>(&self, path: P) -> io::Result<() > {
         let file = File::create(path)?;
         let writer = BufWriter::new(file);
         serde_json::to_writer(writer, self)?;
@@ -153,6 +176,7 @@ impl NgramModel {
         let file = File::open(path)?;
         let reader = BufReader::new(file);
         let mut model: Self = serde_json::from_reader(reader)?;
+        model.token_set = std::collections::HashSet::new();
         model.load_token_list();
         Ok(model)
     }
