@@ -46,14 +46,14 @@ impl Tray for ImeTray {
     fn menu(&self) -> Vec<MenuItem<Self>> {
         vec![
             StandardItem {
-                label: format!("Mode: {}", if self.chinese_enabled { "Chinese" } else { "English" }),
+                label: format!("当前模式: {}", if self.chinese_enabled { "中文" } else { "英文" }),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::ToggleIme);
                 }),
                 ..Default::default()
             }.into(),
             StandardItem {
-                label: format!("Profile: {}", self.active_profile),
+                label: format!("当前词库: {}", self.active_profile),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::NextProfile);
                 }),
@@ -61,14 +61,14 @@ impl Tray for ImeTray {
             }.into(),
             MenuItem::Separator,
             StandardItem {
-                label: "Config Center (r -c)".to_string(),
+                label: "配置中心 (网页端)".to_string(),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::OpenConfig);
                 }),
                 ..Default::default()
             }.into(),
             StandardItem {
-                label: "Restart".to_string(),
+                label: "重启服务".to_string(),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::Restart);
                 }),
@@ -76,7 +76,7 @@ impl Tray for ImeTray {
             }.into(),
             MenuItem::Separator,
             StandardItem {
-                label: "Exit".to_string(),
+                label: "退出程序".to_string(),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::Exit);
                 }),

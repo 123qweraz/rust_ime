@@ -156,9 +156,9 @@ impl Default for Profile {
             name: "Chinese".to_string(),
             description: "默认中文输入".to_string(),
             dicts: vec![
-                "dicts/chinese/vocabulary".to_string(),
-                "dicts/chinese/character".to_string(),
-                "dicts/chinese/other".to_string(),
+                "dicts/words.json".to_string(),
+                "dicts/basic_words.json".to_string(),
+                "dicts/chars.json".to_string(),
             ],
         }
     }
@@ -203,10 +203,10 @@ fn default_profiles() -> Vec<Profile> {
         },
     ]
 }
-fn default_punctuation_path() -> String { "dicts/chinese/punctuation.json".to_string() }
+fn default_punctuation_path() -> String { "dicts/punctuation.json".to_string() }
 fn default_char_defs() -> Vec<String> {
     vec![
-        "dicts/chinese/character/level-1_char_en.json".to_string()
+        "dicts/chars.json".to_string()
     ]
 }
 

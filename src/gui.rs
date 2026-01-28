@@ -11,16 +11,18 @@ pub fn start_gui(rx: Receiver<(String, Vec<String>, usize)>) {
 
     let window = ApplicationWindow::builder()
         .title("Rust IME")
-        .default_width(400)
-        .default_height(50)
         .decorated(false)
         .skip_taskbar_hint(true)
-        .type_hint(gdk::WindowTypeHint::Utility)
+        .skip_pager_hint(true)
+        .type_hint(gdk::WindowTypeHint::Menu)
         .app_paintable(true)
         .accept_focus(false)
+        .can_focus(false)
         .build();
     
+    // 显式确保这些属性被应用
     window.set_keep_above(true);
+    window.set_resizable(false);
     
     let screen = window.screen().expect("Failed to get screen");
     if let Some(visual) = screen.rgba_visual() {

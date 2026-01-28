@@ -196,11 +196,42 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
     let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
     let active_profile = initial_config.input.default_profile.clone();
 
-    let (notify_tx, _notify_rx) = std::sync::mpsc::channel();
-    let (tray_tx, _tray_rx) = std::sync::mpsc::channel();
+    let (notify_tx, notify_rx) = std::sync::mpsc::channel();
+    let (tray_tx, tray_rx) = std::sync::mpsc::channel();
+
+    // 启动通知处理线程
+    std::thread::spawn(move || {
+        use notify_rust::{Notification, Timeout};
+        while let Ok(event) = notify_rx.recv() {
+            match event {
+                NotifyEvent::Message(msg) => {
+                    let _ = Notification::new()
+                        .summary("Rust IME")
+                        .body(&msg)
+                        .timeout(Timeout::Milliseconds(1500))
+                        .show();
+                },
+                NotifyEvent::Update(summary, body) => {
+                    let _ = Notification::new()
+                        .summary(&summary)
+                        .body(&body)
+                        .id(9999)
+                        .timeout(Timeout::Never)
+                        .show();
+                },
+                NotifyEvent::Close => {
+                    let _ = Notification::new()
+                        .summary(" ")
+                        .id(9999)
+                        .timeout(Timeout::Milliseconds(1))
+                        .show();
+                }
+            }
+        }
+    });
 
     // 启动托盘
-    let _tray_handle = tray::start_tray(false, active_profile.clone(), tray_tx);
+    let tray_handle = tray::start_tray(false, active_profile.clone(), tray_tx);
 
     let base_ngram = ngram::NgramModel::new();
     let user_ngram = ngram::NgramModel::new();
@@ -221,7 +252,45 @@ fn run_ime(gui_tx: Option<Sender<(String, Vec<String>, usize)>>) -> Result<(), B
     let mut meta_held = false;
     let mut shift_held = false;
 
+    use nix::poll::{PollFd, PollFlags};
+    use std::os::unix::io::{AsRawFd, BorrowedFd};
+
     while !should_exit.load(Ordering::Relaxed) {
+        // 1. 处理托盘事件
+        while let Ok(event) = tray_rx.try_recv() {
+            match event {
+                tray::TrayEvent::ToggleIme => {
+                    ime.toggle();
+                    tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled);
+                }
+                tray::TrayEvent::NextProfile => {
+                    ime.next_profile();
+                    tray_handle.update(|t| t.active_profile = ime.current_profile.clone());
+                }
+                tray::TrayEvent::OpenConfig => {
+                    let _ = Command::new("xdg-open").arg("http://localhost:8765").spawn();
+                }
+                tray::TrayEvent::Restart => {
+                    let _ = Command::new("rust-ime").arg("--restart").spawn();
+                    should_exit.store(true, Ordering::Relaxed);
+                }
+                tray::TrayEvent::Exit => {
+                    should_exit.store(true, Ordering::Relaxed);
+                }
+            }
+        }
+
+        // 2. Poll 键盘事件 (200ms 超时，以便循环处理托盘)
+        let raw_fd = dev.as_raw_fd();
+        let borrowed_fd = unsafe { BorrowedFd::borrow_raw(raw_fd) };
+        let mut poll_fds = [PollFd::new(&borrowed_fd, PollFlags::POLLIN)];
+        
+        if let Ok(n) = nix::poll::poll(&mut poll_fds, 200) {
+            if n == 0 { continue; }
+        } else {
+            break;
+        }
+
         let events = match dev.fetch_events() {
             Ok(iter) => iter,
             Err(_) => break,
@@ -301,19 +370,27 @@ fn load_file_into_dict(path: &str, trie: &mut Trie, word_en_map: &mut HashMap<St
         let reader = BufReader::new(file);
         if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(reader) {
             if let Some(obj) = v.as_object() {
+                let mut count = 0;
                 for (py, val) in obj {
                     let py_lower = py.to_lowercase();
                     if let Ok(entries) = serde_json::from_value::<Vec<DictEntry>>(val.clone()) {
                         for e in entries {
                             trie.insert(&py_lower, e.char.clone());
                             if let Some(en) = e.en { word_en_map.entry(e.char).or_default().push(en); }
+                            count += 1;
                         }
                     } else if let Ok(strings) = serde_json::from_value::<Vec<String>>(val.clone()) {
-                        for s in strings { trie.insert(&py_lower, s); }
+                        for s in strings { 
+                            trie.insert(&py_lower, s); 
+                            count += 1;
+                        }
                     }
                 }
+                println!("[Dictionary] Loaded {} entries from {}", count, path);
             }
         }
+    } else {
+        eprintln!("[Error] Failed to open dictionary file: {}", path);
     }
 }
 

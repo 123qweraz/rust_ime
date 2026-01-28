@@ -58,6 +58,7 @@
         "name": "Chinese",
         "description": "默认中文输入",
         "dicts": [
+          "dicts/words.json",
           "dicts/chars.json",
           "dicts/basic_words.json"
         ]

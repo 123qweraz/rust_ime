@@ -1,0 +1,112 @@
+use std::collections::{HashMap, HashSet};
+use evdev::Key;
+use std::sync::mpsc::Sender;
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum ImeState {
+    Direct,
+    Composing,
+    NoMatch,
+    Single,
+    Multi,
+}
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum Action {
+    Emit(String),
+    DeleteAndEmit { delete: usize, insert: String, highlight: bool },
+    PassThrough,
+    Consume,
+}
+
+#[derive(Debug)]
+pub enum NotifyEvent {
+    Update(String, String),
+    Message(String),
+    Close,
+}
+
+use crate::trie::Trie;
+use crate::ngram::NgramModel;
+
+#[derive(Debug, Clone, PartialEq)]
+pub enum PhantomMode {
+    None,
+    Pinyin,
+    Hanzi,
+}
+
+pub struct Ime {
+    pub state: ImeState,
+    pub buffer: String,
+    // Multi-profile support
+    pub tries: HashMap<String, Trie>, 
+    pub current_profile: String,
+    
+    // LoRA-style models
+    pub base_ngram: NgramModel,
+    pub user_ngram: NgramModel,
+    pub user_ngram_path: std::path::PathBuf,
+    
+    pub context: Vec<char>, // 记录最近上屏的字符流
+    
+    pub punctuation: HashMap<String, String>,
+    pub candidates: Vec<String>,
+    pub selected: usize,
+    pub page: usize,
+    pub chinese_enabled: bool,
+    pub notification_tx: Sender<NotifyEvent>,
+    pub gui_tx: Option<Sender<(String, Vec<String>, usize)>>, 
+    pub phantom_mode: PhantomMode,
+    pub enable_notifications: bool,
+    pub phantom_text: String,
+    pub is_highlighted: bool,
+    pub word_en_map: HashMap<String, Vec<String>>,
+    pub enable_fuzzy: bool,
+}
+
+impl Ime {
+    pub fn new(
+        tries: HashMap<String, Trie>, 
+        initial_profile: String, 
+        punctuation: HashMap<String, String>, 
+        word_en_map: HashMap<String, Vec<String>>, 
+        notification_tx: Sender<NotifyEvent>, 
+        gui_tx: Option<Sender<(String, Vec<String>, usize)>>, 
+        enable_fuzzy: bool, 
+        phantom_mode_str: &str, 
+        enable_notifications: bool, 
+        base_ngram: NgramModel, 
+        user_ngram: NgramModel,
+        user_ngram_path: std::path::PathBuf
+    ) -> Self {
+        let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
+            "pinyin" => PhantomMode::Pinyin,
+            "hanzi" => PhantomMode::Hanzi,
+            _ => PhantomMode::None,
+        };
+        
+        Self {
+            state: ImeState::Direct,
+            buffer: String::new(),
+            tries,
+            current_profile: initial_profile,
+            base_ngram,
+            user_ngram,
+            user_ngram_path,
+            context: Vec::new(),
+            punctuation,
+            candidates: vec![],
+            selected: 0,
+            page: 0,
+            chinese_enabled: false,
+            notification_tx,
+            gui_tx,
+            phantom_mode,
+            enable_notifications,
+            phantom_text: String::new(),
+            is_highlighted: false,
+            word_en_map,
+            enable_fuzzy,
+        }
+    }

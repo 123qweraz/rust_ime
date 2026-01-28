@@ -21,9 +21,7 @@ pub enum Action {
 
 #[derive(Debug)]
 pub enum NotifyEvent {
-    #[allow(dead_code)]
     Update(String, String),
-    #[allow(dead_code)]
     Message(String),
     Close,
 }
@@ -346,12 +344,12 @@ impl Ime {
 
         // Prepare Action
         let action = if self.phantom_mode != PhantomMode::None {
-                     let delete_count = self.phantom_text.chars().count();
-                     /*
-                     if self.is_highlighted && delete_count > 0 {
-                         delete_count = 1;
-                     }
-                     */             Action::DeleteAndEmit { delete: delete_count, insert: candidate.clone(), highlight: false }
+            let delete_count = self.phantom_text.chars().count();
+            Action::DeleteAndEmit {
+                delete: delete_count,
+                insert: candidate.clone(),
+                highlight: false,
+            }
         } else {
             print!("\r\x1B[K");
             Action::Emit(candidate.clone())
@@ -430,18 +428,20 @@ impl Ime {
             pinyin_search = self.buffer.get(..idx).unwrap_or(&self.buffer).to_string();
             filter_string = self.buffer.get(idx..).unwrap_or("").to_lowercase();
         }
-        let pinyin_lower = pinyin_search.to_lowercase();
+        
+        // Strip tones for lookup
+        let pinyin_stripped = strip_tones(&pinyin_search).to_lowercase();
 
         // 2. Intelligent Segmentation
         // Example: "nihao" -> ["ni", "hao"]
-        let segments = self.segment_pinyin(&pinyin_lower, dict);
+        let segments = self.segment_pinyin(&pinyin_stripped, dict);
 
         let mut final_candidates: Vec<String> = Vec::new();
         let mut seen = HashSet::new();
 
         // 1. Full Pinyin Match (Highest Priority)
         // If the entire buffer matches a word in the dictionary, put it first.
-        if let Some(exact_matches) = dict.get_all_exact(&pinyin_lower) {
+        if let Some(exact_matches) = dict.get_all_exact(&pinyin_stripped) {
             for cand in exact_matches {
                 if seen.insert(cand.clone()) {
                     final_candidates.push(cand);
@@ -518,7 +518,7 @@ impl Ime {
         // --- Single-syllable / Primary Search Logic ---
         // We still search for the prefix matches
         let mut raw_candidates = if self.enable_fuzzy {
-            let variants = self.expand_fuzzy_pinyin(&pinyin_lower);
+            let variants = self.expand_fuzzy_pinyin(&pinyin_stripped);
             let mut merged = Vec::new();
             let mut merged_seen = HashSet::new();
             for variant in variants {
@@ -533,7 +533,7 @@ impl Ime {
         } else {
             // CRITICAL FIX: Always include full-pinyin prefix matches
             // and optionally prioritized first-segment matches.
-            let mut res = dict.search_bfs(&pinyin_lower, 100);
+            let mut res = dict.search_bfs(&pinyin_stripped, 100);
             if segments.len() > 1 {
                 let first_seg_res = dict.search_bfs(&segments[0], 100);
                 let mut res_seen: HashSet<String> = res.iter().cloned().collect();
@@ -576,7 +576,7 @@ impl Ime {
         // --- GLOBAL RANKING ---
         // Combine all candidates and rank them using the N-gram/Unigram models
         let mut all_candidates = final_candidates;
-        let full_pinyin_exact = dict.get_all_exact(&pinyin_lower).unwrap_or_default();
+        let full_pinyin_exact = dict.get_all_exact(&pinyin_stripped).unwrap_or_default();
 
         for cand in raw_candidates {
             if !all_candidates.contains(&cand) {
@@ -609,7 +609,7 @@ impl Ime {
                 }
                 
                 // 3. JIANPIN PENALTY: Prevent single-char noise for long inputs
-                if char_count == 1 && pinyin_lower.len() > 2 {
+                if char_count == 1 && pinyin_stripped.len() > 2 {
                     total_score = total_score.saturating_sub(15000);
                 }
                 
@@ -868,16 +868,16 @@ impl Ime {
                 self.buffer.pop();
                 if self.buffer.is_empty() {
                     print!("\r\x1B[K"); // 清除预览行
-                            let delete_count = self.phantom_text.chars().count();
-                            /*
-                            if self.is_highlighted && delete_count > 0 {
-                                delete_count = 1;
-                            }
-                            */                    self.reset();
+                    let delete_count = self.phantom_text.chars().count();
+                    self.reset();
                     if self.phantom_mode != PhantomMode::None && delete_count > 0 {
-                         Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
+                        Action::DeleteAndEmit {
+                            delete: delete_count,
+                            insert: String::new(),
+                            highlight: false,
+                        }
                     } else {
-                         Action::Consume
+                        Action::Consume
                     }
                 } else {
                     self.lookup();
@@ -959,13 +959,13 @@ impl Ime {
                 } else if !self.buffer.is_empty() {
                     let out = self.buffer.clone();
                     if self.phantom_mode != PhantomMode::None {
-                                 let delete_count = self.phantom_text.chars().count();
-                                 /*
-                                 if self.is_highlighted && delete_count > 0 {
-                                     delete_count = 1;
-                                 }
-                                 */                         self.reset();
-                         Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
+                        let delete_count = self.phantom_text.chars().count();
+                        self.reset();
+                        Action::DeleteAndEmit {
+                            delete: delete_count,
+                            insert: out,
+                            highlight: false,
+                        }
                     } else {
                         print!("\r\x1B[K");
                         self.reset();
@@ -979,13 +979,13 @@ impl Ime {
             Key::KEY_ENTER => {
                 let out = self.buffer.clone();
                 if self.phantom_mode != PhantomMode::None {
-                             let delete_count = self.phantom_text.chars().count();
-                             /*
-                             if self.is_highlighted && delete_count > 0 {
-                                 delete_count = 1;
-                             }
-                             */                     self.reset();
-                     Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
+                    let delete_count = self.phantom_text.chars().count();
+                    self.reset();
+                    Action::DeleteAndEmit {
+                        delete: delete_count,
+                        insert: out,
+                        highlight: false,
+                    }
                 } else {
                     print!("\r\x1B[K");
                     self.reset();
@@ -995,13 +995,13 @@ impl Ime {
 
             Key::KEY_ESC => {
                 if self.phantom_mode != PhantomMode::None {
-                            let delete_count = self.phantom_text.chars().count();
-                            /*
-                            if self.is_highlighted && delete_count > 0 {
-                                delete_count = 1;
-                            }
-                            */                    self.reset();
-                    Action::DeleteAndEmit { delete: delete_count, insert: String::new(), highlight: false }
+                    let delete_count = self.phantom_text.chars().count();
+                    self.reset();
+                    Action::DeleteAndEmit {
+                        delete: delete_count,
+                        insert: String::new(),
+                        highlight: false,
+                    }
                 } else {
                     print!("\r\x1B[K");
                     self.reset();
@@ -1288,4 +1288,26 @@ mod tests {
             panic!("Expected Action::Emit, got {:?}", action);
         }
     }
+}
+
+pub fn strip_tones(s: &str) -> String {
+    let mut res = String::new();
+    for c in s.chars() {
+        match c {
+            'ā' | 'á' | 'ǎ' | 'à' => res.push('a'),
+            'ē' | 'é' | 'ě' | 'è' => res.push('e'),
+            'ī' | 'í' | 'ǐ' | 'ì' => res.push('i'),
+            'ō' | 'ó' | 'ǒ' | 'ò' => res.push('o'),
+            'ū' | 'ú' | 'ǔ' | 'ù' => res.push('u'),
+            'ǖ' | 'ǘ' | 'ǚ' | 'ǜ' => res.push('v'),
+            'Ā' | 'Á' | 'Ǎ' | 'À' => res.push('A'),
+            'Ē' | 'É' | 'Ě' | 'È' => res.push('E'),
+            'Ī' | 'Í' | 'Ǐ' | 'Ì' => res.push('I'),
+            'Ō' | 'Ó' | 'Ǒ' | 'Ò' => res.push('O'),
+            'Ū' | 'Ú' | 'Ǔ' | 'Ù' => res.push('U'),
+            'Ǖ' | 'Ǘ' | 'Ǚ' | 'Ǜ' => res.push('V'),
+            _ => res.push(c),
+        }
+    }
+    res
 }
