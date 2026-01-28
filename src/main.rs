@@ -422,7 +422,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     
     
-                                                                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false, ngram::NgramModel::new());
+                                                                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false, ngram::NgramModel::new(), std::path::PathBuf::from("ngram.json"));
     
     
     
@@ -688,7 +688,15 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
 
     // Load N-gram Model
     let mut ngram_path = find_project_root();
+    ngram_path.push("n-gram-model");
     ngram_path.push("ngram.json");
+    
+    if !ngram_path.exists() {
+        // Fallback to root
+        ngram_path = find_project_root();
+        ngram_path.push("ngram.json");
+    }
+
     let ngram = match ngram::NgramModel::load(&ngram_path) {
         Ok(m) => {
             println!("[IME] Loaded N-gram Model from {}", ngram_path.display());
@@ -709,7 +717,8 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications,
-        ngram
+        ngram,
+        ngram_path
     );
 
     // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
@@ -1317,7 +1326,14 @@ fn train_model(path_str: &str) -> Result<(), Box<dyn std::error::Error>> {
     println!("Read {} chars. Training...", content.chars().count());
     
     let mut model_path = find_project_root();
+    model_path.push("n-gram-model");
     model_path.push("ngram.json");
+    
+    if !model_path.parent().unwrap().exists() {
+        // Fallback to root if directory doesn't exist
+        model_path = find_project_root();
+        model_path.push("ngram.json");
+    }
     
     let mut model = match ngram::NgramModel::load(&model_path) {
         Ok(m) => {

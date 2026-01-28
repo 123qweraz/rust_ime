@@ -43,6 +43,7 @@ pub struct Ime {
     pub tries: HashMap<String, Trie>, 
     pub current_profile: String,
     pub ngram: NgramModel,
+    pub ngram_path: std::path::PathBuf,
     pub context: Vec<char>, // 替换 last_committed，记录最近上屏的字符流
     
     pub punctuation: HashMap<String, String>,
@@ -60,7 +61,7 @@ pub struct Ime {
 }
 
 impl Ime {
-    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool, ngram: NgramModel) -> Self {
+    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool, ngram: NgramModel, ngram_path: std::path::PathBuf) -> Self {
         let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
             "pinyin" => PhantomMode::Pinyin,
             "hanzi" => PhantomMode::Hanzi,
@@ -73,6 +74,7 @@ impl Ime {
             tries,
             current_profile: initial_profile,
             ngram,
+            ngram_path,
             context: Vec::new(),
             punctuation,
             candidates: vec![],
@@ -282,9 +284,7 @@ impl Ime {
         unsafe {
             COMMIT_COUNT += 1;
             if COMMIT_COUNT % 10 == 0 {
-                let mut path = std::env::current_dir().unwrap_or_default();
-                path.push("ngram.json");
-                let _ = self.ngram.save(&path);
+                let _ = self.ngram.save(&self.ngram_path);
             }
         }
 
@@ -1090,7 +1090,7 @@ mod tests {
         trie.insert("zhong", "中".to_string());
         tries.insert("default".to_string(), trie);
         
-        Ime::new(tries, "default".to_string(), HashMap::new(), HashMap::new(), tx, false, "none", false, BigramModel::new())
+        Ime::new(tries, "default".to_string(), HashMap::new(), HashMap::new(), tx, false, "none", false, NgramModel::new(), std::path::PathBuf::from("test_ngram.json"))
     }
 
     #[test]

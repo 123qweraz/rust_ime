@@ -21,8 +21,14 @@ impl NgramModel {
     }
 
     pub fn train(&mut self, text: &str) {
+        // 只保留汉字进行训练，过滤掉符号、英文、数字
         let chars: Vec<char> = text.chars()
-            .filter(|c| !c.is_whitespace() && !c.is_control())
+            .filter(|c| {
+                // 仅匹配中文字符范围 (CJK Unified Ideographs)
+                (*c >= '\u{4e00}' && *c <= '\u{9fa5}') ||
+                (*c >= '\u{3400}' && *c <= '\u{4dbf}') ||
+                (*c >= '\u{20000}' && *c <= '\u{2a6df}')
+            })
             .collect();
 
         if chars.len() < 2 {
