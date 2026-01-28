@@ -15,6 +15,7 @@ mod trie;
 mod config;
 mod tray;
 mod web;
+mod ngram;
 
 use ime::*;
 use vkbd::*;
@@ -419,7 +420,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     
     
-                                                                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false);
+                                                                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false, ngram::BigramModel::new());
     
     
     
@@ -500,6 +501,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     println!("✓ 已重置配置文件 config.json 为默认设置。");
                 }
                 return Ok(());
+            }
+            "--train" => {
+                if args.len() > 2 {
+                    let path = &args[2];
+                    return train_model(path);
+                } else {
+                    println!("Usage: rust-ime --train <text_file>");
+                    return Ok(());
+                }
             }
             "--foreground" => {
                 // 直接运行，不后台化
@@ -669,6 +679,20 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     
     // 初始化托盘事件通道
     let (tray_event_tx, tray_event_rx) = std::sync::mpsc::channel();
+
+    // Load Bigram Model
+    let mut ngram_path = find_project_root();
+    ngram_path.push("ngram.json");
+    let ngram = match ngram::BigramModel::load(&ngram_path) {
+        Ok(m) => {
+            println!("[IME] Loaded Bigram Model from {}", ngram_path.display());
+            m
+        },
+        Err(_) => {
+            println!("[IME] No Bigram Model found, creating new one.");
+            ngram::BigramModel::new()
+        }
+    };
     
     let mut ime = Ime::new(
         tries, 
@@ -678,7 +702,8 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
         notify_tx.clone(), 
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
-        initial_config.appearance.show_notifications
+        initial_config.appearance.show_notifications,
+        ngram
     );
 
     // 启动托盘 (可能会因为 D-Bus 问题失败，所以包装一下)
@@ -1306,4 +1331,35 @@ fn load_punctuation_dict_quiet(path: &str) -> HashMap<String, String> {
         }
     }
     map
+}
+
+fn train_model(path_str: &str) -> Result<(), Box<dyn std::error::Error>> {
+    let path = Path::new(path_str);
+    if !path.exists() {
+        return Err(format!("File not found: {}", path_str).into());
+    }
+    
+    println!("Reading file: {}", path.display());
+    let content = std::fs::read_to_string(path)?;
+    println!("Read {} chars. Training...", content.chars().count());
+    
+    let mut model_path = find_project_root();
+    model_path.push("ngram.json");
+    
+    let mut model = match ngram::BigramModel::load(&model_path) {
+        Ok(m) => {
+            println!("Loaded existing model.");
+            m
+        },
+        Err(_) => {
+            println!("Creating new model.");
+            ngram::BigramModel::new()
+        }
+    };
+    
+    model.train(&content);
+    
+    model.save(&model_path)?;
+    println!("Training complete. Model saved to {}", model_path.display());
+    Ok(())
 }

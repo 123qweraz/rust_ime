@@ -27,6 +27,7 @@ pub enum NotifyEvent {
 }
 
 use crate::trie::Trie;
+use crate::ngram::BigramModel;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum PhantomMode {
@@ -41,6 +42,8 @@ pub struct Ime {
     // Multi-profile support
     pub tries: HashMap<String, Trie>, 
     pub current_profile: String,
+    pub ngram: BigramModel,
+    pub last_committed: Option<char>,
     
     pub punctuation: HashMap<String, String>,
     pub candidates: Vec<String>,
@@ -57,7 +60,7 @@ pub struct Ime {
 }
 
 impl Ime {
-    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool) -> Self {
+    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool, ngram: BigramModel) -> Self {
         let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
             "pinyin" => PhantomMode::Pinyin,
             "hanzi" => PhantomMode::Hanzi,
@@ -69,6 +72,8 @@ impl Ime {
             buffer: String::new(),
             tries,
             current_profile: initial_profile,
+            ngram,
+            last_committed: None,
             punctuation,
             candidates: vec![],
             selected: 0,
@@ -214,7 +219,14 @@ impl Ime {
 
     fn update_state(&mut self) {
         if self.buffer.is_empty() {
-            self.state = ImeState::Direct;
+            if !self.candidates.is_empty() {
+                self.state = match self.candidates.len() {
+                    1 => ImeState::Single,
+                    _ => ImeState::Multi,
+                };
+            } else {
+                self.state = ImeState::Direct;
+            }
             return;
         }
         self.state = match self.candidates.len() {
@@ -256,6 +268,64 @@ impl Ime {
             insert: new_text,
             highlight: true,
         }
+    }
+
+    fn commit_candidate(&mut self, candidate: String) -> Action {
+        // Update last committed char
+        self.last_committed = candidate.chars().last();
+
+        // Prepare Action
+        let action = if self.phantom_mode != PhantomMode::None {
+             let mut delete_count = self.phantom_text.chars().count();
+             if self.is_highlighted && delete_count > 0 {
+                 delete_count = 1;
+             }
+             Action::DeleteAndEmit { delete: delete_count, insert: candidate.clone(), highlight: false }
+        } else {
+            print!("\r\x1B[K");
+            Action::Emit(candidate.clone())
+        };
+
+        // Clear Buffer/State for next step
+        self.buffer.clear();
+        self.phantom_text.clear();
+        self.is_highlighted = false;
+        
+        // Generate Predictions
+        if let Some(c) = self.last_committed {
+            // Fetch plenty of predictions
+            self.candidates = self.ngram.predict(c, 60); 
+        } else {
+            self.candidates.clear();
+        }
+        
+        self.selected = 0;
+        self.page = 0;
+        self.update_state();
+
+        if !self.candidates.is_empty() {
+             // We have predictions.
+             // If in Phantom mode, we ideally want to show the first prediction as ghost text.
+             if self.phantom_mode == PhantomMode::Hanzi {
+                 // Force update phantom text based on new candidate[0]
+                 if let Some(first) = self.candidates.first() {
+                     self.phantom_text = format!("[{}]", first);
+                     self.is_highlighted = true;
+                     // Note: We cannot emit this phantom text in the SAME action as the commit easily
+                     // without complicating the protocol. 
+                     // For now, we accept that phantom text might not appear until next input
+                     // OR we rely on the side-channel notifications/CLI print.
+                 }
+             }
+             
+             self.print_preview();
+             self.notify_preview();
+        } else {
+             // No predictions, full reset
+             self.reset();
+        }
+
+        action
     }
 
     fn lookup(&mut self) {
@@ -626,20 +696,7 @@ impl Ime {
             Key::KEY_SPACE => {
                 if let Some(word) = self.candidates.get(self.selected) {
                     let target_word = word.clone();
-                    
-                    if self.phantom_mode != PhantomMode::None {
-                        let mut delete_count = self.phantom_text.chars().count();
-                        if self.is_highlighted && delete_count > 0 {
-                            delete_count = 1;
-                        }
-                        self.reset(); 
-                        
-                        Action::DeleteAndEmit { delete: delete_count, insert: target_word, highlight: false }
-                    } else {
-                        print!("\r\x1B[K"); // 上屏时清除预览
-                        self.reset();
-                        Action::Emit(target_word)
-                    }
+                    return self.commit_candidate(target_word);
                 } else if !self.buffer.is_empty() {
                     let out = self.buffer.clone();
                     if self.phantom_mode != PhantomMode::None {
@@ -731,19 +788,7 @@ impl Ime {
                     let actual_idx = self.page + (digit - 1);
                     if let Some(word) = self.candidates.get(actual_idx) {
                         let out = word.clone();
-                        
-                        if self.phantom_mode != PhantomMode::None {
-                            let mut delete_count = self.phantom_text.chars().count();
-                            if self.is_highlighted && delete_count > 0 {
-                                delete_count = 1;
-                            }
-                            self.reset();
-                            Action::DeleteAndEmit { delete: delete_count, insert: out, highlight: false }
-                        } else {
-                            print!("\r\x1B[K");
-                            self.reset();
-                            return Action::Emit(out);
-                        }
+                        return self.commit_candidate(out);
                     } else {
                         Action::Consume
                     }
@@ -763,18 +808,7 @@ impl Ime {
                     let has_filter = self.buffer.char_indices().skip(1).any(|(_, c)| c.is_ascii_uppercase());
                     if has_filter && self.candidates.len() == 1 {
                         let word = self.candidates[0].clone();
-                        if self.phantom_mode != PhantomMode::None {
-                            let mut delete_count = self.phantom_text.chars().count();
-                            if self.is_highlighted && delete_count > 0 {
-                                delete_count = 1;
-                            }
-                            self.reset();
-                            return Action::DeleteAndEmit { delete: delete_count, insert: word, highlight: false };
-                        } else {
-                            print!("\r\x1B[K");
-                            self.reset();
-                            return Action::Emit(word);
-                        }
+                        return self.commit_candidate(word);
                     }
 
                     if self.phantom_mode != PhantomMode::None {
