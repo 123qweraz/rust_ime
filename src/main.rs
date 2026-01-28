@@ -422,7 +422,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     
     
-                                                                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false, ngram::BigramModel::new());
+                                                                                                let ime = Ime::new(tries, active_profile_name.clone(), punctuation, HashMap::new(), tx, config.input.enable_fuzzy_pinyin, "none", false, ngram::NgramModel::new());
     
     
     
@@ -686,17 +686,17 @@ fn run_ime() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化托盘事件通道
     let (tray_event_tx, tray_event_rx) = std::sync::mpsc::channel();
 
-    // Load Bigram Model
+    // Load N-gram Model
     let mut ngram_path = find_project_root();
     ngram_path.push("ngram.json");
-    let ngram = match ngram::BigramModel::load(&ngram_path) {
+    let ngram = match ngram::NgramModel::load(&ngram_path) {
         Ok(m) => {
-            println!("[IME] Loaded Bigram Model from {}", ngram_path.display());
+            println!("[IME] Loaded N-gram Model from {}", ngram_path.display());
             m
         },
         Err(_) => {
-            println!("[IME] No Bigram Model found, creating new one.");
-            ngram::BigramModel::new()
+            println!("[IME] No N-gram Model found, creating new one.");
+            ngram::NgramModel::new()
         }
     };
     
@@ -1319,14 +1319,14 @@ fn train_model(path_str: &str) -> Result<(), Box<dyn std::error::Error>> {
     let mut model_path = find_project_root();
     model_path.push("ngram.json");
     
-    let mut model = match ngram::BigramModel::load(&model_path) {
+    let mut model = match ngram::NgramModel::load(&model_path) {
         Ok(m) => {
             println!("Loaded existing model.");
             m
         },
         Err(_) => {
             println!("Creating new model.");
-            ngram::BigramModel::new()
+            ngram::NgramModel::new()
         }
     };
     

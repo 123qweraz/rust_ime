@@ -27,7 +27,7 @@ pub enum NotifyEvent {
 }
 
 use crate::trie::Trie;
-use crate::ngram::BigramModel;
+use crate::ngram::NgramModel;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum PhantomMode {
@@ -42,8 +42,8 @@ pub struct Ime {
     // Multi-profile support
     pub tries: HashMap<String, Trie>, 
     pub current_profile: String,
-    pub ngram: BigramModel,
-    pub last_committed: Option<char>,
+    pub ngram: NgramModel,
+    pub context: Vec<char>, // 替换 last_committed，记录最近上屏的字符流
     
     pub punctuation: HashMap<String, String>,
     pub candidates: Vec<String>,
@@ -60,7 +60,7 @@ pub struct Ime {
 }
 
 impl Ime {
-    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool, ngram: BigramModel) -> Self {
+    pub fn new(tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, enable_fuzzy: bool, phantom_mode_str: &str, enable_notifications: bool, ngram: NgramModel) -> Self {
         let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
             "pinyin" => PhantomMode::Pinyin,
             "hanzi" => PhantomMode::Hanzi,
@@ -73,7 +73,7 @@ impl Ime {
             tries,
             current_profile: initial_profile,
             ngram,
-            last_committed: None,
+            context: Vec::new(),
             punctuation,
             candidates: vec![],
             selected: 0,
@@ -271,8 +271,15 @@ impl Ime {
     }
 
     fn commit_candidate(&mut self, candidate: String) -> Action {
-        // Update last committed char
-        self.last_committed = candidate.chars().last();
+        // Update context buffer
+        for c in candidate.chars() {
+            self.context.push(c);
+        }
+        // Keep only last 3 characters for context (enough for 4-gram)
+        if self.context.len() > 3 {
+            let start = self.context.len() - 3;
+            self.context = self.context[start..].to_vec();
+        }
 
         // Prepare Action
         let action = if self.phantom_mode != PhantomMode::None {
@@ -292,9 +299,9 @@ impl Ime {
         self.is_highlighted = false;
         
         // Generate Predictions
-        if let Some(c) = self.last_committed {
-            // Fetch plenty of predictions
-            self.candidates = self.ngram.predict(c, 60); 
+        if !self.context.is_empty() {
+            // Fetch predictions based on context
+            self.candidates = self.ngram.predict(&self.context, 60); 
         } else {
             self.candidates.clear();
         }
@@ -357,7 +364,7 @@ impl Ime {
         // Example: "nihao" -> ["ni", "hao"]
         let segments = self.segment_pinyin(&pinyin_lower, dict);
 
-        let mut final_candidates = Vec::new();
+        let mut final_candidates: Vec<String> = Vec::new();
 
         if segments.len() > 1 {
             // --- Multi-syllable Logic: Generate Dynamic Words ---
@@ -372,10 +379,12 @@ impl Ime {
             for c1 in &chars1 {
                 for c2 in &chars2 {
                     let word = format!("{}{}", c1, c2);
-                    // Score based on Bigram model
-                    let score = *self.ngram.transitions.get(&c1.chars().next().unwrap_or(' '))
-                                     .and_then(|m| m.get(&c2.chars().next().unwrap_or(' ')))
-                                     .unwrap_or(&0);
+                    // Score based on N-gram model, including current context
+                    let mut full_context = self.context.clone();
+                    for char_c1 in c1.chars() {
+                        full_context.push(char_c1);
+                    }
+                    let score = self.ngram.get_score(&full_context, c2.chars().next().unwrap_or(' '));
                     combinations.push((word, score));
                 }
             }
@@ -418,22 +427,20 @@ impl Ime {
         }
 
         // --- N-gram Reordering for Single Characters ---
-        if let Some(prev_char) = self.last_committed {
-            if let Some(next_map) = self.ngram.transitions.get(&prev_char) {
-                // Create a temporary list of (candidate, score)
-                let mut scored_candidates: Vec<(String, u32)> = raw_candidates.into_iter()
-                    .map(|cand| {
-                        let first_char = cand.chars().next().unwrap_or(' ');
-                        let score = *next_map.get(&first_char).unwrap_or(&0);
-                        (cand, score)
-                    })
-                    .collect();
-                
-                // Sort by score descending, but preserve relative order for same scores
-                scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
-                
-                raw_candidates = scored_candidates.into_iter().map(|(c, _)| c).collect();
-            }
+        if !self.context.is_empty() {
+            // Create a temporary list of (candidate, score)
+            let mut scored_candidates: Vec<(String, u32)> = raw_candidates.into_iter()
+                .map(|cand| {
+                    let first_char = cand.chars().next().unwrap_or(' ');
+                    let score = self.ngram.get_score(&self.context, first_char);
+                    (cand, score)
+                })
+                .collect();
+            
+            // Sort by score descending, but preserve relative order for same scores
+            scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
+            
+            raw_candidates = scored_candidates.into_iter().map(|(c, _)| c).collect();
         }
 
         // Merge and ensure uniqueness
