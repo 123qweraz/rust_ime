@@ -4,6 +4,7 @@ use gdk4::Display;
 use gtk4_layer_shell::{LayerShell, Layer, Edge, KeyboardMode};
 use std::sync::mpsc::Receiver;
 use glib::MainContext;
+use crate::config::Config;
 
 #[derive(Debug)]
 pub enum GuiEvent {
@@ -15,10 +16,12 @@ pub enum GuiEvent {
     },
     Keystroke(String),
     ClearKeystrokes,
+    ApplyConfig(Config),
+    #[allow(dead_code)]
     Exit,
 }
 
-pub fn start_gui(rx: Receiver<GuiEvent>) {
+pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
     if gtk4::init().is_err() {
         eprintln!("[GUI] Failed to initialize GTK4.");
         return;
@@ -26,27 +29,27 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
 
     let is_layer_supported = gtk4_layer_shell::is_supported();
 
-    // --- Candidate Window ---
-    let window = Window::builder()
-        .title("Rust IME Candidates")
-        .decorated(false)
-        .can_focus(false)
-        .focusable(false)
-        .resizable(false)
-        .build();
+    // --- 窗口创建 ---
+    let window = Window::builder().title("Rust IME Candidates").decorated(false).can_focus(false).focusable(false).resizable(false).build();
+    let key_window = Window::builder().title("Keystroke Display").decorated(false).can_focus(false).focusable(false).resizable(false).build();
     
     if is_layer_supported {
         window.init_layer_shell();
         window.set_namespace("rust-ime-candidates");
         window.set_layer(Layer::Overlay);
         window.set_keyboard_mode(KeyboardMode::None);
-        window.set_anchor(Edge::Bottom, true);
-        window.set_margin(Edge::Bottom, 120);
-        // 设置为 0 确保不会挤压其他窗口，设置为 -1 则会自动避开
-        window.set_exclusive_zone(0); 
+        window.set_exclusive_zone(0);
+
+        key_window.init_layer_shell();
+        key_window.set_namespace("rust-ime-keystrokes");
+        key_window.set_layer(Layer::Overlay);
+        key_window.set_keyboard_mode(KeyboardMode::None);
+        key_window.set_exclusive_zone(0);
     }
+
     window.add_css_class("ime-window");
-    
+    key_window.add_css_class("keystroke-window");
+
     let main_box = Box::new(Orientation::Horizontal, 8);
     main_box.set_widget_name("main-container");
     window.set_child(Some(&main_box));
@@ -59,81 +62,95 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     candidates_box.set_widget_name("candidates-box");
     main_box.append(&candidates_box);
 
-    // --- Keystroke Window ---
-    let key_window = Window::builder()
-        .title("Keystroke Display")
-        .decorated(false)
-        .can_focus(false)
-        .focusable(false)
-        .resizable(false)
-        .build();
-    
-    if is_layer_supported {
-        key_window.init_layer_shell();
-        key_window.set_namespace("rust-ime-keystrokes");
-        key_window.set_layer(Layer::Overlay);
-        key_window.set_keyboard_mode(KeyboardMode::None);
-        key_window.set_anchor(Edge::Bottom, true);
-        key_window.set_anchor(Edge::Right, true);
-        key_window.set_margin(Edge::Bottom, 40);
-        key_window.set_margin(Edge::Right, 40);
-        key_window.set_exclusive_zone(0);
-    }
-    key_window.add_css_class("keystroke-window");
-
     let key_box = Box::new(Orientation::Horizontal, 6);
     key_box.set_widget_name("keystroke-container");
     key_window.set_child(Some(&key_box));
 
     let css_provider = CssProvider::new();
-    css_provider.load_from_data("
-        window.ime-window, window.keystroke-window {
-            background-color: transparent;
-        }
-        #main-container, #keystroke-container {
-            background-color: rgba(20, 20, 20, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 10px;
-            padding: 6px 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-        }
-        #pinyin-label {
-            color: #339af0;
-            font-size: 13pt;
-            font-weight: 600;
-            margin-right: 4px;
-            padding-right: 10px;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .candidate-item { padding: 2px 8px; border-radius: 6px; }
-        .candidate-selected { background-color: #339af0; }
-        .candidate-text { color: #f8f9fa; font-size: 14pt; font-weight: 500; }
-        .hint-text { color: #adb5bd; font-size: 10pt; margin-left: 4px; }
-        .index { font-size: 9pt; color: #6c757d; margin-right: 6px; }
-        .key-label {
-            background: linear-gradient(to bottom, #444, #222);
-            color: #eee;
-            font-family: 'Sans', sans-serif;
-            font-size: 11pt;
-            font-weight: 700;
-            padding: 5px 12px;
-            border-radius: 6px;
-            border: 1px solid #111;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.4);
-            margin: 2px;
-        }
-    ");
-
     if let Some(display) = Display::default() {
-        gtk4::style_context_add_provider_for_display(
-            &display,
-            &css_provider,
-            gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION,
-        );
+        gtk4::style_context_add_provider_for_display(&display, &css_provider, gtk4::STYLE_PROVIDER_PRIORITY_APPLICATION);
     }
 
+    // --- 配置应用逻辑 ---
+    let apply_style = move |conf: &Config, css: &CssProvider, w: &Window, kw: &Window| {
+        let app = &conf.appearance;
+        
+        // 动态生成 CSS
+        let css_data = format!(r#"
+            window.ime-window, window.keystroke-window {{ background-color: transparent; }}
+            #main-container {{
+                background-color: {cand_bg};
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 10px;
+                padding: 6px 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            }}
+            #keystroke-container {{
+                background-color: {key_bg};
+                border: 1px solid rgba(255, 255, 255, 0.12);
+                border-radius: 10px;
+                padding: 6px 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            }}
+            #pinyin-label {{
+                color: #339af0;
+                font-size: {cand_font}pt;
+                font-weight: 600;
+                margin-right: 4px;
+                padding-right: 10px;
+                border-right: 1px solid rgba(255, 255, 255, 0.1);
+            }}
+            .candidate-text {{ color: #f8f9fa; font-size: {cand_font}pt; font-weight: 500; }}
+            .key-label {{
+                background: linear-gradient(to bottom, #444, #222);
+                color: #eee;
+                font-family: 'Sans', sans-serif;
+                font-size: {key_font}pt;
+                font-weight: 700;
+                padding: 5px 12px;
+                border-radius: 6px;
+                border: 1px solid #111;
+                margin: 2px;
+            }}
+        "#, 
+        cand_bg = app.candidate_bg_color,
+        key_bg = app.keystroke_bg_color,
+        cand_font = app.candidate_font_size,
+        key_font = app.keystroke_font_size);
+        
+        css.load_from_data(&css_data);
+
+        // 应用位置 (LayerShell)
+        if gtk4_layer_shell::is_supported() {
+            // 候选词位置
+            match app.candidate_anchor.as_str() {
+                "top" => { w.set_anchor(Edge::Bottom, false); w.set_anchor(Edge::Top, true); }
+                _ => { w.set_anchor(Edge::Top, false); w.set_anchor(Edge::Bottom, true); }
+            }
+            w.set_margin(Edge::Bottom, app.candidate_margin_y);
+            w.set_margin(Edge::Top, app.candidate_margin_y);
+            w.set_margin(Edge::Left, app.candidate_margin_x);
+
+            // 按键回显位置
+            kw.set_anchor(Edge::Bottom, false); kw.set_anchor(Edge::Top, false);
+            kw.set_anchor(Edge::Left, false); kw.set_anchor(Edge::Right, false);
+            match app.keystroke_anchor.as_str() {
+                "top_right" => { kw.set_anchor(Edge::Top, true); kw.set_anchor(Edge::Right, true); }
+                "top_left" => { kw.set_anchor(Edge::Top, true); kw.set_anchor(Edge::Left, true); }
+                "bottom_left" => { kw.set_anchor(Edge::Bottom, true); kw.set_anchor(Edge::Left, true); }
+                _ => { kw.set_anchor(Edge::Bottom, true); kw.set_anchor(Edge::Right, true); }
+            }
+            kw.set_margin(Edge::Bottom, app.keystroke_margin_y);
+            kw.set_margin(Edge::Top, app.keystroke_margin_y);
+            kw.set_margin(Edge::Left, app.keystroke_margin_x);
+            kw.set_margin(Edge::Right, app.keystroke_margin_x);
+        }
+    };
+
+    // 初始应用配置
+    apply_style(&initial_config, &css_provider, &window, &key_window);
+
     let (tx, gtk_rx) = MainContext::channel::<GuiEvent>(glib::Priority::default());
-    
     std::thread::spawn(move || {
         while let Ok(msg) = rx.recv() {
             let is_exit = matches!(msg, GuiEvent::Exit);
@@ -141,34 +158,32 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         }
     });
 
-    let window_clone = window.clone();
-    let key_window_clone = key_window.clone();
-    let pinyin_label_clone = pinyin_label.clone();
-    let candidates_box_clone = candidates_box.clone();
-    let key_box_clone = key_box.clone();
+    let window_c = window.clone();
+    let key_window_c = key_window.clone();
+    let pinyin_label_c = pinyin_label.clone();
+    let candidates_box_c = candidates_box.clone();
+    let key_box_c = key_box.clone();
+    let css_p_c = css_provider.clone();
+    let mut current_config = initial_config;
 
     gtk_rx.attach(None, move |event| {
         match event {
+            GuiEvent::ApplyConfig(conf) => {
+                apply_style(&conf, &css_p_c, &window_c, &key_window_c);
+                current_config = conf;
+            }
             GuiEvent::Update { pinyin, candidates, hints, selected } => {
                 if pinyin.is_empty() && candidates.is_empty() {
-                    // 关键：只改透明度，不隐藏窗口，避免 Surface 销毁重建
-                    window_clone.set_opacity(0.0);
-                    while let Some(child) = candidates_box_clone.first_child() {
-                        candidates_box_clone.remove(&child);
-                    }
-                    pinyin_label_clone.set_text("");
+                    window_c.set_opacity(0.0);
+                    while let Some(child) = candidates_box_c.first_child() { candidates_box_c.remove(&child); }
+                    pinyin_label_c.set_text("");
                     return glib::Continue(true);
                 }
-                
-                window_clone.set_opacity(1.0);
-                pinyin_label_clone.set_text(&pinyin);
-                while let Some(child) = candidates_box_clone.first_child() {
-                    candidates_box_clone.remove(&child);
-                }
-                
+                window_c.set_opacity(1.0);
+                pinyin_label_c.set_text(&pinyin);
+                while let Some(child) = candidates_box_c.first_child() { candidates_box_c.remove(&child); }
                 let page_start = (selected / 5) * 5;
                 let page_end = (page_start + 5).min(candidates.len());
-
                 for i in page_start..page_end {
                     let cand_box = Box::new(Orientation::Horizontal, 0);
                     cand_box.add_css_class("candidate-item");
@@ -180,59 +195,45 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
                     cand_box.append(&val_label);
                     if let Some(hint) = hints.get(i) {
                         if !hint.is_empty() {
-                            let hint_label = Label::new(Some(&format!("{}", hint)));
+                            let hint_label = Label::new(Some(&hint));
                             hint_label.add_css_class("hint-text");
                             cand_box.append(&hint_label);
                         }
                     }
                     if i == selected { cand_box.add_css_class("candidate-selected"); }
-                    candidates_box_clone.append(&cand_box);
+                    candidates_box_c.append(&cand_box);
                 }
             },
             GuiEvent::Keystroke(key_name) => {
                 let label = Label::new(Some(&key_name));
                 label.add_css_class("key-label");
-                key_box_clone.append(&label);
-                key_window_clone.set_opacity(1.0);
-
-                let key_box_weak = key_box_clone.downgrade();
-                let label_weak = label.downgrade();
-                let key_window_weak = key_window_clone.downgrade();
-                
-                glib::timeout_add_local(std::time::Duration::from_millis(1000), move || {
-                    if let (Some(kb), Some(l)) = (key_box_weak.upgrade(), label_weak.upgrade()) {
+                key_box_c.append(&label);
+                key_window_c.set_opacity(1.0);
+                let kb_weak = key_box_c.downgrade();
+                let l_weak = label.downgrade();
+                let kw_weak = key_window_c.downgrade();
+                let timeout = current_config.appearance.keystroke_timeout_ms;
+                glib::timeout_add_local(std::time::Duration::from_millis(timeout), move || {
+                    if let (Some(kb), Some(l)) = (kb_weak.upgrade(), l_weak.upgrade()) {
                         kb.remove(&l);
-                        if kb.first_child().is_none() {
-                            if let Some(kw) = key_window_weak.upgrade() { 
-                                kw.set_opacity(0.0); 
-                            }
-                        }
+                        if kb.first_child().is_none() { if let Some(kw) = kw_weak.upgrade() { kw.set_opacity(0.0); } }
                     }
                     glib::Continue(false)
                 });
             },
             GuiEvent::ClearKeystrokes => {
-                while let Some(child) = key_box_clone.first_child() {
-                    key_box_clone.remove(&child);
-                }
-                key_window_clone.set_opacity(0.0);
+                while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
+                key_window_c.set_opacity(0.0);
             },
-            GuiEvent::Exit => {
-                window_clone.close();
-                key_window_clone.close();
-                return glib::Continue(false);
-            }
+            GuiEvent::Exit => { window_c.close(); key_window_c.close(); return glib::Continue(false); }
         }
         glib::Continue(true)
     });
 
-    // 初始状态：透明但已 present，保持 Surface 存活
     window.set_opacity(0.0);
     window.present();
-    
     key_window.set_opacity(0.0);
     key_window.present();
-
     let loop_ = glib::MainLoop::new(None, false);
     loop_.run();
 }

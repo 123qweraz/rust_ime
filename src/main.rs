@@ -1,7 +1,7 @@
 use evdev::{Device, InputEventKind, Key};
 use std::collections::HashMap;
 use std::fs::File;
-use std::io::{BufReader, Write};
+use std::io::BufReader;
 use serde::Deserialize;
 use std::sync::atomic::{AtomicBool, Ordering};
 use signal_hook::consts::signal::*;
@@ -18,11 +18,10 @@ mod ngram;
 mod gui;
 
 use ime::*;
-use vkbd::*;
+use vkbd::Vkbd;
 use trie::Trie;
 use config::Config;
 use users::get_effective_uid;
-use std::process::Command;
 use std::env;
 use std::path::{Path, PathBuf};
 
@@ -45,13 +44,6 @@ const PID_FILE: &str = "/tmp/rust-ime.pid";
 const LOG_FILE: &str = "/tmp/rust-ime.log";
 
 #[derive(Debug, Deserialize)]
-struct DictEntry {
-    char: String,
-    en: Option<String>,
-    _category: Option<String>,
-}
-
-#[derive(Debug, Deserialize)]
 struct PunctuationEntry {
     char: String,
 }
@@ -71,20 +63,12 @@ fn is_process_running(pid: i32) -> bool {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    // 忽略 SIGPIPE，防止 GTK 崩溃带走整个进程
     unsafe { libc::signal(libc::SIGPIPE, libc::SIG_IGN); }
-
     let args: Vec<String> = env::args().collect();
     
     if args.len() > 1 {
         match args[1].as_str() {
-            "--foreground" => {
-                return run_core(true);
-            }
-            "--stop" => {
-                // stop logic...
-                return Ok(())
-            }
+            "--foreground" => { return run_core(true); }
             _ => {}
         }
     }
@@ -100,21 +84,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let log_file = File::create(LOG_FILE)?;
     let cwd = find_project_root();
-    
-    // 捕获环境变量
     let display = env::var("DISPLAY").unwrap_or_default();
     let wayland_display = env::var("WAYLAND_DISPLAY").unwrap_or_default();
     let xdg_runtime = env::var("XDG_RUNTIME_DIR").unwrap_or_default();
 
-    let daemonize = Daemonize::new()
-        .pid_file(PID_FILE)
-        .working_directory(cwd)
-        .stdout(log_file.try_clone()?)
-        .stderr(log_file);
+    let daemonize = Daemonize::new().pid_file(PID_FILE).working_directory(cwd).stdout(log_file.try_clone()?).stderr(log_file);
 
     match daemonize.start() {
         Ok(_) => {
-            // 恢复环境变量
             if !display.is_empty() { env::set_var("DISPLAY", display); }
             if !wayland_display.is_empty() { env::set_var("WAYLAND_DISPLAY", wayland_display); }
             if !xdg_runtime.is_empty() { env::set_var("XDG_RUNTIME_DIR", xdg_runtime); }
@@ -125,128 +102,87 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn run_core(_foreground: bool) -> Result<(), Box<dyn std::error::Error>> {
+    let config = load_config();
     let (gui_tx, gui_rx) = std::sync::mpsc::channel();
+    let gui_config = config.clone();
     
-    // --- 启动 GUI 插件 (子线程) ---
-    // 即使 GUI 崩溃，也不会影响主线程
     std::thread::spawn(move || {
-        // 检查是否有图形环境
-        if env::var("DISPLAY").is_err() && env::var("WAYLAND_DISPLAY").is_err() {
-            eprintln!("[GUI] No graphical environment detected. UI disabled.");
-            return;
-        }
-        
-        println!("[GUI] Starting UI thread...");
-        // 使用 catch_unwind 防止 GTK 内部 panic 扩散（虽然 Broken pipe 通常是信号级退出）
-        let _ = std::panic::catch_unwind(move || {
-            gui::start_gui(gui_rx);
-        });
-        eprintln!("[GUI] UI thread has terminated.");
+        if env::var("DISPLAY").is_err() && env::var("WAYLAND_DISPLAY").is_err() { return; }
+        let _ = std::panic::catch_unwind(move || { gui::start_gui(gui_rx, gui_config); });
     });
 
-    // --- 启动 IME 核心 (主线程) ---
-    run_ime(Some(gui_tx))
+    run_ime(Some(gui_tx), config)
 }
 
 use std::sync::{Arc, RwLock, mpsc::Sender};
 
-fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn std::error::Error>> {
+fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config) -> Result<(), Box<dyn std::error::Error>> {
     let root = find_project_root();
     let _ = env::set_current_dir(&root);
-
     detect_environment();
     
     let should_exit = Arc::new(AtomicBool::new(false));
     flag::register(SIGTERM, Arc::clone(&should_exit))?;
     flag::register(SIGINT, Arc::clone(&should_exit))?;
 
-    let config = load_config();
-    let config_arc = Arc::new(RwLock::new(config));
-    
-    let initial_config = config_arc.read().unwrap().clone();
+    let config_arc = Arc::new(RwLock::new(initial_config.clone()));
+    let active_profile = initial_config.input.default_profile.clone();
     let mut tries_map = HashMap::new();
-    // 使用新的二进制加载方式
     match Trie::load("dict.index", "dict.data") {
-        Ok(trie) => {
-            tries_map.insert("default".to_string(), trie);
-            println!("[Dictionary] High-performance binary dictionary loaded via Mmap.");
-        },
-        Err(e) => {
-            eprintln!("[Error] Failed to load binary dictionary: {}. Did you run 'compile_dict'?", e);
-        }
+        Ok(trie) => { tries_map.insert(active_profile.clone(), trie); } // 关键修复：使用配置文件中的 profile 名作为键
+        Err(e) => { eprintln!("[Error] Binary dict failed: {}", e); } // 关键修复：使用配置文件中的 profile 名作为键
     }
     let tries_arc = Arc::new(RwLock::new(tries_map));
-    let word_en_map: HashMap<String, Vec<String>> = HashMap::new(); 
-
-    // 启动 Web 配置服务器
-    let config_for_web = Arc::clone(&config_arc);
-    let tries_for_web = Arc::clone(&tries_arc);
-    std::thread::spawn(move || {
-        let rt = tokio::runtime::Runtime::new().unwrap();
-        rt.block_on(async {
-            let server = web::WebServer::new(8765, config_for_web, tries_for_web);
-            server.start().await;
-        });
-    });
     
     let device_path = initial_config.files.device_path.clone().unwrap_or_else(|| find_keyboard().unwrap_or_default());
     let mut dev = Device::open(&device_path)?;
     let mut vkbd = Vkbd::new(&dev)?;
-    
     let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
-    let active_profile = initial_config.input.default_profile.clone();
 
     let (notify_tx, notify_rx) = std::sync::mpsc::channel();
     let (tray_tx, tray_rx) = std::sync::mpsc::channel();
 
-    // 启动通知处理线程
+    // Web Server
+    let c_web = Arc::clone(&config_arc);
+    let t_web = Arc::clone(&tries_arc);
+    let tx_web = tray_tx.clone();
     std::thread::spawn(move || {
-        use notify_rust::{Notification, Timeout};
-        let mut current_handle: Option<notify_rust::NotificationHandle> = None;
+        let rt = tokio::runtime::Runtime::new().unwrap();
+        rt.block_on(async { web::WebServer::new(8765, c_web, t_web, tx_web).start().await; });
+    });
+
+    // Notify Thread
+    std::thread::spawn(move || {
+        use notify_rust::Notification;
+        let mut handle: Option<notify_rust::NotificationHandle> = None;
         while let Ok(event) = notify_rx.recv() {
             match event {
-                NotifyEvent::Message(msg) => {
-                    let _ = Notification::new().summary("Rust IME").body(&msg).timeout(Timeout::Milliseconds(1500)).show();
-                },
-                NotifyEvent::Update(summary, body) => {
-                    if let Ok(handle) = Notification::new().summary(&summary).body(&body).id(9999).timeout(Timeout::Never).show() {
-                        current_handle = Some(handle);
-                    }
-                },
-                NotifyEvent::Close => {
-                    if let Some(handle) = current_handle.take() { handle.close(); }
-                }
+                NotifyEvent::Message(msg) => { let _ = Notification::new().summary("Rust IME").body(&msg).show(); },
+                NotifyEvent::Update(s, b) => { if let Ok(h) = Notification::new().summary(&s).body(&b).id(9999).show() { handle = Some(h); } },
+                NotifyEvent::Close => { if let Some(h) = handle.take() { h.close(); } }
             }
         }
     });
 
-    // 启动托盘 (子线程)
-    let tray_handle = tray::start_tray(
-        false, active_profile.clone(), 
-        initial_config.appearance.show_candidates,
-        initial_config.appearance.show_notifications,
-        initial_config.appearance.show_keystrokes,
-        tray_tx
-    );
+    let show_candidates = false;
+    let show_notifications = true;
+    let show_keystrokes = false;
+
+    let tray_handle = tray::start_tray(false, active_profile.clone(), show_candidates, show_notifications, show_keystrokes, tray_tx);
 
     let base_ngram = ngram::NgramModel::new();
-    let user_ngram = ngram::NgramModel::new();
+    let mut user_ngram = ngram::NgramModel::new();
     let user_ngram_path = find_project_root().join("user_adapter.json");
+    user_ngram.load_user_adapter(&user_ngram_path);
 
     let mut ime = Ime::new(
-        tries_arc.read().unwrap().clone(), active_profile, punctuation, word_en_map, notify_tx.clone(), gui_tx.clone(),
-        initial_config.input.enable_fuzzy_pinyin,
-        &initial_config.appearance.preview_mode,
-        initial_config.appearance.show_notifications,
-        initial_config.appearance.show_candidates,
-        initial_config.appearance.show_keystrokes,
-        base_ngram, user_ngram, user_ngram_path
+        tries_arc.read().unwrap().clone(), active_profile, punctuation, HashMap::new(), notify_tx.clone(), gui_tx.clone(),
+        initial_config.input.enable_fuzzy_pinyin, &initial_config.appearance.preview_mode,
+        show_notifications, show_candidates, show_keystrokes, base_ngram, user_ngram, user_ngram_path
     );
 
-    // 核心循环开始
     std::thread::sleep(std::time::Duration::from_millis(200));
     let _ = dev.grab();
-    println!("[IME] Core loop started. Keyboard grabbed.");
     
     let mut ctrl_held = false;
     let mut alt_held = false;
@@ -257,58 +193,51 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
     use std::os::unix::io::{AsRawFd, BorrowedFd};
 
     while !should_exit.load(Ordering::Relaxed) {
-        // 1. 处理托盘事件
         while let Ok(event) = tray_rx.try_recv() {
             match event {
-                tray::TrayEvent::ToggleIme => {
-                    ime.toggle();
-                    tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled);
+                tray::TrayEvent::ToggleIme => {ime.toggle(); tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled); }
+                tray::TrayEvent::NextProfile => {ime.next_profile(); tray_handle.update(|t| t.active_profile = ime.current_profile.clone()); }
+                tray::TrayEvent::ToggleGui => { 
+                    ime.show_candidates = !ime.show_candidates; 
+                    if !ime.show_candidates {ime.reset(); } else {ime.update_gui(); }
+                    tray_handle.update(|t| t.show_candidates = ime.show_candidates);
                 }
+                tray::TrayEvent::ToggleNotify => {ime.enable_notifications = !ime.enable_notifications; tray_handle.update(|t| t.show_notifications = ime.enable_notifications); }
                 tray::TrayEvent::ToggleKeystroke => {
                     ime.show_keystrokes = !ime.show_keystrokes;
-                    if !ime.show_keystrokes {
-                        if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes); }
-                    }
+                    if !ime.show_keystrokes { if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes); } }
                     tray_handle.update(|t| t.show_keystrokes = ime.show_keystrokes);
                 }
+                tray::TrayEvent::ReloadConfig => {
+                    let new_conf = load_config();
+                    if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ApplyConfig(new_conf.clone())); }
+                    if let Ok(mut w) = config_arc.write() { *w = new_conf; }
+                }
+                tray::TrayEvent::Restart => { should_exit.store(true, Ordering::Relaxed); }
                 tray::TrayEvent::Exit => { should_exit.store(true, Ordering::Relaxed); }
-                _ => {}
+                _ => {} // 捕获环境变量
             }
         }
 
-        // 2. Poll 键盘事件
         let raw_fd = dev.as_raw_fd();
         let borrowed_fd = unsafe { BorrowedFd::borrow_raw(raw_fd) };
         let mut poll_fds = [PollFd::new(&borrowed_fd, PollFlags::POLLIN)];
-        
-        if let Ok(n) = nix::poll::poll(&mut poll_fds, 200) {
-            if n == 0 { continue; }
-        } else { break; }
+        if let Ok(n) = nix::poll::poll(&mut poll_fds, 200) { if n == 0 { continue; } } else { break; }
 
-        let events = match dev.fetch_events() {
-            Ok(iter) => iter,
-            Err(_) => break,
-        };
-
+        let events = match dev.fetch_events() { Ok(iter) => iter, Err(_) => break, };
         for ev in events {
             if let InputEventKind::Key(key) = ev.kind() {
                 let val = ev.value();
                 let is_press = val != 0; 
-
                 match key {
                     Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL => ctrl_held = is_press,
                     Key::KEY_LEFTALT | Key::KEY_RIGHTALT => alt_held = is_press,
                     Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA => meta_held = is_press,
                     Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT => shift_held = is_press,
-                    _ => {}
+                    _ => {} // 捕获环境变量
                 }
-
                 if is_press {
-                    if (key == Key::KEY_SPACE && ctrl_held) || key == Key::KEY_CAPSLOCK {
-                        ime.toggle();
-                        continue;
-                    }
-
+                    if (key == Key::KEY_SPACE && ctrl_held) || key == Key::KEY_CAPSLOCK {ime.toggle(); continue;}
                     if ime.show_keystrokes {
                         if let Some(ref tx) = gui_tx {
                             let mut key_str = format!("{:?}", key).replace("KEY_", "");
@@ -318,40 +247,27 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                             if alt_held { combo.push("Alt"); }
                             if shift_held { combo.push("Shift"); }
                             if meta_held { combo.push("Meta"); }
-                            
-                            let is_modifier = matches!(key, Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL | Key::KEY_LEFTALT | Key::KEY_RIGHTALT | Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT | Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA);
-                            if !is_modifier {
+                            if !matches!(key, Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL | Key::KEY_LEFTALT | Key::KEY_RIGHTALT | Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT | Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA) {
                                 let display_text = if combo.is_empty() { key_str } else { format!("{}+{}", combo.join("+"), key_str) };
                                 let _ = tx.send(crate::gui::GuiEvent::Keystroke(display_text));
                             }
                         }
                     }
                 }
-
                 if ime.chinese_enabled {
                     if !ctrl_held && !alt_held && !meta_held {
                         match ime.handle_key(key, is_press, shift_held) {
                             Action::Emit(s) => vkbd.send_text(&s),
-                            Action::DeleteAndEmit { delete, insert, .. } => {
-                                vkbd.backspace(delete);
-                                vkbd.send_text(&insert);
-                            }
+                            Action::DeleteAndEmit { delete, insert, .. } => { vkbd.backspace(delete); vkbd.send_text(&insert); }
                             Action::PassThrough => vkbd.emit_raw(key, val),
-                            Action::Consume => {}
+                            _ => {} // 捕获环境变量
                         }
-                    } else {
-                        if is_press { ime.reset(); }
-                        vkbd.emit_raw(key, val);
-                    }
-                } else {
-                    vkbd.emit_raw(key, val);
-                }
+                    } else { if is_press { ime.reset(); } vkbd.emit_raw(key, val); }
+                } else { vkbd.emit_raw(key, val); }
             }
         }
     }
-
     let _ = dev.ungrab();
-    if let Some(tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::Exit); }
     Ok(())
 }
 
@@ -382,6 +298,14 @@ pub fn load_punctuation_dict(path: &str) -> HashMap<String, String> {
     map
 }
 
+pub fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
+    let mut config_path = find_project_root();
+    config_path.push("config.json");
+    let file = File::create(config_path)?;
+    serde_json::to_writer_pretty(file, config)?;
+    Ok(())
+}
+
 fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
     let paths = std::fs::read_dir("/dev/input")?;
     for entry in paths {
@@ -394,12 +318,4 @@ fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
         }
     }
     Err("No keyboard found".into())
-}
-
-pub fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
-    let mut config_path = find_project_root();
-    config_path.push("config.json");
-    let file = File::create(config_path)?;
-    serde_json::to_writer_pretty(file, config)?;
-    Ok(())
 }

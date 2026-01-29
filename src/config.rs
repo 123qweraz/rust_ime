@@ -5,13 +5,39 @@ use evdev::Key;
 #[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct Appearance {
     #[serde(default = "default_enable_notifications")]
-    pub show_notifications: bool, // 原 enable_notifications
+    pub show_notifications: bool,
     #[serde(default = "default_phantom_mode")]
-    pub preview_mode: String,     // 原 phantom_mode: none/pinyin/hanzi
+    pub preview_mode: String,
     #[serde(default = "default_show_candidates")]
     pub show_candidates: bool,
     #[serde(default = "default_show_keystrokes")]
     pub show_keystrokes: bool,
+
+    // 候选词窗口样式
+    #[serde(default = "default_cand_anchor")]
+    pub candidate_anchor: String, // bottom, top, center
+    #[serde(default = "default_cand_margin_x")]
+    pub candidate_margin_x: i32,
+    #[serde(default = "default_cand_margin_y")]
+    pub candidate_margin_y: i32,
+    #[serde(default = "default_cand_bg")]
+    pub candidate_bg_color: String,
+    #[serde(default = "default_cand_font_size")]
+    pub candidate_font_size: i32,
+
+    // 按键回显窗口样式
+    #[serde(default = "default_key_anchor")]
+    pub keystroke_anchor: String, // bottom_right, bottom_left, top_right, top_left
+    #[serde(default = "default_key_margin_x")]
+    pub keystroke_margin_x: i32,
+    #[serde(default = "default_key_margin_y")]
+    pub keystroke_margin_y: i32,
+    #[serde(default = "default_key_bg")]
+    pub keystroke_bg_color: String,
+    #[serde(default = "default_key_font_size")]
+    pub keystroke_font_size: i32,
+    #[serde(default = "default_key_timeout")]
+    pub keystroke_timeout_ms: u64,
 }
 
 impl Default for Appearance {
@@ -19,8 +45,19 @@ impl Default for Appearance {
         Appearance {
             show_notifications: true,
             preview_mode: "none".to_string(),
-            show_candidates: true,
-            show_keystrokes: true,
+            show_candidates: false,
+            show_keystrokes: false,
+            candidate_anchor: default_cand_anchor(),
+            candidate_margin_x: default_cand_margin_x(),
+            candidate_margin_y: default_cand_margin_y(),
+            candidate_bg_color: default_cand_bg(),
+            candidate_font_size: default_cand_font_size(),
+            keystroke_anchor: default_key_anchor(),
+            keystroke_margin_x: default_key_margin_x(),
+            keystroke_margin_y: default_key_margin_y(),
+            keystroke_bg_color: default_key_bg(),
+            keystroke_font_size: default_key_font_size(),
+            keystroke_timeout_ms: default_key_timeout(),
         }
     }
 }
@@ -193,9 +230,22 @@ impl Default for Shortcut {
 // Default Value Generators
 fn default_readme() -> String { "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert".to_string() }
 fn default_enable_notifications() -> bool { true }
-fn default_show_candidates() -> bool { true }
-fn default_show_keystrokes() -> bool { true }
+fn default_show_candidates() -> bool { false }
+fn default_show_keystrokes() -> bool { false }
 fn default_phantom_mode() -> String { "none".to_string() }
+
+fn default_cand_anchor() -> String { "bottom".to_string() }
+fn default_cand_margin_x() -> i32 { 0 }
+fn default_cand_margin_y() -> i32 { 120 }
+fn default_cand_bg() -> String { "rgba(20, 20, 20, 0.85)".to_string() }
+fn default_cand_font_size() -> i32 { 14 }
+
+fn default_key_anchor() -> String { "bottom_right".to_string() }
+fn default_key_margin_x() -> i32 { 40 }
+fn default_key_margin_y() -> i32 { 40 }
+fn default_key_bg() -> String { "rgba(20, 20, 20, 0.85)".to_string() }
+fn default_key_font_size() -> i32 { 11 }
+fn default_key_timeout() -> u64 { 1000 }
 
 fn default_active_profile() -> String { "Chinese".to_string() }
 fn default_paste_behavior() -> String { "ctrl_v".to_string() }

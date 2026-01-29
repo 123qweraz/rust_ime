@@ -12,6 +12,7 @@ pub enum TrayEvent {
     ToggleGui,
     ToggleNotify,
     ToggleKeystroke,
+    ReloadConfig,
 }
 
 pub struct ImeTray {
@@ -92,6 +93,13 @@ impl Tray for ImeTray {
                 label: "配置中心 (Web)".to_string(),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::OpenConfig);
+                }),
+                ..Default::default()
+            }.into(),
+            StandardItem {
+                label: "重新加载配置".to_string(),
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::ReloadConfig);
                 }),
                 ..Default::default()
             }.into(),

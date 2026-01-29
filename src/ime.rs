@@ -127,6 +127,7 @@ impl Ime {
             println!("\n[IME] 英文模式");
             let _ = self.notification_tx.send(NotifyEvent::Message("英文模式".to_string()));
         }
+        self.update_gui(); // 强制更新一次 GUI 状态
     }
 
     #[allow(dead_code)]
@@ -253,7 +254,7 @@ impl Ime {
         self.update_gui();
     }
 
-    fn update_gui(&self) {
+    pub fn update_gui(&self) {
         if let Some(ref tx) = self.gui_tx {
             let mut hints = Vec::new();
             let (pinyin, candidates) = if self.show_candidates {

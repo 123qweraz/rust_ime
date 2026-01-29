@@ -3,7 +3,6 @@ use memmap2::Mmap;
 use std::fs::File;
 use std::path::Path;
 use std::sync::Arc;
-use std::ops::Deref;
 
 #[derive(Clone)]
 pub struct MmapData(Arc<Mmap>);
