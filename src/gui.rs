@@ -1,5 +1,5 @@
 use gtk4::prelude::*;
-use gtk4::{ApplicationWindow, Label, Box, Orientation, CssProvider};
+use gtk4::{Window, Label, Box, Orientation, CssProvider};
 use std::sync::mpsc::Receiver;
 use glib::MainContext;
 
@@ -20,7 +20,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         return;
     }
 
-    let window = ApplicationWindow::builder()
+    let window = Window::builder()
         .title("Rust IME")
         .decorated(false)
         .can_focus(false)
@@ -45,6 +45,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
 
     let css_provider = CssProvider::new();
     // THE KEY: remove window shadow and margin to make it truly small.
+    // Also hide any possible header bars or title bars injected by the theme.
     css_provider.load_from_data("
         window.ime-window {
             background-color: transparent;
@@ -53,10 +54,15 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
             box-shadow: none;
             border: none;
         }
-        /* In GTK4, the actual window surface can have a shadow added by the compositor/theme */
-        window.ime-window decoration {
-            box-shadow: none;
+        window.ime-window decoration,
+        window.ime-window headerbar,
+        window.ime-window titlebar {
+            display: none;
+            opacity: 0;
             margin: 0;
+            padding: 0;
+            min-height: 0;
+            min-width: 0;
         }
         #main-container {
             background-color: rgba(30, 30, 30, 0.88);
