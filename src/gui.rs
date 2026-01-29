@@ -12,6 +12,7 @@ pub enum GuiEvent {
         hints: Vec<String>,
         selected: usize,
     },
+    Keystroke(String),
     Exit,
 }
 
@@ -21,6 +22,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         return;
     }
 
+    // --- Candidate Window ---
     let window = Window::builder()
         .title("Rust IME")
         .decorated(false)
@@ -29,10 +31,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .resizable(false)
         .build();
     
-    // Use the generic property system for better compatibility in GTK4
     window.set_property("deletable", false);
-    
-    // Add a specific class to the window to target it in CSS
     window.add_css_class("ime-window");
     
     let main_box = Box::new(Orientation::Horizontal, 8);
@@ -65,20 +64,35 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     candidates_box.set_widget_name("candidates-box");
     main_box.append(&candidates_box);
 
+    // --- Keystroke Window ---
+    let key_window = Window::builder()
+        .title("Keystroke Display")
+        .decorated(false)
+        .can_focus(false)
+        .focusable(false)
+        .resizable(false)
+        .build();
+    key_window.set_property("deletable", false);
+    key_window.add_css_class("keystroke-window");
+
+    let key_box = Box::new(Orientation::Horizontal, 6);
+    key_box.set_widget_name("keystroke-container");
+    key_window.set_child(Some(&key_box));
+
     let css_provider = CssProvider::new();
     css_provider.load_from_data("
-        window.ime-window {
+        window.ime-window, window.keystroke-window {
             background-color: transparent;
             margin: 0;
             padding: 0;
             box-shadow: none;
             border: none;
         }
-        window.ime-window decoration,
-        window.ime-window headerbar,
-        window.ime-window titlebar,
-        window.ime-window windowhandle,
-        window.ime-window button.titlebutton {
+        window.ime-window decoration, window.keystroke-window decoration,
+        window.ime-window headerbar, window.keystroke-window headerbar,
+        window.ime-window titlebar, window.keystroke-window titlebar,
+        window.ime-window windowhandle, window.keystroke-window windowhandle,
+        window.ime-window button.titlebutton, window.keystroke-window button.titlebutton {
             opacity: 0;
             margin: 0;
             padding: 0;
@@ -132,6 +146,22 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .candidate-selected .index {
             color: rgba(255, 255, 255, 0.7);
         }
+
+        /* Keystroke Styles */
+        #keystroke-container {
+            padding: 10px;
+        }
+        .key-label {
+            background-color: rgba(40, 40, 40, 0.9);
+            color: white;
+            font-family: 'Monospace';
+            font-size: 12pt;
+            font-weight: bold;
+            padding: 6px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
     ");
 
     if let Some(display) = gdk4::Display::default() {
@@ -154,68 +184,96 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     });
 
     let window_clone = window.clone();
+    let key_window_clone = key_window.clone();
     let pinyin_label_clone = pinyin_label.clone();
     let candidates_box_clone = candidates_box.clone();
+    let key_box_clone = key_box.clone();
 
     gtk_rx.attach(None, move |event| {
-        let (pinyin, candidates, hints, selected) = match event {
-            GuiEvent::Update { pinyin, candidates, hints, selected } => (pinyin, candidates, hints, selected),
+        match event {
+            GuiEvent::Update { pinyin, candidates, hints, selected } => {
+                if pinyin.is_empty() && candidates.is_empty() {
+                    window_clone.set_visible(false);
+                    return glib::Continue(true);
+                }
+
+                pinyin_label_clone.set_text(&pinyin);
+                
+                while let Some(child) = candidates_box_clone.first_child() {
+                    candidates_box_clone.remove(&child);
+                }
+                
+                let page_start = (selected / 5) * 5;
+                let page_end = (page_start + 5).min(candidates.len());
+
+                for i in page_start..page_end {
+                    let cand_box = Box::new(Orientation::Horizontal, 0);
+                    cand_box.add_css_class("candidate-item");
+                    
+                    let idx_label = Label::new(Some(&format!("{}", (i % 5) + 1)));
+                    idx_label.add_css_class("index");
+                    
+                    let val_label = Label::new(Some(&candidates[i]));
+                    val_label.add_css_class("candidate-text");
+                    
+                    cand_box.append(&idx_label);
+                    cand_box.append(&val_label);
+
+                    if let Some(hint) = hints.get(i) {
+                        if !hint.is_empty() {
+                            let hint_label = Label::new(Some(&format!("{}", hint)));
+                            hint_label.add_css_class("hint-text");
+                            cand_box.append(&hint_label);
+                        }
+                    }
+                    
+                    if i == selected {
+                        cand_box.add_css_class("candidate-selected");
+                    }
+                    
+                    candidates_box_clone.append(&cand_box);
+                }
+                window_clone.set_visible(true);
+            },
+            GuiEvent::Keystroke(key_name) => {
+                let label = Label::new(Some(&key_name));
+                label.add_css_class("key-label");
+                key_box_clone.append(&label);
+                
+                if !key_window_clone.is_visible() {
+                    key_window_clone.set_visible(true);
+                }
+
+                // Remove after 2 seconds
+                let key_box_weak = key_box_clone.downgrade();
+                let label_weak = label.downgrade();
+                let key_window_weak = key_window_clone.downgrade();
+                
+                glib::timeout_add_local(std::time::Duration::from_millis(2000), move || {
+                    if let (Some(kb), Some(l)) = (key_box_weak.upgrade(), label_weak.upgrade()) {
+                        kb.remove(&l);
+                        // Hide window if empty
+                        if kb.first_child().is_none() {
+                            if let Some(kw) = key_window_weak.upgrade() {
+                                kw.set_visible(false);
+                            }
+                        }
+                    }
+                    glib::Continue(false)
+                });
+            },
             GuiEvent::Exit => {
                 window_clone.close();
+                key_window_clone.close();
                 return glib::Continue(false);
             }
-        };
-
-        if pinyin.is_empty() && candidates.is_empty() {
-            window_clone.set_visible(false);
-            return glib::Continue(true);
         }
-
-        pinyin_label_clone.set_text(&pinyin);
-        
-        while let Some(child) = candidates_box_clone.first_child() {
-            candidates_box_clone.remove(&child);
-        }
-        
-        let page_start = (selected / 5) * 5;
-        let page_end = (page_start + 5).min(candidates.len());
-
-        for i in page_start..page_end {
-            let cand_box = Box::new(Orientation::Horizontal, 0);
-            cand_box.add_css_class("candidate-item");
-            
-            let idx_label = Label::new(Some(&format!("{}", (i % 5) + 1)));
-            idx_label.add_css_class("index");
-            
-            let val_label = Label::new(Some(&candidates[i]));
-            val_label.add_css_class("candidate-text");
-            
-            cand_box.append(&idx_label);
-            cand_box.append(&val_label);
-
-            if let Some(hint) = hints.get(i) {
-                if !hint.is_empty() {
-                    let hint_label = Label::new(Some(&format!("{}", hint)));
-                    hint_label.add_css_class("hint-text");
-                    cand_box.append(&hint_label);
-                }
-            }
-            
-            if i == selected {
-                cand_box.add_css_class("candidate-selected");
-            }
-            
-            candidates_box_clone.append(&cand_box);
-        }
-
-        // In GTK4 on Wayland absolute positioning is not allowed.
-        // Users can now drag the window to their preferred location.
-        window_clone.set_visible(true);
         
         glib::Continue(true)
     });
 
     window.set_visible(false);
+    key_window.set_visible(false);
 
     let loop_ = glib::MainLoop::new(None, false);
     loop_.run();

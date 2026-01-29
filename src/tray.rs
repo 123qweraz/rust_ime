@@ -11,6 +11,7 @@ pub enum TrayEvent {
     Exit,
     ToggleGui,
     ToggleNotify,
+    ToggleKeystroke,
 }
 
 pub struct ImeTray {
@@ -18,6 +19,7 @@ pub struct ImeTray {
     pub active_profile: String,
     pub show_candidates: bool,
     pub show_notifications: bool,
+    pub show_keystrokes: bool,
     pub tx: Sender<TrayEvent>,
 }
 
@@ -37,10 +39,11 @@ impl Tray for ImeTray {
     fn tool_tip(&self) -> ToolTip {
         ToolTip {
             title: "Blind IME".to_string(),
-            description: format!("Profile: {}\nGUI: {}\nNotify: {}", 
+            description: format!("Profile: {}\nGUI: {}\nNotify: {}\nKeystroke: {}", 
                 self.active_profile,
                 if self.show_candidates { "开" } else { "关" },
-                if self.show_notifications { "开" } else { "关" }
+                if self.show_notifications { "开" } else { "关" },
+                if self.show_keystrokes { "开" } else { "关" }
             ),
             ..Default::default()
         }
@@ -77,6 +80,13 @@ impl Tray for ImeTray {
                 }),
                 ..Default::default()
             }.into(),
+            StandardItem {
+                label: format!("按键回显: {}", if self.show_keystrokes { "开启" } else { "关闭" }),
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::ToggleKeystroke);
+                }),
+                ..Default::default()
+            }.into(),
             MenuItem::Separator,
             StandardItem {
                 label: "配置中心 (Web)".to_string(),
@@ -109,6 +119,7 @@ pub fn start_tray(
     active_profile: String, 
     show_candidates: bool,
     show_notifications: bool,
+    show_keystrokes: bool,
     event_tx: Sender<TrayEvent>
 ) -> Handle<ImeTray> {
     let service = ImeTray {
@@ -116,6 +127,7 @@ pub fn start_tray(
         active_profile,
         show_candidates,
         show_notifications,
+        show_keystrokes,
         tx: event_tx,
     };
     let tray_service = TrayService::new(service);

@@ -277,6 +277,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
         active_profile.clone(), 
         initial_config.appearance.show_candidates,
         initial_config.appearance.show_notifications,
+        initial_config.appearance.show_keystrokes,
         tray_tx
     );
 
@@ -290,6 +291,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
         &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications,
         initial_config.appearance.show_candidates,
+        initial_config.appearance.show_keystrokes,
         base_ngram, user_ngram, user_ngram_path
     );
 
@@ -323,6 +325,10 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                 tray::TrayEvent::ToggleNotify => {
                     ime.enable_notifications = !ime.enable_notifications;
                     tray_handle.update(|t| t.show_notifications = ime.enable_notifications);
+                }
+                tray::TrayEvent::ToggleKeystroke => {
+                    ime.show_keystrokes = !ime.show_keystrokes;
+                    tray_handle.update(|t| t.show_keystrokes = ime.show_keystrokes);
                 }
                 tray::TrayEvent::OpenConfig => {
                     let _ = Command::new("xdg-open").arg("http://localhost:8765").spawn();
@@ -373,6 +379,32 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                     if (key == Key::KEY_SPACE && ctrl_held) || key == Key::KEY_CAPSLOCK {
                         ime.toggle();
                         continue;
+                    }
+
+                    // Keystroke Display logic
+                    if ime.show_keystrokes {
+                        if let Some(ref tx) = gui_tx {
+                            let mut key_str = format!("{:?}", key).replace("KEY_", "");
+                            if key_str.len() == 1 { key_str = key_str.to_uppercase(); }
+                            
+                            let mut combo = Vec::new();
+                            if ctrl_held { combo.push("Ctrl"); }
+                            if alt_held { combo.push("Alt"); }
+                            if shift_held { combo.push("Shift"); }
+                            if meta_held { combo.push("Meta"); }
+                            
+                            // Prevent modifiers being shown alone if they are part of a combo
+                            let is_modifier = matches!(key, Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL | Key::KEY_LEFTALT | Key::KEY_RIGHTALT | Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT | Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA);
+                            
+                            if !is_modifier {
+                                let display_text = if combo.is_empty() {
+                                    key_str
+                                } else {
+                                    format!("{}+{}", combo.join("+"), key_str)
+                                };
+                                let _ = tx.send(crate::gui::GuiEvent::Keystroke(display_text));
+                            }
+                        }
                     }
                 }
 
