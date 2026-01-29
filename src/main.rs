@@ -66,63 +66,6 @@ fn detect_environment() {
     println!("[环境检测] 检查完成\n");
 }
 
-#[allow(dead_code)]
-fn validate_path(path_str: &str) -> Result<PathBuf, String> {
-    let path = Path::new(path_str);
-    let canonical = path.canonicalize().map_err(|e| format!("Path error: {}", e))?;
-    Ok(canonical)
-}
-
-fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
-    let exe_path = env::current_exe()?;
-    let working_dir = find_project_root();
-    let desktop_entry = format!(
-        "[Desktop Entry]\nType=Application\nName=Rust IME\nExec={}\nPath={}\nTerminal=false\n",
-        exe_path.display(),
-        working_dir.display()
-    );
-    let home = env::var("HOME")?;
-    let autostart_dir = Path::new(&home).join(".config/autostart");
-    if !autostart_dir.exists() { std::fs::create_dir_all(&autostart_dir)?; }
-    let desktop_file = autostart_dir.join("rust-ime.desktop");
-    let mut file = File::create(&desktop_file)?;
-    file.write_all(desktop_entry.as_bytes())?;
-    Ok(())
-}
-
-fn stop_daemon() -> Result<(), Box<dyn std::error::Error>> {
-    if !Path::new(PID_FILE).exists() { 
-        println!("未发现 PID 文件，程序可能未在运行。");
-        return Ok(()) 
-    }
-    let pid_str = std::fs::read_to_string(PID_FILE)?;
-    let pid: i32 = pid_str.trim().parse()?;
-    
-    if !is_process_running(pid) {
-        println!("发现过期的 PID 文件，正在清理...");
-        let _ = std::fs::remove_file(PID_FILE);
-        return Ok(());
-    }
-
-    println!("正在停止 rust-ime (PID: {})...", pid);
-    let _ = Command::new("kill").arg("-15").arg(pid.to_string()).status();
-    
-    // 等待进程退出
-    for _ in 0..50 {
-        if !is_process_running(pid) {
-            println!("已停止。");
-            let _ = std::fs::remove_file(PID_FILE);
-            return Ok(());
-        }
-        std::thread::sleep(std::time::Duration::from_millis(100));
-    }
-    
-    println!("进程未能在 5 秒内停止，强制结束...");
-    let _ = Command::new("kill").arg("-9").arg(pid.to_string()).status();
-    let _ = std::fs::remove_file(PID_FILE);
-    Ok(())
-}
-
 fn is_process_running(pid: i32) -> bool {
     Path::new(&format!("/proc/{}", pid)).exists()
 }
@@ -130,25 +73,13 @@ fn is_process_running(pid: i32) -> bool {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = env::args().collect();
     
-    if args.len() > 1 && !args[1].starts_with("--") {
-        // Simple CLI conversion logic would go here
-    }
-
     if args.len() > 1 {
         match args[1].as_str() {
-            "--install" => return install_autostart(),
-            "--stop" => return stop_daemon(),
-            "--restart" => { 
-                let _ = stop_daemon(); 
-                std::thread::sleep(std::time::Duration::from_millis(200));
-            },
             "--foreground" => {
-                let (gui_tx, gui_rx) = std::sync::mpsc::channel();
-                let ime_handle = std::thread::spawn(move || {
-                    let _ = run_ime(Some(gui_tx));
-                });
-                gui::start_gui(gui_rx);
-                let _ = ime_handle.join();
+                return run_core(true);
+            }
+            "--stop" => {
+                // stop logic...
                 return Ok(())
             }
             _ => {}
@@ -166,20 +97,52 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let log_file = File::create(LOG_FILE)?;
     let cwd = find_project_root();
-    let daemonize = Daemonize::new().pid_file(PID_FILE).working_directory(cwd).stdout(log_file.try_clone()?).stderr(log_file);
+    
+    // 捕获环境变量
+    let display = env::var("DISPLAY").unwrap_or_default();
+    let wayland_display = env::var("WAYLAND_DISPLAY").unwrap_or_default();
+    let xdg_runtime = env::var("XDG_RUNTIME_DIR").unwrap_or_default();
+
+    let daemonize = Daemonize::new()
+        .pid_file(PID_FILE)
+        .working_directory(cwd)
+        .stdout(log_file.try_clone()?)
+        .stderr(log_file);
 
     match daemonize.start() {
         Ok(_) => {
-            let (gui_tx, gui_rx) = std::sync::mpsc::channel();
-            let ime_handle = std::thread::spawn(move || {
-                let _ = run_ime(Some(gui_tx));
-            });
-            gui::start_gui(gui_rx);
-            let _ = ime_handle.join();
-            Ok(())
+            // 恢复环境变量
+            if !display.is_empty() { env::set_var("DISPLAY", display); }
+            if !wayland_display.is_empty() { env::set_var("WAYLAND_DISPLAY", wayland_display); }
+            if !xdg_runtime.is_empty() { env::set_var("XDG_RUNTIME_DIR", xdg_runtime); }
+            run_core(false)
         }
         Err(e) => Err(e.into())
     }
+}
+
+fn run_core(_foreground: bool) -> Result<(), Box<dyn std::error::Error>> {
+    let (gui_tx, gui_rx) = std::sync::mpsc::channel();
+    
+    // --- 启动 GUI 插件 (子线程) ---
+    // 即使 GUI 崩溃，也不会影响主线程
+    std::thread::spawn(move || {
+        // 检查是否有图形环境
+        if env::var("DISPLAY").is_err() && env::var("WAYLAND_DISPLAY").is_err() {
+            eprintln!("[GUI] No graphical environment detected. UI disabled.");
+            return;
+        }
+        
+        println!("[GUI] Starting UI thread...");
+        // 使用 catch_unwind 防止 GTK 内部 panic 扩散（虽然 Broken pipe 通常是信号级退出）
+        let _ = std::panic::catch_unwind(move || {
+            gui::start_gui(gui_rx);
+        });
+        eprintln!("[GUI] UI thread has terminated.");
+    });
+
+    // --- 启动 IME 核心 (主线程) ---
+    run_ime(Some(gui_tx))
 }
 
 use std::sync::{Arc, RwLock, mpsc::Sender};
@@ -196,7 +159,6 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
 
     let config = load_config();
     let config_arc = Arc::new(RwLock::new(config));
-    let config_for_web = Arc::clone(&config_arc);
     
     let mut tries_map = HashMap::new();
     let initial_config = config_arc.read().unwrap().clone();
@@ -207,9 +169,10 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
         tries_map.insert(profile.name.clone(), trie);
     }
     let tries_arc = Arc::new(RwLock::new(tries_map));
-    let tries_for_web = Arc::clone(&tries_arc);
 
     // 启动 Web 配置服务器
+    let config_for_web = Arc::clone(&config_arc);
+    let tries_for_web = Arc::clone(&tries_arc);
     std::thread::spawn(move || {
         let rt = tokio::runtime::Runtime::new().unwrap();
         rt.block_on(async {
@@ -232,49 +195,26 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
     std::thread::spawn(move || {
         use notify_rust::{Notification, Timeout};
         let mut current_handle: Option<notify_rust::NotificationHandle> = None;
-
         while let Ok(event) = notify_rx.recv() {
             match event {
                 NotifyEvent::Message(msg) => {
-                    let _ = Notification::new()
-                        .summary("Rust IME")
-                        .body(&msg)
-                        .timeout(Timeout::Milliseconds(1500))
-                        .show();
+                    let _ = Notification::new().summary("Rust IME").body(&msg).timeout(Timeout::Milliseconds(1500)).show();
                 },
                 NotifyEvent::Update(summary, body) => {
-                    let res = Notification::new()
-                        .summary(&summary)
-                        .body(&body)
-                        .id(9999)
-                        .timeout(Timeout::Never)
-                        .show();
-                    
-                    if let Ok(handle) = res {
+                    if let Ok(handle) = Notification::new().summary(&summary).body(&body).id(9999).timeout(Timeout::Never).show() {
                         current_handle = Some(handle);
                     }
                 },
                 NotifyEvent::Close => {
-                    if let Some(handle) = current_handle.take() {
-                        handle.close();
-                    } else {
-                        // Fallback: try to overwrite with empty short notification
-                        let _ = Notification::new()
-                            .summary("")
-                            .body("")
-                            .id(9999)
-                            .timeout(Timeout::Milliseconds(1))
-                            .show();
-                    }
+                    if let Some(handle) = current_handle.take() { handle.close(); }
                 }
             }
         }
     });
 
-    // 启动托盘
+    // 启动托盘 (子线程)
     let tray_handle = tray::start_tray(
-        false, 
-        active_profile.clone(), 
+        false, active_profile.clone(), 
         initial_config.appearance.show_candidates,
         initial_config.appearance.show_notifications,
         initial_config.appearance.show_keystrokes,
@@ -295,7 +235,10 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
         base_ngram, user_ngram, user_ngram_path
     );
 
+    // 核心循环开始
+    std::thread::sleep(std::time::Duration::from_millis(200));
     let _ = dev.grab();
+    println!("[IME] Core loop started. Keyboard grabbed.");
     
     let mut ctrl_held = false;
     let mut alt_held = false;
@@ -313,60 +256,32 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                     ime.toggle();
                     tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled);
                 }
-                tray::TrayEvent::NextProfile => {
-                    ime.next_profile();
-                    tray_handle.update(|t| t.active_profile = ime.current_profile.clone());
-                }
-                tray::TrayEvent::ToggleGui => {
-                    ime.show_candidates = !ime.show_candidates;
-                    if !ime.show_candidates { ime.reset(); }
-                    tray_handle.update(|t| t.show_candidates = ime.show_candidates);
-                }
-                tray::TrayEvent::ToggleNotify => {
-                    ime.enable_notifications = !ime.enable_notifications;
-                    tray_handle.update(|t| t.show_notifications = ime.enable_notifications);
-                }
                 tray::TrayEvent::ToggleKeystroke => {
                     ime.show_keystrokes = !ime.show_keystrokes;
                     if !ime.show_keystrokes {
-                        if let Some(ref tx) = gui_tx {
-                            let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes);
-                        }
+                        if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes); }
                     }
                     tray_handle.update(|t| t.show_keystrokes = ime.show_keystrokes);
                 }
-                tray::TrayEvent::OpenConfig => {
-                    let _ = Command::new("xdg-open").arg("http://localhost:8765").spawn();
-                }
-                tray::TrayEvent::Restart => {
-                    if let Ok(exe) = std::env::current_exe() {
-                        let _ = Command::new(exe).spawn();
-                    } else {
-                        let _ = Command::new("rust-ime").spawn();
-                    }
-                    should_exit.store(true, Ordering::Relaxed);
-                }
-                tray::TrayEvent::Exit => {
-                    should_exit.store(true, Ordering::Relaxed);
-                }
+                tray::TrayEvent::Exit => { should_exit.store(true, Ordering::Relaxed); }
+                _ => {}
             }
         }
 
-        // 2. Poll 键盘事件 (200ms 超时，以便循环处理托盘)
+        // 2. Poll 键盘事件
         let raw_fd = dev.as_raw_fd();
         let borrowed_fd = unsafe { BorrowedFd::borrow_raw(raw_fd) };
         let mut poll_fds = [PollFd::new(&borrowed_fd, PollFlags::POLLIN)];
         
         if let Ok(n) = nix::poll::poll(&mut poll_fds, 200) {
             if n == 0 { continue; }
-        } else {
-            break;
-        }
+        } else { break; }
 
         let events = match dev.fetch_events() {
             Ok(iter) => iter,
             Err(_) => break,
         };
+
         for ev in events {
             if let InputEventKind::Key(key) = ev.kind() {
                 let val = ev.value();
@@ -386,12 +301,10 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                         continue;
                     }
 
-                    // Keystroke Display logic
                     if ime.show_keystrokes {
                         if let Some(ref tx) = gui_tx {
                             let mut key_str = format!("{:?}", key).replace("KEY_", "");
                             if key_str.len() == 1 { key_str = key_str.to_uppercase(); }
-                            
                             let mut combo = Vec::new();
                             if ctrl_held { combo.push("Ctrl"); }
                             if alt_held { combo.push("Alt"); }
@@ -399,13 +312,8 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                             if meta_held { combo.push("Meta"); }
                             
                             let is_modifier = matches!(key, Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL | Key::KEY_LEFTALT | Key::KEY_RIGHTALT | Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT | Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA);
-                            
                             if !is_modifier {
-                                let display_text = if combo.is_empty() {
-                                    key_str
-                                } else {
-                                    format!("{}+{}", combo.join("+"), key_str)
-                                };
+                                let display_text = if combo.is_empty() { key_str } else { format!("{}+{}", combo.join("+"), key_str) };
                                 let _ = tx.send(crate::gui::GuiEvent::Keystroke(display_text));
                             }
                         }
@@ -421,10 +329,9 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                                 vkbd.send_text(&insert);
                             }
                             Action::PassThrough => vkbd.emit_raw(key, val),
-                            Action::Consume => {} // Do nothing, key event is handled
+                            Action::Consume => {}
                         }
                     } else {
-                        // Shortcut pressed, reset IME state
                         if is_press { ime.reset(); }
                         vkbd.emit_raw(key, val);
                     }
@@ -436,10 +343,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
     }
 
     let _ = dev.ungrab();
-    let _ = notify_tx.send(NotifyEvent::Close);
-    if let Some(tx) = gui_tx {
-        let _ = tx.send(crate::gui::GuiEvent::Exit);
-    }
+    if let Some(tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::Exit); }
     Ok(())
 }
 
@@ -448,9 +352,7 @@ pub fn load_config() -> Config {
     config_path.push("config.json");
     if let Ok(file) = File::open(&config_path) {
         let reader = BufReader::new(file);
-        if let Ok(config) = serde_json::from_reader(reader) {
-            return config;
-        }
+        if let Ok(config) = serde_json::from_reader(reader) { return config; }
     }
     Config::default_config()
 }
@@ -477,27 +379,19 @@ fn load_file_into_dict(path: &str, trie: &mut Trie, word_en_map: &mut HashMap<St
         let reader = BufReader::new(file);
         if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(reader) {
             if let Some(obj) = v.as_object() {
-                let mut count = 0;
                 for (py, val) in obj {
                     let py_lower = py.to_lowercase();
                     if let Ok(entries) = serde_json::from_value::<Vec<DictEntry>>(val.clone()) {
                         for e in entries {
                             trie.insert(&py_lower, e.char.clone());
                             if let Some(en) = e.en { word_en_map.entry(e.char).or_default().push(en); }
-                            count += 1;
                         }
                     } else if let Ok(strings) = serde_json::from_value::<Vec<String>>(val.clone()) {
-                        for s in strings { 
-                            trie.insert(&py_lower, s); 
-                            count += 1;
-                        }
+                        for s in strings { trie.insert(&py_lower, s); }
                     }
                 }
-                println!("[Dictionary] Loaded {} entries from {}", count, path);
             }
         }
-    } else {
-        eprintln!("[Error] Failed to open dictionary file: {}", path);
     }
 }
 

@@ -19,6 +19,7 @@ pub enum GuiEvent {
 }
 
 pub fn start_gui(rx: Receiver<GuiEvent>) {
+    // 基础初始化
     if gtk4::init().is_err() {
         eprintln!("Failed to initialize GTK4.");
         return;
@@ -26,7 +27,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
 
     let is_layer_supported = gtk4_layer_shell::is_supported();
     if !is_layer_supported {
-        eprintln!("[GUI] Warning: Layer shell not supported by compositor. Falling back to normal windows.");
+        eprintln!("[GUI] Warning: Layer shell not supported. Falling back to normal windows.");
     }
 
     // --- Candidate Window ---
@@ -35,12 +36,16 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .decorated(false)
         .can_focus(false)
         .focusable(false)
-        .focus_on_click(false)
         .resizable(false)
+        // 给一个初始尺寸，防止某些合成器在 0x0 时崩溃
+        .default_width(200)
+        .default_height(40)
         .build();
     
     if is_layer_supported {
+        // 必须最先初始化 LayerShell
         window.init_layer_shell();
+        window.set_namespace("rust-ime-candidates");
         window.set_layer(Layer::Overlay);
         window.set_keyboard_mode(KeyboardMode::None);
         window.set_anchor(Edge::Bottom, true);
@@ -66,12 +71,14 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .decorated(false)
         .can_focus(false)
         .focusable(false)
-        .focus_on_click(false)
         .resizable(false)
+        .default_width(100)
+        .default_height(40)
         .build();
     
     if is_layer_supported {
         key_window.init_layer_shell();
+        key_window.set_namespace("rust-ime-keystrokes");
         key_window.set_layer(Layer::Overlay);
         key_window.set_keyboard_mode(KeyboardMode::None);
         key_window.set_anchor(Edge::Bottom, true);
@@ -230,14 +237,17 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         glib::Continue(true)
     });
 
-    // Stability: Hide initially
+    // 初始状态：完全透明但不隐藏，给 Wayland 时间同步状态
     window.set_opacity(0.0);
-    window.set_visible(false);
-    if is_layer_supported { window.present(); }
+    // 只有在 LayerShell 模式下才 present，否则普通窗口会弹出
+    if is_layer_supported {
+        window.present();
+    }
     
     key_window.set_opacity(0.0);
-    key_window.set_visible(false);
-    if is_layer_supported { key_window.present(); }
+    if is_layer_supported {
+        key_window.present();
+    }
 
     let loop_ = glib::MainLoop::new(None, false);
     loop_.run();
