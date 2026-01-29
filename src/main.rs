@@ -231,6 +231,8 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
     // 启动通知处理线程
     std::thread::spawn(move || {
         use notify_rust::{Notification, Timeout};
+        let mut current_handle: Option<notify_rust::NotificationHandle> = None;
+
         while let Ok(event) = notify_rx.recv() {
             match event {
                 NotifyEvent::Message(msg) => {
@@ -241,20 +243,29 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                         .show();
                 },
                 NotifyEvent::Update(summary, body) => {
-                    let _ = Notification::new()
+                    let res = Notification::new()
                         .summary(&summary)
                         .body(&body)
                         .id(9999)
                         .timeout(Timeout::Never)
                         .show();
+                    
+                    if let Ok(handle) = res {
+                        current_handle = Some(handle);
+                    }
                 },
                 NotifyEvent::Close => {
-                    let _ = Notification::new()
-                        .summary("")
-                        .body("")
-                        .id(9999)
-                        .timeout(Timeout::Milliseconds(1))
-                        .show();
+                    if let Some(handle) = current_handle.take() {
+                        handle.close();
+                    } else {
+                        // Fallback: try to overwrite with empty short notification
+                        let _ = Notification::new()
+                            .summary("")
+                            .body("")
+                            .id(9999)
+                            .timeout(Timeout::Milliseconds(1))
+                            .show();
+                    }
                 }
             }
         }
