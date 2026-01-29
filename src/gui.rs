@@ -28,17 +28,18 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .decorated(false)
         .can_focus(false)
         .focusable(false)
+        .focus_on_click(false)
         .resizable(false)
         .build();
     
-    window.set_property("deletable", false);
+    // Ensure it doesn't accept focus via properties too
     window.add_css_class("ime-window");
     
     let main_box = Box::new(Orientation::Horizontal, 8);
     main_box.set_widget_name("main-container");
     window.set_child(Some(&main_box));
 
-    // Add drag support to the main container
+    // Add drag support
     let drag_gesture = GestureClick::new();
     let window_clone_for_drag = window.clone();
     drag_gesture.connect_pressed(move |gesture, _n, x, y| {
@@ -70,9 +71,9 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .decorated(false)
         .can_focus(false)
         .focusable(false)
+        .focus_on_click(false)
         .resizable(false)
         .build();
-    key_window.set_property("deletable", false);
     key_window.add_css_class("keystroke-window");
 
     let key_box = Box::new(Orientation::Horizontal, 6);
@@ -83,84 +84,76 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     css_provider.load_from_data("
         window.ime-window, window.keystroke-window {
             background-color: transparent;
-            margin: 0;
-            padding: 0;
-            box-shadow: none;
-            border: none;
         }
-        window.ime-window decoration, window.keystroke-window decoration,
-        window.ime-window headerbar, window.keystroke-window headerbar,
-        window.ime-window titlebar, window.keystroke-window titlebar,
-        window.ime-window windowhandle, window.keystroke-window windowhandle,
-        window.ime-window button.titlebutton, window.keystroke-window button.titlebutton {
-            opacity: 0;
-            margin: 0;
-            padding: 0;
-            min-height: 0;
-            min-width: 0;
+        
+        /* High-quality container */
+        #main-container, #keystroke-container {
+            background-color: rgba(20, 20, 20, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 10px;
+            padding: 6px 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
-        #main-container {
-            background-color: rgba(30, 30, 30, 0.88);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            padding: 4px 10px;
-            margin: 0;
-        }
+
         #pinyin-label {
-            color: #4dabf7;
+            color: #339af0;
             font-size: 13pt;
-            font-weight: 500;
-            margin-right: 2px;
+            font-weight: 600;
+            margin-right: 4px;
+            padding-right: 10px;
             border-right: 1px solid rgba(255, 255, 255, 0.1);
-            padding-right: 8px;
         }
+
         .candidate-item {
-            padding: 1px 6px;
-            border-radius: 4px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            transition: all 0.2s;
         }
+        
         .candidate-selected {
             background-color: #339af0;
+            box-shadow: 0 0 8px rgba(51, 154, 240, 0.4);
         }
+
         .candidate-text {
-            color: #e9ecef;
+            color: #f8f9fa;
             font-size: 14pt;
             font-weight: 500;
         }
+
         .candidate-selected .candidate-text {
             color: #ffffff;
-            font-weight: 600;
-        }
-        .hint-text {
-            color: #adb5bd;
-            font-size: 9pt;
-            margin-left: 2px;
-        }
-        .candidate-selected .hint-text {
-            color: rgba(255, 255, 255, 0.8);
-        }
-        .index {
-            font-size: 8pt;
-            color: #868e96;
-            margin-right: 4px;
-        }
-        .candidate-selected .index {
-            color: rgba(255, 255, 255, 0.7);
+            font-weight: 700;
         }
 
-        /* Keystroke Styles */
-        #keystroke-container {
-            padding: 10px;
+        .hint-text {
+            color: #adb5bd;
+            font-size: 10pt;
+            margin-left: 4px;
         }
+
+        .index {
+            font-size: 9pt;
+            color: #6c757d;
+            margin-right: 6px;
+        }
+
+        .candidate-selected .index, .candidate-selected .hint-text {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Keystroke Keycap Style */
         .key-label {
-            background-color: rgba(40, 40, 40, 0.9);
-            color: white;
-            font-family: 'Monospace';
-            font-size: 12pt;
-            font-weight: bold;
-            padding: 6px 12px;
+            background: linear-gradient(to bottom, #444, #222);
+            color: #eee;
+            font-family: 'Inter', 'Sans', sans-serif;
+            font-size: 11pt;
+            font-weight: 700;
+            padding: 5px 12px;
             border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            border: 1px solid #111;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 2px 4px rgba(0,0,0,0.4);
+            margin: 2px;
         }
     ");
 
