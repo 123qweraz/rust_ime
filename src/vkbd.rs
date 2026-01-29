@@ -17,8 +17,6 @@ pub enum PasteMode {
 pub struct Vkbd {
     pub dev: VirtualDevice,
     pub paste_mode: PasteMode,
-    #[allow(dead_code)]
-    pub backspace_char: u8,
 }
 
 impl Vkbd {
@@ -55,7 +53,6 @@ impl Vkbd {
         Ok(Self { 
             dev,
             paste_mode: PasteMode::CtrlV, // Default standard
-            backspace_char: 0x7f, // Default to DEL (^?)
         })
     }
 
@@ -65,18 +62,6 @@ impl Vkbd {
         println!("[Vkbd] Paste mode set to: {:?}", mode);
     }
     
-    #[allow(dead_code)]
-    pub fn toggle_backspace_char(&mut self) -> String {
-        self.backspace_char = if self.backspace_char == 0x7f {
-            0x08 // Switch to BS (^H)
-        } else {
-            0x7f // Switch to DEL (^?)
-        };
-        
-        let label = if self.backspace_char == 0x7f { "DEL (^?)" } else { "BS (^H)" };
-        format!("Backspace键值: {}", label)
-    }
-
     #[allow(dead_code)]
     pub fn cycle_paste_mode(&mut self) -> String {
         self.paste_mode = match self.paste_mode {

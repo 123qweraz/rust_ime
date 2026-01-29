@@ -57,14 +57,13 @@ impl NgramModel {
                     self.static_index = Map::new(MmapData(Arc::new(m_idx))).ok();
                     self.static_unigrams = Map::new(MmapData(Arc::new(m_uni))).ok();
                     self.static_data = Some(MmapData(Arc::new(m_data)));
-                    println!("[NgramModel] Static Mmap model loaded.");
                 }
             }
         }
     }
 
     fn load_token_list(&mut self) {
-        let path = Path::new("dicts/basic_tokens.txt");
+        let path = Path::new("dicts/chinese/basic_tokens.txt");
         if let Ok(file) = File::open(path) {
             let reader = BufReader::new(file);
             for line in reader.lines().map_while(Result::ok) {
@@ -75,10 +74,75 @@ impl NgramModel {
         }
     }
 
+    pub fn tokenize(&self, text: &str) -> Vec<String> {
+        let mut result = Vec::new();
+        let chars: Vec<char> = text.chars().collect();
+        let n = chars.len();
+        let mut i = 0;
+        while i < n {
+            let mut found_token = None;
+            let max_len = self.max_token_len.min(n - i);
+            for len in (1..=max_len).rev() {
+                let sub: String = chars[i..i+len].iter().collect();
+                if self.token_set.contains(&sub) { found_token = Some(sub); break; }
+            }
+            if let Some(token) = found_token {
+                let len = token.chars().count();
+                result.push(token); i += len;
+            } else {
+                let c = chars[i];
+                if (c >= '\u{4e00}' && c <= '\u{9fa5}') || (c >= '\u{3400}' && c <= '\u{4dbf}') || (c >= '\u{20000}' && c <= '\u{2a6df}') { result.push(c.to_string()); }
+                i += 1;
+            }
+        }
+        result
+    }
+
+    pub fn train(&mut self, text: &str) {
+        let sections = text.split(|c: char| {
+            c == '\n' || c == '\r' || c == '。' || c == '，' || c == '！' || c == '？' || c == '；' || c == '：' || c == '“' || c == '”' || c == '（' || c == '）' || c == '、'
+        });
+        for section in sections {
+            let tokens = self.tokenize(section);
+            if tokens.is_empty() { continue; }
+            let mut char_level_tokens = Vec::new();
+            for token in &tokens {
+                *self.user_unigrams.entry(token.clone()).or_default() += 1;
+                let chars: Vec<char> = token.chars().collect();
+                for &c in &chars {
+                    let c_str = c.to_string();
+                    if chars.len() > 1 { *self.user_unigrams.entry(c_str.clone()).or_default() += 1; }
+                    char_level_tokens.push(c_str);
+                }
+            }
+            if tokens.len() >= 2 {
+                for n in 2..=self.max_n {
+                    if tokens.len() < n { continue; }
+                    for window in tokens.windows(n) {
+                        let context = window[..n-1].join("");
+                        let next_token = &window[n-1];
+                        let entry = self.user_transitions.entry(context).or_default();
+                        *entry.entry(next_token.clone()).or_default() += 1;
+                    }
+                }
+            }
+            if char_level_tokens.len() >= 2 {
+                for n in 2..=self.max_n {
+                    if char_level_tokens.len() < n { continue; }
+                    for window in char_level_tokens.windows(n) {
+                        let context = window[..n-1].join("");
+                        let next_token = &window[n-1];
+                        let entry = self.user_transitions.entry(context).or_default();
+                        *entry.entry(next_token.clone()).or_default() += 1;
+                    }
+                }
+            }
+        }
+    }
+
     pub fn update(&mut self, context_chars: &[char], next_token: &str) {
         let token_str = next_token.to_string();
         *self.user_unigrams.entry(token_str.clone()).or_default() += 1;
-
         for len in 1..self.max_n {
             if context_chars.len() < len { break; }
             let start = context_chars.len() - len;
@@ -90,61 +154,40 @@ impl NgramModel {
 
     pub fn get_score(&self, context_chars: &[char], next_token_str: &str) -> u32 {
         let mut total_score = 0u32;
-
-        // 1. 获取 Unigram 基础分
-        if let Some(ref static_uni) = self.static_unigrams {
-            total_score += static_uni.get(next_token_str).unwrap_or(0) as u32;
-        }
+        if let Some(ref static_uni) = self.static_unigrams { total_score += static_uni.get(next_token_str).unwrap_or(0) as u32; }
         total_score += self.user_unigrams.get(next_token_str).cloned().unwrap_or(0);
-
-        // 2. 获取 Context 匹配分
         let target_bytes = next_token_str.as_bytes();
         for len in (1..=context_chars.len().min(self.max_n - 1)).rev() {
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
-
             let mut found_context = false;
-
-            // 静态层查找 - 优化：直接扫描二进制，不分配 HashMap
             if let (Some(ref idx), Some(ref data)) = (&self.static_index, &self.static_data) {
                 if let Some(offset) = idx.get(&context) {
                     let score = self.scan_score_in_block(offset as usize, data.as_ref(), target_bytes);
-                    if score > 0 {
-                        total_score += score * 10 * (len as u32);
-                        found_context = true;
-                    }
+                    if score > 0 { total_score += score * 10 * (len as u32); found_context = true; }
                 }
             }
-
-            // 动态层查找 (用户习惯权重更高)
             if let Some(next_map) = self.user_transitions.get(&context) {
-                if let Some(&score) = next_map.get(next_token_str) {
-                    total_score += score * 100 * (len as u32);
-                    found_context = true;
-                }
+                if let Some(&score) = next_map.get(next_token_str) { total_score += score * 100 * (len as u32); found_context = true; }
             }
-
             if found_context { break; }
         }
         total_score
     }
 
-    /// 核心优化：直接在二进制数据中搜索目标词，避免分配内存
     fn scan_score_in_block(&self, offset: usize, data: &[u8], target_bytes: &[u8]) -> u32 {
         let mut cursor = offset;
         let count = u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());
         cursor += 4;
-        
         for _ in 0..count {
             let len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap()) as usize;
             cursor += 2;
-            
             let word_bytes = &data[cursor..cursor+len];
             if word_bytes == target_bytes {
                 cursor += len;
                 return u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());
             }
-            cursor += len + 4; // 跳过当前分数
+            cursor += len + 4;
         }
         0
     }
@@ -166,7 +209,6 @@ impl NgramModel {
             if let Ok(adapter) = serde_json::from_reader::<_, UserAdapter>(reader) {
                 self.user_transitions = adapter.transitions;
                 self.user_unigrams = adapter.unigrams;
-                println!("[NgramModel] User adapter loaded.");
             }
         }
     }

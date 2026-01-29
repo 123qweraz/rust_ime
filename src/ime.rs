@@ -167,6 +167,22 @@ impl Ime {
         // Force send this message even if notifications are nominally "off" so user knows they turned it off
         let _ = self.notification_tx.send(NotifyEvent::Message(msg));
     }
+
+    pub fn apply_config(&mut self, conf: &crate::config::Config) {
+        self.enable_notifications = conf.appearance.show_notifications;
+        self.show_candidates = conf.appearance.show_candidates;
+        self.show_keystrokes = conf.appearance.show_keystrokes;
+        self.enable_fuzzy = conf.input.enable_fuzzy_pinyin;
+        
+        self.phantom_mode = match conf.appearance.preview_mode.to_lowercase().as_str() {
+            "pinyin" => PhantomMode::Pinyin,
+            "hanzi" => PhantomMode::Hanzi,
+            _ => PhantomMode::None,
+        };
+        
+        println!("[IME] Configuration applied to core.");
+        self.update_gui();
+    }
     
     #[allow(dead_code)]
     pub fn switch_profile(&mut self, profile_name: &str) {

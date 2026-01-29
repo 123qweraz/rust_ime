@@ -38,6 +38,14 @@ pub struct Appearance {
     pub keystroke_font_size: i32,
     #[serde(default = "default_key_timeout")]
     pub keystroke_timeout_ms: u64,
+
+    // 汉字学习模式
+    #[serde(default = "default_learning_mode")]
+    pub learning_mode: bool,
+    #[serde(default = "default_learning_interval")]
+    pub learning_interval_sec: u64,
+    #[serde(default = "default_learning_dict_path")]
+    pub learning_dict_path: String,
 }
 
 impl Default for Appearance {
@@ -58,6 +66,9 @@ impl Default for Appearance {
             keystroke_bg_color: default_key_bg(),
             keystroke_font_size: default_key_font_size(),
             keystroke_timeout_ms: default_key_timeout(),
+            learning_mode: default_learning_mode(),
+            learning_interval_sec: default_learning_interval(),
+            learning_dict_path: default_learning_dict_path(),
         }
     }
 }
@@ -67,6 +78,8 @@ impl Default for Appearance {
 pub struct Input {
     #[serde(default)]
     pub enable_fuzzy_pinyin: bool,
+    #[serde(default = "default_autostart")]
+    pub autostart: bool,
     #[serde(default = "default_active_profile")]
     pub default_profile: String,   // 原 active_profile
     #[serde(default = "default_paste_behavior")]
@@ -77,6 +90,7 @@ impl Default for Input {
     fn default() -> Self {
         Input {
             enable_fuzzy_pinyin: false,
+            autostart: false,
             default_profile: "Chinese".to_string(),
             paste_method: "ctrl_v".to_string(),
         }
@@ -114,16 +128,12 @@ pub struct Hotkeys {
     pub switch_language: Shortcut,
     #[serde(default = "default_ime_toggle_alt")]
     pub switch_language_alt: Shortcut,
-    #[serde(default = "default_convert_pinyin")]
-    pub convert_selection: Shortcut,
     
     // 功能切换
     #[serde(default = "default_phantom_cycle")]
     pub cycle_preview_mode: Shortcut,
     #[serde(default = "default_notification_toggle")]
     pub toggle_notifications: Shortcut,
-    #[serde(default = "default_fuzzy_toggle")]
-    pub toggle_fuzzy_pinyin: Shortcut,
     #[serde(default = "default_profile_next")]
     pub switch_dictionary: Shortcut,
     
@@ -132,8 +142,6 @@ pub struct Hotkeys {
     pub cycle_paste_method: Shortcut,
     #[serde(default = "default_caps_lock_toggle")]
     pub trigger_caps_lock: Shortcut,
-    #[serde(default = "default_backspace_toggle")]
-    pub toggle_backspace_type: Shortcut,
 }
 
 impl Default for Hotkeys {
@@ -141,14 +149,11 @@ impl Default for Hotkeys {
         Hotkeys {
             switch_language: default_ime_toggle(),
             switch_language_alt: default_ime_toggle_alt(),
-            convert_selection: default_convert_pinyin(),
             cycle_preview_mode: default_phantom_cycle(),
             toggle_notifications: default_notification_toggle(),
-            toggle_fuzzy_pinyin: default_fuzzy_toggle(),
             switch_dictionary: default_profile_next(),
             cycle_paste_method: default_paste_cycle(),
             trigger_caps_lock: default_caps_lock_toggle(),
-            toggle_backspace_type: default_backspace_toggle(),
         }
     }
 }
@@ -194,92 +199,177 @@ pub struct Profile {
 }
 
 impl Default for Profile {
+
     fn default() -> Self {
+
         Profile {
+
             name: "Chinese".to_string(),
+
             description: "默认中文输入".to_string(),
+
             dicts: vec![
-                "dicts/basic_words.json".to_string(),
-                "dicts/chars.json".to_string(),
+
+                "dicts/chinese/basic_words.json".to_string(),
+
+                "dicts/chinese/chars.json".to_string(),
+
             ],
+
         }
+
     }
+
 }
+
+
 
 #[derive(Debug, Deserialize, Serialize, Clone)]
+
 pub struct Shortcut {
+
     pub key: String,
+
     pub description: String,
+
 }
+
+
 
 impl Shortcut {
+
     pub fn new(key: &str, desc: &str) -> Self {
+
         Self {
+
             key: key.to_string(),
+
             description: desc.to_string(),
+
         }
+
     }
+
 }
+
+
 
 impl Default for Shortcut {
+
     fn default() -> Self {
+
         Shortcut::new("none", "未设置")
+
     }
+
 }
+
+
 
 // Default Value Generators
+
 fn default_readme() -> String { "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert".to_string() }
+
 fn default_enable_notifications() -> bool { true }
+
 fn default_show_candidates() -> bool { false }
+
 fn default_show_keystrokes() -> bool { false }
+
 fn default_phantom_mode() -> String { "none".to_string() }
 
+
+
 fn default_cand_anchor() -> String { "bottom".to_string() }
+
 fn default_cand_margin_x() -> i32 { 0 }
+
 fn default_cand_margin_y() -> i32 { 120 }
+
 fn default_cand_bg() -> String { "rgba(20, 20, 20, 0.85)".to_string() }
+
 fn default_cand_font_size() -> i32 { 14 }
 
+
+
 fn default_key_anchor() -> String { "bottom_right".to_string() }
+
 fn default_key_margin_x() -> i32 { 40 }
+
 fn default_key_margin_y() -> i32 { 40 }
+
 fn default_key_bg() -> String { "rgba(20, 20, 20, 0.85)".to_string() }
+
 fn default_key_font_size() -> i32 { 11 }
+
 fn default_key_timeout() -> u64 { 1000 }
 
+
+
+fn default_learning_mode() -> bool { false }
+
+
+
+fn default_learning_interval() -> u64 { 10 }
+
+
+
+fn default_learning_dict_path() -> String { "dicts/chinese/chars.json".to_string() }
+
+
+
+fn default_autostart() -> bool { false }
+
+
+
 fn default_active_profile() -> String { "Chinese".to_string() }
+
 fn default_paste_behavior() -> String { "ctrl_v".to_string() }
 
+
+
 fn default_profiles() -> Vec<Profile> {
+
     vec![
+
         Profile::default(),
+
         Profile {
+
             name: "Japanese".to_string(),
+
             description: "日语输入方案".to_string(),
+
             dicts: vec!["dicts/japanese".to_string()],
+
         },
+
     ]
+
 }
-fn default_punctuation_path() -> String { "dicts/punctuation.json".to_string() }
+
+fn default_punctuation_path() -> String { "dicts/chinese/punctuation.json".to_string() }
+
 fn default_char_defs() -> Vec<String> {
+
     vec![
-        "dicts/chars.json".to_string()
+
+        "dicts/chinese/chars.json".to_string()
+
     ]
+
 }
 
 // Shortcuts Defaults
 fn default_ime_toggle() -> Shortcut { Shortcut::new("caps_lock", "核心: 切换中/英文模式") }
 fn default_ime_toggle_alt() -> Shortcut { Shortcut::new("ctrl+space", "核心: 切换中/英文模式 (备选)") }
-fn default_convert_pinyin() -> Shortcut { Shortcut::new("ctrl+r", "核心: 将选中的拼音转换为汉字 (选中拼音后按此键)") }
 
 fn default_phantom_cycle() -> Shortcut { Shortcut::new("ctrl+alt+p", "功能: 切换输入预览模式 (无 -> 拼音 -> 汉字)") }
 fn default_notification_toggle() -> Shortcut { Shortcut::new("ctrl+alt+n", "功能: 开启/关闭桌面候选词通知") }
-fn default_fuzzy_toggle() -> Shortcut { Shortcut::new("ctrl+alt+f", "功能: 开启/关闭模糊拼音 (z=zh, c=ch...)") }
 fn default_profile_next() -> Shortcut { Shortcut::new("ctrl+alt+s", "功能: 切换词库 (如 中文 -> 日语)") }
 
 fn default_paste_cycle() -> Shortcut { Shortcut::new("ctrl+alt+v", "高级: 循环切换自动粘贴的方式 (如在终端无法上屏时使用)") }
 fn default_caps_lock_toggle() -> Shortcut { Shortcut::new("caps_lock+tab", "高级: 发送真实的 CapsLock 键 (因 CapsLock 被占用于切换输入法)") }
-fn default_backspace_toggle() -> Shortcut { Shortcut::new("ctrl+alt+b", "高级: 切换退格键编码 (Delete / Backspace)") }
 
 // Helper for parse (unchanged)
 #[allow(dead_code)]

@@ -1,11 +1,27 @@
 {
   "_help_readme": "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert",
   "appearance": {
-    "show_notifications": true,
-    "preview_mode": "none"
+    "show_notifications": false,
+    "preview_mode": "none",
+    "show_candidates": false,
+    "show_keystrokes": true,
+    "candidate_anchor": "bottom",
+    "candidate_margin_x": 100,
+    "candidate_margin_y": 120,
+    "candidate_bg_color": "rgba(20, 20, 20, 0.85)",
+    "candidate_font_size": 14,
+    "keystroke_anchor": "bottom_right",
+    "keystroke_margin_x": 40,
+    "keystroke_margin_y": 40,
+    "keystroke_bg_color": "rgba(20, 20, 20, 0.85)",
+    "keystroke_font_size": 11,
+    "keystroke_timeout_ms": 1000,
+    "learning_mode": true,
+    "learning_interval_sec": 10
   },
   "input": {
     "enable_fuzzy_pinyin": false,
+    "autostart": false,
     "default_profile": "Chinese",
     "paste_method": "ctrl_v"
   },
@@ -18,10 +34,6 @@
       "key": "ctrl+space",
       "description": "核心: 切换中/英文模式 (备选)"
     },
-    "convert_selection": {
-      "key": "ctrl+r",
-      "description": "核心: 将选中的拼音转换为汉字 (选中拼音后按此键)"
-    },
     "cycle_preview_mode": {
       "key": "ctrl+alt+p",
       "description": "功能: 切换输入预览模式 (无 -> 拼音 -> 汉字)"
@@ -29,10 +41,6 @@
     "toggle_notifications": {
       "key": "ctrl+alt+n",
       "description": "功能: 开启/关闭桌面候选词通知"
-    },
-    "toggle_fuzzy_pinyin": {
-      "key": "ctrl+alt+f",
-      "description": "功能: 开启/关闭模糊拼音 (z=zh, c=ch...)"
     },
     "switch_dictionary": {
       "key": "ctrl+alt+s",
@@ -71,7 +79,6 @@
       }
     ],
     "punctuation_file": "dicts/punctuation.json",
-    "char_defs": [
-    ]
+    "char_defs": []
   }
 }

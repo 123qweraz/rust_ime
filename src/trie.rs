@@ -48,6 +48,26 @@ impl Trie {
         results
     }
 
+    pub fn get_random_entry(&self) -> Option<(String, String)> {
+        let len = self.index.len();
+        if len == 0 { return None; }
+        
+        use rand::Rng;
+        let mut rng = rand::thread_rng();
+        let target_idx = rng.gen_range(0..len);
+        
+        let mut stream = self.index.stream();
+        let mut current = 0;
+        while let Some((_, offset)) = stream.next() {
+            if current == target_idx {
+                let pairs = self.read_block(offset as usize);
+                return pairs.first().cloned();
+            }
+            current += 1;
+        }
+        None
+    }
+
     fn read_block(&self, offset: usize) -> Vec<(String, String)> {
         let data = self.data.as_ref();
         let mut cursor = offset;

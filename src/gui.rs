@@ -15,6 +15,7 @@ pub enum GuiEvent {
         selected: usize,
     },
     Keystroke(String),
+    ShowLearning(String, String), // 汉字, 提示
     ClearKeystrokes,
     ApplyConfig(Config),
     #[allow(dead_code)]
@@ -75,42 +76,83 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
     let apply_style = move |conf: &Config, css: &CssProvider, w: &Window, kw: &Window| {
         let app = &conf.appearance;
         
-        // 动态生成 CSS
+        // 动态生成对齐苹果审美的 CSS
         let css_data = format!(r#"
             window.ime-window, window.keystroke-window {{ background-color: transparent; }}
+            
             #main-container {{
                 background-color: {cand_bg};
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                border-radius: 10px;
-                padding: 6px 12px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 14px;
+                padding: 8px 14px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
             }}
+
             #keystroke-container {{
                 background-color: {key_bg};
-                border: 1px solid rgba(255, 255, 255, 0.12);
-                border-radius: 10px;
-                padding: 6px 12px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 14px;
+                padding: 8px 14px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
             }}
+
             #pinyin-label {{
-                color: #339af0;
+                color: #0071e3;
                 font-size: {cand_font}pt;
-                font-weight: 600;
-                margin-right: 4px;
-                padding-right: 10px;
+                font-weight: 700;
+                margin-right: 6px;
+                padding-right: 12px;
                 border-right: 1px solid rgba(255, 255, 255, 0.1);
             }}
-            .candidate-text {{ color: #f8f9fa; font-size: {cand_font}pt; font-weight: 500; }}
+
+            .candidate-item {{
+                padding: 4px 10px;
+                border-radius: 8px;
+                margin: 0 2px;
+                transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+            }}
+
+            .candidate-selected {{
+                background-color: #0071e3;
+                box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+            }}
+
+            .candidate-text {{ 
+                color: #ffffff; 
+                font-size: {cand_font}pt; 
+                font-weight: 500; 
+                letter-spacing: 0.2px;
+            }}
+
+            .index {{
+                font-size: 10pt;
+                font-weight: 600;
+                color: rgba(255, 255, 255, 0.45);
+                margin-right: 8px;
+            }}
+
+            .hint-text {{
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 10pt;
+                margin-left: 6px;
+            }}
+
+            .candidate-selected .index, .candidate-selected .hint-text {{
+                color: rgba(255, 255, 255, 0.8);
+            }}
+
+            /* 按键回显风格：物理质感键帽 */
             .key-label {{
-                background: linear-gradient(to bottom, #444, #222);
-                color: #eee;
-                font-family: 'Sans', sans-serif;
+                background: linear-gradient(to bottom, #4a4a4a, #2c2c2c);
+                color: #f5f5f7;
+                font-family: 'SF Pro Text', 'Sans', sans-serif;
                 font-size: {key_font}pt;
-                font-weight: 700;
-                padding: 5px 12px;
-                border-radius: 6px;
-                border: 1px solid #111;
-                margin: 2px;
+                font-weight: 600;
+                padding: 6px 14px;
+                border-radius: 8px;
+                border: 1px solid #1a1a1a;
+                box-shadow: inset 0 1px 0 rgba(255,255,255,0.05), 0 4px 8px rgba(0,0,0,0.3);
+                margin: 3px;
             }}
         "#, 
         cand_bg = app.candidate_bg_color,
@@ -209,17 +251,35 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                 label.add_css_class("key-label");
                 key_box_c.append(&label);
                 key_window_c.set_opacity(1.0);
+                
                 let kb_weak = key_box_c.downgrade();
-                let l_weak = label.downgrade();
+                let label_weak = label.downgrade();
                 let kw_weak = key_window_c.downgrade();
                 let timeout = current_config.appearance.keystroke_timeout_ms;
+                
                 glib::timeout_add_local(std::time::Duration::from_millis(timeout), move || {
-                    if let (Some(kb), Some(l)) = (kb_weak.upgrade(), l_weak.upgrade()) {
-                        kb.remove(&l);
-                        if kb.first_child().is_none() { if let Some(kw) = kw_weak.upgrade() { kw.set_opacity(0.0); } }
+                    let kb: Box = if let Some(kb) = kb_weak.upgrade() { kb } else { return glib::Continue(false); };
+                    let l = if let Some(l) = label_weak.upgrade() { l } else { return glib::Continue(false); };
+                    
+                    kb.remove(&l);
+                    if kb.first_child().is_none() {
+                        if let Some(kw) = kw_weak.upgrade() { kw.set_opacity(0.0); }
                     }
                     glib::Continue(false)
                 });
+            },
+            GuiEvent::ShowLearning(hanzi, hint) => {
+                // 清空旧内容
+                while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
+                
+                let text = if hint.is_empty() { hanzi } else { format!("{} {}", hanzi, hint) };
+                let label = Label::new(Some(&text));
+                label.add_css_class("key-label");
+                label.set_margin_start(4);
+                label.set_margin_end(4);
+                
+                key_box_c.append(&label);
+                key_window_c.set_opacity(1.0);
             },
             GuiEvent::ClearKeystrokes => {
                 while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
