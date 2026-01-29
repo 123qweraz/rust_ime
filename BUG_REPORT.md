@@ -1,143 +1,19 @@
-# Rust IME Bug Report & Fix Guide
+# Bug 修复记录
 
-## 🐛 Main Bug Identified
+## 1. COSMIC/Wayland 环境下按键导致程序崩溃 (Broken pipe)
 
-**Issue**: `uinput` kernel module not loaded
-**Impact**: Virtual keyboard functionality fails, preventing text input
-**Severity**: Critical - prevents core IME functionality
+**问题描述：**
+在 COSMIC 桌面环境下，开启 `gtk4-layer-shell` 后，每当按下按键（触发 UI 显示或隐藏）时，程序会立即崩溃并报错 `Broken pipe`。
 
-## 🔍 Bug Analysis
+**原因分析：**
+1. **角色切换压力**：原代码频繁使用 `set_visible(true/false)`，这在 Wayland 协议中会导致 Surface 的频繁创建与销毁（角色重置）。
+2. **合成器兼容性**：COSMIC 合成器对 `layer-shell` 窗口的频繁状态切换处理不够稳健，当 Socket 连接因为协议交互异常断开时，GTK 接收到致命错误并强制退出。
+3. **信号传递**：GTK 的崩溃会触发 `SIGPIPE` 信号，默认情况下会杀死整个进程。
 
-### Root Cause
-The Rust IME relies on the Linux `uinput` kernel module to create virtual input devices. When this module is not loaded, the application cannot:
-- Create virtual keyboard devices
-- Emit keystrokes to applications
-- Function as an input method
+**解决方案：**
+1. **始终映射策略**：将 `set_visible(false)` 替换为 `window.set_opacity(0.0)`。窗口在启动时建立一次 Wayland 连接（`present()`）后保持存活，仅通过透明度控制视觉隐藏。
+2. **信号屏蔽**：在 `main.rs` 中忽略 `SIGPIPE` 信号，确保即使 GUI 线程发生协议级错误，IME 核心逻辑仍然能够存活。
+3. **架构重构**：将 IME 核心逻辑放在主线程，GUI 作为子线程插件运行，实现生命周期解耦。
 
-### Detection Method
-```bash
-lsmod | grep uinput  # Returns empty when module not loaded
-```
-
-## 🛠 Immediate Fix
-
-### 1. Load uinput Module (Temporary)
-```bash
-sudo modprobe uinput
-```
-
-### 2. Permanent Fix
-```bash
-echo 'uinput' | sudo tee /etc/modules-load.d/uinput.conf
-```
-
-### 3. Restart IME
-```bash
-rust-ime --stop
-rust-ime --foreground  # Test in foreground first
-```
-
-## 📋 Complete Diagnostic Script
-
-Run the provided diagnostic script:
-```bash
-./fix_ime_bug.sh
-```
-
-This script checks:
-- ✅ User permissions (input group membership)
-- ✅ uinput device availability
-- ✅ uinput kernel module status
-- ✅ Wayland/X11 environment compatibility
-- ✅ ydotool fallback availability
-- ✅ Configuration file presence
-
-## 🔧 Additional Potential Issues & Fixes
-
-### Issue 1: Missing User Permissions
-**Symptom**: Permission denied accessing input devices
-**Fix**:
-```bash
-sudo usermod -aG input,uinput $USER
-# Then logout and login again
-```
-
-### Issue 2: Wayland Clipboard Issues
-**Symptom**: Text not appearing in applications
-**Fix**:
-```bash
-# Install ydotool for Wayland compatibility
-sudo apt install ydotool
-
-# Enable ydotoold service
-systemctl --user enable --now ydotoold
-```
-
-### Issue 3: Keyboard Device Not Found
-**Symptom**: "No keyboard found" error
-**Fix**: Check available devices and set in config.json
-```bash
-ls -la /dev/input/by-id/
-# Add device path to config.json:
-# "device_path": "/dev/input/by-id/usb-Your_Keyboard-event-kbd"
-```
-
-## 🧪 Verification Steps
-
-1. **Check uinput module**:
-   ```bash
-   lsmod | grep uinput  # Should show "uinput"
-   ```
-
-2. **Test IME functionality**:
-   ```bash
-   rust-ime --foreground
-   # Try typing in any application
-   ```
-
-3. **Check logs for errors**:
-   ```bash
-   tail -f /tmp/rust-ime.log
-   ```
-
-## 📊 Code Quality Assessment
-
-### ✅ Strengths
-- Well-structured Rust code with proper error handling
-- Comprehensive fallback mechanisms (clipboard → ydotool)
-- Thread-safe architecture using Arc/RwLock
-- Good separation of concerns
-
-### ⚠️ Areas for Improvement
-- Could add uinput module pre-flight check
-- Better error messages for permission issues
-- Automatic module loading suggestion
-
-## 🚀 Prevention
-
-To prevent this issue in future installations:
-
-1. **Add dependency check** in main.rs:
-   ```rust
-   // Add this check before device initialization
-   if !Path::new("/dev/uinput").exists() {
-       eprintln!("Error: uinput module not loaded. Please run: sudo modprobe uinput");
-       return Err("uinput not available".into());
-   }
-   ```
-
-2. **Document requirements** clearly in README
-3. **Include diagnostic script** in installation
-
-## 📞 Support
-
-If issues persist after applying these fixes:
-1. Check `/tmp/rust-ime.log` for specific error messages
-2. Verify all system requirements are met
-3. Test with `--foreground` mode for better debugging
-
----
-
-**Status**: ✅ Bug identified and fix provided
-**Priority**: 🔴 Critical - affects core functionality
-**Effort**: 🟢 Low - simple module load fix
+**遗留问题：**
+在某些环境下，`set_opacity(0.0)` 虽然不可见，但窗口依然占据层级，可能存在残影或无法点击底层的问题。后续需进一步测试各发行版兼容性。
