@@ -28,6 +28,11 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .resizable(false)
         .build();
     
+    // Use the generic property system for better compatibility in GTK4
+    window.set_property("accept-focus", false);
+    window.set_property("focus-on-map", false);
+    window.set_property("deletable", false);
+    
     // Add a specific class to the window to target it in CSS
     window.add_css_class("ime-window");
     
@@ -44,8 +49,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     main_box.append(&candidates_box);
 
     let css_provider = CssProvider::new();
-    // THE KEY: remove window shadow and margin to make it truly small.
-    // Also hide any possible header bars or title bars injected by the theme.
     css_provider.load_from_data("
         window.ime-window {
             background-color: transparent;
@@ -56,7 +59,9 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         }
         window.ime-window decoration,
         window.ime-window headerbar,
-        window.ime-window titlebar {
+        window.ime-window titlebar,
+        window.ime-window windowhandle,
+        window.ime-window button.titlebutton {
             display: none;
             opacity: 0;
             margin: 0;
@@ -188,7 +193,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         }
 
         window_clone.set_visible(true);
-        window_clone.present();
         
         glib::Continue(true)
     });
