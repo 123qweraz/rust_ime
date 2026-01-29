@@ -25,10 +25,11 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .decorated(false)
         .can_focus(false)
         .focusable(false)
+        .resizable(false)
         .build();
     
-    // Set window as non-focusable and utility-like
-    // Note: GTK4 position management is different, but we try our best to keep it floating
+    // Add a specific class to the window to target it in CSS
+    window.add_css_class("ime-window");
     
     let main_box = Box::new(Orientation::Horizontal, 8);
     main_box.set_widget_name("main-container");
@@ -43,19 +44,26 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     main_box.append(&candidates_box);
 
     let css_provider = CssProvider::new();
-    // Compact style, semi-transparent background, smaller fonts
+    // THE KEY: remove window shadow and margin to make it truly small.
     css_provider.load_from_data("
-        * {
-            font-family: 'Inter', 'Segoe UI', 'Noto Sans CJK SC', 'PingFang SC', sans-serif;
-        }
-        window {
+        window.ime-window {
             background-color: transparent;
+            margin: 0;
+            padding: 0;
+            box-shadow: none;
+            border: none;
+        }
+        /* In GTK4, the actual window surface can have a shadow added by the compositor/theme */
+        window.ime-window decoration {
+            box-shadow: none;
+            margin: 0;
         }
         #main-container {
-            background-color: rgba(35, 35, 35, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 8px;
+            background-color: rgba(30, 30, 30, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
             padding: 4px 10px;
+            margin: 0;
         }
         #pinyin-label {
             color: #4dabf7;
