@@ -375,47 +375,9 @@ impl Ime {
         self.phantom_text.clear();
         self.is_highlighted = false;
         
-        // Generate Predictions
-        if !self.context.is_empty() {
-            // Fetch predictions from both
-            let mut p1 = self.base_ngram.predict(&self.context, 30);
-            let p2 = self.user_ngram.predict(&self.context, 30);
-            
-            for cand in p2 {
-                if !p1.contains(&cand) {
-                    p1.insert(0, cand); // User predictions at the very front
-                }
-            }
-            self.candidates = p1; 
-        } else {
-            self.candidates.clear();
-        }
-        
-        self.selected = 0;
-        self.page = 0;
-        self.update_state();
-
-        if !self.candidates.is_empty() {
-             // We have predictions.
-             // If in Phantom mode, we ideally want to show the first prediction as ghost text.
-             if self.phantom_mode == PhantomMode::Hanzi {
-                 // Force update phantom text based on new candidate[0]
-                 if let Some(first) = self.candidates.first() {
-                     self.phantom_text = format!("[{}]", first);
-                     self.is_highlighted = true;
-                     // Note: We cannot emit this phantom text in the SAME action as the commit easily
-                     // without complicating the protocol. 
-                     // For now, we accept that phantom text might not appear until next input
-                     // OR we rely on the side-channel notifications/CLI print.
-                 }
-             }
-             
-             self.print_preview();
-             self.notify_preview();
-        } else {
-             // No predictions, full reset
-             self.reset();
-        }
+        // Disable next-word prediction as per user request.
+        // After commit, we simply reset the state to be ready for new input.
+        self.reset();
 
         action
     }
