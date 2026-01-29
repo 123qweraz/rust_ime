@@ -54,13 +54,9 @@ impl NgramModel {
         if Path::new(idx_path).exists() && Path::new(data_path).exists() {
             if let (Ok(f_idx), Ok(f_data), Ok(f_uni)) = (File::open(idx_path), File::open(data_path), File::open(uni_path)) {
                 if let (Ok(m_idx), Ok(m_data), Ok(m_uni)) = (unsafe { Mmap::map(&f_idx) }, unsafe { Mmap::map(&f_data) }, unsafe { Mmap::map(&f_uni) }) {
-                    let d_idx = MmapData(Arc::new(m_idx));
-                    let d_data = MmapData(Arc::new(m_data));
-                    let d_uni = MmapData(Arc::new(m_uni));
-                    
-                    self.static_index = Map::new(d_idx).ok();
-                    self.static_unigrams = Map::new(d_uni).ok();
-                    self.static_data = Some(d_data);
+                    self.static_index = Map::new(MmapData(Arc::new(m_idx))).ok();
+                    self.static_unigrams = Map::new(MmapData(Arc::new(m_uni))).ok();
+                    self.static_data = Some(MmapData(Arc::new(m_data)));
                     println!("[NgramModel] Static Mmap model loaded.");
                 }
             }
@@ -102,18 +98,19 @@ impl NgramModel {
         total_score += self.user_unigrams.get(next_token_str).cloned().unwrap_or(0);
 
         // 2. 获取 Context 匹配分
+        let target_bytes = next_token_str.as_bytes();
         for len in (1..=context_chars.len().min(self.max_n - 1)).rev() {
             let start = context_chars.len() - len;
             let context: String = context_chars[start..].iter().collect();
 
             let mut found_context = false;
 
-            // 静态层查找
+            // 静态层查找 - 优化：直接扫描二进制，不分配 HashMap
             if let (Some(ref idx), Some(ref data)) = (&self.static_index, &self.static_data) {
                 if let Some(offset) = idx.get(&context) {
-                    let tokens = self.read_static_block(offset as usize, data.as_ref());
-                    if let Some(s) = tokens.get(next_token_str) {
-                        total_score += s * 10 * (len as u32);
+                    let score = self.scan_score_in_block(offset as usize, data.as_ref(), target_bytes);
+                    if score > 0 {
+                        total_score += score * 10 * (len as u32);
                         found_context = true;
                     }
                 }
@@ -122,7 +119,7 @@ impl NgramModel {
             // 动态层查找 (用户习惯权重更高)
             if let Some(next_map) = self.user_transitions.get(&context) {
                 if let Some(&score) = next_map.get(next_token_str) {
-                    total_score += score * 100 * (len as u32); // 用户习惯给 100 倍加权
+                    total_score += score * 100 * (len as u32);
                     found_context = true;
                 }
             }
@@ -132,29 +129,29 @@ impl NgramModel {
         total_score
     }
 
-    fn read_static_block(&self, offset: usize, data: &[u8]) -> HashMap<String, u32> {
+    /// 核心优化：直接在二进制数据中搜索目标词，避免分配内存
+    fn scan_score_in_block(&self, offset: usize, data: &[u8], target_bytes: &[u8]) -> u32 {
         let mut cursor = offset;
         let count = u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());
         cursor += 4;
         
-        let mut map = HashMap::with_capacity(count as usize);
         for _ in 0..count {
             let len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap()) as usize;
             cursor += 2;
-            let word = String::from_utf8_lossy(&data[cursor..cursor+len]).to_string();
-            cursor += len;
-            let score = u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());
-            cursor += 4;
-            map.insert(word, score);
+            
+            let word_bytes = &data[cursor..cursor+len];
+            if word_bytes == target_bytes {
+                cursor += len;
+                return u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());
+            }
+            cursor += len + 4; // 跳过当前分数
         }
-        map
+        0
     }
 
-    // 仅保存用户模型
     pub fn save<P: AsRef<Path>>(&self, path: P) -> io::Result<()> {
         let file = File::create(path)?;
         let writer = io::BufWriter::new(file);
-        // 我们只保存动态学习到的数据
         let user_data = UserAdapter {
             transitions: self.user_transitions.clone(),
             unigrams: self.user_unigrams.clone(),

@@ -164,7 +164,7 @@ async fn convert_handler(
         for len in (1..=(chars.len() - i).min(15)).rev() {
             let sub: String = chars[i..i+len].iter().collect();
             let sub_lower = sub.to_lowercase();
-            if let Some(word_match) = dict.get_all_exact(&sub_lower).and_then(|v| v.first().cloned()) {
+            if let Some((word_match, _hint)) = dict.get_all_exact(&sub_lower).and_then(|v| v.first().cloned()) {
                 result.push_str(&word_match);
                 i += len;
                 found = true;

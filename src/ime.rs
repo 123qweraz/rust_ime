@@ -52,18 +52,18 @@ pub struct Ime {
     
     pub punctuation: HashMap<String, String>,
     pub candidates: Vec<String>,
+    pub candidate_hints: Vec<String>, // 新增：存储候选词对应的英文提示
     pub selected: usize,
     pub page: usize,
     pub chinese_enabled: bool,
     pub notification_tx: Sender<NotifyEvent>,
-    pub gui_tx: Option<Sender<crate::gui::GuiEvent>>, // 改回 Sender
+    pub gui_tx: Option<Sender<crate::gui::GuiEvent>>,
     pub phantom_mode: PhantomMode,
     pub enable_notifications: bool,
     pub show_candidates: bool,
     pub show_keystrokes: bool,
     pub phantom_text: String,
     pub is_highlighted: bool,
-    pub word_en_map: HashMap<String, Vec<String>>,
     pub enable_fuzzy: bool,
 }
 
@@ -72,9 +72,9 @@ impl Ime {
         tries: HashMap<String, Trie>, 
         initial_profile: String, 
         punctuation: HashMap<String, String>, 
-        word_en_map: HashMap<String, Vec<String>>, 
+        _word_en_map: HashMap<String, Vec<String>>, 
         notification_tx: Sender<NotifyEvent>, 
-        gui_tx: Option<Sender<crate::gui::GuiEvent>>, // 更新
+        gui_tx: Option<Sender<crate::gui::GuiEvent>>,
         enable_fuzzy: bool, 
         phantom_mode_str: &str, 
         enable_notifications: bool, 
@@ -101,18 +101,18 @@ impl Ime {
             context: Vec::new(),
             punctuation,
             candidates: vec![],
+            candidate_hints: vec![],
             selected: 0,
             page: 0,
             chinese_enabled: false,
             notification_tx,
-            gui_tx, // 初始化
+            gui_tx,
             phantom_mode,
             enable_notifications,
             show_candidates,
             show_keystrokes,
             phantom_text: String::new(),
             is_highlighted: false,
-            word_en_map,
             enable_fuzzy,
         }
     }
@@ -224,7 +224,7 @@ impl Ime {
             for len in (1..=(chars.len() - i).min(15)).rev() {
                 let sub: String = chars[i..i+len].iter().collect();
                 let sub_lower = sub.to_lowercase();
-                if let Some(word) = dict.get_all_exact(&sub_lower).and_then(|v| v.first().cloned()) {
+                if let Some((word, _hint)) = dict.get_all_exact(&sub_lower).and_then(|v| v.first().cloned()) {
                     result.push_str(&word);
                     i += len;
                     found = true;
@@ -256,19 +256,10 @@ impl Ime {
 
     pub fn update_gui(&self) {
         if let Some(ref tx) = self.gui_tx {
-            let mut hints = Vec::new();
-            let (pinyin, candidates) = if self.show_candidates {
-                for cand in &self.candidates {
-                    let hint = if let Some(en_list) = self.word_en_map.get(cand) {
-                        en_list.first().cloned().unwrap_or_default()
-                    } else {
-                        String::new()
-                    };
-                    hints.push(hint);
-                }
-                (self.buffer.clone(), self.candidates.clone())
+            let (pinyin, candidates, hints) = if self.show_candidates {
+                (self.buffer.clone(), self.candidates.clone(), self.candidate_hints.clone())
             } else {
-                (String::new(), Vec::new())
+                (String::new(), Vec::new(), Vec::new())
             };
 
             let _ = tx.send(crate::gui::GuiEvent::Update {
@@ -429,11 +420,13 @@ impl Ime {
         let mut seen = HashSet::new();
 
         // 1. Full Pinyin Match (Highest Priority)
-        // If the entire buffer matches a word in the dictionary, put it first.
+        let mut word_to_hint: HashMap<String, String> = HashMap::new();
+
         if let Some(exact_matches) = dict.get_all_exact(&pinyin_stripped) {
-            for cand in exact_matches {
+            for (cand, hint) in exact_matches {
                 if seen.insert(cand.clone()) {
-                    final_candidates.push(cand);
+                    final_candidates.push(cand.clone());
+                    word_to_hint.insert(cand, hint);
                 }
             }
         }
@@ -441,61 +434,48 @@ impl Ime {
         // 2. Multi-syllable Dynamic Combination
         let mut combination_scores: HashMap<String, u32> = HashMap::new();
         if segments.len() > 1 {
-            // Greedy combination: try to combine as many segments as possible
-            // For efficiency, we'll focus on the first 3 segments (matching our 3-gram)
             let max_segments = segments.len().min(3);
             let mut current_combinations: Vec<(String, u32)> = Vec::new();
 
-            // Initialize with the first segment's candidates
             let first_segment = &segments[0];
             let first_chars = if first_segment.len() == 1 {
-                // Jianpin: Prefix search for single letter
                 dict.search_bfs(first_segment, 100)
             } else {
-                // Full pinyin match
                 dict.get_all_exact(first_segment).unwrap_or_default()
             };
 
-            for c in first_chars {
-                current_combinations.push((c, 0));
+            for (c, h) in first_chars {
+                current_combinations.push((c.clone(), 0));
+                word_to_hint.entry(c).or_insert(h);
             }
 
-            // Iteratively add segments and score them
             for i in 1..max_segments {
                 let next_segment = &segments[i];
                 let next_chars = if next_segment.len() == 1 {
-                    // Jianpin: Prefix search for single letter
                     dict.search_bfs(next_segment, 100)
                 } else {
-                    // Full pinyin match
                     dict.get_all_exact(next_segment).unwrap_or_default()
                 };
                 let mut next_combinations = Vec::new();
 
                 for (prev_word, prev_score) in current_combinations {
-                    for next_char_str in &next_chars {
-                        let _next_char = next_char_str.chars().next().unwrap_or(' ');
+                    for (next_char_str, next_hint) in &next_chars {
+                        word_to_hint.entry(next_char_str.clone()).or_insert(next_hint.clone());
                         let context: Vec<char> = prev_word.chars().collect();
-                        
-                        // New score = previous path score + current transition score
                         let base_score = self.base_ngram.get_score(&context, next_char_str);
                         let user_score = self.user_ngram.get_score(&context, next_char_str);
                         let transition_score = base_score + (user_score * 10);
                         let new_score = prev_score + transition_score;
-                        
                         let mut new_word = prev_word.clone();
                         new_word.push_str(next_char_str);
                         next_combinations.push((new_word, new_score));
                     }
                 }
-                
-                // Keep only top candidates to avoid exponential explosion
                 next_combinations.sort_by(|a, b| b.1.cmp(&a.1));
                 next_combinations.truncate(50);
                 current_combinations = next_combinations;
             }
             
-            // Add the best full combinations to final candidates
             for (word, score) in current_combinations {
                 if seen.insert(word.clone()) {
                     final_candidates.push(word.clone());
@@ -504,125 +484,90 @@ impl Ime {
             }
         }
 
-        // --- Single-syllable / Primary Search Logic ---
-        // We still search for the prefix matches
         let mut raw_candidates = if self.enable_fuzzy {
             let variants = self.expand_fuzzy_pinyin(&pinyin_stripped);
             let mut merged = Vec::new();
             let mut merged_seen = HashSet::new();
             for variant in variants {
                 let res = dict.search_bfs(&variant, 100); 
-                for c in res {
-                    if merged_seen.insert(c.clone()) {
-                        merged.push(c);
-                    }
+                for (c, h) in res {
+                    word_to_hint.entry(c.clone()).or_insert(h);
+                    if merged_seen.insert(c.clone()) { merged.push(c); }
                 }
             }
             merged
         } else {
-            // CRITICAL FIX: Always include full-pinyin prefix matches
-            // and optionally prioritized first-segment matches.
-            let mut res = dict.search_bfs(&pinyin_stripped, 100);
+            let mut res_list = Vec::new();
+            let res = dict.search_bfs(&pinyin_stripped, 100);
+            for (c, h) in res { 
+                word_to_hint.entry(c.clone()).or_insert(h);
+                res_list.push(c); 
+            }
             if segments.len() > 1 {
                 let first_seg_res = dict.search_bfs(&segments[0], 100);
-                let mut res_seen: HashSet<String> = res.iter().cloned().collect();
-                for c in first_seg_res {
-                    if res_seen.insert(c.clone()) {
-                        res.push(c);
-                    }
+                let mut res_seen: HashSet<String> = res_list.iter().cloned().collect();
+                for (c, h) in first_seg_res {
+                    word_to_hint.entry(c.clone()).or_insert(h);
+                    if res_seen.insert(c.clone()) { res_list.push(c); }
                 }
             }
-            res
+            res_list
         };
 
-        // Apply auxiliary filter if active (uppercase letters) to ALL candidates
         if !filter_string.is_empty() {
             let filter = |cand: &String| {
-                if let Some(en_list) = self.word_en_map.get(cand) {
-                    en_list.iter().any(|en| {
-                        en.split(|c: char| !c.is_alphanumeric())
-                          .any(|word| word.to_lowercase().starts_with(&filter_string))
-                    })
+                if let Some(hint) = word_to_hint.get(cand) {
+                    hint.to_lowercase().starts_with(&filter_string)
                 } else {
-                    // For phrases/combinations, we check if the FIRST character matches the filter
-                    // This allows "nihaoM" to work by checking "ni" (you)
                     if let Some(first_char) = cand.chars().next() {
-                        if let Some(en_list) = self.word_en_map.get(&first_char.to_string()) {
-                            return en_list.iter().any(|en| {
-                                en.split(|c: char| !c.is_alphanumeric())
-                                  .any(|word| word.to_lowercase().starts_with(&filter_string))
-                            });
+                        if let Some(h) = word_to_hint.get(&first_char.to_string()) {
+                            return h.to_lowercase().starts_with(&filter_string);
                         }
                     }
                     false 
                 }
             };
-            
             final_candidates.retain(filter);
             raw_candidates.retain(filter);
         }
 
-        // --- GLOBAL RANKING ---
-        // Combine all candidates and rank them using the N-gram/Unigram models
         let mut all_candidates = final_candidates;
-        let full_pinyin_exact = dict.get_all_exact(&pinyin_stripped).unwrap_or_default();
+        let full_pinyin_exact: Vec<String> = dict.get_all_exact(&pinyin_stripped).unwrap_or_default().into_iter().map(|(c,_)| c).collect();
 
         for cand in raw_candidates {
-            if !all_candidates.contains(&cand) {
-                all_candidates.push(cand);
-            }
+            if !all_candidates.contains(&cand) { all_candidates.push(cand); }
         }
 
         let mut scored_candidates: Vec<(String, u32)> = all_candidates.into_iter()
             .map(|cand| {
-                // Initial score from combination logic if available
                 let init_score = *combination_scores.get(&cand).unwrap_or(&0);
-
-                // Score includes Unigram (base frequency) + N-gram (context boost)
                 let base_score = self.base_ngram.get_score(&self.context, &cand);
                 let user_score = self.user_ngram.get_score(&self.context, &cand);
-                
-                // MASSIVE BOOST for user habits (Adapter) - this ensures it "remembers"
-                // 500x ensures even a few usages beat common base words
                 let mut total_score = init_score + base_score + (user_score * 500);
-                
-                // 1. Full-pinyin exact match bonus (Moderate boost, not invincible)
-                if full_pinyin_exact.contains(&cand) {
-                    total_score += 50000;
-                }
-
-                // 2. PHRASE LENGTH ADVANTAGE: 2-3 char phrases are almost always better than single chars
+                if full_pinyin_exact.contains(&cand) { total_score += 50000; }
                 let char_count = cand.chars().count();
-                if char_count >= 2 {
-                    total_score += 20000;
-                }
-                
-                // 3. JIANPIN PENALTY: Prevent single-char noise for long inputs
-                if char_count == 1 && pinyin_stripped.len() > 2 {
-                    total_score = total_score.saturating_sub(15000);
-                }
-                
+                if char_count >= 2 { total_score += 20000; }
+                if char_count == 1 && pinyin_stripped.len() > 2 { total_score = total_score.saturating_sub(15000); }
                 (cand, total_score)
             })
             .collect();
 
-        // Sort by score descending
         scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
-
-        self.candidates = scored_candidates.into_iter().map(|(s, _)| s).collect();
+        self.candidates = scored_candidates.iter().map(|(s, _)| s.clone()).collect();
+        self.candidate_hints = scored_candidates.into_iter()
+            .map(|(s, _)| word_to_hint.get(&s).cloned().unwrap_or_default())
+            .collect();
         
-        // If no Chinese candidates found, show raw buffer
         if self.candidates.is_empty() {
             self.candidates.push(self.buffer.clone());
+            self.candidate_hints.push(String::new());
         }
 
         self.selected = 0;
         self.page = 0;
         self.update_state();
         
-        if self.enable_notifications {
-            self.notify_preview();
-        }
+        if self.enable_notifications { self.notify_preview(); }
         self.print_preview();
     }
 
@@ -734,15 +679,16 @@ impl Ime {
                 
                 for (i, cand) in current_page_candidates.iter().enumerate() {
                     let num = i + 1;
+                    let abs_idx = start + i;
                     
                     let mut hint = String::new();
-                    if let Some(en_list) = self.word_en_map.get(cand) {
-                        if let Some(first_en) = en_list.first() {
-                            hint = format!("({})", first_en);
+                    if let Some(h) = self.candidate_hints.get(abs_idx) {
+                        if !h.is_empty() {
+                            hint = format!("({})", h);
                         }
                     }
 
-                    if (start + i) == self.selected {
+                    if abs_idx == self.selected {
                         body.push_str(&format!("【{}.{}{}】 ", num, cand, hint));
                     } else {
                         body.push_str(&format!("{}.{}{} ", num, cand, hint));
@@ -783,9 +729,9 @@ impl Ime {
                     let num = i + 1;
 
                     let mut hint = String::new();
-                    if let Some(en_list) = self.word_en_map.get(cand) {
-                        if let Some(first_en) = en_list.first() {
-                            hint = format!("({})", first_en);
+                    if let Some(h) = self.candidate_hints.get(abs_index) {
+                        if !h.is_empty() {
+                            hint = format!("({})", h);
                         }
                     }
 

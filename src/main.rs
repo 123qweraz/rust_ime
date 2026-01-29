@@ -153,12 +153,27 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
 
     // Notify Thread
     std::thread::spawn(move || {
-        use notify_rust::Notification;
+        use notify_rust::{Notification, Timeout};
         let mut handle: Option<notify_rust::NotificationHandle> = None;
         while let Ok(event) = notify_rx.recv() {
             match event {
-                NotifyEvent::Message(msg) => { let _ = Notification::new().summary("Rust IME").body(&msg).show(); },
-                NotifyEvent::Update(s, b) => { if let Ok(h) = Notification::new().summary(&s).body(&b).id(9999).show() { handle = Some(h); } },
+                NotifyEvent::Message(msg) => { 
+                    let _ = Notification::new()
+                        .summary("Rust IME")
+                        .body(&msg)
+                        .timeout(Timeout::Milliseconds(1500))
+                        .show(); 
+                },
+                NotifyEvent::Update(s, b) => { 
+                    if let Ok(h) = Notification::new()
+                        .summary(&s)
+                        .body(&b)
+                        .id(9999)
+                        .timeout(Timeout::Never)
+                        .show() { 
+                        handle = Some(h); 
+                    } 
+                },
                 NotifyEvent::Close => { if let Some(h) = handle.take() { h.close(); } }
             }
         }
