@@ -1,7 +1,6 @@
 use gtk4::prelude::*;
 use gtk4::{Window, Label, Box, Orientation, CssProvider};
 use gdk4::Display;
-use gtk4_layer_shell::{LayerShell, Layer, Edge, KeyboardMode};
 use std::sync::mpsc::Receiver;
 use glib::MainContext;
 
@@ -28,14 +27,12 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     let window = Window::builder()
         .title("Rust IME Candidates")
         .decorated(false)
+        .can_focus(false)
+        .focusable(false)
+        .focus_on_click(false)
         .resizable(false)
         .build();
     
-    window.init_layer_shell();
-    window.set_layer(Layer::Overlay);
-    window.set_keyboard_mode(KeyboardMode::None);
-    window.set_anchor(Edge::Bottom, true);
-    window.set_margin(Edge::Bottom, 120);
     window.add_css_class("ime-window");
     
     let main_box = Box::new(Orientation::Horizontal, 8);
@@ -54,16 +51,12 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     let key_window = Window::builder()
         .title("Keystroke Display")
         .decorated(false)
+        .can_focus(false)
+        .focusable(false)
+        .focus_on_click(false)
         .resizable(false)
         .build();
     
-    key_window.init_layer_shell();
-    key_window.set_layer(Layer::Overlay);
-    key_window.set_keyboard_mode(KeyboardMode::None);
-    key_window.set_anchor(Edge::Bottom, true);
-    key_window.set_anchor(Edge::Right, true);
-    key_window.set_margin(Edge::Bottom, 40);
-    key_window.set_margin(Edge::Right, 40);
     key_window.add_css_class("keystroke-window");
 
     let key_box = Box::new(Orientation::Horizontal, 6);
@@ -215,14 +208,12 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         glib::Continue(true)
     });
 
-    // Stability: Show once and keep mapped, only toggle opacity and visibility
+    // Stability: Hide initially
     window.set_opacity(0.0);
     window.set_visible(false);
-    window.present();
     
     key_window.set_opacity(0.0);
     key_window.set_visible(false);
-    key_window.present();
 
     let loop_ = glib::MainLoop::new(None, false);
     loop_.run();
