@@ -4,21 +4,20 @@ use std::sync::mpsc::Sender;
 
 #[derive(Debug, Clone)]
 pub enum TrayEvent {
-    #[allow(dead_code)]
     ToggleIme,
-    #[allow(dead_code)]
     NextProfile,
-    #[allow(dead_code)]
     OpenConfig,
-    #[allow(dead_code)]
     Restart,
-    #[allow(dead_code)]
     Exit,
+    ToggleGui,
+    ToggleNotify,
 }
 
 pub struct ImeTray {
     pub chinese_enabled: bool,
     pub active_profile: String,
+    pub show_candidates: bool,
+    pub show_notifications: bool,
     pub tx: Sender<TrayEvent>,
 }
 
@@ -38,7 +37,11 @@ impl Tray for ImeTray {
     fn tool_tip(&self) -> ToolTip {
         ToolTip {
             title: "Blind IME".to_string(),
-            description: format!("Profile: {}", self.active_profile),
+            description: format!("Profile: {}\nGUI: {}\nNotify: {}", 
+                self.active_profile,
+                if self.show_candidates { "开" } else { "关" },
+                if self.show_notifications { "开" } else { "关" }
+            ),
             ..Default::default()
         }
     }
@@ -46,14 +49,14 @@ impl Tray for ImeTray {
     fn menu(&self) -> Vec<MenuItem<Self>> {
         vec![
             StandardItem {
-                label: format!("当前模式: {}", if self.chinese_enabled { "中文" } else { "英文" }),
+                label: format!("模式: {}", if self.chinese_enabled { "中文" } else { "英文" }),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::ToggleIme);
                 }),
                 ..Default::default()
             }.into(),
             StandardItem {
-                label: format!("当前词库: {}", self.active_profile),
+                label: format!("词库: {}", self.active_profile),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::NextProfile);
                 }),
@@ -61,7 +64,22 @@ impl Tray for ImeTray {
             }.into(),
             MenuItem::Separator,
             StandardItem {
-                label: "配置中心 (网页端)".to_string(),
+                label: format!("候选窗: {}", if self.show_candidates { "显示" } else { "隐藏" }),
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::ToggleGui);
+                }),
+                ..Default::default()
+            }.into(),
+            StandardItem {
+                label: format!("桌面通知: {}", if self.show_notifications { "开启" } else { "关闭" }),
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::ToggleNotify);
+                }),
+                ..Default::default()
+            }.into(),
+            MenuItem::Separator,
+            StandardItem {
+                label: "配置中心 (Web)".to_string(),
                 activate: Box::new(|this: &mut Self| {
                     let _ = this.tx.send(TrayEvent::OpenConfig);
                 }),
@@ -89,15 +107,24 @@ impl Tray for ImeTray {
 pub fn start_tray(
     chinese_enabled: bool, 
     active_profile: String, 
+    show_candidates: bool,
+    show_notifications: bool,
     event_tx: Sender<TrayEvent>
 ) -> Handle<ImeTray> {
     let service = ImeTray {
         chinese_enabled,
         active_profile,
+        show_candidates,
+        show_notifications,
         tx: event_tx,
     };
     let tray_service = TrayService::new(service);
     let handle = tray_service.handle();
-    tray_service.spawn();
+    
+    // Use an explicit thread to ensure the tray service runs independently
+    std::thread::spawn(move || {
+        let _ = tray_service.run();
+    });
+    
     handle
 }

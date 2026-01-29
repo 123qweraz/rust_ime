@@ -59,6 +59,7 @@ pub struct Ime {
     pub gui_tx: Option<Sender<crate::gui::GuiEvent>>, // 改回 Sender
     pub phantom_mode: PhantomMode,
     pub enable_notifications: bool,
+    pub show_candidates: bool,
     pub phantom_text: String,
     pub is_highlighted: bool,
     pub word_en_map: HashMap<String, Vec<String>>,
@@ -76,6 +77,7 @@ impl Ime {
         enable_fuzzy: bool, 
         phantom_mode_str: &str, 
         enable_notifications: bool, 
+        show_candidates: bool,
         base_ngram: NgramModel, 
         user_ngram: NgramModel,
         user_ngram_path: std::path::PathBuf
@@ -104,6 +106,7 @@ impl Ime {
             gui_tx, // 初始化
             phantom_mode,
             enable_notifications,
+            show_candidates,
             phantom_text: String::new(),
             is_highlighted: false,
             word_en_map,
@@ -248,6 +251,7 @@ impl Ime {
     }
 
     fn update_gui(&self) {
+        if !self.show_candidates { return; }
         if let Some(ref tx) = self.gui_tx {
             let mut hints = Vec::new();
             for cand in &self.candidates {
@@ -695,6 +699,7 @@ impl Ime {
     }
 
     fn notify_preview(&self) {
+        if !self.enable_notifications { return; }
         if self.buffer.is_empty() && self.candidates.is_empty() { 
             let _ = self.notification_tx.send(NotifyEvent::Close);
             return; 
@@ -1187,6 +1192,7 @@ mod tests {
             false, 
             "none", 
             false, 
+            true,
             NgramModel::new(), 
             NgramModel::new(),
             std::path::PathBuf::from("test_user_adapter.json")

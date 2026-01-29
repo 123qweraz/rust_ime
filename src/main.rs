@@ -272,7 +272,13 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
     });
 
     // 启动托盘
-    let tray_handle = tray::start_tray(false, active_profile.clone(), tray_tx);
+    let tray_handle = tray::start_tray(
+        false, 
+        active_profile.clone(), 
+        initial_config.appearance.show_candidates,
+        initial_config.appearance.show_notifications,
+        tray_tx
+    );
 
     let base_ngram = ngram::NgramModel::new();
     let user_ngram = ngram::NgramModel::new();
@@ -283,6 +289,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
         initial_config.input.enable_fuzzy_pinyin,
         &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications,
+        initial_config.appearance.show_candidates,
         base_ngram, user_ngram, user_ngram_path
     );
 
@@ -307,6 +314,15 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                 tray::TrayEvent::NextProfile => {
                     ime.next_profile();
                     tray_handle.update(|t| t.active_profile = ime.current_profile.clone());
+                }
+                tray::TrayEvent::ToggleGui => {
+                    ime.show_candidates = !ime.show_candidates;
+                    if !ime.show_candidates { ime.reset(); }
+                    tray_handle.update(|t| t.show_candidates = ime.show_candidates);
+                }
+                tray::TrayEvent::ToggleNotify => {
+                    ime.enable_notifications = !ime.enable_notifications;
+                    tray_handle.update(|t| t.show_notifications = ime.enable_notifications);
                 }
                 tray::TrayEvent::OpenConfig => {
                     let _ = Command::new("xdg-open").arg("http://localhost:8765").spawn();

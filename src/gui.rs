@@ -1,5 +1,6 @@
 use gtk4::prelude::*;
-use gtk4::{Window, Label, Box, Orientation, CssProvider};
+use gtk4::{Window, Label, Box, Orientation, CssProvider, GestureClick};
+use gdk4::Display;
 use std::sync::mpsc::Receiver;
 use glib::MainContext;
 
@@ -37,6 +38,24 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     let main_box = Box::new(Orientation::Horizontal, 8);
     main_box.set_widget_name("main-container");
     window.set_child(Some(&main_box));
+
+    // Add drag support to the main container
+    let drag_gesture = GestureClick::new();
+    let window_clone_for_drag = window.clone();
+    drag_gesture.connect_pressed(move |gesture, _n, x, y| {
+        let surface = window_clone_for_drag.surface();
+        if let Some(display) = Display::default() {
+            if let Some(seat) = display.default_seat() {
+                if let Some(device) = seat.pointer() {
+                    if let Ok(toplevel) = surface.dynamic_cast::<gdk4::Toplevel>() {
+                        gesture.set_state(gtk4::EventSequenceState::Claimed);
+                        toplevel.begin_move(&device, 1, x, y, 0);
+                    }
+                }
+            }
+        }
+    });
+    main_box.add_controller(drag_gesture);
 
     let pinyin_label = Label::new(None);
     pinyin_label.set_widget_name("pinyin-label");
@@ -189,6 +208,8 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
             candidates_box_clone.append(&cand_box);
         }
 
+        // In GTK4 on Wayland absolute positioning is not allowed.
+        // Users can now drag the window to their preferred location.
         window_clone.set_visible(true);
         
         glib::Continue(true)

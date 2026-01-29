@@ -8,6 +8,8 @@ pub struct Appearance {
     pub show_notifications: bool, // 原 enable_notifications
     #[serde(default = "default_phantom_mode")]
     pub preview_mode: String,     // 原 phantom_mode: none/pinyin/hanzi
+    #[serde(default = "default_show_candidates")]
+    pub show_candidates: bool,
 }
 
 impl Default for Appearance {
@@ -15,6 +17,7 @@ impl Default for Appearance {
         Appearance {
             show_notifications: true,
             preview_mode: "none".to_string(),
+            show_candidates: true,
         }
     }
 }
@@ -187,6 +190,7 @@ impl Default for Shortcut {
 // Default Value Generators
 fn default_readme() -> String { "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert".to_string() }
 fn default_enable_notifications() -> bool { true }
+fn default_show_candidates() -> bool { true }
 fn default_phantom_mode() -> String { "none".to_string() }
 
 fn default_active_profile() -> String { "Chinese".to_string() }
