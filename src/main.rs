@@ -328,6 +328,11 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                 }
                 tray::TrayEvent::ToggleKeystroke => {
                     ime.show_keystrokes = !ime.show_keystrokes;
+                    if !ime.show_keystrokes {
+                        if let Some(ref tx) = gui_tx {
+                            let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes);
+                        }
+                    }
                     tray_handle.update(|t| t.show_keystrokes = ime.show_keystrokes);
                 }
                 tray::TrayEvent::OpenConfig => {
@@ -393,7 +398,6 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                             if shift_held { combo.push("Shift"); }
                             if meta_held { combo.push("Meta"); }
                             
-                            // Prevent modifiers being shown alone if they are part of a combo
                             let is_modifier = matches!(key, Key::KEY_LEFTCTRL | Key::KEY_RIGHTCTRL | Key::KEY_LEFTALT | Key::KEY_RIGHTALT | Key::KEY_LEFTSHIFT | Key::KEY_RIGHTSHIFT | Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA);
                             
                             if !is_modifier {
@@ -408,15 +412,21 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                     }
                 }
 
-                if ime.chinese_enabled && !ctrl_held && !alt_held && !meta_held {
-                    match ime.handle_key(key, is_press, shift_held) {
-                        Action::Emit(s) => vkbd.send_text(&s),
-                        Action::DeleteAndEmit { delete, insert, .. } => {
-                            vkbd.backspace(delete);
-                            vkbd.send_text(&insert);
+                if ime.chinese_enabled {
+                    if !ctrl_held && !alt_held && !meta_held {
+                        match ime.handle_key(key, is_press, shift_held) {
+                            Action::Emit(s) => vkbd.send_text(&s),
+                            Action::DeleteAndEmit { delete, insert, .. } => {
+                                vkbd.backspace(delete);
+                                vkbd.send_text(&insert);
+                            }
+                            Action::PassThrough => vkbd.emit_raw(key, val),
+                            Action::Consume => {} // Do nothing, key event is handled
                         }
-                        Action::PassThrough => vkbd.emit_raw(key, val),
-                        Action::Consume => {} // Do nothing, key event is handled
+                    } else {
+                        // Shortcut pressed, reset IME state
+                        if is_press { ime.reset(); }
+                        vkbd.emit_raw(key, val);
                     }
                 } else {
                     vkbd.emit_raw(key, val);

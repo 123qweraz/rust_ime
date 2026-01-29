@@ -27,6 +27,7 @@ open = "5.1"
 nix = { version = "0.27", features = ["poll"] }
 # GTK 4 依赖
 gtk4 = { version = "0.7", package = "gtk4", features = ["v4_6"] }
+gtk4-layer-shell = "0.2"
 glib = "0.17"
 gdk4 = "0.7"
 pango = "0.17"

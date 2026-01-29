@@ -944,6 +944,7 @@ dependencies = [
  "gdk-pixbuf",
  "gdk4-sys",
  "gio 0.18.4",
+ "gl",
  "glib 0.18.5",
  "libc",
  "pango 0.18.3",
@@ -1072,6 +1073,26 @@ dependencies = [
  "libc",
  "system-deps",
  "winapi",
+]
+
+[[package]]
+name = "gl"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a94edab108827d67608095e269cf862e60d920f144a5026d3dbcfd8b877fb404"
+dependencies = [
+ "gl_generator",
+]
+
+[[package]]
+name = "gl_generator"
+version = "0.14.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1a95dfc23a2b4a9a2f5ab41d194f8bfda3cabec42af4e39f08c339eb2a0c124d"
+dependencies = [
+ "khronos_api",
+ "log",
+ "xml-rs",
 ]
 
 [[package]]
@@ -1264,6 +1285,34 @@ dependencies = [
  "gtk4-sys",
  "libc",
  "pango 0.18.3",
+]
+
+[[package]]
+name = "gtk4-layer-shell"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1bb4778221a59ba5ee44d5e43bb353328c2d6f0a11fc876b41ecb6eae8a62b8a"
+dependencies = [
+ "bitflags 2.10.0",
+ "gdk4",
+ "glib 0.18.5",
+ "glib-sys 0.18.1",
+ "gtk4",
+ "gtk4-layer-shell-sys",
+ "libc",
+]
+
+[[package]]
+name = "gtk4-layer-shell-sys"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "745a7886e30ce7643b194e24630c2387ca58dc266248d5175450c5907efe759d"
+dependencies = [
+ "gdk4-sys",
+ "glib-sys 0.18.1",
+ "gtk4-sys",
+ "libc",
+ "system-deps",
 ]
 
 [[package]]
@@ -1686,6 +1735,12 @@ dependencies = [
  "once_cell",
  "wasm-bindgen",
 ]
+
+[[package]]
+name = "khronos_api"
+version = "3.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e2db585e1d738fc771bf08a151420d3ed193d9d895a36df7f6f8a9456b911ddc"
 
 [[package]]
 name = "ksni"
@@ -2447,6 +2502,7 @@ dependencies = [
  "gdk4",
  "glib 0.17.10",
  "gtk4",
+ "gtk4-layer-shell",
  "ksni",
  "libc",
  "mime_guess",

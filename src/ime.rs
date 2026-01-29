@@ -254,21 +254,25 @@ impl Ime {
     }
 
     fn update_gui(&self) {
-        if !self.show_candidates { return; }
         if let Some(ref tx) = self.gui_tx {
             let mut hints = Vec::new();
-            for cand in &self.candidates {
-                let hint = if let Some(en_list) = self.word_en_map.get(cand) {
-                    en_list.first().cloned().unwrap_or_default()
-                } else {
-                    String::new()
-                };
-                hints.push(hint);
-            }
+            let (pinyin, candidates) = if self.show_candidates {
+                for cand in &self.candidates {
+                    let hint = if let Some(en_list) = self.word_en_map.get(cand) {
+                        en_list.first().cloned().unwrap_or_default()
+                    } else {
+                        String::new()
+                    };
+                    hints.push(hint);
+                }
+                (self.buffer.clone(), self.candidates.clone())
+            } else {
+                (String::new(), Vec::new())
+            };
 
             let _ = tx.send(crate::gui::GuiEvent::Update {
-                pinyin: self.buffer.clone(),
-                candidates: self.candidates.clone(),
+                pinyin,
+                candidates,
                 hints,
                 selected: self.selected,
             });

@@ -158,25 +158,6 @@ impl NgramModel {
         }
     }
 
-    pub fn predict(&self, context_chars: &[char], limit: usize) -> Vec<String> {
-        // 预测逻辑也应该考虑 Unigram 权重，但先保持 Back-off 逻辑
-        for len in (1..=context_chars.len().min(self.max_n - 1)).rev() {
-            let start = context_chars.len() - len;
-            let context: String = context_chars[start..].iter().collect();
-
-            if let Some(next_map) = self.transitions.get(&context) {
-                let mut candidates: Vec<(&String, &u32)> = next_map.iter().collect();
-                candidates.sort_by(|a, b| b.1.cmp(a.1));
-                
-                return candidates.into_iter()
-                    .take(limit)
-                    .map(|(c, _)| c.clone())
-                    .collect();
-            }
-        }
-        Vec::new()
-    }
-
     pub fn get_score(&self, context_chars: &[char], next_token_str: &str) -> u32 {
         let mut total_score = *self.unigrams.get(next_token_str).unwrap_or(&0);
 
