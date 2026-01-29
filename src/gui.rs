@@ -23,12 +23,14 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     let window = ApplicationWindow::builder()
         .title("Rust IME")
         .decorated(false)
+        .can_focus(false)
+        .focusable(false)
         .build();
     
-    // In GTK4, some hints and properties are set differently or have moved
-    // Position/Type hints are more restricted, especially on Wayland.
+    // Set window as non-focusable and utility-like
+    // Note: GTK4 position management is different, but we try our best to keep it floating
     
-    let main_box = Box::new(Orientation::Horizontal, 12);
+    let main_box = Box::new(Orientation::Horizontal, 8);
     main_box.set_widget_name("main-container");
     window.set_child(Some(&main_box));
 
@@ -36,39 +38,43 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
     pinyin_label.set_widget_name("pinyin-label");
     main_box.append(&pinyin_label);
 
-    let candidates_box = Box::new(Orientation::Horizontal, 18);
+    let candidates_box = Box::new(Orientation::Horizontal, 12);
     candidates_box.set_widget_name("candidates-box");
     main_box.append(&candidates_box);
 
     let css_provider = CssProvider::new();
+    // Compact style, semi-transparent background, smaller fonts
     css_provider.load_from_data("
         * {
             font-family: 'Inter', 'Segoe UI', 'Noto Sans CJK SC', 'PingFang SC', sans-serif;
         }
+        window {
+            background-color: transparent;
+        }
         #main-container {
-            background-color: rgba(30, 30, 30, 0.92);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 6px 16px;
+            background-color: rgba(35, 35, 35, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 4px 10px;
         }
         #pinyin-label {
-            color: #339af0;
-            font-size: 16pt;
-            font-weight: 600;
-            margin-right: 4px;
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
-            padding-right: 14px;
+            color: #4dabf7;
+            font-size: 13pt;
+            font-weight: 500;
+            margin-right: 2px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding-right: 8px;
         }
         .candidate-item {
-            padding: 2px 10px;
-            border-radius: 6px;
+            padding: 1px 6px;
+            border-radius: 4px;
         }
         .candidate-selected {
-            background-color: #1c7ed6;
+            background-color: #339af0;
         }
         .candidate-text {
-            color: #f8f9fa;
-            font-size: 18pt;
+            color: #e9ecef;
+            font-size: 14pt;
             font-weight: 500;
         }
         .candidate-selected .candidate-text {
@@ -77,17 +83,16 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         }
         .hint-text {
             color: #adb5bd;
-            font-size: 11pt;
-            margin-left: 4px;
+            font-size: 9pt;
+            margin-left: 2px;
         }
         .candidate-selected .hint-text {
             color: rgba(255, 255, 255, 0.8);
         }
         .index {
-            font-size: 10pt;
+            font-size: 8pt;
             color: #868e96;
-            margin-right: 6px;
-            font-weight: 400;
+            margin-right: 4px;
         }
         .candidate-selected .index {
             color: rgba(255, 255, 255, 0.7);
@@ -121,8 +126,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         let (pinyin, candidates, hints, selected) = match event {
             GuiEvent::Update { pinyin, candidates, hints, selected } => (pinyin, candidates, hints, selected),
             GuiEvent::Exit => {
-                // GTK4 exit handling might be different if using Application, 
-                // but here we can just stop the loop or hide.
                 window_clone.close();
                 return glib::Continue(false);
             }
@@ -135,7 +138,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
 
         pinyin_label_clone.set_text(&pinyin);
         
-        // GTK4: Removing children is different. We can use remove() on each child.
         while let Some(child) = candidates_box_clone.first_child() {
             candidates_box_clone.remove(&child);
         }
@@ -147,7 +149,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
             let cand_box = Box::new(Orientation::Horizontal, 0);
             cand_box.add_css_class("candidate-item");
             
-            let idx_label = Label::new(Some(&format!("{}.", (i % 5) + 1)));
+            let idx_label = Label::new(Some(&format!("{}", (i % 5) + 1)));
             idx_label.add_css_class("index");
             
             let val_label = Label::new(Some(&candidates[i]));
@@ -158,7 +160,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
 
             if let Some(hint) = hints.get(i) {
                 if !hint.is_empty() {
-                    let hint_label = Label::new(Some(&format!("({})", hint)));
+                    let hint_label = Label::new(Some(&format!("{}", hint)));
                     hint_label.add_css_class("hint-text");
                     cand_box.append(&hint_label);
                 }
@@ -172,19 +174,13 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         }
 
         window_clone.set_visible(true);
-        // Position management in GTK4 is harder. 
-        // window.move_() is removed. For now, we just present.
         window_clone.present();
         
         glib::Continue(true)
     });
 
-    // In GTK4, widgets are visible by default, but windows need to be presented.
-    // However, we start hidden.
     window.set_visible(false);
 
-    // GTK4 doesn't have gtk::main(). It uses a different loop structure usually 
-    // via Application, but we can still use a manual loop or glib::MainLoop.
     let loop_ = glib::MainLoop::new(None, false);
     loop_.run();
 }
