@@ -71,6 +71,9 @@ fn is_process_running(pid: i32) -> bool {
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 忽略 SIGPIPE，防止 GTK 崩溃带走整个进程
+    unsafe { libc::signal(libc::SIGPIPE, libc::SIG_IGN); }
+
     let args: Vec<String> = env::args().collect();
     
     if args.len() > 1 {

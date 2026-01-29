@@ -19,16 +19,12 @@ pub enum GuiEvent {
 }
 
 pub fn start_gui(rx: Receiver<GuiEvent>) {
-    // 基础初始化
     if gtk4::init().is_err() {
-        eprintln!("Failed to initialize GTK4.");
+        eprintln!("[GUI] Failed to initialize GTK4.");
         return;
     }
 
     let is_layer_supported = gtk4_layer_shell::is_supported();
-    if !is_layer_supported {
-        eprintln!("[GUI] Warning: Layer shell not supported. Falling back to normal windows.");
-    }
 
     // --- Candidate Window ---
     let window = Window::builder()
@@ -37,19 +33,17 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .can_focus(false)
         .focusable(false)
         .resizable(false)
-        // 给一个初始尺寸，防止某些合成器在 0x0 时崩溃
-        .default_width(200)
-        .default_height(40)
         .build();
     
     if is_layer_supported {
-        // 必须最先初始化 LayerShell
         window.init_layer_shell();
         window.set_namespace("rust-ime-candidates");
         window.set_layer(Layer::Overlay);
         window.set_keyboard_mode(KeyboardMode::None);
         window.set_anchor(Edge::Bottom, true);
         window.set_margin(Edge::Bottom, 120);
+        // 设置为 0 确保不会挤压其他窗口，设置为 -1 则会自动避开
+        window.set_exclusive_zone(0); 
     }
     window.add_css_class("ime-window");
     
@@ -72,8 +66,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .can_focus(false)
         .focusable(false)
         .resizable(false)
-        .default_width(100)
-        .default_height(40)
         .build();
     
     if is_layer_supported {
@@ -85,6 +77,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         key_window.set_anchor(Edge::Right, true);
         key_window.set_margin(Edge::Bottom, 40);
         key_window.set_margin(Edge::Right, 40);
+        key_window.set_exclusive_zone(0);
     }
     key_window.add_css_class("keystroke-window");
 
@@ -158,8 +151,8 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         match event {
             GuiEvent::Update { pinyin, candidates, hints, selected } => {
                 if pinyin.is_empty() && candidates.is_empty() {
+                    // 关键：只改透明度，不隐藏窗口，避免 Surface 销毁重建
                     window_clone.set_opacity(0.0);
-                    window_clone.set_visible(false);
                     while let Some(child) = candidates_box_clone.first_child() {
                         candidates_box_clone.remove(&child);
                     }
@@ -167,7 +160,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
                     return glib::Continue(true);
                 }
                 
-                window_clone.set_visible(true);
                 window_clone.set_opacity(1.0);
                 pinyin_label_clone.set_text(&pinyin);
                 while let Some(child) = candidates_box_clone.first_child() {
@@ -201,7 +193,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
                 let label = Label::new(Some(&key_name));
                 label.add_css_class("key-label");
                 key_box_clone.append(&label);
-                key_window_clone.set_visible(true);
                 key_window_clone.set_opacity(1.0);
 
                 let key_box_weak = key_box_clone.downgrade();
@@ -214,7 +205,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
                         if kb.first_child().is_none() {
                             if let Some(kw) = key_window_weak.upgrade() { 
                                 kw.set_opacity(0.0); 
-                                kw.set_visible(false);
                             }
                         }
                     }
@@ -226,7 +216,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
                     key_box_clone.remove(&child);
                 }
                 key_window_clone.set_opacity(0.0);
-                key_window_clone.set_visible(false);
             },
             GuiEvent::Exit => {
                 window_clone.close();
@@ -237,17 +226,12 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         glib::Continue(true)
     });
 
-    // 初始状态：完全透明但不隐藏，给 Wayland 时间同步状态
+    // 初始状态：透明但已 present，保持 Surface 存活
     window.set_opacity(0.0);
-    // 只有在 LayerShell 模式下才 present，否则普通窗口会弹出
-    if is_layer_supported {
-        window.present();
-    }
+    window.present();
     
     key_window.set_opacity(0.0);
-    if is_layer_supported {
-        key_window.present();
-    }
+    key_window.present();
 
     let loop_ = glib::MainLoop::new(None, false);
     loop_.run();
