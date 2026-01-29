@@ -163,15 +163,20 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
     let config = load_config();
     let config_arc = Arc::new(RwLock::new(config));
     
-    let mut tries_map = HashMap::new();
     let initial_config = config_arc.read().unwrap().clone();
-    let mut word_en_map: HashMap<String, Vec<String>> = HashMap::new();
-
-    for profile in &initial_config.files.profiles {
-        let trie = load_dict_for_profile(&profile.dicts, &mut word_en_map);
-        tries_map.insert(profile.name.clone(), trie);
+    let mut tries_map = HashMap::new();
+    // 使用新的二进制加载方式
+    match Trie::load("dict.index", "dict.data") {
+        Ok(trie) => {
+            tries_map.insert("default".to_string(), trie);
+            println!("[Dictionary] High-performance binary dictionary loaded via Mmap.");
+        },
+        Err(e) => {
+            eprintln!("[Error] Failed to load binary dictionary: {}. Did you run 'compile_dict'?", e);
+        }
     }
     let tries_arc = Arc::new(RwLock::new(tries_map));
+    let word_en_map: HashMap<String, Vec<String>> = HashMap::new(); 
 
     // 启动 Web 配置服务器
     let config_for_web = Arc::clone(&config_arc);
@@ -183,7 +188,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
             server.start().await;
         });
     });
-
+    
     let device_path = initial_config.files.device_path.clone().unwrap_or_else(|| find_keyboard().unwrap_or_default());
     let mut dev = Device::open(&device_path)?;
     let mut vkbd = Vkbd::new(&dev)?;
@@ -358,44 +363,6 @@ pub fn load_config() -> Config {
         if let Ok(config) = serde_json::from_reader(reader) { return config; }
     }
     Config::default_config()
-}
-
-pub fn load_dict_for_profile(paths: &[String], word_en_map: &mut HashMap<String, Vec<String>>) -> Trie {
-    let mut trie = Trie::new();
-    for path_str in paths {
-        let path = Path::new(path_str);
-        if path.is_dir() {
-            for entry in walkdir::WalkDir::new(path).into_iter().filter_map(|e| e.ok()) {
-                if entry.path().is_file() && entry.path().extension().map_or(false, |ext| ext == "json") {
-                    load_file_into_dict(entry.path().to_str().unwrap(), &mut trie, word_en_map);
-                }
-            }
-        } else {
-            load_file_into_dict(path_str, &mut trie, word_en_map);
-        }
-    }
-    trie
-}
-
-fn load_file_into_dict(path: &str, trie: &mut Trie, word_en_map: &mut HashMap<String, Vec<String>>) {
-    if let Ok(file) = File::open(path) {
-        let reader = BufReader::new(file);
-        if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(reader) {
-            if let Some(obj) = v.as_object() {
-                for (py, val) in obj {
-                    let py_lower = py.to_lowercase();
-                    if let Ok(entries) = serde_json::from_value::<Vec<DictEntry>>(val.clone()) {
-                        for e in entries {
-                            trie.insert(&py_lower, e.char.clone());
-                            if let Some(en) = e.en { word_en_map.entry(e.char).or_default().push(en); }
-                        }
-                    } else if let Ok(strings) = serde_json::from_value::<Vec<String>>(val.clone()) {
-                        for s in strings { trie.insert(&py_lower, s); }
-                    }
-                }
-            }
-        }
-    }
 }
 
 pub fn load_punctuation_dict(path: &str) -> HashMap<String, String> {

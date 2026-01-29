@@ -25,6 +25,8 @@ reqwest = { version = "0.12", features = ["blocking"] }
 urlencoding = "2.1"
 open = "5.1"
 nix = { version = "0.27", features = ["poll"] }
+fst = "0.4"
+memmap2 = "0.9"
 # GTK 4 依赖
 gtk4 = { version = "0.7", package = "gtk4", features = ["v4_6"] }
 gtk4-layer-shell = "0.2"

@@ -311,7 +311,7 @@ async fn convert_handler(
                 for len in (1..=(chars.len() - i).min(15)).rev() {
                     let sub: String = chars[i..i+len].iter().collect();
                     let sub_lower = sub.to_lowercase();
-                    if let Some(word_match) = dict.get_exact(&sub_lower) {
+                    if let Some(word_match) = dict.get_all_exact(&sub_lower).and_then(|v| v.first().cloned()) {
                         final_result.push_str(&word_match);
                         i += len;
                         found = true;
@@ -1357,7 +1357,7 @@ async fn convert_handler(
 
 
 
-            use crate::load_dict_for_profile;
+            // Removed legacy import
 
 
 
@@ -1677,7 +1677,7 @@ async fn convert_handler(
 
 
 
-            for profile in profiles {
+                    // Binary Trie is read-only. Dynamic profile loading from JSON disabled.
 
 
 
@@ -1709,7 +1709,7 @@ async fn convert_handler(
 
 
 
-                let mut dummy_map = HashMap::new();
+            
 
 
 
@@ -1741,7 +1741,7 @@ async fn convert_handler(
 
 
 
-                let trie = load_dict_for_profile(&profile.dicts, &mut dummy_map);
+                    /*
 
 
 
@@ -1773,7 +1773,7 @@ async fn convert_handler(
 
 
 
-                new_tries.insert(profile.name.clone(), trie);
+            
 
 
 
@@ -1805,7 +1805,327 @@ async fn convert_handler(
 
 
 
-            }
+                    for profile in &config.files.profiles {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        let mut dummy_map = HashMap::new();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        let trie = load_dict_for_profile(&profile.dicts, &mut dummy_map);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        t.insert(profile.name.clone(), trie);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    */
 
 
 

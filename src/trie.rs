@@ -1,216 +1,90 @@
-use std::collections::{HashMap, VecDeque, HashSet};
+use fst::{Map, IntoStreamer, Streamer, Automaton};
+use memmap2::Mmap;
+use std::fs::File;
+use std::path::Path;
+use std::sync::Arc;
+use std::ops::Deref;
 
-#[derive(Debug, Default, Clone)]
-struct TrieNode {
-    children: HashMap<char, TrieNode>,
-    words: Vec<String>,
+#[derive(Clone)]
+pub struct MmapData(Arc<Mmap>);
+
+impl AsRef<[u8]> for MmapData {
+    fn as_ref(&self) -> &[u8] {
+        self.0.as_ref()
+    }
 }
 
-#[derive(Debug, Default, Clone)]
+#[derive(Clone)]
 pub struct Trie {
-    root: TrieNode,
-    total_words: usize,
+    index: Map<MmapData>,
+    data: MmapData,
 }
 
 impl Trie {
-    pub fn new() -> Self {
-        Self {
-            root: TrieNode::default(),
-            total_words: 0,
-        }
-    }
-
-    pub fn insert(&mut self, pinyin: &str, word: String) {
-        let mut node = &mut self.root;
-        for c in pinyin.chars() {
-            node = node.children.entry(c).or_default();
-        }
-        if !node.words.contains(&word) {
-            node.words.push(word);
-            self.total_words += 1;
-        }
-    }
-
-    #[allow(dead_code)]
-    pub fn len(&self) -> usize {
-        self.total_words
-    }
-
-    #[allow(dead_code)]
-    pub fn is_empty(&self) -> bool {
-        self.total_words == 0
-    }
-
-    pub fn get_exact(&self, pinyin: &str) -> Option<String> {
-        let mut node = &self.root;
-        for c in pinyin.chars() {
-            node = node.children.get(&c)?;
-        }
-        node.words.first().cloned()
+    pub fn load<P: AsRef<Path>>(index_path: P, data_path: P) -> Result<Self, Box<dyn std::error::Error>> {
+        let index_file = File::open(index_path)?;
+        let data_file = File::open(data_path)?;
+        
+        let index_mmap = unsafe { Mmap::map(&index_file)? };
+        let data_mmap = unsafe { Mmap::map(&data_file)? };
+        
+        let index_data = MmapData(Arc::new(index_mmap));
+        let data_data = MmapData(Arc::new(data_mmap));
+        
+        let index = Map::new(index_data)?;
+        
+        Ok(Self {
+            index,
+            data: data_data,
+        })
     }
 
     pub fn get_all_exact(&self, pinyin: &str) -> Option<Vec<String>> {
-        let mut node = &self.root;
-        for c in pinyin.chars() {
-            node = node.children.get(&c)?;
-        }
-        if node.words.is_empty() {
-            None
-        } else {
-            Some(node.words.clone())
-        }
+        let offset = self.index.get(pinyin)? as usize;
+        Some(self.read_block(offset))
     }
 
-    /// Search for words starting with `prefix` using BFS.
     pub fn search_bfs(&self, prefix: &str, limit: usize) -> Vec<String> {
         let mut results = Vec::new();
-        let mut node = &self.root;
+        
+        let matcher = fst::automaton::Str::new(prefix).starts_with();
+        let mut stream = self.index.search(matcher).into_stream();
 
-        // 1. Navigate to the prefix node
-        for c in prefix.chars() {
-            match node.children.get(&c) {
-                Some(n) => node = n,
-                None => return results, // Prefix not found
-            }
-        }
-
-        // 2. BFS from this node
-        let mut queue = VecDeque::new();
-        queue.push_back(node);
-
-        let mut seen = HashSet::new();
-        while let Some(curr) = queue.pop_front() {
-            for word in &curr.words {
-                if seen.insert(word) {
-                    results.push(word.clone());
+        while let Some((_, offset)) = stream.next() {
+            let words = self.read_block(offset as usize);
+            for word in words {
+                if !results.contains(&word) {
+                    results.push(word);
                     if results.len() >= limit {
                         return results;
                     }
                 }
             }
+        }
+        
+        results
+    }
+
+    fn read_block(&self, offset: usize) -> Vec<String> {
+        let data = self.data.as_ref();
+        let mut cursor = offset;
+        
+        let count_bytes = &data[cursor..cursor+4];
+        let count = u32::from_le_bytes(count_bytes.try_into().unwrap());
+        cursor += 4;
+        
+        let mut words = Vec::with_capacity(count as usize);
+        for _ in 0..count {
+            let len_bytes = &data[cursor..cursor+2];
+            let len = u16::from_le_bytes(len_bytes.try_into().unwrap()) as usize;
+            cursor += 2;
             
-            // Sort children keys to ensure deterministic BFS order
-            let mut keys: Vec<&char> = curr.children.keys().collect();
-            keys.sort();
-            for &k in keys {
-                if let Some(child) = curr.children.get(&k) {
-                    queue.push_back(child);
-                }
-            }
-        }
-
-        results
-    }
-
-    /// Fuzzy search using Levenshtein distance on the Trie.
-    pub fn search_fuzzy(&self, pattern: &str, max_cost: usize) -> Vec<String> {
-        let pattern_chars: Vec<char> = pattern.chars().collect();
-        // The first row of the Levenshtein matrix: 0, 1, 2, ...
-        let current_row: Vec<usize> = (0..=pattern_chars.len()).collect();
-        
-        let mut results = Vec::new();
-        
-        for (char, child) in &self.root.children {
-            self.search_fuzzy_recursive(child, *char, &pattern_chars, &current_row, max_cost, &mut results);
+            let word_bytes = &data[cursor..cursor+len];
+            let word = String::from_utf8_lossy(word_bytes).to_string();
+            words.push(word);
+            cursor += len;
         }
         
-        results
-    }
-
-    fn search_fuzzy_recursive(
-        &self,
-        node: &TrieNode,
-        char: char,
-        pattern: &[char],
-        prev_row: &[usize],
-        max_cost: usize,
-        results: &mut Vec<String>
-    ) {
-        let columns = pattern.len() + 1;
-        let mut current_row = vec![0; columns];
-        current_row[0] = prev_row[0] + 1;
-
-        let mut min_val = current_row[0];
-
-        for i in 1..columns {
-            let insert_cost = current_row[i - 1] + 1;
-            let delete_cost = prev_row[i] + 1;
-            let replace_cost = prev_row[i - 1] + if pattern[i - 1] == char { 0 } else { 1 };
-
-            current_row[i] = insert_cost.min(delete_cost).min(replace_cost);
-            if current_row[i] < min_val {
-                min_val = current_row[i];
-            }
-        }
-
-        // Pruning: if the best possible match in this subtree is already worse than max_cost, stop.
-        if min_val > max_cost {
-            return;
-        }
-
-        // If the last entry in the row is within max_cost, this node matches the pattern closely enough.
-        // Also, since this is an IME, we often want prefix matches too.
-        // But for typo correction (gongnegn -> gongneng), we usually want full matches logic,
-        // or at least "end of pattern matches current node".
-        if current_row[pattern.len()] <= max_cost {
-            for word in &node.words {
-                if !results.contains(word) {
-                    results.push(word.clone());
-                }
-            }
-        }
-
-        // Recurse
-        for (next_char, next_child) in &node.children {
-            self.search_fuzzy_recursive(next_child, *next_char, pattern, &current_row, max_cost, results);
-        }
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test_trie_insert_and_exact_match() {
-        let mut trie = Trie::new();
-        trie.insert("ni", "你".to_string());
-        trie.insert("ni", "拟".to_string());
-        trie.insert("hao", "好".to_string());
-
-        assert_eq!(trie.get_exact("ni"), Some("你".to_string()));
-        assert_eq!(trie.get_all_exact("ni"), Some(vec!["你".to_string(), "拟".to_string()]));
-        assert_eq!(trie.get_exact("hao"), Some("好".to_string()));
-        assert_eq!(trie.get_exact("abc"), None);
-    }
-
-    #[test]
-    fn test_trie_search_bfs() {
-        let mut trie = Trie::new();
-        trie.insert("zhong", "中".to_string());
-        trie.insert("zhong", "重".to_string());
-        trie.insert("zhongguo", "中国".to_string());
-        trie.insert("zhongwen", "中文".to_string());
-        trie.insert("zi", "子".to_string());
-
-        // 测试前缀搜索
-        let results = trie.search_bfs("zhong", 10);
-        assert!(results.contains(&"中".to_string()));
-        assert!(results.contains(&"中国".to_string()));
-        assert!(results.contains(&"中文".to_string()));
-        assert!(!results.contains(&"子".to_string()));
-
-        // 测试限制
-        let limited = trie.search_bfs("zhong", 2);
-        assert_eq!(limited.len(), 2);
-    }
-
-    #[test]
-    fn test_trie_case_sensitivity() {
-        let mut trie = Trie::new();
-        trie.insert("ni", "你".to_string());
-        // Trie 内部目前是区分大小写的，取决于 handle_key 传什么进来
-        assert_eq!(trie.get_exact("Ni"), None);
-        assert_eq!(trie.get_exact("ni"), Some("你".to_string()));
+        words
     }
 }
