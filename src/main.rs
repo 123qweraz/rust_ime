@@ -218,7 +218,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
         });
     });
 
-    let device_path = initial_config.files.device_path.clone().unwrap_or_else(|| find_keyboard().unwrap());
+    let device_path = initial_config.files.device_path.clone().unwrap_or_else(|| find_keyboard().unwrap_or_default());
     let mut dev = Device::open(&device_path)?;
     let mut vkbd = Vkbd::new(&dev)?;
     
@@ -250,8 +250,8 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>) -> Result<(), Box<dyn s
                 },
                 NotifyEvent::Close => {
                     let _ = Notification::new()
-                        .summary(" ")
-                        .body(" ")
+                        .summary("")
+                        .body("")
                         .id(9999)
                         .timeout(Timeout::Milliseconds(1))
                         .show();

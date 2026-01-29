@@ -39,7 +39,7 @@ impl NgramModel {
         if path.exists() {
             if let Ok(file) = File::open(path) {
                 let reader = BufReader::new(file);
-                self.token_list = reader.lines().filter_map(|l| l.ok()).collect();
+                self.token_list = reader.lines().map_while(Result::ok).collect();
                 self.max_token_len = 0;
                 for t in &self.token_list {
                     let len = t.chars().count();

@@ -1045,11 +1045,10 @@ impl Ime {
                     let vowels = ['a', 'e', 'i', 'o', 'u', 'v', 'A', 'E', 'I', 'O', 'U', 'V'];
                     
                     // 逆向寻找最后一个元音位置
-                    if let Some(idx) = new_buffer.rfind(|c| vowels.contains(&c)) {
-                        let c = new_buffer.chars().nth(idx).unwrap();
-                        if let Some(toned) = apply_tone(c, tone) {
+                    let mut chars: Vec<char> = new_buffer.chars().collect();
+                    if let Some(idx) = chars.iter().rposition(|c| vowels.contains(c)) {
+                        if let Some(toned) = apply_tone(chars[idx], tone) {
                             // 替换该位置的字符
-                            let mut chars: Vec<char> = new_buffer.chars().collect();
                             chars[idx] = toned;
                             self.buffer = chars.into_iter().collect();
                             self.lookup();

@@ -29,8 +29,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         .build();
     
     // Use the generic property system for better compatibility in GTK4
-    window.set_property("accept-focus", false);
-    window.set_property("focus-on-map", false);
     window.set_property("deletable", false);
     
     // Add a specific class to the window to target it in CSS
@@ -62,7 +60,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>) {
         window.ime-window titlebar,
         window.ime-window windowhandle,
         window.ime-window button.titlebutton {
-            display: none;
             opacity: 0;
             margin: 0;
             padding: 0;

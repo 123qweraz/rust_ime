@@ -156,7 +156,6 @@ impl Default for Profile {
             name: "Chinese".to_string(),
             description: "默认中文输入".to_string(),
             dicts: vec![
-                "dicts/words.json".to_string(),
                 "dicts/basic_words.json".to_string(),
                 "dicts/chars.json".to_string(),
             ],
