@@ -330,10 +330,28 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
                 tray::TrayEvent::ToggleGui => {ime.show_candidates = !ime.show_candidates; if !ime.show_candidates { ime.reset(); } else { ime.update_gui(); } tray_handle.update(|t| t.show_candidates = ime.show_candidates); }
                 tray::TrayEvent::ToggleNotify => {ime.enable_notifications = !ime.enable_notifications; tray_handle.update(|t| t.show_notifications = ime.enable_notifications); }
                 tray::TrayEvent::ToggleKeystroke => {ime.show_keystrokes = !ime.show_keystrokes; if !ime.show_keystrokes { if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes); } } tray_handle.update(|t| t.show_keystrokes = ime.show_keystrokes); }
-                tray::TrayEvent::ToggleLearning => { if let Ok(mut w) = config_arc.write() { w.appearance.learning_mode = !w.appearance.learning_mode; let e = w.appearance.learning_mode; tray_handle.update(|t| t.learning_mode = e); if !e { if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes); } } let _ = crate::save_config(&w); } }
+                tray::TrayEvent::ToggleLearning => {
+                    if let Ok(mut w) = config_arc.write() {
+                        w.appearance.learning_mode = !w.appearance.learning_mode;
+                        let e = w.appearance.learning_mode;
+                        tray_handle.update(|t| t.learning_mode = e);
+                        if let Some(ref tx) = gui_tx {
+                            let _ = tx.send(crate::gui::GuiEvent::ApplyConfig((*w).clone()));
+                            if !e {
+                                let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes);
+                            }
+                        }
+                        let _ = crate::save_config(&w);
+                    }
+                }
                 tray::TrayEvent::ReloadConfig => {
                     let new_conf = load_config();
-                    if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ApplyConfig(new_conf.clone())); }
+                    if let Some(ref tx) = gui_tx { 
+                        let _ = tx.send(crate::gui::GuiEvent::ApplyConfig(new_conf.clone())); 
+                        if !new_conf.appearance.learning_mode && !new_conf.appearance.show_keystrokes {
+                            let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes);
+                        }
+                    }
                     if new_conf.input.autostart { let _ = install_autostart(); } else { let _ = remove_autostart(); }
                     ime.apply_config(&new_conf);
                     tray_handle.update(|t| { t.show_candidates = new_conf.appearance.show_candidates; t.show_notifications = new_conf.appearance.show_notifications; t.show_keystrokes = new_conf.appearance.show_keystrokes; t.learning_mode = new_conf.appearance.learning_mode; });

@@ -269,6 +269,11 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                 });
             },
             GuiEvent::ShowLearning(hanzi, hint) => {
+                if !current_config.appearance.learning_mode {
+                    while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
+                    key_window_c.set_opacity(0.0);
+                    return glib::Continue(true);
+                }
                 // 清空旧内容
                 while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
                 
