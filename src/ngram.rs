@@ -30,7 +30,7 @@ pub struct NgramModel {
 }
 
 impl NgramModel {
-    pub fn new() -> Self {
+    pub fn new(profile_path: Option<&str>) -> Self {
         let mut model = Self {
             static_index: None,
             static_unigrams: None,
@@ -42,21 +42,24 @@ impl NgramModel {
             max_token_len: 0,
         };
         model.load_token_list();
-        model.load_static_model();
+        if let Some(path) = profile_path {
+            model.load_static_model(path);
+        }
         model
     }
 
-    fn load_static_model(&mut self) {
-        let idx_path = "data/ngram.index";
-        let data_path = "data/ngram.data";
-        let uni_path = "data/ngram.unigram";
+    fn load_static_model(&mut self, base_path: &str) {
+        let idx_path = format!("{}/ngram.index", base_path);
+        let data_path = format!("{}/ngram.data", base_path);
+        let uni_path = format!("{}/ngram.unigram", base_path);
 
-        if Path::new(idx_path).exists() && Path::new(data_path).exists() {
-            if let (Ok(f_idx), Ok(f_data), Ok(f_uni)) = (File::open(idx_path), File::open(data_path), File::open(uni_path)) {
+        if Path::new(&idx_path).exists() && Path::new(&data_path).exists() {
+            if let (Ok(f_idx), Ok(f_data), Ok(f_uni)) = (File::open(&idx_path), File::open(&data_path), File::open(&uni_path)) {
                 if let (Ok(m_idx), Ok(m_data), Ok(m_uni)) = (unsafe { Mmap::map(&f_idx) }, unsafe { Mmap::map(&f_data) }, unsafe { Mmap::map(&f_uni) }) {
                     self.static_index = Map::new(MmapData(Arc::new(m_idx))).ok();
                     self.static_unigrams = Map::new(MmapData(Arc::new(m_uni))).ok();
                     self.static_data = Some(MmapData(Arc::new(m_data)));
+                    println!("[NGram] Loaded static model for path: {}", base_path);
                 }
             }
         }
@@ -179,16 +182,20 @@ impl NgramModel {
 
     #[allow(dead_code)]
     fn scan_score_in_block(&self, offset: usize, data: &[u8], target_bytes: &[u8]) -> u32 {
+        if offset + 4 > data.len() { return 0; }
         let mut cursor = offset;
-        let count = u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());
+        let count = u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap_or([0; 4]));
         cursor += 4;
         for _ in 0..count {
-            let len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap()) as usize;
+            if cursor + 2 > data.len() { break; }
+            let len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap_or([0; 2])) as usize;
             cursor += 2;
+            if cursor + len > data.len() { break; }
             let word_bytes = &data[cursor..cursor+len];
             if word_bytes == target_bytes {
                 cursor += len;
-                return u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());
+                if cursor + 4 > data.len() { return 0; }
+                return u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap_or([0; 4]));
             }
             cursor += len + 4;
         }

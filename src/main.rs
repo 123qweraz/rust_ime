@@ -1,4 +1,6 @@
-use evdev::{Device, InputEventKind, Key}; use std::collections::{HashMap, HashSet}; use std::fs::File; use std::io::{self, BufReader, Read}; use serde::Deserialize; use std::sync::atomic::{AtomicBool, Ordering}; use signal_hook::consts::signal::*; use signal_hook::flag; use daemonize::Daemonize;
+use evdev::{Device, InputEventKind, Key}; use std::collections::{HashMap, HashSet}; use std::fs::File; use std::io::{self, BufReader, Read}; use serde::Deserialize;
+use serde_json::Value;
+use std::sync::atomic::{AtomicBool, Ordering}; use signal_hook::consts::signal::*; use signal_hook::flag; use daemonize::Daemonize;
 
 mod ime;
 mod vkbd;
@@ -195,7 +197,7 @@ fn run_cli_conversion(input_args: &[String]) -> Result<(), Box<dyn std::error::E
     tries.insert("default".to_string(), trie);
     let (tx, _) = std::sync::mpsc::channel();
     let ime = Ime::new(
-        tries, "default".to_string(), load_punctuation_dict(&config.files.punctuation_file), HashMap::new(), tx, None,
+        tries, HashMap::new(), "default".to_string(), load_punctuation_dict(&config.files.punctuation_file), HashMap::new(), tx, None,
         config.input.enable_fuzzy_pinyin, "pinyin", false, false, false
     );
     println!("{}", ime.convert_text(&input_text));
@@ -204,7 +206,7 @@ fn run_cli_conversion(input_args: &[String]) -> Result<(), Box<dyn std::error::E
 
 fn run_training(path_str: &str) -> Result<(), Box<dyn std::error::Error>> {
     let path = Path::new(path_str);
-    let mut model = ngram::NgramModel::new();
+    let mut model = ngram::NgramModel::new(None);
     let user_ngram_path = find_project_root().join("data/user_adapter.json");
     model.load_user_adapter(&user_ngram_path);
     let mut files_processed = 0;
@@ -237,7 +239,30 @@ use std::sync::{Arc, RwLock, mpsc::Sender};
 
 fn is_combo(held: &HashSet<Key>, target: &[Key]) -> bool {
     if target.is_empty() { return false; }
-    target.iter().all(|k| held.contains(k)) && held.len() == target.len()
+    // 必须包含 target 中定义的所有键
+    if !target.iter().all(|k| held.contains(k)) { return false; }
+    
+    // 允许额外的“干扰键”（如 NumLock, CapsLock 或额外的 Shift）
+    // 但不允许包含 target 之外的其他普通字符键
+    let modifiers = [
+        Key::KEY_LEFTSHIFT, Key::KEY_RIGHTSHIFT, 
+        Key::KEY_LEFTCTRL, Key::KEY_RIGHTCTRL,
+        Key::KEY_LEFTALT, Key::KEY_RIGHTALT,
+        Key::KEY_LEFTMETA, Key::KEY_RIGHTMETA,
+        Key::KEY_CAPSLOCK, Key::KEY_NUMLOCK, Key::KEY_SCROLLLOCK
+    ];
+    
+    held.iter().all(|k| {
+        target.contains(k) || modifiers.contains(k)
+    })
+}
+
+#[derive(Debug, Deserialize, Clone)]
+struct DictEntry {
+    #[serde(alias = "char")]
+    word: String,
+    #[serde(alias = "en")]
+    hint: Option<String>,
 }
 
 fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config) -> Result<(), Box<dyn std::error::Error>> {
@@ -251,17 +276,38 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     flag::register(SIGINT, Arc::clone(&should_exit))?;
 
     let config_arc = Arc::new(RwLock::new(initial_config.clone()));
-    let active_profile = initial_config.input.default_profile.clone();
+    let active_profile = initial_config.input.default_profile.to_lowercase();
     let mut tries_map = HashMap::new();
-    if let Ok(trie) = Trie::load("data/chinese.index", "data/chinese.data") { 
-        tries_map.insert("Chinese".to_string(), trie); 
-    } else {
-        println!("⚠️ 警告: 无法加载中文词库 data/chinese.index");
+    let mut ngrams_map = HashMap::new();
+
+    // 动态扫描 data 目录加载所有词库
+    if let Ok(entries) = std::fs::read_dir("data") {
+        for entry in entries.flatten() {
+            if entry.path().is_dir() {
+                let dir_name = entry.file_name().to_string_lossy().to_string().to_lowercase();
+                let trie_idx = entry.path().join("trie.index");
+                let trie_dat = entry.path().join("trie.data");
+                
+                if trie_idx.exists() && trie_dat.exists() {
+                    if let Ok(trie) = Trie::load(&trie_idx, &trie_dat) {
+                        println!("[IME] 加载词库方案: {}", dir_name);
+                        tries_map.insert(dir_name.clone(), trie);
+                        
+                        // 尝试加载该方案私有的 N-gram
+                        let ngram_path = entry.path().to_string_lossy().to_string();
+                        let model = ngram::NgramModel::new(Some(&ngram_path));
+                        ngrams_map.insert(dir_name, model);
+                    }
+                }
+            }
+        }
     }
-    if let Ok(trie) = Trie::load("data/japanese.index", "data/japanese.data") { 
-        tries_map.insert("Japanese".to_string(), trie); 
+    
+    if tries_map.is_empty() {
+        println!("⚠️ 警告: 未发现任何有效词库，请运行: cargo run --bin compile_dict");
     }
     let tries_arc = Arc::new(RwLock::new(tries_map));
+    let ngrams_arc = Arc::new(RwLock::new(ngrams_map));
     
     let device_path = match initial_config.files.device_path.clone() {
         Some(path) => path,
@@ -288,8 +334,11 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     let t_web = Arc::clone(&tries_arc);
     let tx_web = tray_tx.clone();
     std::thread::spawn(move || {
-        let rt = tokio::runtime::Runtime::new().unwrap();
-        rt.block_on(async {{ web::WebServer::new(8765, c_web, t_web, tx_web).start().await; }});
+        if let Ok(rt) = tokio::runtime::Runtime::new() {
+            rt.block_on(async { web::WebServer::new(8765, c_web, t_web, tx_web).start().await; });
+        } else {
+            eprintln!("[Web] 无法创建 Tokio 运行时");
+        }
     });
 
     std::thread::spawn(move || {
@@ -306,26 +355,63 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     let gui_tx_learn = gui_tx.clone();
     let conf_learn = Arc::clone(&config_arc);
     std::thread::spawn(move || {
-        let mut current_trie: Option<(String, Trie)> = None;
+        let mut current_data: Option<(String, Vec<(String, String)>)> = None;
         loop {
-            let (enabled, interval, dict_path) = {
-                let c = conf_learn.read().unwrap();
-                (c.appearance.learning_mode, c.appearance.learning_interval_sec, c.appearance.learning_dict_path.clone())
-            };
-            if enabled && !dict_path.is_empty() {
-                if current_trie.as_ref().map_or(true, |(p, _)| p != &dict_path) {
-                    let stem = Path::new(&dict_path).file_stem().and_then(|s| s.to_str()).unwrap_or_default();
-                    if let Ok(t) = Trie::load(format!("target/dict_cache/{}.index", stem), format!("target/dict_cache/{}.data", stem)) {
-                        current_trie = Some((dict_path.clone(), t));
+            let config_res = conf_learn.read();
+            if let Ok(c) = config_res {
+                let (enabled, interval, dict_path) = (c.appearance.learning_mode, c.appearance.learning_interval_sec, c.appearance.learning_dict_path.clone());
+                drop(c); // Release lock early
+
+                if enabled {
+                    if !dict_path.is_empty() {
+                        if current_data.as_ref().map_or(true, |(p, _)| p != &dict_path) {
+                            println!("[Learning] Loading JSON dictionary: {}", dict_path);
+                            if let Ok(file) = File::open(&dict_path) {
+                                let reader = BufReader::new(file);
+                                if let Ok(json) = serde_json::from_reader::<_, HashMap<String, Value>>(reader) {
+                                    let mut entries = Vec::new();
+                                    for (_, val) in json {
+                                        if let Some(arr) = val.as_array() {
+                                            for v in arr {
+                                                if let Ok(entry) = serde_json::from_value::<DictEntry>(v.clone()) {
+                                                    entries.push((entry.word, entry.hint.unwrap_or_default()));
+                                                }
+                                            }
+                                        }
+                                    }
+                                    println!("[Learning] Loaded {} entries.", entries.len());
+                                    current_data = Some((dict_path.clone(), entries));
+                                } else {
+                                    eprintln!("[Learning] Failed to parse JSON: {}", dict_path);
+                                }
+                            } else {
+                                eprintln!("[Learning] Failed to open dictionary: {}", dict_path);
+                            }
+                        }
+                        if let Some((_, ref entries)) = current_data {
+                            if !entries.is_empty() {
+                                use rand::Rng;
+                                let mut rng = rand::thread_rng();
+                                let idx = rng.gen_range(0..entries.len());
+                                let (h, t) = &entries[idx];
+                                if let Some(ref tx) = gui_tx_learn {
+                                    let _ = tx.send(crate::gui::GuiEvent::ShowLearning(h.clone(), t.clone()));
+                                }
+                            }
+                        }
                     }
-                }
-                if let Some((_, ref trie)) = current_trie {
-                    if let Some(ref tx) = gui_tx_learn {
-                        if let Some((h, t)) = trie.get_random_entry() { let _ = tx.send(crate::gui::GuiEvent::ShowLearning(h, t)); }
+                    std::thread::sleep(std::time::Duration::from_secs(interval.max(1)));
+                } else {
+                    // When disabled, clear memory and check frequently for toggle
+                    if current_data.is_some() {
+                        println!("[Learning] Disabled, clearing data from memory.");
+                        current_data = None;
                     }
+                    std::thread::sleep(std::time::Duration::from_secs(1));
                 }
+            } else {
+                std::thread::sleep(std::time::Duration::from_secs(5));
             }
-            std::thread::sleep(std::time::Duration::from_secs(interval.max(1)));
         }
     });
 
@@ -336,8 +422,18 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
         tray_tx
     );
 
+    let tries_init = match tries_arc.read() {
+        Ok(t) => t.clone(),
+        Err(_) => HashMap::new(),
+    };
+    
+    let ngrams_init = match ngrams_arc.read() {
+        Ok(n) => n.clone(),
+        Err(_) => HashMap::new(),
+    };
+
     let mut ime = Ime::new(
-        tries_arc.read().unwrap().clone(), active_profile, punctuation, HashMap::new(), notify_tx.clone(), gui_tx.clone(),
+        tries_init, ngrams_init, active_profile, punctuation, HashMap::new(), notify_tx.clone(), gui_tx.clone(),
         initial_config.input.enable_fuzzy_pinyin, &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications, initial_config.appearance.show_candidates, initial_config.appearance.show_keystrokes
     );
@@ -352,15 +448,38 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     while !should_exit.load(Ordering::Relaxed) {
         while let Ok(event) = tray_rx.try_recv() {
             match event {
-                tray::TrayEvent::ToggleIme => { ime.toggle(); tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled); }
-                tray::TrayEvent::NextProfile => {ime.next_profile(); tray_handle.update(|t| t.active_profile = ime.current_profile.clone()); }
-                tray::TrayEvent::ToggleGui => {ime.show_candidates = !ime.show_candidates; if !ime.show_candidates { ime.reset(); } else { ime.update_gui(); } tray_handle.update(|t| t.show_candidates = ime.show_candidates); }
-                tray::TrayEvent::ToggleNotify => {ime.enable_notifications = !ime.enable_notifications; tray_handle.update(|t| t.show_notifications = ime.enable_notifications); }
-                tray::TrayEvent::ToggleKeystroke => {ime.show_keystrokes = !ime.show_keystrokes; if !ime.show_keystrokes { if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes); } } tray_handle.update(|t| t.show_keystrokes = ime.show_keystrokes); }
+                tray::TrayEvent::ToggleIme => { 
+                    ime.toggle(); 
+                    println!("[IME] Toggle -> Chinese: {}", ime.chinese_enabled);
+                    tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled); 
+                }
+                tray::TrayEvent::NextProfile => {
+                    ime.next_profile(); 
+                    println!("[IME] Switch Profile -> {}", ime.current_profile);
+                    tray_handle.update(|t| t.active_profile = ime.current_profile.clone()); 
+                }
+                tray::TrayEvent::ToggleGui => {
+                    ime.show_candidates = !ime.show_candidates; 
+                    if !ime.show_candidates { ime.reset(); } else { ime.update_gui(); } 
+                    println!("[IME] Toggle Candidates -> {}", ime.show_candidates);
+                    tray_handle.update(|t| t.show_candidates = ime.show_candidates); 
+                }
+                tray::TrayEvent::ToggleNotify => {
+                    ime.enable_notifications = !ime.enable_notifications; 
+                    println!("[IME] Toggle Notifications -> {}", ime.enable_notifications);
+                    tray_handle.update(|t| t.show_notifications = ime.enable_notifications); 
+                }
+                tray::TrayEvent::ToggleKeystroke => {
+                    ime.show_keystrokes = !ime.show_keystrokes; 
+                    if !ime.show_keystrokes { if let Some(ref tx) = gui_tx { let _ = tx.send(crate::gui::GuiEvent::ClearKeystrokes); } } 
+                    println!("[IME] Toggle Keystrokes -> {}", ime.show_keystrokes);
+                    tray_handle.update(|t| t.show_keystrokes = ime.show_keystrokes); 
+                }
                 tray::TrayEvent::ToggleLearning => {
                     if let Ok(mut w) = config_arc.write() {
                         w.appearance.learning_mode = !w.appearance.learning_mode;
                         let e = w.appearance.learning_mode;
+                        println!("[IME] Toggle Learning -> {}", e);
                         tray_handle.update(|t| t.learning_mode = e);
                         if let Some(ref tx) = gui_tx {
                             let _ = tx.send(crate::gui::GuiEvent::ApplyConfig((*w).clone()));
@@ -372,6 +491,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
                     }
                 }
                 tray::TrayEvent::ReloadConfig => {
+                    println!("[IME] Reloading configuration...");
                     let new_conf = load_config();
                     if let Some(ref tx) = gui_tx { 
                         let _ = tx.send(crate::gui::GuiEvent::ApplyConfig(new_conf.clone())); 
@@ -397,10 +517,11 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
                         PhantomMode::Pinyin => "pinyin",
                         _ => "none",
                     }.to_string();
+                    println!("[IME] Cycle Preview -> {}", mode);
                     tray_handle.update(|t| t.preview_mode = mode);
                 }
-                tray::TrayEvent::Restart => { should_exit.store(true, Ordering::Relaxed); }
-                tray::TrayEvent::Exit => { should_exit.store(true, Ordering::Relaxed); }
+                tray::TrayEvent::Restart => { println!("[IME] Restarting..."); should_exit.store(true, Ordering::Relaxed); }
+                tray::TrayEvent::Exit => { println!("[IME] Exiting..."); should_exit.store(true, Ordering::Relaxed); }
             }
         }
 
@@ -425,46 +546,57 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
                     held_keys.remove(&key);
                 }
 
-                let conf = config_arc.read().unwrap();
-                if val == 1 {
-                    // 快捷键组合检测
-                    if is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_language.key)) || is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_language_alt.key)) {
-                        ime.toggle(); 
-                        tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled); 
-                        continue;
-                    }
-                    if is_combo(&held_keys, &parse_key(&conf.hotkeys.cycle_paste_method.key)) {
-                        let msg = vkbd.cycle_paste_mode(); let _ = notify_tx.send(NotifyEvent::Message(msg)); continue;
-                    }
-                    if is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_dictionary.key)) {
-                        ime.next_profile(); tray_handle.update(|t| t.active_profile = ime.current_profile.clone()); continue;
-                    }
-                    if is_combo(&held_keys, &parse_key(&conf.hotkeys.toggle_notifications.key)) {
-                        ime.toggle_notifications(); tray_handle.update(|t| t.show_notifications = ime.enable_notifications); continue;
-                    }
-                    if is_combo(&held_keys, &parse_key(&conf.hotkeys.cycle_preview_mode.key)) {
-                        ime.cycle_phantom();
-                        let mode = match ime.phantom_mode {
-                            PhantomMode::Pinyin => "pinyin",
-                            _ => "none",
-                        }.to_string();
-                        tray_handle.update(|t| t.preview_mode = mode);
-                        continue;
-                    }
-                    if is_combo(&held_keys, &parse_key(&conf.hotkeys.trigger_caps_lock.key)) {
-                        vkbd.tap(Key::KEY_CAPSLOCK); continue;
-                    }
+                let config_guard = config_arc.read();
+                if let Ok(conf) = config_guard {
+                    if val == 1 {
+                        // 快捷键组合检测
+                        if is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_language.key)) || is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_language_alt.key)) {
+                            println!("[Shortcut] Switch Language Triggered");
+                            ime.toggle(); 
+                            tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled); 
+                            continue;
+                        }
+                        if is_combo(&held_keys, &parse_key(&conf.hotkeys.cycle_paste_method.key)) {
+                            println!("[Shortcut] Cycle Paste Method Triggered");
+                            let msg = vkbd.cycle_paste_mode(); let _ = notify_tx.send(NotifyEvent::Message(msg)); continue;
+                        }
+                        if is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_dictionary.key)) {
+                            println!("[Shortcut] Switch Dictionary Triggered");
+                            ime.next_profile(); 
+                            println!("[IME] Active Profile: {}", ime.current_profile);
+                            tray_handle.update(|t| t.active_profile = ime.current_profile.clone()); continue;
+                        }
+                        if is_combo(&held_keys, &parse_key(&conf.hotkeys.toggle_notifications.key)) {
+                            println!("[Shortcut] Toggle Notifications Triggered");
+                            ime.toggle_notifications(); tray_handle.update(|t| t.show_notifications = ime.enable_notifications); continue;
+                        }
+                        if is_combo(&held_keys, &parse_key(&conf.hotkeys.cycle_preview_mode.key)) {
+                            println!("[Shortcut] Cycle Preview Triggered");
+                            ime.cycle_phantom();
+                            let mode = match ime.phantom_mode {
+                                PhantomMode::Pinyin => "pinyin",
+                                _ => "none",
+                            }.to_string();
+                            tray_handle.update(|t| t.preview_mode = mode);
+                            continue;
+                        }
+                        if is_combo(&held_keys, &parse_key(&conf.hotkeys.trigger_caps_lock.key)) {
+                            println!("[Shortcut] Trigger real CapsLock");
+                            vkbd.tap(Key::KEY_CAPSLOCK); continue;
+                        }
 
-                    // 特殊硬件按键直接检测 (如物理 CapsLock 或 Space+Ctrl)
-                    if (key == Key::KEY_SPACE && (held_keys.contains(&Key::KEY_LEFTCTRL) || held_keys.contains(&Key::KEY_RIGHTCTRL))) || key == Key::KEY_CAPSLOCK {
-                        ime.toggle();
-                        tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled);
-                        continue;
-                    }
+                        // 特殊硬件按键直接检测 (如物理 CapsLock 或 Space+Ctrl)
+                        if (key == Key::KEY_SPACE && (held_keys.contains(&Key::KEY_LEFTCTRL) || held_keys.contains(&Key::KEY_RIGHTCTRL))) || key == Key::KEY_CAPSLOCK {
+                            println!("[Shortcut] Quick Toggle Triggered ({:?})", key);
+                            ime.toggle();
+                            tray_handle.update(|t| t.chinese_enabled = ime.chinese_enabled);
+                            continue;
+                        }
 
-                    // 重置逻辑
-                    if held_keys.contains(&Key::KEY_LEFTCTRL) || held_keys.contains(&Key::KEY_LEFTALT) || held_keys.contains(&Key::KEY_LEFTMETA) {
-                        if !ime.buffer.is_empty() { ime.reset(); }
+                        // 重置逻辑
+                        if held_keys.contains(&Key::KEY_LEFTCTRL) || held_keys.contains(&Key::KEY_LEFTALT) || held_keys.contains(&Key::KEY_LEFTMETA) {
+                            if !ime.buffer.is_empty() { println!("[IME] Resetting buffer due to modifier."); ime.reset(); }
+                        }
                     }
                 }
 
@@ -521,7 +653,7 @@ fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
             Ok(d) => {
                 found_any = true;
                 if d.supported_keys().map_or(false, |k| k.contains(Key::KEY_A) && k.contains(Key::KEY_ENTER)) {
-                    return Ok(p.to_str().unwrap().to_string());
+                    return Ok(p.to_string_lossy().to_string());
                 }
             }
             Err(e) if e.kind() == std::io::ErrorKind::PermissionDenied => {

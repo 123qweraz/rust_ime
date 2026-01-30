@@ -53,9 +53,17 @@ impl WebServer {
             .with_state(state);
 
         let addr = format!("127.0.0.1:{}", self.port);
-        println!("[Web] 服务器启动在 http://{}", addr);
-        let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
-        axum::serve(listener, app).await.unwrap();
+        match tokio::net::TcpListener::bind(&addr).await {
+            Ok(listener) => {
+                println!("[Web] 服务器启动在 http://{}", addr);
+                if let Err(e) = axum::serve(listener, app).await {
+                    eprintln!("[Web] Server error: {}", e);
+                }
+            }
+            Err(e) => {
+                eprintln!("[Web] Failed to bind to {}: {}", addr, e);
+            }
+        }
     }
 }
 
@@ -77,8 +85,11 @@ async fn static_handler(uri: Uri) -> impl IntoResponse {
     }
 }
 
-async fn get_config(State((config, _, _)): State<WebState>) -> Json<Config> {
-    Json(config.read().unwrap().clone())
+async fn get_config(State((config, _, _)): State<WebState>) -> impl IntoResponse {
+    match config.read() {
+        Ok(c) => Json(c.clone()).into_response(),
+        Err(_) => StatusCode::INTERNAL_SERVER_ERROR.into_response(),
+    }
 }
 
 async fn update_config(
@@ -86,7 +97,10 @@ async fn update_config(
     Json(new_config): Json<Config>
 ) -> StatusCode {
     {
-        let mut w = config.write().unwrap();
+        let mut w = match config.write() {
+            Ok(w) => w,
+            Err(_) => return StatusCode::INTERNAL_SERVER_ERROR,
+        };
         *w = new_config.clone();
     }
     if let Err(_e) = crate::save_config(&new_config) { return StatusCode::INTERNAL_SERVER_ERROR; }
@@ -99,7 +113,10 @@ async fn reset_config(
 ) -> StatusCode {
     let default_conf = Config::default_config();
     {
-        let mut w = config.write().unwrap();
+        let mut w = match config.write() {
+            Ok(w) => w,
+            Err(_) => return StatusCode::INTERNAL_SERVER_ERROR,
+        };
         *w = default_conf.clone();
     }
     if let Err(_e) = crate::save_config(&default_conf) { return StatusCode::INTERNAL_SERVER_ERROR; }

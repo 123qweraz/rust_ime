@@ -38,6 +38,7 @@ pub struct Ime {
     pub state: ImeState,
     pub buffer: String,
     pub tries: HashMap<String, Trie>, 
+    pub ngrams: HashMap<String, crate::ngram::NgramModel>,
     pub current_profile: String,
     pub context: Vec<char>,
     pub punctuation: HashMap<String, String>,
@@ -61,7 +62,8 @@ pub struct Ime {
 
 impl Ime {
     pub fn new(
-        tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, 
+        tries: HashMap<String, Trie>, ngrams: HashMap<String, crate::ngram::NgramModel>,
+        initial_profile: String, punctuation: HashMap<String, String>, 
         _word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, 
         gui_tx: Option<Sender<crate::gui::GuiEvent>>, enable_fuzzy: bool, phantom_mode_str: &str, 
         enable_notifications: bool, show_candidates: bool, show_keystrokes: bool,
@@ -70,13 +72,20 @@ impl Ime {
             "pinyin" => PhantomMode::Pinyin,
             _ => PhantomMode::None,
         };
+        let mut syllable_set = std::collections::HashSet::new();
+        if let Ok(content) = std::fs::read_to_string("dicts/chinese/syllables.txt") {
+            for line in content.lines() {
+                let s = line.trim();
+                if !s.is_empty() { syllable_set.insert(s.to_string()); }
+            }
+        }
         Self {
-            state: ImeState::Direct, buffer: String::new(), tries, current_profile: initial_profile,
+            state: ImeState::Direct, buffer: String::new(), tries, ngrams, current_profile: initial_profile,
             context: Vec::new(), punctuation,
             candidates: vec![], candidate_hints: vec![], selected: 0, page: 0, chinese_enabled: false,
             notification_tx, gui_tx, phantom_mode, enable_notifications, show_candidates, show_keystrokes,
             phantom_text: String::new(), is_highlighted: false, enable_fuzzy,
-            syllable_set: std::collections::HashSet::new(), best_segmentation: vec![],
+            syllable_set, best_segmentation: vec![],
         }
     }
 
@@ -114,20 +123,12 @@ impl Ime {
         }
     }
 
-    fn ensure_syllables(&mut self) {
-        if !self.syllable_set.is_empty() { return; }
-        if let Ok(content) = std::fs::read_to_string("dicts/chinese/syllables.txt") {
-            for line in content.lines() {
-                let s = line.trim();
-                if !s.is_empty() { self.syllable_set.insert(s.to_string()); }
-            }
-        }
-    }
-
-    fn lookup(&mut self) {
+    pub fn lookup(&mut self) {
         if self.buffer.is_empty() { self.reset(); return; }
-        self.ensure_syllables();
-        let dict = if let Some(d) = self.tries.get(&self.current_profile) { d } else { self.reset(); return; };
+        let dict = if let Some(d) = self.tries.get(&self.current_profile.to_lowercase()) { d } else { 
+            eprintln!("[IME] Profile not found: {}", self.current_profile);
+            self.reset(); return; 
+        };
 
         let mut pinyin_search = self.buffer.clone();
         let mut filter_string = String::new();
@@ -174,6 +175,10 @@ impl Ime {
                 let next_segment = &segments[i];
                 let next_chars = if next_segment.len() == 1 { dict.search_bfs(next_segment, 10) } else { dict.get_all_exact(next_segment).unwrap_or_default() };
                 let mut next_paths = Vec::with_capacity(20);
+                
+                // 获取当前方案的 N-gram 模型
+                let ngram_model = self.ngrams.get(&self.current_profile.to_lowercase());
+
                 for (prev_word, prev_score) in &current_paths {
                     let prev_score_val = *prev_score;
                     for (next_char_str, next_hint) in &next_chars {
@@ -182,12 +187,22 @@ impl Ime {
                         new_word.push_str(next_char_str);
                         
                         let mut new_score = prev_score_val;
+                        
+                        // 1. 词库匹配加分 (整词匹配)
                         let combined_pinyin = segments[0..=i].join("");
                         if let Some(matches) = dict.get_all_exact(&combined_pinyin) {
-                            for (w, h) in matches { 
-                                if &w == &new_word { word_to_hint.insert(w, h); new_score += 1000000; break; } 
+                            for (w, _) in matches { 
+                                if &w == &new_word { new_score += 1000000; break; } 
                             } 
                         }
+
+                        // 2. N-gram 语境加分
+                        if let Some(model) = ngram_model {
+                            let context_chars: Vec<char> = prev_word.chars().collect();
+                            let score = model.get_score(&context_chars, next_char_str);
+                            new_score += score;
+                        }
+
                         next_paths.push((new_word, new_score));
                     }
                 }
@@ -441,13 +456,17 @@ impl Ime {
 
     pub fn next_profile(&mut self) {
         let mut profiles: Vec<String> = self.tries.keys().cloned().collect();
+        if profiles.is_empty() { return; }
         profiles.sort();
-        if let Ok(idx) = profiles.binary_search(&self.current_profile) {
-            let next_idx = (idx + 1) % profiles.len();
-            self.current_profile = profiles[next_idx].clone();
-            self.reset();
-            let _ = self.notification_tx.send(NotifyEvent::Message(format!("切换词库: {}", self.current_profile)));
-        }
+        
+        let current_lower = self.current_profile.to_lowercase();
+        let idx = profiles.iter().position(|p| p.to_lowercase() == current_lower).unwrap_or(0);
+        let next_idx = (idx + 1) % profiles.len();
+        
+        self.current_profile = profiles[next_idx].clone();
+        println!("[IME] Switched profile to: {}", self.current_profile);
+        self.reset();
+        let _ = self.notification_tx.send(NotifyEvent::Message(format!("切换词库: {}", self.current_profile)));
     }
 
     pub fn convert_text(&self, text: &str) -> String {

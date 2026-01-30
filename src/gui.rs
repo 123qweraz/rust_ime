@@ -217,11 +217,13 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
             GuiEvent::Update { pinyin, candidates, hints, selected } => {
                 if pinyin.is_empty() && candidates.is_empty() {
                     window_c.set_opacity(0.0);
+                    window_c.set_can_target(false);
                     while let Some(child) = candidates_box_c.first_child() { candidates_box_c.remove(&child); }
                     pinyin_label_c.set_text("");
                     return glib::Continue(true);
                 }
                 window_c.set_opacity(1.0);
+                window_c.set_can_target(true);
                 pinyin_label_c.set_text(&pinyin);
                 while let Some(child) = candidates_box_c.first_child() { candidates_box_c.remove(&child); }
                 let page_start = (selected / 5) * 5;
@@ -251,6 +253,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                 label.add_css_class("key-label");
                 key_box_c.append(&label);
                 key_window_c.set_opacity(1.0);
+                key_window_c.set_can_target(true);
                 
                 let kb_weak = key_box_c.downgrade();
                 let label_weak = label.downgrade();
@@ -263,7 +266,10 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                     
                     kb.remove(&l);
                     if kb.first_child().is_none() {
-                        if let Some(kw) = kw_weak.upgrade() { kw.set_opacity(0.0); }
+                        if let Some(kw) = kw_weak.upgrade() { 
+                            kw.set_opacity(0.0); 
+                            kw.set_can_target(false);
+                        }
                     }
                     glib::Continue(false)
                 });
@@ -272,6 +278,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                 if !current_config.appearance.learning_mode {
                     while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
                     key_window_c.set_opacity(0.0);
+                    key_window_c.set_can_target(false);
                     return glib::Continue(true);
                 }
                 // 清空旧内容
@@ -285,6 +292,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                 
                 key_box_c.append(&label);
                 key_window_c.set_opacity(1.0);
+                key_window_c.set_can_target(true);
 
                 let kb_weak = key_box_c.downgrade();
                 let label_weak = label.downgrade();
@@ -296,7 +304,10 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                     
                     kb.remove(&l);
                     if kb.first_child().is_none() {
-                        if let Some(kw) = kw_weak.upgrade() { kw.set_opacity(0.0); }
+                        if let Some(kw) = kw_weak.upgrade() { 
+                            kw.set_opacity(0.0); 
+                            kw.set_can_target(false);
+                        }
                     }
                     glib::Continue(false)
                 });
@@ -304,6 +315,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
             GuiEvent::ClearKeystrokes => {
                 while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
                 key_window_c.set_opacity(0.0);
+                key_window_c.set_can_target(false);
             },
             GuiEvent::Exit => { window_c.close(); key_window_c.close(); return glib::Continue(false); }
         }

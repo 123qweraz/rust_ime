@@ -17,6 +17,7 @@ pub enum PasteMode {
 pub struct Vkbd {
     pub dev: VirtualDevice,
     pub paste_mode: PasteMode,
+    pub auto_mode: bool,
 }
 
 impl Vkbd {
@@ -53,6 +54,7 @@ impl Vkbd {
         Ok(Self { 
             dev,
             paste_mode: PasteMode::CtrlV, // Default standard
+            auto_mode: true,
         })
     }
 
@@ -61,9 +63,107 @@ impl Vkbd {
         self.paste_mode = mode;
         println!("[Vkbd] Paste mode set to: {:?}", mode);
     }
+
+    fn check_and_update_mode(&mut self) {
+        if !self.auto_mode { return; } //
+        
+        // 增加检测，避免频繁调用不存在的二进制导致性能损耗和报错
+        let output = Command::new("xdotool")
+            .args(["getactivewindow", "getwindowclassname"])
+            .output();
+        
+        match output {
+            Ok(out) => {
+                let class_name = String::from_utf8_lossy(&out.stdout).to_lowercase();
+                if class_name.trim().is_empty() { return; } //
+                
+                let is_terminal = class_name.contains("terminal") || 
+                                  class_name.contains("alacritty") || 
+                                  class_name.contains("kitty") || 
+                                  class_name.contains("konsole") ||
+                                  class_name.contains("wezterm") ||
+                                  class_name.contains("foot") ||
+                                  class_name.contains("tmux");
+                
+                if is_terminal {
+                    if self.paste_mode != PasteMode::CtrlShiftV {
+                        self.paste_mode = PasteMode::CtrlShiftV;
+                        println!("[Vkbd] Detected Terminal ({}), using Ctrl+Shift+V", class_name.trim());
+                    }
+                }
+                else {
+                    if self.paste_mode != PasteMode::CtrlV {
+                        self.paste_mode = PasteMode::CtrlV;
+                        println!("[Vkbd] Detected App ({}), using Ctrl+V", class_name.trim());
+                    }
+                }
+            }
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
+                // 如果找不到 xdotool，静默关闭自动模式，不再尝试
+                self.auto_mode = false;
+                eprintln!("[Vkbd] xdotool not found. Automatic terminal detection disabled. (Please install xdotool)");
+            }
+            Err(e) => {
+                eprintln!("[Vkbd] xdotool error: {}", e);
+            }
+        }
+    }
+
+    fn send_via_clipboard(&mut self, text: &str) -> bool {
+        use arboard::Clipboard;
+        
+        let mut cb = match Clipboard::new() {
+            Ok(c) => c,
+            Err(e) => {
+                eprintln!("[Error] Failed to initialize clipboard (arboard): {}", e);
+                return false;
+            }
+        };
+
+        if let Err(e) = cb.set_text(text.to_string()) {
+            eprintln!("[Error] Failed to set clipboard text: {}", e);
+            return false;
+        }
+
+        // 稍微延长等待剪贴板同步的时间，确保复杂应用能感知
+        thread::sleep(Duration::from_millis(180));
+        
+        match self.paste_mode {
+            PasteMode::CtrlV => {
+                println!("[Vkbd] Injecting via Ctrl+V");
+                self.emit(Key::KEY_LEFTCTRL, true);
+                thread::sleep(Duration::from_millis(30));
+                self.tap(Key::KEY_V);
+                thread::sleep(Duration::from_millis(30));
+                self.emit(Key::KEY_LEFTCTRL, false);
+            },
+            PasteMode::CtrlShiftV => {
+                println!("[Vkbd] Injecting via Ctrl+Shift+V");
+                self.emit(Key::KEY_LEFTCTRL, true);
+                self.emit(Key::KEY_LEFTSHIFT, true);
+                thread::sleep(Duration::from_millis(30));
+                self.tap(Key::KEY_V);
+                thread::sleep(Duration::from_millis(30));
+                self.emit(Key::KEY_LEFTSHIFT, false);
+                self.emit(Key::KEY_LEFTCTRL, false);
+            },
+            PasteMode::ShiftInsert => {
+                println!("[Vkbd] Injecting via Shift+Insert");
+                self.emit(Key::KEY_LEFTSHIFT, true);
+                thread::sleep(Duration::from_millis(30));
+                self.tap(Key::KEY_INSERT);
+                thread::sleep(Duration::from_millis(30));
+                self.emit(Key::KEY_LEFTSHIFT, false);
+            },
+            PasteMode::UnicodeHex => {}
+        }
+        
+        true
+    }
     
     #[allow(dead_code)]
     pub fn cycle_paste_mode(&mut self) -> String {
+        self.auto_mode = false; // Disable auto mode if user manually cycles
         self.paste_mode = match self.paste_mode {
             PasteMode::CtrlV => PasteMode::CtrlShiftV,
             PasteMode::CtrlShiftV => PasteMode::ShiftInsert,
@@ -71,7 +171,7 @@ impl Vkbd {
             PasteMode::UnicodeHex => PasteMode::CtrlV,
         };
         
-        println!("[Vkbd] Switched paste mode to: {:?}", self.paste_mode);
+        println!("[Vkbd] Switched paste mode to: {:?} (Auto-mode disabled)", self.paste_mode);
         
         match self.paste_mode {
             PasteMode::CtrlV => "标准模式 (Ctrl+V)".to_string(),
@@ -82,23 +182,26 @@ impl Vkbd {
     }
 
     pub fn send_text(&mut self, text: &str) {
+        self.check_and_update_mode();
         self.send_text_internal(text, false);
     }
 
     #[allow(dead_code)]
     pub fn send_text_highlighted(&mut self, text: &str) {
+        self.check_and_update_mode();
         self.send_text_internal(text, true);
     }
 
     fn send_text_internal(&mut self, text: &str, highlight: bool) {
-        if text.is_empty() { return; }
+        if text.is_empty() { return; } //
 
         // Fast path: for single ASCII characters without highlight, use direct key taps
         if !highlight && text.len() == 1 {
-            let c = text.chars().next().unwrap();
-            if let Some(key) = char_to_key(c) {
-                self.tap(key);
-                return;
+            if let Some(c) = text.chars().next() {
+                if let Some(key) = char_to_key(c) {
+                    self.tap(key);
+                    return;
+                }
             }
         }
 
@@ -137,7 +240,7 @@ impl Vkbd {
     }
     
     pub fn backspace(&mut self, count: usize) {
-        if count == 0 { return; }
+        if count == 0 { return; } //
         
         // Fallback or GUI mode: use uinput Key::KEY_BACKSPACE
         for _ in 0..count {
@@ -178,59 +281,6 @@ impl Vkbd {
 
         self.tap(Key::KEY_ENTER);
         thread::sleep(Duration::from_millis(10));
-        true
-    }
-
-    fn send_via_clipboard(&mut self, text: &str) -> bool {
-        use arboard::Clipboard;
-        
-        let mut cb = match Clipboard::new() {
-            Ok(c) => c,
-            Err(e) => {
-                eprintln!("[Error] Failed to initialize clipboard (arboard): {}", e);
-                return false;
-            }
-        };
-
-        if let Err(e) = cb.set_text(text.to_string()) {
-            eprintln!("[Error] Failed to set clipboard text: {}", e);
-            return false;
-        }
-
-        thread::sleep(Duration::from_millis(150));
-        
-        match self.paste_mode {
-            PasteMode::CtrlV => {
-                // Standard: Ctrl + V
-                self.emit(Key::KEY_LEFTCTRL, true);
-                thread::sleep(Duration::from_millis(20));
-                self.tap(Key::KEY_V);
-                thread::sleep(Duration::from_millis(20));
-                self.emit(Key::KEY_LEFTCTRL, false);
-            },
-            PasteMode::CtrlShiftV => {
-                // Terminal: Ctrl + Shift + V
-                self.emit(Key::KEY_LEFTCTRL, true);
-                self.emit(Key::KEY_LEFTSHIFT, true);
-                thread::sleep(Duration::from_millis(20));
-                self.tap(Key::KEY_V);
-                thread::sleep(Duration::from_millis(20));
-                self.emit(Key::KEY_LEFTSHIFT, false);
-                self.emit(Key::KEY_LEFTCTRL, false);
-            },
-            PasteMode::ShiftInsert => {
-                // X11 Legacy: Shift + Insert
-                self.emit(Key::KEY_LEFTSHIFT, true);
-                thread::sleep(Duration::from_millis(20));
-                self.tap(Key::KEY_INSERT);
-                thread::sleep(Duration::from_millis(20));
-                self.emit(Key::KEY_LEFTSHIFT, false);
-            },
-            PasteMode::UnicodeHex => {
-                // Should not happen here if send_text handles it, but just in case
-            }
-        }
-        
         true
     }
 

@@ -74,22 +74,26 @@ impl Trie {
 
     fn read_block(&self, offset: usize) -> Vec<(String, String)> {
         let data = self.data.as_ref();
-        let mut cursor = offset;
+        if offset + 4 > data.len() { return Vec::new(); }
         
-        let count = u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());
-        cursor += 4;
+        let count = u32::from_le_bytes(data[offset..offset+4].try_into().unwrap_or([0; 4]));
+        let mut cursor = offset + 4;
         
         let mut results = Vec::with_capacity(count as usize);
         for _ in 0..count {
-            // 读取词
-            let w_len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap()) as usize;
+            if cursor + 2 > data.len() { break; }
+            let w_len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap_or([0; 2])) as usize;
             cursor += 2;
+            
+            if cursor + w_len > data.len() { break; }
             let word = String::from_utf8_lossy(&data[cursor..cursor+w_len]).to_string();
             cursor += w_len;
             
-            // 读取提示
-            let h_len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap()) as usize;
+            if cursor + 2 > data.len() { break; }
+            let h_len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap_or([0; 2])) as usize;
             cursor += 2;
+            
+            if cursor + h_len > data.len() { break; }
             let hint = String::from_utf8_lossy(&data[cursor..cursor+h_len]).to_string();
             cursor += h_len;
             

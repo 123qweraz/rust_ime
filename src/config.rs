@@ -403,8 +403,7 @@ pub fn parse_key(s: &str) -> Vec<Key> {
                 "page_up" => Some(Key::KEY_PAGEUP),
                 "page_down" => Some(Key::KEY_PAGEDOWN),
                 s if s.len() == 1 => {
-                    let c = s.chars().next().unwrap();
-                    match c {
+                    s.chars().next().and_then(|c| match c {
                         'a' => Some(Key::KEY_A),
                         'b' => Some(Key::KEY_B),
                         'c' => Some(Key::KEY_C),
@@ -442,7 +441,7 @@ pub fn parse_key(s: &str) -> Vec<Key> {
                         '8' => Some(Key::KEY_8),
                         '9' => Some(Key::KEY_9),
                         _ => None,
-                    }
+                    })
                 }
                 _ => None,
             }

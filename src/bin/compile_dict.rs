@@ -1,4 +1,4 @@
-use fst::{MapBuilder};
+use fst::MapBuilder;
 use std::collections::{BTreeMap, HashMap};
 use std::fs::{self, File};
 use std::io::{BufWriter, Write};
@@ -6,16 +6,81 @@ use std::path::Path;
 use serde_json::Value;
 use walkdir::WalkDir;
 
+use std::time::SystemTime;
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     fs::create_dir_all("data")?;
-    compile_dict_for_path("dicts/chinese", "data/chinese")?;
-    compile_dict_for_path("dicts/japanese", "data/japanese")?;
+
+    // 动态扫描 dicts 目录下的所有子目录并编译
+    if let Ok(entries) = fs::read_dir("dicts") {
+        for entry in entries.flatten() {
+            if entry.path().is_dir() {
+                let dir_name = entry.file_name().to_string_lossy().to_string();
+                let src_path = format!("dicts/{}", dir_name);
+                let out_dir = format!("data/{}", dir_name);
+                fs::create_dir_all(&out_dir)?;
+                
+                let trie_idx = format!("{}/trie.index", out_dir);
+                let local_ngram_src = format!("{}/n-gram-model", src_path);
+                
+                // 1. 检查是否需要编译 Trie
+                if should_compile(Path::new(&src_path), Path::new(&trie_idx)) {
+                    compile_dict_for_path(&src_path, &format!("{}/trie", out_dir))?;
+                } else {
+                    println!("[Compiler] Skipping Trie for: {} (No changes detected)", dir_name);
+                }
+                
+                // 2. 检查并编译 N-gram
+                let ngram_idx = format!("{}/ngram.index", out_dir);
+                if Path::new(&local_ngram_src).exists() {
+                    if should_compile(Path::new(&local_ngram_src), Path::new(&ngram_idx)) {
+                        println!("[Compiler] Compiling local N-gram model for: {}", dir_name);
+                        compile_ngram_for_path(&local_ngram_src, &out_dir)?;
+                    }
+                } else if dir_name == "chinese" && Path::new("n-gram-model").exists() {
+                    if should_compile(Path::new("n-gram-model"), Path::new(&ngram_idx)) {
+                        compile_ngram_for_path("n-gram-model", &out_dir)?;
+                    } else {
+                        println!("[Compiler] Skipping Chinese N-gram (No changes detected)");
+                    }
+                }
+            }
+        }
+    }
     
-    // 自动提取音节表
-    extract_syllables_to_file("dicts/chinese/chars.json", "dicts/chinese/syllables.txt")?;
+    // 自动提取音节表 (优先从 chinese/chars.json 提取)
+    if Path::new("dicts/chinese/chars.json").exists() {
+        extract_syllables_to_file("dicts/chinese/chars.json", "dicts/chinese/syllables.txt")?;
+    }
     
-    compile_ngram()?;
     Ok(())
+}
+
+fn should_compile(src_dir: &Path, target_file: &Path) -> bool {
+    if !target_file.exists() { return true; }
+    
+    let target_mtime = target_file.metadata().and_then(|m| m.modified()).unwrap_or(SystemTime::UNIX_EPOCH);
+    
+    // 1. 检查文件夹本身的修改时间 (新增/删除文件会触发)
+    if let Ok(dir_mtime) = src_dir.metadata().and_then(|m| m.modified()) {
+        if dir_mtime > target_mtime { return true; }
+    }
+
+    // 2. 递归检查源目录下所有文件的最大修改时间
+    let mut max_src_mtime = SystemTime::UNIX_EPOCH;
+    let mut file_count = 0;
+    for entry in WalkDir::new(src_dir).into_iter().filter_map(|e| e.ok()) {
+        if entry.path().is_file() {
+            file_count += 1;
+            if let Ok(mtime) = entry.path().metadata().and_then(|m| m.modified()) {
+                if mtime > max_src_mtime { max_src_mtime = mtime; }
+            }
+        }
+    }
+    
+    // 如果内部文件有更新，或者逻辑上我们想更严格一点 (比如记录上一次的文件总数)
+    // 这里我们先通过 mtime 判定，通常 dir_mtime 已经能涵盖新增/删除了
+    max_src_mtime > target_mtime
 }
 
 fn extract_syllables_to_file(src_json: &str, out_txt: &str) -> Result<(), Box<dyn std::error::Error>> {
@@ -38,12 +103,14 @@ fn compile_dict_for_path(src_dir: &str, out_stem: &str) -> Result<(), Box<dyn st
     println!("[Compiler] Compiling dictionary from {} -> {}...", src_dir, out_stem);
     
     for entry in WalkDir::new(src_dir).into_iter().filter_map(|e| e.ok()) {
-        if entry.path().extension().map_or(false, |ext| ext == "json") {
-            // Skip punctuation file for Trie (it's handled separately)
-            if entry.path().file_name().and_then(|n| n.to_str()).map_or(false, |n| n == "punctuation.json") {
+        let path = entry.path();
+        if path.extension().map_or(false, |ext| ext == "json") {
+            if path.file_name().and_then(|n| n.to_str()).map_or(false, |n| n == "punctuation.json") {
                 continue;
             }
-            process_json_file(entry.path(), &mut entries)?;
+            process_json_file(path, &mut entries)?;
+        } else if path.extension().map_or(false, |ext| ext == "yaml") {
+            process_yaml_file(path, &mut entries)?;
         }
     }
     
@@ -51,6 +118,30 @@ fn compile_dict_for_path(src_dir: &str, out_stem: &str) -> Result<(), Box<dyn st
     let dat_path = format!("{}.data", out_stem);
     write_binary_dict(&idx_path, &dat_path, entries)?;
     println!("[Compiler] Finished: {}", out_stem);
+    Ok(())
+}
+
+fn process_yaml_file(path: &Path, entries: &mut BTreeMap<String, Vec<(String, String)>>) -> Result<(), Box<dyn std::error::Error>> {
+    use std::io::{BufRead, BufReader};
+    let file = File::open(path)?;
+    let reader = BufReader::new(file);
+    let mut in_data = false;
+
+    for line in reader.lines() {
+        let line = line?;
+        if !in_data {
+            if line.starts_with("...") { in_data = true; }
+            continue;
+        }
+        if line.starts_with('#') || line.trim().is_empty() { continue; }
+
+        let parts: Vec<&str> = line.split('\t').collect();
+        if parts.len() >= 2 {
+            let word = parts[0].to_string();
+            let pinyin = parts[1].replace(' ', "").to_lowercase();
+            entries.entry(pinyin).or_default().push((word, String::new()));
+        }
+    }
     Ok(())
 }
 
@@ -107,10 +198,10 @@ fn write_binary_dict(idx_path: &str, dat_path: &str, entries: BTreeMap<String, V
     Ok(())
 }
 
-fn compile_ngram() -> Result<(), Box<dyn std::error::Error>> {
+fn compile_ngram_for_path(src_dir: &str, out_dir: &str) -> Result<(), Box<dyn std::error::Error>> {
     let mut transitions: BTreeMap<String, HashMap<String, u32>> = BTreeMap::new();
     let mut unigrams: BTreeMap<String, u32> = BTreeMap::new();
-    for entry in WalkDir::new("n-gram-model").into_iter().filter_map(|e| e.ok()) {
+    for entry in WalkDir::new(src_dir).into_iter().filter_map(|e| e.ok()) {
         if entry.path().extension().map_or(false, |ext| ext == "json") {
             let file = File::open(entry.path())?;
             let json: Value = serde_json::from_reader(file)?;
@@ -129,9 +220,12 @@ fn compile_ngram() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    let mut data_writer = BufWriter::new(File::create("data/ngram.data")?);
-    let mut index_builder = MapBuilder::new(File::create("data/ngram.index")?)?;
-    let mut unigram_builder = MapBuilder::new(File::create("data/ngram.unigram")?)?;
+    
+    if transitions.is_empty() && unigrams.is_empty() { return Ok(()); }
+
+    let mut data_writer = BufWriter::new(File::create(format!("{}/ngram.data", out_dir))?);
+    let mut index_builder = MapBuilder::new(File::create(format!("{}/ngram.index", out_dir))?)?;
+    let mut unigram_builder = MapBuilder::new(File::create(format!("{}/ngram.unigram", out_dir))?)?;
     let mut current_offset = 0u64;
     for (ctx, next_tokens) in transitions {
         index_builder.insert(&ctx, current_offset)?;
@@ -146,9 +240,11 @@ fn compile_ngram() -> Result<(), Box<dyn std::error::Error>> {
         data_writer.write_all(&block)?;
         current_offset += block.len() as u64;
     }
-    index_builder.finish()?; data_writer.flush()?;
-    for (token, score) in unigrams { unigram_builder.insert(&token, score as u64)?; }
+    index_builder.finish()?;
+    data_writer.flush()?;
+    for (token, score) in unigrams { unigram_builder.insert(&token, score as u64)?;
+    }
     unigram_builder.finish()?;
-    println!("[Compiler] N-gram compiled.");
+    println!("[Compiler] N-gram compiled to: {}", out_dir);
     Ok(())
 }
