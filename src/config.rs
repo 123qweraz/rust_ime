@@ -54,7 +54,7 @@ impl Default for Appearance {
             show_notifications: false,
             preview_mode: "none".to_string(),
             show_candidates: false,
-            show_keystrokes: false,
+            show_keystrokes: default_show_keystrokes(),
             candidate_anchor: default_cand_anchor(),
             candidate_margin_x: default_cand_margin_x(),
             candidate_margin_y: default_cand_margin_y(),

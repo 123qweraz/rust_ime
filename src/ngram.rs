@@ -47,9 +47,9 @@ impl NgramModel {
     }
 
     fn load_static_model(&mut self) {
-        let idx_path = "ngram.index";
-        let data_path = "ngram.data";
-        let uni_path = "ngram.unigram";
+        let idx_path = "data/ngram.index";
+        let data_path = "data/ngram.data";
+        let uni_path = "data/ngram.unigram";
 
         if Path::new(idx_path).exists() && Path::new(data_path).exists() {
             if let (Ok(f_idx), Ok(f_data), Ok(f_uni)) = (File::open(idx_path), File::open(data_path), File::open(uni_path)) {

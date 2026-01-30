@@ -186,14 +186,14 @@ fn run_cli_conversion(input_args: &[String]) -> Result<(), Box<dyn std::error::E
     }
     if input_text.trim().is_empty() { return Ok(()); }
     let config = load_config();
-    let trie = Trie::load("dict.index", "dict.data").map_err(|e| format!("错误: 无法加载词库 ({}). 请运行: cargo run --bin compile_dict", e))?;
+    let trie = Trie::load("data/dict.index", "data/dict.data").map_err(|e| format!("错误: 无法加载词库 ({}). 请运行: cargo run --bin compile_dict", e))?;
     let mut tries = HashMap::new();
     tries.insert("default".to_string(), trie);
     let (tx, _) = std::sync::mpsc::channel();
     let ime = Ime::new(
         tries, "default".to_string(), load_punctuation_dict(&config.files.punctuation_file), HashMap::new(), tx, None,
         config.input.enable_fuzzy_pinyin, "none", false, false, false,
-        ngram::NgramModel::new(), ngram::NgramModel::new(), PathBuf::from("/tmp/user_adapter.json")
+        ngram::NgramModel::new(), ngram::NgramModel::new(), PathBuf::from("data/user_adapter.json")
     );
     println!("{}", ime.convert_text(&input_text));
     Ok(())
@@ -202,7 +202,7 @@ fn run_cli_conversion(input_args: &[String]) -> Result<(), Box<dyn std::error::E
 fn run_training(path_str: &str) -> Result<(), Box<dyn std::error::Error>> {
     let path = Path::new(path_str);
     let mut model = ngram::NgramModel::new();
-    let user_ngram_path = find_project_root().join("user_adapter.json");
+    let user_ngram_path = find_project_root().join("data/user_adapter.json");
     model.load_user_adapter(&user_ngram_path);
     let mut files_processed = 0;
     let entries: Vec<_> = if path.is_dir() {
@@ -249,7 +249,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     let config_arc = Arc::new(RwLock::new(initial_config.clone()));
     let active_profile = initial_config.input.default_profile.clone();
     let mut tries_map = HashMap::new();
-    if let Ok(trie) = Trie::load("dict.index", "dict.data") { tries_map.insert(active_profile.clone(), trie); }
+    if let Ok(trie) = Trie::load("data/dict.index", "data/dict.data") { tries_map.insert(active_profile.clone(), trie); }
     let tries_arc = Arc::new(RwLock::new(tries_map));
     
     let device_path = initial_config.files.device_path.clone().unwrap_or_else(|| find_keyboard().unwrap_or_default());
@@ -312,7 +312,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
         tries_arc.read().unwrap().clone(), active_profile, punctuation, HashMap::new(), notify_tx.clone(), gui_tx.clone(),
         initial_config.input.enable_fuzzy_pinyin, &initial_config.appearance.preview_mode,
         initial_config.appearance.show_notifications, initial_config.appearance.show_candidates, initial_config.appearance.show_keystrokes,
-        ngram::NgramModel::new(), ngram::NgramModel::new(), find_project_root().join("user_adapter.json")
+        ngram::NgramModel::new(), ngram::NgramModel::new(), find_project_root().join("data/user_adapter.json")
     );
 
     std::thread::sleep(std::time::Duration::from_millis(200));

@@ -23,7 +23,7 @@ fn compile_dictionary_global() -> Result<(), Box<dyn std::error::Error>> {
             process_json_file(entry.path(), &mut entries)?;
         }
     }
-    write_binary_dict("dict.index", "dict.data", entries)?;
+    write_binary_dict("data/dict.index", "data/dict.data", entries)?;
     println!("[Compiler] Global dictionary ready.");
     Ok(())
 }
@@ -122,9 +122,9 @@ fn compile_ngram() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
-    let mut data_writer = BufWriter::new(File::create("ngram.data")?);
-    let mut index_builder = MapBuilder::new(File::create("ngram.index")?)?;
-    let mut unigram_builder = MapBuilder::new(File::create("ngram.unigram")?)?;
+    let mut data_writer = BufWriter::new(File::create("data/ngram.data")?);
+    let mut index_builder = MapBuilder::new(File::create("data/ngram.index")?)?;
+    let mut unigram_builder = MapBuilder::new(File::create("data/ngram.unigram")?)?;
     let mut current_offset = 0u64;
     for (ctx, next_tokens) in transitions {
         index_builder.insert(&ctx, current_offset)?;
