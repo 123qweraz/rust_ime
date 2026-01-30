@@ -438,11 +438,7 @@ impl Ime {
             
             // Initial set from first token
             let first_segment = &segments[0];
-            let mut segment_len_bonus = (first_segment.len() as u32).pow(2) * 100; 
-            // Penalize single letter segments if we have multiple segments
-            if first_segment.len() == 1 && segments.len() > 1 {
-                segment_len_bonus = 0; 
-            }
+            let segment_len_bonus = (first_segment.len() as u32).pow(2) * 100; 
             
             let first_chars = if first_segment.len() == 1 {
                 dict.search_bfs(first_segment, 50)
@@ -459,10 +455,7 @@ impl Ime {
             // Extend paths
             for i in 1..segments.len() {
                 let next_segment = &segments[i];
-                let mut next_len_bonus = (next_segment.len() as u32).pow(2) * 100;
-                if next_segment.len() == 1 {
-                    next_len_bonus = 0;
-                }
+                let next_len_bonus = (next_segment.len() as u32).pow(2) * 100;
                 
                 let next_chars = if next_segment.len() == 1 {
                     dict.search_bfs(next_segment, 50)
