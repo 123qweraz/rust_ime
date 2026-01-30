@@ -7,43 +7,31 @@ use serde_json::Value;
 use walkdir::WalkDir;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    fs::create_dir_all("target/dict_cache")?;
-    compile_dictionary_global()?;
-    compile_dictionary_individual()?;
+    fs::create_dir_all("data")?;
+    compile_dict_for_path("dicts/chinese", "data/chinese")?;
+    compile_dict_for_path("dicts/japanese", "data/japanese")?;
     compile_ngram()?;
     Ok(())
 }
 
-fn compile_dictionary_global() -> Result<(), Box<dyn std::error::Error>> {
+fn compile_dict_for_path(src_dir: &str, out_stem: &str) -> Result<(), Box<dyn std::error::Error>> {
     let mut entries: BTreeMap<String, Vec<(String, String)>> = BTreeMap::new();
-    println!("[Compiler] Compiling global dictionary...");
+    println!("[Compiler] Compiling dictionary from {} -> {}...", src_dir, out_stem);
     
-    for entry in WalkDir::new("dicts").into_iter().filter_map(|e| e.ok()) {
+    for entry in WalkDir::new(src_dir).into_iter().filter_map(|e| e.ok()) {
         if entry.path().extension().map_or(false, |ext| ext == "json") {
+            // Skip punctuation file for Trie (it's handled separately)
+            if entry.path().file_name().and_then(|n| n.to_str()).map_or(false, |n| n == "punctuation.json") {
+                continue;
+            }
             process_json_file(entry.path(), &mut entries)?;
         }
     }
-    write_binary_dict("data/dict.index", "data/dict.data", entries)?;
-    println!("[Compiler] Global dictionary ready.");
-    Ok(())
-}
-
-fn compile_dictionary_individual() -> Result<(), Box<dyn std::error::Error>> {
-    println!("[Compiler] Compiling individual dictionaries for Learning Mode...");
     
-    for entry in WalkDir::new("dicts").into_iter().filter_map(|e| e.ok()) {
-        if entry.path().extension().map_or(false, |ext| ext == "json") {
-            let mut entries: BTreeMap<String, Vec<(String, String)>> = BTreeMap::new();
-            process_json_file(entry.path(), &mut entries)?;
-            
-            let file_stem = entry.path().file_stem().unwrap().to_str().unwrap();
-            let idx_path = format!("target/dict_cache/{}.index", file_stem);
-            let dat_path = format!("target/dict_cache/{}.data", file_stem);
-            
-            write_binary_dict(&idx_path, &dat_path, entries)?;
-            println!("[Compiler] Cached: {}", entry.path().display());
-        }
-    }
+    let idx_path = format!("{}.index", out_stem);
+    let dat_path = format!("{}.data", out_stem);
+    write_binary_dict(&idx_path, &dat_path, entries)?;
+    println!("[Compiler] Finished: {}", out_stem);
     Ok(())
 }
 

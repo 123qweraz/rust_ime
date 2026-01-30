@@ -186,7 +186,7 @@ fn run_cli_conversion(input_args: &[String]) -> Result<(), Box<dyn std::error::E
     }
     if input_text.trim().is_empty() { return Ok(()); }
     let config = load_config();
-    let trie = Trie::load("data/dict.index", "data/dict.data").map_err(|e| format!("错误: 无法加载词库 ({}). 请运行: cargo run --bin compile_dict", e))?;
+    let trie = Trie::load("data/chinese.index", "data/chinese.data").map_err(|e| format!("错误: 无法加载词库 ({}). 请运行: cargo run --bin compile_dict", e))?;
     let mut tries = HashMap::new();
     tries.insert("default".to_string(), trie);
     let (tx, _) = std::sync::mpsc::channel();
@@ -249,7 +249,8 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     let config_arc = Arc::new(RwLock::new(initial_config.clone()));
     let active_profile = initial_config.input.default_profile.clone();
     let mut tries_map = HashMap::new();
-    if let Ok(trie) = Trie::load("data/dict.index", "data/dict.data") { tries_map.insert(active_profile.clone(), trie); }
+    if let Ok(trie) = Trie::load("data/chinese.index", "data/chinese.data") { tries_map.insert("Chinese".to_string(), trie); }
+    if let Ok(trie) = Trie::load("data/japanese.index", "data/japanese.data") { tries_map.insert("Japanese".to_string(), trie); }
     let tries_arc = Arc::new(RwLock::new(tries_map));
     
     let device_path = initial_config.files.device_path.clone().unwrap_or_else(|| find_keyboard().unwrap_or_default());
