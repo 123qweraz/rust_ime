@@ -19,13 +19,17 @@ if [ -f /etc/debian_version ]; then
     # Detect Debian/Ubuntu/Pop!_OS
     echo "检测到 Debian 系系统，正在使用 apt 安装依赖..."
     sudo apt-get update
-    sudo apt-get install -y libxcb-composite0-dev libx11-dev libdbus-1-dev build-essential
+    sudo apt-get install -y libxcb-composite0-dev libx11-dev libdbus-1-dev build-essential pkg-config clang gtk4-layer-shell
+elif [ -f /etc/arch-release ]; then
+    # Detect Arch Linux/Manjaro
+    echo "检测到 Arch 系系统，正在使用 pacman 安装依赖..."
+    sudo pacman -S --noconfirm --needed base-devel pkgconf clang gtk4-layer-shell libxcb libx11 dbus
 else
-    echo "⚠️  未检测到 apt 包管理器"
+    echo "⚠️  未检测到已知包管理器 (apt/pacman)"
     echo "请确保已手动安装以下开发库："
-    echo "  - libxcb-composite0-dev"
-    echo "  - libx11-dev"
-    echo "  - libdbus-1-dev"
+    echo "  - xcb, x11, dbus development files"
+    echo "  - pkg-config, clang"
+    echo "  - gtk4-layer-shell"
     read -p "按回车键继续..."
 fi
 
