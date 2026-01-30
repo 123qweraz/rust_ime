@@ -14,6 +14,7 @@ pub enum TrayEvent {
     ToggleKeystroke,
     ToggleLearning,
     ReloadConfig,
+    CyclePreview,
 }
 
 pub struct ImeTray {
@@ -23,6 +24,7 @@ pub struct ImeTray {
     pub show_notifications: bool,
     pub show_keystrokes: bool,
     pub learning_mode: bool,
+    pub preview_mode: String,
     pub tx: Sender<TrayEvent>,
 }
 
@@ -38,10 +40,10 @@ impl Tray for ImeTray {
     fn tool_tip(&self) -> ToolTip {
         ToolTip {
             title: "rust-IME".to_string(),
-            description: format!("Profile: {}\nGUI: {}\nNotify: {}\nLearning: {}", 
+            description: format!("Profile: {}\nGUI: {}\nPreview: {}\nLearning: {}", 
                 self.active_profile,
                 if self.show_candidates { "开" } else { "关" },
-                if self.show_notifications { "开" } else { "关" },
+                self.preview_mode,
                 if self.learning_mode { "开" } else { "关" }
             ),
             ..Default::default()
@@ -64,6 +66,11 @@ impl Tray for ImeTray {
             StandardItem {
                 label: format!("候选窗: {}", if self.show_candidates { "显示" } else { "隐藏" }),
                 activate: Box::new(|this: &mut Self| { let _ = this.tx.send(TrayEvent::ToggleGui); }),
+                ..Default::default()
+            }.into(),
+            StandardItem {
+                label: format!("拼音预览: {}", if self.preview_mode == "pinyin" { "开启" } else { "关闭" }),
+                activate: Box::new(|this: &mut Self| { let _ = this.tx.send(TrayEvent::CyclePreview); }),
                 ..Default::default()
             }.into(),
             StandardItem {
@@ -110,9 +117,10 @@ impl Tray for ImeTray {
 pub fn start_tray(
     chinese_enabled: bool, active_profile: String, show_candidates: bool,
     show_notifications: bool, show_keystrokes: bool, learning_mode: bool,
+    preview_mode: String,
     event_tx: Sender<TrayEvent>
 ) -> Handle<ImeTray> {
-    let service = ImeTray { chinese_enabled, active_profile, show_candidates, show_notifications, show_keystrokes, learning_mode, tx: event_tx };
+    let service = ImeTray { chinese_enabled, active_profile, show_candidates, show_notifications, show_keystrokes, learning_mode, preview_mode, tx: event_tx };
     let tray_service = TrayService::new(service);
     let handle = tray_service.handle();
     std::thread::spawn(move || { let _ = tray_service.run(); });

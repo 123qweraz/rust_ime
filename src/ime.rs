@@ -27,27 +27,22 @@ pub enum NotifyEvent {
 }
 
 use crate::trie::Trie;
-use crate::ngram::NgramModel;
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum PhantomMode {
     None,
     Pinyin,
-    Hanzi,
 }
 
 pub struct Ime {
     pub state: ImeState,
     pub buffer: String,
-    pub tries: HashMap<String, Trie>,
+    pub tries: HashMap<String, Trie>, 
     pub current_profile: String,
-    pub base_ngram: NgramModel,
-    pub user_ngram: NgramModel,
-    pub user_ngram_path: std::path::PathBuf,
     pub context: Vec<char>,
     pub punctuation: HashMap<String, String>,
     pub candidates: Vec<String>,
-    pub candidate_hints: Vec<String>,
+    pub candidate_hints: Vec<String>, 
     pub selected: usize,
     pub page: usize,
     pub chinese_enabled: bool,
@@ -66,52 +61,22 @@ pub struct Ime {
 
 impl Ime {
     pub fn new(
-        tries: HashMap<String, Trie>,
-        initial_profile: String,
-        punctuation: HashMap<String, String>,
-        _word_en_map: HashMap<String, Vec<String>>,
-        notification_tx: Sender<NotifyEvent>,
-        gui_tx: Option<Sender<crate::gui::GuiEvent>>,
-        enable_fuzzy: bool,
-        phantom_mode_str: &str,
-        enable_notifications: bool,
-        show_candidates: bool,
-        show_keystrokes: bool,
-        base_ngram: NgramModel,
-        user_ngram: NgramModel,
-        user_ngram_path: std::path::PathBuf,
+        tries: HashMap<String, Trie>, initial_profile: String, punctuation: HashMap<String, String>, 
+        _word_en_map: HashMap<String, Vec<String>>, notification_tx: Sender<NotifyEvent>, 
+        gui_tx: Option<Sender<crate::gui::GuiEvent>>, enable_fuzzy: bool, phantom_mode_str: &str, 
+        enable_notifications: bool, show_candidates: bool, show_keystrokes: bool,
     ) -> Self {
         let phantom_mode = match phantom_mode_str.to_lowercase().as_str() {
             "pinyin" => PhantomMode::Pinyin,
-            "hanzi" => PhantomMode::Hanzi,
             _ => PhantomMode::None,
         };
         Self {
-            state: ImeState::Direct,
-            buffer: String::new(),
-            tries,
-            current_profile: initial_profile,
-            base_ngram,
-            user_ngram,
-            user_ngram_path,
-            context: Vec::new(),
-            punctuation,
-            candidates: vec![],
-            candidate_hints: vec![],
-            selected: 0,
-            page: 0,
-            chinese_enabled: false,
-            notification_tx,
-            gui_tx,
-            phantom_mode,
-            enable_notifications,
-            show_candidates,
-            show_keystrokes,
-            phantom_text: String::new(),
-            is_highlighted: false,
-            enable_fuzzy,
-            syllable_set: std::collections::HashSet::new(),
-            best_segmentation: vec![],
+            state: ImeState::Direct, buffer: String::new(), tries, current_profile: initial_profile,
+            context: Vec::new(), punctuation,
+            candidates: vec![], candidate_hints: vec![], selected: 0, page: 0, chinese_enabled: false,
+            notification_tx, gui_tx, phantom_mode, enable_notifications, show_candidates, show_keystrokes,
+            phantom_text: String::new(), is_highlighted: false, enable_fuzzy,
+            syllable_set: std::collections::HashSet::new(), best_segmentation: vec![],
         }
     }
 
@@ -172,36 +137,36 @@ impl Ime {
         }
         let pinyin_stripped = strip_tones(&pinyin_search).to_lowercase();
 
-        let mut candidate_map: HashMap<String, (u32, Vec<String>)> = HashMap::new(); // word -> (score, path)
+        let mut candidate_map: HashMap<String, (u32, Vec<String>)> = HashMap::new(); 
         let mut word_to_hint: HashMap<String, String> = HashMap::new();
 
         // 1. Multi-Path Segmentation
         let all_segmentations = self.segment_pinyin_all(&pinyin_stripped, dict);
         let min_segments = all_segmentations.iter().map(|v| v.len()).min().unwrap_or(0);
 
-        // 2. Process Paths (Limit to Top 5 most plausible segmentations)
+        // 2. Process Paths
         for (idx, segments) in all_segmentations.into_iter().enumerate() {
             if idx >= 5 { break; } 
             if segments.is_empty() { continue; }
             
-            let mut path_bonus = 0u32;
+            let mut path_score = 0u32;
             let mut valid_count = 0;
             for s in &segments {
                 if self.syllable_set.contains(s) { 
-                    path_bonus += (s.len() as u32).pow(3) * 1000;
+                    path_score += (s.len() as u32).pow(3) * 1000;
                     valid_count += 1;
                 }
             }
-            if segments.len() == min_segments { path_bonus += 2000000; }
-            else { path_bonus /= 10; }
-            if valid_count < segments.len() { path_bonus /= 5; }
+            if segments.len() == min_segments { path_score += 2000000; }
+            else { path_score /= 10; }
+            if valid_count < segments.len() { path_score /= 5; }
 
             // BFS combination per path
             let first_segment = &segments[0];
             let first_chars = if first_segment.len() == 1 { dict.search_bfs(first_segment, 10) } else { dict.get_all_exact(first_segment).unwrap_or_default() };
             let mut current_paths: Vec<(String, u32)> = Vec::with_capacity(5);
             for (c, h) in first_chars {
-                current_paths.push((c.clone(), path_bonus));
+                current_paths.push((c.clone(), path_score));
                 word_to_hint.entry(c).or_insert(h);
             }
 
@@ -220,18 +185,14 @@ impl Ime {
                         let combined_pinyin = segments[0..=i].join("");
                         if let Some(matches) = dict.get_all_exact(&combined_pinyin) {
                             for (w, h) in matches { 
-                                if &w == &new_word { 
-                                    word_to_hint.insert(w, h); 
-                                    new_score += 1000000; 
-                                    break; 
-                                } 
-                            }
+                                if &w == &new_word { word_to_hint.insert(w, h); new_score += 1000000; break; } 
+                            } 
                         }
                         next_paths.push((new_word, new_score));
                     }
                 }
                 next_paths.sort_by(|a, b| b.1.cmp(&a.1));
-                next_paths.truncate(10);
+                next_paths.truncate(5);
                 current_paths = next_paths;
             }
             for (word, score) in current_paths {
@@ -242,18 +203,17 @@ impl Ime {
 
         // 3. Absolute Match Override
         if let Some(exact_matches) = dict.get_all_exact(&pinyin_stripped) {
-            for (cand, hint) in exact_matches {
+            for (pos, (cand, hint)) in exact_matches.into_iter().enumerate() {
                 word_to_hint.insert(cand.clone(), hint);
                 let entry = candidate_map.entry(cand).or_insert((0, vec![pinyin_stripped.clone()]));
-                entry.0 += 50000000; // Ultimate priority
+                entry.0 += 50000000 - (pos as u32 * 100);
             }
         }
 
-        // 4. Final Ranking (Pure Dictionary & Length Bonus)
+        // 4. Final Ranking
         let mut final_list: Vec<(String, u32, Vec<String>)> = candidate_map.into_iter().map(|(w, (s, p))| (w, s, p)).collect();
         for (cand, score, _) in &mut final_list {
-            // Length bonus: longer words in the dictionary should rank higher
-            if cand.chars().count() >= 2 { *score += 50000; }
+            if cand.chars().count() >= 2 { *score += 10000; }
         }
 
         if !filter_string.is_empty() {
@@ -264,23 +224,24 @@ impl Ime {
             });
         }
 
-        final_list.sort_by(|a, b| b.1.cmp(&a.1));
+        final_list.sort_by(|a, b| {
+            let res = b.1.cmp(&a.1);
+            if res != std::cmp::Ordering::Equal { return res; }
+            let res = b.0.chars().count().cmp(&a.0.chars().count());
+            if res != std::cmp::Ordering::Equal { return res; }
+            a.0.cmp(&b.0)
+        });
         
-        // Final sanity check for hints before sending to GUI
         self.candidates.clear();
         self.candidate_hints.clear();
         if let Some(best) = final_list.first() { self.best_segmentation = best.2.clone(); }
 
         for (cand, _, _) in final_list {
             self.candidates.push(cand.clone());
-            let hint = word_to_hint.get(&cand).cloned().unwrap_or_default();
-            self.candidate_hints.push(hint);
+            self.candidate_hints.push(word_to_hint.get(&cand).cloned().unwrap_or_default());
         }
 
-        if self.candidates.is_empty() { 
-            self.candidates.push(self.buffer.clone()); 
-            self.candidate_hints.push(String::new()); 
-        }
+        if self.candidates.is_empty() { self.candidates.push(self.buffer.clone()); self.candidate_hints.push(String::new()); }
         self.selected = 0; self.page = 0; self.update_state();
         if self.enable_notifications { self.notify_preview(); }
         self.print_preview();
@@ -298,13 +259,13 @@ impl Ime {
         if remaining.is_empty() { results.push(current.clone()); return; }
         if results.len() >= 15 { return; }
 
-        let has_apostrophe = remaining.starts_with('`');
+        let has_apostrophe = remaining.starts_with('\'');
         if has_apostrophe {
             let actual = &remaining[1..];
             let max_len = actual.len().min(6);
             for len in (1..=max_len).rev() {
                 let sub = &actual[..len];
-                if self.syllable_set.contains(sub) || dict.contains(sub) { 
+                if self.syllable_set.contains(sub) || dict.contains(sub) {
                     current.push(sub.to_string());
                     self.segment_recursive(&actual[len..], dict, current, results);
                     current.pop();
@@ -313,7 +274,6 @@ impl Ime {
             return;
         }
 
-        // Try standard syllables
         let max_len = remaining.len().min(6);
         for len in (2..=max_len).rev() {
             let sub = &remaining[..len];
@@ -323,7 +283,6 @@ impl Ime {
                 current.pop();
             }
         }
-        // Initials fallback
         if !remaining.is_empty() {
             let sub = &remaining[..1];
             current.push(sub.to_string());
@@ -338,12 +297,12 @@ impl Ime {
         while current_offset < pinyin.len() {
             let mut found_len = 0;
             let current_str = &pinyin[current_offset..];
-            if current_str.starts_with('`') { current_offset += 1; continue; }
+            if current_str.starts_with('\'') { current_offset += 1; continue; }
             for len in (1..=current_str.len().min(6)).rev() {
                 let sub = &current_str[..len];
                 if dict.contains(sub) || self.syllable_set.contains(sub) { found_len = len; break; }
             }
-            if found_len > 0 { segments.push(current_str[..found_len].to_string()); current_offset += found_len; } 
+            if found_len > 0 { segments.push(current_str[..found_len].to_string()); current_offset += found_len; }
             else { segments.push(current_str[..1].to_string()); current_offset += 1; }
         }
         segments
@@ -356,66 +315,27 @@ impl Ime {
 
     fn update_phantom_text(&mut self) -> Action {
         if self.phantom_mode == PhantomMode::None { return Action::Consume; }
-        
-        let target_text = match self.phantom_mode {
-            PhantomMode::Pinyin => self.buffer.clone(),
-            PhantomMode::Hanzi => {
-                if !self.candidates.is_empty() { self.candidates[self.selected].clone() } 
-                else { self.buffer.clone() }
-            }
-            _ => self.buffer.clone(),
-        };
-
-        // Skip update if text hasn't changed to avoid unnecessary flicker
-        if target_text == self.phantom_text {
-            return Action::Consume;
+        let target_text = self.buffer.clone();
+        if target_text == self.phantom_text { return Action::Consume; }
+        if target_text.starts_with(&self.phantom_text) && !self.phantom_text.is_empty() {
+            let added = target_text[self.phantom_text.len()..].to_string();
+            if added.is_empty() { return Action::Consume; }
+            self.phantom_text = target_text;
+            return Action::Emit(added);
+        } else if self.phantom_text.starts_with(&target_text) && !target_text.is_empty() {
+            let del_count = self.phantom_text.len() - target_text.len();
+            self.phantom_text = target_text;
+            return Action::DeleteAndEmit { delete: del_count, insert: String::new(), highlight: false };
         }
-
-        if self.phantom_mode == PhantomMode::Pinyin {
-            // Incremental Optimization for Pinyin Mode
-            if target_text.starts_with(&self.phantom_text) && !self.phantom_text.is_empty() {
-                let added = target_text[self.phantom_text.len()..].to_string();
-                if added.is_empty() { return Action::Consume; }
-                self.phantom_text = target_text;
-                return Action::Emit(added);
-            } else if self.phantom_text.starts_with(&target_text) && !target_text.is_empty() {
-                let del_count = self.phantom_text.len() - target_text.len();
-                self.phantom_text = target_text;
-                return Action::DeleteAndEmit { delete: del_count, insert: String::new(), highlight: false };
-            }
-        }
-
-        // For Hanzi mode or complex changes:
-        // If we are already highlighted, we can often just "Paste" to replace selection.
-        // We set delete: 0 to tell the main loop not to backspace.
-        let delete_count = if self.is_highlighted { 0 } else { self.phantom_text.chars().count() };
-        
+        let delete_count = self.phantom_text.chars().count();
         self.phantom_text = target_text.clone();
-        self.is_highlighted = self.phantom_mode == PhantomMode::Hanzi;
-        
-        Action::DeleteAndEmit { delete: delete_count, insert: target_text, highlight: self.is_highlighted }
+        self.is_highlighted = false;
+        Action::DeleteAndEmit { delete: delete_count, insert: target_text, highlight: false }
     }
 
     fn commit_candidate(&mut self, candidate: String) -> Action {
-        self.user_ngram.update(&self.context, &candidate);
-        let word_chars: Vec<char> = candidate.chars().collect();
-        let mut temp_context = self.context.clone();
-        for &c in &word_chars { self.user_ngram.update(&temp_context, &c.to_string()); temp_context.push(c); }
-        
-        // Auto-save user adapter occasionally
-        static mut COMMIT_COUNT: u32 = 0;
-        unsafe {
-            COMMIT_COUNT += 1;
-            if COMMIT_COUNT % 10 == 0 {
-                let model_to_save = self.user_ngram.clone();
-                let path_to_save = self.user_ngram_path.clone();
-                std::thread::spawn(move || { let _ = model_to_save.save(&path_to_save); });
-            }
-        }
-
         for c in candidate.chars() { self.context.push(c); }
         if self.context.len() > 2 { let start = self.context.len() - 2; self.context = self.context[start..].to_vec(); }
-
         let action = if self.phantom_mode != PhantomMode::None {
             Action::DeleteAndEmit { delete: self.phantom_text.chars().count(), insert: candidate.clone(), highlight: false }
         } else {
@@ -456,7 +376,8 @@ impl Ime {
             }
             Key::KEY_TAB => {
                 if !self.candidates.is_empty() {
-                    if shift_pressed { if self.selected > 0 { self.selected -= 1; self.page = self.selected; } } else { if self.selected + 1 < self.candidates.len() { self.selected += 1; self.page = self.selected; } }
+                    if shift_pressed { if self.selected > 0 { self.selected -= 1; self.page = self.selected; } }
+                    else { if self.selected + 1 < self.candidates.len() { self.selected += 1; self.page = self.selected; } }
                     self.print_preview(); self.notify_preview();
                     if self.phantom_mode != PhantomMode::None { self.update_phantom_text() } else { Action::Consume }
                 } else { Action::Consume }
@@ -496,20 +417,18 @@ impl Ime {
         self.show_candidates = conf.appearance.show_candidates;
         self.show_keystrokes = conf.appearance.show_keystrokes;
         self.enable_fuzzy = conf.input.enable_fuzzy_pinyin;
-        self.phantom_mode = match conf.appearance.preview_mode.to_lowercase().as_str() { "pinyin" => PhantomMode::Pinyin, "hanzi" => PhantomMode::Hanzi, _ => PhantomMode::None };
+        self.phantom_mode = match conf.appearance.preview_mode.to_lowercase().as_str() { "pinyin" => PhantomMode::Pinyin, _ => PhantomMode::None };
         self.update_gui();
     }
 
     pub fn cycle_phantom(&mut self) {
         self.phantom_mode = match self.phantom_mode {
             PhantomMode::None => PhantomMode::Pinyin,
-            PhantomMode::Pinyin => PhantomMode::Hanzi,
-            PhantomMode::Hanzi => PhantomMode::None,
+            PhantomMode::Pinyin => PhantomMode::None,
         };
         let msg = match self.phantom_mode {
             PhantomMode::None => "预览: 关",
-            PhantomMode::Pinyin => "预览: 拼音",
-            PhantomMode::Hanzi => "预览: 汉字",
+            PhantomMode::Pinyin => "预览: 开",
         };
         let _ = self.notification_tx.send(NotifyEvent::Message(msg.to_string()));
     }
@@ -585,7 +504,6 @@ impl Ime {
                 let abs_idx = start + i;
                 let num = i + 1;
                 let hint = self.candidate_hints.get(abs_idx).cloned().unwrap_or_default();
-
                 if abs_idx == self.selected { body.push_str(&format!("【{}.{}{}】 ", num, cand, hint)); }
                 else { body.push_str(&format!("{}.{}{} ", num, cand, hint)); }
             }
@@ -599,14 +517,10 @@ pub fn is_digit(key: Key) -> bool {
     matches!(key, Key::KEY_1 | Key::KEY_2 | Key::KEY_3 | Key::KEY_4 | Key::KEY_5 | 
                   Key::KEY_6 | Key::KEY_7 | Key::KEY_8 | Key::KEY_9 | Key::KEY_0)
 }
-pub fn key_to_digit(key: Key) -> Option<usize> { match key {
-    Key::KEY_1 => Some(1), Key::KEY_2 => Some(2), Key::KEY_3 => Some(3), Key::KEY_4 => Some(4), Key::KEY_5 => Some(5),
-    Key::KEY_6 => Some(6), Key::KEY_7 => Some(7), Key::KEY_8 => Some(8), Key::KEY_9 => Some(9), Key::KEY_0 => Some(0),
-    _ => None
-} }
+pub fn key_to_digit(key: Key) -> Option<usize> { match key { Key::KEY_1 => Some(1), Key::KEY_2 => Some(2), Key::KEY_3 => Some(3), Key::KEY_4 => Some(4), Key::KEY_5 => Some(5), Key::KEY_6 => Some(6), Key::KEY_7 => Some(7), Key::KEY_8 => Some(8), Key::KEY_9 => Some(9), Key::KEY_0 => Some(0), _ => None } }
 pub fn key_to_char(key: Key, shift: bool) -> Option<char> {
     let c = match key {
-        Key::KEY_Q => Some('q'), Key::KEY_W => Some('w'), Key::KEY_E => Some('e'), Key::KEY_R => Some('r'), Key::KEY_T => Some('t'), Key::KEY_Y => Some('y'), Key::KEY_U => Some('u'), Key::KEY_I => Some('i'), Key::KEY_O => Some('o'), Key::KEY_P => Some('p'), Key::KEY_A => Some('a'), Key::KEY_S => Some('s'), Key::KEY_D => Some('d'), Key::KEY_F => Some('f'), Key::KEY_G => Some('g'), Key::KEY_H => Some('h'), Key::KEY_J => Some('j'), Key::KEY_K => Some('k'), Key::KEY_L => Some('l'), Key::KEY_Z => Some('z'), Key::KEY_X => Some('x'), Key::KEY_C => Some('c'), Key::KEY_V => Some('v'), Key::KEY_B => Some('b'), Key::KEY_N => Some('n'), Key::KEY_M => Some('m'), Key::KEY_APOSTROPHE => Some('`'), _ => None
+        Key::KEY_Q => Some('q'), Key::KEY_W => Some('w'), Key::KEY_E => Some('e'), Key::KEY_R => Some('r'), Key::KEY_T => Some('t'), Key::KEY_Y => Some('y'), Key::KEY_U => Some('u'), Key::KEY_I => Some('i'), Key::KEY_O => Some('o'), Key::KEY_P => Some('p'), Key::KEY_A => Some('a'), Key::KEY_S => Some('s'), Key::KEY_D => Some('d'), Key::KEY_F => Some('f'), Key::KEY_G => Some('g'), Key::KEY_H => Some('h'), Key::KEY_J => Some('j'), Key::KEY_K => Some('k'), Key::KEY_L => Some('l'), Key::KEY_Z => Some('z'), Key::KEY_X => Some('x'), Key::KEY_C => Some('c'), Key::KEY_V => Some('v'), Key::KEY_B => Some('b'), Key::KEY_N => Some('n'), Key::KEY_M => Some('m'), Key::KEY_APOSTROPHE => Some('\''), _ => None
     };
     if shift { c.map(|ch| ch.to_ascii_uppercase()) } else { c }
 }
@@ -617,61 +531,10 @@ pub fn apply_tone(c: char, tone: usize) -> Option<char> {
     }
 }
 fn get_punctuation_key(key: Key, shift: bool) -> Option<&'static str> {
-    match (key, shift) {
-        (Key::KEY_GRAVE, false) => Some("`"),
-        (Key::KEY_GRAVE, true) => Some("~"),
-        (Key::KEY_MINUS, false) => Some("-"),
-        (Key::KEY_MINUS, true) => Some("_"),
-        (Key::KEY_EQUAL, false) => Some("="),
-        (Key::KEY_EQUAL, true) => Some("+"),
-        (Key::KEY_LEFTBRACE, false) => Some("["),
-        (Key::KEY_LEFTBRACE, true) => Some("{"),
-        (Key::KEY_RIGHTBRACE, false) => Some("]"),
-        (Key::KEY_RIGHTBRACE, true) => Some("}"),
-        (Key::KEY_BACKSLASH, false) => Some("\\"),
-        (Key::KEY_BACKSLASH, true) => Some("|"),
-        (Key::KEY_SEMICOLON, false) => Some(";"),
-        (Key::KEY_SEMICOLON, true) => Some(":"),
-        (Key::KEY_APOSTROPHE, false) => Some("'"),
-        (Key::KEY_APOSTROPHE, true) => Some("\""),
-        (Key::KEY_COMMA, false) => Some(","),
-        (Key::KEY_COMMA, true) => Some("<"),
-        (Key::KEY_DOT, false) => Some("."),
-        (Key::KEY_DOT, true) => Some(">"),
-        (Key::KEY_SLASH, false) => Some("/"),
-        (Key::KEY_SLASH, true) => Some("?"),
-        (Key::KEY_1, true) => Some("!"),
-        (Key::KEY_2, true) => Some("@"),
-        (Key::KEY_3, true) => Some("#"),
-        (Key::KEY_4, true) => Some("$"),
-        (Key::KEY_5, true) => Some("%"),
-        (Key::KEY_6, true) => Some("^"),
-        (Key::KEY_7, true) => Some("&"),
-        (Key::KEY_8, true) => Some("*"),
-        (Key::KEY_9, true) => Some("("),
-        (Key::KEY_0, true) => Some(")"),
-        _ => None,
-    }
-}
+    match (key, shift) { (Key::KEY_GRAVE, false) => Some("`"), (Key::KEY_GRAVE, true) => Some("~"), (Key::KEY_MINUS, false) => Some("-"), (Key::KEY_MINUS, true) => Some("_"), (Key::KEY_EQUAL, false) => Some("="), (Key::KEY_EQUAL, true) => Some("+"), (Key::KEY_LEFTBRACE, false) => Some("["), (Key::KEY_LEFTBRACE, true) => Some("{"), (Key::KEY_RIGHTBRACE, false) => Some("]"), (Key::KEY_RIGHTBRACE, true) => Some("}"), (Key::KEY_BACKSLASH, false) => Some("\\"), (Key::KEY_BACKSLASH, true) => Some("|"), (Key::KEY_SEMICOLON, false) => Some(";"), (Key::KEY_SEMICOLON, true) => Some(":"), (Key::KEY_APOSTROPHE, false) => Some("'"), (Key::KEY_APOSTROPHE, true) => Some("\""), (Key::KEY_COMMA, false) => Some(","), (Key::KEY_COMMA, true) => Some("<"), (Key::KEY_DOT, false) => Some("."), (Key::KEY_DOT, true) => Some(">"), (Key::KEY_SLASH, false) => Some("/"), (Key::KEY_SLASH, true) => Some("?"), (Key::KEY_1, true) => Some("!"), (Key::KEY_2, true) => Some("@"), (Key::KEY_3, true) => Some("#"), (Key::KEY_4, true) => Some("$"), (Key::KEY_5, true) => Some("%"), (Key::KEY_6, true) => Some("^"), (Key::KEY_7, true) => Some("&"), (Key::KEY_8, true) => Some("*"), (Key::KEY_9, true) => Some("("), (Key::KEY_0, true) => Some(")"), _ => None } }
 pub fn strip_tones(s: &str) -> String {
     let mut res = String::new();
-    for c in s.chars() {
-        match c {
-            'ā'|'á'|'ǎ'|'à' => res.push('a'),
-            'ē'|'é'|'ě'|'è' => res.push('e'),
-            'ī'|'í'|'ǐ'|'ì' => res.push('i'),
-            'ō'|'ó'|'ǒ'|'ò' => res.push('o'),
-            'ū'|'ú'|'ǔ'|'ù' => res.push('u'),
-            'ǖ'|'ǘ'|'ǚ'|'ǜ' => res.push('v'),
-            'Ā'|'Á'|'Ǎ'|'À' => res.push('A'),
-            'Ē'|'É'|'Ě'|'È' => res.push('E'),
-            'Ī'|'Í'|'Ǐ'|'Ì' => res.push('I'),
-            'Ō'|'Ó'|'Ǒ'|'Ò' => res.push('O'),
-            'Ū'|'Ú'|'Ǔ'|'Ù' => res.push('U'),
-            'Ǖ'|'Ǘ'|'Ǚ'|'Ǜ' => res.push('V'),
-            _ => res.push(c)
-        }
-    }
+    for c in s.chars() { match c { 'ā'|'á'|'ǎ'|'à' => res.push('a'), 'ē'|'é'|'ě'|'è' => res.push('e'), 'ī'|'í'|'ǐ'|'ì' => res.push('i'), 'ō'|'ó'|'ǒ'|'ò' => res.push('o'), 'ū'|'ú'|'ǔ'|'ù' => res.push('u'), 'ǖ'|'ǘ'|'ǚ'|'ǜ' => res.push('v'), 'Ā'|'Á'|'Ǎ'|'À' => res.push('A'), 'Ē'|'É'|'Ě'|'È' => res.push('E'), 'Ī'|'Í'|'Ǐ'|'Ì' => res.push('I'), 'Ō'|'Ó'|'Ǒ'|'Ò' => res.push('O'), 'Ū'|'Ú'|'Ǔ'|'Ù' => res.push('U'), 'Ǖ'|'Ǘ'|'Ǚ'|'Ǜ' => res.push('V'), _ => res.push(c) } } // Corrected: removed unnecessary escape for single quote
     res
 }
 

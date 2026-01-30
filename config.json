@@ -2,7 +2,7 @@
   "_help_readme": "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert",
   "appearance": {
     "show_notifications": true,
-    "preview_mode": "none",
+    "preview_mode": "pinyin",
     "show_candidates": false,
     "show_keystrokes": false,
     "candidate_anchor": "bottom",
@@ -16,7 +16,7 @@
     "keystroke_bg_color": "rgba(20, 20, 20, 0.85)",
     "keystroke_font_size": 11,
     "keystroke_timeout_ms": 1000,
-    "learning_mode": false,
+    "learning_mode": true,
     "learning_interval_sec": 10,
     "learning_dict_path": "dicts/chinese/chars.json"
   },
@@ -62,12 +62,17 @@
       {
         "name": "Chinese",
         "description": "默认中文输入",
-        "dicts": ["dicts/chars.json", "dicts/basic_words.json"]
+        "dicts": [
+          "dicts/chars.json",
+          "dicts/basic_words.json"
+        ]
       },
       {
         "name": "Japanese",
         "description": "日语输入方案",
-        "dicts": ["dicts/japanese"]
+        "dicts": [
+          "dicts/japanese"
+        ]
       }
     ],
     "punctuation_file": "dicts/punctuation.json",

@@ -52,7 +52,7 @@ impl Default for Appearance {
     fn default() -> Self {
         Appearance {
             show_notifications: true,
-            preview_mode: "none".to_string(),
+            preview_mode: "pinyin".to_string(),
             show_candidates: false,
             show_keystrokes: false,
             candidate_anchor: default_cand_anchor(),
@@ -255,9 +255,9 @@ fn default_show_keystrokes() -> bool {
     false
 }
 
-fn default_phantom_mode() -> String {
-    "none".to_string()
-}
+fn default_phantom_mode() -> String { "pinyin".to_string() }
+
+
 
 fn default_cand_anchor() -> String {
     "bottom".to_string()

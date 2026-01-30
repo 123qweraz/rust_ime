@@ -307,7 +307,12 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
         }
     });
 
-    let tray_handle = tray::start_tray(false, active_profile.clone(), initial_config.appearance.show_candidates, initial_config.appearance.show_notifications, initial_config.appearance.show_keystrokes, initial_config.appearance.learning_mode, tray_tx);
+    let tray_handle = tray::start_tray(
+        false, active_profile.clone(), initial_config.appearance.show_candidates, 
+        initial_config.appearance.show_notifications, initial_config.appearance.show_keystrokes, 
+        initial_config.appearance.learning_mode, initial_config.appearance.preview_mode.clone(),
+        tray_tx
+    );
 
     let mut ime = Ime::new(
         tries_arc.read().unwrap().clone(), active_profile, punctuation, HashMap::new(), notify_tx.clone(), gui_tx.clone(),
@@ -355,10 +360,24 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
                     }
                     if new_conf.input.autostart { let _ = install_autostart(); } else { let _ = remove_autostart(); }
                     ime.apply_config(&new_conf);
-                    tray_handle.update(|t| { t.show_candidates = new_conf.appearance.show_candidates; t.show_notifications = new_conf.appearance.show_notifications; t.show_keystrokes = new_conf.appearance.show_keystrokes; t.learning_mode = new_conf.appearance.learning_mode; });
+                    tray_handle.update(|t| { 
+                        t.show_candidates = new_conf.appearance.show_candidates; 
+                        t.show_notifications = new_conf.appearance.show_notifications; 
+                        t.show_keystrokes = new_conf.appearance.show_keystrokes; 
+                        t.learning_mode = new_conf.appearance.learning_mode;
+                        t.preview_mode = new_conf.appearance.preview_mode.clone();
+                    });
                     if let Ok(mut w) = config_arc.write() { *w = new_conf; }
                 }
                 tray::TrayEvent::OpenConfig => { let _ = Command::new("xdg-open").arg("http://localhost:8765").spawn(); }
+                tray::TrayEvent::CyclePreview => {
+                    ime.cycle_phantom();
+                    let mode = match ime.phantom_mode {
+                        PhantomMode::Pinyin => "pinyin",
+                        _ => "none",
+                    }.to_string();
+                    tray_handle.update(|t| t.preview_mode = mode);
+                }
                 tray::TrayEvent::Restart => { should_exit.store(true, Ordering::Relaxed); }
                 tray::TrayEvent::Exit => { should_exit.store(true, Ordering::Relaxed); }
             }
@@ -403,7 +422,13 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
                         ime.toggle_notifications(); tray_handle.update(|t| t.show_notifications = ime.enable_notifications); continue;
                     }
                     if is_combo(&held_keys, &parse_key(&conf.hotkeys.cycle_preview_mode.key)) {
-                        ime.cycle_phantom(); continue;
+                        ime.cycle_phantom();
+                        let mode = match ime.phantom_mode {
+                            PhantomMode::Pinyin => "pinyin",
+                            _ => "none",
+                        }.to_string();
+                        tray_handle.update(|t| t.preview_mode = mode);
+                        continue;
                     }
                     if is_combo(&held_keys, &parse_key(&conf.hotkeys.trigger_caps_lock.key)) {
                         vkbd.tap(Key::KEY_CAPSLOCK); continue;

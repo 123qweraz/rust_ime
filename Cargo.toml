@@ -34,3 +34,11 @@ gtk4-layer-shell = "0.2"
 glib = "0.17"
 gdk4 = "0.7"
 pango = "0.17"
+
+[[bin]]
+name = "rust-ime"
+path = "src/main.rs"
+
+[[bin]]
+name = "compile_dict"
+path = "src/bin/compile_dict.rs"

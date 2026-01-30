@@ -2,7 +2,7 @@ use fst::{MapBuilder};
 use std::collections::{BTreeMap, HashMap};
 use std::fs::{self, File};
 use std::io::{BufWriter, Write};
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use serde_json::Value;
 use walkdir::WalkDir;
 
@@ -10,7 +10,26 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     fs::create_dir_all("data")?;
     compile_dict_for_path("dicts/chinese", "data/chinese")?;
     compile_dict_for_path("dicts/japanese", "data/japanese")?;
+    
+    // 自动提取音节表
+    extract_syllables_to_file("dicts/chinese/chars.json", "dicts/chinese/syllables.txt")?;
+    
     compile_ngram()?;
+    Ok(())
+}
+
+fn extract_syllables_to_file(src_json: &str, out_txt: &str) -> Result<(), Box<dyn std::error::Error>> {
+    println!("[Compiler] Extracting syllables from {}...", src_json);
+    let file = File::open(src_json)?;
+    let json: Value = serde_json::from_reader(file)?;
+    if let Some(obj) = json.as_object() {
+        let mut syllables: Vec<_> = obj.keys().cloned().collect();
+        syllables.sort();
+        let mut f = File::create(out_txt)?;
+        for s in syllables {
+            writeln!(f, "{}", s)?;
+        }
+    }
     Ok(())
 }
 

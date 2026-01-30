@@ -93,6 +93,15 @@ impl Vkbd {
     fn send_text_internal(&mut self, text: &str, highlight: bool) {
         if text.is_empty() { return; }
 
+        // Fast path: for single ASCII characters without highlight, use direct key taps
+        if !highlight && text.len() == 1 {
+            let c = text.chars().next().unwrap();
+            if let Some(key) = char_to_key(c) {
+                self.tap(key);
+                return;
+            }
+        }
+
         println!("[IME] Emitting text: {} (highlight={})", text, highlight);
 
         // If using UnicodeHex mode, skip clipboard and type directly
@@ -279,6 +288,27 @@ impl Vkbd {
 }
 
 
+
+fn char_to_key(c: char) -> Option<Key> {
+    match c.to_ascii_lowercase() {
+        'a' => Some(Key::KEY_A), 'b' => Some(Key::KEY_B), 'c' => Some(Key::KEY_C),
+        'd' => Some(Key::KEY_D), 'e' => Some(Key::KEY_E), 'f' => Some(Key::KEY_F),
+        'g' => Some(Key::KEY_G), 'h' => Some(Key::KEY_H), 'i' => Some(Key::KEY_I),
+        'j' => Some(Key::KEY_J), 'k' => Some(Key::KEY_K), 'l' => Some(Key::KEY_L),
+        'm' => Some(Key::KEY_M), 'n' => Some(Key::KEY_N), 'o' => Some(Key::KEY_O),
+        'p' => Some(Key::KEY_P), 'q' => Some(Key::KEY_Q), 'r' => Some(Key::KEY_R),
+        's' => Some(Key::KEY_S), 't' => Some(Key::KEY_T), 'u' => Some(Key::KEY_U),
+        'v' => Some(Key::KEY_V), 'w' => Some(Key::KEY_W), 'x' => Some(Key::KEY_X),
+        'y' => Some(Key::KEY_Y), 'z' => Some(Key::KEY_Z),
+        '0' => Some(Key::KEY_0), '1' => Some(Key::KEY_1), '2' => Some(Key::KEY_2),
+        '3' => Some(Key::KEY_3), '4' => Some(Key::KEY_4), '5' => Some(Key::KEY_5),
+        '6' => Some(Key::KEY_6), '7' => Some(Key::KEY_7), '8' => Some(Key::KEY_8),
+        '9' => Some(Key::KEY_9),
+        '\'' => Some(Key::KEY_APOSTROPHE),
+        ' ' => Some(Key::KEY_SPACE),
+        _ => None,
+    }
+}
 
 fn hex_char_to_key(c: char) -> Option<Key> {
     match c.to_ascii_lowercase() {
