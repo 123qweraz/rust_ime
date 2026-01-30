@@ -438,7 +438,11 @@ impl Ime {
             
             // Initial set from first token
             let first_segment = &segments[0];
-            let segment_len_bonus = (first_segment.len() as u32).pow(2) * 100; // Prefer longer pinyin segments
+            let mut segment_len_bonus = (first_segment.len() as u32).pow(2) * 100; 
+            // Penalize single letter segments if we have multiple segments
+            if first_segment.len() == 1 && segments.len() > 1 {
+                segment_len_bonus = 0; 
+            }
             
             let first_chars = if first_segment.len() == 1 {
                 dict.search_bfs(first_segment, 50)
@@ -455,7 +459,10 @@ impl Ime {
             // Extend paths
             for i in 1..segments.len() {
                 let next_segment = &segments[i];
-                let next_len_bonus = (next_segment.len() as u32).pow(2) * 100;
+                let mut next_len_bonus = (next_segment.len() as u32).pow(2) * 100;
+                if next_segment.len() == 1 {
+                    next_len_bonus = 0;
+                }
                 
                 let next_chars = if next_segment.len() == 1 {
                     dict.search_bfs(next_segment, 50)
@@ -498,7 +505,7 @@ impl Ime {
                 word_to_hint.insert(cand.clone(), hint);
                 // Boost exact matches significantly
                 let entry = candidate_map.entry(cand).or_insert(0);
-                *entry += 100000; 
+                *entry += 500000; 
             }
         }
         
