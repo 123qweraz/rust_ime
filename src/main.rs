@@ -285,6 +285,9 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
         for entry in entries.flatten() {
             if entry.path().is_dir() {
                 let dir_name = entry.file_name().to_string_lossy().to_string().to_lowercase();
+                // 排除 ngram 目录，它不是一个独立的输入法方案
+                if dir_name == "ngram" || dir_name.contains("user_adapter") { continue; }
+                
                 let trie_idx = entry.path().join("trie.index");
                 let trie_dat = entry.path().join("trie.data");
                 

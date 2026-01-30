@@ -5,7 +5,6 @@ use std::io::{BufWriter, Write};
 use std::path::Path;
 use serde_json::Value;
 use walkdir::WalkDir;
-
 use std::time::SystemTime;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -57,7 +56,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 fn should_compile(src_dir: &Path, target_file: &Path) -> bool {
-    if !target_file.exists() { return true; }
+    if !target_file.exists() { return true; } 
     
     let target_mtime = target_file.metadata().and_then(|m| m.modified()).unwrap_or(SystemTime::UNIX_EPOCH);
     
@@ -68,18 +67,14 @@ fn should_compile(src_dir: &Path, target_file: &Path) -> bool {
 
     // 2. 递归检查源目录下所有文件的最大修改时间
     let mut max_src_mtime = SystemTime::UNIX_EPOCH;
-    let mut file_count = 0;
     for entry in WalkDir::new(src_dir).into_iter().filter_map(|e| e.ok()) {
         if entry.path().is_file() {
-            file_count += 1;
             if let Ok(mtime) = entry.path().metadata().and_then(|m| m.modified()) {
                 if mtime > max_src_mtime { max_src_mtime = mtime; }
             }
         }
     }
     
-    // 如果内部文件有更新，或者逻辑上我们想更严格一点 (比如记录上一次的文件总数)
-    // 这里我们先通过 mtime 判定，通常 dir_mtime 已经能涵盖新增/删除了
     max_src_mtime > target_mtime
 }
 
@@ -139,7 +134,9 @@ fn process_yaml_file(path: &Path, entries: &mut BTreeMap<String, Vec<(String, St
         if parts.len() >= 2 {
             let word = parts[0].to_string();
             let pinyin = parts[1].replace(' ', "").to_lowercase();
-            entries.entry(pinyin).or_default().push((word, String::new()));
+            // Rime 格式: 词 \t 拼音 \t 权重
+            let weight = if parts.len() >= 3 { parts[2] } else { "" };
+            entries.entry(pinyin).or_default().push((word, weight.to_string()));
         }
     }
     Ok(())
@@ -242,8 +239,7 @@ fn compile_ngram_for_path(src_dir: &str, out_dir: &str) -> Result<(), Box<dyn st
     }
     index_builder.finish()?;
     data_writer.flush()?;
-    for (token, score) in unigrams { unigram_builder.insert(&token, score as u64)?;
-    }
+    for (token, score) in unigrams { unigram_builder.insert(&token, score as u64)?; }
     unigram_builder.finish()?;
     println!("[Compiler] N-gram compiled to: {}", out_dir);
     Ok(())

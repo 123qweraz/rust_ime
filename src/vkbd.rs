@@ -65,46 +65,64 @@ impl Vkbd {
     }
 
     fn check_and_update_mode(&mut self) {
-        if !self.auto_mode { return; } //
+        if !self.auto_mode { return; }
         
-        // 增加检测，避免频繁调用不存在的二进制导致性能损耗和报错
-        let output = Command::new("xdotool")
-            .args(["getactivewindow", "getwindowclassname"])
-            .output();
-        
-        match output {
-            Ok(out) => {
-                let class_name = String::from_utf8_lossy(&out.stdout).to_lowercase();
-                if class_name.trim().is_empty() { return; } //
-                
-                let is_terminal = class_name.contains("terminal") || 
-                                  class_name.contains("alacritty") || 
-                                  class_name.contains("kitty") || 
-                                  class_name.contains("konsole") ||
-                                  class_name.contains("wezterm") ||
-                                  class_name.contains("foot") ||
-                                  class_name.contains("tmux");
-                
-                if is_terminal {
-                    if self.paste_mode != PasteMode::CtrlShiftV {
-                        self.paste_mode = PasteMode::CtrlShiftV;
-                        println!("[Vkbd] Detected Terminal ({}), using Ctrl+Shift+V", class_name.trim());
-                    }
-                }
-                else {
-                    if self.paste_mode != PasteMode::CtrlV {
-                        self.paste_mode = PasteMode::CtrlV;
-                        println!("[Vkbd] Detected App ({}), using Ctrl+V", class_name.trim());
+        let mut class_name = String::new();
+
+        // 1. 尝试 xdotool (适用于 X11 和 XWayland 窗口)
+        if let Ok(out) = Command::new("xdotool").args(["getactivewindow", "getwindowclassname"]).output() {
+            class_name = String::from_utf8_lossy(&out.stdout).to_lowercase();
+        }
+
+        // 2. 如果没结果，尝试 Hyprland (Wayland)
+        if class_name.trim().is_empty() {
+            if let Ok(out) = Command::new("hyprctl").args(["activewindow", "-j"]).output() {
+                if let Ok(v) = serde_json::from_slice::<serde_json::Value>(&out.stdout) {
+                    if let Some(c) = v["class"].as_str() {
+                        class_name = c.to_lowercase();
                     }
                 }
             }
-            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
-                // 如果找不到 xdotool，静默关闭自动模式，不再尝试
-                self.auto_mode = false;
-                eprintln!("[Vkbd] xdotool not found. Automatic terminal detection disabled. (Please install xdotool)");
+        }
+
+        // 3. 如果还没结果，尝试 Sway (Wayland)
+        if class_name.trim().is_empty() {
+            if let Ok(out) = Command::new("swaymsg").args(["-t", "get_tree"]).output() {
+                if let Ok(v) = serde_json::from_slice::<serde_json::Value>(&out.stdout) {
+                    // 递归寻找 focused 节点
+                    fn find_focused(node: &serde_json::Value) -> Option<String> {
+                        if node["focused"].as_bool().unwrap_or(false) {
+                            return node["window_properties"]["class"].as_str().map(|s| s.to_string());
+                        }
+                        if let Some(nodes) = node["nodes"].as_array() {
+                            for n in nodes { if let Some(c) = find_focused(n) { return Some(c); } }
+                        }
+                        None
+                    }
+                    if let Some(c) = find_focused(&v) { class_name = c.to_lowercase(); }
+                }
             }
-            Err(e) => {
-                eprintln!("[Vkbd] xdotool error: {}", e);
+        }
+
+        if class_name.trim().is_empty() { return; }
+        
+        let is_terminal = class_name.contains("terminal") || 
+                          class_name.contains("alacritty") || 
+                          class_name.contains("kitty") || 
+                          class_name.contains("konsole") ||
+                          class_name.contains("wezterm") ||
+                          class_name.contains("foot") ||
+                          class_name.contains("tmux");
+        
+        if is_terminal {
+            if self.paste_mode != PasteMode::CtrlShiftV {
+                self.paste_mode = PasteMode::CtrlShiftV;
+                println!("[Vkbd] Detected Terminal ({}), using Ctrl+Shift+V", class_name.trim());
+            }
+        } else {
+            if self.paste_mode != PasteMode::CtrlV {
+                self.paste_mode = PasteMode::CtrlV;
+                println!("[Vkbd] Detected App ({}), using Ctrl+V", class_name.trim());
             }
         }
     }

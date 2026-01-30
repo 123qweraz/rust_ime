@@ -228,7 +228,15 @@ impl Ime {
         // 4. Final Ranking
         let mut final_list: Vec<(String, u32, Vec<String>)> = candidate_map.into_iter().map(|(w, (s, p))| (w, s, p)).collect();
         for (cand, score, _) in &mut final_list {
+            // 基础分：候选词长度（偏好长词）
             if cand.chars().count() >= 2 { *score += 10000; }
+            
+            // 静态权重加分：如果 hint 是数字（来自 Rime 权重），则累加到分数中
+            if let Some(hint) = word_to_hint.get(cand) {
+                if let Ok(weight) = hint.parse::<u32>() {
+                    *score += weight;
+                }
+            }
         }
 
         if !filter_string.is_empty() {
