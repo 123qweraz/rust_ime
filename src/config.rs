@@ -66,7 +66,7 @@ impl Default for Appearance {
             keystroke_bg_color: default_key_bg(),
             keystroke_font_size: default_key_font_size(),
             keystroke_timeout_ms: default_key_timeout(),
-            learning_mode: default_learning_mode(),
+            learning_mode: false,
             learning_interval_sec: default_learning_interval(),
             learning_dict_path: default_learning_dict_path(),
         }
