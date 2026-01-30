@@ -140,6 +140,7 @@ impl NgramModel {
         }
     }
 
+    #[allow(dead_code)]
     pub fn update(&mut self, context_chars: &[char], next_token: &str) {
         let token_str = next_token.to_string();
         *self.user_unigrams.entry(token_str.clone()).or_default() += 1;
@@ -152,6 +153,7 @@ impl NgramModel {
         }
     }
 
+    #[allow(dead_code)]
     pub fn get_score(&self, context_chars: &[char], next_token_str: &str) -> u32 {
         let mut total_score = 0u32;
         if let Some(ref static_uni) = self.static_unigrams { total_score += static_uni.get(next_token_str).unwrap_or(0) as u32; }
@@ -175,6 +177,7 @@ impl NgramModel {
         total_score
     }
 
+    #[allow(dead_code)]
     fn scan_score_in_block(&self, offset: usize, data: &[u8], target_bytes: &[u8]) -> u32 {
         let mut cursor = offset;
         let count = u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap());

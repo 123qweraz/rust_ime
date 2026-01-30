@@ -192,8 +192,7 @@ fn run_cli_conversion(input_args: &[String]) -> Result<(), Box<dyn std::error::E
     let (tx, _) = std::sync::mpsc::channel();
     let ime = Ime::new(
         tries, "default".to_string(), load_punctuation_dict(&config.files.punctuation_file), HashMap::new(), tx, None,
-        config.input.enable_fuzzy_pinyin, "none", false, false, false,
-        ngram::NgramModel::new(), ngram::NgramModel::new(), PathBuf::from("data/user_adapter.json")
+        config.input.enable_fuzzy_pinyin, "pinyin", false, false, false
     );
     println!("{}", ime.convert_text(&input_text));
     Ok(())
@@ -317,8 +316,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     let mut ime = Ime::new(
         tries_arc.read().unwrap().clone(), active_profile, punctuation, HashMap::new(), notify_tx.clone(), gui_tx.clone(),
         initial_config.input.enable_fuzzy_pinyin, &initial_config.appearance.preview_mode,
-        initial_config.appearance.show_notifications, initial_config.appearance.show_candidates, initial_config.appearance.show_keystrokes,
-        ngram::NgramModel::new(), ngram::NgramModel::new(), find_project_root().join("data/user_adapter.json")
+        initial_config.appearance.show_notifications, initial_config.appearance.show_candidates, initial_config.appearance.show_keystrokes
     );
 
     std::thread::sleep(std::time::Duration::from_millis(200));
