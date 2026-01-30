@@ -185,6 +185,10 @@ fn run_cli_conversion(input_args: &[String]) -> Result<(), Box<dyn std::error::E
         input_text = input_args.join(" ");
     }
     if input_text.trim().is_empty() { return Ok(()); }
+    
+    let root = find_project_root();
+    let _ = env::set_current_dir(&root);
+    
     let config = load_config();
     let trie = Trie::load("data/chinese.index", "data/chinese.data").map_err(|e| format!("错误: 无法加载词库 ({}). 请运行: cargo run --bin compile_dict", e))?;
     let mut tries = HashMap::new();
@@ -238,6 +242,7 @@ fn is_combo(held: &HashSet<Key>, target: &[Key]) -> bool {
 
 fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config) -> Result<(), Box<dyn std::error::Error>> {
     let root = find_project_root();
+    println!("[IME] Using project root: {}", root.display());
     let _ = env::set_current_dir(&root);
     detect_environment();
     
@@ -248,13 +253,31 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     let config_arc = Arc::new(RwLock::new(initial_config.clone()));
     let active_profile = initial_config.input.default_profile.clone();
     let mut tries_map = HashMap::new();
-    if let Ok(trie) = Trie::load("data/chinese.index", "data/chinese.data") { tries_map.insert("Chinese".to_string(), trie); }
-    if let Ok(trie) = Trie::load("data/japanese.index", "data/japanese.data") { tries_map.insert("Japanese".to_string(), trie); }
+    if let Ok(trie) = Trie::load("data/chinese.index", "data/chinese.data") { 
+        tries_map.insert("Chinese".to_string(), trie); 
+    } else {
+        println!("⚠️ 警告: 无法加载中文词库 data/chinese.index");
+    }
+    if let Ok(trie) = Trie::load("data/japanese.index", "data/japanese.data") { 
+        tries_map.insert("Japanese".to_string(), trie); 
+    }
     let tries_arc = Arc::new(RwLock::new(tries_map));
     
-    let device_path = initial_config.files.device_path.clone().unwrap_or_else(|| find_keyboard().unwrap_or_default());
-    let mut dev = Device::open(&device_path)?;
-    let mut vkbd = Vkbd::new(&dev)?;
+    let device_path = match initial_config.files.device_path.clone() {
+        Some(path) => path,
+        None => {
+            println!("[IME] 未指定设备，正在自动检测键盘...");
+            find_keyboard()?
+        }
+    };
+    
+    println!("[IME] 正在打开设备: {}", device_path);
+    let mut dev = Device::open(&device_path).map_err(|e| {
+        format!("无法打开输入设备 '{}': {} (请检查权限，是否已加入 input 组？)", device_path, e)
+    })?;
+    let mut vkbd = Vkbd::new(&dev).map_err(|e| {
+        format!("无法创建虚拟输入设备: {} (请检查 /dev/uinput 权限)", e)
+    })?;
     let punctuation = load_punctuation_dict(&initial_config.files.punctuation_file);
 
     let (notify_tx, notify_rx) = std::sync::mpsc::channel();
@@ -486,6 +509,31 @@ pub fn save_config(c: &Config) -> Result<(), Box<dyn std::error::Error>> {
 
 fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
     let ps = std::fs::read_dir("/dev/input")?;
-    for e in ps { let e = e?; let p = e.path(); if let Ok(d) = Device::open(&p) { if d.supported_keys().map_or(false, |k| k.contains(Key::KEY_A) && k.contains(Key::KEY_ENTER)) { return Ok(p.to_str().unwrap().to_string()); } } } 
-    Err("No keyboard found".into())
+    let mut found_any = false;
+    let mut permission_denied = false;
+
+    for e in ps {
+        let e = e?;
+        let p = e.path();
+        if p.is_dir() { continue; }
+        
+        match Device::open(&p) {
+            Ok(d) => {
+                found_any = true;
+                if d.supported_keys().map_or(false, |k| k.contains(Key::KEY_A) && k.contains(Key::KEY_ENTER)) {
+                    return Ok(p.to_str().unwrap().to_string());
+                }
+            }
+            Err(e) if e.kind() == std::io::ErrorKind::PermissionDenied => {
+                permission_denied = true;
+            }
+            Err(_) => {}
+        }
+    }
+    
+    if permission_denied && !found_any {
+        Err("无法读取 /dev/input 下的设备: 权限不足。请运行 ./install.sh 并重启，或将当前用户加入 input 组。".into())
+    } else {
+        Err("未检测到合适的键盘设备。".into())
+    }
 }
