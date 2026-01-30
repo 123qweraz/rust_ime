@@ -26,6 +26,10 @@ impl Trie {
         Ok(Self { index, data: data_data })
     }
 
+    pub fn contains(&self, pinyin: &str) -> bool {
+        self.index.contains_key(pinyin)
+    }
+
     pub fn get_all_exact(&self, pinyin: &str) -> Option<Vec<(String, String)>> {
         let offset = self.index.get(pinyin)? as usize;
         Some(self.read_block(offset))

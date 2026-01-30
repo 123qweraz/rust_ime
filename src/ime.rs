@@ -1,4 +1,4 @@
-use std::collections::{HashMap, HashSet};
+use std::collections::HashMap;
 use evdev::Key;
 use std::sync::mpsc::Sender;
 
@@ -408,7 +408,6 @@ impl Ime {
             return;
         }
 
-        // Get current dictionary
         let dict = if let Some(d) = self.tries.get(&self.current_profile) {
             d
         } else {
@@ -425,155 +424,127 @@ impl Ime {
             filter_string = self.buffer.get(idx..).unwrap_or("").to_lowercase();
         }
         
-        // Strip tones for lookup
         let pinyin_stripped = strip_tones(&pinyin_search).to_lowercase();
 
-        // 2. Intelligent Segmentation
-        // Example: "nihao" -> ["ni", "hao"]
-        let segments = self.segment_pinyin(&pinyin_stripped, dict);
+        // 2. Multi-Path Segmentation
+        let all_segmentations = self.segment_pinyin_all(&pinyin_stripped, dict);
 
-        let mut final_candidates: Vec<String> = Vec::new();
-        let mut seen = HashSet::new();
-
-        // 1. Full Pinyin Match (Highest Priority)
+        let mut candidate_map: HashMap<String, u32> = HashMap::new(); // word -> score
         let mut word_to_hint: HashMap<String, String> = HashMap::new();
 
-        if let Some(exact_matches) = dict.get_all_exact(&pinyin_stripped) {
-            for (cand, hint) in exact_matches {
-                if seen.insert(cand.clone()) {
-                    final_candidates.push(cand.clone());
-                    word_to_hint.insert(cand, hint);
-                }
-            }
-        }
-
-        // 2. Multi-syllable Dynamic Combination
-        let mut combination_scores: HashMap<String, u32> = HashMap::new();
-        if segments.len() > 1 {
-            let max_segments = segments.len().min(3);
-            let mut current_combinations: Vec<(String, u32)> = Vec::new();
-
+        // 3. Process All Segmentations
+        for segments in all_segmentations {
+            if segments.is_empty() { continue; }
+            
+            // Initial set from first token
             let first_segment = &segments[0];
             let first_chars = if first_segment.len() == 1 {
-                dict.search_bfs(first_segment, 100)
+                dict.search_bfs(first_segment, 50)
             } else {
                 dict.get_all_exact(first_segment).unwrap_or_default()
             };
 
+            let mut current_paths: Vec<(String, u32)> = Vec::new();
             for (c, h) in first_chars {
-                current_combinations.push((c.clone(), 0));
+                current_paths.push((c.clone(), 0));
                 word_to_hint.entry(c).or_insert(h);
             }
 
-            for i in 1..max_segments {
+            // Extend paths
+            for i in 1..segments.len() {
                 let next_segment = &segments[i];
                 let next_chars = if next_segment.len() == 1 {
-                    dict.search_bfs(next_segment, 100)
+                    dict.search_bfs(next_segment, 50)
                 } else {
                     dict.get_all_exact(next_segment).unwrap_or_default()
                 };
-                let mut next_combinations = Vec::new();
 
-                for (prev_word, prev_score) in current_combinations {
+                let mut next_paths = Vec::new();
+                for (prev_word, prev_score) in &current_paths {
                     for (next_char_str, next_hint) in &next_chars {
                         word_to_hint.entry(next_char_str.clone()).or_insert(next_hint.clone());
+                        
                         let context: Vec<char> = prev_word.chars().collect();
                         let base_score = self.base_ngram.get_score(&context, next_char_str);
                         let user_score = self.user_ngram.get_score(&context, next_char_str);
-                        let transition_score = base_score + (user_score * 10);
+                        let transition_score = base_score + (user_score * 50);
+                        
                         let new_score = prev_score + transition_score;
                         let mut new_word = prev_word.clone();
                         new_word.push_str(next_char_str);
-                        next_combinations.push((new_word, new_score));
+                        next_paths.push((new_word, new_score));
                     }
                 }
-                next_combinations.sort_by(|a, b| b.1.cmp(&a.1));
-                next_combinations.truncate(50);
-                current_combinations = next_combinations;
+                // Prune per step to avoid explosion
+                next_paths.sort_by(|a, b| b.1.cmp(&a.1));
+                next_paths.truncate(20);
+                current_paths = next_paths;
             }
-            
-            for (word, score) in current_combinations {
-                if seen.insert(word.clone()) {
-                    final_candidates.push(word.clone());
-                    combination_scores.insert(word, score);
-                }
+
+            // Collect results from this segmentation path
+            for (word, score) in current_paths {
+                let entry = candidate_map.entry(word).or_insert(0);
+                if score > *entry { *entry = score; }
             }
         }
 
-        let mut raw_candidates = if self.enable_fuzzy {
-            let variants = self.expand_fuzzy_pinyin(&pinyin_stripped);
-            let mut merged = Vec::new();
-            let mut merged_seen = HashSet::new();
-            for variant in variants {
-                let res = dict.search_bfs(&variant, 100); 
-                for (c, h) in res {
-                    word_to_hint.entry(c.clone()).or_insert(h);
-                    if merged_seen.insert(c.clone()) { merged.push(c); }
-                }
+        // 4. Exact Match Override (Always check if the full pinyin forms a word)
+        if let Some(exact_matches) = dict.get_all_exact(&pinyin_stripped) {
+            for (cand, hint) in exact_matches {
+                word_to_hint.insert(cand.clone(), hint);
+                // Boost exact matches significantly
+                let entry = candidate_map.entry(cand).or_insert(0);
+                *entry += 100000; 
             }
-            merged
-        } else {
-            let mut res_list = Vec::new();
-            let res = dict.search_bfs(&pinyin_stripped, 100);
-            for (c, h) in res { 
-                word_to_hint.entry(c.clone()).or_insert(h);
-                res_list.push(c); 
-            }
-            if segments.len() > 1 {
-                let first_seg_res = dict.search_bfs(&segments[0], 100);
-                let mut res_seen: HashSet<String> = res_list.iter().cloned().collect();
-                for (c, h) in first_seg_res {
-                    word_to_hint.entry(c.clone()).or_insert(h);
-                    if res_seen.insert(c.clone()) { res_list.push(c); }
-                }
-            }
-            res_list
-        };
+        }
+        
+        // 5. Fuzzy Expansion
+        if self.enable_fuzzy {
+             let variants = self.expand_fuzzy_pinyin(&pinyin_stripped);
+             for variant in variants {
+                 if variant == pinyin_stripped { continue; }
+                 let res = dict.search_bfs(&variant, 50);
+                 for (c, h) in res {
+                     word_to_hint.entry(c.clone()).or_insert(h);
+                     candidate_map.entry(c).or_insert(0);
+                 }
+             }
+        }
+
+        // 6. Convert to List and Sort
+        let mut final_candidates: Vec<(String, u32)> = candidate_map.into_iter().collect();
+        
+        // Final Global Scoring Adjustment
+        for (cand, score) in &mut final_candidates {
+            let base_score = self.base_ngram.get_score(&self.context, cand);
+            let user_score = self.user_ngram.get_score(&self.context, cand);
+            *score += base_score + (user_score * 500);
+            
+            // Length bonus
+            if cand.chars().count() >= 2 { *score += 2000; }
+        }
 
         if !filter_string.is_empty() {
-            let filter = |cand: &String| {
+            let filter = |(cand, _): &(String, u32)| {
                 if let Some(hint) = word_to_hint.get(cand) {
                     hint.to_lowercase().starts_with(&filter_string)
                 } else {
                     if let Some(first_char) = cand.chars().next() {
-                        if let Some(h) = word_to_hint.get(&first_char.to_string()) {
-                            return h.to_lowercase().starts_with(&filter_string);
-                        }
+                         if let Some(h) = word_to_hint.get(&first_char.to_string()) {
+                             return h.to_lowercase().starts_with(&filter_string);
+                         }
                     }
                     false 
                 }
             };
             final_candidates.retain(filter);
-            raw_candidates.retain(filter);
         }
 
-        let mut all_candidates = final_candidates;
-        let full_pinyin_exact: Vec<String> = dict.get_all_exact(&pinyin_stripped).unwrap_or_default().into_iter().map(|(c,_)| c).collect();
+        final_candidates.sort_by(|a, b| b.1.cmp(&a.1));
 
-        for cand in raw_candidates {
-            if !all_candidates.contains(&cand) { all_candidates.push(cand); }
-        }
+        self.candidates = final_candidates.iter().map(|(s, _)| s.clone()).collect();
+        self.candidate_hints = final_candidates.iter().map(|(s, _)| word_to_hint.get(s).cloned().unwrap_or_default()).collect();
 
-        let mut scored_candidates: Vec<(String, u32)> = all_candidates.into_iter()
-            .map(|cand| {
-                let init_score = *combination_scores.get(&cand).unwrap_or(&0);
-                let base_score = self.base_ngram.get_score(&self.context, &cand);
-                let user_score = self.user_ngram.get_score(&self.context, &cand);
-                let mut total_score = init_score + base_score + (user_score * 500);
-                if full_pinyin_exact.contains(&cand) { total_score += 50000; }
-                let char_count = cand.chars().count();
-                if char_count >= 2 { total_score += 20000; }
-                if char_count == 1 && pinyin_stripped.len() > 2 { total_score = total_score.saturating_sub(15000); }
-                (cand, total_score)
-            })
-            .collect();
-
-        scored_candidates.sort_by(|a, b| b.1.cmp(&a.1));
-        self.candidates = scored_candidates.iter().map(|(s, _)| s.clone()).collect();
-        self.candidate_hints = scored_candidates.into_iter()
-            .map(|(s, _)| word_to_hint.get(&s).cloned().unwrap_or_default())
-            .collect();
-        
         if self.candidates.is_empty() {
             self.candidates.push(self.buffer.clone());
             self.candidate_hints.push(String::new());
@@ -587,7 +558,43 @@ impl Ime {
         self.print_preview();
     }
 
-    fn segment_pinyin(&self, pinyin: &str, dict: &Trie) -> Vec<String> {
+    fn segment_pinyin_all(&self, pinyin: &str, dict: &Trie) -> Vec<Vec<String>> {
+        let mut results = Vec::new();
+        let mut current = Vec::new();
+        self.segment_recursive(pinyin, dict, &mut current, &mut results);
+        
+        if results.is_empty() {
+            // Fallback: Greedy
+            results.push(self.segment_pinyin_greedy(pinyin, dict));
+        }
+        results
+    }
+
+    fn segment_recursive(&self, remaining: &str, dict: &Trie, current: &mut Vec<String>, results: &mut Vec<Vec<String>>) {
+        if remaining.is_empty() {
+            results.push(current.clone());
+            return;
+        }
+        
+        if results.len() >= 20 { return; } // Limit paths
+
+        let has_apostrophe = remaining.starts_with('\'');
+        let start_idx = if has_apostrophe { 1 } else { 0 };
+        let actual_remaining = &remaining[start_idx..];
+        
+        let max_len = actual_remaining.len().min(6);
+        // Optimize: Try from longest to shortest to find plausible paths first
+        for len in (1..=max_len).rev() {
+            let sub = &actual_remaining[..len];
+            if dict.contains(sub) {
+                current.push(sub.to_string());
+                self.segment_recursive(&actual_remaining[len..], dict, current, results);
+                current.pop();
+            }
+        }
+    }
+
+    fn segment_pinyin_greedy(&self, pinyin: &str, dict: &Trie) -> Vec<String> {
         let mut segments = Vec::new();
         let mut current_offset = 0;
         let pinyin_len = pinyin.len();
@@ -596,28 +603,20 @@ impl Ime {
             let mut found_len = 0;
             let current_str = &pinyin[current_offset..];
             
-            // Check for explicit divider (apostrophe)
             if current_str.starts_with('\'') {
                 current_offset += 1;
                 continue;
             }
 
-            // Get valid char boundaries
-            let mut boundaries: Vec<usize> = current_str.char_indices()
-                .map(|(idx, _)| idx)
-                .collect();
-            // Add the end of the string as a valid boundary
+            let mut boundaries: Vec<usize> = current_str.char_indices().map(|(idx, _)| idx).collect();
             boundaries.push(current_str.len());
             
-            // Stop at next divider if present
             let next_divider = current_str.find('\'').unwrap_or(current_str.len());
-            
-            // Greedily find the longest valid syllable, max 6 chars, or up to divider
             let max_check = boundaries.len().min(7); 
+            
             for i in (1..max_check).rev() {
                 let len = boundaries[i];
-                if len > next_divider { continue; } // Don't cross divider
-                
+                if len > next_divider { continue; }
                 let sub = &current_str[..len];
                 if dict.get_all_exact(sub).is_some() {
                     found_len = len;
@@ -629,7 +628,6 @@ impl Ime {
                 segments.push(current_str[..found_len].to_string());
                 current_offset += found_len;
             } else {
-                // If no syllable found, take one char and move on (fallback)
                 let first_char_len = current_str.chars().next().unwrap().len_utf8();
                 segments.push(current_str[..first_char_len].to_string());
                 current_offset += first_char_len;
