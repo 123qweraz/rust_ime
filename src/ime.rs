@@ -438,6 +438,8 @@ impl Ime {
             
             // Initial set from first token
             let first_segment = &segments[0];
+            let segment_len_bonus = (first_segment.len() as u32).pow(2) * 100; // Prefer longer pinyin segments
+            
             let first_chars = if first_segment.len() == 1 {
                 dict.search_bfs(first_segment, 50)
             } else {
@@ -446,13 +448,15 @@ impl Ime {
 
             let mut current_paths: Vec<(String, u32)> = Vec::new();
             for (c, h) in first_chars {
-                current_paths.push((c.clone(), 0));
+                current_paths.push((c.clone(), segment_len_bonus));
                 word_to_hint.entry(c).or_insert(h);
             }
 
             // Extend paths
             for i in 1..segments.len() {
                 let next_segment = &segments[i];
+                let next_len_bonus = (next_segment.len() as u32).pow(2) * 100;
+                
                 let next_chars = if next_segment.len() == 1 {
                     dict.search_bfs(next_segment, 50)
                 } else {
@@ -469,7 +473,7 @@ impl Ime {
                         let user_score = self.user_ngram.get_score(&context, next_char_str);
                         let transition_score = base_score + (user_score * 50);
                         
-                        let new_score = prev_score + transition_score;
+                        let new_score = prev_score + transition_score + next_len_bonus;
                         let mut new_word = prev_word.clone();
                         new_word.push_str(next_char_str);
                         next_paths.push((new_word, new_score));
@@ -582,7 +586,7 @@ impl Ime {
         let start_idx = if has_apostrophe { 1 } else { 0 };
         let actual_remaining = &remaining[start_idx..];
         
-        let max_len = actual_remaining.len().min(6);
+        let max_len = actual_remaining.len().min(15);
         // Optimize: Try from longest to shortest to find plausible paths first
         for len in (1..=max_len).rev() {
             let sub = &actual_remaining[..len];
