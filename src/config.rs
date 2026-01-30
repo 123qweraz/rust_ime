@@ -51,7 +51,7 @@ pub struct Appearance {
 impl Default for Appearance {
     fn default() -> Self {
         Appearance {
-            show_notifications: true,
+            show_notifications: false,
             preview_mode: "none".to_string(),
             show_candidates: false,
             show_keystrokes: false,
@@ -270,7 +270,7 @@ impl Default for Shortcut {
 
 fn default_readme() -> String { "本配置文件已优化。请修改 'key' 字段来更改快捷键。'paste_method' 可选值: ctrl_v, ctrl_shift_v, shift_insert".to_string() }
 
-fn default_enable_notifications() -> bool { true }
+fn default_enable_notifications() -> bool { false }
 
 fn default_show_candidates() -> bool { false }
 

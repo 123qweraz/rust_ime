@@ -96,7 +96,8 @@ fn install_autostart() -> Result<(), Box<dyn std::error::Error>> {
     );
     let home = env::var("HOME")?;
     let autostart_dir = Path::new(&home).join(".config/autostart");
-    if !autostart_dir.exists() { std::fs::create_dir_all(&autostart_dir)?; }
+    if !autostart_dir.exists() { std::fs::create_dir_all(&autostart_dir)?;
+    }
     let desktop_file = autostart_dir.join("rust-ime.desktop");
     let mut file = File::create(&desktop_file)?;
     use std::io::Write;
@@ -121,8 +122,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     if args.len() > 1 {
         match args[1].as_str() {
-            "--install" => { install_autostart()?; return Ok(()); }
-            "--stop" => { stop_daemon()?; return Ok(()); }
+            "--install" => { install_autostart()?; return Ok(()); } 
+            "--stop" => { stop_daemon()?; return Ok(()); } 
             "--restart" => { 
                 stop_daemon()?;
                 std::thread::sleep(std::time::Duration::from_millis(500));
@@ -143,8 +144,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 println!("  <拼音>           转换拼音 (CLI 模式)");
                 return Ok(())
             }
-            s if !s.starts_with("--") => { return run_cli_conversion(&args[1..]); }
-            _ => {}
+            s if !s.starts_with("--") => { return run_cli_conversion(&args[1..]); } 
+            _ => {} 
         }
     }
 
@@ -265,7 +266,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
     let tx_web = tray_tx.clone();
     std::thread::spawn(move || {
         let rt = tokio::runtime::Runtime::new().unwrap();
-        rt.block_on(async { web::WebServer::new(8765, c_web, t_web, tx_web).start().await; });
+        rt.block_on(async {{ web::WebServer::new(8765, c_web, t_web, tx_web).start().await; }});
     });
 
     std::thread::spawn(move || {
@@ -353,7 +354,17 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
         for ev in events {
             if let InputEventKind::Key(key) = ev.kind() {
                 let val = ev.value();
-                if val == 1 { held_keys.insert(key); } else if val == 0 { held_keys.remove(&key); }
+                if val == 1 {
+                    held_keys.insert(key);
+                    if ime.show_keystrokes {
+                        if let Some(ref tx) = gui_tx {
+                            let key_name = format!("{:?}", key).replace("KEY_", "");
+                            let _ = tx.send(crate::gui::GuiEvent::Keystroke(key_name));
+                        }
+                    }
+                } else if val == 0 {
+                    held_keys.remove(&key);
+                }
 
                 let conf = config_arc.read().unwrap();
                 if val == 1 {
@@ -402,7 +413,7 @@ fn run_ime(gui_tx: Option<Sender<crate::gui::GuiEvent>>, initial_config: Config)
                         Action::Emit(s) => vkbd.send_text(&s),
                         Action::DeleteAndEmit { delete, insert, .. } => { vkbd.backspace(delete); vkbd.send_text(&insert); },
                         Action::PassThrough => vkbd.emit_raw(key, val),
-                        _ => {}
+                        _ => {} 
                     }
                 } else { vkbd.emit_raw(key, val); }
             }
@@ -433,6 +444,6 @@ pub fn save_config(c: &Config) -> Result<(), Box<dyn std::error::Error>> {
 
 fn find_keyboard() -> Result<String, Box<dyn std::error::Error>> {
     let ps = std::fs::read_dir("/dev/input")?;
-    for e in ps { let e = e?; let p = e.path(); if let Ok(d) = Device::open(&p) { if d.supported_keys().map_or(false, |k| k.contains(Key::KEY_A) && k.contains(Key::KEY_ENTER)) { return Ok(p.to_str().unwrap().to_string()); } } }
+    for e in ps { let e = e?; let p = e.path(); if let Ok(d) = Device::open(&p) { if d.supported_keys().map_or(false, |k| k.contains(Key::KEY_A) && k.contains(Key::KEY_ENTER)) { return Ok(p.to_str().unwrap().to_string()); } } } 
     Err("No keyboard found".into())
 }

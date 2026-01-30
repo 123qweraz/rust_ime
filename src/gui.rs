@@ -280,6 +280,21 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                 
                 key_box_c.append(&label);
                 key_window_c.set_opacity(1.0);
+
+                let kb_weak = key_box_c.downgrade();
+                let label_weak = label.downgrade();
+                let kw_weak = key_window_c.downgrade();
+                
+                glib::timeout_add_local(std::time::Duration::from_secs(3), move || {
+                    let kb: Box = if let Some(kb) = kb_weak.upgrade() { kb } else { return glib::Continue(false); };
+                    let l = if let Some(l) = label_weak.upgrade() { l } else { return glib::Continue(false); };
+                    
+                    kb.remove(&l);
+                    if kb.first_child().is_none() {
+                        if let Some(kw) = kw_weak.upgrade() { kw.set_opacity(0.0); }
+                    }
+                    glib::Continue(false)
+                });
             },
             GuiEvent::ClearKeystrokes => {
                 while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
