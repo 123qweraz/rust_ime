@@ -213,7 +213,8 @@ impl EvdevHost {
             if abs_idx == p.selected { body.push_str(&format!("【{}.{}{}】 ", i+1, cand, hint)); }
             else { body.push_str(&format!("{}.{}{} ", i+1, cand, hint)); }
         }
-        let _ = self.notify_tx.send(NotifyEvent::Update(format!("拼音: {}", pinyin), body));
+        let summary = format!("[{}] {}", p.current_profile, pinyin);
+        let _ = self.notify_tx.send(NotifyEvent::Update(summary, body));
     }
 }
 
