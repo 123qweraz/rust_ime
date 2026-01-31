@@ -8,7 +8,7 @@ use std::sync::{Arc, RwLock, Mutex};
 use std::path::{Path, PathBuf};
 use std::env;
 use std::collections::HashMap;
-use std::io::BufReader;
+use std::io::{BufReader, Read};
 
 use engine::{Processor, Trie, NgramModel};
 use platform::traits::InputMethodHost;
@@ -16,10 +16,26 @@ use platform::linux::evdev_host::EvdevHost;
 use platform::linux::wayland::WaylandHost;
 pub use config::Config;
 use serde::Deserialize;
+use serde_json::Value;
 
 #[derive(Debug, Deserialize)]
 struct PunctuationEntry {
     char: String,
+}
+
+#[derive(Debug, Deserialize, Clone)]
+struct DictEntry {
+    #[serde(alias = "char")]
+    word: String,
+    #[serde(alias = "en")]
+    hint: Option<String>,
+}
+
+#[derive(Debug)]
+pub enum NotifyEvent {
+    Update(String, String),
+    Message(String),
+    Close,
 }
 
 pub fn find_project_root() -> PathBuf {
@@ -68,30 +84,30 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let config = Arc::new(RwLock::new(load_config()));
     let (gui_tx, gui_rx) = std::sync::mpsc::channel();
     let (tray_tx, tray_rx) = std::sync::mpsc::channel();
+    let (notify_tx, notify_rx) = std::sync::mpsc::channel();
     
+    // 1. 启动 GUI 线程
     let gui_config = config.read().unwrap().clone();
-    let gui_tx_clone = gui_tx.clone();
+    let gui_tx_main = gui_tx.clone();
     std::thread::spawn(move || {
         ui::gui::start_gui(gui_rx, gui_config);
     });
 
+    // 2. 加载词库与 N-Gram
     let mut tries = HashMap::new();
     let mut ngrams = HashMap::new();
-
     if let Ok(entries) = std::fs::read_dir("data") {
         for entry in entries.flatten() {
             if entry.path().is_dir() {
                 let dir_name = entry.file_name().to_string_lossy().to_string().to_lowercase();
                 if dir_name == "ngram" || dir_name.contains("user_adapter") { continue; }
-                
                 let trie_idx = entry.path().join("trie.index");
                 let trie_dat = entry.path().join("trie.data");
                 if trie_idx.exists() && trie_dat.exists() {
                     if let Ok(trie) = Trie::load(&trie_idx, &trie_dat) {
-                        println!("[Main] 加载方案: {}", dir_name);
+                        println!("[Main] 加载词库: {}", dir_name);
                         tries.insert(dir_name.clone(), trie);
-                        let ngram_path = entry.path().to_string_lossy().to_string();
-                        let model = NgramModel::new(Some(&ngram_path));
+                        let model = NgramModel::new(Some(&entry.path().to_string_lossy()));
                         ngrams.insert(dir_name, model);
                     }
                 }
@@ -102,47 +118,86 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let conf_guard = config.read().unwrap();
     let punctuation = load_punctuation_dict(&conf_guard.files.punctuation_file);
     let default_profile = conf_guard.input.default_profile.to_lowercase();
+    
+    let mut processor_obj = Processor::new(tries, ngrams, default_profile, punctuation);
+    processor_obj.apply_config(&conf_guard);
+    let processor = Arc::new(Mutex::new(processor_obj));
     drop(conf_guard);
 
-    let processor = Arc::new(Mutex::new(Processor::new(
-        tries,
-        ngrams,
-        default_profile,
-        punctuation,
-    )));
+    // 3. 启动通知线程
+    std::thread::spawn(move || {
+        let mut handle: Option<notify_rust::NotificationHandle> = None;
+        while let Ok(event) = notify_rx.recv() {
+            match event {
+                NotifyEvent::Message(msg) => { let _ = notify_rust::Notification::new().summary("rust-IME").body(&msg).timeout(1500).show(); },
+                NotifyEvent::Update(s, b) => { if let Ok(h) = notify_rust::Notification::new().summary(&s).body(&b).id(9999).timeout(0).show() { handle = Some(h); } },
+                NotifyEvent::Close => { if let Some(h) = handle.take() { h.close(); } }
+            }
+        }
+    });
 
+    // 4. 启动学习模式线程
+    let gui_tx_learn = gui_tx.clone();
+    let conf_learn = config.clone();
+    std::thread::spawn(move || {
+        let mut current_data: Option<(String, Vec<(String, String)>)> = None;
+        loop {
+            let c = conf_learn.read().unwrap();
+            if c.appearance.learning_mode {
+                let dict_path = c.appearance.learning_dict_path.clone();
+                let interval = c.appearance.learning_interval_sec;
+                drop(c);
+                if current_data.as_ref().map_or(true, |(p, _)| p != &dict_path) {
+                    if let Ok(file) = File::open(&dict_path) {
+                        if let Ok(json) = serde_json::from_reader::<_, HashMap<String, Value>>(BufReader::new(file)) {
+                            let mut entries = Vec::new();
+                            for (_, val) in json {
+                                if let Some(arr) = val.as_array() {
+                                    for v in arr { if let Ok(e) = serde_json::from_value::<DictEntry>(v.clone()) { entries.push((e.word, e.hint.unwrap_or_default())); } }
+                                }
+                            }
+                            current_data = Some((dict_path, entries));
+                        }
+                    }
+                }
+                if let Some((_, ref entries)) = current_data {
+                    if !entries.is_empty() {
+                        use rand::Rng;
+                        let idx = rand::thread_rng().gen_range(0..entries.len());
+                        let (h, t) = &entries[idx];
+                        let _ = gui_tx_learn.send(ui::gui::GuiEvent::ShowLearning(h.clone(), t.clone()));
+                    }
+                }
+                std::thread::sleep(std::time::Duration::from_secs(interval.max(1)));
+            } else { drop(c); std::thread::sleep(std::time::Duration::from_secs(2)); }
+        }
+    });
+
+    // 5. 启动托盘处理
     let conf = config.read().unwrap();
-    let _tray_handle = ui::tray::start_tray(
-        false, 
-        conf.input.default_profile.clone(),
-        conf.appearance.show_candidates,
-        conf.appearance.show_notifications,
-        conf.appearance.show_keystrokes,
-        conf.appearance.learning_mode,
-        conf.appearance.preview_mode.clone(),
-        tray_tx
-    );
+    let _tray_handle = ui::tray::start_tray(false, conf.input.default_profile.clone(), conf.appearance.show_candidates, conf.appearance.show_notifications, conf.appearance.show_keystrokes, conf.appearance.learning_mode, conf.appearance.preview_mode.clone(), tray_tx);
     drop(conf);
 
-    let is_wayland = env::var("WAYLAND_DISPLAY").is_ok();
-    let use_native_wayland = env::var("USE_WAYLAND_IME").is_ok();
-    
     let processor_clone = processor.clone();
-    let gui_tx_tray = gui_tx_clone.clone();
+    let gui_tx_tray = gui_tx.clone();
+    let config_tray = config.clone();
     std::thread::spawn(move || {
         while let Ok(event) = tray_rx.recv() {
             match event {
                 ui::tray::TrayEvent::ToggleIme => {
                     let mut p = processor_clone.lock().unwrap();
-                    let enabled = p.toggle();
-                    println!("[Tray] Toggle Language -> Chinese Enabled: {}", enabled);
-                    let msg = if enabled { "中文模式" } else { "英文模式" };
-                    let _ = notify_rust::Notification::new().summary("rust-IME").body(msg).timeout(1500).show();
-                    
-                    // 更新 GUI (清空)
-                    let _ = gui_tx_tray.send(ui::gui::GuiEvent::Update { 
-                        pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 
-                    });
+                    p.toggle();
+                    let _ = gui_tx_tray.send(ui::gui::GuiEvent::Update { pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 });
+                }
+                ui::tray::TrayEvent::NextProfile => {
+                    let mut p = processor_clone.lock().unwrap();
+                    p.next_profile();
+                }
+                ui::tray::TrayEvent::ReloadConfig => {
+                    let new_conf = load_config();
+                    processor_clone.lock().unwrap().apply_config(&new_conf);
+                    let _ = gui_tx_tray.send(ui::gui::GuiEvent::ApplyConfig(new_conf.clone()));
+                    *config_tray.write().unwrap() = new_conf;
                 }
                 ui::tray::TrayEvent::Exit => std::process::exit(0),
                 _ => {}
@@ -150,16 +205,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    let mut host: Box<dyn InputMethodHost> = if is_wayland && use_native_wayland {
-        println!("[Main] 尝试启动原生 Wayland IME 协议...");
-        Box::new(WaylandHost::new(processor, Some(gui_tx_clone)))
-    } else {
-        println!("[Main] 启动 Evdev 模式...");
-        let device_path = find_keyboard_device()?;
-        println!("[Main] 使用键盘设备: {}", device_path);
-        Box::new(EvdevHost::new(processor, &device_path, Some(gui_tx_clone), config.clone())?)
-    };
-
+    // 6. 运行 Host
+    let device_path = find_keyboard_device()?;
+    let mut host = EvdevHost::new(processor, &device_path, Some(gui_tx_main), config.clone(), notify_tx)?;
     host.run()?;
     Ok(())
 }
@@ -168,11 +216,9 @@ fn find_keyboard_device() -> Result<String, Box<dyn std::error::Error>> {
     let ps = std::fs::read_dir("/dev/input")?;
     for e in ps {
         let e = e?;
-        let p = e.path();
-        if p.is_dir() { continue; }
-        if let Ok(d) = evdev::Device::open(&p) {
+        if let Ok(d) = evdev::Device::open(e.path()) {
             if d.supported_keys().map_or(false, |k| k.contains(evdev::Key::KEY_A) && k.contains(evdev::Key::KEY_ENTER)) {
-                return Ok(p.to_string_lossy().to_string());
+                return Ok(e.path().to_string_lossy().to_string());
             }
         }
     }

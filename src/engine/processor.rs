@@ -35,6 +35,11 @@ pub struct Processor {
     pub chinese_enabled: bool,
     pub segmenter: Segmenter,
     pub best_segmentation: Vec<String>,
+    
+    // 恢复的标志位
+    pub show_candidates: bool,
+    pub show_notifications: bool,
+    pub show_keystrokes: bool,
 }
 
 impl Processor {
@@ -48,7 +53,16 @@ impl Processor {
             state: ImeState::Direct, buffer: String::new(), tries, ngrams, current_profile: initial_profile,
             punctuation, candidates: vec![], candidate_hints: vec![], selected: 0, page: 0, 
             chinese_enabled: false, segmenter: Segmenter::new(), best_segmentation: vec![],
+            show_candidates: true, show_notifications: true, show_keystrokes: true,
         }
+    }
+
+    pub fn apply_config(&mut self, conf: &crate::config::Config) {
+        self.show_candidates = conf.appearance.show_candidates;
+        self.show_notifications = conf.appearance.show_notifications;
+        self.show_keystrokes = conf.appearance.show_keystrokes;
+        // 注意：这里需要确保 profile 也是小写
+        self.current_profile = conf.input.default_profile.to_lowercase();
     }
 
     pub fn toggle(&mut self) -> bool {

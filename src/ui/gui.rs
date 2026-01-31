@@ -216,6 +216,7 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                 current_config = conf;
             }
             GuiEvent::Update { pinyin, candidates, hints, selected } => {
+                println!("[GUI] Received Update: pinyin='{}', candidates:{}", pinyin, candidates.len());
                 if pinyin.is_empty() && candidates.is_empty() {
                     window_c.set_opacity(0.0);
                     window_c.set_can_target(false);
