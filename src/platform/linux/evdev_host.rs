@@ -78,6 +78,14 @@ impl InputMethodHost for EvdevHost {
                     if val == 1 && is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_language.key)) {
                         let enabled = self.processor.toggle();
                         println!("[EvdevHost] Toggle Language -> Chinese Enabled: {}", enabled);
+                        
+                        let msg = if enabled { "中文模式" } else { "英文模式" };
+                        let _ = notify_rust::Notification::new()
+                            .summary("rust-IME")
+                            .body(msg)
+                            .timeout(1500)
+                            .show();
+
                         self.update_gui();
                         continue;
                     }

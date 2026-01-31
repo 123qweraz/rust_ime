@@ -5,14 +5,22 @@ mod config;
 
 use std::fs::File;
 use std::sync::{Arc, RwLock};
-use std::path::PathBuf;
+use std::path::{Path, PathBuf};
 use std::env;
+use std::collections::HashMap;
+use std::io::BufReader;
 
 use engine::{Processor, Trie, NgramModel};
 use platform::traits::InputMethodHost;
 use platform::linux::evdev_host::EvdevHost;
 use platform::linux::wayland::WaylandHost;
 pub use config::Config;
+use serde::Deserialize;
+
+#[derive(Debug, Deserialize)]
+struct PunctuationEntry {
+    char: String,
+}
 
 pub fn find_project_root() -> PathBuf {
     let mut curr = env::current_dir().unwrap_or_else(|_| PathBuf::from("."));
@@ -29,6 +37,30 @@ pub fn save_config(c: &Config) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+fn load_config() -> Config {
+    let mut p = find_project_root(); p.push("config.json");
+    if let Ok(f) = File::open(&p) { 
+        if let Ok(c) = serde_json::from_reader(BufReader::new(f)) { return c; } 
+    }
+    Config::default_config()
+}
+
+pub fn load_punctuation_dict(p: &str) -> HashMap<String, String> {
+    let mut m = HashMap::new();
+    if let Ok(f) = File::open(p) { 
+        if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(BufReader::new(f)) {
+            if let Some(obj) = v.as_object() { 
+                for (k, val) in obj { 
+                    if let Ok(es) = serde_json::from_value::<Vec<PunctuationEntry>>(val.clone()) { 
+                        if let Some(first) = es.first() { m.insert(k.clone(), first.char.clone()); } 
+                    } 
+                } 
+            }
+        } 
+    } 
+    m
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let root = find_project_root();
     env::set_current_dir(&root)?;
@@ -43,15 +75,45 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ui::gui::start_gui(gui_rx, gui_config);
     });
 
-    let mut tries = std::collections::HashMap::new();
-    let trie = Trie::load("data/chinese/trie.index", "data/chinese/trie.data")?;
-    tries.insert("chinese".to_string(), trie);
+    let mut tries = HashMap::new();
+    let mut ngrams = HashMap::new();
+
+    // 扫描 data 目录加载词库
+    if let Ok(entries) = std::fs::read_dir("data") {
+        for entry in entries.flatten() {
+            if entry.path().is_dir() {
+                let dir_name = entry.file_name().to_string_lossy().to_string().to_lowercase();
+                if dir_name == "ngram" || dir_name.contains("user_adapter") { continue; }
+                
+                let trie_idx = entry.path().join("trie.index");
+                let trie_dat = entry.path().join("trie.data");
+                if trie_idx.exists() && trie_dat.exists() {
+                    if let Ok(trie) = Trie::load(&trie_idx, &trie_dat) {
+                        println!("[Main] 加载方案: {}", dir_name);
+                        tries.insert(dir_name.clone(), trie);
+                        let ngram_path = entry.path().to_string_lossy().to_string();
+                        let model = NgramModel::new(Some(&ngram_path));
+                        ngrams.insert(dir_name, model);
+                    }
+                }
+            }
+        }
+    }
+
+    if tries.is_empty() {
+        eprintln!("[Warning] 未发现有效词库，请运行 compile_dict");
+    }
+
+    let conf_guard = config.read().unwrap();
+    let punctuation = load_punctuation_dict(&conf_guard.files.punctuation_file);
+    let default_profile = conf_guard.input.default_profile.to_lowercase();
+    drop(conf_guard);
 
     let processor = Processor::new(
         tries,
-        std::collections::HashMap::new(),
-        "chinese".to_string(),
-        std::collections::HashMap::new(),
+        ngrams,
+        default_profile,
+        punctuation,
     );
 
     let conf = config.read().unwrap();
@@ -67,61 +129,43 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
     drop(conf);
 
-    // 默认使用 Evdev 模式以保证“能用”，即使在 Wayland 下
-    // 真正的 Wayland 原生协议支持由于库路径问题暂时挂起，后续完善
-    println!("[Main] 启动 Evdev 硬件拦截模式 (兼容模式)...");
+    let is_wayland = env::var("WAYLAND_DISPLAY").is_ok();
+    let use_native_wayland = env::var("USE_WAYLAND_IME").is_ok();
     
-    // 自动寻找键盘设备
-    let device_path = find_keyboard_device().unwrap_or_else(|_| "/dev/input/event3".to_string());
-    println!("[Main] 使用设备: {}", device_path);
+    let mut host: Box<dyn InputMethodHost> = if is_wayland && use_native_wayland {
+        println!("[Main] 尝试启动原生 Wayland IME 协议...");
+        Box::new(WaylandHost::new(processor, Some(gui_tx_clone)))
+    } else {
+        println!("[Main] 启动 Evdev 兼容模式 (适用于 KDE/Wayland/X11)...");
+        let device_path = find_keyboard_device()?;
+        println!("[Main] 使用键盘设备: {}", device_path);
+        Box::new(EvdevHost::new(processor, &device_path, Some(gui_tx_clone), config.clone())?)
+    };
 
-    let mut host = EvdevHost::new(processor, &device_path, Some(gui_tx_clone), config.clone())?;
-
-    // 启动托盘事件监听线程
     std::thread::spawn(move || {
         while let Ok(event) = tray_rx.recv() {
             match event {
                 ui::tray::TrayEvent::Exit => std::process::exit(0),
-                _ => {} // 其他事件待绑定
+                _ => {}
             }
         }
     });
 
     host.run()?;
-
     Ok(())
-}
-
-fn load_config() -> Config {
-    let mut p = find_project_root(); p.push("config.json");
-    if let Ok(f) = File::open(&p) { 
-        if let Ok(c) = serde_json::from_reader(std::io::BufReader::new(f)) { return c; } 
-    }
-    Config::default_config()
 }
 
 fn find_keyboard_device() -> Result<String, Box<dyn std::error::Error>> {
     let ps = std::fs::read_dir("/dev/input")?;
-    let mut permission_denied = false;
-
     for e in ps {
         let e = e?;
         let p = e.path();
         if p.is_dir() { continue; }
-        
-        // 尝试打开设备并检查是否支持标准的 A-Z 键
         if let Ok(d) = evdev::Device::open(&p) {
             if d.supported_keys().map_or(false, |k| k.contains(evdev::Key::KEY_A) && k.contains(evdev::Key::KEY_ENTER)) {
                 return Ok(p.to_string_lossy().to_string());
             }
-        } else {
-            permission_denied = true;
         }
     }
-    
-    if permission_denied {
-        Err("无法读取 /dev/input 设备：权限不足。请确保已加入 input 组或使用 sudo。".into())
-    } else {
-        Err("未检测到合适的键盘设备。".into())
-    }
+    Err("未检测到合适的键盘设备。".into())
 }
