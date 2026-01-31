@@ -41,6 +41,7 @@ impl Segmenter {
                     current.push(sub.to_string());
                     self.segment_recursive(&actual[len..], dict, current, results);
                     current.pop();
+                    if results.len() >= 15 { return; }
                 }
             }
             return;
@@ -53,6 +54,7 @@ impl Segmenter {
                 current.push(sub.to_string());
                 self.segment_recursive(&remaining[len..], dict, current, results);
                 current.pop();
+                if results.len() >= 15 { return; }
             }
         }
         if !remaining.is_empty() {

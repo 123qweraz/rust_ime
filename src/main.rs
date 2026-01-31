@@ -214,23 +214,29 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     tray_handle.update(|t| t.active_profile = profile);
                 }
                 ui::tray::TrayEvent::ToggleGui => {
-                    let mut p = processor_clone.lock().unwrap();
-                    p.show_candidates = !p.show_candidates;
-                    let enabled = p.show_candidates;
+                    let enabled = {
+                        let mut p = processor_clone.lock().unwrap();
+                        p.show_candidates = !p.show_candidates;
+                        p.show_candidates
+                    };
                     tray_handle.update(|t| t.show_candidates = enabled);
                     if let Ok(mut w) = config_tray.write() { w.appearance.show_candidates = enabled; let _ = save_config(&w); }
                 }
                 ui::tray::TrayEvent::ToggleNotify => {
-                    let mut p = processor_clone.lock().unwrap();
-                    p.show_notifications = !p.show_notifications;
-                    let enabled = p.show_notifications;
+                    let enabled = {
+                        let mut p = processor_clone.lock().unwrap();
+                        p.show_notifications = !p.show_notifications;
+                        p.show_notifications
+                    };
                     tray_handle.update(|t| t.show_notifications = enabled);
                     if let Ok(mut w) = config_tray.write() { w.appearance.show_notifications = enabled; let _ = save_config(&w); }
                 }
                 ui::tray::TrayEvent::ToggleKeystroke => {
-                    let mut p = processor_clone.lock().unwrap();
-                    p.show_keystrokes = !p.show_keystrokes;
-                    let enabled = p.show_keystrokes;
+                    let enabled = {
+                        let mut p = processor_clone.lock().unwrap();
+                        p.show_keystrokes = !p.show_keystrokes;
+                        p.show_keystrokes
+                    };
                     tray_handle.update(|t| t.show_keystrokes = enabled);
                     if let Ok(mut w) = config_tray.write() { w.appearance.show_keystrokes = enabled; let _ = save_config(&w); }
                 }
@@ -242,14 +248,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let _ = save_config(&w);
                 }
                 ui::tray::TrayEvent::CyclePreview => {
-                    let mut p = processor_clone.lock().unwrap();
-                    p.phantom_mode = match p.phantom_mode {
-                        engine::processor::PhantomMode::None => engine::processor::PhantomMode::Pinyin,
-                        engine::processor::PhantomMode::Pinyin => engine::processor::PhantomMode::None,
-                    };
-                    let mode_str = match p.phantom_mode { engine::processor::PhantomMode::Pinyin => "pinyin", _ => "none" };
+                    let mode_str = {
+                        let mut p = processor_clone.lock().unwrap();
+                        p.phantom_mode = match p.phantom_mode {
+                            engine::processor::PhantomMode::None => engine::processor::PhantomMode::Pinyin,
+                            engine::processor::PhantomMode::Pinyin => engine::processor::PhantomMode::None,
+                        };
+                        match p.phantom_mode { engine::processor::PhantomMode::Pinyin => "pinyin", _ => "none" }
+                    }.to_string();
                     tray_handle.update(|t| t.preview_mode = mode_str.to_string());
-                    if let Ok(mut w) = config_tray.write() { w.appearance.preview_mode = mode_str.to_string(); let _ = save_config(&w); }
+                    if let Ok(mut w) = config_tray.write() { w.appearance.preview_mode = mode_str; let _ = save_config(&w); }
                 }
                 ui::tray::TrayEvent::ReloadConfig => {
                     let new_conf = load_config();

@@ -76,11 +76,18 @@ impl InputMethodHost for EvdevHost {
 
                     // --- 快捷键检测 ---
                     if val == 1 {
-                        let conf = self.config.read().unwrap();
+                        let (toggle_main, toggle_alt, switch_prof, cycle_preview, toggle_notify) = {
+                            let conf = self.config.read().unwrap();
+                            (
+                                parse_key(&conf.hotkeys.switch_language.key),
+                                parse_key(&conf.hotkeys.switch_language_alt.key),
+                                parse_key(&conf.hotkeys.switch_dictionary.key),
+                                parse_key(&conf.hotkeys.cycle_preview_mode.key),
+                                parse_key(&conf.hotkeys.toggle_notifications.key),
+                            )
+                        };
                         
                         // 1. 中英切换
-                        let toggle_main = parse_key(&conf.hotkeys.switch_language.key);
-                        let toggle_alt = parse_key(&conf.hotkeys.switch_language_alt.key);
                         if is_combo(&held_keys, &toggle_main) || is_combo(&held_keys, &toggle_alt) {
                             let mut p = self.processor.lock().unwrap();
                             let enabled = p.toggle();
@@ -90,7 +97,6 @@ impl InputMethodHost for EvdevHost {
                         }
 
                         // 2. 方案切换 (Ctrl+Alt+S)
-                        let switch_prof = parse_key(&conf.hotkeys.switch_dictionary.key);
                         if is_combo(&held_keys, &switch_prof) {
                             let mut p = self.processor.lock().unwrap();
                             let profile = p.next_profile();
@@ -103,7 +109,6 @@ impl InputMethodHost for EvdevHost {
                         }
 
                         // 3. 预览模式切换 (Ctrl+Alt+P)
-                        let cycle_preview = parse_key(&conf.hotkeys.cycle_preview_mode.key);
                         if is_combo(&held_keys, &cycle_preview) {
                             let mut p = self.processor.lock().unwrap();
                             p.phantom_mode = match p.phantom_mode {
@@ -124,7 +129,6 @@ impl InputMethodHost for EvdevHost {
                         }
 
                         // 4. 通知开关 (Ctrl+Alt+N)
-                        let toggle_notify = parse_key(&conf.hotkeys.toggle_notifications.key);
                         if is_combo(&held_keys, &toggle_notify) {
                             let mut p = self.processor.lock().unwrap();
                             p.show_notifications = !p.show_notifications;
