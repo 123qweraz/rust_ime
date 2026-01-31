@@ -21,6 +21,12 @@ pub enum Action {
     Consume,
 }
 
+#[derive(Debug, Clone, PartialEq)]
+pub enum PhantomMode {
+    None,
+    Pinyin,
+}
+
 pub struct Processor {
     pub state: ImeState,
     pub buffer: String,
@@ -36,10 +42,10 @@ pub struct Processor {
     pub segmenter: Segmenter,
     pub best_segmentation: Vec<String>,
     
-    // 恢复的标志位
     pub show_candidates: bool,
     pub show_notifications: bool,
     pub show_keystrokes: bool,
+    pub phantom_mode: PhantomMode,
 }
 
 impl Processor {
@@ -54,6 +60,7 @@ impl Processor {
             punctuation, candidates: vec![], candidate_hints: vec![], selected: 0, page: 0, 
             chinese_enabled: false, segmenter: Segmenter::new(), best_segmentation: vec![],
             show_candidates: true, show_notifications: true, show_keystrokes: true,
+            phantom_mode: PhantomMode::Pinyin,
         }
     }
 
@@ -61,8 +68,11 @@ impl Processor {
         self.show_candidates = conf.appearance.show_candidates;
         self.show_notifications = conf.appearance.show_notifications;
         self.show_keystrokes = conf.appearance.show_keystrokes;
-        // 注意：这里需要确保 profile 也是小写
         self.current_profile = conf.input.default_profile.to_lowercase();
+        self.phantom_mode = match conf.appearance.preview_mode.as_str() {
+            "pinyin" => PhantomMode::Pinyin,
+            _ => PhantomMode::None,
+        };
     }
 
     pub fn toggle(&mut self) -> bool {

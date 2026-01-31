@@ -122,12 +122,27 @@ impl EvdevHost {
     fn update_gui(&self) {
         if let Some(ref tx) = self.gui_tx {
             let p = self.processor.lock().unwrap();
+            
+            // 如果不显示候选框，且预览模式为 None，则清空 GUI
+            if !p.show_candidates && p.phantom_mode == engine::processor::PhantomMode::None {
+                let _ = tx.send(GuiEvent::Update { pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 });
+                return;
+            }
+
             if !p.chinese_enabled || p.buffer.is_empty() {
                 let _ = tx.send(GuiEvent::Update { pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 });
                 return;
             }
+
             let pinyin = if p.best_segmentation.is_empty() { p.buffer.clone() } else { p.best_segmentation.join("'") };
-            let _ = tx.send(GuiEvent::Update { pinyin, candidates: p.candidates.clone(), hints: p.candidate_hints.clone(), selected: p.selected });
+            
+            // 如果开启了候选框显示，发送完整数据
+            if p.show_candidates {
+                let _ = tx.send(GuiEvent::Update { pinyin, candidates: p.candidates.clone(), hints: p.candidate_hints.clone(), selected: p.selected });
+            } else {
+                // 仅预览模式：只发送拼音，不发送候选词
+                let _ = tx.send(GuiEvent::Update { pinyin, candidates: vec![], hints: vec![], selected: 0 });
+            }
         }
     }
 

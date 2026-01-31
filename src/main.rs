@@ -93,7 +93,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ui::gui::start_gui(gui_rx, gui_config);
     });
 
-    // 2. 加载词库与 N-Gram
+    // 2. 加载词库
     let mut tries = HashMap::new();
     let mut ngrams = HashMap::new();
     if let Ok(entries) = std::fs::read_dir("data") {
@@ -118,13 +118,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let conf_guard = config.read().unwrap();
     let punctuation = load_punctuation_dict(&conf_guard.files.punctuation_file);
     let default_profile = conf_guard.input.default_profile.to_lowercase();
-    
     let mut processor_obj = Processor::new(tries, ngrams, default_profile, punctuation);
     processor_obj.apply_config(&conf_guard);
     let processor = Arc::new(Mutex::new(processor_obj));
     drop(conf_guard);
 
-    // 3. 启动通知线程
+    // 3. 通知线程
     std::thread::spawn(move || {
         let mut handle: Option<notify_rust::NotificationHandle> = None;
         while let Ok(event) = notify_rx.recv() {
@@ -136,7 +135,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    // 4. 启动学习模式线程
+    // 4. 学习模式线程
     let gui_tx_learn = gui_tx.clone();
     let conf_learn = config.clone();
     std::thread::spawn(move || {
@@ -173,25 +172,71 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    // 5. 启动托盘处理
+    // 5. 托盘处理器 (全面找回功能)
     let conf = config.read().unwrap();
-    let _tray_handle = ui::tray::start_tray(false, conf.input.default_profile.clone(), conf.appearance.show_candidates, conf.appearance.show_notifications, conf.appearance.show_keystrokes, conf.appearance.learning_mode, conf.appearance.preview_mode.clone(), tray_tx);
+    let tray_handle = ui::tray::start_tray(false, conf.input.default_profile.clone(), conf.appearance.show_candidates, conf.appearance.show_notifications, conf.appearance.show_keystrokes, conf.appearance.learning_mode, conf.appearance.preview_mode.clone(), tray_tx);
     drop(conf);
 
     let processor_clone = processor.clone();
     let gui_tx_tray = gui_tx.clone();
     let config_tray = config.clone();
+    let notify_tx_tray = notify_tx.clone();
+    
     std::thread::spawn(move || {
         while let Ok(event) = tray_rx.recv() {
             match event {
                 ui::tray::TrayEvent::ToggleIme => {
                     let mut p = processor_clone.lock().unwrap();
-                    p.toggle();
+                    let enabled = p.toggle();
+                    let msg = if enabled { "中文模式" } else { "英文模式" };
+                    let _ = notify_tx_tray.send(NotifyEvent::Message(msg.to_string()));
+                    tray_handle.update(|t| t.chinese_enabled = enabled);
                     let _ = gui_tx_tray.send(ui::gui::GuiEvent::Update { pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 });
                 }
                 ui::tray::TrayEvent::NextProfile => {
                     let mut p = processor_clone.lock().unwrap();
-                    p.next_profile();
+                    let profile = p.next_profile();
+                    let _ = notify_tx_tray.send(NotifyEvent::Message(format!("方案: {}", profile)));
+                    tray_handle.update(|t| t.active_profile = profile);
+                }
+                ui::tray::TrayEvent::ToggleGui => {
+                    let mut p = processor_clone.lock().unwrap();
+                    p.show_candidates = !p.show_candidates;
+                    let enabled = p.show_candidates;
+                    tray_handle.update(|t| t.show_candidates = enabled);
+                    if let Ok(mut w) = config_tray.write() { w.appearance.show_candidates = enabled; let _ = save_config(&w); }
+                }
+                ui::tray::TrayEvent::ToggleNotify => {
+                    let mut p = processor_clone.lock().unwrap();
+                    p.show_notifications = !p.show_notifications;
+                    let enabled = p.show_notifications;
+                    tray_handle.update(|t| t.show_notifications = enabled);
+                    if let Ok(mut w) = config_tray.write() { w.appearance.show_notifications = enabled; let _ = save_config(&w); }
+                }
+                ui::tray::TrayEvent::ToggleKeystroke => {
+                    let mut p = processor_clone.lock().unwrap();
+                    p.show_keystrokes = !p.show_keystrokes;
+                    let enabled = p.show_keystrokes;
+                    tray_handle.update(|t| t.show_keystrokes = enabled);
+                    if let Ok(mut w) = config_tray.write() { w.appearance.show_keystrokes = enabled; let _ = save_config(&w); }
+                }
+                ui::tray::TrayEvent::ToggleLearning => {
+                    let mut p = processor_clone.lock().unwrap();
+                    let mut w = config_tray.write().unwrap();
+                    w.appearance.learning_mode = !w.appearance.learning_mode;
+                    let enabled = w.appearance.learning_mode;
+                    tray_handle.update(|t| t.learning_mode = enabled);
+                    let _ = save_config(&w);
+                }
+                ui::tray::TrayEvent::CyclePreview => {
+                    let mut p = processor_clone.lock().unwrap();
+                    p.phantom_mode = match p.phantom_mode {
+                        engine::processor::PhantomMode::None => engine::processor::PhantomMode::Pinyin,
+                        engine::processor::PhantomMode::Pinyin => engine::processor::PhantomMode::None,
+                    };
+                    let mode_str = match p.phantom_mode { engine::processor::PhantomMode::Pinyin => "pinyin", _ => "none" };
+                    tray_handle.update(|t| t.preview_mode = mode_str.to_string());
+                    if let Ok(mut w) = config_tray.write() { w.appearance.preview_mode = mode_str.to_string(); let _ = save_config(&w); }
                 }
                 ui::tray::TrayEvent::ReloadConfig => {
                     let new_conf = load_config();
@@ -207,7 +252,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 6. 运行 Host
     let device_path = find_keyboard_device()?;
-    let mut host = EvdevHost::new(processor, &device_path, Some(gui_tx_main), config.clone(), notify_tx)?;
+    let mut host = EvdevHost::new(processor, &device_path, Some(gui_tx_main), config.clone(), notify_tx.clone())?;
     host.run()?;
     Ok(())
 }
