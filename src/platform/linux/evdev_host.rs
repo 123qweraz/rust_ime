@@ -76,7 +76,9 @@ impl InputMethodHost for EvdevHost {
 
                     let conf = self.config.read().unwrap();
                     if val == 1 && is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_language.key)) {
-                        self.processor.toggle();
+                        let enabled = self.processor.toggle();
+                        println!("[EvdevHost] Toggle Language -> Chinese Enabled: {}", enabled);
+                        self.update_gui();
                         continue;
                     }
                     drop(conf);
@@ -84,19 +86,24 @@ impl InputMethodHost for EvdevHost {
                     let shift = held_keys.contains(&Key::KEY_LEFTSHIFT) || held_keys.contains(&Key::KEY_RIGHTSHIFT);
                     
                     if self.processor.chinese_enabled {
+                        println!("[EvdevHost] Handling key: {:?} (val: {})", key, val);
                         match self.processor.handle_key(key, val != 0, shift) {
                             Action::Emit(s) => { 
+                                println!("[EvdevHost] Emitting text: {}", s);
                                 if let Ok(mut vkbd) = self.vkbd.lock() {
                                     let _ = vkbd.send_text(&s); 
                                 }
                             }
                             Action::DeleteAndEmit { delete, insert } => { 
+                                println!("[EvdevHost] Delete {} and Emit: {}", delete, insert);
                                 if let Ok(mut vkbd) = self.vkbd.lock() {
                                     for _ in 0..delete { vkbd.tap(Key::KEY_BACKSPACE); }
                                     let _ = vkbd.send_text(&insert);
                                 }
                             }
-                            Action::Consume => {}
+                            Action::Consume => {
+                                println!("[EvdevHost] Consumed key, buffer: {}", self.processor.buffer);
+                            }
                             Action::PassThrough => { 
                                 if let Ok(mut vkbd) = self.vkbd.lock() {
                                     let _ = vkbd.emit_raw(key, val); 
