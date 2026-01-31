@@ -33,7 +33,7 @@ struct DictEntry {
 #[derive(Debug)]
 pub enum NotifyEvent {
     Update(String, String),
-    Message(String),
+    Message(String, String), // Summary, Body
     Close,
 }
 
@@ -128,7 +128,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         let mut handle: Option<notify_rust::NotificationHandle> = None;
         while let Ok(event) = notify_rx.recv() {
             match event {
-                NotifyEvent::Message(msg) => { let _ = notify_rust::Notification::new().summary("rust-IME").body(&msg).timeout(1500).show(); },
+                NotifyEvent::Message(summary, body) => { let _ = notify_rust::Notification::new().summary(&summary).body(&body).timeout(1500).show(); },
                 NotifyEvent::Update(s, b) => { if let Ok(h) = notify_rust::Notification::new().summary(&s).body(&b).id(9999).timeout(0).show() { handle = Some(h); } },
                 NotifyEvent::Close => { if let Some(h) = handle.take() { h.close(); } }
             }
@@ -200,17 +200,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         while let Ok(event) = tray_rx.recv() {
             match event {
                 ui::tray::TrayEvent::ToggleIme => {
-                    let mut p = processor_clone.lock().unwrap();
-                    let enabled = p.toggle();
+                    let (profile, enabled) = {
+                        let mut p = processor_clone.lock().unwrap();
+                        let e = p.toggle();
+                        (p.current_profile.clone(), e)
+                    };
                     let msg = if enabled { "中文模式" } else { "英文模式" };
-                    let _ = notify_tx_tray.send(NotifyEvent::Message(msg.to_string()));
+                    let _ = notify_tx_tray.send(NotifyEvent::Message(profile, msg.to_string()));
                     tray_handle.update(|t| t.chinese_enabled = enabled);
                     let _ = gui_tx_tray.send(ui::gui::GuiEvent::Update { pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 });
                 }
                 ui::tray::TrayEvent::NextProfile => {
-                    let mut p = processor_clone.lock().unwrap();
-                    let profile = p.next_profile();
-                    let _ = notify_tx_tray.send(NotifyEvent::Message(format!("方案: {}", profile)));
+                    let profile = {
+                        let mut p = processor_clone.lock().unwrap();
+                        p.next_profile()
+                    };
+                    let _ = notify_tx_tray.send(NotifyEvent::Message(profile.clone(), "已切换方案".to_string()));
                     tray_handle.update(|t| t.active_profile = profile);
                 }
                 ui::tray::TrayEvent::ToggleGui => {

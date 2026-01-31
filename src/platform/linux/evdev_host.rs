@@ -92,7 +92,8 @@ impl InputMethodHost for EvdevHost {
                             let mut p = self.processor.lock().unwrap();
                             let enabled = p.toggle();
                             let msg = if enabled { "中文模式" } else { "英文模式" };
-                            let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
+                            let summary = p.current_profile.clone();
+                            let _ = self.notify_tx.send(NotifyEvent::Message(summary, msg.to_string()));
                             drop(p); self.update_gui(); continue;
                         }
 
@@ -100,7 +101,7 @@ impl InputMethodHost for EvdevHost {
                         if is_combo(&held_keys, &switch_prof) {
                             let mut p = self.processor.lock().unwrap();
                             let profile = p.next_profile();
-                            let _ = self.notify_tx.send(NotifyEvent::Message(format!("方案: {}", profile)));
+                            let _ = self.notify_tx.send(NotifyEvent::Message(profile.clone(), "方案已切换".to_string()));
                             if let Ok(mut w) = self.config.write() {
                                 w.input.default_profile = profile;
                                 let _ = crate::save_config(&w);
@@ -120,7 +121,8 @@ impl InputMethodHost for EvdevHost {
                                 _ => "none",
                             };
                             let msg = if mode_str == "pinyin" { "预览: 开启" } else { "预览: 关闭" };
-                            let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
+                            let summary = p.current_profile.clone();
+                            let _ = self.notify_tx.send(NotifyEvent::Message(summary, msg.to_string()));
                             if let Ok(mut w) = self.config.write() {
                                 w.appearance.preview_mode = mode_str.to_string();
                                 let _ = crate::save_config(&w);
@@ -134,7 +136,8 @@ impl InputMethodHost for EvdevHost {
                             p.show_notifications = !p.show_notifications;
                             let enabled = p.show_notifications;
                             let msg = if enabled { "通知: 开启" } else { "通知: 关闭" };
-                            let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
+                            let summary = p.current_profile.clone();
+                            let _ = self.notify_tx.send(NotifyEvent::Message(summary, msg.to_string()));
                             if let Ok(mut w) = self.config.write() {
                                 w.appearance.show_notifications = enabled;
                                 let _ = crate::save_config(&w);
