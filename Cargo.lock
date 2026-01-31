@@ -2566,6 +2566,7 @@ dependencies = [
  "arboard",
  "atty",
  "axum",
+ "bitflags 2.10.0",
  "daemonize",
  "evdev",
  "fst",

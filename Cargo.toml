@@ -28,6 +28,7 @@ nix = { version = "0.27", features = ["poll"] }
 fst = "0.4"
 memmap2 = "0.9"
 rand = "0.8"
+bitflags = "2.4"
 # GTK 4 依赖
 gtk4 = { version = "0.7", package = "gtk4", features = ["v4_6"] }
 gtk4-layer-shell = "0.2"
@@ -39,6 +40,8 @@ pango = "0.17"
 wayland-client = "0.31"
 wayland-protocols = { version = "0.31", features = ["client", "staging", "unstable"] }
 wayland-cursor = "0.31"
+
+[build-dependencies]
 
 [[bin]]
 name = "rust-ime"
