@@ -95,6 +95,10 @@ impl InputMethodHost for EvdevHost {
                             let mut p = self.processor.lock().unwrap();
                             let profile = p.next_profile();
                             let _ = self.notify_tx.send(NotifyEvent::Message(format!("方案: {}", profile)));
+                            if let Ok(mut w) = self.config.write() {
+                                w.input.default_profile = profile;
+                                let _ = crate::save_config(&w);
+                            }
                             drop(p); self.update_gui(); continue;
                         }
 
@@ -106,11 +110,16 @@ impl InputMethodHost for EvdevHost {
                                 crate::engine::processor::PhantomMode::None => crate::engine::processor::PhantomMode::Pinyin,
                                 crate::engine::processor::PhantomMode::Pinyin => crate::engine::processor::PhantomMode::None,
                             };
-                            let msg = match p.phantom_mode {
-                                crate::engine::processor::PhantomMode::Pinyin => "预览: 开启",
-                                _ => "预览: 关闭",
+                            let mode_str = match p.phantom_mode {
+                                crate::engine::processor::PhantomMode::Pinyin => "pinyin",
+                                _ => "none",
                             };
+                            let msg = if mode_str == "pinyin" { "预览: 开启" } else { "预览: 关闭" };
                             let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
+                            if let Ok(mut w) = self.config.write() {
+                                w.appearance.preview_mode = mode_str.to_string();
+                                let _ = crate::save_config(&w);
+                            }
                             drop(p); self.update_gui(); continue;
                         }
 
@@ -119,8 +128,13 @@ impl InputMethodHost for EvdevHost {
                         if is_combo(&held_keys, &toggle_notify) {
                             let mut p = self.processor.lock().unwrap();
                             p.show_notifications = !p.show_notifications;
-                            let msg = if p.show_notifications { "通知: 开启" } else { "通知: 关闭" };
+                            let enabled = p.show_notifications;
+                            let msg = if enabled { "通知: 开启" } else { "通知: 关闭" };
                             let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
+                            if let Ok(mut w) = self.config.write() {
+                                w.appearance.show_notifications = enabled;
+                                let _ = crate::save_config(&w);
+                            }
                             drop(p); continue;
                         }
                     }
