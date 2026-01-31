@@ -4,7 +4,7 @@
     "show_notifications": true,
     "preview_mode": "pinyin",
     "show_candidates": false,
-    "show_keystrokes": false,
+    "show_keystrokes": true,
     "candidate_anchor": "bottom",
     "candidate_margin_x": 100,
     "candidate_margin_y": 120,

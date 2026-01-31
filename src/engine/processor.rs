@@ -46,6 +46,7 @@ pub struct Processor {
     pub show_notifications: bool,
     pub show_keystrokes: bool,
     pub phantom_mode: PhantomMode,
+    pub phantom_text: String,
 }
 
 impl Processor {
@@ -61,6 +62,7 @@ impl Processor {
             chinese_enabled: false, segmenter: Segmenter::new(), best_segmentation: vec![],
             show_candidates: true, show_notifications: true, show_keystrokes: true,
             phantom_mode: PhantomMode::Pinyin,
+            phantom_text: String::new(),
         }
     }
 
@@ -89,6 +91,7 @@ impl Processor {
         self.selected = 0;
         self.page = 0;
         self.state = ImeState::Direct;
+        self.phantom_text.clear();
     }
 
     pub fn handle_key(&mut self, key: Key, is_press: bool, shift_pressed: bool) -> Action {
@@ -112,7 +115,7 @@ impl Processor {
             self.buffer.push(c); 
             self.state = ImeState::Composing; 
             self.lookup();
-            Action::Consume
+            self.update_phantom_action()
         } else if let Some(punc_key) = get_punctuation_key(key, shift_pressed) {
             if let Some(zh_punc) = self.punctuation.get(punc_key) { Action::Emit(zh_punc.clone()) } else { Action::PassThrough }
         } else { Action::PassThrough }
@@ -122,13 +125,19 @@ impl Processor {
         match key {
             Key::KEY_BACKSPACE => {
                 self.buffer.pop();
-                if self.buffer.is_empty() { self.reset(); Action::Consume }
-                else { self.lookup(); Action::Consume }
+                if self.buffer.is_empty() { 
+                    let del = self.phantom_text.chars().count();
+                    self.reset(); 
+                    if del > 0 { Action::DeleteAndEmit { delete: del, insert: "".into() } } else { Action::Consume }
+                } else { 
+                    self.lookup(); 
+                    self.update_phantom_action()
+                }
             }
             Key::KEY_TAB => {
                 if !self.candidates.is_empty() {
-                    if shift_pressed { if self.selected > 0 { self.selected -= 1; self.page = (self.selected / 5) * 5; } } 
-                    else { if self.selected + 1 < self.candidates.len() { self.selected += 1; self.page = (self.selected / 5) * 5; } } 
+                    if shift_pressed { if self.selected > 0 { self.selected -= 1; self.page = (self.selected / 5) * 5; } }
+                    else { if self.selected + 1 < self.candidates.len() { self.selected += 1; self.page = (self.selected / 5) * 5; } }
                 }
                 Action::Consume
             }
@@ -136,25 +145,24 @@ impl Processor {
             Key::KEY_EQUAL => { if self.page + 5 < self.candidates.len() { self.page += 5; self.selected = self.page; } Action::Consume }
             Key::KEY_SPACE => { 
                 if let Some(word) = self.candidates.get(self.selected) { 
-                    let out = word.clone();
-                    self.reset();
-                    Action::Emit(out)
+                    self.commit_candidate(word.clone())
                 } else if !self.buffer.is_empty() { 
                     let out = self.buffer.clone(); 
-                    self.reset(); 
-                    Action::Emit(out)
+                    self.commit_candidate(out)
                 } else { Action::Consume }
             }
-            Key::KEY_ENTER => { let out = self.buffer.clone(); self.reset(); Action::Emit(out) }
-            Key::KEY_ESC => { self.reset(); Action::Consume }
+            Key::KEY_ENTER => { let out = self.buffer.clone(); self.commit_candidate(out) }
+            Key::KEY_ESC => { 
+                let del = self.phantom_text.chars().count();
+                self.reset(); 
+                if del > 0 { Action::DeleteAndEmit { delete: del, insert: "".into() } } else { Action::Consume }
+            }
             _ if is_digit(key) => {
                 let digit = key_to_digit(key).unwrap_or(0);
                 if digit >= 1 && digit <= 5 { 
                     let idx = self.page + (digit - 1); 
                     if let Some(word) = self.candidates.get(idx) { 
-                        let out = word.clone();
-                        self.reset();
-                        return Action::Emit(out); 
+                        return self.commit_candidate(word.clone());
                     } 
                 }
                 Action::Consume
@@ -164,15 +172,38 @@ impl Processor {
                     self.buffer.push(c); self.lookup();
                     let has_filter = self.buffer.char_indices().skip(1).any(|(_, c)| c.is_ascii_uppercase());
                     if has_filter && self.candidates.len() == 1 { 
-                        let out = self.candidates[0].clone();
-                        self.reset();
-                        return Action::Emit(out); 
+                        return self.commit_candidate(self.candidates[0].clone());
                     }
-                }
-                Action::Consume
+                    self.update_phantom_action()
+                } else { Action::Consume }
             }
             _ => Action::PassThrough,
         }
+    }
+
+    fn commit_candidate(&mut self, cand: String) -> Action {
+        let del = self.phantom_text.chars().count();
+        self.reset();
+        Action::DeleteAndEmit { delete: del, insert: cand }
+    }
+
+    fn update_phantom_action(&mut self) -> Action {
+        if self.phantom_mode == PhantomMode::None { return Action::Consume; }
+        
+        let target = self.buffer.clone();
+        if target == self.phantom_text { return Action::Consume; }
+        
+        // 如果是追加
+        if target.starts_with(&self.phantom_text) && !self.phantom_text.is_empty() {
+            let added = target[self.phantom_text.len()..].to_string();
+            self.phantom_text = target;
+            return Action::Emit(added);
+        } 
+        
+        // 否则执行删除并重打
+        let del = self.phantom_text.chars().count();
+        self.phantom_text = target.clone();
+        Action::DeleteAndEmit { delete: del, insert: target }
     }
 
     pub fn lookup(&mut self) {
@@ -318,7 +349,6 @@ impl Processor {
     }
 }
 
-// Helper functions (simplified)
 pub fn is_letter(key: Key) -> bool { key_to_char(key, false).is_some() }
 pub fn is_digit(key: Key) -> bool {
     matches!(key, Key::KEY_1 | Key::KEY_2 | Key::KEY_3 | Key::KEY_4 | Key::KEY_5 | 

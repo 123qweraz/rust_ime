@@ -5,10 +5,10 @@ mod config;
 
 use std::fs::File;
 use std::sync::{Arc, RwLock, Mutex};
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 use std::env;
 use std::collections::HashMap;
-use std::io::{BufReader, Read};
+use std::io::BufReader;
 
 use engine::{Processor, Trie, NgramModel};
 use platform::traits::InputMethodHost;
@@ -64,7 +64,7 @@ fn load_config() -> Config {
 pub fn load_punctuation_dict(p: &str) -> HashMap<String, String> {
     let mut m = HashMap::new();
     if let Ok(f) = File::open(p) { 
-        if let Ok(v) = serde_json::from_reader::<_, serde_json::Value>(BufReader::new(f)) {
+        if let Ok(v) = serde_json::from_reader::<_, Value>(BufReader::new(f)) {
             if let Some(obj) = v.as_object() { 
                 for (k, val) in obj { 
                     if let Ok(es) = serde_json::from_value::<Vec<PunctuationEntry>>(val.clone()) { 
@@ -105,7 +105,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 let trie_dat = entry.path().join("trie.data");
                 if trie_idx.exists() && trie_dat.exists() {
                     if let Ok(trie) = Trie::load(&trie_idx, &trie_dat) {
-                        println!("[Main] 加载词库: {}", dir_name);
+                        println!("[Main] 加载方案: {}", dir_name);
                         tries.insert(dir_name.clone(), trie);
                         let model = NgramModel::new(Some(&entry.path().to_string_lossy()));
                         ngrams.insert(dir_name, model);
@@ -141,11 +141,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     std::thread::spawn(move || {
         let mut current_data: Option<(String, Vec<(String, String)>)> = None;
         loop {
-            let c = conf_learn.read().unwrap();
-            if c.appearance.learning_mode {
-                let dict_path = c.appearance.learning_dict_path.clone();
-                let interval = c.appearance.learning_interval_sec;
-                drop(c);
+            let (enabled, dict_path, interval) = {
+                let c = conf_learn.read().unwrap();
+                (c.appearance.learning_mode, c.appearance.learning_dict_path.clone(), c.appearance.learning_interval_sec)
+            };
+            if enabled {
                 if current_data.as_ref().map_or(true, |(p, _)| p != &dict_path) {
                     if let Ok(file) = File::open(&dict_path) {
                         if let Ok(json) = serde_json::from_reader::<_, HashMap<String, Value>>(BufReader::new(file)) {
@@ -168,11 +168,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     }
                 }
                 std::thread::sleep(std::time::Duration::from_secs(interval.max(1)));
-            } else { drop(c); std::thread::sleep(std::time::Duration::from_secs(2)); }
+            } else { std::thread::sleep(std::time::Duration::from_secs(2)); }
         }
     });
 
-    // 5. 托盘处理器 (全面找回功能)
+    // 5. 托盘处理器
     let conf = config.read().unwrap();
     let tray_handle = ui::tray::start_tray(false, conf.input.default_profile.clone(), conf.appearance.show_candidates, conf.appearance.show_notifications, conf.appearance.show_keystrokes, conf.appearance.learning_mode, conf.appearance.preview_mode.clone(), tray_tx);
     drop(conf);
@@ -221,7 +221,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     if let Ok(mut w) = config_tray.write() { w.appearance.show_keystrokes = enabled; let _ = save_config(&w); }
                 }
                 ui::tray::TrayEvent::ToggleLearning => {
-                    let mut p = processor_clone.lock().unwrap();
+                    let _p = processor_clone.lock().unwrap();
                     let mut w = config_tray.write().unwrap();
                     w.appearance.learning_mode = !w.appearance.learning_mode;
                     let enabled = w.appearance.learning_mode;
@@ -242,7 +242,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let new_conf = load_config();
                     processor_clone.lock().unwrap().apply_config(&new_conf);
                     let _ = gui_tx_tray.send(ui::gui::GuiEvent::ApplyConfig(new_conf.clone()));
-                    *config_tray.write().unwrap() = new_conf;
+                    if let Ok(mut w) = config_tray.write() { *w = new_conf; }
                 }
                 ui::tray::TrayEvent::Exit => std::process::exit(0),
                 _ => {}
@@ -252,7 +252,15 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // 6. 运行 Host
     let device_path = find_keyboard_device()?;
-    let mut host = EvdevHost::new(processor, &device_path, Some(gui_tx_main), config.clone(), notify_tx.clone())?;
+    let is_wayland = env::var("WAYLAND_DISPLAY").is_ok();
+    let use_native_wayland = env::var("USE_WAYLAND_IME").is_ok();
+    
+    let mut host: Box<dyn InputMethodHost> = if is_wayland && use_native_wayland {
+        Box::new(WaylandHost::new(processor, Some(gui_tx_main)))
+    } else {
+        Box::new(EvdevHost::new(processor, &device_path, Some(gui_tx_main), config.clone(), notify_tx.clone())?)
+    };
+
     host.run()?;
     Ok(())
 }

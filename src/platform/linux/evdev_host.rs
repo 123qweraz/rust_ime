@@ -74,30 +74,68 @@ impl InputMethodHost for EvdevHost {
                         }
                     } else if val == 0 { held_keys.remove(&key); }
 
-                    let conf = self.config.read().unwrap();
-                    let toggle_main = parse_key(&conf.hotkeys.switch_language.key);
-                    let toggle_alt = parse_key(&conf.hotkeys.switch_language_alt.key);
+                    // --- 快捷键检测 ---
+                    if val == 1 {
+                        let conf = self.config.read().unwrap();
+                        
+                        // 1. 中英切换
+                        let toggle_main = parse_key(&conf.hotkeys.switch_language.key);
+                        let toggle_alt = parse_key(&conf.hotkeys.switch_language_alt.key);
+                        if is_combo(&held_keys, &toggle_main) || is_combo(&held_keys, &toggle_alt) {
+                            let mut p = self.processor.lock().unwrap();
+                            let enabled = p.toggle();
+                            let msg = if enabled { "中文模式" } else { "英文模式" };
+                            let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
+                            drop(p); self.update_gui(); continue;
+                        }
 
-                    if val == 1 && (is_combo(&held_keys, &toggle_main) || is_combo(&held_keys, &toggle_alt)) {
-                        let mut p = self.processor.lock().unwrap();
-                        let enabled = p.toggle();
-                        let msg = if enabled { "中文模式" } else { "英文模式" };
-                        let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
-                        drop(p);
-                        self.update_gui();
-                        continue;
+                        // 2. 方案切换 (Ctrl+Alt+S)
+                        let switch_prof = parse_key(&conf.hotkeys.switch_dictionary.key);
+                        if is_combo(&held_keys, &switch_prof) {
+                            let mut p = self.processor.lock().unwrap();
+                            let profile = p.next_profile();
+                            let _ = self.notify_tx.send(NotifyEvent::Message(format!("方案: {}", profile)));
+                            drop(p); self.update_gui(); continue;
+                        }
+
+                        // 3. 预览模式切换 (Ctrl+Alt+P)
+                        let cycle_preview = parse_key(&conf.hotkeys.cycle_preview_mode.key);
+                        if is_combo(&held_keys, &cycle_preview) {
+                            let mut p = self.processor.lock().unwrap();
+                            p.phantom_mode = match p.phantom_mode {
+                                crate::engine::processor::PhantomMode::None => crate::engine::processor::PhantomMode::Pinyin,
+                                crate::engine::processor::PhantomMode::Pinyin => crate::engine::processor::PhantomMode::None,
+                            };
+                            let msg = match p.phantom_mode {
+                                crate::engine::processor::PhantomMode::Pinyin => "预览: 开启",
+                                _ => "预览: 关闭",
+                            };
+                            let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
+                            drop(p); self.update_gui(); continue;
+                        }
+
+                        // 4. 通知开关 (Ctrl+Alt+N)
+                        let toggle_notify = parse_key(&conf.hotkeys.toggle_notifications.key);
+                        if is_combo(&held_keys, &toggle_notify) {
+                            let mut p = self.processor.lock().unwrap();
+                            p.show_notifications = !p.show_notifications;
+                            let msg = if p.show_notifications { "通知: 开启" } else { "通知: 关闭" };
+                            let _ = self.notify_tx.send(NotifyEvent::Message(msg.to_string()));
+                            drop(p); continue;
+                        }
                     }
-                    drop(conf);
 
                     let shift = held_keys.contains(&Key::KEY_LEFTSHIFT) || held_keys.contains(&Key::KEY_RIGHTSHIFT);
                     let mut p = self.processor.lock().unwrap();
                     if p.chinese_enabled {
                         match p.handle_key(key, val != 0, shift) {
-                            Action::Emit(s) => { if let Ok(mut vkbd) = self.vkbd.lock() { let _ = vkbd.send_text(&s); } }
+                            Action::Emit(s) => { 
+                                if let Ok(mut vkbd) = self.vkbd.lock() { let _ = vkbd.send_text(&s); }
+                            }
                             Action::DeleteAndEmit { delete, insert } => { 
                                 if let Ok(mut vkbd) = self.vkbd.lock() {
-                                    for _ in 0..delete { vkbd.tap(Key::KEY_BACKSPACE); }
-                                    let _ = vkbd.send_text(&insert);
+                                    if delete > 0 { vkbd.backspace(delete); }
+                                    if !insert.is_empty() { let _ = vkbd.send_text(&insert); }
                                 }
                             }
                             Action::Consume => {}
@@ -123,13 +161,8 @@ impl EvdevHost {
         if let Some(ref tx) = self.gui_tx {
             let p = self.processor.lock().unwrap();
             
-            // 如果不显示候选框，且预览模式为 None，则清空 GUI
-            if !p.show_candidates && p.phantom_mode == engine::processor::PhantomMode::None {
-                let _ = tx.send(GuiEvent::Update { pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 });
-                return;
-            }
-
-            if !p.chinese_enabled || p.buffer.is_empty() {
+            // 如果不显示候选框，且没有 buffer，清空并返回
+            if p.buffer.is_empty() || !p.chinese_enabled {
                 let _ = tx.send(GuiEvent::Update { pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 });
                 return;
             }
@@ -140,8 +173,8 @@ impl EvdevHost {
             if p.show_candidates {
                 let _ = tx.send(GuiEvent::Update { pinyin, candidates: p.candidates.clone(), hints: p.candidate_hints.clone(), selected: p.selected });
             } else {
-                // 仅预览模式：只发送拼音，不发送候选词
-                let _ = tx.send(GuiEvent::Update { pinyin, candidates: vec![], hints: vec![], selected: 0 });
+                // 否则仅在控制台或通过拼音预览（由 handle_key 处理）工作，GUI 保持清空
+                let _ = tx.send(GuiEvent::Update { pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 });
             }
         }
     }
