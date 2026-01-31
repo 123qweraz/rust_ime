@@ -13,7 +13,6 @@ use std::io::BufReader;
 use engine::{Processor, Trie, NgramModel};
 use platform::traits::InputMethodHost;
 use platform::linux::evdev_host::EvdevHost;
-use platform::linux::wayland::WaylandHost;
 pub use config::Config;
 use serde::Deserialize;
 use serde_json::Value;
@@ -149,14 +148,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             if enabled {
                 if current_data.as_ref().map_or(true, |(p, _)| p != &dict_path) {
                     if let Ok(file) = File::open(&dict_path) {
-                        if let Ok(json) = serde_json::from_reader::<_, HashMap<String, Value>>(BufReader::new(file)) {
-                            let mut entries = Vec::new();
-                            for (_, val) in json {
-                                if let Some(arr) = val.as_array() {
-                                    for v in arr { if let Ok(e) = serde_json::from_value::<DictEntry>(v.clone()) { entries.push((e.word, e.hint.unwrap_or_default())); } }
+                        if let Ok(json) = serde_json::from_reader::<_, Value>(BufReader::new(file)) {
+                            if let Some(obj) = json.as_object() {
+                                let mut entries = Vec::new();
+                                for (_, val) in obj {
+                                    if let Some(arr) = val.as_array() {
+                                        for v in arr { if let Ok(e) = serde_json::from_value::<DictEntry>(v.clone()) { entries.push((e.word, e.hint.unwrap_or_default())); } }
+                                    }
                                 }
+                                current_data = Some((dict_path, entries));
                             }
-                            current_data = Some((dict_path, entries));
                         }
                     }
                 }
@@ -234,11 +235,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     if let Ok(mut w) = config_tray.write() { w.appearance.show_keystrokes = enabled; let _ = save_config(&w); }
                 }
                 ui::tray::TrayEvent::ToggleLearning => {
-                    let mut p = processor_clone.lock().unwrap();
                     let mut w = config_tray.write().unwrap();
                     w.appearance.learning_mode = !w.appearance.learning_mode;
                     let enabled = w.appearance.learning_mode;
-                    p.show_keystrokes = enabled; // 逻辑同步
                     tray_handle.update(|t| t.learning_mode = enabled);
                     let _ = save_config(&w);
                 }
@@ -262,7 +261,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let _ = std::process::Command::new("xdg-open").arg("http://localhost:8765").spawn();
                 }
                 ui::tray::TrayEvent::Restart => {
-                    println!("[Main] 正在重启...");
                     let args: Vec<String> = std::env::args().collect();
                     let _ = std::process::Command::new(&args[0]).args(&args[1..]).spawn();
                     std::process::exit(0);
@@ -273,15 +271,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     });
 
     // 7. 运行 Host
+    println!("[Main] 启动 Evdev 兼容模式 (原生 Wayland 协议暂避)...");
     let device_path = find_keyboard_device()?;
-    let is_wayland = env::var("WAYLAND_DISPLAY").is_ok();
-    let use_native_wayland = env::var("USE_WAYLAND_IME").is_ok();
-    
-    let mut host: Box<dyn InputMethodHost> = if is_wayland && use_native_wayland {
-        Box::new(WaylandHost::new(processor, Some(gui_tx_main)))
-    } else {
-        Box::new(EvdevHost::new(processor, &device_path, Some(gui_tx_main), config.clone(), notify_tx.clone())?)
-    };
+    let mut host = EvdevHost::new(processor, &device_path, Some(gui_tx_main), config.clone(), notify_tx.clone())?;
 
     host.run()?;
     Ok(())
