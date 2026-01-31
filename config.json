@@ -23,7 +23,7 @@
   "input": {
     "enable_fuzzy_pinyin": false,
     "autostart": false,
-    "default_profile": "Chinese",
+    "default_profile": "rime-ice",
     "paste_method": "ctrl_v"
   },
   "hotkeys": {
