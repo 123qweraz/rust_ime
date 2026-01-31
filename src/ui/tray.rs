@@ -31,7 +31,8 @@ pub struct ImeTray {
 
 impl Tray for ImeTray {
     fn icon_name(&self) -> String {
-        "rust-ime-dynamic".to_string()
+        // 返回空字符串，强制系统使用 icon_pixmap
+        String::new()
     }
 
     fn icon_pixmap(&self) -> Vec<ksni::Icon> {
@@ -40,40 +41,71 @@ impl Tray for ImeTray {
         
         let mut paint = Paint::default();
         if self.chinese_enabled {
-            paint.set_color_rgba8(247, 76, 0, 255); // Rust Orange
+            paint.set_color_rgba8(255, 87, 34, 255); // 更鲜艳的橙色 (Orange Red)
         } else {
-            paint.set_color_rgba8(74, 74, 74, 255); // Dark Grey
+            paint.set_color_rgba8(60, 60, 60, 255); // 深灰色
         }
         paint.anti_alias = true;
 
-        // 绘制圆角背景
-        let path = {
+        // 1. 绘制圆角背景
+        let bg_path = {
             let mut pb = PathBuilder::new();
-            pb.move_to(5.0, 2.0);
-            pb.line_to(17.0, 2.0);
-            pb.quad_to(20.0, 2.0, 20.0, 5.0);
-            pb.line_to(20.0, 17.0);
-            pb.quad_to(20.0, 20.0, 17.0, 20.0);
-            pb.line_to(5.0, 20.0);
-            pb.quad_to(2.0, 20.0, 2.0, 17.0);
-            pb.line_to(2.0, 5.0);
-            pb.quad_to(2.0, 2.0, 5.0, 2.0);
+            let r = 4.0;
+            let rect = Rect::from_xywh(2.0, 2.0, 18.0, 18.0).unwrap();
+            pb.move_to(rect.left() + r, rect.top());
+            pb.line_to(rect.right() - r, rect.top());
+            pb.quad_to(rect.right(), rect.top(), rect.right(), rect.top() + r);
+            pb.line_to(rect.right(), rect.bottom() - r);
+            pb.quad_to(rect.right(), rect.bottom(), rect.right() - r, rect.bottom());
+            pb.line_to(rect.left() + r, rect.bottom());
+            pb.quad_to(rect.left(), rect.bottom(), rect.left(), rect.bottom() - r);
+            pb.line_to(rect.left(), rect.top() + r);
+            pb.quad_to(rect.left(), rect.top(), rect.left() + r, rect.top());
             pb.finish().unwrap()
         };
-        pixmap.fill_path(&path, &paint, FillRule::Winding, Transform::identity(), None);
+        pixmap.fill_path(&bg_path, &paint, FillRule::Winding, Transform::identity(), None);
 
-        // 绘制一个简单的指示器 (白色的点)
+        // 2. 绘制内容
+        let mut icon_paint = Paint::default();
+        icon_paint.set_color_rgba8(255, 255, 255, 255);
+        icon_paint.anti_alias = true;
+
         if self.chinese_enabled {
-            let mut dot_paint = Paint::default();
-            dot_paint.set_color_rgba8(255, 255, 255, 255);
-            let center_rect = Rect::from_xywh(8.0, 8.0, 6.0, 6.0).unwrap();
-            pixmap.fill_rect(center_rect, &dot_paint, Transform::identity(), None);
+            // 绘制“中”字
+            // 矩形部分
+            let rect_path = {
+                let mut pb = PathBuilder::new();
+                pb.move_to(6.0, 8.0);
+                pb.line_to(16.0, 8.0);
+                pb.line_to(16.0, 14.0);
+                pb.line_to(6.0, 14.0);
+                pb.close();
+                pb.finish().unwrap()
+            };
+            let mut stroke = Stroke::default();
+            stroke.width = 1.5;
+            pixmap.stroke_path(&rect_path, &icon_paint, &stroke, Transform::identity(), None);
+            
+            // 垂直线部分
+            let mut line_pb = PathBuilder::new();
+            line_pb.move_to(11.0, 5.0);
+            line_pb.line_to(11.0, 17.0);
+            let line_path = line_pb.finish().unwrap();
+            pixmap.stroke_path(&line_path, &icon_paint, &stroke, Transform::identity(), None);
+        } else {
+            // 绘制简易“键盘” (3x2 矩阵点)
+            for y in 0..2 {
+                for x in 0..3 {
+                    let k_rect = Rect::from_xywh(6.0 + x as f32 * 4.0, 9.0 + y as f32 * 4.0, 2.5, 2.5).unwrap();
+                    pixmap.fill_rect(k_rect, &icon_paint, Transform::identity(), None);
+                }
+            }
         }
 
         let rgba = pixmap.data().to_vec();
-        // ARGB 转换 (ksni/DBus 预期是 ARGB，每像素 4 字节)
         let mut argb_data = Vec::with_capacity(rgba.len());
         for chunk in rgba.chunks_exact(4) {
+            // ksni 内部通常需要 ARGB (Big Endian)
             argb_data.push(chunk[3]); // A
             argb_data.push(chunk[0]); // R
             argb_data.push(chunk[1]); // G
