@@ -16,7 +16,7 @@
     "keystroke_bg_color": "rgba(20, 20, 20, 0.85)",
     "keystroke_font_size": 11,
     "keystroke_timeout_ms": 1000,
-    "learning_mode": false,
+    "learning_mode": true,
     "learning_interval_sec": 10,
     "learning_dict_path": "dicts/chinese/chars.json"
   },

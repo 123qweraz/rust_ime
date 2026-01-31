@@ -94,7 +94,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     });
 
     // 2. 加载词库
-    let mut tries = HashMap::new();
+    let mut tries_map = HashMap::new();
     let mut ngrams = HashMap::new();
     if let Ok(entries) = std::fs::read_dir("data") {
         for entry in entries.flatten() {
@@ -106,7 +106,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 if trie_idx.exists() && trie_dat.exists() {
                     if let Ok(trie) = Trie::load(&trie_idx, &trie_dat) {
                         println!("[Main] 加载方案: {}", dir_name);
-                        tries.insert(dir_name.clone(), trie);
+                        tries_map.insert(dir_name.clone(), trie);
                         let model = NgramModel::new(Some(&entry.path().to_string_lossy()));
                         ngrams.insert(dir_name, model);
                     }
@@ -114,11 +114,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
         }
     }
+    let tries_arc = Arc::new(RwLock::new(tries_map.clone()));
 
     let conf_guard = config.read().unwrap();
     let punctuation = load_punctuation_dict(&conf_guard.files.punctuation_file);
     let default_profile = conf_guard.input.default_profile.to_lowercase();
-    let mut processor_obj = Processor::new(tries, ngrams, default_profile, punctuation);
+    let mut processor_obj = Processor::new(tries_map, ngrams, default_profile, punctuation);
     processor_obj.apply_config(&conf_guard);
     let processor = Arc::new(Mutex::new(processor_obj));
     drop(conf_guard);
@@ -172,7 +173,19 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    // 5. 托盘处理器
+    // 5. 启动 Web Server
+    let config_web = config.clone();
+    let tries_web = tries_arc.clone();
+    let tray_tx_web = tray_tx.clone();
+    std::thread::spawn(move || {
+        if let Ok(rt) = tokio::runtime::Runtime::new() {
+            rt.block_on(async {
+                ui::web::WebServer::new(8765, config_web, tries_web, tray_tx_web).start().await;
+            });
+        }
+    });
+
+    // 6. 托盘处理器
     let conf = config.read().unwrap();
     let tray_handle = ui::tray::start_tray(false, conf.input.default_profile.clone(), conf.appearance.show_candidates, conf.appearance.show_notifications, conf.appearance.show_keystrokes, conf.appearance.learning_mode, conf.appearance.preview_mode.clone(), tray_tx);
     drop(conf);
@@ -221,10 +234,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     if let Ok(mut w) = config_tray.write() { w.appearance.show_keystrokes = enabled; let _ = save_config(&w); }
                 }
                 ui::tray::TrayEvent::ToggleLearning => {
-                    let _p = processor_clone.lock().unwrap();
+                    let mut p = processor_clone.lock().unwrap();
                     let mut w = config_tray.write().unwrap();
                     w.appearance.learning_mode = !w.appearance.learning_mode;
                     let enabled = w.appearance.learning_mode;
+                    p.show_keystrokes = enabled; // 逻辑同步
                     tray_handle.update(|t| t.learning_mode = enabled);
                     let _ = save_config(&w);
                 }
@@ -244,13 +258,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let _ = gui_tx_tray.send(ui::gui::GuiEvent::ApplyConfig(new_conf.clone()));
                     if let Ok(mut w) = config_tray.write() { *w = new_conf; }
                 }
+                ui::tray::TrayEvent::OpenConfig => {
+                    let _ = std::process::Command::new("xdg-open").arg("http://localhost:8765").spawn();
+                }
+                ui::tray::TrayEvent::Restart => {
+                    println!("[Main] 正在重启...");
+                    let args: Vec<String> = std::env::args().collect();
+                    let _ = std::process::Command::new(&args[0]).args(&args[1..]).spawn();
+                    std::process::exit(0);
+                }
                 ui::tray::TrayEvent::Exit => std::process::exit(0),
-                _ => {}
             }
         }
     });
 
-    // 6. 运行 Host
+    // 7. 运行 Host
     let device_path = find_keyboard_device()?;
     let is_wayland = env::var("WAYLAND_DISPLAY").is_ok();
     let use_native_wayland = env::var("USE_WAYLAND_IME").is_ok();
