@@ -4,7 +4,7 @@ mod ui;
 mod config;
 
 use std::fs::File;
-use std::sync::{Arc, RwLock};
+use std::sync::{Arc, RwLock, Mutex};
 use std::path::{Path, PathBuf};
 use std::env;
 use std::collections::HashMap;
@@ -78,7 +78,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut tries = HashMap::new();
     let mut ngrams = HashMap::new();
 
-    // 扫描 data 目录加载词库
     if let Ok(entries) = std::fs::read_dir("data") {
         for entry in entries.flatten() {
             if entry.path().is_dir() {
@@ -100,21 +99,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     }
 
-    if tries.is_empty() {
-        eprintln!("[Warning] 未发现有效词库，请运行 compile_dict");
-    }
-
     let conf_guard = config.read().unwrap();
     let punctuation = load_punctuation_dict(&conf_guard.files.punctuation_file);
     let default_profile = conf_guard.input.default_profile.to_lowercase();
     drop(conf_guard);
 
-    let processor = Processor::new(
+    let processor = Arc::new(Mutex::new(Processor::new(
         tries,
         ngrams,
         default_profile,
         punctuation,
-    );
+    )));
 
     let conf = config.read().unwrap();
     let _tray_handle = ui::tray::start_tray(
@@ -132,24 +127,38 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let is_wayland = env::var("WAYLAND_DISPLAY").is_ok();
     let use_native_wayland = env::var("USE_WAYLAND_IME").is_ok();
     
-    let mut host: Box<dyn InputMethodHost> = if is_wayland && use_native_wayland {
-        println!("[Main] 尝试启动原生 Wayland IME 协议...");
-        Box::new(WaylandHost::new(processor, Some(gui_tx_clone)))
-    } else {
-        println!("[Main] 启动 Evdev 兼容模式 (适用于 KDE/Wayland/X11)...");
-        let device_path = find_keyboard_device()?;
-        println!("[Main] 使用键盘设备: {}", device_path);
-        Box::new(EvdevHost::new(processor, &device_path, Some(gui_tx_clone), config.clone())?)
-    };
-
+    let processor_clone = processor.clone();
+    let gui_tx_tray = gui_tx_clone.clone();
     std::thread::spawn(move || {
         while let Ok(event) = tray_rx.recv() {
             match event {
+                ui::tray::TrayEvent::ToggleIme => {
+                    let mut p = processor_clone.lock().unwrap();
+                    let enabled = p.toggle();
+                    println!("[Tray] Toggle Language -> Chinese Enabled: {}", enabled);
+                    let msg = if enabled { "中文模式" } else { "英文模式" };
+                    let _ = notify_rust::Notification::new().summary("rust-IME").body(msg).timeout(1500).show();
+                    
+                    // 更新 GUI (清空)
+                    let _ = gui_tx_tray.send(ui::gui::GuiEvent::Update { 
+                        pinyin: "".into(), candidates: vec![], hints: vec![], selected: 0 
+                    });
+                }
                 ui::tray::TrayEvent::Exit => std::process::exit(0),
                 _ => {}
             }
         }
     });
+
+    let mut host: Box<dyn InputMethodHost> = if is_wayland && use_native_wayland {
+        println!("[Main] 尝试启动原生 Wayland IME 协议...");
+        Box::new(WaylandHost::new(processor, Some(gui_tx_clone)))
+    } else {
+        println!("[Main] 启动 Evdev 模式...");
+        let device_path = find_keyboard_device()?;
+        println!("[Main] 使用键盘设备: {}", device_path);
+        Box::new(EvdevHost::new(processor, &device_path, Some(gui_tx_clone), config.clone())?)
+    };
 
     host.run()?;
     Ok(())

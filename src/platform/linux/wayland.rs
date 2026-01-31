@@ -2,13 +2,19 @@ use crate::engine::Processor;
 use crate::platform::traits::{InputMethodHost, Rect};
 use crate::ui::GuiEvent;
 use std::sync::mpsc::Sender;
+use std::sync::{Arc, Mutex};
 
 pub struct WaylandHost {
+    processor: Arc<Mutex<Processor>>,
+    gui_tx: Option<Sender<GuiEvent>>,
 }
 
 impl WaylandHost {
-    pub fn new(_processor: Processor, _gui_tx: Option<Sender<GuiEvent>>) -> Self {
-        Self {}
+    pub fn new(processor: Arc<Mutex<Processor>>, gui_tx: Option<Sender<GuiEvent>>) -> Self {
+        Self {
+            processor,
+            gui_tx,
+        }
     }
 }
 

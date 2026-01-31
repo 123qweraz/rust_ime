@@ -11,7 +11,7 @@ use std::sync::{Arc, Mutex, atomic::{AtomicBool, Ordering}};
 use crate::config::parse_key;
 
 pub struct EvdevHost {
-    processor: Processor,
+    processor: Arc<Mutex<Processor>>,
     vkbd: Mutex<Vkbd>,
     dev: Mutex<Device>,
     gui_tx: Option<Sender<GuiEvent>>,
@@ -21,7 +21,7 @@ pub struct EvdevHost {
 
 impl EvdevHost {
     pub fn new(
-        processor: Processor, 
+        processor: Arc<Mutex<Processor>>, 
         device_path: &str, 
         gui_tx: Option<Sender<GuiEvent>>,
         config: Arc<std::sync::RwLock<Config>>
@@ -75,8 +75,12 @@ impl InputMethodHost for EvdevHost {
                     else if val == 0 { held_keys.remove(&key); }
 
                     let conf = self.config.read().unwrap();
-                    if val == 1 && is_combo(&held_keys, &parse_key(&conf.hotkeys.switch_language.key)) {
-                        let enabled = self.processor.toggle();
+                    let toggle_main = parse_key(&conf.hotkeys.switch_language.key);
+                    let toggle_alt = parse_key(&conf.hotkeys.switch_language_alt.key);
+
+                    if val == 1 && (is_combo(&held_keys, &toggle_main) || is_combo(&held_keys, &toggle_alt)) {
+                        let mut p = self.processor.lock().unwrap();
+                        let enabled = p.toggle();
                         println!("[EvdevHost] Toggle Language -> Chinese Enabled: {}", enabled);
                         
                         let msg = if enabled { "中文模式" } else { "英文模式" };
@@ -85,7 +89,7 @@ impl InputMethodHost for EvdevHost {
                             .body(msg)
                             .timeout(1500)
                             .show();
-
+                        drop(p);
                         self.update_gui();
                         continue;
                     }
@@ -93,9 +97,10 @@ impl InputMethodHost for EvdevHost {
 
                     let shift = held_keys.contains(&Key::KEY_LEFTSHIFT) || held_keys.contains(&Key::KEY_RIGHTSHIFT);
                     
-                    if self.processor.chinese_enabled {
+                    let mut p = self.processor.lock().unwrap();
+                    if p.chinese_enabled {
                         println!("[EvdevHost] Handling key: {:?} (val: {})", key, val);
-                        match self.processor.handle_key(key, val != 0, shift) {
+                        match p.handle_key(key, val != 0, shift) {
                             Action::Emit(s) => { 
                                 println!("[EvdevHost] Emitting text: {}", s);
                                 if let Ok(mut vkbd) = self.vkbd.lock() {
@@ -110,7 +115,7 @@ impl InputMethodHost for EvdevHost {
                                 }
                             }
                             Action::Consume => {
-                                println!("[EvdevHost] Consumed key, buffer: {}", self.processor.buffer);
+                                println!("[EvdevHost] Consumed key, buffer: {}", p.buffer);
                             }
                             Action::PassThrough => { 
                                 if let Ok(mut vkbd) = self.vkbd.lock() {
@@ -118,8 +123,10 @@ impl InputMethodHost for EvdevHost {
                                 }
                             }
                         }
+                        drop(p);
                         self.update_gui();
                     } else {
+                        drop(p);
                         if let Ok(mut vkbd) = self.vkbd.lock() {
                             let _ = vkbd.emit_raw(key, val);
                         }
@@ -138,16 +145,29 @@ impl InputMethodHost for EvdevHost {
 impl EvdevHost {
     fn update_gui(&self) {
         if let Some(ref tx) = self.gui_tx {
-            let pinyin = if self.processor.best_segmentation.is_empty() { 
-                self.processor.buffer.clone() 
+            let p = self.processor.lock().unwrap();
+            
+            // 如果没开启中文或者 buffer 为空，通常通知 GUI 隐藏
+            if !p.chinese_enabled || p.buffer.is_empty() {
+                let _ = tx.send(GuiEvent::Update {
+                    pinyin: "".into(),
+                    candidates: vec![],
+                    hints: vec![],
+                    selected: 0,
+                });
+                return;
+            }
+
+            let pinyin = if p.best_segmentation.is_empty() { 
+                p.buffer.clone() 
             } else { 
-                self.processor.best_segmentation.join("'") 
+                p.best_segmentation.join("'") 
             };
             let _ = tx.send(GuiEvent::Update {
                 pinyin,
-                candidates: self.processor.candidates.clone(),
-                hints: self.processor.candidate_hints.clone(),
-                selected: self.processor.selected,
+                candidates: p.candidates.clone(),
+                hints: p.candidate_hints.clone(),
+                selected: p.selected,
             });
         }
     }
