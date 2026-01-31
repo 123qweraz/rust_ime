@@ -1,6 +1,7 @@
 use ksni::menu::{StandardItem, MenuItem};
 use ksni::{Tray, ToolTip, TrayService, Handle};
 use std::sync::mpsc::Sender;
+use tiny_skia::*;
 
 #[derive(Debug, Clone)]
 pub enum TrayEvent {
@@ -30,7 +31,60 @@ pub struct ImeTray {
 
 impl Tray for ImeTray {
     fn icon_name(&self) -> String {
-        if self.chinese_enabled { "input-keyboard".to_string() } else { "keyboard".to_string() }
+        "rust-ime-dynamic".to_string()
+    }
+
+    fn icon_pixmap(&self) -> Vec<ksni::Icon> {
+        let size = 22;
+        let mut pixmap = Pixmap::new(size, size).unwrap();
+        
+        let mut paint = Paint::default();
+        if self.chinese_enabled {
+            paint.set_color_rgba8(247, 76, 0, 255); // Rust Orange
+        } else {
+            paint.set_color_rgba8(74, 74, 74, 255); // Dark Grey
+        }
+        paint.anti_alias = true;
+
+        // 绘制圆角背景
+        let path = {
+            let mut pb = PathBuilder::new();
+            pb.move_to(5.0, 2.0);
+            pb.line_to(17.0, 2.0);
+            pb.quad_to(20.0, 2.0, 20.0, 5.0);
+            pb.line_to(20.0, 17.0);
+            pb.quad_to(20.0, 20.0, 17.0, 20.0);
+            pb.line_to(5.0, 20.0);
+            pb.quad_to(2.0, 20.0, 2.0, 17.0);
+            pb.line_to(2.0, 5.0);
+            pb.quad_to(2.0, 2.0, 5.0, 2.0);
+            pb.finish().unwrap()
+        };
+        pixmap.fill_path(&path, &paint, FillRule::Winding, Transform::identity(), None);
+
+        // 绘制一个简单的指示器 (白色的点)
+        if self.chinese_enabled {
+            let mut dot_paint = Paint::default();
+            dot_paint.set_color_rgba8(255, 255, 255, 255);
+            let center_rect = Rect::from_xywh(8.0, 8.0, 6.0, 6.0).unwrap();
+            pixmap.fill_rect(center_rect, &dot_paint, Transform::identity(), None);
+        }
+
+        let rgba = pixmap.data().to_vec();
+        // ARGB 转换 (ksni/DBus 预期是 ARGB，每像素 4 字节)
+        let mut argb_data = Vec::with_capacity(rgba.len());
+        for chunk in rgba.chunks_exact(4) {
+            argb_data.push(chunk[3]); // A
+            argb_data.push(chunk[0]); // R
+            argb_data.push(chunk[1]); // G
+            argb_data.push(chunk[2]); // B
+        }
+
+        vec![ksni::Icon {
+            width: size as i32,
+            height: size as i32,
+            data: argb_data,
+        }]
     }
 
     fn title(&self) -> String {
