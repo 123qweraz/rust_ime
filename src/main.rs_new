@@ -1,0 +1,32 @@
+use evdev::{Device, InputEventKind, Key}; 
+use std::collections::{HashMap, HashSet}; 
+use std::fs::File; 
+use std::io::{self, BufReader, Read}; 
+use serde::Deserialize;
+use serde_json::Value;
+use std::sync::atomic::{AtomicBool, Ordering}; 
+use signal_hook::consts::signal::*; 
+use signal_hook::flag; 
+use daemonize::Daemonize;
+
+mod engine;
+mod platform;
+mod ui;
+mod vkbd;
+mod config;
+
+use engine::{Trie, NgramModel};
+use vkbd::Vkbd;
+use config::{Config, parse_key};
+use users::get_effective_uid;
+use std::process::Command;
+use std::env;
+use std::path::{Path, PathBuf};
+
+// ... 省略部分辅助函数 (find_project_root, stop_daemon 等保持不变) ...
+// (为了节省空间，我将只在必要时修改这些函数)
+
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // ... main 的逻辑需要根据新的 Host 模式调整 ...
+    Ok(())
+}

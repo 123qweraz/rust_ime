@@ -14,6 +14,7 @@ pub enum GuiEvent {
         hints: Vec<String>,
         selected: usize,
     },
+    MoveTo { x: i32, y: i32 },
     Keystroke(String),
     ShowLearning(String, String), // 汉字, 提示
     ClearKeystrokes,
@@ -316,6 +317,17 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                 while let Some(child) = key_box_c.first_child() { key_box_c.remove(&child); }
                 key_window_c.set_opacity(0.0);
                 key_window_c.set_can_target(false);
+            },
+            GuiEvent::MoveTo { x, y } => {
+                if gtk4_layer_shell::is_supported() {
+                    window_c.set_anchor(Edge::Left, true);
+                    window_c.set_anchor(Edge::Top, true);
+                    window_c.set_anchor(Edge::Bottom, false);
+                    window_c.set_anchor(Edge::Right, false);
+                    window_c.set_margin(Edge::Left, x);
+                    window_c.set_margin(Edge::Top, y);
+                    println!("[GUI] Moving to x:{}, y:{}", x, y);
+                }
             },
             GuiEvent::Exit => { window_c.close(); key_window_c.close(); return glib::Continue(false); }
         }

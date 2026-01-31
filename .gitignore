@@ -10,6 +10,7 @@ Cargo.lock
 
 # Configuration
 config.json
+data/
 ngram.json
 user_adapter.json
 ref/

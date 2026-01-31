@@ -1,0 +1,78 @@
+use crate::engine::Processor;
+use crate::platform::traits::{InputMethodHost, Rect};
+use crate::ui::GuiEvent;
+use std::sync::mpsc::Sender;
+use std::sync::{Arc, Mutex};
+use wayland_client::{Connection, Dispatch, EventQueue, Proxy, QueueHandle, protocol::wl_seat};
+use wayland_protocols::staging::ext_input_method_v2::client::{ext_input_method_manager_v2, ext_input_method_v2};
+
+pub struct WaylandHost {
+    processor: Processor,
+    gui_tx: Option<Sender<GuiEvent>>,
+    cursor_rect: Arc<Mutex<Option<Rect>>>,
+}
+
+// Wayland 内部状态
+struct WaylandState {
+    input_method: Option<ext_input_method_v2::ExtInputMethodV2>,
+}
+
+impl WaylandHost {
+    pub fn new(processor: Processor, gui_tx: Option<Sender<GuiEvent>>) -> Self {
+        Self {
+            processor,
+            gui_tx,
+            cursor_rect: Arc::new(Mutex::new(None)),
+        }
+    }
+}
+
+impl InputMethodHost for WaylandHost {
+    fn set_preedit(&self, text: &str, cursor_pos: usize) {
+        println!("[Wayland] Set Preedit: {} at {}", text, cursor_pos);
+        // 此处应调用 self.input_method.set_preedit_text(...)
+    }
+
+    fn commit_text(&self, text: &str) {
+        println!("[Wayland] Commit: {}", text);
+        // 此处应调用 self.input_method.commit_string(...)
+    }
+
+    fn get_cursor_rect(&self) -> Option<Rect> {
+        self.cursor_rect.lock().ok()?.clone()
+    }
+
+    fn run(&mut self) -> Result<(), Box<dyn std::error::Error>> {
+        let conn = Connection::connect_to_env()?;
+        let display = conn.display();
+        let mut event_queue = conn.new_event_queue();
+        let qh = event_queue.handle();
+
+        let _registry = display.get_registry(&qh, ());
+
+        let mut state = WaylandState { input_method: None };
+
+        println!("[Wayland] 正在进入协议调度循环...");
+        
+        // 这是一个阻塞循环，确保程序不会退出
+        loop {
+            event_queue.blocking_dispatch(&mut state)?;
+        }
+    }
+}
+
+// 实现 Wayland 各种协议的处理函数 (此处省略了大量样板代码，仅为演示结构)
+impl Dispatch<wayland_client::protocol::wl_registry::WlRegistry, ()> for WaylandState {
+    fn event(
+        _state: &mut Self,
+        _registry: &wayland_client::protocol::wl_registry::WlRegistry,
+        _event: wayland_client::protocol::wl_registry::Event,
+        _data: &(),
+        _conn: &Connection,
+        _qh: &QueueHandle<Self>,
+    ) {
+        // 在这里检测 ext_input_method_manager_v2 并实例化
+    }
+}
+
+// ... 还需要实现其他 Dispatch 才能通过编译 ...

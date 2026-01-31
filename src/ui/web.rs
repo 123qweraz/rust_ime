@@ -9,7 +9,7 @@ use serde::{Serialize};
 use std::sync::{Arc, RwLock};
 use std::collections::HashMap;
 use crate::config::Config;
-use crate::trie::Trie;
+use crate::engine::trie::Trie;
 use rust_embed::RustEmbed;
 
 #[derive(RustEmbed)]
@@ -20,13 +20,13 @@ pub struct WebServer {
     pub port: u16,
     pub config: Arc<RwLock<Config>>,
     pub tries: Arc<RwLock<HashMap<String, Trie>>>,
-    pub tray_tx: std::sync::mpsc::Sender<crate::tray::TrayEvent>,
+    pub tray_tx: std::sync::mpsc::Sender<crate::ui::tray::TrayEvent>,
 }
 
 type WebState = (
     Arc<RwLock<Config>>, 
     Arc<RwLock<HashMap<String, Trie>>>, 
-    std::sync::mpsc::Sender<crate::tray::TrayEvent>
+    std::sync::mpsc::Sender<crate::ui::tray::TrayEvent>
 );
 
 impl WebServer {
@@ -34,7 +34,7 @@ impl WebServer {
         port: u16, 
         config: Arc<RwLock<Config>>, 
         tries: Arc<RwLock<HashMap<String, Trie>>>,
-        tray_tx: std::sync::mpsc::Sender<crate::tray::TrayEvent>
+        tray_tx: std::sync::mpsc::Sender<crate::ui::tray::TrayEvent>
     ) -> Self {
         Self { port, config, tries, tray_tx }
     }
@@ -104,7 +104,7 @@ async fn update_config(
         *w = new_config.clone();
     }
     if let Err(_e) = crate::save_config(&new_config) { return StatusCode::INTERNAL_SERVER_ERROR; }
-    let _ = tray_tx.send(crate::tray::TrayEvent::ReloadConfig);
+    let _ = tray_tx.send(crate::ui::tray::TrayEvent::ReloadConfig);
     StatusCode::OK
 }
 
@@ -120,7 +120,7 @@ async fn reset_config(
         *w = default_conf.clone();
     }
     if let Err(_e) = crate::save_config(&default_conf) { return StatusCode::INTERNAL_SERVER_ERROR; }
-    let _ = tray_tx.send(crate::tray::TrayEvent::ReloadConfig);
+    let _ = tray_tx.send(crate::ui::tray::TrayEvent::ReloadConfig);
     StatusCode::OK
 }
 
@@ -170,6 +170,6 @@ async fn compile_dicts_handler() -> StatusCode {
 }
 
 async fn reload_dicts(State((_, _, tray_tx)): State<WebState>) -> StatusCode {
-    let _ = tray_tx.send(crate::tray::TrayEvent::ReloadConfig);
+    let _ = tray_tx.send(crate::ui::tray::TrayEvent::ReloadConfig);
     StatusCode::OK
 }
