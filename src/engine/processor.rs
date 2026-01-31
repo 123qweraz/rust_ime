@@ -323,7 +323,13 @@ impl Processor {
 
         for (cand, _, _) in final_list {
             self.candidates.push(cand.clone());
-            self.candidate_hints.push(word_to_hint.get(&cand).cloned().unwrap_or_default());
+            let hint = word_to_hint.get(&cand).cloned().unwrap_or_default();
+            // 如果 hint 全是数字，则不显示它（仅用于权重）
+            if !hint.is_empty() && hint.chars().all(|c| c.is_ascii_digit()) {
+                self.candidate_hints.push(String::new());
+            } else {
+                self.candidate_hints.push(hint);
+            }
         }
 
         if self.candidates.is_empty() { self.candidates.push(self.buffer.clone()); self.candidate_hints.push(String::new()); }
