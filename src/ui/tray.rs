@@ -31,8 +31,8 @@ pub struct ImeTray {
 
 impl Tray for ImeTray {
     fn icon_name(&self) -> String {
-        // 返回空字符串，强制系统使用 icon_pixmap
-        String::new()
+        // 动态变更名称，强制部分桌面环境（如 GNOME）刷新像素缓存
+        if self.chinese_enabled { "rust-ime-zh".into() } else { "rust-ime-en".into() }
     }
 
     fn icon_pixmap(&self) -> Vec<ksni::Icon> {
@@ -41,7 +41,7 @@ impl Tray for ImeTray {
         
         let mut paint = Paint::default();
         if self.chinese_enabled {
-            paint.set_color_rgba8(255, 87, 34, 255); // 更鲜艳的橙色 (Orange Red)
+            paint.set_color_rgba8(255, 128, 0, 255); // 标准橙色
         } else {
             paint.set_color_rgba8(60, 60, 60, 255); // 深灰色
         }
@@ -71,29 +71,17 @@ impl Tray for ImeTray {
         icon_paint.anti_alias = true;
 
         if self.chinese_enabled {
-            // 绘制“中”字
-            // 矩形部分
-            let rect_path = {
-                let mut pb = PathBuilder::new();
-                pb.move_to(6.0, 8.0);
-                pb.line_to(16.0, 8.0);
-                pb.line_to(16.0, 14.0);
-                pb.line_to(6.0, 14.0);
-                pb.close();
-                pb.finish().unwrap()
-            };
-            let mut stroke = Stroke::default();
-            stroke.width = 1.5;
-            pixmap.stroke_path(&rect_path, &icon_paint, &stroke, Transform::identity(), None);
-            
-            // 垂直线部分
-            let mut line_pb = PathBuilder::new();
-            line_pb.move_to(11.0, 5.0);
-            line_pb.line_to(11.0, 17.0);
-            let line_path = line_pb.finish().unwrap();
-            pixmap.stroke_path(&line_path, &icon_paint, &stroke, Transform::identity(), None);
+            // 用 5 个矩形拼出一个结实的“中”字
+            let p = &icon_paint;
+            // 矩形的上下左右边
+            pixmap.fill_rect(Rect::from_xywh(6.0, 8.5, 10.0, 1.5).unwrap(), p, Transform::identity(), None);   // 上
+            pixmap.fill_rect(Rect::from_xywh(6.0, 13.0, 10.0, 1.5).unwrap(), p, Transform::identity(), None);  // 下
+            pixmap.fill_rect(Rect::from_xywh(6.0, 8.5, 1.5, 6.0).unwrap(), p, Transform::identity(), None);    // 左
+            pixmap.fill_rect(Rect::from_xywh(14.5, 8.5, 1.5, 6.0).unwrap(), p, Transform::identity(), None);  // 右
+            // 中间那一竖
+            pixmap.fill_rect(Rect::from_xywh(10.25, 5.0, 1.5, 12.0).unwrap(), p, Transform::identity(), None);
         } else {
-            // 绘制简易“键盘” (3x2 矩阵点)
+            // 键盘网格 (3x2)
             for y in 0..2 {
                 for x in 0..3 {
                     let k_rect = Rect::from_xywh(6.0 + x as f32 * 4.0, 9.0 + y as f32 * 4.0, 2.5, 2.5).unwrap();
@@ -105,7 +93,6 @@ impl Tray for ImeTray {
         let rgba = pixmap.data().to_vec();
         let mut argb_data = Vec::with_capacity(rgba.len());
         for chunk in rgba.chunks_exact(4) {
-            // ksni 内部通常需要 ARGB (Big Endian)
             argb_data.push(chunk[3]); // A
             argb_data.push(chunk[0]); // R
             argb_data.push(chunk[1]); // G
