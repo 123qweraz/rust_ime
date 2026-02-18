@@ -215,6 +215,34 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ui::gui::start_gui(gui_rx, gui_config);
     });
 
+    // 启动子进程 (按键显示和学习模式)
+    #[cfg(target_os = "windows")]
+    {
+        let exe_path = std::env::current_exe().unwrap();
+        let dir = exe_path.parent().unwrap();
+        
+        let keys_exe = dir.join("rust-ime-keys.exe");
+        if keys_exe.exists() {
+            let _ = Command::new(keys_exe).spawn();
+        } else {
+            // 开发环境下尝试在 target 目录找
+            let mut dev_path = dir.to_path_buf();
+            if dev_path.ends_with("deps") { dev_path.pop(); }
+            let dev_keys = dev_path.join("rust-ime-keys.exe");
+            if dev_keys.exists() { let _ = Command::new(dev_keys).spawn(); }
+        }
+
+        let learn_exe = dir.join("rust-ime-learn.exe");
+        if learn_exe.exists() {
+            let _ = Command::new(learn_exe).spawn();
+        } else {
+            let mut dev_path = dir.to_path_buf();
+            if dev_path.ends_with("deps") { dev_path.pop(); }
+            let dev_learn = dev_path.join("rust-ime-learn.exe");
+            if dev_learn.exists() { let _ = Command::new(dev_learn).spawn(); }
+        }
+    }
+
     let mut tries_map = HashMap::new();
     if let Ok(entries) = std::fs::read_dir("data") {
         for entry in entries.flatten() {

@@ -10,8 +10,6 @@ use std::sync::mpsc::Receiver;
 use std::sync::{Arc, RwLock};
 
 static mut WINDOW_STATE: Option<WindowState> = None;
-static mut KEYSTROKE_STATE: Option<KeystrokeState> = None;
-static mut LEARNING_STATE: Option<LearningState> = None;
 static mut STATUS_STATE: Option<StatusState> = None;
 static mut CURRENT_CONFIG: Option<Arc<RwLock<Config>>> = None;
 
@@ -24,17 +22,6 @@ struct WindowState {
     y: i32,
 }
 
-struct KeystrokeState {
-    keys: Vec<String>,
-    last_update: std::time::Instant,
-}
-
-struct LearningState {
-    word: String,
-    hint: String,
-    last_update: std::time::Instant,
-}
-
 struct StatusState {
     text: String,
     last_update: std::time::Instant,
@@ -44,9 +31,9 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
     println!("[GUI] Starting Windows GUI thread...");
     let instance = unsafe { windows::Win32::System::LibraryLoader::GetModuleHandleW(None).unwrap() };
     let window_class = PCWSTR("RustImeGui\0".encode_utf16().collect::<Vec<u16>>().as_ptr());
-    let ks_class = PCWSTR("RustImeKeystroke\0".encode_utf16().collect::<Vec<u16>>().as_ptr());
-    let learn_class = PCWSTR("RustImeLearning\0".encode_utf16().collect::<Vec<u16>>().as_ptr());
     let status_class = PCWSTR("RustImeStatus\0".encode_utf16().collect::<Vec<u16>>().as_ptr());
+
+    use crate::ipc::{self, IpcMessage, PIPE_NAME_KEYS, PIPE_NAME_LEARN};
 
     unsafe {
         // ... 前面的字体加载代码保持不变 ...
@@ -71,26 +58,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
         };
         RegisterClassW(&wc);
 
-        let wc_ks = WNDCLASSW {
-            hCursor: LoadCursorW(None, IDC_ARROW).unwrap(),
-            hInstance: instance.into(),
-            lpszClassName: ks_class,
-            lpfnWndProc: Some(ks_wnd_proc),
-            hbrBackground: CreateSolidBrush(COLORREF(0x000000)),
-            ..Default::default()
-        };
-        RegisterClassW(&wc_ks);
-
-        let wc_learn = WNDCLASSW {
-            hCursor: LoadCursorW(None, IDC_ARROW).unwrap(),
-            hInstance: instance.into(),
-            lpszClassName: learn_class,
-            lpfnWndProc: Some(learn_wnd_proc),
-            hbrBackground: CreateSolidBrush(COLORREF(0x000000)),
-            ..Default::default()
-        };
-        RegisterClassW(&wc_learn);
-
         let wc_status = WNDCLASSW {
             hCursor: LoadCursorW(None, IDC_ARROW).unwrap(),
             hInstance: instance.into(),
@@ -108,20 +75,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
             window_class, PCWSTR(std::ptr::null()), WS_POPUP,
             100, 100, 400, 120, None, None, instance, None,
         );
-
-        let hwnd_ks = CreateWindowExW(
-            WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE | WS_EX_LAYERED | WS_EX_TRANSPARENT,
-            ks_class, PCWSTR(std::ptr::null()), WS_POPUP,
-            0, 0, 800, 100, None, None, instance, None,
-        );
-        let _ = SetLayeredWindowAttributes(hwnd_ks, COLORREF(0x000000), 200, LWA_ALPHA | LWA_COLORKEY);
-
-        let hwnd_learn = CreateWindowExW(
-            WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE | WS_EX_LAYERED | WS_EX_TRANSPARENT,
-            learn_class, PCWSTR(std::ptr::null()), WS_POPUP,
-            0, 0, 400, 80, None, None, instance, None,
-        );
-        let _ = SetLayeredWindowAttributes(hwnd_learn, COLORREF(0x000000), 200, LWA_ALPHA | LWA_COLORKEY);
 
         let hwnd_status = CreateWindowExW(
             WS_EX_TOPMOST | WS_EX_TOOLWINDOW | WS_EX_NOACTIVATE | WS_EX_LAYERED | WS_EX_TRANSPARENT,
@@ -214,63 +167,28 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                     }
                     GuiEvent::Keystroke(key) => {
                         let show = if let Some(ref arc) = CURRENT_CONFIG { arc.read().unwrap().appearance.show_keystrokes } else { false };
-                        if !show { continue; }
-
-                        let ks_ptr = std::ptr::addr_of_mut!(KEYSTROKE_STATE);
-                        if let Some(ref mut state) = *ks_ptr {
-                            state.keys.push(key);
-                            if state.keys.len() > 10 { state.keys.remove(0); }
-                            state.last_update = std::time::Instant::now();
-                        } else {
-                            *ks_ptr = Some(KeystrokeState { keys: vec![key], last_update: std::time::Instant::now() });
+                        if show {
+                            ipc::send_ipc_message(PIPE_NAME_KEYS, &IpcMessage::Keystroke(key));
                         }
-                        ShowWindow(hwnd_ks, SW_SHOWNOACTIVATE);
-                        InvalidateRect(hwnd_ks, None, BOOL(1));
-                        
-                        let timeout = if let Some(ref arc) = CURRENT_CONFIG { arc.read().unwrap().appearance.keystroke_timeout_ms } else { 1500 };
-                        std::thread::spawn(move || {
-                            std::thread::sleep(std::time::Duration::from_millis(timeout));
-                            let ks_ptr = std::ptr::addr_of_mut!(KEYSTROKE_STATE);
-                            if let Some(ref state) = *ks_ptr {
-                                if state.last_update.elapsed().as_millis() >= timeout as u128 {
-                                    ShowWindow(hwnd_ks, SW_HIDE);
-                                }
-                            }
-                        });
                     }
                     GuiEvent::ClearKeystrokes => {
-                        let ks_ptr = std::ptr::addr_of_mut!(KEYSTROKE_STATE);
-                        *ks_ptr = None;
-                        ShowWindow(hwnd_ks, SW_HIDE);
+                        ipc::send_ipc_message(PIPE_NAME_KEYS, &IpcMessage::ClearKeys);
                     }
                     GuiEvent::ShowLearning(word, hint) => {
                         let show = if let Some(ref arc) = CURRENT_CONFIG { arc.read().unwrap().appearance.learning_mode } else { false };
-                        if !show { continue; }
-
-                        let ln_ptr = std::ptr::addr_of_mut!(LEARNING_STATE);
-                        *ln_ptr = Some(LearningState { word, hint, last_update: std::time::Instant::now() });
-                        ShowWindow(hwnd_learn, SW_SHOWNOACTIVATE);
-                        InvalidateRect(hwnd_learn, None, BOOL(1));
-
-                        std::thread::spawn(move || {
-                            std::thread::sleep(std::time::Duration::from_secs(3));
-                            let ln_ptr = std::ptr::addr_of_mut!(LEARNING_STATE);
-                            if let Some(ref state) = *ln_ptr {
-                                if state.last_update.elapsed().as_secs() >= 3 {
-                                    ShowWindow(hwnd_learn, SW_HIDE);
-                                }
-                            }
-                        });
+                        if show {
+                            ipc::send_ipc_message(PIPE_NAME_LEARN, &IpcMessage::Learning { word, hint });
+                        }
                     }
                     GuiEvent::ApplyConfig(conf) => {
                         if let Some(ref arc) = CURRENT_CONFIG {
                             if let Ok(mut w) = arc.write() { *w = conf; }
                         }
                         InvalidateRect(hwnd, None, BOOL(1));
-                        InvalidateRect(hwnd_ks, None, BOOL(1));
-                        InvalidateRect(hwnd_learn, None, BOOL(1));
                     }
                     GuiEvent::Exit => {
+                        ipc::send_ipc_message(PIPE_NAME_KEYS, &IpcMessage::Exit);
+                        ipc::send_ipc_message(PIPE_NAME_LEARN, &IpcMessage::Exit);
                         PostQuitMessage(0);
                     }
                     _ => {}
@@ -330,205 +248,11 @@ unsafe extern "system" fn wnd_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam:
     }
 }
 
-unsafe extern "system" fn ks_wnd_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
-    match msg {
-        WM_PAINT => {
-            let mut ps = PAINTSTRUCT::default();
-            let hdc = BeginPaint(hwnd, &mut ps);
-            let mut rect = RECT::default();
-            let _ = GetClientRect(hwnd, &mut rect);
-            
-            let brush = CreateSolidBrush(COLORREF(0x000000));
-            let _ = FillRect(hdc, &rect, brush);
-            let _ = DeleteObject(brush);
-
-            if let Some(ref state) = KEYSTROKE_STATE {
-                if let Some(ref arc) = CURRENT_CONFIG {
-                    if let Ok(conf) = arc.read() {
-                        draw_keystrokes(hdc, hwnd, state, &conf);
-                    }
-                }
-            }
-            EndPaint(hwnd, &ps);
-            LRESULT(0)
-        }
-        WM_ERASEBKGND => LRESULT(1),
-        _ => DefWindowProcW(hwnd, msg, wparam, lparam),
-    }
-}
-
-unsafe extern "system" fn learn_wnd_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
-    match msg {
-        WM_PAINT => {
-            let mut ps = PAINTSTRUCT::default();
-            let hdc = BeginPaint(hwnd, &mut ps);
-            let mut rect = RECT::default();
-            let _ = GetClientRect(hwnd, &mut rect);
-            
-            let brush = CreateSolidBrush(COLORREF(0x000000));
-            let _ = FillRect(hdc, &rect, brush);
-            let _ = DeleteObject(brush);
-
-            if let Some(ref state) = LEARNING_STATE {
-                if let Some(ref arc) = CURRENT_CONFIG {
-                    if let Ok(conf) = arc.read() {
-                        draw_learning(hdc, hwnd, state, &conf);
-                    }
-                }
-            }
-            EndPaint(hwnd, &ps);
-            LRESULT(0)
-        }
-        WM_ERASEBKGND => LRESULT(1),
-        _ => DefWindowProcW(hwnd, msg, wparam, lparam),
-    }
-}
-
 unsafe extern "system" fn status_wnd_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
     match msg {
         WM_ERASEBKGND => LRESULT(1),
         _ => DefWindowProcW(hwnd, msg, wparam, lparam),
     }
-}
-
-unsafe fn update_layered_window(hwnd: HWND, data: &[u8], w: u32, h: u32) {
-    let screen_dc = GetDC(None);
-    let mem_dc = CreateCompatibleDC(screen_dc);
-    let h_bitmap = CreateCompatibleBitmap(screen_dc, w as i32, h as i32);
-    let old_bitmap = SelectObject(mem_dc, h_bitmap);
-
-    let mut bmi = BITMAPINFO {
-        bmiHeader: BITMAPINFOHEADER {
-            biSize: std::mem::size_of::<BITMAPINFOHEADER>() as u32,
-            biWidth: w as i32,
-            biHeight: -(h as i32), // Top-down
-            biPlanes: 1,
-            biBitCount: 32,
-            biCompression: BI_RGB.0 as u32,
-            ..Default::default()
-        },
-        ..Default::default()
-    };
-
-    SetDIBitsToDevice(
-        mem_dc, 0, 0, w, h, 0, 0, 0, h,
-        data.as_ptr() as *const _, &bmi, DIB_RGB_COLORS
-    );
-
-    let mut pt_dst = POINT::default();
-    let mut rect = RECT::default();
-    let _ = GetWindowRect(hwnd, &mut rect);
-    pt_dst.x = rect.left;
-    pt_dst.y = rect.top;
-
-    let mut size_src = SIZE { cx: w as i32, cy: h as i32 };
-    let mut pt_src = POINT::default();
-    let blend = BLENDFUNCTION {
-        BlendOp: AC_SRC_OVER as u8,
-        BlendFlags: 0,
-        SourceConstantAlpha: 255,
-        AlphaFormat: AC_SRC_ALPHA as u8,
-    };
-
-    let _ = UpdateLayeredWindow(
-        hwnd, screen_dc, Some(&pt_dst), Some(&size_src),
-        mem_dc, Some(&pt_src), COLORREF(0), Some(&blend), ULW_ALPHA
-    );
-
-    SelectObject(mem_dc, old_bitmap);
-    let _ = DeleteObject(h_bitmap);
-    let _ = DeleteDC(mem_dc);
-    ReleaseDC(None, screen_dc);
-}
-
-unsafe fn draw_keystrokes(hdc: HDC, hwnd: HWND, state: &KeystrokeState, conf: &Config) {
-    SetBkMode(hdc, TRANSPARENT);
-    SetTextColor(hdc, COLORREF(0xFFFFFF));
-    
-    let font_name = HSTRING::from(&conf.appearance.candidate_text.font_family);
-    let font_size = conf.appearance.keystroke_font_size as i32;
-    let h_font = CreateFontW(
-        -(font_size * 96 / 72), 0, 0, 0, 700, 0, 0, 0, DEFAULT_CHARSET.0 as u32,
-        OUT_DEFAULT_PRECIS.0 as u32, CLIP_DEFAULT_PRECIS.0 as u32,
-        CLEARTYPE_QUALITY.0 as u32, DEFAULT_PITCH.0 as u32, PCWSTR(font_name.as_ptr())
-    );
-    SelectObject(hdc, h_font);
-
-    let text = state.keys.join("  ");
-    let text_u16: Vec<u16> = text.encode_utf16().collect();
-    let mut size = SIZE::default();
-    GetTextExtentPoint32W(hdc, &text_u16, &mut size);
-
-    let screen_w = GetSystemMetrics(SM_CXSCREEN);
-    let screen_h = GetSystemMetrics(SM_CYSCREEN);
-    let margin_x = conf.appearance.keystroke_margin_x;
-    let margin_y = conf.appearance.keystroke_margin_y;
-
-    let (win_x, win_y) = match conf.appearance.keystroke_anchor.as_str() {
-        "bottom_right" => (screen_w - size.cx - margin_x - 40, screen_h - size.cy - margin_y - 60),
-        "bottom_left" => (margin_x, screen_h - size.cy - margin_y - 60),
-        "top_right" => (screen_w - size.cx - margin_x - 40, margin_y),
-        _ => (margin_x, margin_y),
-    };
-
-    let final_w = size.cx + 40;
-    let final_h = size.cy + 20;
-    let _ = SetWindowPos(hwnd, HWND_TOPMOST, win_x, win_y, final_w, final_h, SWP_NOACTIVATE);
-    
-    TextOutW(hdc, 20, 10, &text_u16);
-    let _ = DeleteObject(h_font);
-}
-
-unsafe fn draw_learning(hdc: HDC, hwnd: HWND, state: &LearningState, conf: &Config) {
-    SetBkMode(hdc, TRANSPARENT);
-    
-    let font_name = HSTRING::from(&conf.appearance.candidate_text.font_family);
-    let h_font_word = CreateFontW(
-        -(conf.appearance.learning_font_size as i32 * 96 / 72), 0, 0, 0, 700, 0, 0, 0, DEFAULT_CHARSET.0 as u32,
-        OUT_DEFAULT_PRECIS.0 as u32, CLIP_DEFAULT_PRECIS.0 as u32,
-        CLEARTYPE_QUALITY.0 as u32, DEFAULT_PITCH.0 as u32, PCWSTR(font_name.as_ptr())
-    );
-
-    let h_font_hint = CreateFontW(
-        -16, 0, 0, 0, 400, 0, 0, 0, DEFAULT_CHARSET.0 as u32,
-        OUT_DEFAULT_PRECIS.0 as u32, CLIP_DEFAULT_PRECIS.0 as u32,
-        CLEARTYPE_QUALITY.0 as u32, DEFAULT_PITCH.0 as u32, PCWSTR(font_name.as_ptr())
-    );
-
-    SelectObject(hdc, h_font_word);
-    SetTextColor(hdc, COLORREF(0x00FFFF)); // Cyan for word
-    let word_u16: Vec<u16> = state.word.encode_utf16().collect();
-    let mut word_size = SIZE::default();
-    GetTextExtentPoint32W(hdc, &word_u16, &mut word_size);
-
-    SelectObject(hdc, h_font_hint);
-    SetTextColor(hdc, COLORREF(0xCCCCCC)); // Gray for hint
-    let hint_u16: Vec<u16> = state.hint.encode_utf16().collect();
-    let mut hint_size = SIZE::default();
-    GetTextExtentPoint32W(hdc, &hint_u16, &mut hint_size);
-
-    let screen_w = GetSystemMetrics(SM_CXSCREEN);
-    let margin_x = conf.appearance.learning_margin_x;
-    let margin_y = conf.appearance.learning_margin_y;
-    
-    let final_w = word_size.cx.max(hint_size.cx) + 40;
-    let final_h = word_size.cy + hint_size.cy + 30;
-
-    let (win_x, win_y) = match conf.appearance.learning_anchor.as_str() {
-        "top_right" => (screen_w - final_w - margin_x, margin_y),
-        "top_left" => (margin_x, margin_y),
-        _ => (screen_w - final_w - margin_x, margin_y),
-    };
-
-    let _ = SetWindowPos(hwnd, HWND_TOPMOST, win_x, win_y, final_w, final_h, SWP_NOACTIVATE);
-    
-    SelectObject(hdc, h_font_word);
-    TextOutW(hdc, 20, 10, &word_u16);
-    SelectObject(hdc, h_font_hint);
-    TextOutW(hdc, 20, 15 + word_size.cy, &hint_u16);
-
-    let _ = DeleteObject(h_font_word);
-    let _ = DeleteObject(h_font_hint);
 }
 
 unsafe fn draw_content(hdc: HDC, hwnd: HWND, state: &WindowState, conf: &Config) {

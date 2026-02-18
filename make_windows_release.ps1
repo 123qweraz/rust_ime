@@ -10,6 +10,8 @@ New-Item -ItemType Directory $ReleaseDir
 # 3. Copy binaries
 Write-Host "Collecting files..." -ForegroundColor Green
 Copy-Item "target/release/rust-ime.exe" $ReleaseDir
+Copy-Item "target/release/rust-ime-keys.exe" $ReleaseDir
+Copy-Item "target/release/rust-ime-learn.exe" $ReleaseDir
 Copy-Item "target/release/rust_ime_tsf_v3.dll" $ReleaseDir
 
 # 4. Copy resource files
@@ -59,6 +61,8 @@ if %errorLevel% neq 0 (
 cd /d %~dp0
 echo Stopping Rust IME...
 taskkill /F /IM rust-ime.exe /T 2>nul
+taskkill /F /IM rust-ime-keys.exe /T 2>nul
+taskkill /F /IM rust-ime-learn.exe /T 2>nul
 echo Unregistering IME...
 .\rust-ime.exe --unregister
 echo Cleaning up registry...
