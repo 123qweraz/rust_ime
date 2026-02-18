@@ -14,12 +14,39 @@ pub const PIPE_NAME_LEARN: &str = "\\\\.\\pipe\\rust-ime-learn";
 #[cfg(windows)]
 pub fn send_ipc_message(pipe_name: &str, msg: &IpcMessage) {
     use std::io::Write;
-    // 使用 CreateFile 直接打开管道作为客户端
-    if let Ok(mut file) = std::fs::OpenOptions::new().write(true).open(pipe_name) {
-        if let Ok(data) = serde_json::to_vec(msg) {
-            let _ = file.write_all(&data);
+    use std::sync::Mutex;
+    use std::collections::HashMap;
+
+    static PIPE_CACHE: Mutex<Option<HashMap<String, std::fs::File>>> = Mutex::new(None);
+
+    let data = match serde_json::to_vec(msg) {
+        Ok(d) => d,
+        Err(_) => return,
+    };
+
+    let pipe_name_s = pipe_name.to_string();
+    
+    std::thread::spawn(move || {
+        let mut cache_guard = PIPE_CACHE.lock().unwrap();
+        if cache_guard.is_none() { *cache_guard = Some(HashMap::new()); }
+        let cache = cache_guard.as_mut().unwrap();
+
+        let mut success = false;
+        if let Some(file) = cache.get_mut(&pipe_name_s) {
+            if file.write_all(&data).is_ok() {
+                success = true;
+            }
         }
-    }
+
+        if !success {
+            // 尝试重新连接
+            if let Ok(mut file) = std::fs::OpenOptions::new().write(true).open(&pipe_name_s) {
+                if file.write_all(&data).is_ok() {
+                    cache.insert(pipe_name_s, file);
+                }
+            }
+        }
+    });
 }
 
 #[cfg(windows)]

@@ -81,7 +81,6 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
             status_class, PCWSTR(std::ptr::null()), WS_POPUP,
             0, 0, 100, 100, None, None, instance, None,
         );
-        let _ = SetLayeredWindowAttributes(hwnd_status, COLORREF(0x000000), 255, LWA_ALPHA | LWA_COLORKEY);
 
         std::thread::spawn(move || {
             let painter = crate::ui::painter::CandidatePainter::new();

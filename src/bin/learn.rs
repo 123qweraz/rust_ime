@@ -39,10 +39,9 @@ fn main() -> Result<()> {
             window_class,
             PCWSTR(std::ptr::null()),
             WS_POPUP,
-            0, 400, 400, 100,
+            10, 10, 400, 100, // Top-left position
             None, None, instance, None,
         );
-        SetLayeredWindowAttributes(hwnd, COLORREF(0x000000), 255, LWA_ALPHA | LWA_COLORKEY)?;
 
         // IPC 监听 (作为服务端)
         let hwnd_clone = isize::from(hwnd.0);
@@ -53,9 +52,17 @@ fn main() -> Result<()> {
                     unsafe {
                         LEARN_WORD = word;
                         LEARN_HINT = hint;
+
+                        if let Some(ref conf_arc) = CURRENT_CONFIG {
+                            let conf = conf_arc.read().unwrap();
+                            let painter = CandidatePainter::new();
+                            let (data, w, h) = painter.draw_learning(&LEARN_WORD, &LEARN_HINT, &conf);
+                            if !data.is_empty() {
+                                update_layered_window(hwnd, &data, w, h);
+                                ShowWindow(hwnd, SW_SHOWNOACTIVATE);
+                            }
+                        }
                     }
-                    ShowWindow(hwnd, SW_SHOWNOACTIVATE);
-                    InvalidateRect(hwnd, None, BOOL(1));
                 }
                 IpcMessage::Exit => std::process::exit(0),
                 _ => {}
