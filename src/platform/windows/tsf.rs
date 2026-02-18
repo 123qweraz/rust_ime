@@ -9,6 +9,7 @@ use crate::NotifyEvent;
 pub struct TsfHost {
     processor: Arc<Mutex<Processor>>,
     gui_tx: Option<Sender<GuiEvent>>,
+    config: Arc<RwLock<Config>>,
     notify_tx: Sender<NotifyEvent>,
 }
 
@@ -16,12 +17,13 @@ impl TsfHost {
     pub fn new(
         processor: Arc<Mutex<Processor>>,
         gui_tx: Option<Sender<GuiEvent>>,
-        _config: Arc<RwLock<Config>>,
+        config: Arc<RwLock<Config>>,
         notify_tx: Sender<NotifyEvent>,
     ) -> Self {
         Self {
             processor,
             gui_tx,
+            config,
             notify_tx,
         }
     }
@@ -146,11 +148,12 @@ impl InputMethodHost for TsfHost {
                 let processor = self.processor.clone();
                 let gui_tx = self.gui_tx.clone();
                 let notify_tx = self.notify_tx.clone();
+                let config = self.config.clone();
                 
                 std::thread::spawn(move || {
+                    let pipe_pcwstr = PCWSTR(pipe_name_u16.as_ptr());
                     loop {
                         unsafe {
-                            let pipe_pcwstr = PCWSTR(pipe_name_u16.as_ptr());
                             let sa = SECURITY_ATTRIBUTES {
                                 nLength: std::mem::size_of::<SECURITY_ATTRIBUTES>() as u32,
                                 lpSecurityDescriptor: sd_ptr as *mut _,
@@ -180,9 +183,10 @@ impl InputMethodHost for TsfHost {
                                 let proc_inner = processor.clone();
                                 let gui_inner = gui_tx.clone();
                                 let notify_inner = notify_tx.clone();
+                                let config_inner = config.clone();
                                 
                                 std::thread::spawn(move || {
-                                    handle_client(h_pipe, proc_inner, gui_inner, notify_inner);
+                                    handle_client(h_pipe, proc_inner, gui_inner, notify_inner, config_inner);
                                     let _ = CloseHandle(h_pipe);
                                 });
                             } else {
@@ -243,10 +247,10 @@ unsafe fn handle_client(
     processor: std::sync::Arc<std::sync::Mutex<crate::engine::Processor>>,
     gui_tx: Option<std::sync::mpsc::Sender<crate::ui::GuiEvent>>,
     notify_tx: std::sync::mpsc::Sender<crate::NotifyEvent>,
+    config: std::sync::Arc<std::sync::RwLock<crate::config::Config>>,
 ) {
     use windows::Win32::Storage::FileSystem::*;
     use crate::engine::processor::Action;
-    use crate::NotifyEvent;
     
     let mut buffer = [0u8; 1024];
     loop {
@@ -264,9 +268,9 @@ unsafe fn handle_client(
         let ctrl = (modifiers & 2) != 0;
         let alt = (modifiers & 4) != 0;
         
-        // 1. 优先检查切换热键 (必须在 ctrl || alt 逻辑之前，否则会被拦截)
+        // 1. 优先检查切换热键 (使用缓存的配置)
         let (is_lang_toggle, is_dp_toggle) = {
-            let c = crate::load_config(); 
+            let c = config.read().unwrap(); 
             let lang_match = is_hk_match(&c.hotkeys.switch_language.key, key_code, ctrl, alt, shift) ||
                              is_hk_match(&c.hotkeys.switch_language_alt.key, key_code, ctrl, alt, shift);
             let dp_match = is_hk_match(&c.hotkeys.toggle_double_pinyin.key, key_code, ctrl, alt, shift);
@@ -298,9 +302,10 @@ unsafe fn handle_client(
                     p.enable_double_pinyin = !p.enable_double_pinyin;
                     (p.enable_double_pinyin, p.get_current_profile_display())
                 };
-                let mut c = crate::load_config();
-                c.input.enable_double_pinyin = enabled;
-                let _ = crate::save_config(&c);
+                if let Ok(mut c) = config.write() {
+                    c.input.enable_double_pinyin = enabled;
+                    let _ = crate::save_config(&c);
+                }
                 
                 if let Some(ref tx) = gui_tx {
                     let msg = if enabled { "双拼: 开".into() } else { "双拼: 关".into() };
@@ -314,8 +319,12 @@ unsafe fn handle_client(
         }
 
         if msg_type == 1 {
-            let mut x = i32::from_le_bytes([buffer[6], buffer[7], buffer[8], buffer[9]]);
-            let mut y = i32::from_le_bytes([buffer[10], buffer[11], buffer[12], buffer[13]]);
+            let mut x = 0;
+            let mut y = 0;
+            if bytes_read >= 14 {
+                x = i32::from_le_bytes([buffer[6], buffer[7], buffer[8], buffer[9]]);
+                y = i32::from_le_bytes([buffer[10], buffer[11], buffer[12], buffer[13]]);
+            }
             if x == 0 && y == 0 {
                 if let Some((sx, sy)) = get_system_cursor_pos() { x = sx; y = sy; }
             }

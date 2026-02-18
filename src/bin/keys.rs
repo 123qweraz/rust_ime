@@ -43,37 +43,25 @@ fn main() -> Result<()> {
         );
         SetLayeredWindowAttributes(hwnd, COLORREF(0x000000), 255, LWA_ALPHA | LWA_COLORKEY)?;
 
-        // IPC 监听线程
-        let hwnd_clone = isize::from(hwnd.0) as isize;
-        std::thread::spawn(move || {
+        // IPC 监听 (作为服务端)
+        let hwnd_clone = isize::from(hwnd.0);
+        rust_ime_tsf_v3::ipc::start_ipc_server(PIPE_NAME_KEYS, move |msg| {
             let hwnd = HWND(hwnd_clone as _);
-            loop {
-                // 等待并连接命名管道
-                if let Ok(mut stream) = std::fs::File::open(PIPE_NAME_KEYS) {
-                    let mut buffer = [0u8; 1024];
-                    while let Ok(n) = stream.read(&mut buffer) {
-                        if n == 0 { break; }
-                        if let Ok(msg) = serde_json::from_slice::<IpcMessage>(&buffer[..n]) {
-                            match msg {
-                                IpcMessage::Keystroke(key) => {
-                                    unsafe {
-                                        KEYSTROKES.push(key);
-                                        if KEYSTROKES.len() > 10 { KEYSTROKES.remove(0); }
-                                    }
-                                    ShowWindow(hwnd, SW_SHOWNOACTIVATE);
-                                    InvalidateRect(hwnd, None, BOOL(1));
-                                }
-                                IpcMessage::ClearKeys => {
-                                    unsafe { KEYSTROKES.clear(); }
-                                    ShowWindow(hwnd, SW_HIDE);
-                                }
-                                IpcMessage::Exit => std::process::exit(0),
-                                _ => {}
-                            }
-                        }
+            match msg {
+                IpcMessage::Keystroke(key) => {
+                    unsafe {
+                        KEYSTROKES.push(key);
+                        if KEYSTROKES.len() > 10 { KEYSTROKES.remove(0); }
                     }
+                    ShowWindow(hwnd, SW_SHOWNOACTIVATE);
+                    InvalidateRect(hwnd, None, BOOL(1));
                 }
-                std::thread::sleep(std::time::Duration::from_millis(100));
+                IpcMessage::ClearKeys => {
+                    unsafe { KEYSTROKES.clear(); }
+                    ShowWindow(hwnd, SW_HIDE);
+                }
+                IpcMessage::Exit => std::process::exit(0),
+                _ => {}
             }
         });
 

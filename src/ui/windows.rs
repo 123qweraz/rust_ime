@@ -255,6 +255,56 @@ unsafe extern "system" fn status_wnd_proc(hwnd: HWND, msg: u32, wparam: WPARAM, 
     }
 }
 
+unsafe fn update_layered_window(hwnd: HWND, data: &[u8], w: u32, h: u32) {
+    let screen_dc = GetDC(None);
+    let mem_dc = CreateCompatibleDC(screen_dc);
+    let h_bitmap = CreateCompatibleBitmap(screen_dc, w as i32, h as i32);
+    let old_bitmap = SelectObject(mem_dc, h_bitmap);
+
+    let mut bmi = BITMAPINFO {
+        bmiHeader: BITMAPINFOHEADER {
+            biSize: std::mem::size_of::<BITMAPINFOHEADER>() as u32,
+            biWidth: w as i32,
+            biHeight: -(h as i32),
+            biPlanes: 1,
+            biBitCount: 32,
+            biCompression: 0, // BI_RGB
+            ..Default::default()
+        },
+        ..Default::default()
+    };
+
+    SetDIBitsToDevice(
+        mem_dc, 0, 0, w, h, 0, 0, 0, h,
+        data.as_ptr() as *const _, &bmi, DIB_RGB_COLORS
+    );
+
+    let mut pt_dst = POINT::default();
+    let mut current_rect = RECT::default();
+    GetWindowRect(hwnd, &mut current_rect).unwrap();
+    pt_dst.x = current_rect.left;
+    pt_dst.y = current_rect.top;
+
+    let mut size_dst = SIZE { cx: w as i32, cy: h as i32 };
+    let mut pt_src = POINT::default();
+    let mut blend = BLENDFUNCTION {
+        BlendOp: 0, // AC_SRC_OVER
+        BlendFlags: 0,
+        SourceConstantAlpha: 255,
+        AlphaFormat: 1, // AC_SRC_ALPHA
+    };
+
+    UpdateLayeredWindow(
+        hwnd, screen_dc, Some(&pt_dst), Some(&size_dst),
+        mem_dc, Some(&pt_src), COLORREF(0), Some(&blend), ULW_ALPHA
+    ).unwrap();
+
+    SelectObject(mem_dc, old_bitmap);
+    DeleteObject(h_bitmap);
+    DeleteDC(mem_dc);
+    ReleaseDC(None, screen_dc);
+}
+
 unsafe fn draw_content(hdc: HDC, hwnd: HWND, state: &WindowState, conf: &Config) {
     SetBkMode(hdc, TRANSPARENT);
     

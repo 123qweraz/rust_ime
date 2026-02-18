@@ -14,9 +14,59 @@ pub const PIPE_NAME_LEARN: &str = "\\\\.\\pipe\\rust-ime-learn";
 #[cfg(windows)]
 pub fn send_ipc_message(pipe_name: &str, msg: &IpcMessage) {
     use std::io::Write;
+    // 使用 CreateFile 直接打开管道作为客户端
     if let Ok(mut file) = std::fs::OpenOptions::new().write(true).open(pipe_name) {
         if let Ok(data) = serde_json::to_vec(msg) {
             let _ = file.write_all(&data);
         }
     }
+}
+
+#[cfg(windows)]
+pub fn start_ipc_server<F>(pipe_name: &str, mut handler: F) 
+where F: FnMut(IpcMessage) + Send + 'static {
+    use windows::Win32::System::Pipes::*;
+    use windows::Win32::Storage::FileSystem::*;
+    use windows::Win32::Foundation::*;
+    use windows::core::PCWSTR;
+    use std::io::Read;
+    use std::os::windows::io::FromRawHandle;
+
+    let pipe_name_u16: Vec<u16> = pipe_name.encode_utf16().chain(std::iter::once(0)).collect();
+
+    std::thread::spawn(move || {
+        let pipe_pcwstr = PCWSTR(pipe_name_u16.as_ptr());
+        loop {
+            unsafe {
+                let h_pipe = CreateNamedPipeW(
+                    pipe_pcwstr,
+                    PIPE_ACCESS_DUPLEX,
+                    PIPE_TYPE_MESSAGE | PIPE_READMODE_MESSAGE | PIPE_WAIT,
+                    PIPE_UNLIMITED_INSTANCES,
+                    1024,
+                    1024,
+                    0,
+                    None,
+                );
+
+                if h_pipe.is_invalid() {
+                    std::thread::sleep(std::time::Duration::from_millis(100));
+                    continue;
+                }
+
+                if ConnectNamedPipe(h_pipe, None).is_ok() {
+                    let mut buffer = [0u8; 1024];
+                    let mut pipe_file = std::fs::File::from_raw_handle(h_pipe.0 as *mut _);
+                    while let Ok(n) = pipe_file.read(&mut buffer) {
+                        if n == 0 { break; }
+                        if let Ok(msg) = serde_json::from_slice::<IpcMessage>(&buffer[..n]) {
+                            handler(msg);
+                        }
+                    }
+                } else {
+                    let _ = CloseHandle(h_pipe);
+                }
+            }
+        }
+    });
 }
