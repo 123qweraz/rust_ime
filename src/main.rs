@@ -114,7 +114,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 #[cfg(target_os = "linux")]
                 let _ = Command::new("pkill").arg("-f").arg("rust-ime").status();
                 #[cfg(target_os = "windows")]
-                let _ = Command::new("taskkill").arg("/F").arg("/IM").arg("rust-ime.exe").arg("/T").status();
+                {
+                    let _ = Command::new("taskkill").arg("/F").arg("/IM").arg("rust-ime.exe").arg("/T").status();
+                    let _ = Command::new("taskkill").arg("/F").arg("/IM").arg("rust-ime-keys.exe").arg("/F").status();
+                    let _ = Command::new("taskkill").arg("/F").arg("/IM").arg("rust-ime-learn.exe").arg("/F").status();
+                }
                 println!("✅ 已停止后台进程。");
                 return Ok(());
             }
@@ -414,7 +418,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 ui::tray::TrayEvent::ToggleLearning => {
                     let mut w = config_tray.write().unwrap(); w.appearance.learning_mode = !w.appearance.learning_mode;
                     let enabled = w.appearance.learning_mode; tray_handle.update(|t| t.learning_mode = enabled);
-                    let _ = save_config(&w); let _ = gui_tx_tray.send(GuiEvent::ApplyConfig(w.clone()));
+                    let _ = save_config(&w); 
+                    let _ = gui_tx_tray.send(GuiEvent::ApplyConfig(w.clone()));
+                    if !enabled {
+                        let _ = gui_tx_tray.send(GuiEvent::HideLearning);
+                    }
                 }
                 ui::tray::TrayEvent::ToggleAntiTypo => {
                     let mut w = config_tray.write().unwrap(); w.input.enable_anti_typo = !w.input.enable_anti_typo;
@@ -460,6 +468,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let new_conf = load_config();
                     processor_clone.lock().unwrap().apply_config(&new_conf);
                     let _ = gui_tx_tray.send(GuiEvent::ApplyConfig(new_conf.clone()));
+                    if !new_conf.appearance.learning_mode {
+                        let _ = gui_tx_tray.send(GuiEvent::HideLearning);
+                    }
                     tray_handle.update(|t| {
                         t.show_candidates = new_conf.appearance.show_candidates; t.show_notifications = new_conf.appearance.show_notifications;
                         t.show_keystrokes = new_conf.appearance.show_keystrokes; t.learning_mode = new_conf.appearance.learning_mode;

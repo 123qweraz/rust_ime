@@ -64,6 +64,11 @@ fn main() -> Result<()> {
                         }
                     }
                 }
+                IpcMessage::HideLearning => {
+                    unsafe {
+                        ShowWindow(hwnd, SW_HIDE);
+                    }
+                }
                 IpcMessage::Exit => std::process::exit(0),
                 _ => {}
             }

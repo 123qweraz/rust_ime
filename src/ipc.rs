@@ -4,6 +4,7 @@ use serde::{Deserialize, Serialize};
 pub enum IpcMessage {
     Keystroke(String),
     Learning { word: String, hint: String },
+    HideLearning,
     ClearKeys,
     Exit,
 }

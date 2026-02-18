@@ -179,6 +179,9 @@ pub fn start_gui(rx: Receiver<GuiEvent>, initial_config: Config) {
                             ipc::send_ipc_message(PIPE_NAME_LEARN, &IpcMessage::Learning { word, hint });
                         }
                     }
+                    GuiEvent::HideLearning => {
+                        ipc::send_ipc_message(PIPE_NAME_LEARN, &IpcMessage::HideLearning);
+                    }
                     GuiEvent::ApplyConfig(conf) => {
                         if let Some(ref arc) = CURRENT_CONFIG {
                             if let Ok(mut w) = arc.write() { *w = conf; }
