@@ -3,7 +3,8 @@ use std::sync::mpsc::Sender;
 use crate::platform::traits::{InputMethodHost, Rect};
 use crate::engine::Processor;
 use crate::ui::GuiEvent;
-use crate::{Config, NotifyEvent};
+use crate::config::Config;
+use crate::NotifyEvent;
 
 pub struct TsfHost {
     processor: Arc<Mutex<Processor>>,

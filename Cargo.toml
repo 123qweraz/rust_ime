@@ -79,6 +79,14 @@ name = "rust-ime"
 path = "src/main.rs"
 
 [[bin]]
+name = "rust-ime-keys"
+path = "src/bin/keys.rs"
+
+[[bin]]
+name = "rust-ime-learn"
+path = "src/bin/learn.rs"
+
+[[bin]]
 name = "compile_dict"
 path = "src/bin/compile_dict.rs"
 
