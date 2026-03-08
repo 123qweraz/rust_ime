@@ -327,8 +327,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let mut shift = false;
                     let mut ctrl = false;
                     let mut alt = false;
+                    let mut val = 1;
                     let mut input = line.trim().to_string();
                     
+                    if input.starts_with("UP_") {
+                        val = 0;
+                        input = input.replace("UP_", "");
+                    }
                     if input.starts_with("SHIFT_") {
                         shift = true;
                         input = input.replace("SHIFT_", "");
@@ -345,6 +350,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     if input.len() == 1 && input.chars().next().unwrap().is_ascii_alphabetic() {
                         let c = input.chars().next().unwrap().to_ascii_uppercase();
                         let key = match c {
+                            // ... (match 内容不变)
                             'A' => engine::keys::VirtualKey::A,
                             'B' => engine::keys::VirtualKey::B,
                             'C' => engine::keys::VirtualKey::C,
@@ -373,10 +379,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                             'Z' => engine::keys::VirtualKey::Z,
                             _ => engine::keys::VirtualKey::A,
                         };
-                        let action = processor.handle_key_ext(key, 1, shift, ctrl, alt, false);
+                        let action = processor.handle_key_ext(key, val, shift, ctrl, alt, false);
                         println!("动作反馈: {action:?}");
                     } else if input == "BACKSPACE" {
-                        let action = processor.handle_key(engine::keys::VirtualKey::Backspace, 1, false, false, false);
+                        let action = processor.handle_key(engine::keys::VirtualKey::Backspace, val, false, false, false);
                         println!("动作反馈: {action:?}");
                     } else if input == "UP" {
                         let action = processor.handle_key(engine::keys::VirtualKey::Up, 1, false, false, false);

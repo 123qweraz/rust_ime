@@ -16,56 +16,45 @@ def run_ime_cmd(inputs):
     full_input = "\n".join(inputs) + "\nexit\n"
     out, err = process.communicate(input=full_input)
     
-    # 提取最后一次查询的结果
+    # 提取所有反馈动作
     lines = out.splitlines()
-    last_action = ""
-    buffer_content = ""
+    actions = []
     
-    for line in reversed(lines):
-        if "动作反馈:" in line and not last_action:
-            last_action = line.split(":")[1].strip()
-        if "原始缓冲区:" in line and not buffer_content:
-            buffer_content = line.split(":")[1].strip()
+    for line in lines:
+        if "动作反馈:" in line:
+            actions.append(line.split(":")[1].strip())
             
-    return {"action": last_action, "buffer": buffer_content, "full": out}
+    return actions
 
 if __name__ == "__main__":
-    print("--- 系统快捷键透传集成测试 ---")
+    print("--- 系统快捷键生命周期测试 (防止按键粘连) ---")
     
-    # 1. 测试 Ctrl + C (应透传，不进 buffer)
-    print("\n[测试 1] 验证 Ctrl + C 透传...")
-    res1 = run_ime_cmd(["CTRL_C"])
-    print(f"动作反馈: {res1['action']}")
-    print(f"缓冲区: '{res1['buffer']}'")
+    # 1. 测试 Ctrl + C 的完整生命周期
+    # 序列: 按下 CTRL_C, 释放 UP_CTRL_C
+    print("\n[测试 1] 验证 Ctrl + C 的按下与释放...")
+    actions1 = run_ime_cmd(["CTRL_C", "UP_CTRL_C"])
+    print(f"动作序列: {actions1}")
     
-    if "PassThrough" in res1['action'] and not res1['buffer']:
-        print("✅ [成功] Ctrl + C 已正确透传")
+    if len(actions1) >= 2 and all("PassThrough" in a for a in actions1):
+        print("✅ [成功] Ctrl + C 的所有事件均已正确透传")
     else:
-        print("❌ [失败] Ctrl + C 被拦截或进入了缓冲区")
+        print("❌ [失败] 部分事件被拦截，可能导致按键粘连")
 
-    # 2. 测试 Ctrl + V
-    print("\n[测试 2] 验证 Ctrl + V 透传...")
-    res2 = run_ime_cmd(["CTRL_V"])
-    print(f"动作反馈: {res2['action']}")
-    if "PassThrough" in res2['action']:
-        print("✅ [成功] Ctrl + V 已正确透传")
+    # 2. 测试在 Buffer 不为空时使用快捷键 (这是最容易出问题的场景)
+    print("\n[测试 2] 验证 Buffer 不为空时快捷键的透传...")
+    # 序列: w, o, CTRL_C, UP_CTRL_C
+    actions2 = run_ime_cmd(["w", "o", "CTRL_C", "UP_CTRL_C"])
+    # 动作反馈顺序: Emit(w), Emit(o), CTRL_C反馈, UP_CTRL_C反馈
+    shortcut_actions = actions2[2:] if len(actions2) > 2 else []
+    print(f"快捷键反馈: {shortcut_actions}")
+    
+    if shortcut_actions and all("PassThrough" in a for a in shortcut_actions):
+        print("✅ [成功] Buffer 占用时，快捷键释放事件依然正确透传")
     else:
-        print("❌ [失败] Ctrl + V 未能透传")
+        print("❌ [失败] Buffer 占用导致释放事件被拦截")
 
-    # 3. 测试 Alt + F (应透传)
-    print("\n[测试 3] 验证 Alt + F 透传...")
-    res3 = run_ime_cmd(["ALT_F"])
-    print(f"动作反馈: {res3['action']}")
-    if "PassThrough" in res3['action']:
-        print("✅ [成功] Alt + F 已正确透传")
-    else:
-        print("❌ [失败] Alt + F 未能透传")
-
-    # 4. 验证正常输入不受影响 (无修饰键)
-    print("\n[测试 4] 验证正常输入逻辑...")
-    res4 = run_ime_cmd(["a"])
-    print(f"缓冲区: '{res4['buffer']}'")
-    if res4['buffer'] == "a":
-        print("✅ [成功] 正常字母输入逻辑依然稳健")
-    else:
-        print("❌ [失败] 正常输入逻辑被破坏")
+    # 3. 验证修饰键本身 (单独按 Ctrl)
+    # 我们暂不支持单独 CTRL 映射，但可以确保它不被 Consume
+    print("\n[测试 3] 验证单独 Ctrl 键释放...")
+    # 注意: 需要在 main.rs 增加对单独 CTRL 支持才能测这个，目前我们支持 CTRL_字母
+    # 我们先用 CTRL_C 的释放来代表

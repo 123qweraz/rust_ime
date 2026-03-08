@@ -248,10 +248,9 @@ impl Processor {
 
         // 2. 快捷键透传：防止 Ctrl+C, Alt+Tab 等系统快捷键被输入法拦截
         // 除了一些我们明确要拦截的 Ctrl 组合（如 Ctrl+标点）外，其余带 Ctrl/Alt 的一律透传
-        if is_press && (ctrl_pressed || alt_pressed) {
-            // 这里可以排除一些我们想要保留的 Ctrl 组合，比如未来可能增加的 Ctrl+数字选词等
-            // 目前先拦截 Ctrl+Space 之外的所有修饰键组合并透传
-            // 注意：Ctrl+标点逻辑在下方，如果需要保留，则需要在这里做排除
+        // 核心修复：包括按下(is_press)和释放(is_release)都要透传
+        if (ctrl_pressed || alt_pressed) || (key == VirtualKey::Control || key == VirtualKey::Alt) {
+            // 这里可以排除一些我们想要保留的 Ctrl 组合
             if !get_punctuation_key(key, shift_pressed).is_some() {
                 return Action::PassThrough;
             }

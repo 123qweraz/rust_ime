@@ -19,6 +19,12 @@ pub fn process_modifiers(processor: &mut Processor, key: VirtualKey, is_press: b
             }
             processor.session.shift_used_as_modifier = false;
         }
+        
+        // 核心修复：修饰键释放事件必须透传，否则会导致系统状态不一致（如 Ctrl 粘连）
+        if matches!(key, VirtualKey::Control | VirtualKey::Alt | VirtualKey::Shift | VirtualKey::CapsLock) {
+            return Some(Action::PassThrough);
+        }
+
         if processor.session.buffer.is_empty() { return Some(Action::PassThrough); }
         return Some(Action::Consume);
     }
