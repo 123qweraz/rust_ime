@@ -2,6 +2,9 @@ import os
 import subprocess
 import time
 
+# 确保在项目根目录运行
+os.chdir(os.path.dirname(os.path.abspath(__file__)) + "/..")
+
 def run_ime_cmd(inputs):
     """运行 rust-ime 并模拟输入，返回最后的候选词列表"""
     process = subprocess.Popen(

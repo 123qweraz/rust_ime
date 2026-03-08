@@ -1,6 +1,6 @@
 每次修改之后，必须执行以下步骤：
 1. 执行 `cargo build` 确保编译成功且无警告。
-2. 运行测试脚本（如 `bash test_core_logic.sh`）确保核心逻辑正确。
+2. 运行测试脚本（如 `bash tests/test_core_logic.sh`）确保核心逻辑正确。
 3. 使用 `git` 保存更改。
 计划模式，只讲思路，不动代码。
 每次都要在 cargo build 成功之后再给我

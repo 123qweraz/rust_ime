@@ -1,6 +1,10 @@
 #!/bin/bash
 # 核心逻辑集成测试脚本 - 严格校验 Action 反馈
 
+# 确保在项目根目录运行
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+cd "$SCRIPT_DIR/.."
+
 echo "--- 正在编译项目 ---"
 cargo build --quiet
 

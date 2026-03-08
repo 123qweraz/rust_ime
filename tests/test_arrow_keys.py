@@ -1,6 +1,9 @@
 import os
 import subprocess
 
+# 确保在项目根目录运行
+os.chdir(os.path.dirname(os.path.abspath(__file__)) + "/..")
+
 def run_ime_cmd(inputs):
     process = subprocess.Popen(
         ["./target/debug/rust-ime", "--test"],
