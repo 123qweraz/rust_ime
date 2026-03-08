@@ -15,24 +15,41 @@ pub struct TrieResult<'a> {
 }
 
 #[derive(Clone)]
-pub struct MmapData(Arc<Mmap>);
-impl AsRef<[u8]> for MmapData {
-    fn as_ref(&self) -> &[u8] { self.0.as_ref() }
+pub enum TrieData {
+    Mmap(Arc<Mmap>),
+    Memory(Arc<Vec<u8>>),
+}
+
+impl AsRef<[u8]> for TrieData {
+    fn as_ref(&self) -> &[u8] {
+        match self {
+            Self::Mmap(m) => m.as_ref(),
+            Self::Memory(v) => v.as_ref(),
+        }
+    }
 }
 
 #[derive(Clone)]
 pub struct Trie {
-    index: Map<MmapData>,
-    data: MmapData,
+    index: Map<TrieData>,
+    data: TrieData,
 }
 
 impl Trie {
-    pub fn load<P: AsRef<Path>>(index_path: P, data_path: P) -> Result<Self, Box<dyn std::error::Error>> {
-        println!("[Trie] Loading index: {:?}, data: {:?}", index_path.as_ref(), data_path.as_ref());
-        let index_file = File::open(&index_path)?;
-        let data_file = File::open(&data_path)?;
-        let index_data = MmapData(Arc::new(unsafe { Mmap::map(&index_file)? }));
-        let data_data = MmapData(Arc::new(unsafe { Mmap::map(&data_file)? }));
+    pub fn load<P: AsRef<Path>>(index_path: P, data_path: P, force_memory: bool) -> Result<Self, Box<dyn std::error::Error>> {
+        let load_data = |path: &Path| -> Result<TrieData, Box<dyn std::error::Error>> {
+            if force_memory {
+                let buffer = std::fs::read(path)?;
+                Ok(TrieData::Memory(Arc::new(buffer)))
+            } else {
+                let file = File::open(path)?;
+                let mmap = unsafe { Mmap::map(&file)? };
+                Ok(TrieData::Mmap(Arc::new(mmap)))
+            }
+        };
+
+        let index_data = load_data(index_path.as_ref())?;
+        let data_data = load_data(data_path.as_ref())?;
         let index = Map::new(index_data)?;
 
         Ok(Self { index, data: data_data })
@@ -41,16 +58,18 @@ impl Trie {
     pub fn get_all_exact(&self, pinyin: &str) -> Option<Vec<TrieResult<'_>>> {
         let _span = tracing::debug_span!("trie_exact", %pinyin).entered();
         let offset = self.index.get(pinyin)? as usize;
-        Some(self.read_block(offset))
+        let mut results = Vec::new();
+        self.read_block(offset, |tr| results.push(tr));
+        Some(results)
     }
 
     /// 预热词库：读取前 limit 条记录以填充 Page Cache
     pub fn prewarm(&self, limit: usize) {
+        if matches!(self.data, TrieData::Memory(_)) { return; }
         let mut stream = self.index.stream();
         let mut count = 0;
         while let Some((_, offset)) = fst::Streamer::next(&mut stream) {
-            // 仅仅通过读取该偏移量的块数据，就能让 OS 将对应的文件页载入 RAM
-            let _ = self.read_block(offset as usize);
+            self.read_block(offset as usize, |_| {});
             count += 1;
             if count >= limit { break; }
         }
@@ -76,6 +95,7 @@ impl Trie {
     pub fn search_bfs(&self, prefix: &str, limit: usize) -> Vec<TrieResult<'_>> {
         let _span = tracing::debug_span!("trie_bfs", %prefix, limit).entered();
         let mut results = Vec::new();
+        let mut seen = std::collections::HashSet::new();
         
         // 支持通配符 z：将其转换为正则搜索
         if prefix.contains('z') {
@@ -86,13 +106,14 @@ impl Trie {
         let mut stream = self.index.search(matcher).into_stream();
 
         while let Some((_, offset)) = stream.next() {
-            let pairs = self.read_block(offset as usize);
-            for pair in pairs {
-                if !results.iter().any(|tr: &TrieResult| tr.word == pair.word) {
+            let mut stop = false;
+            self.read_block(offset as usize, |pair| {
+                if !stop && seen.insert(pair.word) {
                     results.push(pair);
-                    if results.len() >= limit { return results; }
+                    if results.len() >= limit { stop = true; }
                 }
-            }
+            });
+            if stop { break; }
         }
         results
     }
@@ -100,19 +121,21 @@ impl Trie {
     /// 通配符搜索实现：z 匹配任意单个 a-y 字母
     pub fn search_wildcard(&self, pattern: &str, limit: usize) -> Vec<TrieResult<'_>> {
         let mut results = Vec::new();
+        let mut seen = std::collections::HashSet::new();
         
         // 简单的 DFS 实现通配符匹配
         let mut stream = self.index.stream();
         while let Some((key_bytes, offset)) = stream.next() {
             let key = String::from_utf8_lossy(key_bytes);
             if self.wildcard_match(pattern, &key) {
-                let pairs = self.read_block(offset as usize);
-                for pair in pairs {
-                    if !results.iter().any(|tr: &TrieResult| tr.word == pair.word) {
+                let mut stop = false;
+                self.read_block(offset as usize, |pair| {
+                    if !stop && seen.insert(pair.word) {
                         results.push(pair);
-                        if results.len() >= limit { return results; }
+                        if results.len() >= limit { stop = true; }
                     }
-                }
+                });
+                if stop { break; }
             }
         }
         results
@@ -144,6 +167,7 @@ impl Trie {
         // 字典序中 'sai', 'san', 'sao' 可能就占用了上千个坑位。
         let internal_scan_limit = 3000; 
         let mut results = Vec::with_capacity(limit);
+        let mut seen = std::collections::HashSet::new();
         
         let first_seg = &segments[0];
         let matcher = fst::automaton::Str::new(first_seg).starts_with();
@@ -156,13 +180,14 @@ impl Trie {
             // 1. 每一个 segment 必须匹配一个音节的开头
             // 2. 必须刚好匹配完所有 segment 且 耗尽 key 中的所有音节
             if self.matches_strict_jianpin(&key, segments, syllables) {
-                let pairs = self.read_block(offset as usize);
-                for pair in pairs {
-                    if !results.iter().any(|tr: &TrieResult| tr.word == pair.word) {
+                let mut stop = false;
+                self.read_block(offset as usize, |pair| {
+                    if !stop && seen.insert(pair.word) {
                         results.push(pair);
-                        if results.len() >= internal_scan_limit { break; }
+                        if results.len() >= internal_scan_limit { stop = true; }
                     }
-                }
+                });
+                if stop { break; }
             }
             if results.len() >= internal_scan_limit { break; }
         }
@@ -227,22 +252,24 @@ impl Trie {
         let mut current = 0;
         while let Some((_, offset)) = stream.next() {
             if current == target_idx {
-                let pairs = self.read_block(offset as usize);
-                return pairs.first().copied();
+                let mut result = None;
+                self.read_block(offset as usize, |pair| {
+                    if result.is_none() { result = Some(pair); }
+                });
+                return result;
             }
             current += 1;
         }
         None
     }
 
-    fn read_block(&self, offset: usize) -> Vec<TrieResult<'_>> {
+    fn read_block<'a>(&'a self, offset: usize, mut f: impl FnMut(TrieResult<'a>)) {
         let data = self.data.as_ref();
-        if offset + 4 > data.len() { return Vec::new(); }
+        if offset + 4 > data.len() { return; }
         
         let count = u32::from_le_bytes(data[offset..offset+4].try_into().unwrap_or([0; 4]));
         let mut cursor = offset + 4;
         
-        let mut results = Vec::with_capacity(count as usize);
         for _ in 0..count {
             if cursor + 2 > data.len() { break; }
             let w_len = u16::from_le_bytes(data[cursor..cursor+2].try_into().unwrap_or([0; 2])) as usize;
@@ -283,8 +310,7 @@ impl Trie {
             let weight = u32::from_le_bytes(data[cursor..cursor+4].try_into().unwrap_or([0; 4]));
             cursor += 4;
             
-            results.push(TrieResult { word, trad, tone, en, stroke_aux, weight });
+            f(TrieResult { word, trad, tone, en, stroke_aux, weight });
         }
-        results
     }
 }

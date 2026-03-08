@@ -379,7 +379,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                             'Z' => engine::keys::VirtualKey::Z,
                             _ => engine::keys::VirtualKey::A,
                         };
-                        let action = processor.handle_key_ext(key, val, shift, ctrl, alt, false);
+                        let action = processor.handle_key_ext(key, val, shift, ctrl, alt, true);
                         println!("动作反馈: {action:?}");
                     } else if input == "BACKSPACE" {
                         let action = processor.handle_key(engine::keys::VirtualKey::Backspace, val, false, false, false);
