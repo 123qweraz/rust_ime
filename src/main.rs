@@ -149,6 +149,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     limit: 10,
                     filter_mode: engine::processor::FilterMode::None,
                     aux_filter: "",
+                    context: None,
                 }).0.is_empty();
                 Some(found)
             } else { None }

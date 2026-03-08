@@ -62,9 +62,10 @@ pub struct ConfigManager {
     pub fuzzy_config: FuzzyPinyinConfig,
     pub enable_traditional: bool,
 
-    // 用户词库相关逻辑：分离新词发现和调频历史
+    // 用户词库相关逻辑：分离新词发现、调频历史和上下文联想
     pub learned_words: Arc<ArcSwap<UserDictData>>,
     pub usage_history: Arc<ArcSwap<UserDictData>>,
+    pub ngram_history: Arc<ArcSwap<UserDictData>>, // 存储 context -> { word -> count }
     pub db: Option<sled::Db>,
 
     pub user_dict_tx: Option<std::sync::mpsc::Sender<(UserDictData, std::path::PathBuf)>>,
@@ -134,6 +135,7 @@ impl ConfigManager {
             enable_traditional: master.input.enable_traditional,
             learned_words: Arc::new(ArcSwap::from_pointee(HashMap::new())),
             usage_history: Arc::new(ArcSwap::from_pointee(HashMap::new())),
+            ngram_history: Arc::new(ArcSwap::from_pointee(HashMap::new())),
             db,
             user_dict_tx: None,
         }
@@ -210,21 +212,21 @@ impl ConfigManager {
 
     pub fn load_user_dicts(&mut self) {
         let mut learned = UserDictData::new();
-        let mut usage = UserDictData::new();
+        let mut usage: UserDictData = HashMap::new();
+        let mut ngram: UserDictData = HashMap::new();
 
-        // 1. 尝试从数据库加载 (Sled)
         if let Some(ref db) = self.db {
-            println!("[ConfigManager] 正在从 KV 存储加载用户数据...");
             for (key_bytes, val_bytes) in db.iter().flatten() {
                 let key = String::from_utf8_lossy(&key_bytes);
                 if let Ok(entries) = serde_json::from_slice::<Vec<(String, u32)>>(&val_bytes) {
                     let parts: Vec<&str> = key.split(':').collect();
                     if parts.len() == 3 {
-                        let (prefix, profile, pinyin) = (parts[0], parts[1], parts[2]);
+                        let (prefix, profile, key_str) = (parts[0], parts[1], parts[2]);
                         match prefix {
-                            "learned" => learned.entry(profile.to_string()).or_default().insert(pinyin.to_string(), entries),
-                            "usage" => usage.entry(profile.to_string()).or_default().insert(pinyin.to_string(), entries),
-                            _ => None,
+                            "learned" => { learned.entry(profile.to_string()).or_default().insert(key_str.to_string(), entries); }
+                            "usage" => { usage.entry(profile.to_string()).or_default().insert(key_str.to_string(), entries); }
+                            "ngram" => { ngram.entry(profile.to_string()).or_default().insert(key_str.to_string(), entries); }
+                            _ => {}
                         };
                     }
                 }
@@ -274,6 +276,7 @@ impl ConfigManager {
 
         self.learned_words.store(Arc::new(learned));
         self.usage_history.store(Arc::new(usage));
+        self.ngram_history.store(Arc::new(ngram));
 
         if self.user_dict_tx.is_none() {
             let (tx, rx) = std::sync::mpsc::channel::<(UserDictData, std::path::PathBuf)>();
@@ -306,6 +309,15 @@ impl ConfigManager {
     pub fn insert_usage(&self, profile: &str, pinyin: &str, entries: &[(String, u32)]) {
         if let Some(ref db) = self.db {
             let key = format!("usage:{}:{}", profile, pinyin);
+            if let Ok(val) = serde_json::to_vec(entries) {
+                let _ = db.insert(key, val);
+            }
+        }
+    }
+
+    pub fn insert_ngram(&self, profile: &str, context: &str, entries: &[(String, u32)]) {
+        if let Some(ref db) = self.db {
+            let key = format!("ngram:{}:{}", profile, context);
             if let Ok(val) = serde_json::to_vec(entries) {
                 let _ = db.insert(key, val);
             }

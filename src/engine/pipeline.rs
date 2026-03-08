@@ -46,7 +46,7 @@ pub trait Translator: Send + Sync {
 
 /// 4. 过滤器：对候选词列表的后期加工
 pub trait Filter: Send + Sync {
-    fn filter(&self, candidates: &mut Vec<Candidate>, config: &Config, query: &str);
+    fn filter(&self, candidates: &mut Vec<Candidate>, config: &Config, query: &str, context: Option<&str>);
 }
 
 /// 默认切分器实现 (Max Match)
@@ -216,11 +216,33 @@ impl Translator for UserDictTranslator {
 /// 调频过滤器：根据用户历史频率对已有候选词进行动态评分加成
 pub struct AdaptiveFilter {
     pub usage_history: Arc<arc_swap::ArcSwap<UserDictData>>,
+    pub ngram_history: Arc<arc_swap::ArcSwap<UserDictData>>,
     pub profile: String,
 }
 impl Filter for AdaptiveFilter {
-    fn filter(&self, candidates: &mut Vec<Candidate>, config: &Config, query: &str) {
+    fn filter(&self, candidates: &mut Vec<Candidate>, config: &Config, query: &str, context: Option<&str>) {
         if !config.input.enable_auto_reorder { return; }
+
+        // 1. 上下文联想提权 (N-Gram)
+        if let Some(ctx) = context {
+            let dict = self.ngram_history.load();
+            if let Some(profile_dict) = dict.get(&self.profile) {
+                if let Some(history_entries) = profile_dict.get(ctx) {
+                    // 对于匹配上下文的词，给予物理置顶
+                    for (word, _) in history_entries.iter().rev() {
+                        if let Some(pos) = candidates.iter().position(|c| c.simplified.as_ref() == word || c.traditional.as_ref() == word) {
+                            let mut cand = candidates.remove(pos);
+                            if !cand.source.contains("(Context)") {
+                                cand.source = format!("{} (Context)", cand.source).into();
+                            }
+                            candidates.insert(0, cand);
+                        }
+                    }
+                }
+            }
+        }
+
+        // 2. 基础调频逻辑 (MRU)
         let dict = self.usage_history.load();
         if let Some(profile_dict) = dict.get(&self.profile) {
             if let Some(history_entries) = profile_dict.get(query) {
@@ -228,7 +250,8 @@ impl Filter for AdaptiveFilter {
                 for (word, _) in history_entries.iter().rev() {
                     if let Some(pos) = candidates.iter().position(|c| c.simplified.as_ref() == word || c.traditional.as_ref() == word) {
                         let mut cand = candidates.remove(pos);
-                        if !cand.source.contains("(Hist)") {
+                        // 如果已经有了 Context 标记，不再覆盖，但仍保持置顶状态
+                        if !cand.source.contains("(Hist)") && !cand.source.contains("(Context)") {
                             cand.source = format!("{} (Hist)", cand.source).into();
                         }
                         candidates.insert(0, cand);
@@ -242,7 +265,7 @@ impl Filter for AdaptiveFilter {
 /// 排序与去重过滤器
 pub struct SortFilter;
 impl Filter for SortFilter {
-    fn filter(&self, candidates: &mut Vec<Candidate>, config: &Config, _query: &str) {
+    fn filter(&self, candidates: &mut Vec<Candidate>, config: &Config, _query: &str, _context: Option<&str>) {
         let ranking = &config.input.ranking;
         // 纯粹基于质量的排序：词库分 + 长度惩罚
         candidates.sort_by(|a, b| {
@@ -269,7 +292,7 @@ impl Filter for SortFilter {
 /// 繁简转换过滤器
 pub struct TraditionalFilter;
 impl Filter for TraditionalFilter {
-    fn filter(&self, candidates: &mut Vec<Candidate>, config: &Config, _query: &str) {
+    fn filter(&self, candidates: &mut Vec<Candidate>, config: &Config, _query: &str, _context: Option<&str>) {
         let use_trad = config.input.enable_traditional;
         for c in candidates.iter_mut() {
             c.text = if use_trad { c.traditional.clone() } else { c.simplified.clone() };
@@ -310,14 +333,14 @@ impl Pipeline {
     }
     */
 
-    pub fn run(&self, input: &str, syllables: &HashSet<String>, config: &Config, limit: usize) -> Vec<Candidate> {
+    pub fn run(&self, input: &str, syllables: &HashSet<String>, config: &Config, limit: usize, context: Option<&str>) -> Vec<Candidate> {
         let segments = self.segmentor.segment(input, syllables);
         let mut candidates = Vec::new();
         for t in &self.translators {
             candidates.extend(t.translate(input, &segments, config, limit));
         }
         for f in &self.filters {
-            f.filter(&mut candidates, config, input);
+            f.filter(&mut candidates, config, input, context);
         }
         
         // 在所有排序和过滤完成后，执行最终截断
@@ -335,6 +358,7 @@ pub struct SearchEngine {
     pub syllables: Arc<HashSet<String>>,
     pub learned_words: Arc<arc_swap::ArcSwap<UserDictData>>,
     pub usage_history: Arc<arc_swap::ArcSwap<UserDictData>>,
+    pub ngram_history: Arc<arc_swap::ArcSwap<UserDictData>>,
     pub schemes: Arc<HashMap<String, Box<dyn crate::engine::scheme::InputScheme>>>,
     pipelines: Arc<RwLock<HashMap<String, Arc<Pipeline>>>>,
     cache: Arc<Mutex<LruCache<SearchCacheKey, (Vec<Candidate>, Vec<String>)>>>,
@@ -348,6 +372,7 @@ pub struct SearchQuery<'a> {
     pub limit: usize,
     pub filter_mode: crate::engine::processor::FilterMode,
     pub aux_filter: &'a str,
+    pub context: Option<&'a str>,
 }
 
 impl SearchEngine {
@@ -356,18 +381,21 @@ impl SearchEngine {
         syllables: Arc<HashSet<String>>,
         learned_words: Arc<arc_swap::ArcSwap<UserDictData>>,
         usage_history: Arc<arc_swap::ArcSwap<UserDictData>>,
-        schemes: HashMap<String, Box<dyn crate::engine::scheme::InputScheme>>,
+        ngram_history: Arc<arc_swap::ArcSwap<UserDictData>>,
+        schemes: Arc<HashMap<String, Box<dyn crate::engine::scheme::InputScheme>>>,
     ) -> Self {
         Self {
             trie_paths,
             syllables,
             learned_words,
             usage_history,
-            schemes: Arc::new(schemes),
+            ngram_history,
+            schemes,
             pipelines: Arc::new(RwLock::new(HashMap::new())),
             cache: Arc::new(Mutex::new(LruCache::new(std::num::NonZeroUsize::new(1000).unwrap()))),
         }
     }
+
 
 
     pub fn has_exact_match(&self, profile: &str, pinyin: &str, word: &str) -> bool {
@@ -407,6 +435,7 @@ impl SearchEngine {
         pipeline.add_filter(Box::new(SortFilter));
         pipeline.add_filter(Box::new(AdaptiveFilter {
             usage_history: self.usage_history.clone(),
+            ngram_history: self.ngram_history.clone(),
             profile: profile.to_string()
         }));
         pipeline.add_filter(Box::new(TraditionalFilter));
@@ -482,7 +511,7 @@ impl SearchEngine {
 
         if let Some(pipeline) = self.get_or_create_pipeline(query.profile) {
             let segments = pipeline.segmentor.segment(query.buffer, query.syllables);
-            let results = pipeline.run(query.buffer, query.syllables, query.config, query.limit);
+            let results = pipeline.run(query.buffer, query.syllables, query.config, query.limit, query.context);
             
             let mut final_results = results;
             if query.filter_mode == crate::engine::processor::FilterMode::Global && !query.aux_filter.is_empty() {

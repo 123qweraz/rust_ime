@@ -63,13 +63,14 @@ impl Processor {
             syllables_arc,
             config.learned_words.clone(),
             config.usage_history.clone(),
+            config.ngram_history.clone(),
             {
                 let mut m: HashMap<String, Box<dyn InputScheme>> = HashMap::new();
                 m.insert("stroke".to_string(), Box::new(crate::engine::schemes::StrokeScheme::new()));
                 m.insert("english".to_string(), Box::new(crate::engine::schemes::EnglishScheme::new()));
                 m.insert("chinese".to_string(), Box::new(crate::engine::schemes::ChineseScheme::new()));
                 m.insert("japanese".to_string(), Box::new(crate::engine::schemes::JapaneseScheme::new()));
-                m
+                Arc::new(m)
             }
         );
 
@@ -334,13 +335,18 @@ impl Processor {
             if now.duration_since(self.last_commit_time) > Duration::from_secs(3) {
                 self.commit_history.clear();
             }
+            
+            let last_word_opt = self.commit_history.last().map(|(_, w)| w.clone());
+            self.record_usage(&py, &cand, last_word_opt.as_deref());
             self.commit_history.push((py.clone(), cand.to_string()));
-            self.record_usage(&py, &cand);
 
             let start = if self.commit_history.len() > 4 { self.commit_history.len() - 4 } else { 0 };
             let mut new_combinations = Vec::new();
             {
                 let history_slice = &self.commit_history[start..];
+                // 注意：这里需要计算基于“新加入之前”的 context 来进行组合记录
+                // 但实际上 new_combinations 是为了“新词发现”，并不需要 context 参数参与联想
+                // 我们在下方的循环中为 record_usage 传入 None 作为 context
                 for i in 0..(history_slice.len().saturating_sub(1)) {
                     let mut combined_py = String::new();
                     let mut combined_word = String::new();
@@ -354,7 +360,7 @@ impl Processor {
                 }
             }
             for (py_c, word_c) in new_combinations {
-                self.record_usage(&py_c, &word_c);
+                self.record_usage(&py_c, &word_c, None);
             }
             self.last_commit_time = now;
         }
@@ -420,6 +426,8 @@ impl Processor {
         }
 
         let current_profile = self.active_profiles.first().cloned().unwrap_or_default();
+        let last_word = self.commit_history.last().map(|(_, word)| word.as_str());
+        
         let query = crate::engine::pipeline::SearchQuery {
             buffer: &self.session.buffer,
             profile: &current_profile,
@@ -428,6 +436,7 @@ impl Processor {
             limit,
             filter_mode: self.session.filter_mode.clone(),
             aux_filter: &self.session.aux_filter,
+            context: last_word,
         };
         let (results, segments) = self.engine.search(query);
         self.session.candidates = results;
@@ -516,7 +525,7 @@ impl Processor {
         }
     }
 
-    pub fn record_usage(&mut self, pinyin: &str, word: &str) {
+    pub fn record_usage(&mut self, pinyin: &str, word: &str, context: Option<&str>) {
         if pinyin.is_empty() || word.is_empty() { return; }
         
         let profile = self.active_profiles.first().cloned().unwrap_or_else(|| "chinese".to_string());
@@ -548,7 +557,33 @@ impl Processor {
             self.engine.clear_cache();
         }
 
-        // 2. 记录造词记录 (Learned Words)
+        // 2. 记录上下文联想 (N-Gram)
+        if self.config.enable_auto_reorder {
+            if let Some(ctx) = context {
+                let current_word = word.to_string();
+                let mut updated_ngram = Vec::new();
+                
+                self.config.ngram_history.rcu(|hist| {
+                    let mut hist_clone = (**hist).clone();
+                    let entries = hist_clone.entry(profile.clone()).or_default().entry(ctx.to_string()).or_default();
+                    
+                    if let Some(pos) = entries.iter().position(|(w, _)| w == &current_word) {
+                        let old_count = entries[pos].1;
+                        entries.remove(pos);
+                        entries.insert(0, (current_word.clone(), old_count + 1));
+                    } else {
+                        entries.insert(0, (current_word.clone(), 1));
+                    }
+                    if entries.len() > 10 { entries.truncate(10); }
+                    
+                    updated_ngram = entries.clone();
+                    Arc::new(hist_clone)
+                });
+                self.config.insert_ngram(&profile, ctx, &updated_ngram);
+            }
+        }
+
+        // 3. 记录造词记录 (Learned Words)
         if self.config.enable_word_discovery && word_len > 1 {
             let is_new_word = !self.engine.has_exact_match(&profile, pinyin, word);
             if is_new_word {
