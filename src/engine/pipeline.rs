@@ -225,7 +225,6 @@ impl Filter for TraditionalFilter {
 /// 动态自适应过滤器 (调频)
 pub struct AdaptiveFilter {
     pub usage_history: Arc<ArcSwap<UserDictData>>,
-    pub ngram_history: Arc<ArcSwap<UserDictData>>,
     pub profile: String,
 }
 impl Filter for AdaptiveFilter {
@@ -446,7 +445,6 @@ impl SearchEngine {
         pipeline.add_filter(Box::new(SortFilter));
         pipeline.add_filter(Box::new(AdaptiveFilter {
             usage_history: self.usage_history.clone(),
-            ngram_history: self.ngram_history.clone(),
             profile: profile.to_string()
         }));
         pipeline.add_filter(Box::new(TraditionalFilter));
