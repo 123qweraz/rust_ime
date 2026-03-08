@@ -96,6 +96,25 @@ pub enum PhantomType {
 }
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+pub struct KeyAction {
+    pub tap: String,
+    #[serde(default)]
+    pub shift: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub double_tap: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub long_press: Option<String>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub description: Option<String>,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+pub struct ProfileLayout {
+    pub name: String,
+    pub mappings: std::collections::HashMap<String, KeyAction>,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub struct Input {
     pub autostart: bool,
     pub commit_mode: String,
@@ -129,6 +148,8 @@ pub struct Input {
     pub enable_word_discovery: bool, // 是否允许记录新词 (造词)
     pub enable_auto_reorder: bool,   // 是否根据输入记录自动调频
     pub enable_fixed_first_candidate: bool,
+    #[serde(default)]
+    pub layouts: std::collections::HashMap<String, ProfileLayout>,
     pub enable_smart_backspace: bool,
     pub enable_double_pinyin: bool,
     pub double_pinyin_scheme: DoublePinyinScheme,
@@ -395,6 +416,34 @@ impl Config {
                 enable_word_discovery: true,
                 enable_auto_reorder: true,
                 enable_fixed_first_candidate: false,
+                layouts: {
+                    let mut m = std::collections::HashMap::new();
+                    let mut chinese_mappings = std::collections::HashMap::new();
+                    
+                    // 示例：分号的多维定义
+                    chinese_mappings.insert(";".to_string(), KeyAction {
+                        tap: "；".into(),
+                        shift: ":".into(),
+                        double_tap: Some(";".into()),
+                        long_press: Some("……".into()),
+                        description: Some("中文分号/长按省略号".into()),
+                    });
+
+                    // 示例：句号的多维定义
+                    chinese_mappings.insert(".".to_string(), KeyAction {
+                        tap: "。".into(),
+                        shift: ">".into(),
+                        double_tap: Some("...".into()),
+                        long_press: Some("·".into()),
+                        description: Some("中文句号/双击三连点".into()),
+                    });
+
+                    m.insert("chinese".to_string(), ProfileLayout {
+                        name: "中文标准布局".into(),
+                        mappings: chinese_mappings,
+                    });
+                    m
+                },
                 enable_smart_backspace: false,
                 enable_double_pinyin: false,
                 double_pinyin_scheme: DoublePinyinScheme {
