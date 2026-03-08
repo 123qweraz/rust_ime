@@ -49,6 +49,7 @@ pub struct Processor {
     pub last_commit_time: Instant,
     pub capslock_pending: bool, // CapsLock 快速切换方案预备状态
     pub caps_lock_enabled: bool, // 模拟物理大写锁定灯状态
+    pub capslock_down: bool, // CapsLock 键是否正被按下
 }
 
 impl Processor {
@@ -87,6 +88,7 @@ impl Processor {
             last_commit_time: Instant::now(),
             capslock_pending: false,
             caps_lock_enabled: false,
+            capslock_down: false,
         }
     }
 
@@ -223,22 +225,30 @@ impl Processor {
                 return Action::Consume;
             }
 
-            // C. CapsLock 逻辑：导航模式 (Buffer非空) 或 方案切换准备 (Buffer为空)
+            // C. CapsLock 核心逻辑
             if key == VirtualKey::CapsLock {
                 if !self.session.buffer.is_empty() {
-                    // 进入 VIM 导航模式
                     self.session.nav_mode = true;
                 } else {
-                    // 方案切换准备
                     self.capslock_pending = true;
-                    self.caps_lock_enabled = !self.caps_lock_enabled; 
+                    // 故意不切换 self.caps_lock_enabled，彻底屏蔽大写锁定功能
                 }
                 return Action::Consume; 
             }
             
-            // 如果处于 CapsLock 待命状态且此时输入了字母（且 buffer 仍为空）
-            if self.capslock_pending && self.session.buffer.is_empty() && crate::engine::processor::utils::is_letter(key) {
-                // 检查是否命中了方案映射
+            // D. VIM 导航逻辑 (当处于导航模式时)
+            if self.session.nav_mode && !self.session.buffer.is_empty() {
+                match key {
+                    VirtualKey::H => return self.execute_command(Command::PrevCandidate),
+                    VirtualKey::L => return self.execute_command(Command::NextCandidate),
+                    VirtualKey::J => return self.execute_command(Command::NextPage),
+                    VirtualKey::K => return self.execute_command(Command::PrevPage),
+                    _ => {}
+                }
+            }
+
+            // E. CapsLock 方案快速切换 (支持延迟按键)
+            if self.capslock_pending && self.session.buffer.is_empty() && is_letter(key) {
                 let key_char = crate::engine::processor::utils::key_to_char(key, false, false).unwrap_or('\0').to_lowercase().to_string();
                 if let Some(profile) = self.config.profile_keys.iter().find(|(k, _)| k.to_lowercase() == key_char).map(|(_, p)| p.clone()) {
                     self.active_profiles = profile.split(',').map(|s| s.to_string()).collect();
@@ -246,13 +256,14 @@ impl Processor {
                     self.capslock_pending = false;
                     return Action::Notify(self.get_short_display(), format!("方案: {}", self.get_current_profile_display()));
                 }
+                // 如果按了字母但没中方案映射，则取消 pending
                 self.capslock_pending = false;
             }
         }
 
         if is_release && key == VirtualKey::CapsLock {
             self.session.nav_mode = false;
-            self.capslock_pending = false;
+            self.capslock_down = false;
             return Action::Consume;
         }
 
@@ -260,17 +271,14 @@ impl Processor {
             return Action::PassThrough;
         }
 
-        // 2. 快捷键透传：防止 Ctrl+C, Alt+Tab 等系统快捷键被输入法拦截
-        // 除了一些我们明确要拦截的 Ctrl 组合（如 Ctrl+标点）外，其余带 Ctrl/Alt 的一律透传
-        // 核心修复：包括按下(is_press)和释放(is_release)都要透传
+        // 2. 快捷键透传
         if (ctrl_pressed || alt_pressed) || (key == VirtualKey::Control || key == VirtualKey::Alt) {
-            // 这里可以排除一些我们想要保留的 Ctrl 组合
             if !get_punctuation_key(key, shift_pressed).is_some() {
                 return Action::PassThrough;
             }
         }
 
-        // 1. 处理控制键意图 (保持原有逻辑)
+        // 1. 处理控制键意图
         if is_press && ctrl_pressed && !alt_pressed {
             if let Some(p_key) = get_punctuation_key(key, shift_pressed) {
                 let mut commit_text = if !self.session.joined_sentence.is_empty() { 
@@ -301,7 +309,7 @@ impl Processor {
             return action;
         }
 
-        // 2. FSM 驱动：获取副作用
+        // 2. FSM 驱动
         let input = fsm::FsmInput {
             key,
             mods: ModifierState { shift: shift_pressed, ctrl: ctrl_pressed, alt: alt_pressed, meta: false },
@@ -311,6 +319,12 @@ impl Processor {
 
         let (new_state, effect) = fsm::StateMachine::transition(self.session.state, &input);
         self.session.state = new_state;
+
+        // 如果此时输入了字母且不是在处理 CapsLock，确保清除 capslock_pending
+        // 增加判定：如果处于导航模式，不清除 pending (防止 HJKL 误伤)
+        if is_press && is_letter(key) && !self.session.nav_mode {
+            self.capslock_pending = false;
+        }
 
         // 3. 执行副作用并映射为 Action
         match effect {
@@ -334,8 +348,6 @@ impl Processor {
                 self.execute_command(Command::Clear)
             }
             fsm::FsmEffect::Consume => {
-                // 对于 Consume，我们仍然需要处理一些特殊的组合键逻辑（如辅助码）
-                // 暂时回退到 handle_composing 处理这些复杂情况
                 self.handle_composing(key, shift_pressed, perform_lookup)
             }
             fsm::FsmEffect::Alert => Action::Alert,
@@ -371,9 +383,6 @@ impl Processor {
             let mut new_combinations = Vec::new();
             {
                 let history_slice = &self.commit_history[start..];
-                // 注意：这里需要计算基于“新加入之前”的 context 来进行组合记录
-                // 但实际上 new_combinations 是为了“新词发现”，并不需要 context 参数参与联想
-                // 我们在下方的循环中为 record_usage 传入 None 作为 context
                 for i in 0..(history_slice.len().saturating_sub(1)) {
                     let mut combined_py = String::new();
                     let mut combined_word = String::new();
