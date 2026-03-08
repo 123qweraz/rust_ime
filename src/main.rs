@@ -400,7 +400,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                         let action = processor.handle_key_ext(engine::keys::VirtualKey::Space, 1, false, true, false, false);
                         println!("动作反馈: {action:?}");
                     } else if input == "CAPSLOCK" {
-                        let action = processor.handle_key(engine::keys::VirtualKey::CapsLock, 1, false, false, false);
+                        let action = processor.handle_key_ext(engine::keys::VirtualKey::CapsLock, val, false, false, false, true);
                         println!("动作反馈: {action:?}");
                     } else if input == "TAB" {
                         let action = processor.handle_key(engine::keys::VirtualKey::Tab, 1, false, false, false);

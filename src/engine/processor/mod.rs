@@ -223,23 +223,37 @@ impl Processor {
                 return Action::Consume;
             }
 
-            // C. CapsLock 方案切换准备 或 状态切换
-            if key == VirtualKey::CapsLock && self.session.buffer.is_empty() {
-                self.capslock_pending = true;
-                self.caps_lock_enabled = !self.caps_lock_enabled; // 切换锁定状态
-                // 完全拦截，防止触发系统大写锁定
+            // C. CapsLock 逻辑：导航模式 (Buffer非空) 或 方案切换准备 (Buffer为空)
+            if key == VirtualKey::CapsLock {
+                if !self.session.buffer.is_empty() {
+                    // 进入 VIM 导航模式
+                    self.session.nav_mode = true;
+                } else {
+                    // 方案切换准备
+                    self.capslock_pending = true;
+                    self.caps_lock_enabled = !self.caps_lock_enabled; 
+                }
                 return Action::Consume; 
-            } else if self.capslock_pending && self.session.buffer.is_empty() {
+            }
+            
+            // 如果处于 CapsLock 待命状态且此时输入了字母（且 buffer 仍为空）
+            if self.capslock_pending && self.session.buffer.is_empty() && crate::engine::processor::utils::is_letter(key) {
                 // 检查是否命中了方案映射
-                let key_char = crate::engine::processor::utils::key_to_char(key, false, self.caps_lock_enabled).unwrap_or('\0').to_string();
-                if let Some(profile) = self.config.profile_keys.iter().find(|(k, _)| k == &key_char).map(|(_, p)| p.clone()) {
+                let key_char = crate::engine::processor::utils::key_to_char(key, false, false).unwrap_or('\0').to_lowercase().to_string();
+                if let Some(profile) = self.config.profile_keys.iter().find(|(k, _)| k.to_lowercase() == key_char).map(|(_, p)| p.clone()) {
                     self.active_profiles = profile.split(',').map(|s| s.to_string()).collect();
                     self.reset();
                     self.capslock_pending = false;
-                    return Action::Consume;
+                    return Action::Notify(self.get_short_display(), format!("方案: {}", self.get_current_profile_display()));
                 }
                 self.capslock_pending = false;
             }
+        }
+
+        if is_release && key == VirtualKey::CapsLock {
+            self.session.nav_mode = false;
+            self.capslock_pending = false;
+            return Action::Consume;
         }
 
         if !self.chinese_enabled {
