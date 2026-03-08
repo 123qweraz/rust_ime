@@ -11,7 +11,26 @@ impl Compositor {
         let mut pinyin = if p.session.best_segmentation.is_empty() {
             p.session.buffer.clone()
         } else {
-            p.session.best_segmentation.join(" ")
+            // 尝试维持 buffer 的原始大小写
+            let mut result = String::new();
+            let mut current_pos = 0;
+            let buffer_chars: Vec<char> = p.session.buffer.chars().collect();
+            
+            for (i, seg) in p.session.best_segmentation.iter().enumerate() {
+                if i > 0 { result.push(' '); }
+                let seg_len = seg.chars().count();
+                for j in 0..seg_len {
+                    if current_pos + j < buffer_chars.len() {
+                        result.push(buffer_chars[current_pos + j]);
+                    }
+                }
+                current_pos += seg_len;
+            }
+            // 补齐剩余部分 (如果有)
+            if current_pos < buffer_chars.len() {
+                result.push_str(&p.session.buffer[current_pos..]);
+            }
+            result
         };
 
         if p.session.nav_mode {

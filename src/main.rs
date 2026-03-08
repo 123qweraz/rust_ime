@@ -324,14 +324,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let input = line.trim();
                     if input == "exit" { break; }
                     
-                    if (input.len() == 1 && input.chars().next().is_some_and(char::is_alphabetic)) || (input.starts_with("SHIFT_") && input.len() == 7) {
-                        let (letter, shift) = if input.len() == 7 {
-                            (input.chars().last().unwrap_or('\0'), true)
-                        } else {
-                            (input.chars().next().map_or('\0', |c| c.to_ascii_uppercase()), false)
-                        };
+                    let (mut letter_char, mut shift) = ('\0', false);
+                    if input.starts_with("SHIFT_") && input.len() >= 7 {
+                        letter_char = input.chars().nth(6).unwrap().to_ascii_uppercase();
+                        shift = true;
+                    } else if input.len() == 1 && input.chars().next().unwrap().is_ascii_alphabetic() {
+                        letter_char = input.chars().next().unwrap().to_ascii_uppercase();
+                    }
 
-                        let key = match letter {
+                    if letter_char != '\0' {
+                        let key = match letter_char {
                             'A' => engine::keys::VirtualKey::A,
                             'B' => engine::keys::VirtualKey::B,
                             'C' => engine::keys::VirtualKey::C,
@@ -386,6 +388,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     } else if input == "TAB" {
                         let action = processor.handle_key(engine::keys::VirtualKey::Tab, 1, false, false, false);
                         println!("动作反馈: {action:?}");
+                    } else if input == "SHIFT" {
+                        // 模拟按下和释放，触发可能的状态变更（如中英切换或辅助码过滤）
+                        let _ = processor.handle_key(engine::keys::VirtualKey::Shift, 1, false, false, false);
+                        let action = processor.handle_key(engine::keys::VirtualKey::Shift, 0, false, false, false);
+                        println!("动作反馈: {action:?}");
                     } else if input == "[" {
                         let action = processor.handle_key(engine::keys::VirtualKey::LeftBrace, 1, false, false, false);
                         println!("动作反馈: {action:?}");
@@ -420,7 +427,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     
                     let display_preedit = engine::compositor::Compositor::get_preedit(&processor);
                     println!("中英文状态: {}", if processor.chinese_enabled { "开启" } else { "关闭" });
+                    println!("大写锁定: {}", if processor.caps_lock_enabled { "开启" } else { "关闭" });
+                    println!("原始缓冲区: {}", processor.session.buffer);
                     println!("预编辑: {display_preedit}");
+                    println!("过滤模式: {:?}", processor.session.filter_mode);
                     println!("当前选中: {}", processor.session.selected);
                     println!("分页: {}/{}", processor.session.page, processor.session.candidates.len());
                     println!("辅助码过滤: {}", processor.session.aux_filter);

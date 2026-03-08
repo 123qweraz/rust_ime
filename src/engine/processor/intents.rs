@@ -45,7 +45,7 @@ pub fn process_intent(processor: &mut Processor, key: VirtualKey, val: i32, shif
                     if let Some((press_key, press_time)) = processor.dispatcher.key_press_info {
                         if press_key == key && now.duration_since(press_time) >= processor.config.long_press_timeout {
                             if is_letter(key) {
-                                if let Some(c) = key_to_char(key, false) {
+                                if let Some(c) = key_to_char(key, false, processor.caps_lock_enabled) {
                                     if let Some(replacement) = processor.config.long_press_mappings.get(&c.to_string()).cloned() {
                                         processor.dispatcher.long_press_triggered = true;
                                         if !processor.session.buffer.is_empty() {
@@ -119,7 +119,7 @@ pub fn process_switch_mode(processor: &mut Processor, key: VirtualKey, is_press:
                 return Some(Action::Consume);
             }
             _ if is_letter(key) => {
-                let k = key_to_char(key, false).unwrap_or(' ').to_string();
+                let k = key_to_char(key, false, processor.caps_lock_enabled).unwrap_or(' ').to_string();
                 let mut target_profile = None;
                 for (trigger_key, profile_name) in &processor.config.profile_keys {
                     if trigger_key == &k { target_profile = Some(profile_name.clone()); break; }

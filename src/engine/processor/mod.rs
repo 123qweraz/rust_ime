@@ -48,6 +48,7 @@ pub struct Processor {
     pub commit_history: Vec<(String, String)>, // 最近上屏的 (拼音, 词组)
     pub last_commit_time: Instant,
     pub capslock_pending: bool, // CapsLock 快速切换方案预备状态
+    pub caps_lock_enabled: bool, // 模拟物理大写锁定灯状态
 }
 
 impl Processor {
@@ -85,6 +86,7 @@ impl Processor {
             commit_history: Vec::new(),
             last_commit_time: Instant::now(),
             capslock_pending: false,
+            caps_lock_enabled: false,
         }
     }
 
@@ -221,14 +223,15 @@ impl Processor {
                 return Action::Consume;
             }
 
-            // C. CapsLock 方案切换准备
+            // C. CapsLock 方案切换准备 或 状态切换
             if key == VirtualKey::CapsLock && self.session.buffer.is_empty() {
                 self.capslock_pending = true;
+                self.caps_lock_enabled = !self.caps_lock_enabled; // 切换锁定状态
                 // 完全拦截，防止触发系统大写锁定
                 return Action::Consume; 
             } else if self.capslock_pending && self.session.buffer.is_empty() {
                 // 检查是否命中了方案映射
-                let key_char = crate::engine::processor::utils::key_to_char(key, false).unwrap_or('\0').to_string();
+                let key_char = crate::engine::processor::utils::key_to_char(key, false, self.caps_lock_enabled).unwrap_or('\0').to_string();
                 if let Some(profile) = self.config.profile_keys.iter().find(|(k, _)| k == &key_char).map(|(_, p)| p.clone()) {
                     self.active_profiles = profile.split(',').map(|s| s.to_string()).collect();
                     self.reset();

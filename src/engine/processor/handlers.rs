@@ -8,7 +8,7 @@ pub fn handle_idle(processor: &mut Processor, key: VirtualKey, shift_pressed: bo
         return Action::PassThrough;
     }
     if is_letter(key) {
-        if let Some(c) = key_to_char(key, shift_pressed) {
+        if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
             let lang = processor.active_profiles.first().cloned().unwrap_or_default().to_lowercase();
             if let Some(layout) = processor.config.keyboard_layouts.get(&lang) {
                 if let Some(mapped) = layout.get(&c.to_string()) {
@@ -72,7 +72,7 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
 
     // --- Shift + Letter 辅助码过滤 / 精确选词 ---
     if is_letter(key) && shift_pressed && !processor.session.buffer.is_empty() {
-         if let Some(c) = key_to_char(key, false) {
+         if let Some(c) = key_to_char(key, false, processor.caps_lock_enabled) {
              processor.session.shift_used_as_modifier = true;
              // 核心修复：直接设置过滤模式为 Global
              if processor.session.filter_mode != FilterMode::Global {
@@ -110,7 +110,7 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
 
     if is_letter(key) {
         if processor.session.filter_mode != FilterMode::None {
-            if let Some(c) = key_to_char(key, shift_pressed) {
+            if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
                 processor.session.handle_filter_char(c);
                 if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
                 return processor.update_phantom_action();
@@ -122,7 +122,7 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
                 if last_k == key {
                     if let Some(last_t) = processor.dispatcher.last_tap_time {
                         if now.duration_since(last_t) <= processor.config.double_tap_timeout {
-                            if let Some(c) = key_to_char(key, false) {
+                            if let Some(c) = key_to_char(key, false, processor.caps_lock_enabled) {
                                 if let Some(replacement) = processor.config.double_taps.get(&c.to_string()) {
                                     if processor.session.buffer.ends_with(c) {
                                         processor.session.buffer.pop();
@@ -143,6 +143,18 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
         } else {
             processor.dispatcher.last_tap_key = None;
             processor.dispatcher.last_tap_time = None;
+        }
+
+        if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
+            // 如果按下 Shift + 字母输入了大写字母，标记为已作为修饰键使用，防止释放时触发全局过滤
+            if shift_pressed {
+                processor.session.shift_used_as_modifier = true;
+            }
+            processor.session.push_char(c);
+            if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+            if processor.should_block_invalid_input(&processor.session.buffer.clone()) { return Action::Alert; }
+            if let Some(act) = processor.check_auto_commit() { return act; }
+            return processor.update_phantom_action();
         }
     } else {
         processor.dispatcher.last_tap_key = None;
@@ -243,16 +255,17 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
             if processor.config.enable_number_selection && processor.config.commit_mode == "single" && digit >= 1 && digit <= processor.config.page_size {
                 return processor.execute_command(Command::Select(digit as usize - 1));
             }
-            let old_buffer = processor.session.buffer.clone(); 
-            processor.session.push_char(key_to_char(key, false).unwrap_or('0'));
+            let old_buffer = processor.session.buffer.clone();
+            processor.session.push_char(key_to_char(key, false, processor.caps_lock_enabled).unwrap_or('0'));
             if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+
             if processor.should_block_invalid_input(&old_buffer) { return Action::Alert; }
             if let Some(act) = processor.check_auto_commit() { return act; } processor.update_phantom_action()
         }
         _ => {
             if get_punctuation_key(key, shift_pressed).is_some() {
                 processor.handle_punctuation(key, shift_pressed)
-            } else if let Some(c) = key_to_char(key, shift_pressed) {
+            } else if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
                 let old_buffer = processor.session.buffer.clone();
                 processor.session.push_char(c);
                 if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
