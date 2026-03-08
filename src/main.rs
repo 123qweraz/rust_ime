@@ -324,16 +324,27 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let input = line.trim();
                     if input == "exit" { break; }
                     
-                    let (mut letter_char, mut shift) = ('\0', false);
-                    if input.starts_with("SHIFT_") && input.len() >= 7 {
-                        letter_char = input.chars().nth(6).unwrap().to_ascii_uppercase();
+                    let mut shift = false;
+                    let mut ctrl = false;
+                    let mut alt = false;
+                    let mut input = line.trim().to_string();
+                    
+                    if input.starts_with("SHIFT_") {
                         shift = true;
-                    } else if input.len() == 1 && input.chars().next().unwrap().is_ascii_alphabetic() {
-                        letter_char = input.chars().next().unwrap().to_ascii_uppercase();
+                        input = input.replace("SHIFT_", "");
+                    }
+                    if input.starts_with("CTRL_") {
+                        ctrl = true;
+                        input = input.replace("CTRL_", "");
+                    }
+                    if input.starts_with("ALT_") {
+                        alt = true;
+                        input = input.replace("ALT_", "");
                     }
 
-                    if letter_char != '\0' {
-                        let key = match letter_char {
+                    if input.len() == 1 && input.chars().next().unwrap().is_ascii_alphabetic() {
+                        let c = input.chars().next().unwrap().to_ascii_uppercase();
+                        let key = match c {
                             'A' => engine::keys::VirtualKey::A,
                             'B' => engine::keys::VirtualKey::B,
                             'C' => engine::keys::VirtualKey::C,
@@ -362,7 +373,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                             'Z' => engine::keys::VirtualKey::Z,
                             _ => engine::keys::VirtualKey::A,
                         };
-                        let action = processor.handle_key(key, 1, shift, false, false);
+                        let action = processor.handle_key_ext(key, 1, shift, ctrl, alt, false);
                         println!("动作反馈: {action:?}");
                     } else if input == "BACKSPACE" {
                         let action = processor.handle_key(engine::keys::VirtualKey::Backspace, 1, false, false, false);
