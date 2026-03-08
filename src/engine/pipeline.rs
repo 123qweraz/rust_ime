@@ -39,7 +39,7 @@ pub trait Translator: Send + Sync {
 }
 
 pub trait Filter: Send + Sync {
-    fn filter(&self, input: &str, candidates: Vec<Candidate>, config: &Config) -> Vec<Candidate>;
+    fn filter(&self, input: &str, candidates: Vec<Candidate>, config: &Config, context: Option<&str>) -> Vec<Candidate>;
 }
 
 /* 具体实现 */
@@ -199,7 +199,7 @@ impl Translator for UserDictTranslator {
 /// 简单排序过滤器
 pub struct SortFilter;
 impl Filter for SortFilter {
-    fn filter(&self, _input: &str, mut candidates: Vec<Candidate>, _config: &Config) -> Vec<Candidate> {
+    fn filter(&self, _input: &str, mut candidates: Vec<Candidate>, _config: &Config, _context: Option<&str>) -> Vec<Candidate> {
         candidates.sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap_or(std::cmp::Ordering::Equal));
         candidates
     }
@@ -208,7 +208,7 @@ impl Filter for SortFilter {
 /// 繁简转换过滤器
 pub struct TraditionalFilter;
 impl Filter for TraditionalFilter {
-    fn filter(&self, _input: &str, mut candidates: Vec<Candidate>, config: &Config) -> Vec<Candidate> {
+    fn filter(&self, _input: &str, mut candidates: Vec<Candidate>, config: &Config, _context: Option<&str>) -> Vec<Candidate> {
         if config.input.enable_traditional {
             for c in &mut candidates {
                 c.text = c.traditional.clone();
@@ -222,25 +222,43 @@ impl Filter for TraditionalFilter {
     }
 }
 
-/// 动态自适应过滤器 (调频)
+/// 动态自适应过滤器 (调频与上下文联想)
 pub struct AdaptiveFilter {
     pub usage_history: Arc<ArcSwap<UserDictData>>,
+    pub ngram_history: Arc<ArcSwap<UserDictData>>,
     pub profile: String,
 }
 impl Filter for AdaptiveFilter {
-    fn filter(&self, _input: &str, mut candidates: Vec<Candidate>, _config: &Config) -> Vec<Candidate> {
-        let history_guard = self.usage_history.load();
-        if let Some(profile_dict) = history_guard.get(&self.profile) {
-            for c in &mut candidates {
-                // 在 UserDictData 中，usage_history 也是 context -> { word -> count } 结构？
-                // 根据 config_manager，usage_history 的 context 通常是 "usage" 或空
-                if let Some(entries) = profile_dict.get("") {
+    fn filter(&self, input: &str, mut candidates: Vec<Candidate>, _config: &Config, context: Option<&str>) -> Vec<Candidate> {
+        let usage_guard = self.usage_history.load();
+        let ngram_guard = self.ngram_history.load();
+        
+        if let Some(profile_usage) = usage_guard.get(&self.profile) {
+            // 根据当前拼音 (input) 获取调频记录
+            if let Some(entries) = profile_usage.get(input) {
+                for c in &mut candidates {
                     if let Some((_, count)) = entries.iter().find(|(w, _)| w == c.simplified.as_ref()) {
-                        c.weight += (*count as f64) * 100.0;
+                        // 基础调频加权
+                        c.weight += (*count as f64) * 1000000.0;
                     }
                 }
             }
         }
+
+        // 上下文联想 (N-Gram) 加权
+        if let Some(ctx) = context {
+            if let Some(profile_ngram) = ngram_guard.get(&self.profile) {
+                if let Some(entries) = profile_ngram.get(ctx) {
+                    for c in &mut candidates {
+                        if let Some((_, count)) = entries.iter().find(|(w, _)| w == c.simplified.as_ref()) {
+                            // 上下文匹配获得极大权重
+                            c.weight += (*count as f64) * 5000000.0;
+                        }
+                    }
+                }
+            }
+        }
+
         // 再次根据新权重排序
         candidates.sort_by(|a, b| b.weight.partial_cmp(&a.weight).unwrap_or(std::cmp::Ordering::Equal));
         candidates
@@ -271,14 +289,14 @@ impl Pipeline {
         self.filters.push(f);
     }
 
-    pub fn run(&self, input: &str, syllables: &HashSet<String>, config: &Config, limit: usize, _context: Option<&str>) -> Vec<Candidate> {
+    pub fn run(&self, input: &str, syllables: &HashSet<String>, config: &Config, limit: usize, context: Option<&str>) -> Vec<Candidate> {
         let segments = self.segmentor.segment(input, syllables);
         let mut candidates = Vec::new();
         for t in &self.translators {
             candidates.extend(t.translate(input, &segments, config, limit));
         }
         for f in &self.filters {
-            candidates = f.filter(input, candidates, config);
+            candidates = f.filter(input, candidates, config, context);
         }
         candidates
     }
@@ -364,8 +382,8 @@ impl SearchEngine {
         let _enter = span.enter();
 
         if let Some(pipeline) = self.get_or_create_pipeline(query.profile) {
-            let segments = pipeline.segmentor.segment(query.buffer, query.syllables);
             let results = pipeline.run(query.buffer, query.syllables, query.config, query.limit, query.context);
+            let segments = pipeline.segmentor.segment(query.buffer, query.syllables);
             
             let mut final_results = results;
             if query.filter_mode == crate::engine::processor::FilterMode::Global && !query.aux_filter.is_empty() {
@@ -445,6 +463,7 @@ impl SearchEngine {
         pipeline.add_filter(Box::new(SortFilter));
         pipeline.add_filter(Box::new(AdaptiveFilter {
             usage_history: self.usage_history.clone(),
+            ngram_history: self.ngram_history.clone(),
             profile: profile.to_string()
         }));
         pipeline.add_filter(Box::new(TraditionalFilter));
