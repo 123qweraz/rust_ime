@@ -1,0 +1,91 @@
+[Test] 进入测试模式 (无 UI)...
+[Test] 配置加载目录: "/home/x/Documents/rust_ime/configs"
+[ConfigManager] 检测到全新存储，尝试迁移旧 JSON 数据...
+请输入拼音进行测试 (输入 'exit' 退出):
+> [2m2026-03-08T13:35:36.425328Z[0m [32m INFO[0m ThreadId(03) Lazy loading dictionary... [3mprofile[0m[2m=[0mchinese
+[2m2026-03-08T13:35:36.425344Z[0m [32m INFO[0m ThreadId(01) [1mengine_search[0m[1m{[0m[3mprofile[0m[2m=[0mchinese [3mbuffer[0m[2m=[0ma[1m}[0m[2m:[0m Lazy loading dictionary... [3mprofile[0m[2m=[0mchinese
+动作反馈: Emit("a")
+中英文状态: 开启
+大写锁定: 关闭
+原始缓冲区: a
+预编辑: a
+过滤模式: None
+当前选中: 0
+分页: 0/500
+辅助码过滤: 
+切分: ["a"]
+候选词 (前 10 条):
+  1. 啊 (hint: Particle, source: Table (Exact))
+  2. 阿 (hint: Prefix, source: Table (Exact))
+  3. 吖 (hint: Interjection, source: Table (Exact))
+  4. 嗄 (hint: Hoarse, source: Table (Exact))
+  5. 锕 (hint: Actinium, source: Table (Exact))
+  6. 腌 (hint: Salt, source: Table (Exact))
+  7. 呵 (hint: a, source: Table (Exact))
+  8. 錒 (hint: ā, source: Table (Exact))
+  9. 𠼞 (hint: ā, source: Table (Exact))
+  10. 𥥩 (hint: ā, source: Table (Exact))
+> 动作反馈: Consume
+中英文状态: 开启
+大写锁定: 关闭
+原始缓冲区: a
+预编辑: a [H:左 J:下 K:上 L:右]
+过滤模式: None
+当前选中: 0
+分页: 0/500
+辅助码过滤: 
+切分: ["a"]
+候选词 (前 10 条):
+  1. 啊 (hint: Particle, source: Table (Exact))
+  2. 阿 (hint: Prefix, source: Table (Exact))
+  3. 吖 (hint: Interjection, source: Table (Exact))
+  4. 嗄 (hint: Hoarse, source: Table (Exact))
+  5. 锕 (hint: Actinium, source: Table (Exact))
+  6. 腌 (hint: Salt, source: Table (Exact))
+  7. 呵 (hint: a, source: Table (Exact))
+  8. 錒 (hint: ā, source: Table (Exact))
+  9. 𠼞 (hint: ā, source: Table (Exact))
+  10. 𥥩 (hint: ā, source: Table (Exact))
+> 动作反馈: Consume
+中英文状态: 开启
+大写锁定: 关闭
+原始缓冲区: a
+预编辑: a [H:左 J:下 K:上 L:右]
+过滤模式: None
+当前选中: 5
+分页: 5/500
+辅助码过滤: 
+切分: ["a"]
+候选词 (前 10 条):
+  1. 啊 (hint: Particle, source: Table (Exact))
+  2. 阿 (hint: Prefix, source: Table (Exact))
+  3. 吖 (hint: Interjection, source: Table (Exact))
+  4. 嗄 (hint: Hoarse, source: Table (Exact))
+  5. 锕 (hint: Actinium, source: Table (Exact))
+  6. 腌 (hint: Salt, source: Table (Exact))
+  7. 呵 (hint: a, source: Table (Exact))
+  8. 錒 (hint: ā, source: Table (Exact))
+  9. 𠼞 (hint: ā, source: Table (Exact))
+  10. 𥥩 (hint: ā, source: Table (Exact))
+> 动作反馈: Consume
+中英文状态: 开启
+大写锁定: 关闭
+原始缓冲区: a
+预编辑: a
+过滤模式: None
+当前选中: 5
+分页: 5/500
+辅助码过滤: 
+切分: ["a"]
+候选词 (前 10 条):
+  1. 啊 (hint: Particle, source: Table (Exact))
+  2. 阿 (hint: Prefix, source: Table (Exact))
+  3. 吖 (hint: Interjection, source: Table (Exact))
+  4. 嗄 (hint: Hoarse, source: Table (Exact))
+  5. 锕 (hint: Actinium, source: Table (Exact))
+  6. 腌 (hint: Salt, source: Table (Exact))
+  7. 呵 (hint: a, source: Table (Exact))
+  8. 錒 (hint: ā, source: Table (Exact))
+  9. 𠼞 (hint: ā, source: Table (Exact))
+  10. 𥥩 (hint: ā, source: Table (Exact))
+> 

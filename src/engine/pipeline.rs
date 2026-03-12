@@ -489,15 +489,19 @@ impl SearchEngine {
         }
     }
 
-    /// 预热指定方案的词库
+    /// 预加载并初始化指定方案的 Pipeline
     pub fn prewarm_profile(&self, profile: &str) {
-        if let Some(pipeline) = self.get_or_create_pipeline(profile) {
-            // 获取第一个 TableTranslator 并执行预热
-            if !pipeline.translators.is_empty() {
-                if let Some(paths) = self.trie_paths.get(profile) {
-                    if let Ok(trie) = Trie::load(&paths.0, &paths.1, true) {
-                        trie.prewarm(5000); // 预热前 5000 个词条
-                    }
+        let span = tracing::info_span!("prewarm_profile", %profile);
+        let _enter = span.enter();
+        
+        // 直接调用 get_or_create_pipeline，这将触发完整的加载和缓存流程
+        if let Some(_pipeline) = self.get_or_create_pipeline(profile) {
+            tracing::info!(%profile, "Pipeline eagerly initialized and cached.");
+            // 顺便触发一次内部 trie 的预热（如果是 Mmap 模式）
+            // 虽然目前默认是全内存加载，但保留此逻辑以增强兼容性
+            if let Some(paths) = self.trie_paths.get(profile) {
+                if let Ok(trie) = Trie::load(&paths.0, &paths.1, true) {
+                    trie.prewarm(1000);
                 }
             }
         }

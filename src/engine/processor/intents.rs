@@ -52,7 +52,22 @@ pub fn process_intent(processor: &mut Processor, key: VirtualKey, val: i32, shif
                         if press_key == key && now.duration_since(press_time) >= processor.config.long_press_timeout {
                             if is_letter(key) {
                                 if let Some(c) = key_to_char(key, false, processor.caps_lock_enabled) {
-                                    if let Some(replacement) = processor.config.long_press_mappings.get(&c.to_string()).cloned() {
+                                    let lang = processor.active_profiles.first().cloned().unwrap_or_default().to_lowercase();
+                                    
+                                    // 1. 尝试 profile 专属的长按映射
+                                    let mut replacement = None;
+                                    if let Some(layout) = processor.config.layouts.get(&lang) {
+                                        if let Some(action) = layout.mappings.get(&c.to_string()) {
+                                            replacement = action.long_press.clone();
+                                        }
+                                    }
+
+                                    // 2. 尝试全局长按映射
+                                    if replacement.is_none() {
+                                        replacement = processor.config.long_press_mappings.get(&c.to_string()).cloned();
+                                    }
+
+                                    if let Some(r) = replacement {
                                         processor.dispatcher.long_press_triggered = true;
                                         if !processor.session.buffer.is_empty() {
                                             if let Some(last_char) = processor.session.buffer.chars().last() {
@@ -61,11 +76,26 @@ pub fn process_intent(processor: &mut Processor, key: VirtualKey, val: i32, shif
                                                 }
                                             }
                                         }
-                                        return Some(processor.inject_text(&replacement));
+                                        return Some(processor.inject_text(&r));
                                     }
                                 }
                             } else if let Some(p_key) = get_punctuation_key(key, false) {
-                                if let Some(replacement) = processor.config.punctuation_long_press_mappings.get(p_key).cloned() {
+                                let lang = processor.active_profiles.first().cloned().unwrap_or_default().to_lowercase();
+                                
+                                // 1. 尝试 profile 专属的长按映射
+                                let mut replacement = None;
+                                if let Some(layout) = processor.config.layouts.get(&lang) {
+                                    if let Some(action) = layout.mappings.get(p_key) {
+                                        replacement = action.long_press.clone();
+                                    }
+                                }
+
+                                // 2. 尝试全局长按映射
+                                if replacement.is_none() {
+                                    replacement = processor.config.punctuation_long_press_mappings.get(p_key).cloned();
+                                }
+
+                                if let Some(r) = replacement {
                                     processor.dispatcher.long_press_triggered = true;
                                     let mut commit_text = if !processor.session.joined_sentence.is_empty() { 
                                         processor.session.joined_sentence.trim_end().to_string() 
@@ -74,7 +104,7 @@ pub fn process_intent(processor: &mut Processor, key: VirtualKey, val: i32, shif
                                     } else { 
                                         processor.session.buffer.trim_end().to_string() 
                                     };
-                                    commit_text.push_str(&replacement);
+                                    commit_text.push_str(&r);
                                     let del_len = processor.session.phantom_text.chars().count();
                                     processor.clear_composing();
                                     processor.commit_history.clear(); 

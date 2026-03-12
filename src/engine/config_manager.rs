@@ -49,6 +49,7 @@ pub struct ConfigManager {
     pub punctuation_long_press_mappings: HashMap<String, String>,
     pub punctuations: HashMap<String, HashMap<String, Vec<PunctuationEntry>>>,
     pub keyboard_layouts: HashMap<String, HashMap<String, String>>,
+    pub layouts: HashMap<String, crate::config::ProfileLayout>,
 
     pub phantom_type: PhantomType,
 
@@ -123,6 +124,7 @@ impl ConfigManager {
             punctuation_long_press_mappings: master.input.punctuation_long_press_mappings.clone(),
             punctuations: master.input.punctuations.clone(),
             keyboard_layouts: master.input.keyboard_layouts.clone(),
+            layouts: master.input.layouts.clone(),
             phantom_type: if cfg!(target_os = "windows") { PhantomType::None } else { master.input.phantom_type },
             enable_word_discovery: master.input.enable_word_discovery,
             enable_auto_reorder: master.input.enable_auto_reorder,
@@ -199,6 +201,7 @@ impl ConfigManager {
         self.punctuation_long_press_mappings = conf.input.punctuation_long_press_mappings.clone();
         self.punctuations = conf.input.punctuations.clone();
         self.keyboard_layouts = conf.input.keyboard_layouts.clone();
+        self.layouts = conf.input.layouts.clone();
 
         self.phantom_type = conf.input.phantom_type;
         if cfg!(target_os = "windows") && self.phantom_type != PhantomType::None {

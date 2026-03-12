@@ -10,6 +10,19 @@ pub fn handle_idle(processor: &mut Processor, key: VirtualKey, shift_pressed: bo
     if is_letter(key) {
         if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
             let lang = processor.active_profiles.first().cloned().unwrap_or_default().to_lowercase();
+            
+            // 1. 尝试新的多维布局 (layouts)
+            if let Some(layout) = processor.config.layouts.get(&lang) {
+                if let Some(action) = layout.mappings.get(&c.to_string()) {
+                    if shift_pressed && !action.shift.is_empty() {
+                        return Action::Emit(action.shift.clone());
+                    } else if !action.tap.is_empty() {
+                        return Action::Emit(action.tap.clone());
+                    }
+                }
+            }
+
+            // 2. 尝试旧的简单映射 (keyboard_layouts)
             if let Some(layout) = processor.config.keyboard_layouts.get(&lang) {
                 if let Some(mapped) = layout.get(&c.to_string()) {
                     return Action::Emit(mapped.clone());
@@ -123,10 +136,27 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
                     if let Some(last_t) = processor.dispatcher.last_tap_time {
                         if now.duration_since(last_t) <= processor.config.double_tap_timeout {
                             if let Some(c) = key_to_char(key, false, processor.caps_lock_enabled) {
-                                if let Some(replacement) = processor.config.double_taps.get(&c.to_string()) {
+                                let lang = processor.active_profiles.first().cloned().unwrap_or_default().to_lowercase();
+                                
+                                // 1. 尝试 profile 专属的双击映射
+                                let mut replacement = None;
+                                if let Some(layout) = processor.config.layouts.get(&lang) {
+                                    if let Some(action) = layout.mappings.get(&c.to_string()) {
+                                        if let Some(dt) = &action.double_tap {
+                                            replacement = Some(dt.clone());
+                                        }
+                                    }
+                                }
+
+                                // 2. 尝试全局双击映射
+                                if replacement.is_none() {
+                                    replacement = processor.config.double_taps.get(&c.to_string()).cloned();
+                                }
+
+                                if let Some(r) = replacement {
                                     if processor.session.buffer.ends_with(c) {
                                         processor.session.buffer.pop();
-                                        processor.session.buffer.push_str(replacement);
+                                        processor.session.buffer.push_str(&r);
                                         processor.dispatcher.last_tap_key = None;
                                         processor.dispatcher.last_tap_time = None;
                                         if perform_lookup { if let Some(act) = processor.lookup() { return act; } }

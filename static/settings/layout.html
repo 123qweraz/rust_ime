@@ -3,188 +3,398 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>键盘布局设置 - rust-ime</title>
+    <title>全能键盘布局编辑器 - rust-ime</title>
     <link rel="stylesheet" href="/static/css/style.css">
     <style>
-        .layout-editor {
-            background: var(--apple-card);
-            border-radius: 16px;
-            padding: 24px;
-            margin-top: 20px;
-            border: 1px solid var(--apple-border);
+        :root {
+            --key-bg: #ffffff;
+            --key-text: #24292e;
+            --key-active: #007aff;
+            --key-accent: #f0f0f0;
+            --key-border: #d1d5da;
+            --key-shadow: 0 2px 0 rgba(0,0,0,0.1);
         }
-        .key-map-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 10px;
-            margin-top: 20px;
+
+        .visual-keyboard {
+            background: #eef0f2;
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            user-select: none;
+            max-width: 900px;
+            margin: 20px auto;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
         }
-        .key-item {
+
+        .kb-row {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .kb-key {
+            background: var(--key-bg);
+            border: 1px solid var(--key-border);
+            border-radius: 6px;
+            width: 50px;
+            height: 54px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 8px;
-            border: 1px solid #eee;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            box-shadow: var(--key-shadow);
+            transition: all 0.1s;
         }
-        .key-label {
-            font-size: 12px;
+
+        .kb-key:hover {
+            background: #f8f9fa;
+            transform: translateY(-1px);
+        }
+
+        .kb-key:active {
+            transform: translateY(1px);
+            box-shadow: none;
+        }
+
+        .kb-key.active {
+            border-color: var(--key-active);
+            background: rgba(0, 122, 255, 0.05);
+        }
+
+        .kb-key-main {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--key-text);
+        }
+
+        .kb-key-sub {
+            font-size: 10px;
             color: #888;
-            font-weight: bold;
+            position: absolute;
+            top: 4px;
+            right: 6px;
         }
-        .key-input {
-            width: 40px;
-            text-align: center;
-            padding: 4px;
-            border-radius: 4px;
+
+        .kb-key-indicator {
+            position: absolute;
+            bottom: 4px;
+            display: flex;
+            gap: 2px;
+        }
+
+        .dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+        }
+        .dot-double { background: #ff9500; }
+        .dot-long { background: #34c759; }
+
+        .key-edit-panel {
+            background: #fff;
+            border: 1px solid var(--apple-border);
+            border-radius: 16px;
+            padding: 24px;
+            margin-top: 20px;
+            display: none;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .edit-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .edit-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .edit-item label {
+            font-size: 13px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .edit-item input {
+            padding: 10px;
             border: 1px solid #ddd;
+            border-radius: 8px;
             font-size: 16px;
         }
-        .controls {
+
+        .scheme-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+
+        .import-export {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 20px;
             display: flex;
             gap: 10px;
             align-items: center;
         }
-        select, input[type="text"] {
-            padding: 8px 12px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-        }
+
+        /* 键宽调整 */
+        .key-backspace { width: 90px; }
+        .key-tab { width: 70px; }
+        .key-caps { width: 85px; }
+        .key-enter { width: 95px; }
+        .key-shift { width: 115px; }
+        .key-space { width: 300px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <a href="/" class="back-btn">← 返回首页</a>
-            <h1>键盘布局设置</h1>
-            <p>为特定输入方案（如俄语、希腊语）定义 1:1 的按键映射。</p>
-        </div>
+        <header>
+            <a href="/" class="back-btn">← 返回</a>
+            <h1>全能按键布局编辑器</h1>
+            <p>点击虚拟按键，为当前方案（Profile）定义专属的单击、双击、长按行为。</p>
+        </header>
 
-        <div class="section">
-            <div class="controls">
-                <span>选择布局方案:</span>
-                <select id="layout-select" onchange="changeLayout()">
-                    <!-- 动态加载 -->
+        <div class="scheme-controls">
+            <div class="btn-group">
+                <select id="profile-select" onchange="switchProfile()">
+                    <option value="chinese">中文 (chinese)</option>
+                    <option value="english">英文 (english)</option>
+                    <option value="japanese">日文 (japanese)</option>
+                    <option value="stroke">笔画 (stroke)</option>
                 </select>
-                <button class="btn" onclick="addNewLayout()">+ 新增方案</button>
-                <button class="btn btn-danger" onclick="deleteLayout()">删除当前方案</button>
+                <button class="btn" onclick="save()">保存全局配置</button>
             </div>
-
-            <div id="editor-container" class="layout-editor" style="display:none;">
-                <div class="info">
-                    <p>当 <strong>输入方案</strong> 切换为与 <strong>布局名称</strong> 一致时，下方的映射将生效（直接输出映射后的字符）。</p>
-                </div>
-                
-                <div class="key-map-grid" id="key-grid">
-                    <!-- 动态生成 A-Z -->
-                </div>
+            <div class="btn-group">
+                <button class="btn" onclick="exportLayout()">导出当前布局</button>
+                <label class="btn" style="cursor:pointer">
+                    导入布局 <input type="file" id="import-file" style="display:none" onchange="importLayout(event)">
+                </label>
             </div>
         </div>
 
-        <div class="actions">
-            <button class="btn btn-primary" onclick="saveLayoutConfig()">保存全局设置</button>
+        <div class="visual-keyboard" id="keyboard-container">
+            <!-- 动态生成 -->
+        </div>
+
+        <div class="key-edit-panel" id="edit-panel">
+            <h3 id="edit-title">编辑按键: ?</h3>
+            <div class="edit-grid">
+                <div class="edit-item">
+                    <label>单击 (Tap / 默认字符)</label>
+                    <input type="text" id="input-tap" placeholder="如: ；">
+                </div>
+                <div class="edit-item">
+                    <label>Shift + 按键</label>
+                    <input type="text" id="input-shift" placeholder="如: ：">
+                </div>
+                <div class="edit-item">
+                    <label>双击 (Double Tap)</label>
+                    <input type="text" id="input-double" placeholder="如: ;">
+                </div>
+                <div class="edit-item">
+                    <label>长按 (Long Press)</label>
+                    <input type="text" id="input-long" placeholder="如: ……">
+                </div>
+            </div>
+            <div class="edit-item" style="margin-top:15px;">
+                <label>备注描述</label>
+                <input type="text" id="input-desc" placeholder="给人看的备注">
+            </div>
+            <div style="margin-top:20px; display:flex; gap:10px;">
+                <button class="btn btn-primary" onclick="applyKeyEdit()">确定</button>
+                <button class="btn" onclick="closeEditPanel()">取消</button>
+                <button class="btn btn-danger" style="margin-left:auto" onclick="resetKey()">重置此键</button>
+            </div>
+        </div>
+
+        <div class="import-export">
+            <span style="font-size:12px; color:#666;">💡 提示：所有配置均按照 Profile 隔离。日语模式下的标点可以与中文模式完全不同。</span>
         </div>
     </div>
 
-    <div id="toast" class="toast"></div>
+    <div id="toast" class="status-toast"></div>
 
     <script src="/static/js/settings.js"></script>
     <script>
-        let currentLayoutName = "";
-        const letters = "abcdefghijklmnopqrstuvwxyz".split("");
+        const KEYBOARD_DATA = [
+            [
+                { id: '`', label: '`', sub: '~' }, { id: '1', label: '1', sub: '!' }, { id: '2', label: '2', sub: '@' }, { id: '3', label: '3', sub: '#' }, { id: '4', label: '4', sub: '$' }, { id: '5', label: '5', sub: '%' }, { id: '6', label: '6', sub: '^' }, { id: '7', label: '7', sub: '&' }, { id: '8', label: '8', sub: '*' }, { id: '9', label: '9', sub: '(' }, { id: '0', label: '0', sub: ')' }, { id: '-', label: '-', sub: '_' }, { id: '=', label: '=', sub: '+' }, { id: 'BACKSPACE', label: 'Delete', className: 'key-backspace' }
+            ],
+            [
+                { id: 'TAB', label: 'Tab', className: 'key-tab' }, { id: 'q', label: 'Q' }, { id: 'w', label: 'W' }, { id: 'e', label: 'E' }, { id: 'r', label: 'R' }, { id: 't', label: 'T' }, { id: 'y', label: 'Y' }, { id: 'u', label: 'U' }, { id: 'i', label: 'I' }, { id: 'o', label: 'O' }, { id: 'p', label: 'P' }, { id: '[', label: '[', sub: '{' }, { id: ']', label: ']', sub: '}' }, { id: '\\', label: '\\', sub: '|' }
+            ],
+            [
+                { id: 'CAPSLOCK', label: 'Caps', className: 'key-caps' }, { id: 'a', label: 'A' }, { id: 's', label: 'S' }, { id: 'd', label: 'D' }, { id: 'f', label: 'F' }, { id: 'g', label: 'G' }, { id: 'h', label: 'H' }, { id: 'j', label: 'J' }, { id: 'k', label: 'K' }, { id: 'l', label: 'L' }, { id: ';', label: ';', sub: ':' }, { id: '\'', label: '\'', sub: '"' }, { id: 'ENTER', label: 'Enter', className: 'key-enter' }
+            ],
+            [
+                { id: 'SHIFT', label: 'Shift', className: 'key-shift' }, { id: 'z', label: 'Z' }, { id: 'x', label: 'X' }, { id: 'c', label: 'C' }, { id: 'v', label: 'V' }, { id: 'b', label: 'B' }, { id: 'n', label: 'N' }, { id: 'm', label: 'M' }, { id: ',', label: ',', sub: '<' }, { id: '.', label: '.', sub: '>' }, { id: '/', label: '/', sub: '?' }, { id: 'SHIFT_R', label: 'Shift', className: 'key-shift' }
+            ],
+            [
+                { id: 'SPACE', label: 'Space', className: 'key-space' }
+            ]
+        ];
+
+        let currentProfile = 'chinese';
+        let editingKeyId = null;
 
         async function init() {
             await loadConfig();
-            if (!config.input.keyboard_layouts) {
-                config.input.keyboard_layouts = {};
-            }
-            refreshLayoutList();
-        }
-
-        function refreshLayoutList() {
-            const select = document.getElementById('layout-select');
-            select.innerHTML = '<option value="">-- 请选择 --</option>';
+            if (!config.input.layouts) config.input.layouts = {};
             
-            Object.keys(config.input.keyboard_layouts).forEach(name => {
-                const opt = document.createElement('option');
-                opt.value = name;
-                opt.textContent = name;
-                select.appendChild(opt);
-            });
-
-            if (currentLayoutName && config.input.keyboard_layouts[currentLayoutName]) {
-                select.value = currentLayoutName;
-                showEditor();
-            } else {
-                document.getElementById('editor-container').style.display = 'none';
-            }
-        }
-
-        function changeLayout() {
-            currentLayoutName = document.getElementById('layout-select').value;
-            if (currentLayoutName) {
-                showEditor();
-            } else {
-                document.getElementById('editor-container').style.display = 'none';
-            }
-        }
-
-        function showEditor() {
-            const container = document.getElementById('editor-container');
-            container.style.display = 'block';
-            
-            const grid = document.getElementById('key-grid');
-            grid.innerHTML = '';
-
-            const layout = config.input.keyboard_layouts[currentLayoutName];
-
-            letters.forEach(letter => {
-                const val = layout[letter] || "";
-                const div = document.createElement('div');
-                div.className = 'key-item';
-                div.innerHTML = `
-                    <span class="key-label">${letter.toUpperCase()}</span>
-                    <input type="text" class="key-input" value="${val}" 
-                           maxlength="1"
-                           oninput="updateKey('${letter}', this.value)">
-                `;
-                grid.appendChild(div);
-            });
-        }
-
-        function updateKey(letter, val) {
-            config.input.keyboard_layouts[currentLayoutName][letter] = val;
-        }
-
-        function addNewLayout() {
-            const name = prompt("请输入新布局名称 (建议与 dicts 下的文件夹名一致，如 russian):");
-            if (name && !config.input.keyboard_layouts[name]) {
-                config.input.keyboard_layouts[name] = {};
-                currentLayoutName = name;
-                
-                // 预设一些模板
-                if (name.toLowerCase().includes("russian")) {
-                    const ru = "f d u l t p b q r k y j g h c n e a [ ] s m i o x z v . /".split(" ");
-                    letters.forEach((l, i) => { if(ru[i]) config.input.keyboard_layouts[name][l] = ru[i]; });
+            // 确保默认 profile 存在
+            ['chinese', 'english', 'japanese', 'stroke'].forEach(p => {
+                if (!config.input.layouts[p]) {
+                    config.input.layouts[p] = { name: p + "布局", mappings: {} };
                 }
+            });
 
-                refreshLayoutList();
-            }
+            renderKeyboard();
         }
 
-        function deleteLayout() {
-            if (currentLayoutName && confirm(`确定要删除布局 "${currentLayoutName}" 吗？`)) {
-                delete config.input.keyboard_layouts[currentLayoutName];
-                currentLayoutName = "";
-                refreshLayoutList();
-            }
+        function renderKeyboard() {
+            const container = document.getElementById('keyboard-container');
+            container.innerHTML = '';
+
+            const layout = config.input.layouts[currentProfile] || { mappings: {} };
+
+            KEYBOARD_DATA.forEach(row => {
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'kb-row';
+                
+                row.forEach(key => {
+                    const keyDiv = document.createElement('div');
+                    keyDiv.className = `kb-key ${key.className || ''}`;
+                    
+                    const mapping = layout.mappings[key.id];
+                    if (mapping) keyDiv.classList.add('active');
+
+                    keyDiv.innerHTML = `
+                        <div class="kb-key-sub">${key.sub || ''}</div>
+                        <div class="kb-key-main">${key.label}</div>
+                        <div class="kb-key-indicator">
+                            ${mapping?.double_tap ? '<div class="dot dot-double"></div>' : ''}
+                            ${mapping?.long_press ? '<div class="dot dot-long"></div>' : ''}
+                        </div>
+                    `;
+                    
+                    keyDiv.onclick = () => openEditPanel(key.id, key.label);
+                    rowDiv.appendChild(keyDiv);
+                });
+                container.appendChild(rowDiv);
+            });
         }
 
-        async function saveLayoutConfig() {
+        function openEditPanel(id, label) {
+            editingKeyId = id;
+            document.getElementById('edit-title').innerText = `编辑按键: ${label} (${id})`;
+            
+            const mapping = config.input.layouts[currentProfile].mappings[id] || {
+                tap: id.length === 1 ? id : "",
+                shift: "",
+                double_tap: null,
+                long_press: null,
+                description: ""
+            };
+
+            document.getElementById('input-tap').value = mapping.tap || "";
+            document.getElementById('input-shift').value = mapping.shift || "";
+            document.getElementById('input-double').value = mapping.double_tap || "";
+            document.getElementById('input-long').value = mapping.long_press || "";
+            document.getElementById('input-desc').value = mapping.description || "";
+
+            document.getElementById('edit-panel').style.display = 'block';
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        function applyKeyEdit() {
+            const tap = document.getElementById('input-tap').value;
+            const shift = document.getElementById('input-shift').value;
+            const double_tap = document.getElementById('input-double').value;
+            const long_press = document.getElementById('input-long').value;
+            const description = document.getElementById('input-desc').value;
+
+            config.input.layouts[currentProfile].mappings[editingKeyId] = {
+                tap,
+                shift,
+                double_tap: double_tap || null,
+                long_press: long_press || null,
+                description: description || null
+            };
+
+            closeEditPanel();
+            renderKeyboard();
+        }
+
+        function resetKey() {
+            delete config.input.layouts[currentProfile].mappings[editingKeyId];
+            closeEditPanel();
+            renderKeyboard();
+        }
+
+        function closeEditPanel() {
+            document.getElementById('edit-panel').style.display = 'none';
+            editingKeyId = null;
+        }
+
+        function switchProfile() {
+            currentProfile = document.getElementById('profile-select').value;
+            closeEditPanel();
+            renderKeyboard();
+        }
+
+        async function save() {
             await saveConfig();
+        }
+
+        function exportLayout() {
+            const layout = config.input.layouts[currentProfile];
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(layout, null, 2));
+            const downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute("href", dataStr);
+            downloadAnchorNode.setAttribute("download", `layout_${currentProfile}.json`);
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        function importLayout(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const imported = JSON.parse(e.target.result);
+                    if (imported.mappings) {
+                        config.input.layouts[currentProfile] = imported;
+                        renderKeyboard();
+                        showToast("导入成功，请点击保存");
+                    } else {
+                        alert("无效的布局文件格式");
+                    }
+                } catch (err) {
+                    alert("解析 JSON 失败: " + err);
+                }
+            };
+            reader.readAsText(file);
         }
 
         init();
