@@ -1,0 +1,8 @@
+{
+  "name": "English Default Layout",
+  "mappings": {
+    ";": { "tap": ";", "shift": ":", "description": "英文分号" },
+    ".": { "tap": ".", "shift": ">", "description": "英文句号" },
+    ",": { "tap": ",", "shift": "<", "description": "英文逗号" }
+  }
+}

@@ -170,7 +170,7 @@
         <header>
             <a href="/" class="back-btn">← 返回</a>
             <h1>全能按键布局编辑器</h1>
-            <p>点击虚拟按键，为当前方案（Profile）定义专属的单击、双击、长按行为。</p>
+            <p>统一管理各语言键盘布局（包含原标点页能力），支持单击/双击/长按，并可一键导入导出。</p>
         </header>
 
         <div class="scheme-controls">
@@ -184,6 +184,12 @@
                 <button class="btn" onclick="save()">保存全局配置</button>
             </div>
             <div class="btn-group">
+                <select id="preset-select">
+                    <option value="chinese">中文默认布局</option>
+                    <option value="english">英文默认布局</option>
+                    <option value="japanese">日文默认布局</option>
+                </select>
+                <button class="btn" onclick="importPresetLayout()">一键导入预设</button>
                 <button class="btn" onclick="exportLayout()">导出当前布局</button>
                 <label class="btn" style="cursor:pointer">
                     导入布局 <input type="file" id="import-file" style="display:none" onchange="importLayout(event)">
@@ -267,6 +273,7 @@
                 }
             });
 
+            document.getElementById('preset-select').value = currentProfile;
             renderKeyboard();
         }
 
@@ -357,12 +364,29 @@
 
         function switchProfile() {
             currentProfile = document.getElementById('profile-select').value;
+            document.getElementById('preset-select').value = currentProfile;
             closeEditPanel();
             renderKeyboard();
         }
 
         async function save() {
             await saveConfig();
+        }
+
+
+        async function importPresetLayout() {
+            const preset = document.getElementById('preset-select').value;
+            try {
+                const resp = await fetch(`/static/presets/layout_${preset}.json`);
+                if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+                const imported = await resp.json();
+                if (!imported.mappings) throw new Error('预设格式错误');
+                config.input.layouts[currentProfile] = imported;
+                renderKeyboard();
+                showToast('预设已导入，请点击保存');
+            } catch (e) {
+                alert('导入预设失败: ' + e.message);
+            }
         }
 
         function exportLayout() {

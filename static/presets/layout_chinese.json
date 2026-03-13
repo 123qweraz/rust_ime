@@ -1,0 +1,10 @@
+{
+  "name": "中文默认布局",
+  "mappings": {
+    ";": { "tap": "；", "shift": ":", "double_tap": ";", "long_press": "……", "description": "中文分号" },
+    ".": { "tap": "。", "shift": ">", "double_tap": "...", "long_press": "·", "description": "中文句号" },
+    ",": { "tap": "，", "shift": "<", "long_press": "、", "description": "中文逗号" },
+    "?": { "tap": "？", "shift": "?", "description": "中文问号" },
+    "!": { "tap": "！", "shift": "!", "description": "中文叹号" }
+  }
+}
