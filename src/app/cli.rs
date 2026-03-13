@@ -41,6 +41,7 @@ pub fn parse_startup_command(args: &[String]) -> StartupCommand {
     }
 }
 
+
 pub fn handle_startup(args: &[String]) -> Result<StartupAction, Box<dyn Error>> {
     match parse_startup_command(args) {
         StartupCommand::Bench => {
@@ -368,6 +369,7 @@ mod tests {
             parse_startup_command(&["rust-ime".to_string()]),
             StartupCommand::None
         );
+        assert_eq!(parse_startup_command(&["rust-ime".to_string()]), StartupCommand::None);
         let args = vec!["rust-ime".to_string(), "--unknown".to_string()];
         assert_eq!(parse_startup_command(&args), StartupCommand::None);
     }
