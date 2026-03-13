@@ -295,11 +295,8 @@ fn default_profile_layouts() -> std::collections::HashMap<String, ProfileLayout>
         ",".to_string(),
         action("，", "<", None, Some("、"), "中文逗号"),
     );
-    chinese.insert(
-        "/".to_string(),
-        action("、", "？", None, None, "中文顿号/问号"),
-    );
-    chinese.insert("1".to_string(), action("1", "！", None, None, "中文叹号"));
+    chinese.insert("?".to_string(), action("？", "?", None, None, "中文问号"));
+    chinese.insert("!".to_string(), action("！", "!", None, None, "中文叹号"));
     layouts.insert(
         "chinese".to_string(),
         ProfileLayout {
@@ -312,11 +309,6 @@ fn default_profile_layouts() -> std::collections::HashMap<String, ProfileLayout>
     english.insert(";".to_string(), action(";", ":", None, None, "英文分号"));
     english.insert(".".to_string(), action(".", ">", None, None, "英文句号"));
     english.insert(",".to_string(), action(",", "<", None, None, "英文逗号"));
-    english.insert(
-        "/".to_string(),
-        action("/", "?", None, None, "英文斜杠/问号"),
-    );
-    english.insert("1".to_string(), action("1", "!", None, None, "英文叹号"));
     layouts.insert(
         "english".to_string(),
         ProfileLayout {

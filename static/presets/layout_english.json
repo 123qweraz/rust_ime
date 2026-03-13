@@ -3,8 +3,6 @@
   "mappings": {
     ";": { "tap": ";", "shift": ":", "description": "英文分号" },
     ".": { "tap": ".", "shift": ">", "description": "英文句号" },
-    ",": { "tap": ",", "shift": "<", "description": "英文逗号" },
-    "/": { "tap": "/", "shift": "?", "description": "英文斜杠/问号" },
-    "1": { "tap": "1", "shift": "!", "description": "英文叹号" }
+    ",": { "tap": ",", "shift": "<", "description": "英文逗号" }
   }
 }

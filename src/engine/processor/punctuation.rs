@@ -70,24 +70,18 @@ pub fn handle_punctuation(
                 _ => punc_key.to_string(),
             }
         } else {
-            // 非中文方案下不要兜底到中文标点，否则 english/stroke 等会出现“默认英文键盘却输出中文标点”的问题
-            let lang_puncs = processor
+            let zh_puncs = processor
                 .config
                 .punctuations
                 .get(&lang)
-                .and_then(|m| m.get(punc_key));
-
-            let zh_puncs = if lang == "chinese" {
-                lang_puncs.or_else(|| {
+                .and_then(|m| m.get(punc_key))
+                .or_else(|| {
                     processor
                         .config
                         .punctuations
                         .get("chinese")
                         .and_then(|m| m.get(punc_key))
-                })
-            } else {
-                lang_puncs
-            };
+                });
 
             if let Some(entries) = zh_puncs {
                 if punc_key == "\"" {
