@@ -42,14 +42,6 @@ pub fn check_and_compile_all() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-fn should_update_syllables(src: &Path, dst: &Path) -> bool {
-    !dst.exists() || {
-        let src_mtime = src.metadata().and_then(|m| m.modified()).unwrap_or(SystemTime::UNIX_EPOCH);
-        let dst_mtime = dst.metadata().and_then(|m| m.modified()).unwrap_or(SystemTime::UNIX_EPOCH);
-        src_mtime > dst_mtime
-    }
-}
-
 fn should_compile(src_dir: &Path, target_file: &Path) -> bool {
     if !target_file.exists() { return true; } 
     let target_mtime = target_file.metadata().and_then(|m| m.modified()).unwrap_or(SystemTime::UNIX_EPOCH);
@@ -277,14 +269,4 @@ fn write_binary_dict(idx_path: &str, dat_path: &str, entries: BTreeMap<String, V
     Ok(())
 }
 
-fn extract_syllables_to_file(src_json: &str, out_txt: &str) -> Result<(), Box<dyn std::error::Error>> {
-    let file = File::open(src_json)?;
-    let json: Value = serde_json::from_reader(file)?;
-    if let Some(obj) = json.as_object() {
-        let mut syllables: Vec<_> = obj.keys().cloned().collect();
-        syllables.sort();
-        let mut f = File::create(out_txt)?;
-        for s in syllables { writeln!(f, "{}", s)? };
-    }
-    Ok(())
-}
+
