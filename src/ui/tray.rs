@@ -34,7 +34,7 @@ pub struct ImeTray {
 #[cfg(target_os = "linux")]
 impl Tray for ImeTray {
     fn icon_name(&self) -> String {
-        "rust-ime".into()
+        if self.chinese_enabled { "rust-ime" } else { "rust-ime" }.to_string()
     }
 
     fn title(&self) -> String {
@@ -98,6 +98,7 @@ impl LinuxTrayHandle {
 
 #[cfg(target_os = "linux")]
 pub fn start_tray(params: TrayParams) -> LinuxTrayHandle {
+    println!("[Tray] 正在启动 Linux 系统托盘...");
     let tray = ImeTray {
         chinese_enabled: true,
         active_profile: params.active_profile,
@@ -107,6 +108,7 @@ pub fn start_tray(params: TrayParams) -> LinuxTrayHandle {
     let service = TrayService::new(tray);
     let handle = service.handle();
     service.spawn();
+    println!("[Tray] Linux 系统托盘已启动。");
     LinuxTrayHandle(handle)
 }
 
