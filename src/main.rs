@@ -30,6 +30,7 @@ mod engine;
 mod platform;
 mod ui;
 mod config;
+mod app;
 
 use std::fs::File;
 use std::sync::{Arc, RwLock, Mutex};
@@ -42,6 +43,7 @@ use platform::traits::InputMethodHost;
 pub use config::Config;
 use ui::GuiEvent;
 use serde_json::Value;
+use app::cli::StartupCommand;
 
 static WEB_SERVER_RUNNING: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
 
@@ -110,7 +112,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     std::env::set_var("SLINT_BACKEND", "skia");
 
     let args: Vec<String> = env::args().collect();
-    if args.len() > 1 && args[1] == "--bench" {
+    let startup_command = app::cli::parse_startup_command(&args);
+
+    if startup_command == StartupCommand::Bench {
         println!("--- Rust-IME 核心引擎性能基准测试 ---");
         let root = find_project_root();
         
@@ -227,7 +231,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Ok(());
     }
 
-    if args.len() > 1 && args[1] == "--compile-only" {
+    if startup_command == StartupCommand::CompileOnly {
         println!("[Main] 正在强制编译词库...");
         let _ = engine::compiler::check_and_compile_all();
         return Ok(());
@@ -264,18 +268,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let mut should_daemonize = true;
 
-    if args.len() > 1 {
-        match args[1].as_str() {
-            "--compile-only" => {
-                println!("[Main] 正在强制编译词库...");
-                let _ = engine::compiler::check_and_compile_all();
-                return Ok(());
-            }
-            "--register" | "--unregister" => {
+    match startup_command {
+            StartupCommand::Register | StartupCommand::Unregister => {
                 #[cfg(target_os = "windows")]
                 {
                     unsafe { windows::Win32::System::Com::CoInitializeEx(None, windows::Win32::System::Com::COINIT_APARTMENTTHREADED)?; }
-                    if args[1] == "--register" {
+                    if startup_command == StartupCommand::Register {
                         let mut dll_path = std::env::current_exe()?;
                         dll_path.set_file_name("rust_ime_tsf_v3.dll");
                         let path_str = dll_path.to_str().ok_or("Path error")?;
@@ -288,9 +286,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
                 return Ok(());
             }
-            "--daemon" => { should_daemonize = true; }
-            "--foreground" => { should_daemonize = false; }
-            "--test" => {
+            StartupCommand::Daemon => { should_daemonize = true; }
+            StartupCommand::Foreground => { should_daemonize = false; }
+            StartupCommand::Test => {
                 println!("[Test] 进入测试模式 (无 UI)...");
                 let config_dir = crate::config::Config::get_config_dir();
                 println!("[Test] 配置加载目录: {:?}", config_dir);
@@ -461,7 +459,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             }
             _ => {}
         }
-    }
 
     if should_daemonize {
         #[cfg(target_os = "windows")]
