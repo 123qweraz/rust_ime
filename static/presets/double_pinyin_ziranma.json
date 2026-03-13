@@ -1,0 +1,9 @@
+{
+  "name": "自然码双拼",
+  "initials": {"v":"zh", "u":"ch", "i":"sh"},
+  "rimes": {
+    "q":"iu", "w":"ia", "e":"e", "r":"uan", "t":"ue", "y":"un", "o":"uo", "p":"ie",
+    "a":"a", "s":"ong", "d":"ai", "f":"en", "g":"eng", "h":"ang", "j":"an", "k":"ao", "l":"iang",
+    "z":"ei", "x":"ua", "c":"iao", "b":"in", "n":"ian", "m":"ui"
+  }
+}
