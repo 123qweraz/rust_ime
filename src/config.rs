@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub struct Config {
@@ -43,7 +43,7 @@ pub struct Appearance {
     pub aux_mode: AuxMode,
     pub candidate_anchor: String,
     pub candidate_layout: String, // "horizontal" 或 "vertical"
-    
+
     // Window Style
     pub corner_radius: f32,
     pub window_bg_color: String,
@@ -130,8 +130,10 @@ pub struct Input {
     pub long_press_mappings: Vec<LongPressMapping>,
     pub enable_punctuation_long_press: bool,
     pub punctuation_long_press_mappings: std::collections::HashMap<String, String>,
-    pub punctuations: std::collections::HashMap<String, std::collections::HashMap<String, Vec<PunctuationEntry>>>,
-    pub keyboard_layouts: std::collections::HashMap<String, std::collections::HashMap<String, String>>,
+    pub punctuations:
+        std::collections::HashMap<String, std::collections::HashMap<String, Vec<PunctuationEntry>>>,
+    pub keyboard_layouts:
+        std::collections::HashMap<String, std::collections::HashMap<String, String>>,
     pub auto_commit_unique_en_fuzhuma: bool,
     pub auto_commit_unique_full_match: bool,
     pub enable_prefix_matching: bool,
@@ -230,15 +232,123 @@ pub struct Hotkeys {
     pub enable_ctrl_space_toggle: bool,
 }
 
-fn default_page_up() -> Vec<String> { vec!["Up".into(), "PageUp".into(), "-".into(), ",".into(), "[".into()] }
-fn default_page_down() -> Vec<String> { vec!["Down".into(), "PageDown".into(), "=".into(), ".".into(), "]".into()] }
-fn default_prev_candidate() -> Vec<String> { vec!["Left".into()] }
-fn default_next_candidate() -> Vec<String> { vec!["Right".into()] }
+fn default_page_up() -> Vec<String> {
+    vec![
+        "Up".into(),
+        "PageUp".into(),
+        "-".into(),
+        ",".into(),
+        "[".into(),
+    ]
+}
+fn default_page_down() -> Vec<String> {
+    vec![
+        "Down".into(),
+        "PageDown".into(),
+        "=".into(),
+        ".".into(),
+        "]".into(),
+    ]
+}
+fn default_prev_candidate() -> Vec<String> {
+    vec!["Left".into()]
+}
+fn default_next_candidate() -> Vec<String> {
+    vec!["Right".into()]
+}
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub struct Hotkey {
     pub key: String,
     pub description: String,
+}
+
+fn action(
+    tap: &str,
+    shift: &str,
+    double_tap: Option<&str>,
+    long_press: Option<&str>,
+    description: &str,
+) -> KeyAction {
+    KeyAction {
+        tap: tap.to_string(),
+        shift: shift.to_string(),
+        double_tap: double_tap.map(ToString::to_string),
+        long_press: long_press.map(ToString::to_string),
+        description: Some(description.to_string()),
+    }
+}
+
+fn default_profile_layouts() -> std::collections::HashMap<String, ProfileLayout> {
+    let mut layouts = std::collections::HashMap::new();
+
+    let mut chinese = std::collections::HashMap::new();
+    chinese.insert(
+        ";".to_string(),
+        action("；", ":", Some(";"), Some("……"), "中文分号"),
+    );
+    chinese.insert(
+        ".".to_string(),
+        action("。", ">", Some("..."), Some("·"), "中文句号"),
+    );
+    chinese.insert(
+        ",".to_string(),
+        action("，", "<", None, Some("、"), "中文逗号"),
+    );
+    chinese.insert(
+        "/".to_string(),
+        action("、", "？", None, None, "中文顿号/问号"),
+    );
+    chinese.insert("1".to_string(), action("1", "！", None, None, "中文叹号"));
+    layouts.insert(
+        "chinese".to_string(),
+        ProfileLayout {
+            name: "中文默认布局".into(),
+            mappings: chinese,
+        },
+    );
+
+    let mut english = std::collections::HashMap::new();
+    english.insert(";".to_string(), action(";", ":", None, None, "英文分号"));
+    english.insert(".".to_string(), action(".", ">", None, None, "英文句号"));
+    english.insert(",".to_string(), action(",", "<", None, None, "英文逗号"));
+    english.insert(
+        "/".to_string(),
+        action("/", "?", None, None, "英文斜杠/问号"),
+    );
+    english.insert("1".to_string(), action("1", "!", None, None, "英文叹号"));
+    layouts.insert(
+        "english".to_string(),
+        ProfileLayout {
+            name: "English Default Layout".into(),
+            mappings: english,
+        },
+    );
+
+    let mut japanese = std::collections::HashMap::new();
+    japanese.insert(
+        ".".to_string(),
+        action("。", ">", None, Some("・"), "日文句号"),
+    );
+    japanese.insert(",".to_string(), action("、", "<", None, None, "日文顿号"));
+    japanese.insert("/".to_string(), action("・", "?", None, None, "日文中点"));
+    japanese.insert("[".to_string(), action("「", "{", None, None, "日文左引号"));
+    japanese.insert("]".to_string(), action("」", "}", None, None, "日文右引号"));
+    layouts.insert(
+        "japanese".to_string(),
+        ProfileLayout {
+            name: "日本語デフォルト配列".into(),
+            mappings: japanese,
+        },
+    );
+
+    layouts
+        .entry("stroke".to_string())
+        .or_insert(ProfileLayout {
+            name: "笔画默认布局".into(),
+            mappings: std::collections::HashMap::new(),
+        });
+    layouts
 }
 
 impl Config {
@@ -263,20 +373,29 @@ impl Config {
     }
 
     pub fn get_config_dir() -> std::path::PathBuf {
-        let mut curr = std::env::current_exe().ok()
+        let mut curr = std::env::current_exe()
+            .ok()
             .and_then(|p| p.parent().map(|parent| parent.to_path_buf()))
-            .unwrap_or_else(|| std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from(".")));
+            .unwrap_or_else(|| {
+                std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."))
+            });
 
         for _ in 0..4 {
-            if curr.join("dicts").exists() { break; }
-            if !curr.pop() { break; }
+            if curr.join("dicts").exists() {
+                break;
+            }
+            if !curr.pop() {
+                break;
+            }
         }
         curr.join("configs")
     }
 
     pub fn load() -> Self {
         let config_dir = Self::get_config_dir();
-        if !config_dir.exists() { let _ = std::fs::create_dir_all(&config_dir); }
+        if !config_dir.exists() {
+            let _ = std::fs::create_dir_all(&config_dir);
+        }
 
         let mut conf = Self::default_config();
 
@@ -284,20 +403,40 @@ impl Config {
             let p = config_dir.join(format!("{}.json", name));
             if let Ok(f) = std::fs::File::open(p) {
                 serde_json::from_reader(std::io::BufReader::new(f)).ok()
-            } else { None }
+            } else {
+                None
+            }
         };
 
-        if let Some(v) = load_file("appearance") { if let Ok(a) = serde_json::from_value(v) { conf.appearance = a; } }
-        if let Some(v) = load_file("input") { if let Ok(i) = serde_json::from_value(v) { conf.input = i; } }
-        if let Some(v) = load_file("hotkeys") { if let Ok(h) = serde_json::from_value(v) { conf.hotkeys = h; } }
-        if let Some(v) = load_file("files") { if let Ok(f) = serde_json::from_value(v) { conf.files = f; } }
+        if let Some(v) = load_file("appearance") {
+            if let Ok(a) = serde_json::from_value(v) {
+                conf.appearance = a;
+            }
+        }
+        if let Some(v) = load_file("input") {
+            if let Ok(i) = serde_json::from_value(v) {
+                conf.input = i;
+            }
+        }
+        if let Some(v) = load_file("hotkeys") {
+            if let Ok(h) = serde_json::from_value(v) {
+                conf.hotkeys = h;
+            }
+        }
+        if let Some(v) = load_file("files") {
+            if let Ok(f) = serde_json::from_value(v) {
+                conf.files = f;
+            }
+        }
 
         conf
     }
 
     pub fn save(&self) -> Result<(), Box<dyn std::error::Error>> {
         let config_dir = Self::get_config_dir();
-        if !config_dir.exists() { std::fs::create_dir_all(&config_dir)?; }
+        if !config_dir.exists() {
+            std::fs::create_dir_all(&config_dir)?;
+        }
 
         {
             let p = config_dir.join("appearance.json");
@@ -335,10 +474,22 @@ impl Config {
             files: Files {
                 punctuation_file: "dicts/chinese/punctuation.json".to_string(),
                 profiles: vec![
-                    Profile { name: "chinese".to_string(), path: "data/chinese/trie".to_string() },
-                    Profile { name: "english".to_string(), path: "data/english/trie".to_string() },
-                    Profile { name: "japanese".to_string(), path: "data/japanese/trie".to_string() },
-                    Profile { name: "stroke".to_string(), path: "data/stroke/trie".to_string() },
+                    Profile {
+                        name: "chinese".to_string(),
+                        path: "data/chinese/trie".to_string(),
+                    },
+                    Profile {
+                        name: "english".to_string(),
+                        path: "data/english/trie".to_string(),
+                    },
+                    Profile {
+                        name: "japanese".to_string(),
+                        path: "data/japanese/trie".to_string(),
+                    },
+                    Profile {
+                        name: "stroke".to_string(),
+                        path: "data/stroke/trie".to_string(),
+                    },
                 ],
             },
             appearance: Appearance {
@@ -357,10 +508,34 @@ impl Config {
                 item_spacing: 16.0,
                 row_spacing: 8.0,
                 theme_mode: "auto".to_string(),
-                pinyin_text: TextStyle { font_family: "".to_string(), font_size: 18, font_weight: 400, color: "#586069".to_string(), alpha: 1.0 },
-                candidate_text: TextStyle { font_family: "".to_string(), font_size: 18, font_weight: 600, color: "#24292e".to_string(), alpha: 1.0 },
-                hint_text: TextStyle { font_family: "".to_string(), font_size: 14, font_weight: 400, color: "#6e7781".to_string(), alpha: 0.8 },
-                comment_text: TextStyle { font_family: "".to_string(), font_size: 12, font_weight: 400, color: "#0969da".to_string(), alpha: 0.7 },
+                pinyin_text: TextStyle {
+                    font_family: "".to_string(),
+                    font_size: 18,
+                    font_weight: 400,
+                    color: "#586069".to_string(),
+                    alpha: 1.0,
+                },
+                candidate_text: TextStyle {
+                    font_family: "".to_string(),
+                    font_size: 18,
+                    font_weight: 600,
+                    color: "#24292e".to_string(),
+                    alpha: 1.0,
+                },
+                hint_text: TextStyle {
+                    font_family: "".to_string(),
+                    font_size: 14,
+                    font_weight: 400,
+                    color: "#6e7781".to_string(),
+                    alpha: 0.8,
+                },
+                comment_text: TextStyle {
+                    font_family: "".to_string(),
+                    font_size: 12,
+                    font_weight: 400,
+                    color: "#0969da".to_string(),
+                    alpha: 0.7,
+                },
                 show_english_aux: true,
                 show_english_translation: false,
                 enable_random_highlight: false,
@@ -386,12 +561,41 @@ impl Config {
                 long_press_mappings: vec![],
                 enable_punctuation_long_press: true,
                 punctuation_long_press_mappings: [
-                    (",", ","), (".", "."), ("?", "?"), ("!", "!"), (";", ";"), (":", ":"),
-                    ("\"", "\""), ("'", "'"), ("(", "("), (")", ")"), ("[", "["), ("]", "]"),
-                    ("{", "{"), ("}", "}"), ("<", "<"), (">", ">"), ("\\", "\\"), ("/", "/"),
-                    ("~", "~"), ("`", "`"), ("@", "@"), ("#", "#"), ("$", "$"), ("%", "%"),
-                    ("^", "^"), ("&", "&"), ("*", "*"), ("-", "-"), ("_", "_"), ("=", "="), ("+", "+")
-                ].iter().map(|(k, v)| (k.to_string(), v.to_string())).collect(),
+                    (",", ","),
+                    (".", "."),
+                    ("?", "?"),
+                    ("!", "!"),
+                    (";", ";"),
+                    (":", ":"),
+                    ("\"", "\""),
+                    ("'", "'"),
+                    ("(", "("),
+                    (")", ")"),
+                    ("[", "["),
+                    ("]", "]"),
+                    ("{", "{"),
+                    ("}", "}"),
+                    ("<", "<"),
+                    (">", ">"),
+                    ("\\", "\\"),
+                    ("/", "/"),
+                    ("~", "~"),
+                    ("`", "`"),
+                    ("@", "@"),
+                    ("#", "#"),
+                    ("$", "$"),
+                    ("%", "%"),
+                    ("^", "^"),
+                    ("&", "&"),
+                    ("*", "*"),
+                    ("-", "-"),
+                    ("_", "_"),
+                    ("=", "="),
+                    ("+", "+"),
+                ]
+                .iter()
+                .map(|(k, v)| (k.to_string(), v.to_string()))
+                .collect(),
                 punctuations: std::collections::HashMap::new(),
                 keyboard_layouts: std::collections::HashMap::new(),
                 auto_commit_unique_en_fuzhuma: false,
@@ -402,11 +606,26 @@ impl Config {
                 filter_proper_nouns_by_case: true,
                 active_profiles: vec!["chinese".to_string()],
                 profile_keys: vec![
-                    ProfileKey { key: "c".into(), profile: "chinese".into() },
-                    ProfileKey { key: "e".into(), profile: "english".into() },
-                    ProfileKey { key: "j".into(), profile: "japanese".into() },
-                    ProfileKey { key: "b".into(), profile: "stroke".into() },
-                    ProfileKey { key: "m".into(), profile: "chinese,english,japanese".into() },
+                    ProfileKey {
+                        key: "c".into(),
+                        profile: "chinese".into(),
+                    },
+                    ProfileKey {
+                        key: "e".into(),
+                        profile: "english".into(),
+                    },
+                    ProfileKey {
+                        key: "j".into(),
+                        profile: "japanese".into(),
+                    },
+                    ProfileKey {
+                        key: "b".into(),
+                        profile: "stroke".into(),
+                    },
+                    ProfileKey {
+                        key: "m".into(),
+                        profile: "chinese,english,japanese".into(),
+                    },
                 ],
                 swap_arrow_keys: false,
                 enable_error_sound: true,
@@ -416,50 +635,52 @@ impl Config {
                 enable_word_discovery: true,
                 enable_auto_reorder: true,
                 enable_fixed_first_candidate: false,
-                layouts: {
-                    let mut m = std::collections::HashMap::new();
-                    let mut chinese_mappings = std::collections::HashMap::new();
-                    
-                    // 示例：分号的多维定义
-                    chinese_mappings.insert(";".to_string(), KeyAction {
-                        tap: "；".into(),
-                        shift: ":".into(),
-                        double_tap: Some(";".into()),
-                        long_press: Some("……".into()),
-                        description: Some("中文分号/长按省略号".into()),
-                    });
-
-                    // 示例：句号的多维定义
-                    chinese_mappings.insert(".".to_string(), KeyAction {
-                        tap: "。".into(),
-                        shift: ">".into(),
-                        double_tap: Some("...".into()),
-                        long_press: Some("·".into()),
-                        description: Some("中文句号/双击三连点".into()),
-                    });
-
-                    m.insert("chinese".to_string(), ProfileLayout {
-                        name: "中文标准布局".into(),
-                        mappings: chinese_mappings,
-                    });
-                    m
-                },
+                layouts: default_profile_layouts(),
                 enable_smart_backspace: false,
                 enable_double_pinyin: false,
                 double_pinyin_scheme: DoublePinyinScheme {
                     name: "小鹤双拼".to_string(),
-                    initials: [("v", "zh"), ("u", "sh"), ("i", "ch")].iter().map(|(k, v)| (k.to_string(), v.to_string())).collect(),
+                    initials: [("v", "zh"), ("u", "sh"), ("i", "ch")]
+                        .iter()
+                        .map(|(k, v)| (k.to_string(), v.to_string()))
+                        .collect(),
                     rimes: [
-                        ("p", "ie"), ("b", "in"), ("m", "ian"),  ("q", "iu"),
-                        ("r", "uan"), ("x", "ia"), ("k", "ao"), ("f", "en"),
-                        ("d", "ai"), ("j", "an"), ("t", "ue"), ("c", "ao"), ("s", "ong"),
-                        ("z", "ou"), ("y", "un"), ("w", "ei"), ("l", "iang")
-                    ].iter().map(|(k, v)| (k.to_string(), v.to_string())).collect(),
+                        ("p", "ie"),
+                        ("b", "in"),
+                        ("m", "ian"),
+                        ("q", "iu"),
+                        ("r", "uan"),
+                        ("x", "ia"),
+                        ("k", "ao"),
+                        ("f", "en"),
+                        ("d", "ai"),
+                        ("j", "an"),
+                        ("t", "ue"),
+                        ("c", "ao"),
+                        ("s", "ong"),
+                        ("z", "ou"),
+                        ("y", "un"),
+                        ("w", "ei"),
+                        ("l", "iang"),
+                    ]
+                    .iter()
+                    .map(|(k, v)| (k.to_string(), v.to_string()))
+                    .collect(),
                 },
                 enable_fuzzy_pinyin: false,
                 fuzzy_config: FuzzyPinyinConfig {
-                    z_zh: true, c_ch: true, s_sh: true, n_l: false, r_l: false, f_h: false,
-                    an_ang: false, en_eng: false, in_ing: false, ian_iang: false, uan_uang: false, u_v: false,
+                    z_zh: true,
+                    c_ch: true,
+                    s_sh: true,
+                    n_l: false,
+                    r_l: false,
+                    f_h: false,
+                    an_ang: false,
+                    en_eng: false,
+                    in_ing: false,
+                    ian_iang: false,
+                    uan_uang: false,
+                    u_v: false,
                     custom_mappings: vec![],
                 },
                 enable_traditional: false,
@@ -471,9 +692,24 @@ impl Config {
                 },
             },
             hotkeys: Hotkeys {
-                switch_language: Hotkey { key: "tab".to_string(), description: "核心: 切换中/英文模式".to_string() },
-                page_up: vec!["Up".into(), "PageUp".into(), "-".into(), ",".into(), "[".into()],
-                page_down: vec!["Down".into(), "PageDown".into(), "=".into(), ".".into(), "]".into()],
+                switch_language: Hotkey {
+                    key: "tab".to_string(),
+                    description: "核心: 切换中/英文模式".to_string(),
+                },
+                page_up: vec![
+                    "Up".into(),
+                    "PageUp".into(),
+                    "-".into(),
+                    ",".into(),
+                    "[".into(),
+                ],
+                page_down: vec![
+                    "Down".into(),
+                    "PageDown".into(),
+                    "=".into(),
+                    ".".into(),
+                    "]".into(),
+                ],
                 prev_candidate: vec!["Left".into()],
                 next_candidate: vec!["Right".into()],
                 enable_tab_toggle: true,
@@ -502,13 +738,28 @@ pub fn remove_autostart() -> Result<(), Box<dyn std::error::Error>> {
 pub fn setup_autostart() -> Result<(), Box<dyn std::error::Error>> {
     let exe = std::env::current_exe()?;
     let exe_path = exe.to_str().ok_or("Invalid path")?;
-    let _ = std::process::Command::new("reg").arg("add").arg("HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run").arg("/v").arg("RustIME").arg("/t").arg("REG_SZ").arg("/d").arg(exe_path).arg("/f").status();
+    let _ = std::process::Command::new("reg")
+        .arg("add")
+        .arg("HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run")
+        .arg("/v")
+        .arg("RustIME")
+        .arg("/t")
+        .arg("REG_SZ")
+        .arg("/d")
+        .arg(exe_path)
+        .arg("/f")
+        .status();
     Ok(())
 }
 
 #[cfg(target_os = "windows")]
 pub fn remove_autostart() -> Result<(), Box<dyn std::error::Error>> {
-    let _ = std::process::Command::new("reg").arg("delete").arg("HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run").arg("/v").arg("RustIME").arg("/f").status();
+    let _ = std::process::Command::new("reg")
+        .arg("delete")
+        .arg("HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run")
+        .arg("/v")
+        .arg("RustIME")
+        .arg("/f")
+        .status();
     Ok(())
 }
-

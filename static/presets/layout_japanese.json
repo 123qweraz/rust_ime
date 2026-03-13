@@ -1,0 +1,10 @@
+{
+  "name": "日本語デフォルト配列",
+  "mappings": {
+    ".": { "tap": "。", "shift": ">", "long_press": "・", "description": "日文句号" },
+    ",": { "tap": "、", "shift": "<", "description": "日文顿号" },
+    "/": { "tap": "・", "shift": "?", "description": "日文中点" },
+    "[": { "tap": "「", "shift": "{", "description": "日文左引号" },
+    "]": { "tap": "」", "shift": "}", "description": "日文右引号" }
+  }
+}

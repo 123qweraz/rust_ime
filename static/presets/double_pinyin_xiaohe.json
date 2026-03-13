@@ -1,0 +1,9 @@
+{
+  "name": "小鹤双拼",
+  "initials": {"v":"zh", "u":"sh", "i":"ch"},
+  "rimes": {
+    "q":"iu", "w":"ei", "r":"uan", "t":"ue", "y":"un", "p":"ie", "s":"ong",
+    "d":"ai", "f":"en", "g":"eng", "h":"ang", "j":"an", "k":"ao", "l":"iang",
+    "z":"ou", "x":"ia", "c":"ao", "v":"ui", "b":"in", "n":"iao", "m":"ian"
+  }
+}
