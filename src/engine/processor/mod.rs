@@ -227,6 +227,7 @@ impl Processor {
 
             // C. CapsLock 核心逻辑
             if key == VirtualKey::CapsLock {
+                self.capslock_down = true;
                 if !self.session.buffer.is_empty() {
                     self.session.nav_mode = true;
                 } else {

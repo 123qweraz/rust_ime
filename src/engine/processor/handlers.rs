@@ -69,14 +69,14 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
         return processor.execute_command(final_cmd);
     }
 
-    // 2. 如果处于导航模式，映射 HJKL
-    if processor.session.nav_mode {
+    // 2. 如果处于导航模式（例如按下 CapsLock），映射 HJKL
+    if processor.session.nav_mode || processor.capslock_down {
         match key {
             VirtualKey::H => return processor.execute_command(Command::PrevCandidate),
             VirtualKey::L => return processor.execute_command(Command::NextCandidate),
             VirtualKey::K => return processor.execute_command(Command::PrevPage),
             VirtualKey::J => return processor.execute_command(Command::NextPage),
-            _ => { /* 继续处理其他按键，或退出模式 */ }
+            _ => { /* 继续处理其他按键 */ }
         }
     }
 
