@@ -83,6 +83,7 @@ impl Segmentor for DefaultSegmentor {
 pub struct TableTranslator {
     pub trie: Arc<Trie>,
     pub syllables: Arc<HashSet<String>>,
+    pub enable_abbreviation: bool,
 }
 impl Translator for TableTranslator {
     fn translate(&self, _input: &str, segments: &[String], config: &Config, limit: usize) -> Vec<Candidate> {
@@ -123,7 +124,9 @@ impl Translator for TableTranslator {
             }
         }
         
-        let is_abbreviation = segments.len() > 1 && segments.iter().any(|s| s.len() == 1);
+        let is_abbreviation = self.enable_abbreviation
+            && segments.len() > 1
+            && segments.iter().any(|s| s.len() == 1);
 
         if is_abbreviation && config.input.enable_abbreviation_matching {
             let abbr_results = self.trie.search_abbreviation(segments, &self.syllables, internal_limit);
@@ -459,6 +462,8 @@ impl SearchEngine {
         pipeline.add_translator(Box::new(TableTranslator { 
             trie: Arc::new(trie),
             syllables: self.syllables.clone(),
+            // 简拼只对拼音方案有意义；笔画/英文/日文使用前缀搜索。
+            enable_abbreviation: profile == "chinese",
         }));
         pipeline.add_filter(Box::new(SortFilter));
         pipeline.add_filter(Box::new(AdaptiveFilter {
