@@ -89,8 +89,12 @@ impl InputScheme for StrokeScheme {
                     }
                 }
                 
-                // 前缀匹配：根据用户输入的前缀查找所有可能的匹配
-                if context.config.input.enable_prefix_matching {
+                // 前缀匹配：
+                // - 全局开启前缀匹配时，始终启用；
+                // - 即使全局关闭，当当前输入没有精确命中时也启用兜底前缀匹配，
+                //   避免笔画模式下出现“只有全码才有结果”的体验。
+                let enable_prefix_fallback = results.is_empty();
+                if context.config.input.enable_prefix_matching || enable_prefix_fallback {
                     let limit = context.config.input.prefix_matching_limit.min(50);
                     let matches = trie.search_bfs(query, limit);
                     for tr in matches {
