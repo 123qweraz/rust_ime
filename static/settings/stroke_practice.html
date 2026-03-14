@@ -238,6 +238,28 @@
                 <div class="kb-row" id="row2"></div>
                 <div class="kb-row" id="row3"></div>
             </div>
+
+            <!-- 编码规则说明 -->
+            <div class="config-card" style="margin-top: 30px;">
+                <h3>笔画编码规则说明 (SBSRF 4码系统)</h3>
+                <div style="font-size: 14px; line-height: 1.8; color: #444;">
+                    <p>本练习采用 <b>SBSRF 4码系统</b>，将汉字笔画与拼音结合，实现极速定位：</p>
+                    <ul style="padding-left: 20px;">
+                        <li><b>5 笔及以上 (4位编码)</b>：
+                            <br>第 1-2 位：代表汉字的 <b>前 4 笔</b> (每 2 笔对应 1 个按键)。
+                            <br>第 3 位：代表汉字的 <b>最后 2 笔</b>。
+                            <br>第 4 位：代表汉字的 <b>拼音首字母</b>。
+                        </li>
+                        <li><b>少于 5 笔 (短编码)</b>：
+                            <br><b>1-2 笔</b>：1 位笔画键 + 拼音首字母 (共 2 位)。
+                            <br><b>3-4 笔</b>：2 位笔画键 + 拼音首字母 (共 3 位)。
+                        </li>
+                    </ul>
+                    <p style="margin-top: 10px; padding: 10px; background: #fff9e6; border-radius: 8px; border: 1px solid #ffe58f; color: #856404;">
+                        <b>提示：</b>观察虚拟键盘上的标注，每个字母代表两个连续笔画的组合。例如 <b>G</b> 代表“横横 (11)”，<b>F</b> 代表“横竖 (12)”。
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 
