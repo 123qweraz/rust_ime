@@ -8,10 +8,16 @@ impl Compositor {
             return String::new();
         }
 
-        let mut pinyin = if p.session.best_segmentation.is_empty() {
+        // 笔画输入法不需要拼音分词，直接使用buffer
+        let is_stroke = p.active_profiles.iter().any(|profile| profile == "stroke");
+        
+        let mut pinyin = if is_stroke {
+            // 笔画输入法：不使用拼音分词
+            p.session.buffer.clone()
+        } else if p.session.best_segmentation.is_empty() {
             p.session.buffer.clone()
         } else {
-            // 尝试维持 buffer 的原始大小写
+            // 拼音输入法：使用拼音分词
             let mut result = String::new();
             let mut current_pos = 0;
             let buffer_chars: Vec<char> = p.session.buffer.chars().collect();
