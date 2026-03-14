@@ -591,7 +591,7 @@ impl Config {
                 punctuations: std::collections::HashMap::new(),
                 keyboard_layouts: std::collections::HashMap::new(),
                 auto_commit_unique_en_fuzhuma: false,
-                auto_commit_unique_full_match: false,
+                auto_commit_unique_full_match: true,
                 enable_prefix_matching: true,
                 prefix_matching_limit: 20,
                 enable_abbreviation_matching: true,

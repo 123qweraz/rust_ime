@@ -240,27 +240,37 @@ fn run_test_mode() {
         if let Some(vk) = engine::keys::VirtualKey::from_str(&input) {
             let action = processor.handle_key(vk, val, shift, ctrl, alt);
             println!("动作反馈: {action:?}");
-        } else if input.len() == 1 && input.chars().next().is_some_and(|c| c.is_ascii_digit()) {
-            let digit = input
-                .chars()
-                .next()
-                .unwrap_or_default()
-                .to_digit(10)
-                .unwrap_or_default();
-            let vk = match digit {
-                0 => engine::keys::VirtualKey::Digit0,
-                1 => engine::keys::VirtualKey::Digit1,
-                2 => engine::keys::VirtualKey::Digit2,
-                3 => engine::keys::VirtualKey::Digit3,
-                4 => engine::keys::VirtualKey::Digit4,
-                5 => engine::keys::VirtualKey::Digit5,
-                6 => engine::keys::VirtualKey::Digit6,
-                7 => engine::keys::VirtualKey::Digit7,
-                8 => engine::keys::VirtualKey::Digit8,
-                9 => engine::keys::VirtualKey::Digit9,
-                _ => engine::keys::VirtualKey::Digit0,
+        } else if input.len() == 1 {
+            let c = input.chars().next().unwrap();
+            let vk = match c {
+                '0' => engine::keys::VirtualKey::Digit0,
+                '1' => engine::keys::VirtualKey::Digit1,
+                '2' => engine::keys::VirtualKey::Digit2,
+                '3' => engine::keys::VirtualKey::Digit3,
+                '4' => engine::keys::VirtualKey::Digit4,
+                '5' => engine::keys::VirtualKey::Digit5,
+                '6' => engine::keys::VirtualKey::Digit6,
+                '7' => engine::keys::VirtualKey::Digit7,
+                '8' => engine::keys::VirtualKey::Digit8,
+                '9' => engine::keys::VirtualKey::Digit9,
+                'a'..='z' | 'A'..='Z' => {
+                    engine::keys::VirtualKey::from_str(&c.to_string()).unwrap()
+                },
+                ';' => engine::keys::VirtualKey::Semicolon,
+                ',' => engine::keys::VirtualKey::Comma,
+                '.' => engine::keys::VirtualKey::Dot,
+                '/' => engine::keys::VirtualKey::Slash,
+                '[' => engine::keys::VirtualKey::LeftBrace,
+                ']' => engine::keys::VirtualKey::RightBrace,
+                '\\' => engine::keys::VirtualKey::Backslash,
+                '\'' => engine::keys::VirtualKey::Apostrophe,
+                '`' => engine::keys::VirtualKey::Grave,
+                '-' => engine::keys::VirtualKey::Minus,
+                '=' => engine::keys::VirtualKey::Equal,
+                ' ' => engine::keys::VirtualKey::Space,
+                _ => engine::keys::VirtualKey::A,
             };
-            let action = processor.handle_key(vk, 1, false, false, false);
+            let action = processor.handle_key(vk, 1, shift, ctrl, alt);
             println!("动作反馈: {action:?}");
         } else {
             processor.session.buffer = input.to_string();

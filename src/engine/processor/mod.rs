@@ -540,7 +540,15 @@ impl Processor {
 
     pub fn check_auto_commit(&mut self) -> Option<Action> {
         if !self.config.auto_commit_unique_full_match || self.session.candidates.len() != 1 || !self.session.has_dict_match { return None; }
+        
         let raw_input = &self.session.buffer;
+        
+        // 如果使用了分号（笔画辅助码）或者当前是纯笔画方案，只要唯一就上屏
+        if raw_input.contains(';') || self.active_profiles.contains(&"stroke".to_string()) {
+            let word = self.session.candidates[0].text.clone();
+            return Some(self.commit_candidate(word, 0));
+        }
+
         let mut total_longer = 0;
         for p in &self.active_profiles { if self.engine.has_longer_match(p, raw_input) { total_longer += 1; break; } }
         if total_longer == 0 { 
