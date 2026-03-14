@@ -85,11 +85,11 @@ def build_code(strokes: str, py_initial: str) -> str:
         # 4 笔：前两笔一码 + 后两笔一码
         stroke_code = encode_pair(strokes[:2]) + encode_pair(strokes[2:4])
     else:
-        # 5 笔及以上：前 4 笔两码 + 最后一笔一码
+        # 5 笔及以上：前 4 笔两码 + 最后两笔一码
         stroke_code = (
             encode_pair(strokes[:2])
             + encode_pair(strokes[2:4])
-            + encode_single(strokes[-1])
+            + encode_pair(strokes[-2:])
         )
 
     # 末位始终拼音首字母
