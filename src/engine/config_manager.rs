@@ -20,6 +20,7 @@ pub struct ConfigManager {
     pub commit_mode: String,
     pub auto_commit_unique_en_fuzhuma: bool,
     pub auto_commit_unique_full_match: bool,
+    pub auto_commit_stroke: bool,
     pub enable_error_sound: bool,
     pub enable_prefix_matching: bool,
     pub prefix_matching_limit: usize,
@@ -92,6 +93,7 @@ impl ConfigManager {
             commit_mode: master.input.commit_mode.clone(),
             auto_commit_unique_en_fuzhuma: master.input.auto_commit_unique_en_fuzhuma,
             auto_commit_unique_full_match: master.input.auto_commit_unique_full_match,
+            auto_commit_stroke: master.input.auto_commit_stroke,
             enable_error_sound: master.input.enable_error_sound,
             enable_prefix_matching: master.input.enable_prefix_matching,
             prefix_matching_limit: master.input.prefix_matching_limit,
@@ -166,6 +168,7 @@ impl ConfigManager {
         self.commit_mode = conf.input.commit_mode.clone();
         self.auto_commit_unique_en_fuzhuma = conf.input.auto_commit_unique_en_fuzhuma;
         self.auto_commit_unique_full_match = conf.input.auto_commit_unique_full_match;
+        self.auto_commit_stroke = conf.input.auto_commit_stroke;
         self.enable_error_sound = conf.input.enable_error_sound;
         self.enable_prefix_matching = conf.input.enable_prefix_matching;
         self.prefix_matching_limit = conf.input.prefix_matching_limit;

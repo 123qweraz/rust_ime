@@ -548,12 +548,15 @@ impl Processor {
         // println!("[AutoCommit] buffer={}, profile={:?}, first_cand={}, match_level={}", 
         //     raw_input, self.active_profiles, self.session.candidates[0].text, self.session.candidates[0].match_level);
 
-        // 笔画输入法特殊逻辑：只要第一个是精确匹配，直接上屏
-        // (注：stroke 模式下我们希望录入节奏是敲完就上屏，不需要管有没有更长的)
-        if self.active_profiles.contains(&"stroke".to_string()) {
+        // 笔画输入法特殊逻辑：只有当第一个是精确匹配且没有重码时，直接上屏
+        if self.config.auto_commit_stroke && self.active_profiles.contains(&"stroke".to_string()) {
             if !self.session.candidates.is_empty() && self.session.candidates[0].match_level == 3 {
-                let word = self.session.candidates[0].text.clone();
-                return Some(self.commit_candidate(word, 0));
+                // 检查是否有重码（即第二个候选词是否也是精确匹配）
+                let is_unique_exact = self.session.candidates.len() == 1 || self.session.candidates[1].match_level != 3;
+                if is_unique_exact {
+                    let word = self.session.candidates[0].text.clone();
+                    return Some(self.commit_candidate(word, 0));
+                }
             }
         }
 
