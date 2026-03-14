@@ -63,7 +63,19 @@ impl Compositor {
         }
 
         match p.config.phantom_type {
-            PhantomType::Pinyin => p.session.buffer.clone(),
+            PhantomType::Pinyin => {
+                // 对于笔画输入法，显示转换后的字母编码而不是原始数字
+                // 笔画输入法的 buffer 包含数字（如 "12345"），需要转换为字母编码
+                if p.active_profiles.contains(&"stroke".to_string()) && p.session.buffer.chars().any(|c| c.is_ascii_digit()) {
+                    // 如果 buffer 包含数字，说明是笔画输入，需要转换
+                    // 这里我们使用一个简单的转换逻辑，因为无法直接调用 scheme 的方法
+                    let converted = convert_stroke_digits_to_letters(&p.session.buffer);
+                    if !converted.is_empty() {
+                        return converted;
+                    }
+                }
+                p.session.buffer.clone()
+            }
             PhantomType::Hanzi => {
                 if p.session.preview_selected_candidate && !p.session.candidates.is_empty() {
                     p.session.candidates[p.session.selected.min(p.session.candidates.len() - 1)].text.to_string()
@@ -78,4 +90,37 @@ impl Compositor {
             _ => String::new(),
         }
     }
+}
+
+/// 将笔画数字转换为字母编码（与 StrokeScheme::encode_stroke 相同的逻辑）
+fn convert_stroke_digits_to_letters(s: &str) -> String {
+    let mut res = String::new();
+    let chars: Vec<char> = s.chars().collect();
+    let mut i = 0;
+    while i < chars.len() {
+        if i + 1 < chars.len() {
+            let pair = format!("{}{}", chars[i], chars[i+1]);
+            let code = match pair.as_str() {
+                "11" => 'g', "12" => 'f', "13" => 'd', "14" => 's', "15" => 'a',
+                "21" => 'h', "22" => 'j', "23" => 'k', "24" => 'l', "25" => 'm',
+                "31" => 't', "32" => 'r', "33" => 'e', "34" => 'w', "35" => 'q',
+                "41" => 'y', "42" => 'u', "43" => 'i', "44" => 'o', "45" => 'p',
+                "51" => 'n', "52" => 'b', "53" => 'v', "54" => 'c', "55" => 'x',
+                _ => ' ',
+            };
+            if code != ' ' {
+                res.push(code);
+                i += 2;
+                continue;
+            }
+        }
+        let code = match chars[i] {
+            '1' => 'g', '2' => 'h', '3' => 't', '4' => 'y', '5' => 'n',
+            c if c.is_ascii_lowercase() => c,
+            _ => ' ',
+        };
+        if code != ' ' { res.push(code); }
+        i += 1;
+    }
+    res
 }
