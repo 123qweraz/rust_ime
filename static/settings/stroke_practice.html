@@ -11,6 +11,14 @@
             margin: 0 auto;
         }
 
+        .config-card {
+            background: var(--apple-card);
+            padding: 24px;
+            border-radius: 20px;
+            border: 1px solid var(--apple-border);
+            margin-bottom: 24px;
+        }
+
         .practice-card {
             background: white;
             border-radius: 32px;
@@ -171,11 +179,26 @@
         </header>
 
         <div class="practice-container">
+            <div class="config-card">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h3 style="margin:0">实战练习设置</h3>
+                        <p style="margin:4px 0 0 0; font-size: 13px; color: #666;">使用笔画输入法输入目标汉字，验证编码记忆。</p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: #333;">
+                            <input type="checkbox" id="hideHintToggle" style="width: 18px; height: 18px;"> 隐藏编码提示
+                        </label>
+                        <button onclick="startPractice()" class="btn">开始 / 重置</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="practice-card">
                 <div class="target-word" id="targetWord">...</div>
                 
                 <div class="hint-area">
-                    <div class="hint-badge">编码提示: <b id="fullCodeHint">-</b></div>
+                    <div class="hint-badge" id="codeHintBadge">编码提示: <b id="fullCodeHint">-</b></div>
                     <div class="hint-badge">拼音: <span id="pinyinHint">-</span></div>
                 </div>
 
@@ -266,10 +289,12 @@
                 strokeKeys = Object.keys(strokeDict);
                 nextWord();
                 
-                setInterval(() => {
-                    const seconds = Math.floor((Date.now() - stats.startTime) / 1000);
-                    document.getElementById('timerStat').innerText = seconds + 's';
-                }, 1000);
+                if (!window.timerInterval) {
+                    window.timerInterval = setInterval(() => {
+                        const seconds = Math.floor((Date.now() - stats.startTime) / 1000);
+                        document.getElementById('timerStat').innerText = seconds + 's';
+                    }, 1000);
+                }
             } catch (e) {
                 alert("词库加载失败，请检查网络或路径。");
             } finally {
@@ -289,13 +314,23 @@
             };
             
             document.getElementById('targetWord').innerText = currentTarget.char;
-            document.getElementById('fullCodeHint').innerText = currentTarget.code;
+            
+            const hintEl = document.getElementById('fullCodeHint');
+            hintEl.innerText = currentTarget.code;
+            
+            const hideHint = document.getElementById('hideHintToggle').checked;
+            document.getElementById('codeHintBadge').style.display = hideHint ? 'none' : 'block';
+            
             document.getElementById('pinyinHint').innerText = currentTarget.pinyin;
             
             const input = document.getElementById('practiceInput');
             input.value = '';
             input.focus();
         }
+
+        document.getElementById('hideHintToggle').addEventListener('change', (e) => {
+            document.getElementById('codeHintBadge').style.display = e.target.checked ? 'none' : 'block';
+        });
 
         // 监听键盘按下以产生视觉反馈
         document.addEventListener('keydown', (e) => {
@@ -310,8 +345,6 @@
             const val = e.target.value.trim();
             if (val.length === 0) return;
 
-            // 检查输入的最后一个字符是否为目标汉字
-            // 这样支持直接输入汉字，也支持 IME 在输入框内产生的预览
             if (val.includes(currentTarget.char)) {
                 stats.count++;
                 stats.totalAttempts++;
@@ -327,9 +360,7 @@
                     nextWord();
                 }, 400);
             } else if (val.length >= 1 && !currentTarget.char.startsWith(val)) {
-                // 如果输入的不是目标汉字且不是拼音预览（简单判定）
-                // 这里我们稍微放宽，因为 IME 过程中会有拼音字符
-                if (/[^\x00-\xff]/.test(val)) { // 如果包含中文字符但不是目标
+                if (/[^\x00-\xff]/.test(val)) {
                     e.target.style.borderColor = '#ff3b30';
                     stats.totalAttempts++;
                     updateStats();
