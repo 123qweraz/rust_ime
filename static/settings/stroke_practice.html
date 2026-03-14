@@ -186,6 +186,16 @@
                         <p style="margin:4px 0 0 0; font-size: 13px; color: #666;">使用笔画输入法输入目标汉字，验证编码记忆。</p>
                     </div>
                     <div style="display: flex; align-items: center; gap: 20px;">
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <label style="font-size: 14px; color: #333;">选择字典：</label>
+                            <select id="dictSelect" style="padding: 8px 12px; border-radius: 8px; border: 1px solid #ddd; font-size: 14px; cursor: pointer;">
+                                <option value="level-1">Level-1 (常用字)</option>
+                                <option value="level-2">Level-2 (次常用字)</option>
+                                <option value="level-3">Level-3 (较少用字)</option>
+                                <option value="level-4">Level-4 (其他字)</option>
+                                <option value="all">全部汉字</option>
+                            </select>
+                        </div>
                         <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 14px; color: #333;">
                             <input type="checkbox" id="hideHintToggle" style="width: 18px; height: 18px;"> 隐藏编码提示
                         </label>
@@ -284,9 +294,24 @@
         async function startPractice() {
             document.getElementById('loadingOverlay').style.display = 'flex';
             try {
-                const resp = await fetch('/dicts/stroke/words/stroke_char.json');
+                const dictLevel = document.getElementById('dictSelect').value;
+                let url;
+                if (dictLevel === 'all') {
+                    url = '/dicts/stroke/chars/stroke_chars.json';
+                } else {
+                    url = `/dicts/stroke/chars/stroke_chars_${dictLevel}.json`;
+                }
+                
+                const resp = await fetch(url);
                 strokeDict = await resp.json();
                 strokeKeys = Object.keys(strokeDict);
+                
+                if (strokeKeys.length === 0) {
+                    alert("当前字典为空，请选择其他等级的字典。");
+                    document.getElementById('loadingOverlay').style.display = 'none';
+                    return;
+                }
+                
                 nextWord();
                 
                 if (!window.timerInterval) {
@@ -296,7 +321,7 @@
                     }, 1000);
                 }
             } catch (e) {
-                alert("词库加载失败，请检查网络或路径。");
+                alert("词库加载失败，请检查网络或路径。错误: " + e.message);
             } finally {
                 document.getElementById('loadingOverlay').style.display = 'none';
             }
