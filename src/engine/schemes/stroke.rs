@@ -61,46 +61,46 @@ impl InputScheme for StrokeScheme {
         let mut results = Vec::new();
         let has_wildcard = query.contains('z');
         
-        // 尝试多个笔画词库 (单字和组词)
-        for profile in ["stroke", "stroke_short", "stroke_words"] {
-            if let Some(trie) = context.tries.get(profile) {
-                // 1. 如果包含通配符，使用搜索方法
-                if has_wildcard {
-                    let matches = trie.search_wildcard(query, 50);
+        // 使用合并后的笔画词库
+        if let Some(trie) = context.tries.get("stroke") {
+            // 1. 如果包含通配符，使用搜索方法
+            if has_wildcard {
+                let matches = trie.search_wildcard(query, 50);
+                for tr in matches {
+                    let mut cand = SchemeCandidate::new(tr.word.to_string(), tr.weight);
+                    cand.traditional = tr.trad.to_string();
+                    cand.tone = tr.tone.to_string();
+                    cand.english = tr.en.to_string();
+                    cand.stroke_aux = tr.stroke_aux.to_string();
+                    cand.match_level = 2; // 通配匹配设为 2
+                    results.push(cand);
+                }
+            } else {
+                // 2. 无通配符，执行常规精确 + 前缀匹配
+                if let Some(matches) = trie.get_all_exact(query) {
                     for tr in matches {
                         let mut cand = SchemeCandidate::new(tr.word.to_string(), tr.weight);
                         cand.traditional = tr.trad.to_string();
                         cand.tone = tr.tone.to_string();
                         cand.english = tr.en.to_string();
                         cand.stroke_aux = tr.stroke_aux.to_string();
-                        cand.match_level = 2; // 通配匹配设为 2
+                        cand.match_level = 3; // 精确匹配设为 3
                         results.push(cand);
                     }
-                } else {
-                    // 2. 无通配符，执行常规精确 + 前缀匹配
-                    if let Some(matches) = trie.get_all_exact(query) {
-                        for tr in matches {
-                            let mut cand = SchemeCandidate::new(tr.word.to_string(), tr.weight);
-                            cand.traditional = tr.trad.to_string();
-                            cand.tone = tr.tone.to_string();
-                            cand.english = tr.en.to_string();
-                            cand.stroke_aux = tr.stroke_aux.to_string();
-                            cand.match_level = 3;
-                            results.push(cand);
-                        }
-                    }
-                    
-                    if context.config.input.enable_prefix_matching {
-                        let matches = trie.search_bfs(query, 50);
-                        for tr in matches {
-                            let mut cand = SchemeCandidate::new(tr.word.to_string(), tr.weight);
-                            cand.traditional = tr.trad.to_string();
-                            cand.tone = tr.tone.to_string();
-                            cand.english = tr.en.to_string();
-                            cand.stroke_aux = tr.stroke_aux.to_string();
-                            cand.match_level = 1;
-                            results.push(cand);
-                        }
+                }
+                
+                // 前缀匹配：根据用户输入的前缀查找所有可能的匹配
+                if context.config.input.enable_prefix_matching {
+                    let limit = context.config.input.prefix_matching_limit.min(50);
+                    let matches = trie.search_bfs(query, limit);
+                    for tr in matches {
+                        let mut cand = SchemeCandidate::new(tr.word.to_string(), tr.weight);
+                        cand.traditional = tr.trad.to_string();
+                        cand.tone = tr.tone.to_string();
+                        cand.english = tr.en.to_string();
+                        cand.stroke_aux = tr.stroke_aux.to_string();
+                        cand.match_level = 1; // 前缀匹配设为 1
+                        results.push(cand);
                     }
                 }
             }
@@ -109,28 +109,55 @@ impl InputScheme for StrokeScheme {
     }
 
     fn post_process(&self, _query: &str, candidates: &mut Vec<SchemeCandidate>, _context: &SchemeContext) {
-        // 按综合得分排序：级别基础分 + 精确匹配分 + 词频权重
+        // 按综合得分排序：级别基础分 + 匹配级别分 + 词频权重
         candidates.sort_by(|a, b| {
             let get_score = |c: &SchemeCandidate| -> i64 {
-                // 1. 级别基础分
+                // 1. 级别基础分（确保常用字优先）
                 let cat_score = match c.stroke_aux.as_str() {
-                    "level-1" => 100_000_000,
-                    "level-2" => 50_000_000,
-                    "level-3" => 20_000_000,
+                    "level-1" => 1_000_000_000,
+                    "level-2" => 500_000_000,
+                    "level-3" => 200_000_000,
                     _ => 0,
                 };
                 
-                // 2. 精确匹配分
-                let level_score = if c.match_level == 3 { 10_000_000 } else { 0 };
+                // 2. 匹配级别分（精确匹配优先，但不要过度影响词频排序）
+                // 精确匹配: 50,000,000
+                // 前缀匹配: 10,000,000
+                // 通配匹配: 0
+                let level_score = match c.match_level {
+                    3 => 50_000_000,  // 精确匹配
+                    1 => 10_000_000,  // 前缀匹配
+                    _ => 0,           // 通配匹配或其他
+                };
                 
-                cat_score + level_score + (c.weight as i64)
+                // 3. 词频权重（直接使用权重值）
+                // 这样可以确保同一匹配级别内按词频排序
+                let weight_score = c.weight as i64;
+                
+                cat_score + level_score + weight_score
             };
             get_score(b).cmp(&get_score(a))
         });
         
-        // 去重
-        let mut seen = std::collections::HashSet::new();
-        candidates.retain(|c| seen.insert(c.text.clone()));
+        // 去重（保留权重最高的）
+        let mut seen = std::collections::HashMap::new();
+        candidates.retain(|c| {
+            let entry = seen.entry(c.text.clone());
+            match entry {
+                std::collections::hash_map::Entry::Vacant(e) => {
+                    e.insert(c.weight);
+                    true
+                }
+                std::collections::hash_map::Entry::Occupied(mut e) => {
+                    if c.weight > *e.get() {
+                        e.insert(c.weight);
+                        true
+                    } else {
+                        false
+                    }
+                }
+            }
+        });
     }
 
     fn handle_special_key(&self, key: VirtualKey, buffer: &mut String, context: &SchemeContext) -> Option<Action> {
