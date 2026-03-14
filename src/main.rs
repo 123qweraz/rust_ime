@@ -95,7 +95,6 @@ mod ui;
 
 pub use config::Config;
 use engine::Processor;
-use platform::traits::InputMethodHost;
 use serde_json::Value;
 use std::collections::HashMap;
 use std::env;

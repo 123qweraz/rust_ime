@@ -213,6 +213,12 @@ fn run_test_mode() {
         let mut alt = false;
         let mut val = 1;
         let mut input = line.trim().to_string();
+        if input.is_empty() && line.chars().any(|c| c == ' ') {
+            input = "space".to_string();
+        } else if input.is_empty() && line.chars().any(|c| c == '\n' || c == '\r') {
+             // Optional: handle enter if needed, but for now let's just avoid clearing buffer if it's just a newline from some platforms
+             // but usually read_line includes the newline.
+        }
 
         if input.starts_with("UP_") {
             val = 0;

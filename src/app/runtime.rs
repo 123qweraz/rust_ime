@@ -37,7 +37,7 @@ pub fn run_input_host(
     gui_tx: std::sync::mpsc::Sender<GuiEvent>,
     config: Arc<RwLock<Config>>,
     tray_tx: std::sync::mpsc::Sender<ui::tray::TrayEvent>,
-    app_state: Arc<Mutex<ui::AppState>>,
+    _app_state: Arc<Mutex<ui::AppState>>,
 ) -> Result<(), Box<dyn Error>> {
     #[cfg(target_os = "windows")]
     {
