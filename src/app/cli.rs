@@ -237,6 +237,17 @@ fn run_test_mode() {
             input = input.replace("ALT_", "");
         }
 
+        if input == "`" {
+            let mut next = processor.next_profile();
+            let mut count = 0;
+            while next != "stroke" && count < 10 {
+                next = processor.next_profile();
+                count += 1;
+            }
+            println!("方案强制切换至: {next}");
+            continue;
+        }
+
         if let Some(vk) = engine::keys::VirtualKey::from_str(&input) {
             let action = processor.handle_key(vk, val, shift, ctrl, alt);
             println!("动作反馈: {action:?}");
@@ -264,10 +275,9 @@ fn run_test_mode() {
                 ']' => engine::keys::VirtualKey::RightBrace,
                 '\\' => engine::keys::VirtualKey::Backslash,
                 '\'' => engine::keys::VirtualKey::Apostrophe,
-                '`' => engine::keys::VirtualKey::Grave,
-                '-' => engine::keys::VirtualKey::Minus,
                 '=' => engine::keys::VirtualKey::Equal,
                 ' ' => engine::keys::VirtualKey::Space,
+                '`' => engine::keys::VirtualKey::Grave,
                 _ => engine::keys::VirtualKey::A,
             };
             let action = processor.handle_key(vk, 1, shift, ctrl, alt);

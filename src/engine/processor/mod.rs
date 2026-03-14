@@ -495,10 +495,11 @@ impl Processor {
                 hint: Arc::from(""),
                 source: Arc::from("Raw"),
                 weight: 0.0,
+                match_level: 0,
             });
         }
         self.session.update_state();
-        None
+        self.check_auto_commit()
     }
 
     pub fn reset(&mut self) {
@@ -539,21 +540,46 @@ impl Processor {
     }
 
     pub fn check_auto_commit(&mut self) -> Option<Action> {
-        if !self.config.auto_commit_unique_full_match || self.session.candidates.len() != 1 || !self.session.has_dict_match { return None; }
-        
+        if self.session.candidates.is_empty() || !self.session.has_dict_match { return None; }
+
         let raw_input = &self.session.buffer;
         
-        // 如果使用了分号（笔画辅助码）或者当前是纯笔画方案，只要唯一就上屏
-        if raw_input.contains(';') || self.active_profiles.contains(&"stroke".to_string()) {
-            let word = self.session.candidates[0].text.clone();
-            return Some(self.commit_candidate(word, 0));
+        // DEBUG
+        // println!("[AutoCommit] buffer={}, profile={:?}, first_cand={}, match_level={}", 
+        //     raw_input, self.active_profiles, self.session.candidates[0].text, self.session.candidates[0].match_level);
+
+        // 笔画输入法特殊逻辑：只要第一个是精确匹配，直接上屏
+        // (注：stroke 模式下我们希望录入节奏是敲完就上屏，不需要管有没有更长的)
+        if self.active_profiles.contains(&"stroke".to_string()) {
+            if !self.session.candidates.is_empty() && self.session.candidates[0].match_level == 3 {
+                let word = self.session.candidates[0].text.clone();
+                return Some(self.commit_candidate(word, 0));
+            }
         }
 
+        // 辅码模式特殊逻辑：通常是为了筛选唯一字
+        if raw_input.contains(';') {
+            if self.session.candidates[0].match_level == 3 {
+                let second_not_exact = self.session.candidates.len() == 1 || self.session.candidates[1].match_level != 3;
+                if second_not_exact {
+                    let word = self.session.candidates[0].text.clone();
+                    return Some(self.commit_candidate(word, 0));
+                }
+            }
+        }
+
+        if !self.config.auto_commit_unique_full_match || self.session.candidates.len() != 1 { return None; }
+
         let mut total_longer = 0;
-        for p in &self.active_profiles { if self.engine.has_longer_match(p, raw_input) { total_longer += 1; break; } }
-        if total_longer == 0 { 
+        for p in &self.active_profiles {
+            if self.engine.has_longer_match(p, raw_input) {
+                total_longer += 1;
+                break;
+            }
+        }
+        if total_longer == 0 {
             let word = self.session.candidates[0].text.clone();
-            return Some(self.commit_candidate(word, 0)); 
+            return Some(self.commit_candidate(word, 0));
         }
         None
     }

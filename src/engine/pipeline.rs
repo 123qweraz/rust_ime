@@ -26,6 +26,7 @@ pub struct Candidate {
     pub hint: Arc<str>,
     pub source: Arc<str>, // 来源：如 "User", "Table", "Script"
     pub weight: f64,
+    pub match_level: u8, // 0: unknown, 1: prefix, 2: abbreviation/wildcard, 3: exact
 }
 
 /* 核心接口定义 */
@@ -119,6 +120,7 @@ impl Translator for TableTranslator {
                         hint: build_hint(&tr), 
                         source: Arc::from("Table (Exact)"),
                         weight: tr.weight as f64 + config.input.ranking.exact_match_bonus, 
+                        match_level: 3,
                     });
                 }
             }
@@ -147,6 +149,7 @@ impl Translator for TableTranslator {
                         hint: build_hint(&ar), 
                         source: Arc::from("Table (Abbr)"),
                         weight: adjusted_weight, 
+                        match_level: 2,
                     });
                 }
                 if candidates.len() >= internal_limit { break; } 
@@ -162,6 +165,7 @@ impl Translator for TableTranslator {
                         hint: build_hint(&tr), 
                         source: Arc::from("Table"),
                         weight: tr.weight as f64,
+                        match_level: 1,
                     });
                 }
                 if candidates.len() >= internal_limit { break; }
@@ -191,6 +195,7 @@ impl Translator for UserDictTranslator {
                         hint: Arc::from("User"),
                         source: Arc::from("User"),
                         weight: *weight as f64,
+                        match_level: 3,
                     });
                 }
             }
@@ -421,6 +426,7 @@ impl SearchEngine {
                     hint: Arc::from(sc.tone.as_str()),
                     source: Arc::from("Engine"),
                     weight: sc.weight as f64,
+                    match_level: sc.match_level,
                 });
             }
             return (results, vec![]);
