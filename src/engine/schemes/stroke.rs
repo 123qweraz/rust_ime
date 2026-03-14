@@ -61,7 +61,7 @@ impl InputScheme for StrokeScheme {
         let mut results = Vec::new();
         let has_wildcard = query.contains('z');
         
-        // 使用合并后的笔画词库
+        // 使用合并后的笔画词库，支持按等级过滤
         if let Some(trie) = context.tries.get("stroke") {
             // 1. 如果包含通配符，使用搜索方法
             if has_wildcard {

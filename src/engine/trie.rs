@@ -56,11 +56,30 @@ impl Trie {
     }
 
     pub fn get_all_exact(&self, pinyin: &str) -> Option<Vec<TrieResult<'_>>> {
-        let _span = tracing::debug_span!("trie_exact", %pinyin).entered();
+        self.get_all_exact_with_level_filter(pinyin, None)
+    }
+
+    /// 带等级过滤的精确匹配
+    pub fn get_all_exact_with_level_filter(&self, pinyin: &str, level_filter: Option<&str>) -> Option<Vec<TrieResult<'_>>> {
+        let _span = tracing::debug_span!("trie_exact", %pinyin, ?level_filter).entered();
         let offset = self.index.get(pinyin)? as usize;
         let mut results = Vec::new();
-        self.read_block(offset, |tr| results.push(tr));
-        Some(results)
+        self.read_block(offset, |tr| {
+            // 应用等级过滤
+            if let Some(filter_level) = level_filter {
+                if tr.stroke_aux == filter_level {
+                    results.push(tr);
+                }
+            } else {
+                results.push(tr);
+            }
+        });
+        // 如果过滤后没有结果，返回 None
+        if results.is_empty() {
+            None
+        } else {
+            Some(results)
+        }
     }
 
     /// 预热词库：读取前 limit 条记录以填充 Page Cache
@@ -93,13 +112,19 @@ impl Trie {
     }
 
     pub fn search_bfs(&self, prefix: &str, limit: usize) -> Vec<TrieResult<'_>> {
-        let _span = tracing::debug_span!("trie_bfs", %prefix, limit).entered();
+        self.search_bfs_with_level_filter(prefix, limit, None)
+    }
+
+    /// 带等级过滤的前缀搜索
+    /// level_filter: Some("level-1") 表示只返回 level-1 的结果，None 表示返回所有结果
+    pub fn search_bfs_with_level_filter(&self, prefix: &str, limit: usize, level_filter: Option<&str>) -> Vec<TrieResult<'_>> {
+        let _span = tracing::debug_span!("trie_bfs", %prefix, limit, ?level_filter).entered();
         let mut results = Vec::new();
         let mut seen = std::collections::HashSet::new();
         
         // 支持通配符 z：将其转换为正则搜索
         if prefix.contains('z') {
-            return self.search_wildcard(prefix, limit);
+            return self.search_wildcard_with_level_filter(prefix, limit, level_filter);
         }
 
         let matcher = fst::automaton::Str::new(prefix).starts_with();
@@ -109,8 +134,16 @@ impl Trie {
             let mut stop = false;
             self.read_block(offset as usize, |pair| {
                 if !stop && seen.insert(pair.word) {
-                    results.push(pair);
-                    if results.len() >= limit { stop = true; }
+                    // 应用等级过滤
+                    if let Some(filter_level) = level_filter {
+                        if pair.stroke_aux == filter_level {
+                            results.push(pair);
+                            if results.len() >= limit { stop = true; }
+                        }
+                    } else {
+                        results.push(pair);
+                        if results.len() >= limit { stop = true; }
+                    }
                 }
             });
             if stop { break; }
@@ -120,6 +153,11 @@ impl Trie {
 
     /// 通配符搜索实现：z 匹配任意单个 a-y 字母
     pub fn search_wildcard(&self, pattern: &str, limit: usize) -> Vec<TrieResult<'_>> {
+        self.search_wildcard_with_level_filter(pattern, limit, None)
+    }
+
+    /// 带等级过滤的通配符搜索
+    pub fn search_wildcard_with_level_filter(&self, pattern: &str, limit: usize, level_filter: Option<&str>) -> Vec<TrieResult<'_>> {
         let mut results = Vec::new();
         let mut seen = std::collections::HashSet::new();
         
@@ -131,8 +169,16 @@ impl Trie {
                 let mut stop = false;
                 self.read_block(offset as usize, |pair| {
                     if !stop && seen.insert(pair.word) {
-                        results.push(pair);
-                        if results.len() >= limit { stop = true; }
+                        // 应用等级过滤
+                        if let Some(filter_level) = level_filter {
+                            if pair.stroke_aux == filter_level {
+                                results.push(pair);
+                                if results.len() >= limit { stop = true; }
+                            }
+                        } else {
+                            results.push(pair);
+                            if results.len() >= limit { stop = true; }
+                        }
                     }
                 });
                 if stop { break; }
