@@ -7765,7 +7765,6 @@ bianfengliang
 bianfu
 bianfuxi
 bianfuxia
-biang
 biangan
 bianganbianxue
 biangang
@@ -15999,7 +15998,6 @@ cehuifa
 cehuiju
 cehuiyiqi
 cehuiyuan
-cei
 ceile
 ceji
 cejian
@@ -16262,8 +16260,6 @@ cenwei
 cenxishi
 cenyongkang
 cenzhongmian
-ceok
-ceon
 cepang
 ceping
 cepingbiao
@@ -39474,7 +39470,6 @@ enenaiai
 enenen
 enenenen
 enenyuanyuan
-eng
 engeer
 engeerxishu
 engesi
@@ -45930,7 +45925,6 @@ fenzuo
 fenzushuju
 fenzutaolun
 fenzuxinxi
-fiao
 fo
 fobao
 foci
@@ -107721,7 +107715,6 @@ muzimei
 muzipang
 muziqing
 muzuo
-m̀
 n
 na
 naa
@@ -133396,7 +133389,6 @@ shehuizhuyixueyuan
 shehun
 shehuo
 shehuxian
-shei
 sheia
 sheibu
 sheiceng
@@ -201898,7 +201890,6 @@ zhehuo
 zhehuoer
 zhehuoren
 zhehuoxu
-zhei
 zheji
 zhejia
 zhejiadian
@@ -217209,10 +217200,3 @@ zuzu
 zuzubeibei
 zuzuyou
 ê
-ń
-ńg
-ň
-ňg
-ǹ
-ǹg
-ḿ

@@ -618,6 +618,10 @@ impl Config {
                         key: "m".into(),
                         profile: "chinese,english,japanese".into(),
                     },
+                    ProfileKey {
+                        key: "s".into(),
+                        profile: "shengpizi".into(),
+                    },
                 ],
                 swap_arrow_keys: false,
                 enable_error_sound: true,
