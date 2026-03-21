@@ -2,6 +2,7 @@ pub mod commands;
 pub mod fsm;
 pub mod handlers;
 pub mod intents;
+pub mod learning;
 pub mod punctuation;
 pub mod session_state;
 pub mod utils;
@@ -11,11 +12,9 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 use crate::config::Config;
-use crate::engine::config_manager::UserDictData;
 use crate::engine::keys::VirtualKey;
 use crate::engine::scheme::InputScheme;
 use crate::engine::{Command, InputEvent, ModifierState};
-use arc_swap::ArcSwap;
 
 pub use fsm::ImeState;
 pub use utils::*;
@@ -713,80 +712,26 @@ impl Processor {
 
         if self.config.enable_auto_reorder {
             let updated =
-                Self::update_mru_history(&self.config.usage_history, &profile, pinyin, word, false);
+                learning::update_mru(&self.config.usage_history, &profile, pinyin, word, false);
             self.config.insert_usage(&profile, pinyin, &updated);
             self.engine.clear_cache();
         }
 
         if self.config.enable_auto_reorder {
             if let Some(ctx) = context {
-                let updated = Self::update_mru_history(
-                    &self.config.ngram_history,
-                    &profile,
-                    ctx,
-                    word,
-                    false,
-                );
+                let updated =
+                    learning::update_mru(&self.config.ngram_history, &profile, ctx, word, false);
                 self.config.insert_ngram(&profile, ctx, &updated);
             }
         }
 
         if self.config.enable_word_discovery && word_len > 1 {
             if !self.engine.has_exact_match(&profile, pinyin, word) {
-                let updated = Self::update_mru_history(
-                    &self.config.learned_words,
-                    &profile,
-                    pinyin,
-                    word,
-                    true,
-                );
+                let updated =
+                    learning::update_mru(&self.config.learned_words, &profile, pinyin, word, true);
                 self.config.insert_learned(&profile, pinyin, &updated);
             }
         }
-    }
-
-    fn update_mru_history(
-        history: &Arc<ArcSwap<UserDictData>>,
-        profile: &str,
-        key: &str,
-        word: &str,
-        sort_by_count: bool,
-    ) -> Vec<(String, u32)> {
-        let mut result = Vec::new();
-        history.rcu(|hist| {
-            let mut hist_clone = (**hist).clone();
-            let entries = hist_clone
-                .entry(profile.to_string())
-                .or_default()
-                .entry(key.to_string())
-                .or_default();
-
-            if let Some(pos) = entries.iter().position(|(w, _)| w == word) {
-                if sort_by_count {
-                    entries[pos].1 += 1;
-                } else {
-                    let old_count = entries[pos].1;
-                    entries.remove(pos);
-                    entries.insert(0, (word.to_string(), old_count + 1));
-                }
-            } else {
-                if sort_by_count {
-                    entries.push((word.to_string(), 1));
-                } else {
-                    entries.insert(0, (word.to_string(), 1));
-                }
-            }
-
-            if sort_by_count {
-                entries.sort_by(|a, b| b.1.cmp(&a.1));
-            } else if entries.len() > 10 {
-                entries.truncate(10);
-            }
-
-            result = entries.clone();
-            Arc::new(hist_clone)
-        });
-        result
     }
 
     fn handle_global_hotkey(&mut self, key: VirtualKey, ctrl_pressed: bool) -> Option<Action> {
