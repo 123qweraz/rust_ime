@@ -55,6 +55,36 @@ impl SessionState {
         self.last_commit_time = Instant::now();
     }
 
+    pub fn get_combination_candidates(&self, max_len: usize) -> Vec<(String, String)> {
+        let start = if self.commit_history.len() > 4 {
+            self.commit_history.len() - 4
+        } else {
+            0
+        };
+        let mut results = Vec::new();
+        let history_slice = &self.commit_history[start..];
+
+        for i in 0..history_slice.len().saturating_sub(1) {
+            let mut combined_py = String::new();
+            let mut combined_word = String::new();
+            for entry in history_slice.iter().skip(i) {
+                combined_py.push_str(&entry.0);
+                combined_word.push_str(&entry.1);
+            }
+            if combined_word.chars().count() <= max_len {
+                results.push((combined_py, combined_word));
+            }
+        }
+        results
+    }
+
+    pub fn get_current_profile(&self) -> String {
+        self.active_profiles
+            .first()
+            .cloned()
+            .unwrap_or_else(|| "chinese".to_string())
+    }
+
     pub fn set_profiles(&mut self, profiles: Vec<String>) {
         self.active_profiles = profiles;
     }

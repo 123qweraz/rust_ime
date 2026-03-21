@@ -467,40 +467,15 @@ impl Processor {
                 self.session_state.commit_history.clear();
             }
 
-            let last_word_opt = self
-                .session_state
-                .commit_history
-                .last()
-                .map(|(_, w)| w.clone());
+            let last_word_opt = self.session_state.get_last_word().map(|s| s.to_string());
             self.record_usage(&py, &cand, last_word_opt.as_deref());
             self.session_state
-                .commit_history
-                .push((py.clone(), cand.to_string()));
+                .add_to_history(py.clone(), cand.to_string());
 
-            let start = if self.session_state.commit_history.len() > 4 {
-                self.session_state.commit_history.len() - 4
-            } else {
-                0
-            };
-            let mut new_combinations = Vec::new();
-            {
-                let history_slice = &self.session_state.commit_history[start..];
-                for i in 0..(history_slice.len().saturating_sub(1)) {
-                    let mut combined_py = String::new();
-                    let mut combined_word = String::new();
-                    for entry in history_slice.iter().skip(i) {
-                        combined_py.push_str(&entry.0);
-                        combined_word.push_str(&entry.1);
-                    }
-                    if combined_word.chars().count() <= 8 {
-                        new_combinations.push((combined_py, combined_word));
-                    }
-                }
-            }
-            for (py_c, word_c) in new_combinations {
+            for (py_c, word_c) in self.session_state.get_combination_candidates(8) {
                 self.record_usage(&py_c, &word_c, None);
             }
-            self.session_state.last_commit_time = now;
+            self.session_state.update_commit_time();
         }
 
         if self.session_state.active_profiles.len() == 1
@@ -799,12 +774,7 @@ impl Processor {
             return;
         }
 
-        let profile = self
-            .session_state
-            .active_profiles
-            .first()
-            .cloned()
-            .unwrap_or_else(|| "chinese".to_string());
+        let profile = self.session_state.get_current_profile();
         let word_len = word.chars().count();
 
         // 1. 记录调频记录 (Usage History)
