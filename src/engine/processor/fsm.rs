@@ -43,8 +43,6 @@ impl StateMachine {
     fn handle_idle(input: &FsmInput) -> (ImeState, FsmEffect) {
         if Self::is_coding_key(input.key) {
             (ImeState::Composing, FsmEffect::UpdateLookup)
-        } else if input.key == VirtualKey::Space || input.key == VirtualKey::Enter {
-            (ImeState::Idle, FsmEffect::PassThrough)
         } else {
             (ImeState::Idle, FsmEffect::PassThrough)
         }
@@ -60,7 +58,7 @@ impl StateMachine {
 
         // 处理组合键
         if input.mods.ctrl {
-             return (ImeState::Composing, FsmEffect::Consume);
+            return (ImeState::Composing, FsmEffect::Consume);
         }
 
         match input.key {
@@ -73,7 +71,9 @@ impl StateMachine {
             }
             // 处理字母按键（包含 Shift 辅助码）
             k if Self::is_letter(k) => (ImeState::Composing, FsmEffect::UpdateLookup),
-            k if matches!(k, VirtualKey::Apostrophe | VirtualKey::Semicolon) => (ImeState::Composing, FsmEffect::UpdateLookup),
+            k if matches!(k, VirtualKey::Apostrophe | VirtualKey::Semicolon) => {
+                (ImeState::Composing, FsmEffect::UpdateLookup)
+            }
             _ => (ImeState::Composing, FsmEffect::Consume),
         }
     }
@@ -95,28 +95,54 @@ impl StateMachine {
     }
 
     fn is_coding_key(key: VirtualKey) -> bool {
-        Self::is_letter(key) || 
-        matches!(key, VirtualKey::Apostrophe | VirtualKey::Semicolon)
+        Self::is_letter(key) || matches!(key, VirtualKey::Apostrophe | VirtualKey::Semicolon)
     }
 
     fn is_letter(key: VirtualKey) -> bool {
-        matches!(key, 
-            VirtualKey::A | VirtualKey::B | VirtualKey::C | VirtualKey::D | VirtualKey::E | 
-            VirtualKey::F | VirtualKey::G | VirtualKey::H | VirtualKey::I | VirtualKey::J | 
-            VirtualKey::K | VirtualKey::L | VirtualKey::M | VirtualKey::N | VirtualKey::O | 
-            VirtualKey::P | VirtualKey::Q | VirtualKey::R | VirtualKey::S | VirtualKey::T | 
-            VirtualKey::U | VirtualKey::V | VirtualKey::W | VirtualKey::X | VirtualKey::Y | 
-            VirtualKey::Z
+        matches!(
+            key,
+            VirtualKey::A
+                | VirtualKey::B
+                | VirtualKey::C
+                | VirtualKey::D
+                | VirtualKey::E
+                | VirtualKey::F
+                | VirtualKey::G
+                | VirtualKey::H
+                | VirtualKey::I
+                | VirtualKey::J
+                | VirtualKey::K
+                | VirtualKey::L
+                | VirtualKey::M
+                | VirtualKey::N
+                | VirtualKey::O
+                | VirtualKey::P
+                | VirtualKey::Q
+                | VirtualKey::R
+                | VirtualKey::S
+                | VirtualKey::T
+                | VirtualKey::U
+                | VirtualKey::V
+                | VirtualKey::W
+                | VirtualKey::X
+                | VirtualKey::Y
+                | VirtualKey::Z
         )
     }
 
     fn is_selection_key(key: VirtualKey) -> bool {
-        matches!(key, 
-            VirtualKey::Up | VirtualKey::Down | 
-            VirtualKey::Left | VirtualKey::Right |
-            VirtualKey::PageUp | VirtualKey::PageDown |
-            VirtualKey::Minus | VirtualKey::Equal |
-            VirtualKey::Comma | VirtualKey::Dot
+        matches!(
+            key,
+            VirtualKey::Up
+                | VirtualKey::Down
+                | VirtualKey::Left
+                | VirtualKey::Right
+                | VirtualKey::PageUp
+                | VirtualKey::PageDown
+                | VirtualKey::Minus
+                | VirtualKey::Equal
+                | VirtualKey::Comma
+                | VirtualKey::Dot
         )
     }
 

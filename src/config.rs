@@ -435,29 +435,25 @@ impl Config {
             let p = config_dir.join("appearance.json");
             let f = std::fs::File::create(p)?;
             serde_json::to_writer_pretty(f, &self.appearance)?;
-        };
-        ();
+        }
 
         {
             let p = config_dir.join("input.json");
             let f = std::fs::File::create(p)?;
             serde_json::to_writer_pretty(f, &self.input)?;
-        };
-        ();
+        }
 
         {
             let p = config_dir.join("hotkeys.json");
             let f = std::fs::File::create(p)?;
             serde_json::to_writer_pretty(f, &self.hotkeys)?;
-        };
-        ();
+        }
 
         {
             let p = config_dir.join("files.json");
             let f = std::fs::File::create(p)?;
             serde_json::to_writer_pretty(f, &self.files)?;
-        };
-        ();
+        }
 
         Ok(())
     }

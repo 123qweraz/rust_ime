@@ -1,7 +1,7 @@
 #[cfg(target_os = "linux")]
-use ksni::menu::{StandardItem, MenuItem};
+use ksni::menu::{MenuItem, StandardItem};
 #[cfg(target_os = "linux")]
-use ksni::{Tray, TrayService, Handle};
+use ksni::{Handle, Tray, TrayService};
 use std::sync::mpsc::Sender;
 
 #[derive(Debug, Clone)]
@@ -12,7 +12,10 @@ pub enum TrayEvent {
     OpenConfig,
     Exit,
     ReloadConfig,
-    SyncStatus { chinese_enabled: bool, active_profile: String },
+    SyncStatus {
+        chinese_enabled: bool,
+        active_profile: String,
+    },
     ShowNotification(String), // 显示通知
     ClearUserDict,
 }
@@ -34,51 +37,86 @@ pub struct ImeTray {
 #[cfg(target_os = "linux")]
 impl Tray for ImeTray {
     fn icon_name(&self) -> String {
-        if self.chinese_enabled { "rust-ime" } else { "rust-ime" }.to_string()
+        if self.chinese_enabled {
+            "rust-ime"
+        } else {
+            "rust-ime-en"
+        }
+        .to_string()
     }
 
     fn title(&self) -> String {
-        format!("rust-IME ({})", if self.chinese_enabled { "中" } else { "英" })
+        format!(
+            "rust-IME ({})",
+            if self.chinese_enabled { "中" } else { "英" }
+        )
     }
 
     fn menu(&self) -> Vec<MenuItem<Self>> {
         let profile_zh = match self.active_profile.as_str() {
-            "chinese" => "中文", "english" => "英文", "japanese" => "日文", "mixed" => "中日英混", other => other,
+            "chinese" => "中文",
+            "english" => "英文",
+            "japanese" => "日文",
+            "mixed" => "中日英混",
+            other => other,
         };
 
         vec![
             StandardItem {
                 label: format!("输入法: {}", if self.chinese_enabled { "中" } else { "英" }),
-                activate: Box::new(|this: &mut Self| { let _ = this.tx.send(TrayEvent::ToggleIme); }),    
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::ToggleIme);
+                }),
                 ..Default::default()
-            }.into(),
+            }
+            .into(),
             StandardItem {
                 label: format!("词典方案: {}", profile_zh),
-                activate: Box::new(|this: &mut Self| { let _ = this.tx.send(TrayEvent::NextProfile); }),  
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::NextProfile);
+                }),
                 ..Default::default()
-            }.into(),
+            }
+            .into(),
             StandardItem {
-                label: if self.show_status_bar { "隐藏状态栏" } else { "显示状态栏" }.to_string(),
-                activate: Box::new(|this: &mut Self| { let _ = this.tx.send(TrayEvent::ToggleStatusBar); }),
+                label: if self.show_status_bar {
+                    "隐藏状态栏"
+                } else {
+                    "显示状态栏"
+                }
+                .to_string(),
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::ToggleStatusBar);
+                }),
                 ..Default::default()
-            }.into(),
+            }
+            .into(),
             MenuItem::Separator,
             StandardItem {
                 label: "配置管理 (Web)".to_string(),
-                activate: Box::new(|this: &mut Self| { let _ = this.tx.send(TrayEvent::OpenConfig); }),   
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::OpenConfig);
+                }),
                 ..Default::default()
-            }.into(),
+            }
+            .into(),
             StandardItem {
                 label: "重载词库配置".to_string(),
-                activate: Box::new(|this: &mut Self| { let _ = this.tx.send(TrayEvent::ReloadConfig); }), 
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::ReloadConfig);
+                }),
                 ..Default::default()
-            }.into(),
+            }
+            .into(),
             MenuItem::Separator,
             StandardItem {
                 label: "退出程序".to_string(),
-                activate: Box::new(|this: &mut Self| { let _ = this.tx.send(TrayEvent::Exit); }),
+                activate: Box::new(|this: &mut Self| {
+                    let _ = this.tx.send(TrayEvent::Exit);
+                }),
                 ..Default::default()
-            }.into(),
+            }
+            .into(),
         ]
     }
 }
@@ -113,14 +151,11 @@ pub fn start_tray(params: TrayParams) -> LinuxTrayHandle {
 }
 
 #[cfg(target_os = "windows")]
-use windows::{
-    Win32::UI::Shell::*,
-    Win32::UI::WindowsAndMessaging::*,
-    Win32::Foundation::*,
-    core::*,
-};
-#[cfg(target_os = "windows")]
 use std::sync::{Arc, Mutex};
+#[cfg(target_os = "windows")]
+use windows::{
+    core::*, Win32::Foundation::*, Win32::UI::Shell::*, Win32::UI::WindowsAndMessaging::*,
+};
 
 #[cfg(target_os = "windows")]
 const WM_TRAYICON: u32 = WM_USER + 100;
@@ -157,8 +192,8 @@ impl WindowsTrayHandle {
 #[cfg(target_os = "windows")]
 pub fn start_tray(params: TrayParams) -> WindowsTrayHandle {
     let state = Arc::new(Mutex::new(ImeTrayStub {
-        chinese_enabled: true, 
-        active_profile: params.active_profile, 
+        chinese_enabled: true,
+        active_profile: params.active_profile,
         show_status_bar: params.show_status_bar,
     }));
 
@@ -168,101 +203,149 @@ pub fn start_tray(params: TrayParams) -> WindowsTrayHandle {
     }
 
     let (tx, rx) = std::sync::mpsc::channel();
-    std::thread::spawn(move || {
-        unsafe {
-            let instance = windows::Win32::System::LibraryLoader::GetModuleHandleW(None).unwrap_or_default();
-            let window_class = PCWSTR("RustImeTrayClass\0".encode_utf16().collect::<Vec<u16>>().as_ptr());
+    std::thread::spawn(move || unsafe {
+        let instance =
+            windows::Win32::System::LibraryLoader::GetModuleHandleW(None).unwrap_or_default();
+        let window_class = PCWSTR(
+            "RustImeTrayClass\0"
+                .encode_utf16()
+                .collect::<Vec<u16>>()
+                .as_ptr(),
+        );
 
-            let wc = WNDCLASSW {
-                hInstance: instance.into(),
-                lpszClassName: window_class,
-                lpfnWndProc: Some(tray_wnd_proc),
-                ..Default::default()
-            };
-            RegisterClassW(&wc);
+        let wc = WNDCLASSW {
+            hInstance: instance.into(),
+            lpszClassName: window_class,
+            lpfnWndProc: Some(tray_wnd_proc),
+            ..Default::default()
+        };
+        RegisterClassW(&wc);
 
-            let hwnd = CreateWindowExW(
-                WS_EX_TOOLWINDOW, window_class, PCWSTR(std::ptr::null()),
-                WS_POPUP, 0, 0, 0, 0, None, None, instance, None
-            );
+        let hwnd = CreateWindowExW(
+            WS_EX_TOOLWINDOW,
+            window_class,
+            PCWSTR(std::ptr::null()),
+            WS_POPUP,
+            0,
+            0,
+            0,
+            0,
+            None,
+            None,
+            instance,
+            None,
+        );
 
-            let icon_path = "picture/rust-ime_v2.ico\0".encode_utf16().collect::<Vec<u16>>();
-            let h_icon = match LoadImageW(
-                None,
-                PCWSTR(icon_path.as_ptr()),
-                IMAGE_ICON,
-                0, 0,
-                LR_LOADFROMFILE | LR_DEFAULTSIZE
-            ) {
-                Ok(handle) => HICON(handle.0),
-                Err(_) => LoadIconW(None, IDI_APPLICATION).unwrap_or_default(),
-            };
+        let icon_path = "picture/rust-ime_v2.ico\0"
+            .encode_utf16()
+            .collect::<Vec<u16>>();
+        let h_icon = match LoadImageW(
+            None,
+            PCWSTR(icon_path.as_ptr()),
+            IMAGE_ICON,
+            0,
+            0,
+            LR_LOADFROMFILE | LR_DEFAULTSIZE,
+        ) {
+            Ok(handle) => HICON(handle.0),
+            Err(_) => LoadIconW(None, IDI_APPLICATION).unwrap_or_default(),
+        };
 
-            let nid = NOTIFYICONDATAW {
-                cbSize: std::mem::size_of::<NOTIFYICONDATAW>() as u32,
-                hWnd: hwnd,
-                uID: TRAY_ICON_ID,
-                uFlags: NIF_ICON | NIF_MESSAGE | NIF_TIP,
-                uCallbackMessage: WM_TRAYICON,
-                hIcon: h_icon,
-                ..Default::default()
-            };
+        let nid = NOTIFYICONDATAW {
+            cbSize: std::mem::size_of::<NOTIFYICONDATAW>() as u32,
+            hWnd: hwnd,
+            uID: TRAY_ICON_ID,
+            uFlags: NIF_ICON | NIF_MESSAGE | NIF_TIP,
+            uCallbackMessage: WM_TRAYICON,
+            hIcon: h_icon,
+            ..Default::default()
+        };
 
-            if Shell_NotifyIconW(NIM_ADD, &nid).as_bool() {
-                println!("[Tray] 系统托盘初始化成功。");
-            }
-            let _ = tx.send(hwnd);
-
-            let mut msg = MSG::default();
-            while GetMessageW(&mut msg, None, 0, 0).as_bool() {
-                TranslateMessage(&msg);
-                DispatchMessageW(&msg);
-            }
-            Shell_NotifyIconW(NIM_DELETE, &nid);
+        if Shell_NotifyIconW(NIM_ADD, &nid).as_bool() {
+            println!("[Tray] 系统托盘初始化成功。");
         }
+        let _ = tx.send(hwnd);
+
+        let mut msg = MSG::default();
+        while GetMessageW(&mut msg, None, 0, 0).as_bool() {
+            TranslateMessage(&msg);
+            DispatchMessageW(&msg);
+        }
+        Shell_NotifyIconW(NIM_DELETE, &nid);
     });
 
-    let _hwnd = rx.recv_timeout(std::time::Duration::from_secs(2)).unwrap_or(HWND(0));
+    let _hwnd = rx
+        .recv_timeout(std::time::Duration::from_secs(2))
+        .unwrap_or(HWND(0));
     WindowsTrayHandle(state)
 }
 
 #[cfg(target_os = "windows")]
-unsafe extern "system" fn tray_wnd_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+unsafe extern "system" fn tray_wnd_proc(
+    hwnd: HWND,
+    msg: u32,
+    wparam: WPARAM,
+    lparam: LPARAM,
+) -> LRESULT {
     match msg {
         WM_TRAYICON => {
             if lparam.0 as u32 == WM_RBUTTONUP {
                 let mut pt = POINT::default();
                 let _ = GetCursorPos(&mut pt);
-                
-                if let Some(state_arc) = (&raw const TRAY_STATE).as_ref().and_then(|opt| opt.as_ref()) {
+
+                if let Some(state_arc) = (&raw const TRAY_STATE)
+                    .as_ref()
+                    .and_then(|opt| opt.as_ref())
+                {
                     if let Ok(state) = state_arc.lock() {
                         let h_menu = CreatePopupMenu().expect("Failed to create popup menu");
-                        
-                        let activated_label = format!("输入法: {}", if state.chinese_enabled { "激活 (中)" } else { "未激活 (英)" });
+
+                        let activated_label = format!(
+                            "输入法: {}",
+                            if state.chinese_enabled {
+                                "激活 (中)"
+                            } else {
+                                "未激活 (英)"
+                            }
+                        );
                         let mut activated_w: Vec<u16> = activated_label.encode_utf16().collect();
                         activated_w.push(0);
                         let _ = AppendMenuW(h_menu, MF_STRING, 1001, PCWSTR(activated_w.as_ptr()));
-                        
+
                         let profile_zh = match state.active_profile.as_str() {
-                            "chinese" => "中文", "english" => "英文", "japanese" => "日文", "mixed" => "混合", other => other,
+                            "chinese" => "中文",
+                            "english" => "英文",
+                            "japanese" => "日文",
+                            "mixed" => "混合",
+                            other => other,
                         };
                         let profile_label = format!("词典方案: {}", profile_zh);
                         let mut profile_w: Vec<u16> = profile_label.encode_utf16().collect();
                         profile_w.push(0);
                         let _ = AppendMenuW(h_menu, MF_STRING, 1002, PCWSTR(profile_w.as_ptr()));
-                        
+
                         let _ = AppendMenuW(h_menu, MF_SEPARATOR, 0, None);
 
-                        let sb_label = if state.show_status_bar { "隐藏状态栏" } else { "显示状态栏" };
+                        let sb_label = if state.show_status_bar {
+                            "隐藏状态栏"
+                        } else {
+                            "显示状态栏"
+                        };
                         let mut sb_w: Vec<u16> = sb_label.encode_utf16().collect();
                         sb_w.push(0);
                         let _ = AppendMenuW(h_menu, MF_STRING, 1003, PCWSTR(sb_w.as_ptr()));
-                        
-                        let _ = AppendMenuW(h_menu, MF_STRING, 1011, windows::core::w!("管理设置 (Web)"));
-                        let _ = AppendMenuW(h_menu, MF_STRING, 1012, windows::core::w!("重载词库配置"));
+
+                        let _ = AppendMenuW(
+                            h_menu,
+                            MF_STRING,
+                            1011,
+                            windows::core::w!("管理设置 (Web)"),
+                        );
+                        let _ =
+                            AppendMenuW(h_menu, MF_STRING, 1012, windows::core::w!("重载词库配置"));
                         let _ = AppendMenuW(h_menu, MF_SEPARATOR, 0, None);
                         let _ = AppendMenuW(h_menu, MF_STRING, 1014, windows::core::w!("退出程序"));
-                        
+
                         let _ = SetForegroundWindow(hwnd);
                         let _ = TrackPopupMenu(h_menu, TPM_RIGHTBUTTON, pt.x, pt.y, 0, hwnd, None);
                         let _ = PostMessageW(hwnd, WM_NULL, WPARAM(0), LPARAM(0));
@@ -276,12 +359,24 @@ unsafe extern "system" fn tray_wnd_proc(hwnd: HWND, msg: u32, wparam: WPARAM, lp
             let id = wparam.0 as u32;
             if let Some(ref tx) = TRAY_TX {
                 match id {
-                    1001 => { let _ = tx.send(TrayEvent::ToggleIme); }
-                    1002 => { let _ = tx.send(TrayEvent::NextProfile); }
-                    1003 => { let _ = tx.send(TrayEvent::ToggleStatusBar); }
-                    1011 => { let _ = tx.send(TrayEvent::OpenConfig); }
-                    1012 => { let _ = tx.send(TrayEvent::ReloadConfig); }
-                    1014 => { let _ = tx.send(TrayEvent::Exit); }
+                    1001 => {
+                        let _ = tx.send(TrayEvent::ToggleIme);
+                    }
+                    1002 => {
+                        let _ = tx.send(TrayEvent::NextProfile);
+                    }
+                    1003 => {
+                        let _ = tx.send(TrayEvent::ToggleStatusBar);
+                    }
+                    1011 => {
+                        let _ = tx.send(TrayEvent::OpenConfig);
+                    }
+                    1012 => {
+                        let _ = tx.send(TrayEvent::ReloadConfig);
+                    }
+                    1014 => {
+                        let _ = tx.send(TrayEvent::Exit);
+                    }
                     _ => {}
                 }
             }
