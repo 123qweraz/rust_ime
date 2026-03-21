@@ -807,17 +807,18 @@ impl Processor {
         }
 
         if key == VirtualKey::CapsLock {
-            if !self.session_state.chinese_enabled {
+            return Some(if !self.session_state.chinese_enabled {
                 self.session_state.caps_lock_enabled = !self.session_state.caps_lock_enabled;
-                return Some(Action::PassThrough);
-            }
-            self.session_state.capslock_down = true;
-            if !self.session.buffer.is_empty() {
-                self.session.nav_mode = true;
+                Action::PassThrough
             } else {
-                self.session_state.capslock_pending = true;
-            }
-            return Some(Action::Consume);
+                self.session_state.capslock_down = true;
+                if !self.session.buffer.is_empty() {
+                    self.session.nav_mode = true;
+                } else {
+                    self.session_state.capslock_pending = true;
+                }
+                Action::Consume
+            });
         }
 
         None
