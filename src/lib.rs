@@ -1,29 +1,19 @@
 // Version: 2026-02-07 20:45 - UI Update Sync
 #[cfg(windows)]
-use windows::{
-    core::*,
-    Win32::Foundation::*,
-    Win32::System::SystemServices::DLL_PROCESS_ATTACH,
-};
+use windows::{core::*, Win32::Foundation::*, Win32::System::SystemServices::DLL_PROCESS_ATTACH};
 
+#[cfg(windows)]
+mod class_factory;
 #[cfg(windows)]
 mod registry;
 #[cfg(windows)]
 mod text_service;
-#[cfg(windows)]
-mod class_factory;
 
 #[cfg(windows)]
 use crate::class_factory::ClassFactory;
 
 #[cfg(windows)]
-// 这是一个随机生成的 GUID，正式发布时请保持固定
-// {C03C9525-2C5E-4959-9988-51787281D523}
-pub const IME_ID: GUID = GUID::from_u128(0xc03c9525_2c5e_4959_9988_51787281d523);
-
-#[cfg(windows)]
-// 语言配置文件 GUID (简体中文)
-pub const LANG_PROFILE_ID: GUID = GUID::from_u128(0xc03c9525_2c5e_4959_9988_51787281d524);
+pub use crate::constants::{IME_ID, LANG_PROFILE_ID};
 
 #[cfg(windows)]
 static mut DLL_INSTANCE: HINSTANCE = HINSTANCE(0);
@@ -60,7 +50,7 @@ pub unsafe extern "system" fn DllGetClassObject(
     // 创建类工厂
     let factory = ClassFactory::new();
     let unknown: IUnknown = factory.into();
-    
+
     // 查询接口 (通常是 IClassFactory)
     unknown.query(&*riid, ppv)
 }
@@ -81,8 +71,7 @@ pub unsafe extern "system" fn DllRegisterServer() -> HRESULT {
 /// # Safety
 /// This function is called by Windows/regsvr32 to unregister the COM server.
 pub unsafe extern "system" fn DllUnregisterServer() -> HRESULT {
-    registry::unregister_server(&IME_ID)
-        .map_or_else(|e| e.code(), |_| S_OK)
+    registry::unregister_server(&IME_ID).map_or_else(|e| e.code(), |_| S_OK)
 }
 
 // 空壳实现，防止编译错误

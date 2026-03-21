@@ -1,91 +1,10 @@
 #[cfg(target_os = "windows")]
-pub mod evdev {
-    #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
-    #[allow(non_camel_case_types)]
-    #[repr(u32)]
-    pub enum Key {
-        KEY_A = 0,
-        KEY_B,
-        KEY_C,
-        KEY_D,
-        KEY_E,
-        KEY_F,
-        KEY_G,
-        KEY_H,
-        KEY_I,
-        KEY_J,
-        KEY_K,
-        KEY_L,
-        KEY_M,
-        KEY_N,
-        KEY_O,
-        KEY_P,
-        KEY_Q,
-        KEY_R,
-        KEY_S,
-        KEY_T,
-        KEY_U,
-        KEY_V,
-        KEY_W,
-        KEY_X,
-        KEY_Y,
-        KEY_Z,
-        KEY_0,
-        KEY_1,
-        KEY_2,
-        KEY_3,
-        KEY_4,
-        KEY_5,
-        KEY_6,
-        KEY_7,
-        KEY_8,
-        KEY_9,
-        KEY_SPACE,
-        KEY_ENTER,
-        KEY_TAB,
-        KEY_BACKSPACE,
-        KEY_ESC,
-        KEY_CAPSLOCK,
-        KEY_LEFTCTRL,
-        KEY_RIGHTCTRL,
-        KEY_LEFTSHIFT,
-        KEY_RIGHTSHIFT,
-        KEY_LEFTALT,
-        KEY_RIGHTALT,
-        KEY_LEFTMETA,
-        KEY_RIGHTMETA,
-        KEY_GRAVE,
-        KEY_MINUS,
-        KEY_EQUAL,
-        KEY_LEFTBRACE,
-        KEY_RIGHTBRACE,
-        KEY_BACKSLASH,
-        KEY_SEMICOLON,
-        KEY_APOSTROPHE,
-        KEY_COMMA,
-        KEY_DOT,
-        KEY_SLASH,
-        KEY_LEFT,
-        KEY_RIGHT,
-        KEY_UP,
-        KEY_DOWN,
-        KEY_PAGEUP,
-        KEY_PAGEDOWN,
-        KEY_HOME,
-        KEY_END,
-        KEY_DELETE,
-    }
-}
-
-#[cfg(target_os = "windows")]
 pub mod registry;
 
-#[cfg(target_os = "windows")]
-pub const IME_ID: windows::core::GUID =
-    windows::core::GUID::from_u128(0xc03c9525_2c5e_4959_9988_51787281d523);
-#[cfg(target_os = "windows")]
-pub const LANG_PROFILE_ID: windows::core::GUID =
-    windows::core::GUID::from_u128(0xc03c9525_2c5e_4959_9988_51787281d524);
+mod constants;
+
+#[cfg(windows)]
+pub use crate::constants::{IME_ID, LANG_PROFILE_ID};
 
 mod app;
 mod config;
