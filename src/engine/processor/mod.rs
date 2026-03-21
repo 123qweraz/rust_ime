@@ -301,31 +301,15 @@ impl Processor {
             return Action::PassThrough;
         }
 
-        // 2. 快捷键透传
         if (ctrl_pressed || alt_pressed) || (key == VirtualKey::Control || key == VirtualKey::Alt) {
-            if !get_punctuation_key(key, shift_pressed).is_some() {
+            if get_punctuation_key(key, shift_pressed).is_none() {
                 return Action::PassThrough;
             }
         }
 
-        // 1. 处理控制键意图
         if is_press && ctrl_pressed && !alt_pressed {
-            if let Some(p_key) = get_punctuation_key(key, shift_pressed) {
-                let mut commit_text = if !self.session.joined_sentence.is_empty() {
-                    self.session.joined_sentence.trim_end().to_string()
-                } else if !self.session.candidates.is_empty() {
-                    self.session.candidates[0].text.trim_end().to_string()
-                } else {
-                    self.session.buffer.trim_end().to_string()
-                };
-                commit_text.push_str(p_key);
-                let del_len = self.session.phantom_text.chars().count();
-                self.clear_composing();
-                self.session_state.commit_history.clear();
-                return Action::DeleteAndEmit {
-                    delete: del_len,
-                    insert: commit_text,
-                };
+            if let Some(action) = self.handle_ctrl_punctuation(key, shift_pressed) {
+                return action;
             }
         }
 
@@ -342,7 +326,25 @@ impl Processor {
             return action;
         }
 
-        // 2. FSM 驱动
+        self.handle_fsm_transition(
+            key,
+            shift_pressed,
+            ctrl_pressed,
+            alt_pressed,
+            is_press,
+            perform_lookup,
+        )
+    }
+
+    fn handle_fsm_transition(
+        &mut self,
+        key: VirtualKey,
+        shift_pressed: bool,
+        ctrl_pressed: bool,
+        alt_pressed: bool,
+        is_press: bool,
+        perform_lookup: bool,
+    ) -> Action {
         let input = fsm::FsmInput {
             key,
             mods: ModifierState {
@@ -358,13 +360,10 @@ impl Processor {
         let (new_state, effect) = fsm::StateMachine::transition(self.session.state, &input);
         self.session.state = new_state;
 
-        // 如果此时输入了字母且不是在处理 CapsLock，确保清除 capslock_pending
-        // 增加判定：如果处于导航模式，不清除 pending (防止 HJKL 误伤)
         if is_press && is_letter(key) && !self.session.nav_mode {
             self.session_state.capslock_pending = false;
         }
 
-        // 3. 执行副作用并映射为 Action
         match effect {
             fsm::FsmEffect::PassThrough => {
                 if self.session.state == ImeState::Idle {
@@ -847,5 +846,23 @@ impl Processor {
         }
         self.session_state.capslock_pending = false;
         None
+    }
+
+    fn handle_ctrl_punctuation(&mut self, key: VirtualKey, shift_pressed: bool) -> Option<Action> {
+        let p_key = get_punctuation_key(key, shift_pressed)?;
+        let commit_text = if !self.session.joined_sentence.is_empty() {
+            self.session.joined_sentence.trim_end().to_string()
+        } else if !self.session.candidates.is_empty() {
+            self.session.candidates[0].text.trim_end().to_string()
+        } else {
+            self.session.buffer.trim_end().to_string()
+        };
+        let del_len = self.session.phantom_text.chars().count();
+        self.clear_composing();
+        self.session_state.commit_history.clear();
+        Some(Action::DeleteAndEmit {
+            delete: del_len,
+            insert: format!("{}{}", commit_text, p_key),
+        })
     }
 }
