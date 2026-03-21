@@ -689,19 +689,9 @@ impl Processor {
 
         let raw_input = &self.session.buffer;
 
-        // DEBUG
-        // println!("[AutoCommit] buffer={}, profile={:?}, first_cand={}, match_level={}",
-        //     raw_input, self.session_state.active_profiles, self.session.candidates[0].text, self.session.candidates[0].match_level);
-
         // 笔画输入法特殊逻辑：只有当第一个是精确匹配且没有重码时，直接上屏
-        if self.config.auto_commit_stroke
-            && self
-                .session_state
-                .active_profiles
-                .contains(&"stroke".to_string())
-        {
+        if self.config.auto_commit_stroke && self.session_state.is_stroke_mode() {
             if !self.session.candidates.is_empty() && self.session.candidates[0].match_level == 3 {
-                // 检查是否有重码（即第二个候选词是否也是精确匹配）
                 let is_unique_exact = self.session.candidates.len() == 1
                     || self.session.candidates[1].match_level != 3;
                 if is_unique_exact {
@@ -712,11 +702,11 @@ impl Processor {
         }
 
         // 辅码模式特殊逻辑：通常是为了筛选唯一字
-        if raw_input.contains(';') {
+        if raw_input.contains(';') && !self.session.candidates.is_empty() {
             if self.session.candidates[0].match_level == 3 {
-                let second_not_exact = self.session.candidates.len() == 1
+                let is_unique_exact = self.session.candidates.len() == 1
                     || self.session.candidates[1].match_level != 3;
-                if second_not_exact {
+                if is_unique_exact {
                     let word = self.session.candidates[0].text.clone();
                     return Some(self.commit_candidate(word, 0));
                 }
@@ -727,14 +717,12 @@ impl Processor {
             return None;
         }
 
-        let mut total_longer = 0;
-        for p in &self.session_state.active_profiles {
-            if self.engine.has_longer_match(p, raw_input) {
-                total_longer += 1;
-                break;
-            }
-        }
-        if total_longer == 0 {
+        let has_longer = self
+            .session_state
+            .active_profiles
+            .iter()
+            .any(|p| self.engine.has_longer_match(p, raw_input));
+        if !has_longer {
             let word = self.session.candidates[0].text.clone();
             return Some(self.commit_candidate(word, 0));
         }

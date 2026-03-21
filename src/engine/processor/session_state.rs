@@ -85,6 +85,14 @@ impl SessionState {
             .unwrap_or_else(|| "chinese".to_string())
     }
 
+    pub fn is_stroke_mode(&self) -> bool {
+        self.active_profiles.contains(&"stroke".to_string())
+    }
+
+    pub fn is_english_mode(&self) -> bool {
+        self.active_profiles.len() == 1 && self.active_profiles[0] == "english"
+    }
+
     pub fn set_profiles(&mut self, profiles: Vec<String>) {
         self.active_profiles = profiles;
     }
