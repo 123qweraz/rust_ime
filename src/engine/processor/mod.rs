@@ -598,6 +598,9 @@ impl Processor {
         self.session.has_dict_match = !self.session.candidates.is_empty();
         self.session.last_lookup_pinyin = self.session.buffer.clone();
 
+        // 触发预取（异步后台执行，不阻塞当前搜索）
+        self.trigger_prefetch();
+
         if self.session.candidates.len() == 1 && self.session.filter_mode == FilterMode::Global {
             let word = self.session.candidates[0].text.clone();
             return Some(self.commit_candidate(word, 0));
@@ -619,6 +622,45 @@ impl Processor {
         }
         self.session.update_state();
         self.check_auto_commit()
+    }
+
+    /// 触发预取下一个字符的结果
+    pub fn trigger_prefetch(&self) {
+        if self.session.buffer.len() < 2 {
+            return;
+        }
+
+        let buffer = self.session.buffer.clone();
+        let profile = self
+            .session_state
+            .active_profiles
+            .first()
+            .cloned()
+            .unwrap_or_default();
+        let syllables = self.syllables.clone();
+        let config = self.config.master_config.clone();
+        let engine = self.engine.clone();
+
+        std::thread::spawn(move || {
+            let common_suffixes = [
+                "a", "i", "n", "g", "o", "e", "u", "an", "ang", "en", "ong", "ian", "iao",
+            ];
+
+            for suffix in &common_suffixes {
+                let next_buffer = format!("{}{}", buffer, suffix);
+                let query = crate::engine::pipeline::SearchQuery {
+                    buffer: &next_buffer,
+                    profile: &profile,
+                    syllables: &syllables,
+                    config: &config,
+                    limit: 3,
+                    filter_mode: FilterMode::None,
+                    aux_filter: "",
+                    context: None,
+                };
+                let _ = engine.search(query);
+            }
+        });
     }
 
     pub fn reset(&mut self) {

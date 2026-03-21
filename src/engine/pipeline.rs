@@ -347,7 +347,28 @@ pub struct AdaptiveFilter {
     pub usage_history: Arc<ArcSwap<UserDictData>>,
     pub ngram_history: Arc<ArcSwap<UserDictData>>,
     pub profile: String,
+    last_input: std::sync::RwLock<Option<(String, std::time::Instant)>>,
+    cached_usage_map: std::sync::RwLock<Option<std::collections::HashMap<String, u32>>>,
+    cached_ngram_map: std::sync::RwLock<Option<std::collections::HashMap<String, u32>>>,
 }
+
+impl AdaptiveFilter {
+    pub fn new(
+        usage_history: Arc<ArcSwap<UserDictData>>,
+        ngram_history: Arc<ArcSwap<UserDictData>>,
+        profile: String,
+    ) -> Self {
+        Self {
+            usage_history,
+            ngram_history,
+            profile,
+            last_input: std::sync::RwLock::new(None),
+            cached_usage_map: std::sync::RwLock::new(None),
+            cached_ngram_map: std::sync::RwLock::new(None),
+        }
+    }
+}
+
 impl Filter for AdaptiveFilter {
     fn filter(
         &self,
@@ -359,14 +380,49 @@ impl Filter for AdaptiveFilter {
         let usage_guard = self.usage_history.load();
         let ngram_guard = self.ngram_history.load();
 
-        // 构建 HashMap 用于 O(1) 查找，而不是 O(n) 线性搜索
+        // 使用缓存的 HashMap（避免重复构建）
         if let Some(profile_usage) = usage_guard.get(&self.profile) {
             if let Some(entries) = profile_usage.get(input) {
-                let usage_map: std::collections::HashMap<&str, u32> =
-                    entries.iter().map(|(w, c)| (w.as_str(), *c)).collect();
-                for c in &mut candidates {
-                    if let Some(&count) = usage_map.get(c.simplified.as_ref()) {
-                        c.weight += (count as f64) * USAGE_HISTORY_WEIGHT_MULTIPLIER;
+                // 检查缓存是否有效
+                let use_cached = {
+                    if let Ok(guard) = self.last_input.read() {
+                        if let Some((ref last_input, ref time)) = *guard {
+                            *last_input == input && time.elapsed().as_millis() < 100
+                        } else {
+                            false
+                        }
+                    } else {
+                        false
+                    }
+                };
+
+                if use_cached {
+                    if let Ok(guard) = self.cached_usage_map.read() {
+                        if let Some(ref usage_map) = *guard {
+                            for c in &mut candidates {
+                                if let Some(&count) = usage_map.get(c.simplified.as_ref()) {
+                                    c.weight += (count as f64) * USAGE_HISTORY_WEIGHT_MULTIPLIER;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    // 构建并缓存 HashMap
+                    let usage_map: std::collections::HashMap<String, u32> =
+                        entries.iter().map(|(w, c)| (w.clone(), *c)).collect();
+
+                    for c in &mut candidates {
+                        if let Some(&count) = usage_map.get(c.simplified.as_ref()) {
+                            c.weight += (count as f64) * USAGE_HISTORY_WEIGHT_MULTIPLIER;
+                        }
+                    }
+
+                    // 更新缓存
+                    if let Ok(mut guard) = self.cached_usage_map.write() {
+                        *guard = Some(usage_map);
+                    }
+                    if let Ok(mut guard) = self.last_input.write() {
+                        *guard = Some((input.to_string(), std::time::Instant::now()));
                     }
                 }
             }
@@ -376,12 +432,17 @@ impl Filter for AdaptiveFilter {
         if let Some(ctx) = context {
             if let Some(profile_ngram) = ngram_guard.get(&self.profile) {
                 if let Some(entries) = profile_ngram.get(ctx) {
-                    let ngram_map: std::collections::HashMap<&str, u32> =
-                        entries.iter().map(|(w, c)| (w.as_str(), *c)).collect();
+                    let ngram_map: std::collections::HashMap<String, u32> =
+                        entries.iter().map(|(w, c)| (w.clone(), *c)).collect();
                     for c in &mut candidates {
                         if let Some(&count) = ngram_map.get(c.simplified.as_ref()) {
                             c.weight += (count as f64) * NGRAM_HISTORY_WEIGHT_MULTIPLIER;
                         }
+                    }
+
+                    // 缓存 ngram map
+                    if let Ok(mut guard) = self.cached_ngram_map.write() {
+                        *guard = Some(ngram_map);
                     }
                 }
             }
@@ -612,11 +673,11 @@ impl SearchEngine {
             profile == "chinese",
         )));
         pipeline.add_filter(Box::new(SortFilter));
-        pipeline.add_filter(Box::new(AdaptiveFilter {
-            usage_history: self.usage_history.clone(),
-            ngram_history: self.ngram_history.clone(),
-            profile: profile.to_string(),
-        }));
+        pipeline.add_filter(Box::new(AdaptiveFilter::new(
+            self.usage_history.clone(),
+            self.ngram_history.clone(),
+            profile.to_string(),
+        )));
         pipeline.add_filter(Box::new(TraditionalFilter));
 
         let arc_p = Arc::new(pipeline);
