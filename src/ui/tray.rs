@@ -35,14 +35,34 @@ pub struct ImeTray {
 }
 
 #[cfg(target_os = "linux")]
-impl Tray for ImeTray {
-    fn icon_name(&self) -> String {
-        if self.chinese_enabled {
-            "rust-ime"
-        } else {
-            "rust-ime-en"
+fn load_icon() -> Vec<ksni::Icon> {
+    let icon_paths = [
+        "picture/rust-ime_v2.ico",
+        "picture/rust-ime.ico",
+        "picture/rust-ime_v2.png",
+        "picture/rust-ime.png",
+    ];
+
+    for path in &icon_paths {
+        if let Ok(img) = image::open(path) {
+            let rgba = img.to_rgba8();
+            let (width, height) = rgba.dimensions();
+            let data = rgba.into_raw();
+            return vec![ksni::Icon {
+                width: width as i32,
+                height: height as i32,
+                data,
+            }];
         }
-        .to_string()
+    }
+
+    vec![]
+}
+
+#[cfg(target_os = "linux")]
+impl Tray for ImeTray {
+    fn icon_pixmap(&self) -> Vec<ksni::Icon> {
+        load_icon()
     }
 
     fn title(&self) -> String {
