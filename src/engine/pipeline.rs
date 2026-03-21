@@ -11,6 +11,7 @@ const USAGE_HISTORY_WEIGHT_MULTIPLIER: f64 = 1_000_000.0;
 const NGRAM_HISTORY_WEIGHT_MULTIPLIER: f64 = 5_000_000.0;
 const PREWARM_ENTRIES: usize = 1000;
 const MAX_LOOKUP_LIMIT: usize = 500;
+const CACHE_TTL_MS: u64 = 50;
 
 /// 候选项
 #[derive(Clone, Debug, PartialEq)]
@@ -92,7 +93,26 @@ pub struct TableTranslator {
     pub trie: Arc<Trie>,
     pub syllables: Arc<HashSet<String>>,
     pub enable_abbreviation: bool,
+    last_query: std::sync::RwLock<(String, std::time::Instant)>,
+    cached_candidates: std::sync::RwLock<Vec<Candidate>>,
 }
+
+impl TableTranslator {
+    pub fn new(
+        trie: Arc<Trie>,
+        syllables: Arc<HashSet<String>>,
+        enable_abbreviation: bool,
+    ) -> Self {
+        Self {
+            trie,
+            syllables,
+            enable_abbreviation,
+            last_query: std::sync::RwLock::new((String::new(), std::time::Instant::now())),
+            cached_candidates: std::sync::RwLock::new(Vec::new()),
+        }
+    }
+}
+
 impl Translator for TableTranslator {
     fn translate(
         &self,
@@ -105,6 +125,31 @@ impl Translator for TableTranslator {
             return vec![];
         }
         let query = segments.join("");
+
+        // 检查缓存是否可以复用（增量搜索优化）
+        {
+            let cached = self.cached_candidates.read().unwrap();
+            let (last_q, last_time) = &*self.last_query.read().unwrap();
+
+            if last_q.starts_with(&query) && last_time.elapsed().as_millis() < CACHE_TTL_MS as u128
+            {
+                // 新的查询是之前查询的前缀，复用缓存
+                let filtered: Vec<Candidate> = cached
+                    .iter()
+                    .filter(|c| {
+                        let word = c.simplified.as_ref();
+                        word.starts_with(&query) || word.starts_with(last_q)
+                    })
+                    .take(limit)
+                    .cloned()
+                    .collect();
+
+                if !filtered.is_empty() {
+                    return filtered;
+                }
+            }
+        }
+
         let mut candidates = Vec::new();
         let mut seen = HashSet::new();
 
@@ -207,6 +252,15 @@ impl Translator for TableTranslator {
                 }
             }
         }
+
+        // 更新缓存
+        {
+            let mut last_q = self.last_query.write().unwrap();
+            *last_q = (query, std::time::Instant::now());
+            let mut cached = self.cached_candidates.write().unwrap();
+            *cached = candidates.clone();
+        }
+
         candidates
     }
 }
@@ -552,12 +606,11 @@ impl SearchEngine {
             user_dict: self.learned_words.clone(),
             profile: profile.to_string(),
         }));
-        pipeline.add_translator(Box::new(TableTranslator {
-            trie: Arc::new(trie),
-            syllables: self.syllables.clone(),
-            // 简拼只对拼音方案有意义；笔画/英文/日文使用前缀搜索。
-            enable_abbreviation: profile == "chinese",
-        }));
+        pipeline.add_translator(Box::new(TableTranslator::new(
+            Arc::new(trie),
+            self.syllables.clone(),
+            profile == "chinese",
+        )));
         pipeline.add_filter(Box::new(SortFilter));
         pipeline.add_filter(Box::new(AdaptiveFilter {
             usage_history: self.usage_history.clone(),

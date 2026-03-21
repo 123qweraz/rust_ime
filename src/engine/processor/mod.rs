@@ -43,7 +43,11 @@ pub struct Processor {
     pub dispatcher: crate::engine::KeyDispatcher,
     pub engine: crate::engine::pipeline::SearchEngine,
     pub syllables: HashSet<String>,
+    last_key_time: std::time::Instant,
+    pending_key_buffer: String,
 }
+
+const KEY_BATCH_DELAY_MS: u64 = 30;
 
 impl Processor {
     pub fn new(
@@ -88,6 +92,8 @@ impl Processor {
             dispatcher: crate::engine::KeyDispatcher::new(),
             engine,
             syllables,
+            last_key_time: std::time::Instant::now(),
+            pending_key_buffer: String::new(),
         }
     }
 
@@ -325,6 +331,39 @@ impl Processor {
             return action;
         }
 
+        // Key batching: accumulate rapid keys and process together
+        if is_press && is_letter(key) && perform_lookup {
+            let elapsed = now.duration_since(self.last_key_time);
+
+            if elapsed < Duration::from_millis(KEY_BATCH_DELAY_MS) {
+                // Accumulate key for batching
+                if let Some(c) = key_to_char(key, shift_pressed, false) {
+                    self.pending_key_buffer.push(c);
+                }
+                self.last_key_time = now;
+                return Action::Consume;
+            } else if !self.pending_key_buffer.is_empty() {
+                // Process accumulated keys
+                let buffered = self.pending_key_buffer.clone();
+                self.pending_key_buffer.clear();
+
+                // Add the current key
+                if let Some(c) = key_to_char(key, shift_pressed, false) {
+                    self.pending_key_buffer.push(c);
+                }
+                self.last_key_time = now;
+
+                // Process all buffered keys at once
+                return self.process_batched_keys(&buffered);
+            } else {
+                // Start new batch
+                if let Some(c) = key_to_char(key, shift_pressed, false) {
+                    self.pending_key_buffer.push(c);
+                }
+                self.last_key_time = now;
+            }
+        }
+
         self.handle_fsm_transition(
             key,
             shift_pressed,
@@ -333,6 +372,22 @@ impl Processor {
             is_press,
             perform_lookup,
         )
+    }
+
+    fn process_batched_keys(&mut self, keys: &str) -> Action {
+        for c in keys.chars() {
+            if let Some(action) = self.inject_char_internal(c) {
+                if !matches!(action, Action::Consume) {
+                    return action;
+                }
+            }
+        }
+        Action::Consume
+    }
+
+    fn inject_char_internal(&mut self, c: char) -> Option<Action> {
+        self.session.push_char(c);
+        self.lookup()
     }
 
     fn handle_fsm_transition(
