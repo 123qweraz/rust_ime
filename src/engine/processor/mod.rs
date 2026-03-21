@@ -265,43 +265,10 @@ impl Processor {
         let is_press = val == 1;
         let is_release = val == 0;
 
-        // 1. 全局快捷键拦截 (无论中英文是否开启)
         if is_press {
-            // A. Ctrl + Space 中英文切换
-            if key == VirtualKey::Space
-                && ctrl_pressed
-                && self.config.master_config.hotkeys.enable_ctrl_space_toggle
-            {
-                self.session_state.chinese_enabled = !self.session_state.chinese_enabled;
-                return Action::Consume;
+            if let Some(action) = self.handle_global_hotkey(key, ctrl_pressed) {
+                return action;
             }
-
-            // B. Tab 中英文切换 (仅当缓冲区为空且启用时)
-            if key == VirtualKey::Tab
-                && self.session.buffer.is_empty()
-                && self.config.master_config.hotkeys.enable_tab_toggle
-            {
-                self.session_state.chinese_enabled = !self.session_state.chinese_enabled;
-                return Action::Consume;
-            }
-
-            // C. CapsLock 核心逻辑
-            if key == VirtualKey::CapsLock {
-                if !self.session_state.chinese_enabled {
-                    self.session_state.caps_lock_enabled = !self.session_state.caps_lock_enabled;
-                    return Action::PassThrough;
-                }
-                self.session_state.capslock_down = true;
-                if !self.session.buffer.is_empty() {
-                    self.session.nav_mode = true;
-                } else {
-                    self.session_state.capslock_pending = true;
-                    // 故意不切换 self.session_state.caps_lock_enabled，彻底屏蔽大写锁定功能
-                }
-                return Action::Consume;
-            }
-
-            // D. VIM 导航逻辑 (当处于导航模式时)
             if self.session.nav_mode && !self.session.buffer.is_empty() {
                 match key {
                     VirtualKey::H => return self.execute_command(Command::PrevCandidate),
@@ -311,34 +278,13 @@ impl Processor {
                     _ => {}
                 }
             }
-
-            // E. CapsLock 方案快速切换 (支持延迟按键)
             if self.session_state.capslock_pending
                 && self.session.buffer.is_empty()
                 && is_letter(key)
             {
-                let key_char = crate::engine::processor::utils::key_to_char(key, false, false)
-                    .unwrap_or('\0')
-                    .to_lowercase()
-                    .to_string();
-                if let Some(profile) = self
-                    .config
-                    .profile_keys
-                    .iter()
-                    .find(|(k, _)| k.to_lowercase() == key_char)
-                    .map(|(_, p)| p.clone())
-                {
-                    self.session_state.active_profiles =
-                        profile.split(',').map(|s| s.to_string()).collect();
-                    self.reset();
-                    self.session_state.capslock_pending = false;
-                    return Action::Notify(
-                        self.get_short_display(),
-                        format!("方案: {}", self.get_current_profile_display()),
-                    );
+                if let Some(action) = self.handle_capslock_profile_switch(key) {
+                    return action;
                 }
-                // 如果按了字母但没中方案映射，则取消 pending
-                self.session_state.capslock_pending = false;
             }
         }
 
@@ -842,5 +788,64 @@ impl Processor {
             Arc::new(hist_clone)
         });
         result
+    }
+
+    fn handle_global_hotkey(&mut self, key: VirtualKey, ctrl_pressed: bool) -> Option<Action> {
+        if key == VirtualKey::Space
+            && ctrl_pressed
+            && self.config.master_config.hotkeys.enable_ctrl_space_toggle
+        {
+            self.session_state.chinese_enabled = !self.session_state.chinese_enabled;
+            return Some(Action::Consume);
+        }
+
+        if key == VirtualKey::Tab
+            && self.session.buffer.is_empty()
+            && self.config.master_config.hotkeys.enable_tab_toggle
+        {
+            self.session_state.chinese_enabled = !self.session_state.chinese_enabled;
+            return Some(Action::Consume);
+        }
+
+        if key == VirtualKey::CapsLock {
+            if !self.session_state.chinese_enabled {
+                self.session_state.caps_lock_enabled = !self.session_state.caps_lock_enabled;
+                return Some(Action::PassThrough);
+            }
+            self.session_state.capslock_down = true;
+            if !self.session.buffer.is_empty() {
+                self.session.nav_mode = true;
+            } else {
+                self.session_state.capslock_pending = true;
+            }
+            return Some(Action::Consume);
+        }
+
+        None
+    }
+
+    fn handle_capslock_profile_switch(&mut self, key: VirtualKey) -> Option<Action> {
+        let key_char = crate::engine::processor::utils::key_to_char(key, false, false)
+            .unwrap_or('\0')
+            .to_lowercase()
+            .to_string();
+        if let Some(profile) = self
+            .config
+            .profile_keys
+            .iter()
+            .find(|(k, _)| k.to_lowercase() == key_char)
+            .map(|(_, p)| p.clone())
+        {
+            self.session_state.active_profiles =
+                profile.split(',').map(|s| s.to_string()).collect();
+            self.reset();
+            self.session_state.capslock_pending = false;
+            return Some(Action::Notify(
+                self.get_short_display(),
+                format!("方案: {}", self.get_current_profile_display()),
+            ));
+        }
+        self.session_state.capslock_pending = false;
+        None
     }
 }
