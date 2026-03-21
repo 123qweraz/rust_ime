@@ -7,6 +7,11 @@ use std::collections::{HashMap, HashSet};
 use std::path::PathBuf;
 use std::sync::{Arc, RwLock};
 
+const USAGE_HISTORY_WEIGHT_MULTIPLIER: f64 = 1_000_000.0;
+const NGRAM_HISTORY_WEIGHT_MULTIPLIER: f64 = 5_000_000.0;
+const PREWARM_ENTRIES: usize = 1000;
+const MAX_LOOKUP_LIMIT: usize = 500;
+
 /// 候选项
 #[derive(Clone, Debug, PartialEq)]
 pub struct Candidate {
@@ -25,7 +30,7 @@ pub trait Segmentor: Send + Sync {
     fn segment(&self, input: &str, syllables: &HashSet<String>) -> Vec<String>;
 }
 
-pub trait Translator: Send + Sync {
+pub trait Translator: Send + Sync + 'static {
     fn translate(
         &self,
         input: &str,
@@ -103,7 +108,7 @@ impl Translator for TableTranslator {
         let mut candidates = Vec::new();
         let mut seen = HashSet::new();
 
-        let internal_limit = limit.max(500);
+        let internal_limit = limit.max(MAX_LOOKUP_LIMIT);
 
         let build_hint = |tr: &TrieResult| -> Arc<str> {
             let mut hint = String::new();
@@ -307,7 +312,7 @@ impl Filter for AdaptiveFilter {
                     entries.iter().map(|(w, c)| (w.as_str(), *c)).collect();
                 for c in &mut candidates {
                     if let Some(&count) = usage_map.get(c.simplified.as_ref()) {
-                        c.weight += (count as f64) * 1000000.0;
+                        c.weight += (count as f64) * USAGE_HISTORY_WEIGHT_MULTIPLIER;
                     }
                 }
             }
@@ -321,7 +326,7 @@ impl Filter for AdaptiveFilter {
                         entries.iter().map(|(w, c)| (w.as_str(), *c)).collect();
                     for c in &mut candidates {
                         if let Some(&count) = ngram_map.get(c.simplified.as_ref()) {
-                            c.weight += (count as f64) * 5000000.0;
+                            c.weight += (count as f64) * NGRAM_HISTORY_WEIGHT_MULTIPLIER;
                         }
                     }
                 }
@@ -392,7 +397,10 @@ pub struct SearchEngine {
     ngram_history: Arc<ArcSwap<UserDictData>>,
     pub schemes: Arc<HashMap<String, Box<dyn crate::engine::scheme::InputScheme>>>,
     pipelines: Arc<RwLock<HashMap<String, Arc<Pipeline>>>>,
+    pipeline_access_order: Arc<RwLock<Vec<String>>>,
 }
+
+const MAX_CACHED_PIPELINES: usize = 10;
 
 pub struct SearchQuery<'a> {
     pub buffer: &'a str,
@@ -422,6 +430,7 @@ impl SearchEngine {
             ngram_history,
             schemes,
             pipelines: Arc::new(RwLock::new(HashMap::new())),
+            pipeline_access_order: Arc::new(RwLock::new(Vec::new())),
         }
     }
 
@@ -493,8 +502,8 @@ impl SearchEngine {
     }
 
     pub fn has_exact_match(&self, profile: &str, pinyin: &str, word: &str) -> bool {
-        if let Some(paths) = self.trie_paths.get(profile) {
-            if let Ok(trie) = Trie::load(&paths.0, &paths.1, true) {
+        if let Some(pipeline) = self.get_or_create_pipeline(profile) {
+            if let Some(trie) = self.get_trie_from_pipeline(pipeline.as_ref()) {
                 if let Some(exacts) = trie.get_all_exact(pinyin) {
                     return exacts.iter().any(|tr| tr.word == word);
                 }
@@ -503,11 +512,32 @@ impl SearchEngine {
         false
     }
 
+    fn get_trie_from_pipeline(&self, pipeline: &Pipeline) -> Option<&Trie> {
+        use std::any::{Any, TypeId};
+        for t in &pipeline.translators {
+            if TypeId::of::<TableTranslator>() == t.as_ref().type_id() {
+                let ptr = t.as_ref() as *const dyn Translator;
+                let table_ptr = ptr as *const TableTranslator;
+                unsafe {
+                    return Some(&(*table_ptr).trie);
+                }
+            }
+        }
+        None
+    }
+
     fn get_or_create_pipeline(&self, profile: &str) -> Option<Arc<Pipeline>> {
         // 1. 尝试读取现有
         {
             let p_map = self.pipelines.read().ok()?;
             if let Some(p) = p_map.get(profile) {
+                // 更新访问顺序（LRU）
+                if let Ok(mut access_order) = self.pipeline_access_order.write() {
+                    if let Some(pos) = access_order.iter().position(|p| p == profile) {
+                        access_order.remove(pos);
+                    }
+                    access_order.push(profile.to_string());
+                }
                 return Some(p.clone());
             }
         }
@@ -537,14 +567,39 @@ impl SearchEngine {
         pipeline.add_filter(Box::new(TraditionalFilter));
 
         let arc_p = Arc::new(pipeline);
+
+        // LRU eviction: 如果缓存超过限制，移除最久未使用的
+        {
+            let access_order = self.pipeline_access_order.write().ok()?;
+            if access_order.len() >= MAX_CACHED_PIPELINES {
+                if let Some(oldest) = access_order.first().cloned() {
+                    drop(access_order);
+                    if let Ok(mut p_map) = self.pipelines.write() {
+                        p_map.remove(&oldest);
+                    }
+                    if let Ok(mut access_order) = self.pipeline_access_order.write() {
+                        access_order.remove(0);
+                    }
+                    tracing::debug!(profile = %oldest, "Evicted pipeline from cache");
+                }
+            }
+        }
+
         let mut p_map = self.pipelines.write().ok()?;
         p_map.insert(profile.to_string(), arc_p.clone());
+
+        if let Ok(mut access_order) = self.pipeline_access_order.write() {
+            if !access_order.contains(&profile.to_string()) {
+                access_order.push(profile.to_string());
+            }
+        }
+
         Some(arc_p)
     }
 
     pub fn has_longer_match(&self, profile: &str, buffer: &str) -> bool {
-        if let Some(paths) = self.trie_paths.get(profile) {
-            if let Ok(trie) = Trie::load(&paths.0, &paths.1, true) {
+        if let Some(pipeline) = self.get_or_create_pipeline(profile) {
+            if let Some(trie) = self.get_trie_from_pipeline(pipeline.as_ref()) {
                 return trie.has_longer_match(buffer);
             }
         }
@@ -552,7 +607,12 @@ impl SearchEngine {
     }
 
     pub fn clear_cache(&self) {
-        // No-op: 搜索缓存已移除，搜索结果直接由 Trie 和 Pipeline 计算
+        if let Ok(mut p_map) = self.pipelines.write() {
+            p_map.clear();
+        }
+        if let Ok(mut access_order) = self.pipeline_access_order.write() {
+            access_order.clear();
+        }
     }
 
     /// 预加载并初始化指定方案的 Pipeline
@@ -567,7 +627,7 @@ impl SearchEngine {
             // 虽然目前默认是全内存加载，但保留此逻辑以增强兼容性
             if let Some(paths) = self.trie_paths.get(profile) {
                 if let Ok(trie) = Trie::load(&paths.0, &paths.1, true) {
-                    trie.prewarm(1000);
+                    trie.prewarm(PREWARM_ENTRIES);
                 }
             }
         }
@@ -582,5 +642,187 @@ impl SearchEngine {
         let hint_clean = crate::engine::processor::strip_tones(&hint_lower);
         let parts: Vec<&str> = hint_clean.split([' ', '/', '(', ')', ',']).collect();
         parts.iter().any(|p| p.starts_with(&filter_lower)) || hint_clean.starts_with(&filter_lower)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::collections::HashSet;
+    use std::sync::Arc;
+
+    #[test]
+    fn test_default_segmentor_basic() {
+        let segmentor = DefaultSegmentor;
+        let syllables: HashSet<String> = ["ni", "hao", "zhong", "guo"]
+            .iter()
+            .map(|s| s.to_string())
+            .collect();
+
+        let result = segmentor.segment("nihao", &syllables);
+        assert_eq!(result, vec!["ni", "hao"]);
+    }
+
+    #[test]
+    fn test_default_segmentor_longer_match() {
+        let segmentor = DefaultSegmentor;
+        let syllables: HashSet<String> = ["zhong", "guo", "zhongguo"]
+            .iter()
+            .map(|s| s.to_string())
+            .collect();
+
+        let result = segmentor.segment("zhongguo", &syllables);
+        assert_eq!(result, vec!["zhongguo"]);
+    }
+
+    #[test]
+    fn test_default_segmentor_partial_match() {
+        let segmentor = DefaultSegmentor;
+        let syllables: HashSet<String> = ["zhong", "guo"].iter().map(|s| s.to_string()).collect();
+
+        let result = segmentor.segment("zhongguo", &syllables);
+        assert_eq!(result, vec!["zhong", "guo"]);
+    }
+
+    #[test]
+    fn test_default_segmentor_unknown_chars() {
+        let segmentor = DefaultSegmentor;
+        let syllables: HashSet<String> = ["ni"].iter().map(|s| s.to_string()).collect();
+
+        let result = segmentor.segment("nixyz", &syllables);
+        assert_eq!(result, vec!["ni", "x", "y", "z"]);
+    }
+
+    #[test]
+    fn test_default_segmentor_empty_input() {
+        let segmentor = DefaultSegmentor;
+        let syllables: HashSet<String> = ["ni", "hao"].iter().map(|s| s.to_string()).collect();
+
+        let result = segmentor.segment("", &syllables);
+        assert!(result.is_empty());
+    }
+
+    #[test]
+    fn test_candidate_clone() {
+        let candidate = Candidate {
+            text: Arc::from("test"),
+            simplified: Arc::from("test"),
+            traditional: Arc::from("test"),
+            hint: Arc::from("hint"),
+            source: Arc::from("test"),
+            weight: 1.0,
+            match_level: 3,
+        };
+
+        let cloned = candidate.clone();
+        assert_eq!(candidate.text, cloned.text);
+        assert_eq!(candidate.weight, cloned.weight);
+    }
+
+    #[test]
+    fn test_sort_filter() {
+        let filter = SortFilter;
+        let candidates = vec![
+            Candidate {
+                text: Arc::from("low"),
+                simplified: Arc::from("low"),
+                traditional: Arc::from("low"),
+                hint: Arc::from(""),
+                source: Arc::from(""),
+                weight: 1.0,
+                match_level: 1,
+            },
+            Candidate {
+                text: Arc::from("high"),
+                simplified: Arc::from("high"),
+                traditional: Arc::from("high"),
+                hint: Arc::from(""),
+                source: Arc::from(""),
+                weight: 100.0,
+                match_level: 1,
+            },
+            Candidate {
+                text: Arc::from("medium"),
+                simplified: Arc::from("medium"),
+                traditional: Arc::from("medium"),
+                hint: Arc::from(""),
+                source: Arc::from(""),
+                weight: 50.0,
+                match_level: 1,
+            },
+        ];
+
+        let config = Config::default_config();
+        let result = filter.filter("test", candidates, &config, None);
+        assert_eq!(result[0].text.as_ref(), "high");
+        assert_eq!(result[1].text.as_ref(), "medium");
+        assert_eq!(result[2].text.as_ref(), "low");
+    }
+
+    #[test]
+    fn test_traditional_filter_simplified() {
+        let filter = TraditionalFilter;
+        let candidates = vec![Candidate {
+            text: Arc::from("简化"),
+            simplified: Arc::from("简化"),
+            traditional: Arc::from("簡化"),
+            hint: Arc::from(""),
+            source: Arc::from(""),
+            weight: 1.0,
+            match_level: 1,
+        }];
+
+        let config = Config::default_config();
+        let result = filter.filter("test", candidates, &config, None);
+        assert_eq!(result[0].text.as_ref(), "简化");
+    }
+
+    #[test]
+    fn test_traditional_filter_traditional() {
+        let filter = TraditionalFilter;
+        let mut config = Config::default_config();
+        config.input.enable_traditional = true;
+
+        let candidates = vec![Candidate {
+            text: Arc::from("简化"),
+            simplified: Arc::from("简化"),
+            traditional: Arc::from("簡化"),
+            hint: Arc::from(""),
+            source: Arc::from(""),
+            weight: 1.0,
+            match_level: 1,
+        }];
+
+        let result = filter.filter("test", candidates, &config, None);
+        assert_eq!(result[0].text.as_ref(), "簡化");
+    }
+
+    #[test]
+    fn test_matches_filter_empty() {
+        let engine = create_test_engine();
+        let candidate = Candidate {
+            text: Arc::from("测试"),
+            simplified: Arc::from("测试"),
+            traditional: Arc::from("测试"),
+            hint: Arc::from("ceshi"),
+            source: Arc::from(""),
+            weight: 1.0,
+            match_level: 1,
+        };
+
+        assert!(engine.matches_filter(&candidate, ""));
+        assert!(engine.matches_filter(&candidate, "ces"));
+        assert!(!engine.matches_filter(&candidate, "xyz"));
+    }
+
+    fn create_test_engine() -> SearchEngine {
+        SearchEngine::new(
+            HashMap::new(),
+            Arc::new(HashSet::new()),
+            Arc::new(ArcSwap::from_pointee(HashMap::new())),
+            Arc::new(ArcSwap::from_pointee(HashMap::new())),
+            Arc::new(ArcSwap::from_pointee(HashMap::new())),
+            Arc::new(HashMap::new()),
+        )
     }
 }

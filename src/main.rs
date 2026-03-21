@@ -145,7 +145,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     let root = find_project_root();
-    env::set_current_dir(&root)?;
 
     if should_daemonize {
         #[cfg(target_os = "windows")]

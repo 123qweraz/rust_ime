@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::sync::OnceLock;
 
 #[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
 pub struct Config {
@@ -366,22 +367,31 @@ impl Config {
     }
 
     pub fn get_config_dir() -> std::path::PathBuf {
-        let mut curr = std::env::current_exe()
+        let exe_dir = std::env::current_exe()
             .ok()
             .and_then(|p| p.parent().map(|parent| parent.to_path_buf()))
-            .unwrap_or_else(|| {
-                std::env::current_dir().unwrap_or_else(|_| std::path::PathBuf::from("."))
-            });
+            .unwrap_or_else(|| std::path::PathBuf::from("."));
 
-        for _ in 0..4 {
+        let root = if exe_dir.join("dicts").exists() {
+            exe_dir.clone()
+        } else {
+            let mut curr = exe_dir.clone();
+            for _ in 0..4 {
+                if curr.join("dicts").exists() {
+                    break;
+                }
+                if !curr.pop() {
+                    break;
+                }
+            }
             if curr.join("dicts").exists() {
-                break;
+                curr
+            } else {
+                exe_dir
             }
-            if !curr.pop() {
-                break;
-            }
-        }
-        curr.join("configs")
+        };
+
+        root.join("configs")
     }
 
     pub fn load() -> Self {
@@ -426,6 +436,10 @@ impl Config {
     }
 
     pub fn save(&self) -> Result<(), Box<dyn std::error::Error>> {
+        static SAVE_LOCK: OnceLock<std::sync::Mutex<()>> = OnceLock::new();
+        let lock = SAVE_LOCK.get_or_init(|| std::sync::Mutex::new(()));
+        let _guard = lock.lock().map_err(|e| format!("Lock poisoned: {}", e))?;
+
         let config_dir = Self::get_config_dir();
         if !config_dir.exists() {
             std::fs::create_dir_all(&config_dir)?;
@@ -433,25 +447,25 @@ impl Config {
 
         {
             let p = config_dir.join("appearance.json");
-            let f = std::fs::File::create(p)?;
+            let f = std::fs::File::create(&p)?;
             serde_json::to_writer_pretty(f, &self.appearance)?;
         }
 
         {
             let p = config_dir.join("input.json");
-            let f = std::fs::File::create(p)?;
+            let f = std::fs::File::create(&p)?;
             serde_json::to_writer_pretty(f, &self.input)?;
         }
 
         {
             let p = config_dir.join("hotkeys.json");
-            let f = std::fs::File::create(p)?;
+            let f = std::fs::File::create(&p)?;
             serde_json::to_writer_pretty(f, &self.hotkeys)?;
         }
 
         {
             let p = config_dir.join("files.json");
-            let f = std::fs::File::create(p)?;
+            let f = std::fs::File::create(&p)?;
             serde_json::to_writer_pretty(f, &self.files)?;
         }
 

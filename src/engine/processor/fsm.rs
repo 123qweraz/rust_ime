@@ -71,7 +71,7 @@ impl StateMachine {
             }
             // 处理字母按键（包含 Shift 辅助码）
             k if Self::is_letter(k) => (ImeState::Composing, FsmEffect::UpdateLookup),
-            k if matches!(k, VirtualKey::Apostrophe | VirtualKey::Semicolon) => {
+            VirtualKey::Apostrophe | VirtualKey::Semicolon => {
                 (ImeState::Composing, FsmEffect::UpdateLookup)
             }
             _ => (ImeState::Composing, FsmEffect::Consume),
@@ -148,5 +148,136 @@ impl StateMachine {
 
     fn map_selection_effect(_key: VirtualKey) -> FsmEffect {
         FsmEffect::Consume
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::engine::keys::VirtualKey;
+
+    fn make_input(
+        key: VirtualKey,
+        shift: bool,
+        ctrl: bool,
+        alt: bool,
+        buffer_empty: bool,
+        has_candidates: bool,
+    ) -> FsmInput {
+        FsmInput {
+            key,
+            mods: ModifierState {
+                shift,
+                ctrl,
+                alt,
+                meta: false,
+            },
+            buffer_empty,
+            has_candidates,
+        }
+    }
+
+    #[test]
+    fn test_idle_state_letter_key() {
+        let input = make_input(VirtualKey::A, false, false, false, true, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Idle, &input);
+        assert_eq!(new_state, ImeState::Composing);
+        assert_eq!(effect, FsmEffect::UpdateLookup);
+    }
+
+    #[test]
+    fn test_idle_state_non_coding_key() {
+        let input = make_input(VirtualKey::Left, false, false, false, true, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Idle, &input);
+        assert_eq!(new_state, ImeState::Idle);
+        assert_eq!(effect, FsmEffect::PassThrough);
+    }
+
+    #[test]
+    fn test_composing_state_space_commits() {
+        let input = make_input(VirtualKey::Space, false, false, false, false, true);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Idle);
+        assert_eq!(effect, FsmEffect::Commit首选);
+    }
+
+    #[test]
+    fn test_composing_state_enter_commits_raw() {
+        let input = make_input(VirtualKey::Enter, false, false, false, false, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Idle);
+        assert_eq!(effect, FsmEffect::CommitRaw);
+    }
+
+    #[test]
+    fn test_composing_state_backspace_updates_lookup() {
+        let input = make_input(VirtualKey::Backspace, false, false, false, false, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Composing);
+        assert_eq!(effect, FsmEffect::UpdateLookup);
+    }
+
+    #[test]
+    fn test_composing_state_esc_clears() {
+        let input = make_input(VirtualKey::Esc, false, false, false, false, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Idle);
+        assert_eq!(effect, FsmEffect::Clear);
+    }
+
+    #[test]
+    fn test_composing_state_letter_updates_lookup() {
+        let input = make_input(VirtualKey::B, false, false, false, false, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Composing);
+        assert_eq!(effect, FsmEffect::UpdateLookup);
+    }
+
+    #[test]
+    fn test_composing_state_selection_key() {
+        let input = make_input(VirtualKey::Down, false, false, false, false, true);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Selecting);
+        assert_eq!(effect, FsmEffect::Consume);
+    }
+
+    #[test]
+    fn test_composing_state_ctrl_consumes() {
+        let input = make_input(VirtualKey::A, false, true, false, false, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Composing);
+        assert_eq!(effect, FsmEffect::Consume);
+    }
+
+    #[test]
+    fn test_selecting_state_navigation() {
+        let input = make_input(VirtualKey::Down, false, false, false, false, true);
+        let (new_state, effect) = StateMachine::transition(ImeState::Selecting, &input);
+        assert_eq!(new_state, ImeState::Selecting);
+        assert_eq!(effect, FsmEffect::Consume);
+    }
+
+    #[test]
+    fn test_composing_empty_buffer_escape() {
+        let input = make_input(VirtualKey::Backspace, false, false, false, true, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Idle);
+        assert_eq!(effect, FsmEffect::Alert);
+    }
+
+    #[test]
+    fn test_composing_semicolon_updates_lookup() {
+        let input = make_input(VirtualKey::Semicolon, false, false, false, false, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Composing);
+        assert_eq!(effect, FsmEffect::UpdateLookup);
+    }
+
+    #[test]
+    fn test_composing_apostrophe_updates_lookup() {
+        let input = make_input(VirtualKey::Apostrophe, false, false, false, false, false);
+        let (new_state, effect) = StateMachine::transition(ImeState::Composing, &input);
+        assert_eq!(new_state, ImeState::Composing);
+        assert_eq!(effect, FsmEffect::UpdateLookup);
     }
 }
