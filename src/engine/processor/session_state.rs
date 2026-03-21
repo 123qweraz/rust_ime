@@ -24,10 +24,6 @@ impl SessionState {
         }
     }
 
-    pub fn toggle_chinese(&mut self) {
-        self.chinese_enabled = !self.chinese_enabled;
-    }
-
     pub fn add_to_history(&mut self, pinyin: String, word: String) {
         self.commit_history.push((pinyin, word));
         if self.commit_history.len() > 10 {
@@ -37,18 +33,6 @@ impl SessionState {
 
     pub fn get_last_word(&self) -> Option<&str> {
         self.commit_history.last().map(|(_, w)| w.as_str())
-    }
-
-    pub fn get_last_pinyin(&self) -> Option<&str> {
-        self.commit_history.last().map(|(p, _)| p.as_str())
-    }
-
-    pub fn clear_history(&mut self) {
-        self.commit_history.clear();
-    }
-
-    pub fn should_clear_history(&self) -> bool {
-        self.last_commit_time.elapsed().as_secs() > 3
     }
 
     pub fn update_commit_time(&mut self) {
@@ -91,38 +75,6 @@ impl SessionState {
 
     pub fn is_english_mode(&self) -> bool {
         self.active_profiles.len() == 1 && self.active_profiles[0] == "english"
-    }
-
-    pub fn set_profiles(&mut self, profiles: Vec<String>) {
-        self.active_profiles = profiles;
-    }
-
-    pub fn get_short_display(&self) -> String {
-        let display = self.get_current_profile_display();
-        match display.to_lowercase().as_str() {
-            "chinese" => "中".to_string(),
-            "english" => "英".to_string(),
-            "japanese" => "日".to_string(),
-            "stroke" => "笔".to_string(),
-            "mixed" => "混".to_string(),
-            _ => {
-                let mut chars = display.chars();
-                chars
-                    .next()
-                    .map(|c| c.to_string())
-                    .unwrap_or_else(|| " ".to_string())
-            }
-        }
-    }
-
-    pub fn get_current_profile_display(&self) -> String {
-        if self.active_profiles.is_empty() {
-            return "None".to_string();
-        }
-        if self.active_profiles.len() == 1 {
-            return self.active_profiles[0].clone();
-        }
-        "Mixed".to_string()
     }
 }
 
