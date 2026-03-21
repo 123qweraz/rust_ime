@@ -11,9 +11,11 @@ use std::sync::Arc;
 use std::time::{Duration, Instant};
 
 use crate::config::Config;
+use crate::engine::config_manager::UserDictData;
 use crate::engine::keys::VirtualKey;
 use crate::engine::scheme::InputScheme;
 use crate::engine::{Command, InputEvent, ModifierState};
+use arc_swap::ArcSwap;
 
 pub use fsm::ImeState;
 pub use utils::*;
@@ -764,95 +766,81 @@ impl Processor {
         let profile = self.session_state.get_current_profile();
         let word_len = word.chars().count();
 
-        // 1. 记录调频记录 (Usage History)
         if self.config.enable_auto_reorder {
-            let mut updated_entries = Vec::new();
-            self.config.usage_history.rcu(|hist| {
-                let mut hist_clone = (**hist).clone();
-                let entries = hist_clone
-                    .entry(profile.clone())
-                    .or_default()
-                    .entry(pinyin.to_string())
-                    .or_default();
-
-                // MRU 逻辑
-                if let Some(pos) = entries.iter().position(|(w, _)| w == word) {
-                    let old_count = entries[pos].1;
-                    entries.remove(pos);
-                    entries.insert(0, (word.to_string(), old_count + 1));
-                } else {
-                    entries.insert(0, (word.to_string(), 1));
-                }
-                if entries.len() > 10 {
-                    entries.truncate(10);
-                }
-
-                updated_entries = entries.clone();
-                Arc::new(hist_clone)
-            });
-            // 增量持久化到数据库
-            self.config.insert_usage(&profile, pinyin, &updated_entries);
-            // 清理缓存以确保下一次查询能看到调频结果
+            let updated =
+                Self::update_mru_history(&self.config.usage_history, &profile, pinyin, word, false);
+            self.config.insert_usage(&profile, pinyin, &updated);
             self.engine.clear_cache();
         }
 
-        // 2. 记录上下文联想 (N-Gram)
         if self.config.enable_auto_reorder {
             if let Some(ctx) = context {
-                let current_word = word.to_string();
-                let mut updated_ngram = Vec::new();
-
-                self.config.ngram_history.rcu(|hist| {
-                    let mut hist_clone = (**hist).clone();
-                    let entries = hist_clone
-                        .entry(profile.clone())
-                        .or_default()
-                        .entry(ctx.to_string())
-                        .or_default();
-
-                    if let Some(pos) = entries.iter().position(|(w, _)| w == &current_word) {
-                        let old_count = entries[pos].1;
-                        entries.remove(pos);
-                        entries.insert(0, (current_word.clone(), old_count + 1));
-                    } else {
-                        entries.insert(0, (current_word.clone(), 1));
-                    }
-                    if entries.len() > 10 {
-                        entries.truncate(10);
-                    }
-
-                    updated_ngram = entries.clone();
-                    Arc::new(hist_clone)
-                });
-                self.config.insert_ngram(&profile, ctx, &updated_ngram);
+                let updated = Self::update_mru_history(
+                    &self.config.ngram_history,
+                    &profile,
+                    ctx,
+                    word,
+                    false,
+                );
+                self.config.insert_ngram(&profile, ctx, &updated);
             }
         }
 
-        // 3. 记录造词记录 (Learned Words)
         if self.config.enable_word_discovery && word_len > 1 {
-            let is_new_word = !self.engine.has_exact_match(&profile, pinyin, word);
-            if is_new_word {
-                let mut updated_entries = Vec::new();
-                self.config.learned_words.rcu(|learned| {
-                    let mut learned_clone = (**learned).clone();
-                    let entries = learned_clone
-                        .entry(profile.clone())
-                        .or_default()
-                        .entry(pinyin.to_string())
-                        .or_default();
-                    if let Some(pos) = entries.iter().position(|(w, _)| w == word) {
-                        entries[pos].1 += 1;
-                    } else {
-                        entries.push((word.to_string(), 1));
-                    }
-                    entries.sort_by(|a, b| b.1.cmp(&a.1));
-                    updated_entries = entries.clone();
-                    Arc::new(learned_clone)
-                });
-                // 增量持久化到数据库
-                self.config
-                    .insert_learned(&profile, pinyin, &updated_entries);
+            if !self.engine.has_exact_match(&profile, pinyin, word) {
+                let updated = Self::update_mru_history(
+                    &self.config.learned_words,
+                    &profile,
+                    pinyin,
+                    word,
+                    true,
+                );
+                self.config.insert_learned(&profile, pinyin, &updated);
             }
         }
+    }
+
+    fn update_mru_history(
+        history: &Arc<ArcSwap<UserDictData>>,
+        profile: &str,
+        key: &str,
+        word: &str,
+        sort_by_count: bool,
+    ) -> Vec<(String, u32)> {
+        let mut result = Vec::new();
+        history.rcu(|hist| {
+            let mut hist_clone = (**hist).clone();
+            let entries = hist_clone
+                .entry(profile.to_string())
+                .or_default()
+                .entry(key.to_string())
+                .or_default();
+
+            if let Some(pos) = entries.iter().position(|(w, _)| w == word) {
+                if sort_by_count {
+                    entries[pos].1 += 1;
+                } else {
+                    let old_count = entries[pos].1;
+                    entries.remove(pos);
+                    entries.insert(0, (word.to_string(), old_count + 1));
+                }
+            } else {
+                if sort_by_count {
+                    entries.push((word.to_string(), 1));
+                } else {
+                    entries.insert(0, (word.to_string(), 1));
+                }
+            }
+
+            if sort_by_count {
+                entries.sort_by(|a, b| b.1.cmp(&a.1));
+            } else if entries.len() > 10 {
+                entries.truncate(10);
+            }
+
+            result = entries.clone();
+            Arc::new(hist_clone)
+        });
+        result
     }
 }
