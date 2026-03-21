@@ -1,9 +1,12 @@
+use crate::config::{
+    AntiTypoMode, AuxMode, Config, DoublePinyinScheme, FuzzyPinyinConfig, PhantomType,
+    PunctuationEntry,
+};
+use crate::engine::keys::VirtualKey;
+use arc_swap::ArcSwap;
 use std::collections::HashMap;
 use std::sync::Arc;
-use arc_swap::ArcSwap;
 use std::time::Duration;
-use crate::config::{Config, AuxMode, AntiTypoMode, PhantomType, DoublePinyinScheme, FuzzyPinyinConfig, PunctuationEntry};
-use crate::engine::keys::VirtualKey;
 
 pub type UserDictData = HashMap<String, HashMap<String, Vec<(String, u32)>>>;
 
@@ -15,7 +18,7 @@ pub struct ConfigManager {
     pub page_size: usize,
     pub show_tone_hint: bool,
     pub aux_mode: AuxMode,
-    
+
     pub anti_typo_mode: AntiTypoMode,
     pub commit_mode: String,
     pub auto_commit_unique_en_fuzhuma: bool,
@@ -27,13 +30,13 @@ pub struct ConfigManager {
     pub enable_abbreviation_matching: bool,
     pub filter_proper_nouns_by_case: bool,
     pub profile_keys: Vec<(String, String)>,
-    
+
     pub page_up_keys: std::collections::HashSet<crate::engine::keys::VirtualKey>,
     pub page_down_keys: std::collections::HashSet<crate::engine::keys::VirtualKey>,
     pub prev_candidate_keys: std::collections::HashSet<crate::engine::keys::VirtualKey>,
     pub next_candidate_keys: std::collections::HashSet<crate::engine::keys::VirtualKey>,
     pub swap_arrow_keys: bool,
-    
+
     pub enable_english_filter: bool,
     pub enable_caps_selection: bool,
     pub enable_number_selection: bool,
@@ -99,11 +102,36 @@ impl ConfigManager {
             prefix_matching_limit: master.input.prefix_matching_limit,
             enable_abbreviation_matching: master.input.enable_abbreviation_matching,
             filter_proper_nouns_by_case: master.input.filter_proper_nouns_by_case,
-            profile_keys: master.input.profile_keys.iter().map(|pk| (pk.key.to_lowercase(), pk.profile.to_lowercase())).collect(),
-            page_up_keys: master.hotkeys.page_up.iter().filter_map(|s| VirtualKey::from_str(s)).collect(),
-            page_down_keys: master.hotkeys.page_down.iter().filter_map(|s| VirtualKey::from_str(s)).collect(),
-            prev_candidate_keys: master.hotkeys.prev_candidate.iter().filter_map(|s| VirtualKey::from_str(s)).collect(),
-            next_candidate_keys: master.hotkeys.next_candidate.iter().filter_map(|s| VirtualKey::from_str(s)).collect(),
+            profile_keys: master
+                .input
+                .profile_keys
+                .iter()
+                .map(|pk| (pk.key.to_lowercase(), pk.profile.to_lowercase()))
+                .collect(),
+            page_up_keys: master
+                .hotkeys
+                .page_up
+                .iter()
+                .filter_map(|s| VirtualKey::from_str(s))
+                .collect(),
+            page_down_keys: master
+                .hotkeys
+                .page_down
+                .iter()
+                .filter_map(|s| VirtualKey::from_str(s))
+                .collect(),
+            prev_candidate_keys: master
+                .hotkeys
+                .prev_candidate
+                .iter()
+                .filter_map(|s| VirtualKey::from_str(s))
+                .collect(),
+            next_candidate_keys: master
+                .hotkeys
+                .next_candidate
+                .iter()
+                .filter_map(|s| VirtualKey::from_str(s))
+                .collect(),
             swap_arrow_keys: master.input.swap_arrow_keys,
             enable_english_filter: master.input.enable_english_filter,
             enable_caps_selection: master.input.enable_caps_selection,
@@ -112,14 +140,18 @@ impl ConfigManager {
             double_tap_timeout: Duration::from_millis(master.input.double_tap_timeout_ms),
             double_taps: {
                 let mut m = HashMap::new();
-                for dt in &master.input.double_taps { m.insert(dt.trigger_key.to_lowercase(), dt.insert_text.clone()); }
+                for dt in &master.input.double_taps {
+                    m.insert(dt.trigger_key.to_lowercase(), dt.insert_text.clone());
+                }
                 m
             },
             enable_long_press: master.input.enable_long_press,
             long_press_timeout: Duration::from_millis(master.input.long_press_timeout_ms),
             long_press_mappings: {
                 let mut m = HashMap::new();
-                for lm in &master.input.long_press_mappings { m.insert(lm.trigger_key.to_lowercase(), lm.insert_text.clone()); }
+                for lm in &master.input.long_press_mappings {
+                    m.insert(lm.trigger_key.to_lowercase(), lm.insert_text.clone());
+                }
                 m
             },
             enable_punctuation_long_press: master.input.enable_punctuation_long_press,
@@ -127,7 +159,11 @@ impl ConfigManager {
             punctuations: master.input.punctuations.clone(),
             keyboard_layouts: master.input.keyboard_layouts.clone(),
             layouts: master.input.layouts.clone(),
-            phantom_type: if cfg!(target_os = "windows") { PhantomType::None } else { master.input.phantom_type },
+            phantom_type: if cfg!(target_os = "windows") {
+                PhantomType::None
+            } else {
+                master.input.phantom_type
+            },
             enable_word_discovery: master.input.enable_word_discovery,
             enable_auto_reorder: master.input.enable_auto_reorder,
             enable_fixed_first_candidate: master.input.enable_fixed_first_candidate,
@@ -147,6 +183,8 @@ impl ConfigManager {
 
     pub fn apply_config(&mut self, conf: &Config) {
         self.master_config = conf.clone();
+
+        // Input settings
         self.enable_word_discovery = conf.input.enable_word_discovery;
         self.enable_auto_reorder = conf.input.enable_auto_reorder;
         self.enable_fixed_first_candidate = conf.input.enable_fixed_first_candidate;
@@ -156,62 +194,101 @@ impl ConfigManager {
         self.enable_fuzzy_pinyin = conf.input.enable_fuzzy_pinyin;
         self.fuzzy_config = conf.input.fuzzy_config.clone();
         self.enable_traditional = conf.input.enable_traditional;
-        
+
+        // Appearance settings
         self.show_candidates = conf.appearance.show_candidates;
         self.show_english_translation = conf.appearance.show_english_translation;
         self.show_stroke_aux = conf.appearance.show_stroke_aux;
         self.page_size = conf.appearance.page_size;
         self.show_tone_hint = conf.appearance.show_tone_hint;
         self.aux_mode = conf.appearance.aux_mode;
-        
+
+        // Commit settings
         self.anti_typo_mode = conf.input.anti_typo_mode;
         self.commit_mode = conf.input.commit_mode.clone();
         self.auto_commit_unique_en_fuzhuma = conf.input.auto_commit_unique_en_fuzhuma;
         self.auto_commit_unique_full_match = conf.input.auto_commit_unique_full_match;
         self.auto_commit_stroke = conf.input.auto_commit_stroke;
         self.enable_error_sound = conf.input.enable_error_sound;
+
+        // Matching settings
         self.enable_prefix_matching = conf.input.enable_prefix_matching;
         self.prefix_matching_limit = conf.input.prefix_matching_limit;
         self.enable_abbreviation_matching = conf.input.enable_abbreviation_matching;
         self.filter_proper_nouns_by_case = conf.input.filter_proper_nouns_by_case;
-        self.profile_keys = conf.input.profile_keys.iter().map(|pk| (pk.key.to_lowercase(), pk.profile.to_lowercase())).collect();
-        
-        self.page_up_keys = conf.hotkeys.page_up.iter().filter_map(|s| VirtualKey::from_str(s)).collect();
-        self.page_down_keys = conf.hotkeys.page_down.iter().filter_map(|s| VirtualKey::from_str(s)).collect();
-        self.prev_candidate_keys = conf.hotkeys.prev_candidate.iter().filter_map(|s| VirtualKey::from_str(s)).collect();
-        self.next_candidate_keys = conf.hotkeys.next_candidate.iter().filter_map(|s| VirtualKey::from_str(s)).collect();
+        self.profile_keys = conf
+            .input
+            .profile_keys
+            .iter()
+            .map(|pk| (pk.key.to_lowercase(), pk.profile.to_lowercase()))
+            .collect();
+
+        // Hotkeys
+        self.page_up_keys = conf
+            .hotkeys
+            .page_up
+            .iter()
+            .filter_map(|s| VirtualKey::from_str(s))
+            .collect();
+        self.page_down_keys = conf
+            .hotkeys
+            .page_down
+            .iter()
+            .filter_map(|s| VirtualKey::from_str(s))
+            .collect();
+        self.prev_candidate_keys = conf
+            .hotkeys
+            .prev_candidate
+            .iter()
+            .filter_map(|s| VirtualKey::from_str(s))
+            .collect();
+        self.next_candidate_keys = conf
+            .hotkeys
+            .next_candidate
+            .iter()
+            .filter_map(|s| VirtualKey::from_str(s))
+            .collect();
+
+        // Selection settings
         self.swap_arrow_keys = conf.input.swap_arrow_keys;
-        
         self.enable_english_filter = conf.input.enable_english_filter;
         self.enable_caps_selection = conf.input.enable_caps_selection;
         self.enable_number_selection = conf.input.enable_number_selection;
 
+        // Double tap
         self.enable_double_tap = conf.input.enable_double_tap;
         self.double_tap_timeout = Duration::from_millis(conf.input.double_tap_timeout_ms);
         self.double_taps.clear();
         for dt in &conf.input.double_taps {
-            self.double_taps.insert(dt.trigger_key.to_lowercase(), dt.insert_text.clone());
+            self.double_taps
+                .insert(dt.trigger_key.to_lowercase(), dt.insert_text.clone());
         }
 
+        // Long press
         self.enable_long_press = conf.input.enable_long_press;
         self.long_press_timeout = Duration::from_millis(conf.input.long_press_timeout_ms);
         self.long_press_mappings.clear();
         for lm in &conf.input.long_press_mappings {
-            self.long_press_mappings.insert(lm.trigger_key.to_lowercase(), lm.insert_text.clone());
+            self.long_press_mappings
+                .insert(lm.trigger_key.to_lowercase(), lm.insert_text.clone());
         }
 
+        // Punctuation
         self.enable_punctuation_long_press = conf.input.enable_punctuation_long_press;
-        self.punctuation_long_press_mappings = conf.input.punctuation_long_press_mappings.clone();
         self.punctuations = conf.input.punctuations.clone();
         self.keyboard_layouts = conf.input.keyboard_layouts.clone();
         self.layouts = conf.input.layouts.clone();
 
+        // Phantom mode
         self.phantom_type = conf.input.phantom_type;
         if cfg!(target_os = "windows") && self.phantom_type != PhantomType::None {
             self.phantom_type = PhantomType::None;
         }
 
-        if (self.enable_word_discovery || self.enable_auto_reorder) && (self.learned_words.load().is_empty() || self.usage_history.load().is_empty()) {
+        // Load user dicts if needed
+        if (self.enable_word_discovery || self.enable_auto_reorder)
+            && (self.learned_words.load().is_empty() || self.usage_history.load().is_empty())
+        {
             self.load_user_dicts();
         }
     }
@@ -229,9 +306,24 @@ impl ConfigManager {
                     if parts.len() == 3 {
                         let (prefix, profile, key_str) = (parts[0], parts[1], parts[2]);
                         match prefix {
-                            "learned" => { learned.entry(profile.to_string()).or_default().insert(key_str.to_string(), entries); }
-                            "usage" => { usage.entry(profile.to_string()).or_default().insert(key_str.to_string(), entries); }
-                            "ngram" => { ngram.entry(profile.to_string()).or_default().insert(key_str.to_string(), entries); }
+                            "learned" => {
+                                learned
+                                    .entry(profile.to_string())
+                                    .or_default()
+                                    .insert(key_str.to_string(), entries);
+                            }
+                            "usage" => {
+                                usage
+                                    .entry(profile.to_string())
+                                    .or_default()
+                                    .insert(key_str.to_string(), entries);
+                            }
+                            "ngram" => {
+                                ngram
+                                    .entry(profile.to_string())
+                                    .or_default()
+                                    .insert(key_str.to_string(), entries);
+                            }
                             _ => {}
                         };
                     }
@@ -246,7 +338,8 @@ impl ConfigManager {
                 let path = std::path::Path::new("data").join(format!("{}.json", name));
                 if path.exists() {
                     if let Ok(file) = std::fs::File::open(&path) {
-                        return serde_json::from_reader(std::io::BufReader::new(file)).unwrap_or_default();
+                        return serde_json::from_reader(std::io::BufReader::new(file))
+                            .unwrap_or_default();
                     }
                 }
                 HashMap::new()
@@ -292,10 +385,13 @@ impl ConfigManager {
                     let mut latest = dict;
                     let latest_path = path;
                     while let Ok((next, next_path)) = rx.try_recv() {
-                        if next_path == latest_path { latest = next; }
+                        if next_path == latest_path {
+                            latest = next;
+                        }
                     }
                     if let Ok(file) = std::fs::File::create(&latest_path) {
-                        let _ = serde_json::to_writer_pretty(std::io::BufWriter::new(file), &latest);
+                        let _ =
+                            serde_json::to_writer_pretty(std::io::BufWriter::new(file), &latest);
                     }
                 }
             });
