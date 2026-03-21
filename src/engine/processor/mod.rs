@@ -227,6 +227,10 @@ impl Processor {
 
             // C. CapsLock 核心逻辑
             if key == VirtualKey::CapsLock {
+                if !self.chinese_enabled {
+                    self.caps_lock_enabled = !self.caps_lock_enabled;
+                    return Action::PassThrough;
+                }
                 self.capslock_down = true;
                 if !self.session.buffer.is_empty() {
                     self.session.nav_mode = true;
@@ -265,6 +269,9 @@ impl Processor {
         if is_release && key == VirtualKey::CapsLock {
             self.session.nav_mode = false;
             self.capslock_down = false;
+            if !self.chinese_enabled {
+                return Action::PassThrough;
+            }
             return Action::Consume;
         }
 
