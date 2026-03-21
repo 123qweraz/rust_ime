@@ -300,15 +300,14 @@ impl Filter for AdaptiveFilter {
         let usage_guard = self.usage_history.load();
         let ngram_guard = self.ngram_history.load();
 
+        // 构建 HashMap 用于 O(1) 查找，而不是 O(n) 线性搜索
         if let Some(profile_usage) = usage_guard.get(&self.profile) {
-            // 根据当前拼音 (input) 获取调频记录
             if let Some(entries) = profile_usage.get(input) {
+                let usage_map: std::collections::HashMap<&str, u32> =
+                    entries.iter().map(|(w, c)| (w.as_str(), *c)).collect();
                 for c in &mut candidates {
-                    if let Some((_, count)) =
-                        entries.iter().find(|(w, _)| w == c.simplified.as_ref())
-                    {
-                        // 基础调频加权
-                        c.weight += (*count as f64) * 1000000.0;
+                    if let Some(&count) = usage_map.get(c.simplified.as_ref()) {
+                        c.weight += (count as f64) * 1000000.0;
                     }
                 }
             }
@@ -318,12 +317,11 @@ impl Filter for AdaptiveFilter {
         if let Some(ctx) = context {
             if let Some(profile_ngram) = ngram_guard.get(&self.profile) {
                 if let Some(entries) = profile_ngram.get(ctx) {
+                    let ngram_map: std::collections::HashMap<&str, u32> =
+                        entries.iter().map(|(w, c)| (w.as_str(), *c)).collect();
                     for c in &mut candidates {
-                        if let Some((_, count)) =
-                            entries.iter().find(|(w, _)| w == c.simplified.as_ref())
-                        {
-                            // 上下文匹配获得极大权重
-                            c.weight += (*count as f64) * 5000000.0;
+                        if let Some(&count) = ngram_map.get(c.simplified.as_ref()) {
+                            c.weight += (count as f64) * 5000000.0;
                         }
                     }
                 }

@@ -48,10 +48,10 @@ impl SessionState {
         let mut results = Vec::new();
         let history_slice = &self.commit_history[start..];
 
-        for i in 0..history_slice.len().saturating_sub(1) {
+        for i in 0..history_slice.len() {
             let mut combined_py = String::new();
             let mut combined_word = String::new();
-            for entry in history_slice.iter().skip(i) {
+            for entry in &history_slice[i..] {
                 combined_py.push_str(&entry.0);
                 combined_word.push_str(&entry.1);
             }
