@@ -4,32 +4,9 @@ use std::sync::{Arc, Mutex, RwLock};
 use crate::config::Config;
 use crate::engine::Processor;
 use crate::platform::traits::InputMethodHost;
+use crate::platform::{parse_linux_backend, LinuxBackend};
 use crate::ui;
 use crate::ui::GuiEvent;
-
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum LinuxBackend {
-    Auto,
-    Wayland,
-    Evdev,
-    IBus,
-}
-
-#[must_use]
-pub fn parse_linux_backend(args: &[String]) -> LinuxBackend {
-    if args
-        .iter()
-        .any(|a| a == "--backend=wayland" || a == "wayland")
-    {
-        LinuxBackend::Wayland
-    } else if args.iter().any(|a| a == "--backend=evdev" || a == "evdev") {
-        LinuxBackend::Evdev
-    } else if args.iter().any(|a| a == "--backend=ibus" || a == "ibus") {
-        LinuxBackend::IBus
-    } else {
-        LinuxBackend::Auto
-    }
-}
 
 pub fn run_input_host(
     args: &[String],
@@ -54,6 +31,8 @@ pub fn run_input_host(
 
     #[cfg(target_os = "linux")]
     {
+        use crate::platform::linux;
+
         let dev_path = config.read().map_or_else(
             |_| "/dev/input/event0".into(),
             |c| c.linux.device_path.clone(),
@@ -62,27 +41,21 @@ pub fn run_input_host(
         match parse_linux_backend(args) {
             LinuxBackend::Wayland => {
                 println!("[Main] 强制启动 Wayland 原生协议模式...");
-                let mut host =
-                    crate::platform::linux::wayland::WaylandHost::new(processor, Some(gui_tx))?;
+                let mut host = linux::wayland::WaylandHost::new(processor, Some(gui_tx))?;
                 host.run()?;
             }
             LinuxBackend::IBus => {
                 println!("[Main] 强制启动 IBus 伪装模式 (免 Root)...");
-                let mut host =
-                    crate::platform::linux::ibus_host::IBusHost::new(processor, Some(gui_tx));
+                let mut host = linux::ibus_host::IBusHost::new(processor, Some(gui_tx));
                 host.run()?;
             }
             LinuxBackend::Evdev => {
                 println!("[Main] 强制启动 Evdev 拦截模式...");
-                let mut host = crate::platform::linux::evdev_host::EvdevHost::new(
-                    processor,
-                    &dev_path,
-                    Some(gui_tx),
-                    tray_tx,
-                )?;
+                let mut host =
+                    linux::evdev_host::EvdevHost::new(processor, &dev_path, Some(gui_tx), tray_tx)?;
                 host.run()?;
             }
-            LinuxBackend::Auto => match crate::platform::linux::evdev_host::EvdevHost::new(
+            LinuxBackend::Auto => match linux::evdev_host::EvdevHost::new(
                 processor.clone(),
                 &dev_path,
                 Some(gui_tx.clone()),
@@ -94,8 +67,7 @@ pub fn run_input_host(
                 }
                 Err(e) => {
                     println!("[Main] Evdev 启动失败 ({e:?})，尝试回落到 IBus 模式...");
-                    let mut host =
-                        crate::platform::linux::ibus_host::IBusHost::new(processor, Some(gui_tx));
+                    let mut host = linux::ibus_host::IBusHost::new(processor, Some(gui_tx));
                     host.run()?;
                 }
             },
@@ -110,7 +82,7 @@ pub fn run_input_host(
 
 #[cfg(test)]
 mod tests {
-    use super::{parse_linux_backend, LinuxBackend};
+    use crate::platform::{parse_linux_backend, LinuxBackend};
 
     #[test]
     fn parse_linux_backend_flags() {
