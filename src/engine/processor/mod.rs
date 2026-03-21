@@ -478,8 +478,7 @@ impl Processor {
             self.session_state.update_commit_time();
         }
 
-        if self.session_state.active_profiles.len() == 1
-            && self.session_state.active_profiles[0] == "english"
+        if self.session_state.is_english_mode()
             && !cand.is_empty()
             && cand.chars().last().unwrap_or(' ').is_alphanumeric()
         {
