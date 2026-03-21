@@ -105,13 +105,18 @@ impl Processor {
         self.config.apply_config(conf);
         self.engine.clear_cache();
 
-        if !conf.input.active_profiles.is_empty() {
-            self.session_state.active_profiles = conf
+        if !conf.input.enabled_profiles.is_empty() {
+            // 只激活已启用的方案中第一个为默认
+            let enabled: Vec<String> = conf
                 .input
-                .active_profiles
+                .enabled_profiles
                 .iter()
                 .map(|p| p.to_lowercase())
+                .filter(|p| self.engine.trie_paths.contains_key(p))
                 .collect();
+            if !enabled.is_empty() {
+                self.session_state.active_profiles = vec![enabled[0].clone()];
+            }
         } else {
             let new_profile = conf.input.default_profile.to_lowercase();
             if !new_profile.is_empty() && self.engine.trie_paths.contains_key(&new_profile) {
@@ -121,8 +126,15 @@ impl Processor {
             }
         }
 
-        // 异步预热核心词库
-        for profile in self.session_state.active_profiles.clone() {
+        // 异步预热核心词库（只预热已启用的）
+        let enabled_list: Vec<String> = conf
+            .input
+            .enabled_profiles
+            .iter()
+            .filter(|p| self.engine.trie_paths.contains_key(&p.to_lowercase()))
+            .map(|p| p.to_lowercase())
+            .collect();
+        for profile in enabled_list {
             let engine = self.engine.clone();
             std::thread::spawn(move || {
                 engine.prewarm_profile(&profile);
@@ -227,34 +239,34 @@ impl Processor {
     }
 
     pub fn next_profile(&mut self) -> String {
-        let mut all: Vec<String> = self.engine.trie_paths.keys().cloned().collect();
-        if all.is_empty() {
+        let enabled: Vec<String> = self
+            .config
+            .master_config
+            .input
+            .enabled_profiles
+            .iter()
+            .filter(|p| self.engine.trie_paths.contains_key(*p))
+            .cloned()
+            .collect();
+
+        if enabled.is_empty() {
             return String::new();
         }
-        all.sort();
-        if self.session_state.active_profiles.len() > 1 {
-            let next = all[0].clone();
-            self.session_state.active_profiles = vec![next.clone()];
-            self.reset();
-            return next;
-        }
+
         let current = self
             .session_state
             .active_profiles
             .first()
             .cloned()
-            .unwrap_or_default();
-        let idx = all.iter().position(|p| p == &current).unwrap_or(0);
-        if idx + 1 < all.len() {
-            let next = all[idx + 1].clone();
-            self.session_state.active_profiles = vec![next.clone()];
-            self.reset();
-            next
-        } else {
-            self.session_state.active_profiles = all.clone();
-            self.reset();
-            "Mixed (All)".to_string()
-        }
+            .unwrap_or_else(|| enabled[0].clone());
+
+        let idx = enabled.iter().position(|p| p == &current).unwrap_or(0);
+        let next_idx = (idx + 1) % enabled.len();
+        let next = enabled[next_idx].clone();
+
+        self.session_state.active_profiles = vec![next.clone()];
+        self.reset();
+        next
     }
 
     pub fn handle_key_ext(

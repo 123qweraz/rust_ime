@@ -206,7 +206,10 @@ pub fn process_switch_mode(
             }
             VirtualKey::Z => {
                 processor.session.switch_mode = false;
-                if processor.engine.trie_paths.contains_key("english") {
+                let enabled = &processor.config.master_config.input.enabled_profiles;
+                if enabled.contains(&"english".to_string())
+                    && processor.engine.trie_paths.contains_key("english")
+                {
                     processor.session_state.active_profiles = vec!["english".to_string()];
                     processor.reset();
                     return Some(Action::Notify("英".into(), "已切换至英语方案".into()));
@@ -226,10 +229,15 @@ pub fn process_switch_mode(
                 }
 
                 if let Some(p_str) = target_profile {
+                    let enabled = &processor.config.master_config.input.enabled_profiles;
                     let profiles: Vec<String> = p_str
                         .split(',')
                         .map(|s| s.trim().to_lowercase())
-                        .filter(|s| !s.is_empty() && processor.engine.trie_paths.contains_key(s))
+                        .filter(|s| {
+                            !s.is_empty()
+                                && processor.engine.trie_paths.contains_key(s)
+                                && enabled.contains(&s.to_string())
+                        })
                         .collect();
                     if !profiles.is_empty() {
                         processor.session_state.active_profiles = profiles;

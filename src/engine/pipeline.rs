@@ -57,31 +57,47 @@ pub trait Filter: Send + Sync {
 pub struct DefaultSegmentor;
 impl Segmentor for DefaultSegmentor {
     fn segment(&self, input: &str, syllables: &HashSet<String>) -> Vec<String> {
-        let mut segments = Vec::new();
-        let input_lower = input.to_lowercase();
-        let mut remaining = input_lower.as_str();
+        // 快速路径：如果输入已经是小写字母/数字，直接使用（避免 to_lowercase 分配）
+        let needs_lowercase = !input
+            .bytes()
+            .all(|b| (b >= b'a' && b <= b'z') || (b >= b'0' && b <= b'9'));
 
-        while !remaining.is_empty() {
+        if needs_lowercase {
+            let input_lower = input.to_lowercase();
+            return Self::segment_lowercase(&input_lower, syllables);
+        }
+
+        Self::segment_lowercase(input, syllables)
+    }
+}
+
+impl DefaultSegmentor {
+    #[inline]
+    fn segment_lowercase(input: &str, syllables: &HashSet<String>) -> Vec<String> {
+        let mut segments = Vec::new();
+        let mut pos = 0;
+
+        while pos < input.len() {
+            let max_len = 12.min(input.len() - pos);
             let mut matched = false;
-            let max_len = 12.min(remaining.len());
+
             for len in (1..=max_len).rev() {
-                if remaining.is_char_boundary(len) {
-                    let part = &remaining[..len];
+                let end = pos + len;
+                if input.is_char_boundary(end) {
+                    let part = &input[pos..end];
                     if syllables.contains(part) {
                         segments.push(part.to_string());
-                        remaining = &remaining[len..];
+                        pos = end;
                         matched = true;
                         break;
                     }
                 }
             }
+
             if !matched {
-                if let Some(first_char) = remaining.chars().next() {
-                    segments.push(first_char.to_string());
-                    remaining = &remaining[first_char.len_utf8()..];
-                } else {
-                    break;
-                }
+                let ch = input[pos..].chars().next().unwrap();
+                segments.push(ch.to_string());
+                pos += ch.len_utf8();
             }
         }
         segments
@@ -463,6 +479,7 @@ pub struct Pipeline {
     pub segmentor: Box<dyn Segmentor>,
     pub translators: Vec<Box<dyn Translator>>,
     pub filters: Vec<Box<dyn Filter>>,
+    segment_cache: std::sync::RwLock<std::collections::HashMap<String, Vec<String>>>,
 }
 
 impl Pipeline {
@@ -471,6 +488,7 @@ impl Pipeline {
             segmentor,
             translators: Vec::new(),
             filters: Vec::new(),
+            segment_cache: std::sync::RwLock::new(std::collections::HashMap::new()),
         }
     }
 
@@ -482,6 +500,7 @@ impl Pipeline {
         self.filters.push(f);
     }
 
+    #[inline]
     pub fn run(
         &self,
         input: &str,
@@ -490,7 +509,26 @@ impl Pipeline {
         limit: usize,
         context: Option<&str>,
     ) -> Vec<Candidate> {
-        let segments = self.segmentor.segment(input, syllables);
+        // 使用缓存的分段结果
+        let segments = {
+            if let Ok(guard) = self.segment_cache.read() {
+                if let Some(cached) = guard.get(input) {
+                    cached.clone()
+                } else {
+                    drop(guard);
+                    let segments = self.segmentor.segment(input, syllables);
+                    if let Ok(mut guard) = self.segment_cache.write() {
+                        if guard.len() < 100 {
+                            guard.insert(input.to_string(), segments.clone());
+                        }
+                    }
+                    segments
+                }
+            } else {
+                self.segmentor.segment(input, syllables)
+            }
+        };
+
         let mut candidates = Vec::new();
         for t in &self.translators {
             candidates.extend(t.translate(input, &segments, config, limit));
@@ -616,6 +654,7 @@ impl SearchEngine {
         (vec![], vec![])
     }
 
+    #[inline]
     pub fn has_exact_match(&self, profile: &str, pinyin: &str, word: &str) -> bool {
         if let Some(pipeline) = self.get_or_create_pipeline(profile) {
             if let Some(trie) = self.get_trie_from_pipeline(pipeline.as_ref()) {
@@ -711,6 +750,7 @@ impl SearchEngine {
         Some(arc_p)
     }
 
+    #[inline]
     pub fn has_longer_match(&self, profile: &str, buffer: &str) -> bool {
         if let Some(pipeline) = self.get_or_create_pipeline(profile) {
             if let Some(trie) = self.get_trie_from_pipeline(pipeline.as_ref()) {
@@ -747,6 +787,7 @@ impl SearchEngine {
         }
     }
 
+    #[inline]
     pub fn matches_filter(&self, candidate: &Candidate, filter: &str) -> bool {
         if filter.is_empty() {
             return true;

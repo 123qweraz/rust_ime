@@ -13,90 +13,90 @@
         </header>
 
         <div class="card">
-            <h2>输入方案</h2>
+            <h2>输入法方案</h2>
             <div class="setting-item" style="display: block;">
                 <div class="info">
-                    <div class="title">活跃输入方案 (多选混输)</div>
-                    <div class="desc">勾选您想要启用的输入方案，它们将同时生效。</div>
+                    <div class="title">启用的方案</div>
+                    <div class="desc">勾选您想要启用的输入法方案。未启用的方案不会在托盘中显示，也无法切换使用。</div>
                 </div>
-                <div id="active_profiles_container" class="profile-chip-group"></div>
+                <div id="enabled_profiles_container" class="profile-chip-group"></div>
             </div>
         </div>
 
-        <h2>输入行为与转换</h2>
+        <h2>输入与转换</h2>
         <div class="card">
             <div class="setting-item">
                 <div class="info">
-                    <div class="title">繁体模式</div>
-                    <div class="desc">开启后输出繁体中文</div>
+                    <div class="title">繁体输出</div>
+                    <div class="desc">开启后输出的中文为繁体字形</div>
                 </div>
                 <label class="switch"><input type="checkbox" id="enable_traditional"><span class="slider"></span></label>
             </div>
             <div class="setting-item">
                 <div class="info">
                     <div class="title">首词固定</div>
-                    <div class="desc">词库首位候选词位置固定，不参与自动调频。</div>
+                    <div class="desc">首位候选词位置固定，不随使用频率变化</div>
                 </div>
                 <label class="switch"><input type="checkbox" id="enable_fixed_first_candidate"><span class="slider"></span></label>
             </div>
             <div class="setting-item">
                 <div class="info">
                     <div class="title">自动造词</div>
-                    <div class="desc">记录词库中不存在的新组合（字数 > 1）。</div>
+                    <div class="desc">记录连续输入的新词组（超过一个字）</div>
                 </div>
                 <label class="switch"><input type="checkbox" id="enable_word_discovery"><span class="slider"></span></label>
             </div>
             <div class="setting-item">
                 <div class="info">
                     <div class="title">自动调频</div>
-                    <div class="desc">根据输入记录，将常用词和刚输入的词排在前面。</div>
+                    <div class="desc">根据输入频率调整候选词顺序</div>
                 </div>
                 <label class="switch"><input type="checkbox" id="enable_auto_reorder"><span class="slider"></span></label>
             </div>
             <div class="setting-item">
                 <div class="info">
                     <div class="title">上屏模式</div>
-                    <div class="desc">词模式：空格直接上屏；句模式：支持连续输入。</div>
+                    <div class="desc">词模式：空格直接上屏；句模式：支持连续输入整句</div>
                 </div>
                 <select id="commit_mode">
-                    <option value="single">词模式 (单空格)</option>
-                    <option value="double">句模式 (双空格)</option>
+                    <option value="single">词模式</option>
+                    <option value="double">句模式</option>
                 </select>
             </div>
             <div class="setting-item">
                 <div class="info">
                     <div class="title">开机自启</div>
-                    <div class="desc">在系统启动时自动运行 rust-ime。</div>
+                    <div class="desc">系统启动时自动运行输入法</div>
                 </div>
                 <label class="switch"><input type="checkbox" id="autostart"><span class="slider"></span></label>
             </div>
         </div>
 
-        <h2>Linux 专属设置</h2>
+        <h2>Linux 设置</h2>
         <div class="card">
             <div class="setting-item">
                 <div class="info">
-                    <div class="title">使用桌面通知</div>
-                    <div class="desc">在 Linux 下使用桌面通知显示候选词 (解决候选窗焦点问题)。</div>
+                    <div class="title">桌面通知</div>
+                    <div class="desc">使用桌面通知显示候选词列表</div>
                 </div>
                 <label class="switch"><input type="checkbox" id="linux_enable_notification_candidates"><span class="slider"></span></label>
             </div>
             <div class="setting-item">
                 <div class="info">
-                    <div class="title">粘贴模式</div>
-                    <div class="desc">选择将中文注入到应用程序的方式。</div>
+                    <div class="title">粘贴方式</div>
+                    <div class="desc">选择文字上屏的方式</div>
                 </div>
                 <select id="linux_paste_method">
-                    <option value="shift_insert">Shift + Insert (推荐)</option>
+                    <option value="shift_insert">Shift + Insert（推荐）</option>
                     <option value="ctrl_v">Ctrl + V</option>
                     <option value="ctrl_shift_v">Ctrl + Shift + V</option>
-                    <option value="fcitx5">Fcitx5 接口 (需 Fcitx5 运行)</option>
+                    <option value="fcitx5">Fcitx5 接口</option>
                 </select>
             </div>
             <div class="setting-item">
                 <div class="info">
-                    <div class="title">键盘设备路径</div>
-                    <div class="desc">evdev 拦截的键盘硬件路径。</div>
+                    <div class="title">键盘设备</div>
+                    <div class="desc">键盘输入设备路径</div>
                 </div>
                 <input type="text" id="linux_device_path" placeholder="/dev/input/eventX">
             </div>
@@ -116,9 +116,9 @@
             await loadConfig();
             
             // 方案选择
-            const pc = document.getElementById('active_profiles_container');
+            const pc = document.getElementById('enabled_profiles_container');
             pc.innerHTML = config.files.profiles.map(p => `
-                <div class="profile-chip ${config.input.active_profiles.includes(p.name)?'active':''}" onclick="toggleProfile('${p.name}', this)">
+                <div class="profile-chip ${config.input.enabled_profiles.includes(p.name)?'active':''}" onclick="toggleProfile('${p.name}', this)">
                     <span>${p.name}</span>
                 </div>
             `).join('');
@@ -137,13 +137,16 @@
         }
 
         function toggleProfile(name, el) {
-            const idx = config.input.active_profiles.indexOf(name);
+            const idx = config.input.enabled_profiles.indexOf(name);
             if (idx === -1) {
-                config.input.active_profiles.push(name);
+                config.input.enabled_profiles.push(name);
                 el.classList.add('active');
             } else {
-                config.input.active_profiles.splice(idx, 1);
-                el.classList.remove('active');
+                // 至少保留一个启用的方案
+                if (config.input.enabled_profiles.length > 1) {
+                    config.input.enabled_profiles.splice(idx, 1);
+                    el.classList.remove('active');
+                }
             }
         }
 

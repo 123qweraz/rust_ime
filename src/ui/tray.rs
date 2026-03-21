@@ -57,6 +57,8 @@ impl Tray for ImeTray {
             "chinese" => "中文",
             "english" => "英文",
             "japanese" => "日文",
+            "stroke" => "笔画",
+            "shengpizi" => "生僻字",
             "mixed" => "中日英混",
             other => other,
         };
@@ -316,6 +318,8 @@ unsafe extern "system" fn tray_wnd_proc(
                             "chinese" => "中文",
                             "english" => "英文",
                             "japanese" => "日文",
+                            "stroke" => "笔画",
+                            "shengpizi" => "生僻字",
                             "mixed" => "混合",
                             other => other,
                         };

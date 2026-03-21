@@ -13,37 +13,37 @@
   "long_press_mappings": [],
   "enable_punctuation_long_press": true,
   "punctuation_long_press_mappings": {
-    "\"": "\"",
-    "^": "^",
-    "%": "%",
     "-": "-",
-    "$": "$",
-    "~": "~",
-    ">": ">",
-    "+": "+",
-    "{": "{",
-    ";": ";",
-    "@": "@",
-    "<": "<",
-    "}": "}",
-    "?": "?",
-    "!": "!",
-    "#": "#",
-    "(": "(",
-    "*": "*",
-    ".": ".",
     "]": "]",
-    "=": "=",
-    "\\": "\\",
+    ">": ">",
+    "@": "@",
+    "^": "^",
+    "/": "/",
+    "#": "#",
+    ";": ";",
     ",": ",",
-    "_": "_",
+    "\\": "\\",
+    ".": ".",
+    "*": "*",
+    "%": "%",
+    "(": "(",
     "'": "'",
-    ")": ")",
-    "[": "[",
-    "`": "`",
-    "&": "&",
+    "=": "=",
+    "{": "{",
+    "_": "_",
     ":": ":",
-    "/": "/"
+    "`": "`",
+    "+": "+",
+    "<": "<",
+    "[": "[",
+    "&": "&",
+    "?": "?",
+    "~": "~",
+    ")": ")",
+    "!": "!",
+    "\"": "\"",
+    "}": "}",
+    "$": "$"
   },
   "punctuations": {},
   "keyboard_layouts": {},
@@ -54,8 +54,11 @@
   "prefix_matching_limit": 20,
   "enable_abbreviation_matching": true,
   "filter_proper_nouns_by_case": true,
-  "active_profiles": [
-    "chinese"
+  "enabled_profiles": [
+    "chinese",
+    "english",
+    "japanese",
+    "stroke"
   ],
   "profile_keys": [
     {
@@ -92,33 +95,26 @@
   "enable_auto_reorder": true,
   "enable_fixed_first_candidate": false,
   "layouts": {
-    "english": {
-      "name": "English Default Layout",
-      "mappings": {
-        ";": {
-          "tap": ";",
-          "shift": ":",
-          "description": "英文分号"
-        },
-        ",": {
-          "tap": ",",
-          "shift": "<",
-          "description": "英文逗号"
-        },
-        ".": {
-          "tap": ".",
-          "shift": ">",
-          "description": "英文句号"
-        }
-      }
-    },
     "chinese": {
       "name": "中文默认布局",
       "mappings": {
+        ".": {
+          "tap": "。",
+          "shift": ">",
+          "double_tap": "...",
+          "long_press": "·",
+          "description": "中文句号"
+        },
         "!": {
           "tap": "！",
           "shift": "!",
           "description": "中文叹号"
+        },
+        ",": {
+          "tap": "，",
+          "shift": "<",
+          "long_press": "、",
+          "description": "中文逗号"
         },
         "?": {
           "tap": "？",
@@ -131,19 +127,6 @@
           "double_tap": ";",
           "long_press": "……",
           "description": "中文分号"
-        },
-        ",": {
-          "tap": "，",
-          "shift": "<",
-          "long_press": "、",
-          "description": "中文逗号"
-        },
-        ".": {
-          "tap": "。",
-          "shift": ">",
-          "double_tap": "...",
-          "long_press": "·",
-          "description": "中文句号"
         }
       }
     },
@@ -151,13 +134,38 @@
       "name": "笔画默认布局",
       "mappings": {}
     },
+    "english": {
+      "name": "English Default Layout",
+      "mappings": {
+        ",": {
+          "tap": ",",
+          "shift": "<",
+          "description": "英文逗号"
+        },
+        ".": {
+          "tap": ".",
+          "shift": ">",
+          "description": "英文句号"
+        },
+        ";": {
+          "tap": ";",
+          "shift": ":",
+          "description": "英文分号"
+        }
+      }
+    },
     "japanese": {
       "name": "日本語デフォルト配列",
       "mappings": {
-        "/": {
-          "tap": "・",
-          "shift": "?",
-          "description": "日文中点"
+        "]": {
+          "tap": "」",
+          "shift": "}",
+          "description": "日文右引号"
+        },
+        ",": {
+          "tap": "、",
+          "shift": "<",
+          "description": "日文顿号"
         },
         ".": {
           "tap": "。",
@@ -170,15 +178,10 @@
           "shift": "{",
           "description": "日文左引号"
         },
-        ",": {
-          "tap": "、",
-          "shift": "<",
-          "description": "日文顿号"
-        },
-        "]": {
-          "tap": "」",
-          "shift": "}",
-          "description": "日文右引号"
+        "/": {
+          "tap": "・",
+          "shift": "?",
+          "description": "日文中点"
         }
       }
     }
@@ -188,28 +191,28 @@
   "double_pinyin_scheme": {
     "name": "小鹤双拼",
     "initials": {
-      "v": "zh",
       "u": "sh",
+      "v": "zh",
       "i": "ch"
     },
     "rimes": {
-      "b": "in",
-      "r": "uan",
-      "f": "en",
-      "m": "ian",
-      "x": "ia",
-      "z": "ou",
-      "y": "un",
-      "j": "an",
-      "t": "ue",
-      "s": "ong",
-      "l": "iang",
-      "p": "ie",
-      "c": "ao",
-      "w": "ei",
-      "q": "iu",
       "d": "ai",
-      "k": "ao"
+      "c": "ao",
+      "r": "uan",
+      "p": "ie",
+      "w": "ei",
+      "j": "an",
+      "f": "en",
+      "x": "ia",
+      "q": "iu",
+      "b": "in",
+      "y": "un",
+      "t": "ue",
+      "z": "ou",
+      "m": "ian",
+      "k": "ao",
+      "s": "ong",
+      "l": "iang"
     }
   },
   "enable_fuzzy_pinyin": false,
