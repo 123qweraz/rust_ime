@@ -2,7 +2,7 @@ use crate::engine::processor::{Action, Command, Processor};
 use std::sync::Arc;
 
 pub fn execute_command(processor: &mut Processor, cmd: Command) -> Action {
-    let page_size = processor.config.page_size;
+    let page_size = processor.config.page_size();
     match cmd {
         Command::NextPage => {
             let old_page = processor.session.page;

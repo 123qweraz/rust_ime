@@ -70,7 +70,7 @@ impl Compositor {
 
     pub fn get_phantom_text(p: &Processor) -> String {
         use crate::config::PhantomType;
-        if p.session.state == ImeState::Idle || p.config.phantom_type == PhantomType::None {
+        if p.session.state == ImeState::Idle || p.config.phantom_type() == PhantomType::None {
             return String::new();
         }
 
@@ -78,7 +78,7 @@ impl Compositor {
             return "[方案切换]".to_string();
         }
 
-        match p.config.phantom_type {
+        match p.config.phantom_type() {
             PhantomType::Pinyin => {
                 // 对于笔画输入法，显示转换后的字母编码而不是原始数字
                 // 笔画输入法的 buffer 包含数字（如 "12345"），需要转换为字母编码

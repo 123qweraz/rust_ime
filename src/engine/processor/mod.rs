@@ -509,7 +509,7 @@ impl Processor {
     }
 
     pub fn update_phantom_action(&mut self) -> Action {
-        if self.config.phantom_type == crate::config::PhantomType::None {
+        if self.config.phantom_type() == crate::config::PhantomType::None {
             return Action::Consume;
         }
         let target = crate::engine::compositor::Compositor::get_phantom_text(self);
@@ -744,7 +744,7 @@ impl Processor {
         let raw_input = &self.session.buffer;
 
         // 笔画输入法特殊逻辑：只有当第一个是精确匹配且没有重码时，直接上屏
-        if self.config.auto_commit_stroke && self.session_state.is_stroke_mode() {
+        if self.config.auto_commit_stroke() && self.session_state.is_stroke_mode() {
             if !self.session.candidates.is_empty() && self.session.candidates[0].match_level == 3 {
                 let is_unique_exact = self.session.candidates.len() == 1
                     || self.session.candidates[1].match_level != 3;
@@ -767,7 +767,7 @@ impl Processor {
             }
         }
 
-        if !self.config.auto_commit_unique_full_match || self.session.candidates.len() != 1 {
+        if !self.config.auto_commit_unique_full_match() || self.session.candidates.len() != 1 {
             return None;
         }
 
@@ -788,7 +788,7 @@ impl Processor {
             self.session.last_blocked_buffer.clear();
             return false;
         }
-        match self.config.anti_typo_mode {
+        match self.config.anti_typo_mode() {
             crate::config::AntiTypoMode::None => false,
             crate::config::AntiTypoMode::Strict => {
                 self.session.buffer = old_buffer.to_string();
@@ -819,14 +819,14 @@ impl Processor {
         let profile = self.session_state.get_current_profile();
         let word_len = word.chars().count();
 
-        if self.config.enable_auto_reorder {
+        if self.config.enable_auto_reorder() {
             let updated =
                 learning::update_mru(&self.config.usage_history, &profile, pinyin, word, false);
             self.config.insert_usage(&profile, pinyin, &updated);
             self.engine.clear_cache();
         }
 
-        if self.config.enable_auto_reorder {
+        if self.config.enable_auto_reorder() {
             if let Some(ctx) = context {
                 let updated =
                     learning::update_mru(&self.config.ngram_history, &profile, ctx, word, false);
@@ -834,7 +834,7 @@ impl Processor {
             }
         }
 
-        if self.config.enable_word_discovery && word_len > 1 {
+        if self.config.enable_word_discovery() && word_len > 1 {
             if !self.engine.has_exact_match(&profile, pinyin, word) {
                 let updated =
                     learning::update_mru(&self.config.learned_words, &profile, pinyin, word, true);
@@ -885,7 +885,7 @@ impl Processor {
             .to_string();
         if let Some(profile) = self
             .config
-            .profile_keys
+            .profile_keys()
             .iter()
             .find(|(k, _)| k.to_lowercase() == key_char)
             .map(|(_, p)| p.clone())

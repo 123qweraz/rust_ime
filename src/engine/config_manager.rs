@@ -12,67 +12,10 @@ pub type UserDictData = HashMap<String, HashMap<String, Vec<(String, u32)>>>;
 
 pub struct ConfigManager {
     pub master_config: Config,
-    pub show_candidates: bool,
-    pub show_english_translation: bool,
-    pub show_stroke_aux: bool,
-    pub page_size: usize,
-    pub show_tone_hint: bool,
-    pub aux_mode: AuxMode,
-
-    pub anti_typo_mode: AntiTypoMode,
-    pub commit_mode: String,
-    pub auto_commit_unique_en_fuzhuma: bool,
-    pub auto_commit_unique_full_match: bool,
-    pub auto_commit_stroke: bool,
-    pub enable_error_sound: bool,
-    pub enable_prefix_matching: bool,
-    pub prefix_matching_limit: usize,
-    pub enable_abbreviation_matching: bool,
-    pub filter_proper_nouns_by_case: bool,
-    pub profile_keys: Vec<(String, String)>,
-
-    pub page_up_keys: std::collections::HashSet<crate::engine::keys::VirtualKey>,
-    pub page_down_keys: std::collections::HashSet<crate::engine::keys::VirtualKey>,
-    pub prev_candidate_keys: std::collections::HashSet<crate::engine::keys::VirtualKey>,
-    pub next_candidate_keys: std::collections::HashSet<crate::engine::keys::VirtualKey>,
-    pub swap_arrow_keys: bool,
-
-    pub enable_english_filter: bool,
-    pub enable_caps_selection: bool,
-    pub enable_number_selection: bool,
-
-    pub enable_double_tap: bool,
-    pub double_tap_timeout: Duration,
-    pub double_taps: HashMap<String, String>,
-
-    pub enable_long_press: bool,
-    pub long_press_timeout: Duration,
-    pub long_press_mappings: HashMap<String, String>,
-
-    pub enable_punctuation_long_press: bool,
-    pub punctuation_long_press_mappings: HashMap<String, String>,
-    pub punctuations: HashMap<String, HashMap<String, Vec<PunctuationEntry>>>,
-    pub keyboard_layouts: HashMap<String, HashMap<String, String>>,
-    pub layouts: HashMap<String, crate::config::ProfileLayout>,
-
-    pub phantom_type: PhantomType,
-
-    pub enable_word_discovery: bool,
-    pub enable_auto_reorder: bool,
-    pub enable_fixed_first_candidate: bool,
-    pub enable_smart_backspace: bool,
-    pub enable_double_pinyin: bool,
-    pub double_pinyin_scheme: DoublePinyinScheme,
-    pub enable_fuzzy_pinyin: bool,
-    pub fuzzy_config: FuzzyPinyinConfig,
-    pub enable_traditional: bool,
-
-    // 用户词库相关逻辑：分离新词发现、调频历史和上下文联想
     pub learned_words: Arc<ArcSwap<UserDictData>>,
     pub usage_history: Arc<ArcSwap<UserDictData>>,
-    pub ngram_history: Arc<ArcSwap<UserDictData>>, // 存储 context -> { word -> count }
+    pub ngram_history: Arc<ArcSwap<UserDictData>>,
     pub db: Option<sled::Db>,
-
     pub user_dict_tx: Option<std::sync::mpsc::Sender<(UserDictData, std::path::PathBuf)>>,
 }
 
@@ -85,94 +28,7 @@ impl ConfigManager {
         }
 
         Self {
-            master_config: master.clone(),
-            show_candidates: master.appearance.show_candidates,
-            show_english_translation: master.appearance.show_english_translation,
-            show_stroke_aux: master.appearance.show_stroke_aux,
-            page_size: master.appearance.page_size,
-            show_tone_hint: master.appearance.show_tone_hint,
-            aux_mode: master.appearance.aux_mode,
-            anti_typo_mode: master.input.anti_typo_mode,
-            commit_mode: master.input.commit_mode.clone(),
-            auto_commit_unique_en_fuzhuma: master.input.auto_commit_unique_en_fuzhuma,
-            auto_commit_unique_full_match: master.input.auto_commit_unique_full_match,
-            auto_commit_stroke: master.input.auto_commit_stroke,
-            enable_error_sound: master.input.enable_error_sound,
-            enable_prefix_matching: master.input.enable_prefix_matching,
-            prefix_matching_limit: master.input.prefix_matching_limit,
-            enable_abbreviation_matching: master.input.enable_abbreviation_matching,
-            filter_proper_nouns_by_case: master.input.filter_proper_nouns_by_case,
-            profile_keys: master
-                .input
-                .profile_keys
-                .iter()
-                .map(|pk| (pk.key.to_lowercase(), pk.profile.to_lowercase()))
-                .collect(),
-            page_up_keys: master
-                .hotkeys
-                .page_up
-                .iter()
-                .filter_map(|s| VirtualKey::from_str(s))
-                .collect(),
-            page_down_keys: master
-                .hotkeys
-                .page_down
-                .iter()
-                .filter_map(|s| VirtualKey::from_str(s))
-                .collect(),
-            prev_candidate_keys: master
-                .hotkeys
-                .prev_candidate
-                .iter()
-                .filter_map(|s| VirtualKey::from_str(s))
-                .collect(),
-            next_candidate_keys: master
-                .hotkeys
-                .next_candidate
-                .iter()
-                .filter_map(|s| VirtualKey::from_str(s))
-                .collect(),
-            swap_arrow_keys: master.input.swap_arrow_keys,
-            enable_english_filter: master.input.enable_english_filter,
-            enable_caps_selection: master.input.enable_caps_selection,
-            enable_number_selection: master.input.enable_number_selection,
-            enable_double_tap: master.input.enable_double_tap,
-            double_tap_timeout: Duration::from_millis(master.input.double_tap_timeout_ms),
-            double_taps: {
-                let mut m = HashMap::new();
-                for dt in &master.input.double_taps {
-                    m.insert(dt.trigger_key.to_lowercase(), dt.insert_text.clone());
-                }
-                m
-            },
-            enable_long_press: master.input.enable_long_press,
-            long_press_timeout: Duration::from_millis(master.input.long_press_timeout_ms),
-            long_press_mappings: {
-                let mut m = HashMap::new();
-                for lm in &master.input.long_press_mappings {
-                    m.insert(lm.trigger_key.to_lowercase(), lm.insert_text.clone());
-                }
-                m
-            },
-            enable_punctuation_long_press: master.input.enable_punctuation_long_press,
-            punctuation_long_press_mappings: master.input.punctuation_long_press_mappings.clone(),
-            punctuations: master.input.punctuations.clone(),
-            keyboard_layouts: master.input.keyboard_layouts.clone(),
-            layouts: master.input.layouts.clone(),
-            phantom_type: if cfg!(target_os = "windows") {
-                PhantomType::None
-            } else {
-                master.input.phantom_type
-            },
-            enable_word_discovery: master.input.enable_word_discovery,
-            enable_auto_reorder: master.input.enable_auto_reorder,
-            enable_fixed_first_candidate: master.input.enable_fixed_first_candidate,
-            enable_smart_backspace: master.input.enable_smart_backspace,
-            enable_double_pinyin: master.input.enable_double_pinyin,
-            double_pinyin_scheme: master.input.double_pinyin_scheme.clone(),
-            enable_fuzzy_pinyin: master.input.enable_fuzzy_pinyin,
-            fuzzy_config: master.input.fuzzy_config.clone(),
-            enable_traditional: master.input.enable_traditional,
+            master_config: master,
             learned_words: Arc::new(ArcSwap::from_pointee(HashMap::new())),
             usage_history: Arc::new(ArcSwap::from_pointee(HashMap::new())),
             ngram_history: Arc::new(ArcSwap::from_pointee(HashMap::new())),
@@ -184,113 +40,238 @@ impl ConfigManager {
     pub fn apply_config(&mut self, conf: &Config) {
         self.master_config = conf.clone();
 
-        // Input settings
-        self.enable_word_discovery = conf.input.enable_word_discovery;
-        self.enable_auto_reorder = conf.input.enable_auto_reorder;
-        self.enable_fixed_first_candidate = conf.input.enable_fixed_first_candidate;
-        self.enable_smart_backspace = conf.input.enable_smart_backspace;
-        self.enable_double_pinyin = conf.input.enable_double_pinyin;
-        self.double_pinyin_scheme = conf.input.double_pinyin_scheme.clone();
-        self.enable_fuzzy_pinyin = conf.input.enable_fuzzy_pinyin;
-        self.fuzzy_config = conf.input.fuzzy_config.clone();
-        self.enable_traditional = conf.input.enable_traditional;
-
-        // Appearance settings
-        self.show_candidates = conf.appearance.show_candidates;
-        self.show_english_translation = conf.appearance.show_english_translation;
-        self.show_stroke_aux = conf.appearance.show_stroke_aux;
-        self.page_size = conf.appearance.page_size;
-        self.show_tone_hint = conf.appearance.show_tone_hint;
-        self.aux_mode = conf.appearance.aux_mode;
-
-        // Commit settings
-        self.anti_typo_mode = conf.input.anti_typo_mode;
-        self.commit_mode = conf.input.commit_mode.clone();
-        self.auto_commit_unique_en_fuzhuma = conf.input.auto_commit_unique_en_fuzhuma;
-        self.auto_commit_unique_full_match = conf.input.auto_commit_unique_full_match;
-        self.auto_commit_stroke = conf.input.auto_commit_stroke;
-        self.enable_error_sound = conf.input.enable_error_sound;
-
-        // Matching settings
-        self.enable_prefix_matching = conf.input.enable_prefix_matching;
-        self.prefix_matching_limit = conf.input.prefix_matching_limit;
-        self.enable_abbreviation_matching = conf.input.enable_abbreviation_matching;
-        self.filter_proper_nouns_by_case = conf.input.filter_proper_nouns_by_case;
-        self.profile_keys = conf
-            .input
-            .profile_keys
-            .iter()
-            .map(|pk| (pk.key.to_lowercase(), pk.profile.to_lowercase()))
-            .collect();
-
-        // Hotkeys
-        self.page_up_keys = conf
-            .hotkeys
-            .page_up
-            .iter()
-            .filter_map(|s| VirtualKey::from_str(s))
-            .collect();
-        self.page_down_keys = conf
-            .hotkeys
-            .page_down
-            .iter()
-            .filter_map(|s| VirtualKey::from_str(s))
-            .collect();
-        self.prev_candidate_keys = conf
-            .hotkeys
-            .prev_candidate
-            .iter()
-            .filter_map(|s| VirtualKey::from_str(s))
-            .collect();
-        self.next_candidate_keys = conf
-            .hotkeys
-            .next_candidate
-            .iter()
-            .filter_map(|s| VirtualKey::from_str(s))
-            .collect();
-
-        // Selection settings
-        self.swap_arrow_keys = conf.input.swap_arrow_keys;
-        self.enable_english_filter = conf.input.enable_english_filter;
-        self.enable_caps_selection = conf.input.enable_caps_selection;
-        self.enable_number_selection = conf.input.enable_number_selection;
-
-        // Double tap
-        self.enable_double_tap = conf.input.enable_double_tap;
-        self.double_tap_timeout = Duration::from_millis(conf.input.double_tap_timeout_ms);
-        self.double_taps.clear();
-        for dt in &conf.input.double_taps {
-            self.double_taps
-                .insert(dt.trigger_key.to_lowercase(), dt.insert_text.clone());
-        }
-
-        // Long press
-        self.enable_long_press = conf.input.enable_long_press;
-        self.long_press_timeout = Duration::from_millis(conf.input.long_press_timeout_ms);
-        self.long_press_mappings.clear();
-        for lm in &conf.input.long_press_mappings {
-            self.long_press_mappings
-                .insert(lm.trigger_key.to_lowercase(), lm.insert_text.clone());
-        }
-
-        // Punctuation
-        self.enable_punctuation_long_press = conf.input.enable_punctuation_long_press;
-        self.punctuations = conf.input.punctuations.clone();
-        self.keyboard_layouts = conf.input.keyboard_layouts.clone();
-        self.layouts = conf.input.layouts.clone();
-
-        // Phantom mode
-        self.phantom_type = conf.input.phantom_type;
-        if cfg!(target_os = "windows") && self.phantom_type != PhantomType::None {
-            self.phantom_type = PhantomType::None;
-        }
-
         // Load user dicts if needed
-        if (self.enable_word_discovery || self.enable_auto_reorder)
+        if (self.master_config.input.enable_word_discovery
+            || self.master_config.input.enable_auto_reorder)
             && (self.learned_words.load().is_empty() || self.usage_history.load().is_empty())
         {
             self.load_user_dicts();
         }
+    }
+
+    // === Helper methods for computed values ===
+
+    pub fn profile_keys(&self) -> Vec<(String, String)> {
+        self.master_config
+            .input
+            .profile_keys
+            .iter()
+            .map(|pk| (pk.key.to_lowercase(), pk.profile.to_lowercase()))
+            .collect()
+    }
+
+    pub fn page_up_keys(&self) -> std::collections::HashSet<VirtualKey> {
+        self.master_config
+            .hotkeys
+            .page_up
+            .iter()
+            .filter_map(|s| VirtualKey::from_str(s))
+            .collect()
+    }
+
+    pub fn page_down_keys(&self) -> std::collections::HashSet<VirtualKey> {
+        self.master_config
+            .hotkeys
+            .page_down
+            .iter()
+            .filter_map(|s| VirtualKey::from_str(s))
+            .collect()
+    }
+
+    pub fn prev_candidate_keys(&self) -> std::collections::HashSet<VirtualKey> {
+        self.master_config
+            .hotkeys
+            .prev_candidate
+            .iter()
+            .filter_map(|s| VirtualKey::from_str(s))
+            .collect()
+    }
+
+    pub fn next_candidate_keys(&self) -> std::collections::HashSet<VirtualKey> {
+        self.master_config
+            .hotkeys
+            .next_candidate
+            .iter()
+            .filter_map(|s| VirtualKey::from_str(s))
+            .collect()
+    }
+
+    pub fn double_taps(&self) -> HashMap<String, String> {
+        let mut m = HashMap::new();
+        for dt in &self.master_config.input.double_taps {
+            m.insert(dt.trigger_key.to_lowercase(), dt.insert_text.clone());
+        }
+        m
+    }
+
+    pub fn double_tap_timeout(&self) -> Duration {
+        Duration::from_millis(self.master_config.input.double_tap_timeout_ms)
+    }
+
+    pub fn long_press_timeout(&self) -> Duration {
+        Duration::from_millis(self.master_config.input.long_press_timeout_ms)
+    }
+
+    pub fn long_press_mappings(&self) -> HashMap<String, String> {
+        let mut m = HashMap::new();
+        for lm in &self.master_config.input.long_press_mappings {
+            m.insert(lm.trigger_key.to_lowercase(), lm.insert_text.clone());
+        }
+        m
+    }
+
+    // === Shortcut accessors ===
+
+    pub fn show_candidates(&self) -> bool {
+        self.master_config.appearance.show_candidates
+    }
+
+    pub fn page_size(&self) -> usize {
+        self.master_config.appearance.page_size
+    }
+
+    pub fn commit_mode(&self) -> &str {
+        &self.master_config.input.commit_mode
+    }
+
+    pub fn enable_word_discovery(&self) -> bool {
+        self.master_config.input.enable_word_discovery
+    }
+
+    pub fn enable_auto_reorder(&self) -> bool {
+        self.master_config.input.enable_auto_reorder
+    }
+
+    pub fn enable_fixed_first_candidate(&self) -> bool {
+        self.master_config.input.enable_fixed_first_candidate
+    }
+
+    pub fn enable_double_pinyin(&self) -> bool {
+        self.master_config.input.enable_double_pinyin
+    }
+
+    pub fn double_pinyin_scheme(&self) -> &DoublePinyinScheme {
+        &self.master_config.input.double_pinyin_scheme
+    }
+
+    pub fn enable_fuzzy_pinyin(&self) -> bool {
+        self.master_config.input.enable_fuzzy_pinyin
+    }
+
+    pub fn fuzzy_config(&self) -> &FuzzyPinyinConfig {
+        &self.master_config.input.fuzzy_config
+    }
+
+    pub fn enable_traditional(&self) -> bool {
+        self.master_config.input.enable_traditional
+    }
+
+    pub fn show_english_translation(&self) -> bool {
+        self.master_config.appearance.show_english_translation
+    }
+
+    pub fn show_stroke_aux(&self) -> bool {
+        self.master_config.appearance.show_stroke_aux
+    }
+
+    pub fn show_tone_hint(&self) -> bool {
+        self.master_config.appearance.show_tone_hint
+    }
+
+    pub fn aux_mode(&self) -> AuxMode {
+        self.master_config.appearance.aux_mode
+    }
+
+    pub fn anti_typo_mode(&self) -> AntiTypoMode {
+        self.master_config.input.anti_typo_mode
+    }
+
+    pub fn auto_commit_unique_en_fuzhuma(&self) -> bool {
+        self.master_config.input.auto_commit_unique_en_fuzhuma
+    }
+
+    pub fn auto_commit_unique_full_match(&self) -> bool {
+        self.master_config.input.auto_commit_unique_full_match
+    }
+
+    pub fn auto_commit_stroke(&self) -> bool {
+        self.master_config.input.auto_commit_stroke
+    }
+
+    pub fn enable_error_sound(&self) -> bool {
+        self.master_config.input.enable_error_sound
+    }
+
+    pub fn enable_prefix_matching(&self) -> bool {
+        self.master_config.input.enable_prefix_matching
+    }
+
+    pub fn prefix_matching_limit(&self) -> usize {
+        self.master_config.input.prefix_matching_limit
+    }
+
+    pub fn enable_abbreviation_matching(&self) -> bool {
+        self.master_config.input.enable_abbreviation_matching
+    }
+
+    pub fn filter_proper_nouns_by_case(&self) -> bool {
+        self.master_config.input.filter_proper_nouns_by_case
+    }
+
+    pub fn swap_arrow_keys(&self) -> bool {
+        self.master_config.input.swap_arrow_keys
+    }
+
+    pub fn enable_english_filter(&self) -> bool {
+        self.master_config.input.enable_english_filter
+    }
+
+    pub fn enable_caps_selection(&self) -> bool {
+        self.master_config.input.enable_caps_selection
+    }
+
+    pub fn enable_number_selection(&self) -> bool {
+        self.master_config.input.enable_number_selection
+    }
+
+    pub fn enable_double_tap(&self) -> bool {
+        self.master_config.input.enable_double_tap
+    }
+
+    pub fn enable_long_press(&self) -> bool {
+        self.master_config.input.enable_long_press
+    }
+
+    pub fn enable_punctuation_long_press(&self) -> bool {
+        self.master_config.input.enable_punctuation_long_press
+    }
+
+    pub fn punctuation_long_press_mappings(&self) -> &HashMap<String, String> {
+        &self.master_config.input.punctuation_long_press_mappings
+    }
+
+    pub fn punctuations(&self) -> &HashMap<String, HashMap<String, Vec<PunctuationEntry>>> {
+        &self.master_config.input.punctuations
+    }
+
+    pub fn keyboard_layouts(&self) -> &HashMap<String, HashMap<String, String>> {
+        &self.master_config.input.keyboard_layouts
+    }
+
+    pub fn layouts(&self) -> &HashMap<String, crate::config::ProfileLayout> {
+        &self.master_config.input.layouts
+    }
+
+    pub fn phantom_type(&self) -> PhantomType {
+        if cfg!(target_os = "windows") {
+            PhantomType::None
+        } else {
+            self.master_config.input.phantom_type
+        }
+    }
+
+    pub fn enable_smart_backspace(&self) -> bool {
+        self.master_config.input.enable_smart_backspace
     }
 
     pub fn load_user_dicts(&mut self) {
@@ -403,7 +384,6 @@ impl ConfigManager {
             let key = format!("learned:{}:{}", profile, pinyin);
             if let Ok(val) = serde_json::to_vec(entries) {
                 let _ = db.insert(key, val);
-                // 暂时不强制 flush，让 sled 自动处理以换取性能
             }
         }
     }

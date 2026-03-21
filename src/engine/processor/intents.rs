@@ -57,8 +57,8 @@ pub fn process_intent(
     let is_repeat = val == 2;
     let is_release = val == 0;
 
-    if ((processor.config.enable_long_press && is_letter(key))
-        || (processor.config.enable_punctuation_long_press
+    if ((processor.config.enable_long_press() && is_letter(key))
+        || (processor.config.enable_punctuation_long_press()
             && get_punctuation_key(key, shift_pressed).is_some()))
         && !shift_pressed
     {
@@ -69,7 +69,7 @@ pub fn process_intent(
             if !processor.dispatcher.long_press_triggered {
                 if let Some((press_key, press_time)) = processor.dispatcher.key_press_info {
                     if press_key == key
-                        && now.duration_since(press_time) >= processor.config.long_press_timeout
+                        && now.duration_since(press_time) >= processor.config.long_press_timeout()
                     {
                         if is_letter(key) {
                             if let Some(c) =
@@ -85,7 +85,7 @@ pub fn process_intent(
 
                                 // 1. 尝试 profile 专属的长按映射
                                 let mut replacement = None;
-                                if let Some(layout) = processor.config.layouts.get(&lang) {
+                                if let Some(layout) = processor.config.layouts().get(&lang) {
                                     if let Some(action) = layout.mappings.get(&c.to_string()) {
                                         replacement = action.long_press.clone();
                                     }
@@ -95,7 +95,7 @@ pub fn process_intent(
                                 if replacement.is_none() {
                                     replacement = processor
                                         .config
-                                        .long_press_mappings
+                                        .long_press_mappings()
                                         .get(&c.to_string())
                                         .cloned();
                                 }
@@ -125,7 +125,7 @@ pub fn process_intent(
 
                             // 1. 尝试 profile 专属的长按映射
                             let mut replacement = None;
-                            if let Some(layout) = processor.config.layouts.get(&lang) {
+                            if let Some(layout) = processor.config.layouts().get(&lang) {
                                 if let Some(action) = layout.mappings.get(p_key) {
                                     replacement = action.long_press.clone();
                                 }
@@ -135,7 +135,7 @@ pub fn process_intent(
                             if replacement.is_none() {
                                 replacement = processor
                                     .config
-                                    .punctuation_long_press_mappings
+                                    .punctuation_long_press_mappings()
                                     .get(p_key)
                                     .cloned();
                             }
@@ -221,7 +221,7 @@ pub fn process_switch_mode(
                     .unwrap_or(' ')
                     .to_string();
                 let mut target_profile = None;
-                for (trigger_key, profile_name) in &processor.config.profile_keys {
+                for (trigger_key, profile_name) in &processor.config.profile_keys() {
                     if trigger_key == &k {
                         target_profile = Some(profile_name.clone());
                         break;

@@ -27,7 +27,7 @@ pub fn handle_idle(
                 .to_lowercase();
 
             // 1. 尝试新的多维布局 (layouts)
-            if let Some(layout) = processor.config.layouts.get(&lang) {
+            if let Some(layout) = processor.config.layouts().get(&lang) {
                 if let Some(action) = layout.mappings.get(&c.to_string()) {
                     if shift_pressed && !action.shift.is_empty() {
                         return Action::Emit(action.shift.clone());
@@ -38,7 +38,7 @@ pub fn handle_idle(
             }
 
             // 2. 尝试旧的简单映射 (keyboard_layouts)
-            if let Some(layout) = processor.config.keyboard_layouts.get(&lang) {
+            if let Some(layout) = processor.config.keyboard_layouts().get(&lang) {
                 if let Some(mapped) = layout.get(&c.to_string()) {
                     return Action::Emit(mapped.clone());
                 }
@@ -80,7 +80,7 @@ pub fn handle_composing(
     // 1. 优先尝试从 KeyMap 中获取统一指令
     if let Some(cmd) = processor.dispatcher.key_map.get(&(key, mods)).cloned() {
         // 处理方向键交换逻辑 (如果是方向键且启用了交换)
-        let final_cmd = if processor.config.swap_arrow_keys {
+        let final_cmd = if processor.config.swap_arrow_keys() {
             match (key, cmd.clone()) {
                 (VirtualKey::Up, Command::PrevPage) => Command::PrevCandidate,
                 (VirtualKey::Down, Command::NextPage) => Command::NextCandidate,
@@ -183,11 +183,11 @@ pub fn handle_composing(
             }
         }
 
-        if !shift_pressed && processor.config.enable_double_tap {
+        if !shift_pressed && processor.config.enable_double_tap() {
             if let Some(last_k) = processor.dispatcher.last_tap_key {
                 if last_k == key {
                     if let Some(last_t) = processor.dispatcher.last_tap_time {
-                        if now.duration_since(last_t) <= processor.config.double_tap_timeout {
+                        if now.duration_since(last_t) <= processor.config.double_tap_timeout() {
                             if let Some(c) =
                                 key_to_char(key, false, processor.session_state.caps_lock_enabled)
                             {
@@ -201,7 +201,7 @@ pub fn handle_composing(
 
                                 // 1. 尝试 profile 专属的双击映射
                                 let mut replacement = None;
-                                if let Some(layout) = processor.config.layouts.get(&lang) {
+                                if let Some(layout) = processor.config.layouts().get(&lang) {
                                     if let Some(action) = layout.mappings.get(&c.to_string()) {
                                         if let Some(dt) = &action.double_tap {
                                             replacement = Some(dt.clone());
@@ -212,7 +212,7 @@ pub fn handle_composing(
                                 // 2. 尝试全局双击映射
                                 if replacement.is_none() {
                                     replacement =
-                                        processor.config.double_taps.get(&c.to_string()).cloned();
+                                        processor.config.double_taps().get(&c.to_string()).cloned();
                                 }
 
                                 if let Some(r) = replacement {
@@ -269,16 +269,16 @@ pub fn handle_composing(
         processor.dispatcher.last_tap_time = None;
     }
 
-    if processor.config.page_up_keys.contains(&key) && has_cand {
+    if processor.config.page_up_keys().contains(&key) && has_cand {
         return processor.execute_command(Command::PrevPage);
     }
-    if processor.config.page_down_keys.contains(&key) && has_cand {
+    if processor.config.page_down_keys().contains(&key) && has_cand {
         return processor.execute_command(Command::NextPage);
     }
-    if processor.config.prev_candidate_keys.contains(&key) && has_cand {
+    if processor.config.prev_candidate_keys().contains(&key) && has_cand {
         return processor.execute_command(Command::PrevCandidate);
     }
-    if processor.config.next_candidate_keys.contains(&key) && has_cand {
+    if processor.config.next_candidate_keys().contains(&key) && has_cand {
         return processor.execute_command(Command::NextCandidate);
     }
 
@@ -347,11 +347,11 @@ pub fn handle_composing(
                 if shift_pressed {
                     processor.session.selected = processor.session.candidates.len() - 1;
                     processor.session.page = (processor.session.selected
-                        / processor.config.page_size)
-                        * processor.config.page_size;
+                        / processor.config.page_size())
+                        * processor.config.page_size();
                 } else {
                     processor.session.selected =
-                        (processor.session.page + processor.config.page_size - 1)
+                        (processor.session.page + processor.config.page_size() - 1)
                             .min(processor.session.candidates.len() - 1);
                 }
             }
@@ -405,10 +405,10 @@ pub fn handle_composing(
 
         _ if is_digit(key) => {
             let digit = key_to_digit(key).unwrap_or(0);
-            if processor.config.enable_number_selection
-                && processor.config.commit_mode == "single"
+            if processor.config.enable_number_selection()
+                && processor.config.commit_mode() == "single"
                 && digit >= 1
-                && digit <= processor.config.page_size
+                && digit <= processor.config.page_size()
             {
                 return processor.execute_command(Command::Select(digit as usize - 1));
             }

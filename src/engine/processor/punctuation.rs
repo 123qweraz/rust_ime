@@ -8,7 +8,7 @@ fn resolve_layout_punctuation(
     key: VirtualKey,
     shift_pressed: bool,
 ) -> Option<String> {
-    let layout = processor.config.layouts.get(lang)?;
+    let layout = processor.config.layouts().get(lang)?;
     let shifted_key = get_punctuation_key(key, true);
     let base_key = get_punctuation_key(key, false);
 
@@ -73,13 +73,13 @@ pub fn handle_punctuation(
         } else {
             let zh_puncs = processor
                 .config
-                .punctuations
+                .punctuations()
                 .get(&lang)
                 .and_then(|m| m.get(punc_key))
                 .or_else(|| {
                     processor
                         .config
-                        .punctuations
+                        .punctuations()
                         .get("chinese")
                         .and_then(|m| m.get(punc_key))
                 });
