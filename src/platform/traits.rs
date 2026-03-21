@@ -1,5 +1,4 @@
-#[derive(Clone, Debug)]
-#[allow(dead_code)]
+#[derive(Clone, Debug, Default)]
 pub struct Rect {
     pub x: i32,
     pub y: i32,
@@ -7,7 +6,6 @@ pub struct Rect {
     pub height: i32,
 }
 
-#[allow(dead_code)]
 pub trait InputMethodHost {
     fn set_preedit(&self, text: &str, cursor_pos: usize);
     fn commit_text(&self, text: &str);
