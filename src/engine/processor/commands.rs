@@ -1,5 +1,5 @@
+use crate::engine::processor::{Action, Command, Processor};
 use std::sync::Arc;
-use crate::engine::processor::{Processor, Action, Command};
 
 pub fn execute_command(processor: &mut Processor, cmd: Command) -> Action {
     let page_size = processor.config.page_size;
@@ -39,8 +39,10 @@ pub fn execute_command(processor: &mut Processor, cmd: Command) -> Action {
             Action::Consume
         }
         Command::Commit => {
-            if processor.session.buffer.is_empty() { return Action::PassThrough; }
-            
+            if processor.session.buffer.is_empty() {
+                return Action::PassThrough;
+            }
+
             // 优先尝试提交当前选中的候选词
             if !processor.session.candidates.is_empty() {
                 let idx = processor.session.selected;
@@ -55,15 +57,24 @@ pub fn execute_command(processor: &mut Processor, cmd: Command) -> Action {
             processor.commit_candidate(out, 99)
         }
         Command::CommitRaw => {
-            if processor.session.buffer.is_empty() { return Action::PassThrough; }
+            if processor.session.buffer.is_empty() {
+                return Action::PassThrough;
+            }
             let out = Arc::from(processor.session.buffer.as_str());
             processor.commit_candidate(out, 99)
         }
         Command::Clear => {
-            processor.commit_history.clear();
+            processor.session_state.commit_history.clear();
             let del = processor.session.phantom_text.chars().count();
             processor.reset();
-            if del > 0 { Action::DeleteAndEmit { delete: del, insert: "".into() } } else { Action::Consume }
+            if del > 0 {
+                Action::DeleteAndEmit {
+                    delete: del,
+                    insert: "".into(),
+                }
+            } else {
+                Action::Consume
+            }
         }
     }
 }

@@ -1,16 +1,31 @@
-use std::time::Instant;
 use crate::engine::keys::VirtualKey;
-use crate::engine::processor::{Processor, Action, Command, FilterMode};
 use crate::engine::processor::utils::*;
+use crate::engine::processor::{Action, Command, FilterMode, Processor};
+use std::time::Instant;
 
-pub fn handle_idle(processor: &mut Processor, key: VirtualKey, shift_pressed: bool, perform_lookup: bool) -> Action {
+pub fn handle_idle(
+    processor: &mut Processor,
+    key: VirtualKey,
+    shift_pressed: bool,
+    perform_lookup: bool,
+) -> Action {
     if key == VirtualKey::Enter || key == VirtualKey::Space {
         return Action::PassThrough;
     }
     if is_letter(key) {
-        if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
-            let lang = processor.active_profiles.first().cloned().unwrap_or_default().to_lowercase();
-            
+        if let Some(c) = key_to_char(
+            key,
+            shift_pressed,
+            processor.session_state.caps_lock_enabled,
+        ) {
+            let lang = processor
+                .session_state
+                .active_profiles
+                .first()
+                .cloned()
+                .unwrap_or_default()
+                .to_lowercase();
+
             // 1. 尝试新的多维布局 (layouts)
             if let Some(layout) = processor.config.layouts.get(&lang) {
                 if let Some(action) = layout.mappings.get(&c.to_string()) {
@@ -30,8 +45,14 @@ pub fn handle_idle(processor: &mut Processor, key: VirtualKey, shift_pressed: bo
             }
 
             processor.session.push_char(c);
-            if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
-            if processor.should_block_invalid_input(&processor.session.buffer.clone()) { return Action::Alert; }
+            if perform_lookup {
+                if let Some(act) = processor.lookup() {
+                    return act;
+                }
+            }
+            if processor.should_block_invalid_input(&processor.session.buffer.clone()) {
+                return Action::Alert;
+            }
             return processor.update_phantom_action();
         }
     }
@@ -43,9 +64,19 @@ pub fn handle_idle(processor: &mut Processor, key: VirtualKey, shift_pressed: bo
     Action::PassThrough
 }
 
-pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_pressed: bool, perform_lookup: bool) -> Action {
-    let mods = crate::engine::ModifierState { shift: shift_pressed, ctrl: false, alt: false, meta: false };
-    
+pub fn handle_composing(
+    processor: &mut Processor,
+    key: VirtualKey,
+    shift_pressed: bool,
+    perform_lookup: bool,
+) -> Action {
+    let mods = crate::engine::ModifierState {
+        shift: shift_pressed,
+        ctrl: false,
+        alt: false,
+        meta: false,
+    };
+
     // 1. 优先尝试从 KeyMap 中获取统一指令
     if let Some(cmd) = processor.dispatcher.key_map.get(&(key, mods)).cloned() {
         // 处理方向键交换逻辑 (如果是方向键且启用了交换)
@@ -55,10 +86,12 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
                 (VirtualKey::Down, Command::NextPage) => Command::NextCandidate,
                 (VirtualKey::Left, Command::PrevCandidate) => Command::PrevPage,
                 (VirtualKey::Right, Command::NextCandidate) => Command::NextPage,
-                _ => cmd
+                _ => cmd,
             }
-        } else { cmd };
-        
+        } else {
+            cmd
+        };
+
         if key == VirtualKey::Space && shift_pressed {
             if let Some(cand) = processor.session.candidates.get(processor.session.selected) {
                 if !cand.hint.is_empty() {
@@ -70,7 +103,7 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
     }
 
     // 2. 如果处于导航模式（例如按下 CapsLock），映射 HJKL
-    if processor.session.nav_mode || processor.capslock_down {
+    if processor.session.nav_mode || processor.session_state.capslock_down {
         match key {
             VirtualKey::H => return processor.execute_command(Command::PrevCandidate),
             VirtualKey::L => return processor.execute_command(Command::NextCandidate),
@@ -85,36 +118,48 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
 
     // --- Shift + Letter 辅助码过滤 / 精确选词 ---
     if is_letter(key) && shift_pressed && !processor.session.buffer.is_empty() {
-         if let Some(c) = key_to_char(key, false, processor.caps_lock_enabled) {
-             processor.session.shift_used_as_modifier = true;
-             // 核心修复：直接设置过滤模式为 Global
-             if processor.session.filter_mode != FilterMode::Global {
-                 processor.session.filter_mode = FilterMode::Global;
-                 // 注意：这里不清除已有的 aux_filter，因为我们可能正在连续输入辅助码
-             }
-             processor.session.handle_filter_char(c);
+        if let Some(c) = key_to_char(key, false, processor.session_state.caps_lock_enabled) {
+            processor.session.shift_used_as_modifier = true;
+            // 核心修复：直接设置过滤模式为 Global
+            if processor.session.filter_mode != FilterMode::Global {
+                processor.session.filter_mode = FilterMode::Global;
+                // 注意：这里不清除已有的 aux_filter，因为我们可能正在连续输入辅助码
+            }
+            processor.session.handle_filter_char(c);
 
-             if let Some(act) = processor.lookup() { return act; }
-             return processor.update_phantom_action();
-         }
+            if let Some(act) = processor.lookup() {
+                return act;
+            }
+            return processor.update_phantom_action();
+        }
     }
 
-    let current_profile = processor.active_profiles.first().cloned().unwrap_or_default();
+    let current_profile = processor
+        .session_state
+        .active_profiles
+        .first()
+        .cloned()
+        .unwrap_or_default();
     if let Some(scheme) = processor.engine.schemes.get(&current_profile) {
         let context = crate::engine::scheme::SchemeContext {
             config: &processor.config.master_config,
-            tries: &std::collections::HashMap::new(), 
+            tries: &std::collections::HashMap::new(),
             syllables: &processor.syllables,
             _user_dict: &processor.config.learned_words,
-            active_profiles: &processor.active_profiles,
+            active_profiles: &processor.session_state.active_profiles,
             candidate_count: processor.session.candidates.len(),
             _filter_mode: processor.session.filter_mode.clone(),
             _aux_filter: &processor.session.aux_filter,
         };
-        let act_opt: Option<Action> = scheme.handle_special_key(key, &mut processor.session.buffer, &context);
+        let act_opt: Option<Action> =
+            scheme.handle_special_key(key, &mut processor.session.buffer, &context);
         if let Some(act) = act_opt {
             if act == Action::Consume {
-                if perform_lookup { if let Some(lookup_act) = processor.lookup() { return lookup_act; } }
+                if perform_lookup {
+                    if let Some(lookup_act) = processor.lookup() {
+                        return lookup_act;
+                    }
+                }
                 return processor.update_phantom_action();
             }
             return act;
@@ -123,21 +168,37 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
 
     if is_letter(key) {
         if processor.session.filter_mode != FilterMode::None {
-            if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
+            if let Some(c) = key_to_char(
+                key,
+                shift_pressed,
+                processor.session_state.caps_lock_enabled,
+            ) {
                 processor.session.handle_filter_char(c);
-                if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+                if perform_lookup {
+                    if let Some(act) = processor.lookup() {
+                        return act;
+                    }
+                }
                 return processor.update_phantom_action();
             }
         }
-        
+
         if !shift_pressed && processor.config.enable_double_tap {
             if let Some(last_k) = processor.dispatcher.last_tap_key {
                 if last_k == key {
                     if let Some(last_t) = processor.dispatcher.last_tap_time {
                         if now.duration_since(last_t) <= processor.config.double_tap_timeout {
-                            if let Some(c) = key_to_char(key, false, processor.caps_lock_enabled) {
-                                let lang = processor.active_profiles.first().cloned().unwrap_or_default().to_lowercase();
-                                
+                            if let Some(c) =
+                                key_to_char(key, false, processor.session_state.caps_lock_enabled)
+                            {
+                                let lang = processor
+                                    .session_state
+                                    .active_profiles
+                                    .first()
+                                    .cloned()
+                                    .unwrap_or_default()
+                                    .to_lowercase();
+
                                 // 1. 尝试 profile 专属的双击映射
                                 let mut replacement = None;
                                 if let Some(layout) = processor.config.layouts.get(&lang) {
@@ -150,7 +211,8 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
 
                                 // 2. 尝试全局双击映射
                                 if replacement.is_none() {
-                                    replacement = processor.config.double_taps.get(&c.to_string()).cloned();
+                                    replacement =
+                                        processor.config.double_taps.get(&c.to_string()).cloned();
                                 }
 
                                 if let Some(r) = replacement {
@@ -159,7 +221,11 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
                                         processor.session.buffer.push_str(&r);
                                         processor.dispatcher.last_tap_key = None;
                                         processor.dispatcher.last_tap_time = None;
-                                        if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+                                        if perform_lookup {
+                                            if let Some(act) = processor.lookup() {
+                                                return act;
+                                            }
+                                        }
                                         return processor.update_phantom_action();
                                     }
                                 }
@@ -175,15 +241,27 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
             processor.dispatcher.last_tap_time = None;
         }
 
-        if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
+        if let Some(c) = key_to_char(
+            key,
+            shift_pressed,
+            processor.session_state.caps_lock_enabled,
+        ) {
             // 如果按下 Shift + 字母输入了大写字母，标记为已作为修饰键使用，防止释放时触发全局过滤
             if shift_pressed {
                 processor.session.shift_used_as_modifier = true;
             }
             processor.session.push_char(c);
-            if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
-            if processor.should_block_invalid_input(&processor.session.buffer.clone()) { return Action::Alert; }
-            if let Some(act) = processor.check_auto_commit() { return act; }
+            if perform_lookup {
+                if let Some(act) = processor.lookup() {
+                    return act;
+                }
+            }
+            if processor.should_block_invalid_input(&processor.session.buffer.clone()) {
+                return Action::Alert;
+            }
+            if let Some(act) = processor.check_auto_commit() {
+                return act;
+            }
             return processor.update_phantom_action();
         }
     } else {
@@ -206,7 +284,11 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
 
     if key == VirtualKey::Semicolon && !shift_pressed {
         processor.session.push_char(';');
-        if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+        if perform_lookup {
+            if let Some(act) = processor.lookup() {
+                return act;
+            }
+        }
         return processor.update_phantom_action();
     }
 
@@ -214,12 +296,16 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
         VirtualKey::Backspace => {
             if processor.session.filter_mode != FilterMode::None {
                 processor.session.pop_filter();
-                if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+                if perform_lookup {
+                    if let Some(act) = processor.lookup() {
+                        return act;
+                    }
+                }
                 return processor.update_phantom_action();
             }
 
             if processor.session.buffer.is_empty() {
-                processor.commit_history.clear();
+                processor.session_state.commit_history.clear();
                 return Action::PassThrough;
             }
 
@@ -229,24 +315,57 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
 
             if processor.session.buffer.is_empty() {
                 processor.reset();
-                if old_phantom_len > 0 { 
-                    Action::DeleteAndEmit { delete: old_phantom_len, insert: "".into() } 
-                } else { 
-                    Action::Consume 
+                if old_phantom_len > 0 {
+                    Action::DeleteAndEmit {
+                        delete: old_phantom_len,
+                        insert: "".into(),
+                    }
+                } else {
+                    Action::Consume
                 }
-            } else { 
-                if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
-                processor.update_phantom_action() 
+            } else {
+                if perform_lookup {
+                    if let Some(act) = processor.lookup() {
+                        return act;
+                    }
+                }
+                processor.update_phantom_action()
             }
         }
 
-        VirtualKey::Home => { if shift_pressed { processor.session.selected = 0; processor.session.page = 0; } else { processor.session.selected = processor.session.page; } Action::Consume }
-        VirtualKey::End => { if has_cand { if shift_pressed { processor.session.selected = processor.session.candidates.len() - 1; processor.session.page = (processor.session.selected / processor.config.page_size) * processor.config.page_size; } else { processor.session.selected = (processor.session.page + processor.config.page_size - 1).min(processor.session.candidates.len() - 1); } } Action::Consume }
+        VirtualKey::Home => {
+            if shift_pressed {
+                processor.session.selected = 0;
+                processor.session.page = 0;
+            } else {
+                processor.session.selected = processor.session.page;
+            }
+            Action::Consume
+        }
+        VirtualKey::End => {
+            if has_cand {
+                if shift_pressed {
+                    processor.session.selected = processor.session.candidates.len() - 1;
+                    processor.session.page = (processor.session.selected
+                        / processor.config.page_size)
+                        * processor.config.page_size;
+                } else {
+                    processor.session.selected =
+                        (processor.session.page + processor.config.page_size - 1)
+                            .min(processor.session.candidates.len() - 1);
+                }
+            }
+            Action::Consume
+        }
 
         VirtualKey::Apostrophe if !shift_pressed => {
             processor.session.buffer.push('\'');
             processor.session.preview_selected_candidate = false;
-            if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+            if perform_lookup {
+                if let Some(act) = processor.lookup() {
+                    return act;
+                }
+            }
             processor.update_phantom_action()
         }
 
@@ -254,7 +373,7 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
             let mut new_buffer = processor.session.buffer.clone();
             let last_part_start = new_buffer.rfind(' ').map(|i| i + 1).unwrap_or(0);
             let last_part = &new_buffer[last_part_start..];
-            
+
             let transformed = if last_part.starts_with("zh") {
                 last_part.replacen("zh", "z", 1)
             } else if last_part.starts_with("ch") {
@@ -274,7 +393,11 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
             if transformed != last_part {
                 new_buffer.replace_range(last_part_start.., &transformed);
                 processor.session.buffer = new_buffer;
-                if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+                if perform_lookup {
+                    if let Some(act) = processor.lookup() {
+                        return act;
+                    }
+                }
                 return processor.update_phantom_action();
             }
             Action::PassThrough
@@ -282,26 +405,56 @@ pub fn handle_composing(processor: &mut Processor, key: VirtualKey, shift_presse
 
         _ if is_digit(key) => {
             let digit = key_to_digit(key).unwrap_or(0);
-            if processor.config.enable_number_selection && processor.config.commit_mode == "single" && digit >= 1 && digit <= processor.config.page_size {
+            if processor.config.enable_number_selection
+                && processor.config.commit_mode == "single"
+                && digit >= 1
+                && digit <= processor.config.page_size
+            {
                 return processor.execute_command(Command::Select(digit as usize - 1));
             }
             let old_buffer = processor.session.buffer.clone();
-            processor.session.push_char(key_to_char(key, false, processor.caps_lock_enabled).unwrap_or('0'));
-            if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
+            processor.session.push_char(
+                key_to_char(key, false, processor.session_state.caps_lock_enabled).unwrap_or('0'),
+            );
+            if perform_lookup {
+                if let Some(act) = processor.lookup() {
+                    return act;
+                }
+            }
 
-            if processor.should_block_invalid_input(&old_buffer) { return Action::Alert; }
-            if let Some(act) = processor.check_auto_commit() { return act; } processor.update_phantom_action()
+            if processor.should_block_invalid_input(&old_buffer) {
+                return Action::Alert;
+            }
+            if let Some(act) = processor.check_auto_commit() {
+                return act;
+            }
+            processor.update_phantom_action()
         }
         _ => {
             if get_punctuation_key(key, shift_pressed).is_some() {
                 processor.handle_punctuation(key, shift_pressed)
-            } else if let Some(c) = key_to_char(key, shift_pressed, processor.caps_lock_enabled) {
+            } else if let Some(c) = key_to_char(
+                key,
+                shift_pressed,
+                processor.session_state.caps_lock_enabled,
+            ) {
                 let old_buffer = processor.session.buffer.clone();
                 processor.session.push_char(c);
-                if perform_lookup { if let Some(act) = processor.lookup() { return act; } }
-                if processor.should_block_invalid_input(&old_buffer) { return Action::Alert; }
-                if let Some(act) = processor.check_auto_commit() { return act; } processor.update_phantom_action()
-            } else { Action::PassThrough }
+                if perform_lookup {
+                    if let Some(act) = processor.lookup() {
+                        return act;
+                    }
+                }
+                if processor.should_block_invalid_input(&old_buffer) {
+                    return Action::Alert;
+                }
+                if let Some(act) = processor.check_auto_commit() {
+                    return act;
+                }
+                processor.update_phantom_action()
+            } else {
+                Action::PassThrough
+            }
         }
     }
 }

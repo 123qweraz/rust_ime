@@ -259,7 +259,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 ui::tray::TrayEvent::ToggleIme => {
                     if let Ok(mut p) = processor_clone.lock() {
                         p.toggle();
-                        let enabled = p.chinese_enabled;
+                        let enabled = p.session_state.chinese_enabled;
                         let short = p.get_short_display();
                         tray_handle.update(move |t| t.chinese_enabled = enabled);
 
@@ -273,7 +273,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 ui::tray::TrayEvent::NextProfile => {
                     if let Ok(mut p) = processor_clone.lock() {
                         let profile = p.next_profile();
-                        let enabled = p.chinese_enabled;
+                        let enabled = p.session_state.chinese_enabled;
                         let short = p.get_short_display();
                         tray_handle.update(move |t| t.active_profile = profile);
 

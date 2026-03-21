@@ -47,6 +47,7 @@ pub fn handle_punctuation(
         .unwrap_or_else(|| format!("{:?}", key));
     let punc_key = punc_key_owned.as_str();
     let lang = processor
+        .session_state
         .active_profiles
         .first()
         .cloned()
@@ -123,7 +124,7 @@ pub fn handle_punctuation(
     commit_text.push_str(&zh_punc);
     let del_len = processor.session.phantom_text.chars().count();
     processor.clear_composing();
-    processor.commit_history.clear();
+    processor.session_state.commit_history.clear();
     Action::DeleteAndEmit {
         delete: del_len,
         insert: commit_text,

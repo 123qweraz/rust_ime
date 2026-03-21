@@ -41,7 +41,6 @@ pub fn parse_startup_command(args: &[String]) -> StartupCommand {
     }
 }
 
-
 pub fn handle_startup(args: &[String]) -> Result<StartupAction, Box<dyn Error>> {
     match parse_startup_command(args) {
         StartupCommand::Bench => {
@@ -94,7 +93,7 @@ fn run_bench_mode() {
 
     let mut processor = Processor::new(trie_paths, syllables);
     processor.apply_config(&Config::load());
-    processor.active_profiles = vec!["chinese".to_string()];
+    processor.session_state.active_profiles = vec!["chinese".to_string()];
 
     println!("词库加载完成，正在等待后台预热 (1s)...");
     std::thread::sleep(std::time::Duration::from_secs(1));
@@ -216,8 +215,8 @@ fn run_test_mode() {
         if input.is_empty() && line.chars().any(|c| c == ' ') {
             input = "space".to_string();
         } else if input.is_empty() && line.chars().any(|c| c == '\n' || c == '\r') {
-             // Optional: handle enter if needed, but for now let's just avoid clearing buffer if it's just a newline from some platforms
-             // but usually read_line includes the newline.
+            // Optional: handle enter if needed, but for now let's just avoid clearing buffer if it's just a newline from some platforms
+            // but usually read_line includes the newline.
         }
 
         if input.starts_with("UP_") {
@@ -266,7 +265,7 @@ fn run_test_mode() {
                 '9' => engine::keys::VirtualKey::Digit9,
                 'a'..='z' | 'A'..='Z' => {
                     engine::keys::VirtualKey::from_str(&c.to_string()).unwrap()
-                },
+                }
                 ';' => engine::keys::VirtualKey::Semicolon,
                 ',' => engine::keys::VirtualKey::Comma,
                 '.' => engine::keys::VirtualKey::Dot,
@@ -290,7 +289,7 @@ fn run_test_mode() {
         let display_preedit = engine::compositor::Compositor::get_preedit(&processor);
         println!(
             "中英文状态: {}",
-            if processor.chinese_enabled {
+            if processor.session_state.chinese_enabled {
                 "开启"
             } else {
                 "关闭"
@@ -298,7 +297,7 @@ fn run_test_mode() {
         );
         println!(
             "大写锁定: {}",
-            if processor.caps_lock_enabled {
+            if processor.session_state.caps_lock_enabled {
                 "开启"
             } else {
                 "关闭"
@@ -395,7 +394,10 @@ mod tests {
             parse_startup_command(&["rust-ime".to_string()]),
             StartupCommand::None
         );
-        assert_eq!(parse_startup_command(&["rust-ime".to_string()]), StartupCommand::None);
+        assert_eq!(
+            parse_startup_command(&["rust-ime".to_string()]),
+            StartupCommand::None
+        );
         let args = vec!["rust-ime".to_string(), "--unknown".to_string()];
         assert_eq!(parse_startup_command(&args), StartupCommand::None);
     }
