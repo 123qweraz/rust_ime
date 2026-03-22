@@ -1,0 +1,33 @@
+export component StatusBar inherits Window {
+    title: "RustImeStatusBar";
+    in property <string> status_text: "中";
+    in property <bool> chinese_enabled: true;
+
+    no-frame: true;
+    background: transparent;
+    always-on-top: true;
+    
+    // 移除固定宽度，改用自适应内容宽度
+    width: container.preferred-width;
+    height: 28px;
+
+    container := Rectangle {
+        background: chinese_enabled ? #0969da : #586069;
+        border-radius: 4px;
+
+        HorizontalLayout {
+            padding-left: 10px;
+            padding-right: 10px;
+            alignment: center;
+            
+            Text {
+                text: status_text;
+                color: white;
+                font-size: 14px;
+                font-weight: 800;
+                vertical-alignment: center;
+                horizontal-alignment: center;
+            }
+        }
+    }
+}

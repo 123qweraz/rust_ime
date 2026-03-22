@@ -1,10 +1,10 @@
-use crate::engine::keys::VirtualKey;
-use crate::engine::processor::Action;
-use crate::engine::Processor;
-use crate::platform::linux::vkbd::Vkbd;
-use crate::platform::traits::{InputMethodHost, Rect};
-use crate::ui::GuiEvent;
+use rust_ime_core::{InputMethodHost, Rect};
+use super::vkbd::Vkbd;
+use rust_ime_ui::GuiEvent;
 use evdev::{Device, InputEventKind, Key};
+use rust_ime_engine::keys::VirtualKey;
+use rust_ime_engine::processor::Action;
+use rust_ime_engine::Processor;
 use std::collections::HashSet;
 use std::sync::mpsc::Sender;
 use std::sync::{
@@ -88,13 +88,13 @@ pub struct EvdevHost {
     vkbd: Arc<Mutex<Vkbd>>,
     dev: Arc<Mutex<Device>>,
     gui_tx: Option<Sender<GuiEvent>>,
-    tray_tx: Sender<crate::ui::tray::TrayEvent>,
+    tray_tx: Sender<rust_ime_ui::tray::TrayEvent>,
     should_exit: Arc<AtomicBool>,
     tab_held_and_not_used: bool,
     lookup_tx: std::sync::mpsc::Sender<()>,
     lookup_pending: Arc<AtomicBool>,
-    meta_was_pressed: bool,
     is_grabbed: bool,
+    meta_was_pressed: bool,
 }
 
 struct GrabGuard {
@@ -159,7 +159,7 @@ impl EvdevHost {
         processor: Arc<Mutex<Processor>>,
         device_path: &str,
         gui_tx: Option<Sender<GuiEvent>>,
-        tray_tx: Sender<crate::ui::tray::TrayEvent>,
+        tray_tx: Sender<rust_ime_ui::tray::TrayEvent>,
     ) -> Result<Self, Box<dyn std::error::Error>> {
         let dev = Device::open(device_path)?;
         let vkbd_raw = Vkbd::new(&dev)?;
@@ -213,8 +213,8 @@ impl EvdevHost {
             tab_held_and_not_used: false,
             lookup_tx,
             lookup_pending,
-            meta_was_pressed: false,
             is_grabbed: true,
+            meta_was_pressed: false,
         })
     }
 }
@@ -255,7 +255,7 @@ impl InputMethodHost for EvdevHost {
                 if let InputEventKind::Key(key) = ev.kind() {
                     let val = ev.value();
 
-                    // 1. 基础状态维护 (必须在任何可能 continue 的逻辑之前更新状态)
+                    // 1. 基础状态维护 (必须在任何可能 continue 的逻辑之前更新状态，确保 held_keys 始终同步)
                     if val == 1 {
                         held_keys.insert(key);
                         if key != Key::KEY_TAB {
@@ -297,7 +297,8 @@ impl InputMethodHost for EvdevHost {
                         }
                     }
 
-                    // Meta 键释放：只有当 meta_was_pressed 为 true 且所有按键都释放后，才重新 grab
+                    // Meta 键释放：检测是否重新获取拦截
+                    // 只有当 meta_was_pressed 为 true 且所有按键都释放后，才重新 grab
                     if is_meta_key && val == 0 && !meta_is_held && self.meta_was_pressed {
                         if !self.is_grabbed && held_keys.is_empty() {
                             if grab_guard.re_grab() {
@@ -366,7 +367,7 @@ impl InputMethodHost for EvdevHost {
                                     let enabled = p_locked.ctx.session_state.chinese_enabled;
                                     let profile = p_locked.get_current_profile_display();
                                     let _ =
-                                        self.tray_tx.send(crate::ui::tray::TrayEvent::SyncStatus {
+                                        self.tray_tx.send(rust_ime_ui::tray::TrayEvent::SyncStatus {
                                             chinese_enabled: enabled,
                                             active_profile: profile,
                                         });
@@ -429,7 +430,7 @@ fn update_gui_internal(p: &Processor, gui_tx: &Option<Sender<GuiEvent>>) {
             return;
         }
 
-        let pinyin = crate::engine::compositor::Compositor::get_preedit(&p.ctx);
+        let pinyin = rust_ime_engine::compositor::Compositor::get_preedit(&p.ctx);
 
         if p.ctx.config.show_candidates() {
             let page_size = p.ctx.config.page_size();
@@ -444,7 +445,7 @@ fn update_gui_internal(p: &Processor, gui_tx: &Option<Sender<GuiEvent>>) {
                 } else {
                     format!("{label}{}({})", c.text, c.hint)
                 };
-                display_candidates.push(crate::ui::DisplayCandidate {
+                display_candidates.push(rust_ime_ui::DisplayCandidate {
                     text: c.text.to_string(),
                     label,
                     hint: c.hint.to_string(),

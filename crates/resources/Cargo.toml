@@ -1,0 +1,11 @@
+[package]
+name = "rust-ime-resources"
+version.workspace = true
+edition.workspace = true
+build = "build.rs"
+
+[build-dependencies]
+rust-embed = "8.2"
+
+[dependencies]
+rust-embed = "8.2"

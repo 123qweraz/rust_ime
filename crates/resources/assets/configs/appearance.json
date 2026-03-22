@@ -1,0 +1,53 @@
+{
+  "show_candidates": true,
+  "show_status_bar": false,
+  "page_size": 5,
+  "aux_mode": "English",
+  "candidate_anchor": "bottom",
+  "candidate_layout": "horizontal",
+  "corner_radius": 10.0,
+  "window_bg_color": "#ffffff",
+  "window_highlight_color": "#0969da",
+  "window_border_color": "rgba(0, 0, 0, 0.1)",
+  "window_padding_x": 18,
+  "window_padding_y": 14,
+  "item_spacing": 16.0,
+  "row_spacing": 8.0,
+  "theme_mode": "auto",
+  "pinyin_text": {
+    "font_family": "",
+    "font_size": 18,
+    "font_weight": 400,
+    "color": "#586069",
+    "alpha": 1.0
+  },
+  "candidate_text": {
+    "font_family": "",
+    "font_size": 18,
+    "font_weight": 600,
+    "color": "#24292e",
+    "alpha": 1.0
+  },
+  "hint_text": {
+    "font_family": "",
+    "font_size": 14,
+    "font_weight": 400,
+    "color": "#6e7781",
+    "alpha": 0.8
+  },
+  "comment_text": {
+    "font_family": "",
+    "font_size": 12,
+    "font_weight": 400,
+    "color": "#0969da",
+    "alpha": 0.7
+  },
+  "show_english_aux": true,
+  "show_english_translation": false,
+  "enable_random_highlight": false,
+  "show_stroke_aux": false,
+  "show_tone_hint": true,
+  "show_learning_stroke_hint": true,
+  "show_learning_english_hint": true,
+  "auto_pronounce": true
+}

@@ -1,0 +1,20 @@
+[package]
+name = "rust-ime-engine"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+rust-ime-core = { path = "../core" }
+serde = { workspace = true }
+serde_json.workspace = true
+log.workspace = true
+thiserror.workspace = true
+tracing = "0.1"
+walkdir = "2.3"
+fst = "0.4"
+lru = "0.12"
+memmap2 = "0.9"
+rand = "0.8"
+bitflags = "2.4"
+sled = "0.34"
+arc-swap = "1.7"

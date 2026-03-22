@@ -1,0 +1,31 @@
+[package]
+name = "rust-ime-ui"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+rust-ime-core = { path = "../core" }
+rust-ime-engine = { path = "../engine" }
+serde = { workspace = true }
+serde_json.workspace = true
+log.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+slint = "1.9"
+slint-build = "1.9"
+axum = "0.7"
+tower-http = { version = "0.5", features = ["full"] }
+mime_guess = "2.0"
+rust-embed = "8.2"
+image = "0.24"
+walkdir = "2"
+
+[target.'cfg(target_os = "linux")'.dependencies]
+notify-rust = "4"
+ksni = "0.2.1"
+
+[target.'cfg(target_os = "windows")'.dependencies]
+windows = { version = "0.52", features = ["Win32_System_Registry", "Win32_Foundation"] }
+
+[build-dependencies]
+slint-build = "1.9"

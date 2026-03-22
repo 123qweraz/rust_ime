@@ -1,0 +1,25 @@
+{
+  "switch_language": {
+    "key": "Tab",
+    "description": "核心: 切换中/英文模式"
+  },
+  "page_up": [
+    "Up",
+    "PageUp",
+    "-"
+  ],
+  "page_down": [
+    "Down",
+    "PageDown",
+    "=",
+    "."
+  ],
+  "prev_candidate": [
+    "Left"
+  ],
+  "next_candidate": [
+    "Right"
+  ],
+  "enable_tab_toggle": true,
+  "enable_ctrl_space_toggle": true
+}

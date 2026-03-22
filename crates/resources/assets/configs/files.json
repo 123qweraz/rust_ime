@@ -1,0 +1,21 @@
+{
+  "punctuation_file": "dicts/chinese/punctuation.json",
+  "profiles": [
+    {
+      "name": "chinese",
+      "path": "data/chinese/trie"
+    },
+    {
+      "name": "english",
+      "path": "data/english/trie"
+    },
+    {
+      "name": "japanese",
+      "path": "data/japanese/trie"
+    },
+    {
+      "name": "stroke",
+      "path": "data/stroke/trie"
+    }
+  ]
+}

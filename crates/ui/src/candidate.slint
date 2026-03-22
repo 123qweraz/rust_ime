@@ -1,0 +1,180 @@
+export struct CandidateData {
+    text: string,
+    english_aux: string,
+    stroke_aux: string,
+}
+
+component CandidateItem inherits Rectangle {
+    in property <string> text;
+    in property <string> english_aux;
+    in property <string> stroke_aux;
+    in property <bool> selected;
+    in property <int> index;
+    in property <bool> show_english_aux;
+    in property <bool> show_stroke_aux;
+    in property <bool> show_translation; // 新增：独立控制翻译显示
+    in property <bool> is_horizontal;
+    
+    in property <color> accent_color;
+    in property <color> text_color;
+    in property <color> highlight_text_color;
+    in property <color> aux_text_color;
+    in property <color> aux_highlight_color;
+    
+    in property <length> font_size: 18px;
+    in property <string> font_family: "";
+    in property <int> font_weight: 400;
+
+    background: selected ? accent_color : transparent;
+    border-radius: 4px;
+    
+    layout := HorizontalLayout {
+        padding-left: 8px; padding-right: 8px; 
+        padding-top: 6px; padding-bottom: 6px;
+        spacing: 6px;
+        alignment: start;
+        
+        Text { 
+            text: (index + 1) + "."; 
+            color: selected ? highlight_text_color : aux_text_color; 
+            vertical-alignment: center; 
+            font-size: font_size * 0.8;
+            font-family: font_family;
+            font-weight: font_weight;
+        }
+        Text { 
+            text: text; 
+            color: selected ? highlight_text_color : text_color; 
+            vertical-alignment: center; 
+            font-size: font_size;
+            font-family: font_family != "" ? font_family : "Segoe UI Emoji, Microsoft YaHei, Segoe UI, system-ui";
+            font-weight: font_weight; 
+        }
+        
+        if show_stroke_aux && stroke_aux != "" : Text {
+            text: stroke_aux;
+            color: selected ? aux_highlight_color : aux_text_color;
+            font-size: font_size * 0.7;
+            font-family: font_family;
+            vertical-alignment: center;
+        }
+
+        // 只要开启了显示翻译或者辅助码开关，且内容不为空，就显示
+        if (show_english_aux || show_translation) && english_aux != "" : Text {
+            text: english_aux;
+            color: selected ? aux_highlight_color : aux_text_color;
+            font-size: font_size * 0.7;
+            font-family: font_family;
+            vertical-alignment: center;
+        }
+    }
+}
+
+export component CandidateWindow inherits Window {
+    title: "RustImeCandidateWindow";
+    in property <string> pinyin;
+    in property <[CandidateData]> candidates;
+    in property <int> selected_index: 0;
+    in property <bool> is_visible: false;
+    in property <bool> is_horizontal: true;
+    in property <bool> show_english_aux: true;
+    in property <bool> show_stroke_aux: true;
+    in property <bool> show_translation: true; // 新增
+    
+    in property <length> pinyin_font_size: 14px;
+    in property <string> pinyin_font_family: "";
+    in property <int> pinyin_font_weight: 400;
+    in property <length> candidate_font_size: 18px;
+    in property <string> candidate_font_family: "";
+    in property <int> candidate_font_weight: 400;
+    
+    in property <length> win_border_radius: 6px;
+    in property <color> accent_color: #0969da;
+    in property <color> bg_color: #ffffff;
+    in property <color> border_color: #dcdde1;
+    in property <color> text_color: #2c3e50;
+    in property <color> highlight_text_color: #ffffff;
+    in property <color> aux_text_color: #95a5a6;
+    in property <color> aux_highlight_color: #dcdde1;
+
+    no-frame: true;
+    background: transparent;
+    always-on-top: true;
+    
+    width: main_rect.preferred-width;
+    height: main_rect.preferred-height;
+
+    main_rect := Rectangle {
+        visible: is_visible;
+        background: bg_color;
+        border-radius: win_border_radius;
+        border-width: 1px;
+        border-color: border_color;
+
+        VerticalLayout {
+            padding: 8px;
+            spacing: 4px;
+            alignment: start;
+
+            if pinyin != "" : HorizontalLayout {
+                padding-left: 8px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                Text {
+                    text: pinyin;
+                    color: accent_color;
+                    font-size: pinyin_font_size;
+                    font-family: pinyin_font_family;
+                    font-weight: 600;
+                }
+            }
+
+            if is_horizontal : HorizontalLayout {
+                spacing: 4px;
+                for cand[i] in candidates : CandidateItem {
+                    text: cand.text;
+                    english_aux: cand.english_aux;
+                    stroke_aux: cand.stroke_aux;
+                    selected: i == selected_index;
+                    index: i;
+                    is_horizontal: true;
+                    show_english_aux: show_english_aux;
+                    show_stroke_aux: show_stroke_aux;
+                    show_translation: show_translation; // 传递
+                    accent_color: accent_color;
+                    text_color: text_color;
+                    highlight_text_color: highlight_text_color;
+                    aux_text_color: aux_text_color;
+                    aux_highlight_color: aux_highlight_color;
+                    font_size: candidate_font_size;
+                    font_family: candidate_font_family;
+                    font_weight: candidate_font_weight;
+                }
+            }
+
+            if !is_horizontal : VerticalLayout {
+                spacing: 2px;
+                for cand[i] in candidates : CandidateItem {
+                    width: 100%;
+                    text: cand.text;
+                    english_aux: cand.english_aux;
+                    stroke_aux: cand.stroke_aux;
+                    selected: i == selected_index;
+                    index: i;
+                    is_horizontal: false;
+                    show_english_aux: show_english_aux;
+                    show_stroke_aux: show_stroke_aux;
+                    show_translation: show_translation; // 传递
+                    accent_color: accent_color;
+                    text_color: text_color;
+                    highlight_text_color: highlight_text_color;
+                    aux_text_color: aux_text_color;
+                    aux_highlight_color: aux_highlight_color;
+                    font_size: candidate_font_size;
+                    font_family: candidate_font_family;
+                    font_weight: candidate_font_weight;
+                }
+            }
+        }
+    }
+}

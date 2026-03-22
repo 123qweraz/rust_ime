@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="input_method_unstable_v2">
+  <copyright>
+    Copyright © 2008-2011 Kristian Høgsberg
+    Copyright © 2010-2011 Intel Corporation
+    Copyright © 2012-2013 Collaboration, Ltd.
+    Copyright © 2012, 2013 Nobuhiko Tanibata
+    Copyright © 2015, 2016 Jan Arne Petersen
+    Copyright © 2017, 2018 Red Hat, Inc.
+    Copyright © 2018 Google, Inc.
+  </copyright>
+
+  <interface name="zwp_input_method_v2" version="1">
+    <description summary="input method">
+      An input method object is responsible for composing text in response
+      to input events.
+    </description>
+
+    <request name="destroy" type="destructor"/>
+
+    <request name="commit_string">
+      <arg name="text" type="string"/>
+    </request>
+
+    <request name="set_preedit_string">
+      <arg name="text" type="string"/>
+      <arg name="cursor_begin" type="int"/>
+      <arg name="cursor_end" type="int"/>
+    </request>
+
+    <request name="delete_surrounding_text">
+      <arg name="before_length" type="uint"/>
+      <arg name="after_length" type="uint"/>
+    </request>
+
+    <request name="commit">
+      <arg name="serial" type="uint"/>
+    </request>
+
+    <event name="activate"/>
+    <event name="deactivate"/>
+
+    <event name="surrounding_text">
+      <arg name="text" type="string"/>
+      <arg name="cursor" type="uint"/>
+      <arg name="anchor" type="uint"/>
+    </event>
+
+    <event name="text_change_cause">
+      <arg name="cause" type="uint"/>
+    </event>
+
+    <event name="content_type">
+      <arg name="hint" type="uint"/>
+      <arg name="purpose" type="uint"/>
+    </event>
+
+    <event name="done"/>
+
+    <event name="unavailable"/>
+  </interface>
+
+  <interface name="zwp_input_method_manager_v2" version="1">
+    <request name="get_input_method">
+      <arg name="seat" type="object" interface="wl_seat"/>
+      <arg name="input_method" type="new_id" interface="zwp_input_method_v2"/>
+    </request>
+    <request name="destroy" type="destructor"/>
+  </interface>
+</protocol>

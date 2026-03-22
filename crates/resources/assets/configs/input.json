@@ -1,0 +1,241 @@
+{
+  "autostart": true,
+  "commit_mode": "single",
+  "default_profile": "chinese",
+  "phantom_type": "Pinyin",
+  "clipboard_delay_ms": 50,
+  "anti_typo_mode": "None",
+  "enable_double_tap": false,
+  "double_tap_timeout_ms": 250,
+  "double_taps": [],
+  "enable_long_press": false,
+  "long_press_timeout_ms": 400,
+  "long_press_mappings": [],
+  "enable_punctuation_long_press": true,
+  "punctuation_long_press_mappings": {
+    "-": "-",
+    "]": "]",
+    ">": ">",
+    "@": "@",
+    "^": "^",
+    "/": "/",
+    "#": "#",
+    ";": ";",
+    ",": ",",
+    "\\": "\\",
+    ".": ".",
+    "*": "*",
+    "%": "%",
+    "(": "(",
+    "'": "'",
+    "=": "=",
+    "{": "{",
+    "_": "_",
+    ":": ":",
+    "`": "`",
+    "+": "+",
+    "<": "<",
+    "[": "[",
+    "&": "&",
+    "?": "?",
+    "~": "~",
+    ")": ")",
+    "!": "!",
+    "\"": "\"",
+    "}": "}",
+    "$": "$"
+  },
+  "punctuations": {},
+  "keyboard_layouts": {},
+  "auto_commit_unique_en_fuzhuma": false,
+  "auto_commit_unique_full_match": true,
+  "auto_commit_stroke": true,
+  "enable_prefix_matching": true,
+  "prefix_matching_limit": 20,
+  "enable_abbreviation_matching": true,
+  "filter_proper_nouns_by_case": true,
+  "enabled_profiles": [
+    "chinese",
+    "english",
+    "japanese",
+    "stroke"
+  ],
+  "profile_keys": [
+    {
+      "key": "c",
+      "profile": "chinese"
+    },
+    {
+      "key": "e",
+      "profile": "english"
+    },
+    {
+      "key": "j",
+      "profile": "japanese"
+    },
+    {
+      "key": "b",
+      "profile": "stroke"
+    },
+    {
+      "key": "m",
+      "profile": "chinese,english,japanese"
+    },
+    {
+      "key": "s",
+      "profile": "shengpizi"
+    }
+  ],
+  "swap_arrow_keys": false,
+  "enable_error_sound": true,
+  "enable_english_filter": true,
+  "enable_caps_selection": true,
+  "enable_number_selection": true,
+  "enable_word_discovery": true,
+  "enable_auto_reorder": true,
+  "enable_fixed_first_candidate": false,
+  "layouts": {
+    "chinese": {
+      "name": "中文默认布局",
+      "mappings": {
+        ".": {
+          "tap": "。",
+          "shift": ">",
+          "double_tap": "...",
+          "long_press": "·",
+          "description": "中文句号"
+        },
+        "!": {
+          "tap": "！",
+          "shift": "!",
+          "description": "中文叹号"
+        },
+        ",": {
+          "tap": "，",
+          "shift": "<",
+          "long_press": "、",
+          "description": "中文逗号"
+        },
+        "?": {
+          "tap": "？",
+          "shift": "?",
+          "description": "中文问号"
+        },
+        ";": {
+          "tap": "；",
+          "shift": ":",
+          "double_tap": ";",
+          "long_press": "……",
+          "description": "中文分号"
+        }
+      }
+    },
+    "stroke": {
+      "name": "笔画默认布局",
+      "mappings": {}
+    },
+    "english": {
+      "name": "English Default Layout",
+      "mappings": {
+        ",": {
+          "tap": ",",
+          "shift": "<",
+          "description": "英文逗号"
+        },
+        ".": {
+          "tap": ".",
+          "shift": ">",
+          "description": "英文句号"
+        },
+        ";": {
+          "tap": ";",
+          "shift": ":",
+          "description": "英文分号"
+        }
+      }
+    },
+    "japanese": {
+      "name": "日本語デフォルト配列",
+      "mappings": {
+        "]": {
+          "tap": "」",
+          "shift": "}",
+          "description": "日文右引号"
+        },
+        ",": {
+          "tap": "、",
+          "shift": "<",
+          "description": "日文顿号"
+        },
+        ".": {
+          "tap": "。",
+          "shift": ">",
+          "long_press": "・",
+          "description": "日文句号"
+        },
+        "[": {
+          "tap": "「",
+          "shift": "{",
+          "description": "日文左引号"
+        },
+        "/": {
+          "tap": "・",
+          "shift": "?",
+          "description": "日文中点"
+        }
+      }
+    }
+  },
+  "enable_smart_backspace": false,
+  "enable_double_pinyin": false,
+  "double_pinyin_scheme": {
+    "name": "小鹤双拼",
+    "initials": {
+      "u": "sh",
+      "v": "zh",
+      "i": "ch"
+    },
+    "rimes": {
+      "d": "ai",
+      "c": "ao",
+      "r": "uan",
+      "p": "ie",
+      "w": "ei",
+      "j": "an",
+      "f": "en",
+      "x": "ia",
+      "q": "iu",
+      "b": "in",
+      "y": "un",
+      "t": "ue",
+      "z": "ou",
+      "m": "ian",
+      "k": "ao",
+      "s": "ong",
+      "l": "iang"
+    }
+  },
+  "enable_fuzzy_pinyin": false,
+  "fuzzy_config": {
+    "z_zh": true,
+    "c_ch": true,
+    "s_sh": true,
+    "n_l": false,
+    "r_l": false,
+    "f_h": false,
+    "an_ang": false,
+    "en_eng": false,
+    "in_ing": false,
+    "ian_iang": false,
+    "uan_uang": false,
+    "u_v": false,
+    "custom_mappings": []
+  },
+  "enable_traditional": false,
+  "ranking": {
+    "length_penalty": 50000.0,
+    "user_dict_bonus": 10000000.0,
+    "exact_match_bonus": 10000000.0,
+    "single_char_bonus": 1000000.0
+  }
+}

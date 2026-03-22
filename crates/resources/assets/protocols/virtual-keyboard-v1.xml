@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="virtual_keyboard_unstable_v1">
+  <copyright>
+    Copyright © 2008-2011 Kristian Høgsberg
+    Copyright © 2010-2011 Intel Corporation
+    Copyright © 2012-2013 Collaboration, Ltd.
+    Copyright © 2012, 2013 Nobuhiko Tanibata
+    Copyright © 2015, 2016 Jan Arne Petersen
+    Copyright © 2017, 2018 Red Hat, Inc.
+    Copyright © 2018 Google, Inc.
+  </copyright>
+
+  <interface name="zwp_virtual_keyboard_v1" version="1">
+    <description summary="virtual keyboard">
+      The virtual keyboard provides an application with an interface which
+      allows the client to emulate keyboard input.
+    </description>
+
+    <request name="keymap">
+      <arg name="format" type="uint"/>
+      <arg name="fd" type="fd"/>
+      <arg name="size" type="uint"/>
+    </request>
+
+    <request name="key">
+      <arg name="time" type="uint"/>
+      <arg name="key" type="uint"/>
+      <arg name="state" type="uint"/>
+    </request>
+
+    <request name="modifiers">
+      <arg name="mods_depressed" type="uint"/>
+      <arg name="mods_latched" type="uint"/>
+      <arg name="mods_locked" type="uint"/>
+      <arg name="group" type="uint"/>
+    </request>
+
+    <request name="destroy" type="destructor"/>
+  </interface>
+
+  <interface name="zwp_virtual_keyboard_manager_v1" version="1">
+    <request name="create_virtual_keyboard">
+      <arg name="seat" type="object" interface="wl_seat"/>
+      <arg name="id" type="new_id" interface="zwp_virtual_keyboard_v1"/>
+    </request>
+    <request name="destroy" type="destructor"/>
+  </interface>
+</protocol>

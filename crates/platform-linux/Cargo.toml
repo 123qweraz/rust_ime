@@ -1,0 +1,39 @@
+[package]
+name = "rust-ime-linux"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+rust-ime-core = { path = "../core" }
+rust-ime-engine = { path = "../engine" }
+rust-ime-ui = { path = "../ui" }
+rust-ime-resources = { path = "../resources" }
+serde = { workspace = true }
+serde_json.workspace = true
+log.workspace = true
+thiserror.workspace = true
+tokio.workspace = true
+slint = "1.9"
+evdev = "0.12.1"
+users = "0.11"
+signal-hook = "0.4.1"
+daemonize = "0.5"
+libc = "0.2"
+nix = { version = "0.27", features = ["poll"] }
+wayland-client = "0.31"
+wayland-protocols = { version = "0.31", features = ["client", "staging", "unstable"] }
+wayland-cursor = "0.31"
+zbus = { version = "4.4", features = ["blocking"] }
+rust-embed = "8.2"
+notify-rust = "4"
+reqwest = { version = "0.12", features = ["blocking"] }
+urlencoding = "2.1"
+open = "5.1"
+image = "0.24"
+arboard = "3.2"
+ksni = "0.2.1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "time", "local-time"] }
+
+[build-dependencies]
+slint-build = "1.9"

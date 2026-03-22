@@ -1,0 +1,1685 @@
+{
+  "xiao": [
+    {
+      "char": "😄",
+      "trad": "😄",
+      "en": "Grinning Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "weixiao": [
+    {
+      "char": "😄",
+      "trad": "😄",
+      "en": "Grinning Face",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "😊",
+      "trad": "😊",
+      "en": "Smiling Face with Smiling Eyes",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "kaixin": [
+    {
+      "char": "😄",
+      "trad": "😄",
+      "en": "Grinning Face",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "🥳",
+      "trad": "🥳",
+      "en": "Partying Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "haha": [
+    {
+      "char": "😄",
+      "trad": "😄",
+      "en": "Grinning Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiaoku": [
+    {
+      "char": "🤣",
+      "trad": "🤣",
+      "en": "Rolling on the Floor Laughing",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "😂",
+      "trad": "😂",
+      "en": "Face with Tears of Joy",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "geili": [
+    {
+      "char": "🤣",
+      "trad": "🤣",
+      "en": "Rolling on the Floor Laughing",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiaosi": [
+    {
+      "char": "😂",
+      "trad": "😂",
+      "en": "Face with Tears of Joy",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xingfu": [
+    {
+      "char": "😊",
+      "trad": "😊",
+      "en": "Smiling Face with Smiling Eyes",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "se": [
+    {
+      "char": "😍",
+      "trad": "😍",
+      "en": "Smiling Face with Heart-Eyes",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xihuan": [
+    {
+      "char": "😍",
+      "trad": "😍",
+      "en": "Smiling Face with Heart-Eyes",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "aixinyan": [
+    {
+      "char": "😍",
+      "trad": "😍",
+      "en": "Smiling Face with Heart-Eyes",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qinqin": [
+    {
+      "char": "😘",
+      "trad": "😘",
+      "en": "Face Blowing a Kiss",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "memeda": [
+    {
+      "char": "😘",
+      "trad": "😘",
+      "en": "Face Blowing a Kiss",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "daku": [
+    {
+      "char": "😭",
+      "trad": "😭",
+      "en": "Loudly Crying Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "liulei": [
+    {
+      "char": "😭",
+      "trad": "😭",
+      "en": "Loudly Crying Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shangxin": [
+    {
+      "char": "😭",
+      "trad": "😭",
+      "en": "Loudly Crying Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "jingkong": [
+    {
+      "char": "😱",
+      "trad": "😱",
+      "en": "Face Screaming in Fear",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiasi": [
+    {
+      "char": "😱",
+      "trad": "😱",
+      "en": "Face Screaming in Fear",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shengqi": [
+    {
+      "char": "😡",
+      "trad": "😡",
+      "en": "Pouting Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "fahuo": [
+    {
+      "char": "😡",
+      "trad": "😡",
+      "en": "Pouting Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "nu": [
+    {
+      "char": "😡",
+      "trad": "😡",
+      "en": "Pouting Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xu": [
+    {
+      "char": "🤫",
+      "trad": "🤫",
+      "en": "Shushing Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "anjing": [
+    {
+      "char": "🤫",
+      "trad": "🤫",
+      "en": "Shushing Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "sikao": [
+    {
+      "char": "🤔",
+      "trad": "🤔",
+      "en": "Thinking Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiangyixiang": [
+    {
+      "char": "🤔",
+      "trad": "🤔",
+      "en": "Thinking Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qingzhu": [
+    {
+      "char": "🥳",
+      "trad": "🥳",
+      "en": "Partying Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "ku": [
+    {
+      "char": "😎",
+      "trad": "😎",
+      "en": "Smiling Face with Sunglasses",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "mojing": [
+    {
+      "char": "😎",
+      "trad": "😎",
+      "en": "Smiling Face with Sunglasses",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "tianshi": [
+    {
+      "char": "😇",
+      "trad": "😇",
+      "en": "Smiling Face with Halo",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shanliang": [
+    {
+      "char": "😇",
+      "trad": "😇",
+      "en": "Smiling Face with Halo",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "✨",
+      "trad": "✨",
+      "en": "Sparkles",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiaochou": [
+    {
+      "char": "🤡",
+      "trad": "🤡",
+      "en": "Clown Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "dabian": [
+    {
+      "char": "💩",
+      "trad": "💩",
+      "en": "Pile of Poo",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "bianbian": [
+    {
+      "char": "💩",
+      "trad": "💩",
+      "en": "Pile of Poo",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "gui": [
+    {
+      "char": "👻",
+      "trad": "👻",
+      "en": "Ghost",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "youling": [
+    {
+      "char": "👻",
+      "trad": "👻",
+      "en": "Ghost",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "huo": [
+    {
+      "char": "🔥",
+      "trad": "🔥",
+      "en": "Fire",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "remen": [
+    {
+      "char": "🔥",
+      "trad": "🔥",
+      "en": "Fire",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "huore": [
+    {
+      "char": "🔥",
+      "trad": "🔥",
+      "en": "Fire",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xingxing": [
+    {
+      "char": "✨",
+      "trad": "✨",
+      "en": "Sparkles",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "⭐",
+      "trad": "⭐",
+      "en": "Star",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "wujiaoxing": [
+    {
+      "char": "⭐",
+      "trad": "⭐",
+      "en": "Star",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "yibaifen": [
+    {
+      "char": "💯",
+      "trad": "💯",
+      "en": "Hundred Points",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "manfen": [
+    {
+      "char": "💯",
+      "trad": "💯",
+      "en": "Hundred Points",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "zan": [
+    {
+      "char": "👍",
+      "trad": "👍",
+      "en": "Thumbs Up",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "dianzan": [
+    {
+      "char": "👍",
+      "trad": "👍",
+      "en": "Thumbs Up",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hao": [
+    {
+      "char": "👍",
+      "trad": "👍",
+      "en": "Thumbs Up",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "bang": [
+    {
+      "char": "👍",
+      "trad": "👍",
+      "en": "Thumbs Up",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "cha": [
+    {
+      "char": "👎",
+      "trad": "👎",
+      "en": "Thumbs Down",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "buxing": [
+    {
+      "char": "👎",
+      "trad": "👎",
+      "en": "Thumbs Down",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "laji": [
+    {
+      "char": "👎",
+      "trad": "👎",
+      "en": "Thumbs Down",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "haode": [
+    {
+      "char": "👌",
+      "trad": "👌",
+      "en": "OK Hand",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "OK": [
+    {
+      "char": "👌",
+      "trad": "👌",
+      "en": "OK Hand",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "ye": [
+    {
+      "char": "✌️",
+      "trad": "✌️",
+      "en": "Victory Hand",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shengli": [
+    {
+      "char": "✌️",
+      "trad": "✌️",
+      "en": "Victory Hand",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "haoyun": [
+    {
+      "char": "🤞",
+      "trad": "🤞",
+      "en": "Crossed Fingers",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "bixin": [
+    {
+      "char": "🫰",
+      "trad": "🫰",
+      "en": "Hand with Index Finger and Thumb Crossed",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "aixin": [
+    {
+      "char": "🫰",
+      "trad": "🫰",
+      "en": "Hand with Index Finger and Thumb Crossed",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "❤️",
+      "trad": "❤️",
+      "en": "Red Heart",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "baituo": [
+    {
+      "char": "🙏",
+      "trad": "🙏",
+      "en": "Folded Hands",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qidao": [
+    {
+      "char": "🙏",
+      "trad": "🙏",
+      "en": "Folded Hands",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiexie": [
+    {
+      "char": "🙏",
+      "trad": "🙏",
+      "en": "Folded Hands",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "guzhang": [
+    {
+      "char": "👏",
+      "trad": "👏",
+      "en": "Clapping Hands",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "paishou": [
+    {
+      "char": "👏",
+      "trad": "👏",
+      "en": "Clapping Hands",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "jiayou": [
+    {
+      "char": "💪",
+      "trad": "💪",
+      "en": "Flexed Biceps",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "liliang": [
+    {
+      "char": "💪",
+      "trad": "💪",
+      "en": "Flexed Biceps",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qiang": [
+    {
+      "char": "💪",
+      "trad": "💪",
+      "en": "Flexed Biceps",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "🔫",
+      "trad": "🔫",
+      "en": "Pistol",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "woshou": [
+    {
+      "char": "🤝",
+      "trad": "🤝",
+      "en": "Handshake",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hezuo": [
+    {
+      "char": "🤝",
+      "trad": "🤝",
+      "en": "Handshake",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xin": [
+    {
+      "char": "❤️",
+      "trad": "❤️",
+      "en": "Red Heart",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "✉️",
+      "trad": "✉️",
+      "en": "Envelope",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hongxin": [
+    {
+      "char": "❤️",
+      "trad": "❤️",
+      "en": "Red Heart",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xinsui": [
+    {
+      "char": "💔",
+      "trad": "💔",
+      "en": "Broken Heart",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "gou": [
+    {
+      "char": "🐶",
+      "trad": "🐶",
+      "en": "Dog Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "gougou": [
+    {
+      "char": "🐶",
+      "trad": "🐶",
+      "en": "Dog Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "wangwang": [
+    {
+      "char": "🐶",
+      "trad": "🐶",
+      "en": "Dog Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "mao": [
+    {
+      "char": "🐱",
+      "trad": "🐱",
+      "en": "Cat Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "maomi": [
+    {
+      "char": "🐱",
+      "trad": "🐱",
+      "en": "Cat Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "miaomiao": [
+    {
+      "char": "🐱",
+      "trad": "🐱",
+      "en": "Cat Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "haozi": [
+    {
+      "char": "🐭",
+      "trad": "🐭",
+      "en": "Mouse Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "laoshu": [
+    {
+      "char": "🐭",
+      "trad": "🐭",
+      "en": "Mouse Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "cangshu": [
+    {
+      "char": "🐹",
+      "trad": "🐹",
+      "en": "Hamster Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "tuzi": [
+    {
+      "char": "🐰",
+      "trad": "🐰",
+      "en": "Rabbit Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "tu": [
+    {
+      "char": "🐰",
+      "trad": "🐰",
+      "en": "Rabbit Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "huli": [
+    {
+      "char": "🦊",
+      "trad": "🦊",
+      "en": "Fox Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiong": [
+    {
+      "char": "🐻",
+      "trad": "🐻",
+      "en": "Bear Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiongmao": [
+    {
+      "char": "🐼",
+      "trad": "🐼",
+      "en": "Panda Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "laohu": [
+    {
+      "char": "🐯",
+      "trad": "🐯",
+      "en": "Tiger Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hu": [
+    {
+      "char": "🐯",
+      "trad": "🐯",
+      "en": "Tiger Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shizi": [
+    {
+      "char": "🦁",
+      "trad": "🦁",
+      "en": "Lion Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "niu": [
+    {
+      "char": "🐮",
+      "trad": "🐮",
+      "en": "Cow Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "zhu": [
+    {
+      "char": "🐷",
+      "trad": "🐷",
+      "en": "Pig Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qingwa": [
+    {
+      "char": "🐸",
+      "trad": "🐸",
+      "en": "Frog Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "houzi": [
+    {
+      "char": "🐵",
+      "trad": "🐵",
+      "en": "Monkey Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "ji": [
+    {
+      "char": "🐔",
+      "trad": "🐔",
+      "en": "Chicken",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qiqie": [
+    {
+      "char": "🐧",
+      "trad": "🐧",
+      "en": "Penguin",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "niao": [
+    {
+      "char": "🐦",
+      "trad": "🐦",
+      "en": "Bird",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiaoji": [
+    {
+      "char": "🐤",
+      "trad": "🐤",
+      "en": "Baby Chick",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "dujiaoshou": [
+    {
+      "char": "🦄",
+      "trad": "🦄",
+      "en": "Unicorn Face",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "mifeng": [
+    {
+      "char": "🐝",
+      "trad": "🐝",
+      "en": "Honeybee",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hudie": [
+    {
+      "char": "🦋",
+      "trad": "🦋",
+      "en": "Butterfly",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "meigui": [
+    {
+      "char": "🌹",
+      "trad": "🌹",
+      "en": "Rose",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hua": [
+    {
+      "char": "🌹",
+      "trad": "🌹",
+      "en": "Rose",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiangrikui": [
+    {
+      "char": "🌻",
+      "trad": "🌻",
+      "en": "Sunflower",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "pingguo": [
+    {
+      "char": "🍎",
+      "trad": "🍎",
+      "en": "Red Apple",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hongpingguo": [
+    {
+      "char": "🍎",
+      "trad": "🍎",
+      "en": "Red Apple",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qingpingguo": [
+    {
+      "char": "🍏",
+      "trad": "🍏",
+      "en": "Green Apple",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiangjiao": [
+    {
+      "char": "🍌",
+      "trad": "🍌",
+      "en": "Banana",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xigua": [
+    {
+      "char": "🍉",
+      "trad": "🍉",
+      "en": "Watermelon",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "caomei": [
+    {
+      "char": "🍓",
+      "trad": "🍓",
+      "en": "Strawberry",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "yingtao": [
+    {
+      "char": "🍒",
+      "trad": "🍒",
+      "en": "Cherries",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "taozi": [
+    {
+      "char": " peach",
+      "trad": " peach",
+      "en": "Peach",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "boluo": [
+    {
+      "char": "🍍",
+      "trad": "🍍",
+      "en": "Pineapple",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "putao": [
+    {
+      "char": "🍇",
+      "trad": "🍇",
+      "en": "Grapes",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "juzi": [
+    {
+      "char": "🍊",
+      "trad": "🍊",
+      "en": "Tangerine",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "ningmeng": [
+    {
+      "char": "🍋",
+      "trad": "🍋",
+      "en": "Lemon",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "mihoutao": [
+    {
+      "char": " kiwi",
+      "trad": " kiwi",
+      "en": "Kiwi Fruit",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xihongshi": [
+    {
+      "char": "🍅",
+      "trad": "🍅",
+      "en": "Tomato",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "fanqie": [
+    {
+      "char": "🍅",
+      "trad": "🍅",
+      "en": "Tomato",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "yumi": [
+    {
+      "char": "🌽",
+      "trad": "🌽",
+      "en": "Ear of Corn",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "rou": [
+    {
+      "char": "🥩",
+      "trad": "🥩",
+      "en": "Cut of Meat",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "niupai": [
+    {
+      "char": "🥩",
+      "trad": "🥩",
+      "en": "Cut of Meat",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hanbao": [
+    {
+      "char": "🍔",
+      "trad": "🍔",
+      "en": "Hamburger",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shutiao": [
+    {
+      "char": "🍟",
+      "trad": "🍟",
+      "en": "French Fries",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "pisa": [
+    {
+      "char": "🍕",
+      "trad": "🍕",
+      "en": "Pizza",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "biandang": [
+    {
+      "char": "🍱",
+      "trad": "🍱",
+      "en": "Bento Box",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "lamian": [
+    {
+      "char": "🍜",
+      "trad": "🍜",
+      "en": "Steaming Bowl",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "miantiao": [
+    {
+      "char": "🍜",
+      "trad": "🍜",
+      "en": "Steaming Bowl",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "huoguo": [
+    {
+      "char": "🍲",
+      "trad": "🍲",
+      "en": "Pot of Food",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shousi": [
+    {
+      "char": " sushi",
+      "trad": " sushi",
+      "en": "Sushi",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "jiaozi": [
+    {
+      "char": " dumpling",
+      "trad": " dumpling",
+      "en": "Dumpling",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "bingqilin": [
+    {
+      "char": "🍦",
+      "trad": "🍦",
+      "en": "Soft Serve",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "dangao": [
+    {
+      "char": "🎂",
+      "trad": "🎂",
+      "en": "Birthday Cake",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shengridangao": [
+    {
+      "char": "🎂",
+      "trad": "🎂",
+      "en": "Birthday Cake",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "bangbangtang": [
+    {
+      "char": "🍭",
+      "trad": "🍭",
+      "en": "Lollipop",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qiaokeli": [
+    {
+      "char": "🍫",
+      "trad": "🍫",
+      "en": "Chocolate Bar",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "pijiu": [
+    {
+      "char": "🍺",
+      "trad": "🍺",
+      "en": "Beer Mug",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "ganbei": [
+    {
+      "char": "🍻",
+      "trad": "🍻",
+      "en": "Clinking Beer Mugs",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hongjiu": [
+    {
+      "char": "🍷",
+      "trad": "🍷",
+      "en": "Wine Glass",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "kafei": [
+    {
+      "char": "☕",
+      "trad": "☕",
+      "en": "Hot Beverage",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "kele": [
+    {
+      "char": "🥤",
+      "trad": "🥤",
+      "en": "Cup with Straw",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "yinliao": [
+    {
+      "char": "🥤",
+      "trad": "🥤",
+      "en": "Cup with Straw",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "diannao": [
+    {
+      "char": "💻",
+      "trad": "💻",
+      "en": "Laptop Computer",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "bijiben": [
+    {
+      "char": "💻",
+      "trad": "💻",
+      "en": "Laptop Computer",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shouji": [
+    {
+      "char": "📱",
+      "trad": "📱",
+      "en": "Mobile Phone",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "dianhua": [
+    {
+      "char": "📱",
+      "trad": "📱",
+      "en": "Mobile Phone",
+      "category": "emoji",
+      "weight": 500
+    },
+    {
+      "char": "☎️",
+      "trad": "☎️",
+      "en": "Telephone",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shoubiao": [
+    {
+      "char": "⌚",
+      "trad": "⌚",
+      "en": "Watch",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiangji": [
+    {
+      "char": "📷",
+      "trad": "📷",
+      "en": "Camera",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "paizhao": [
+    {
+      "char": "📷",
+      "trad": "📷",
+      "en": "Camera",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "youxi": [
+    {
+      "char": "🎮",
+      "trad": "🎮",
+      "en": "Video Game",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "youxiji": [
+    {
+      "char": "🎮",
+      "trad": "🎮",
+      "en": "Video Game",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qiche": [
+    {
+      "char": "🚗",
+      "trad": "🚗",
+      "en": "Automobile",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "kaihuo": [
+    {
+      "char": "🚗",
+      "trad": "🚗",
+      "en": "Automobile",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "zixingche": [
+    {
+      "char": "🚲",
+      "trad": "🚲",
+      "en": "Bicycle",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "huojian": [
+    {
+      "char": "🚀",
+      "trad": "🚀",
+      "en": "Rocket",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "fashe": [
+    {
+      "char": "🚀",
+      "trad": "🚀",
+      "en": "Rocket",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "feiji": [
+    {
+      "char": "✈️",
+      "trad": "✈️",
+      "en": "Airplane",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "fangzi": [
+    {
+      "char": "🏠",
+      "trad": "🏠",
+      "en": "House",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "jia": [
+    {
+      "char": "🏠",
+      "trad": "🏠",
+      "en": "House",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qian": [
+    {
+      "char": "💰",
+      "trad": "💰",
+      "en": "Money Bag",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "facai": [
+    {
+      "char": "💰",
+      "trad": "💰",
+      "en": "Money Bag",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "hongbao": [
+    {
+      "char": "💰",
+      "trad": "💰",
+      "en": "Money Bag",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "zuanshi": [
+    {
+      "char": "💎",
+      "trad": "💎",
+      "en": "Gem Stone",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "baoshi": [
+    {
+      "char": "💎",
+      "trad": "💎",
+      "en": "Gem Stone",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "liwu": [
+    {
+      "char": "🎁",
+      "trad": "🎁",
+      "en": "Wrapped Gift",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "songli": [
+    {
+      "char": "🎁",
+      "trad": "🎁",
+      "en": "Wrapped Gift",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qiqiu": [
+    {
+      "char": "🎈",
+      "trad": "🎈",
+      "en": "Balloon",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "youjian": [
+    {
+      "char": "✉️",
+      "trad": "✉️",
+      "en": "Envelope",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "shu": [
+    {
+      "char": "📚",
+      "trad": "📚",
+      "en": "Books",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "dushu": [
+    {
+      "char": "📚",
+      "trad": "📚",
+      "en": "Books",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "zhuyi": [
+    {
+      "char": "💡",
+      "trad": "💡",
+      "en": "Light Bulb",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "dengpao": [
+    {
+      "char": "💡",
+      "trad": "💡",
+      "en": "Light Bulb",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "dianchi": [
+    {
+      "char": "🔋",
+      "trad": "🔋",
+      "en": "Battery",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "zhadan": [
+    {
+      "char": "💣",
+      "trad": "💣",
+      "en": "Bomb",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "zuqiu": [
+    {
+      "char": "⚽",
+      "trad": "⚽",
+      "en": "Soccer Ball",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "lanqiu": [
+    {
+      "char": "🏀",
+      "trad": "🏀",
+      "en": "Basketball",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "caihong": [
+    {
+      "char": "🌈",
+      "trad": "🌈",
+      "en": "Rainbow",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "taiyang": [
+    {
+      "char": "☀️",
+      "trad": "☀️",
+      "en": "Sun",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "qingtian": [
+    {
+      "char": "☀️",
+      "trad": "☀️",
+      "en": "Sun",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "yueliang": [
+    {
+      "char": "🌙",
+      "trad": "🌙",
+      "en": "Crescent Moon",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiayu": [
+    {
+      "char": "☔",
+      "trad": "☔",
+      "en": "Umbrella with Rain Drops",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "yu": [
+    {
+      "char": "☔",
+      "trad": "☔",
+      "en": "Umbrella with Rain Drops",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xiaxue": [
+    {
+      "char": "❄️",
+      "trad": "❄️",
+      "en": "Snowflake",
+      "category": "emoji",
+      "weight": 500
+    }
+  ],
+  "xue": [
+    {
+      "char": "❄️",
+      "trad": "❄️",
+      "en": "Snowflake",
+      "category": "emoji",
+      "weight": 500
+    }
+  ]
+}
