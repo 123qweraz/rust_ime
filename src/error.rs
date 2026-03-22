@@ -1,5 +1,6 @@
 use thiserror::Error;
 
+#[allow(dead_code)]
 #[derive(Error, Debug)]
 pub enum ImeError {
     #[error("词典加载失败: {0}")]
@@ -33,8 +34,10 @@ pub enum ImeError {
     Unknown(String),
 }
 
+#[allow(dead_code)]
 pub type Result<T> = std::result::Result<T, ImeError>;
 
+#[allow(dead_code)]
 impl ImeError {
     pub fn search_error(msg: impl Into<String>) -> Self {
         ImeError::SearchError(msg.into())

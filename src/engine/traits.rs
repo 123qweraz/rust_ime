@@ -2,6 +2,7 @@ use crate::config::Config;
 use crate::engine::pipeline::{Candidate, SearchQuery};
 use std::sync::Arc;
 
+#[allow(dead_code)]
 pub trait SearchProvider: Send + Sync {
     fn search(&self, query: SearchQuery) -> (Vec<Candidate>, Vec<String>);
     fn clear_cache(&self);
@@ -10,6 +11,7 @@ pub trait SearchProvider: Send + Sync {
     fn prewarm_profile(&self, profile: &str);
 }
 
+#[allow(dead_code)]
 pub trait ConfigProvider: Send + Sync {
     fn get_config(&self) -> Arc<Config>;
     fn get_page_size(&self) -> usize;

@@ -59,6 +59,7 @@ impl KeyDispatcher {
         }
     }
 
+    #[allow(dead_code)]
     pub fn reset_states(&mut self) {
         self.last_tap_key = None;
         self.last_tap_time = None;

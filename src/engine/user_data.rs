@@ -48,10 +48,6 @@ impl UserDataManager {
         })
     }
 
-    pub fn data_dir(&self) -> &Path {
-        &self.data_dir
-    }
-
     fn profile_dir(&self, profile: &str) -> PathBuf {
         self.data_dir.join(profile)
     }
@@ -163,14 +159,6 @@ impl UserDataManager {
         Ok(())
     }
 
-    pub fn is_dirty(&self) -> bool {
-        self.dirty.load(Ordering::SeqCst)
-    }
-
-    pub fn mark_dirty(&self) {
-        self.dirty.store(true, Ordering::SeqCst);
-    }
-
     pub fn save_user_dict(
         &self,
         profile: &str,
@@ -180,115 +168,6 @@ impl UserDataManager {
         if let Some(profile_data) = data.get(profile) {
             self.save(profile, data_type, profile_data)?;
         }
-        Ok(())
-    }
-
-    pub fn export(&self, profile: &str, output_dir: &Path) -> std::io::Result<()> {
-        let out = output_dir.join(profile);
-        fs::create_dir_all(&out)?;
-
-        for data_type in &[DataType::Learned, DataType::Usage, DataType::Ngram] {
-            let data = self.load(profile, data_type.clone());
-            if !data.is_empty() {
-                let file_path = out.join(data_type.filename());
-                let data_file = JsonDataFile {
-                    version: DATA_VERSION.to_string(),
-                    updated_at: Some(Self::timestamp()),
-                    data,
-                };
-                let json = serde_json::to_string_pretty(&data_file)?;
-                fs::write(&file_path, json)?;
-            }
-        }
-        Ok(())
-    }
-
-    pub fn import(&self, profile: &str, input_dir: &Path) -> std::io::Result<()> {
-        for data_type in &[DataType::Learned, DataType::Usage, DataType::Ngram] {
-            let file_path = input_dir.join(data_type.filename());
-            if file_path.exists() {
-                if let Ok(content) = fs::read_to_string(&file_path) {
-                    let data: HashMap<String, Vec<(String, u32)>> =
-                        if let Ok(data_file) = serde_json::from_str::<JsonDataFile>(&content) {
-                            data_file.data
-                        } else if let Ok(data) =
-                            serde_json::from_str::<HashMap<String, Vec<(String, u32)>>>(&content)
-                        {
-                            data
-                        } else {
-                            continue;
-                        };
-                    self.save(profile, data_type.clone(), &data)?;
-                }
-            }
-        }
-        Ok(())
-    }
-
-    pub fn migrate_from_sled(&self, db: &sled::Db, profiles: &[String]) -> std::io::Result<()> {
-        let mut learned: UserDictData = UserDictData::new();
-        let mut usage: UserDictData = UserDictData::new();
-        let mut ngrams: UserDictData = UserDictData::new();
-
-        for (key_bytes, val_bytes) in db.iter().flatten() {
-            let key = String::from_utf8_lossy(&key_bytes);
-            if let Ok(entries) = serde_json::from_slice::<Vec<(String, u32)>>(&val_bytes) {
-                let parts: Vec<&str> = key.split(':').collect();
-                if parts.len() == 3 {
-                    let (prefix, profile, key_str) = (parts[0], parts[1], parts[2]);
-                    let profile_data = match prefix {
-                        "learned" => &mut learned,
-                        "usage" => &mut usage,
-                        "ngram" => &mut ngrams,
-                        _ => continue,
-                    };
-                    profile_data
-                        .entry(profile.to_string())
-                        .or_default()
-                        .insert(key_str.to_string(), entries);
-                }
-            }
-        }
-
-        for profile in profiles {
-            if let Some(data) = learned.get(profile) {
-                self.save(profile, DataType::Learned, data)?;
-            }
-            if let Some(data) = usage.get(profile) {
-                self.save(profile, DataType::Usage, data)?;
-            }
-            if let Some(data) = ngrams.get(profile) {
-                self.save(profile, DataType::Ngram, data)?;
-            }
-        }
-
-        println!("[UserDataManager] 从 sled DB 迁移完成");
-        Ok(())
-    }
-
-    pub fn migrate_to_sled(&self, db: &sled::Db, profiles: &[String]) -> std::io::Result<()> {
-        for profile in profiles {
-            for data_type in &[DataType::Learned, DataType::Usage, DataType::Ngram] {
-                let data = self.load(profile, data_type.clone());
-                for (key_str, entries) in &data {
-                    let key = format!(
-                        "{}:{}:{}",
-                        match data_type {
-                            DataType::Learned => "learned",
-                            DataType::Usage => "usage",
-                            DataType::Ngram => "ngram",
-                        },
-                        profile,
-                        key_str
-                    );
-                    if let Ok(val) = serde_json::to_vec(entries) {
-                        let _ = db.insert(key.as_bytes(), val);
-                    }
-                }
-            }
-        }
-        let _ = db.flush();
-        println!("[UserDataManager] 迁移到 sled DB 完成");
         Ok(())
     }
 

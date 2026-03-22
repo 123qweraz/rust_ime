@@ -132,25 +132,6 @@ impl ConfigManager {
         }
     }
 
-    pub fn get_data_manager(&self) -> Option<&Arc<UserDataManager>> {
-        self.user_data.as_ref()
-    }
-
-    pub fn export_user_data(&self, profile: &str, output_dir: &PathBuf) -> std::io::Result<()> {
-        if let Some(ref user_data) = self.user_data {
-            user_data.export(profile, output_dir)?;
-        }
-        Ok(())
-    }
-
-    pub fn import_user_data(&mut self, profile: &str, input_dir: &PathBuf) -> std::io::Result<()> {
-        if let Some(ref user_data) = self.user_data {
-            user_data.import(profile, input_dir)?;
-        }
-        self.load_user_dicts();
-        Ok(())
-    }
-
     pub fn clear_user_data(&mut self, profile: &str) -> std::io::Result<()> {
         if let Some(ref user_data) = self.user_data {
             user_data.clear(profile, None)?;
