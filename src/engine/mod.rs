@@ -10,6 +10,7 @@ pub mod scheme;
 pub mod schemes;
 pub mod session;
 pub mod trie;
+pub mod user_data;
 
 pub use config_manager::ConfigManager;
 pub use context::EngineContext;

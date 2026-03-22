@@ -1,7 +1,9 @@
 use crate::config::{AntiTypoMode, Config, PhantomType, PunctuationEntry};
 use crate::engine::keys::VirtualKey;
+use crate::engine::user_data::UserDataManager;
 use arc_swap::ArcSwap;
 use std::collections::HashMap;
+use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::Duration;
 
@@ -12,16 +14,18 @@ pub struct ConfigManager {
     pub learned_words: Arc<ArcSwap<UserDictData>>,
     pub usage_history: Arc<ArcSwap<UserDictData>>,
     pub ngram_history: Arc<ArcSwap<UserDictData>>,
-    pub db: Option<sled::Db>,
-    pub user_dict_tx: Option<std::sync::mpsc::Sender<(UserDictData, std::path::PathBuf)>>,
+    pub user_data: Option<Arc<UserDataManager>>,
 }
 
 impl ConfigManager {
     pub fn new() -> Self {
         let master = Config::default_config();
-        let db = sled::open("data/user_data.db").ok();
-        if db.is_some() {
-            println!("[ConfigManager] 成功初始化用户数据 KV 存储 (sled)。");
+        let data_dir = Self::get_data_dir();
+
+        let user_data = UserDataManager::new(data_dir).ok();
+
+        if user_data.is_some() {
+            println!("[ConfigManager] 初始化用户数据管理器 (JSON 存储)");
         }
 
         Self {
@@ -29,20 +33,137 @@ impl ConfigManager {
             learned_words: Arc::new(ArcSwap::from_pointee(HashMap::new())),
             usage_history: Arc::new(ArcSwap::from_pointee(HashMap::new())),
             ngram_history: Arc::new(ArcSwap::from_pointee(HashMap::new())),
-            db,
-            user_dict_tx: None,
+            user_data: user_data.map(Arc::new),
+        }
+    }
+
+    fn get_data_dir() -> PathBuf {
+        if let Ok(config_home) = std::env::var("XDG_CONFIG_HOME") {
+            PathBuf::from(config_home)
+                .join("rust-ime")
+                .join("user_data")
+        } else if let Ok(home) = std::env::var("HOME") {
+            PathBuf::from(home)
+                .join(".config")
+                .join("rust-ime")
+                .join("user_data")
+        } else {
+            PathBuf::from("data").join("user_data")
         }
     }
 
     pub fn apply_config(&mut self, conf: &Config) {
         self.master_config = conf.clone();
 
-        // Load user dicts if needed
         if (self.master_config.input.enable_word_discovery
             || self.master_config.input.enable_auto_reorder)
             && (self.learned_words.load().is_empty() || self.usage_history.load().is_empty())
         {
             self.load_user_dicts();
+        }
+    }
+
+    pub fn load_user_dicts(&mut self) {
+        let mut profiles: Vec<String> = self
+            .master_config
+            .input
+            .profile_keys
+            .iter()
+            .map(|pk| pk.profile.to_lowercase())
+            .collect();
+
+        if profiles.is_empty() {
+            profiles.push("chinese".to_string());
+        }
+
+        if let Some(ref user_data) = self.user_data {
+            let (learned, usage, ngrams) = user_data.load_all(&profiles);
+            self.learned_words.store(Arc::new(learned));
+            self.usage_history.store(Arc::new(usage));
+            self.ngram_history.store(Arc::new(ngrams));
+        }
+    }
+
+    pub fn insert_learned(&self, profile: &str, pinyin: &str, entries: &[(String, u32)]) {
+        if let Some(ref user_data) = self.user_data {
+            let mut current = (**self.learned_words.load()).clone();
+            current
+                .entry(profile.to_string())
+                .or_default()
+                .insert(pinyin.to_string(), entries.to_vec());
+            self.learned_words.store(Arc::new(current.clone()));
+            let _ = user_data.save_user_dict(
+                profile,
+                crate::engine::user_data::DataType::Learned,
+                &current,
+            );
+        }
+    }
+
+    pub fn insert_usage(&self, profile: &str, pinyin: &str, entries: &[(String, u32)]) {
+        if let Some(ref user_data) = self.user_data {
+            let mut current = (**self.usage_history.load()).clone();
+            current
+                .entry(profile.to_string())
+                .or_default()
+                .insert(pinyin.to_string(), entries.to_vec());
+            self.usage_history.store(Arc::new(current.clone()));
+            let _ = user_data.save_user_dict(
+                profile,
+                crate::engine::user_data::DataType::Usage,
+                &current,
+            );
+        }
+    }
+
+    pub fn insert_ngram(&self, profile: &str, context: &str, entries: &[(String, u32)]) {
+        if let Some(ref user_data) = self.user_data {
+            let mut current = (**self.ngram_history.load()).clone();
+            current
+                .entry(profile.to_string())
+                .or_default()
+                .insert(context.to_string(), entries.to_vec());
+            self.ngram_history.store(Arc::new(current.clone()));
+            let _ = user_data.save_user_dict(
+                profile,
+                crate::engine::user_data::DataType::Ngram,
+                &current,
+            );
+        }
+    }
+
+    pub fn get_data_manager(&self) -> Option<&Arc<UserDataManager>> {
+        self.user_data.as_ref()
+    }
+
+    pub fn export_user_data(&self, profile: &str, output_dir: &PathBuf) -> std::io::Result<()> {
+        if let Some(ref user_data) = self.user_data {
+            user_data.export(profile, output_dir)?;
+        }
+        Ok(())
+    }
+
+    pub fn import_user_data(&mut self, profile: &str, input_dir: &PathBuf) -> std::io::Result<()> {
+        if let Some(ref user_data) = self.user_data {
+            user_data.import(profile, input_dir)?;
+        }
+        self.load_user_dicts();
+        Ok(())
+    }
+
+    pub fn clear_user_data(&mut self, profile: &str) -> std::io::Result<()> {
+        if let Some(ref user_data) = self.user_data {
+            user_data.clear(profile, None)?;
+        }
+        self.load_user_dicts();
+        Ok(())
+    }
+
+    pub fn list_profiles(&self) -> Vec<String> {
+        if let Some(ref user_data) = self.user_data {
+            user_data.list_profiles()
+        } else {
+            Vec::new()
         }
     }
 
@@ -188,138 +309,6 @@ impl ConfigManager {
             PhantomType::None
         } else {
             self.master_config.input.phantom_type
-        }
-    }
-
-    pub fn load_user_dicts(&mut self) {
-        let mut learned = UserDictData::new();
-        let mut usage: UserDictData = HashMap::new();
-        let mut ngram: UserDictData = HashMap::new();
-
-        if let Some(ref db) = self.db {
-            for (key_bytes, val_bytes) in db.iter().flatten() {
-                let key = String::from_utf8_lossy(&key_bytes);
-                if let Ok(entries) = serde_json::from_slice::<Vec<(String, u32)>>(&val_bytes) {
-                    let parts: Vec<&str> = key.split(':').collect();
-                    if parts.len() == 3 {
-                        let (prefix, profile, key_str) = (parts[0], parts[1], parts[2]);
-                        match prefix {
-                            "learned" => {
-                                learned
-                                    .entry(profile.to_string())
-                                    .or_default()
-                                    .insert(key_str.to_string(), entries);
-                            }
-                            "usage" => {
-                                usage
-                                    .entry(profile.to_string())
-                                    .or_default()
-                                    .insert(key_str.to_string(), entries);
-                            }
-                            "ngram" => {
-                                ngram
-                                    .entry(profile.to_string())
-                                    .or_default()
-                                    .insert(key_str.to_string(), entries);
-                            }
-                            _ => {}
-                        };
-                    }
-                }
-            }
-        }
-
-        // 2. 如果数据库是空的，或者强制迁移，检查旧 JSON
-        if learned.is_empty() && usage.is_empty() {
-            println!("[ConfigManager] 检测到全新存储，尝试迁移旧 JSON 数据...");
-            let load_file = |name: &str| -> UserDictData {
-                let path = std::path::Path::new("data").join(format!("{}.json", name));
-                if path.exists() {
-                    if let Ok(file) = std::fs::File::open(&path) {
-                        return serde_json::from_reader(std::io::BufReader::new(file))
-                            .unwrap_or_default();
-                    }
-                }
-                HashMap::new()
-            };
-
-            let old_learned = load_file("learned_words");
-            let old_usage = load_file("usage_history");
-
-            // 将旧数据同步进数据库
-            if let Some(ref db) = self.db {
-                for (profile, pinyins) in &old_learned {
-                    for (pinyin, entries) in pinyins {
-                        let key = format!("learned:{}:{}", profile, pinyin);
-                        if let Ok(val) = serde_json::to_vec(entries) {
-                            let _ = db.insert(key, val);
-                        }
-                    }
-                }
-                for (profile, pinyins) in &old_usage {
-                    for (pinyin, entries) in pinyins {
-                        let key = format!("usage:{}:{}", profile, pinyin);
-                        if let Ok(val) = serde_json::to_vec(entries) {
-                            let _ = db.insert(key, val);
-                        }
-                    }
-                }
-                let _ = db.flush();
-                println!("[ConfigManager] 旧 JSON 数据已成功迁移至 KV 数据库。");
-            }
-            learned = old_learned;
-            usage = old_usage;
-        }
-
-        self.learned_words.store(Arc::new(learned));
-        self.usage_history.store(Arc::new(usage));
-        self.ngram_history.store(Arc::new(ngram));
-
-        if self.user_dict_tx.is_none() {
-            let (tx, rx) = std::sync::mpsc::channel::<(UserDictData, std::path::PathBuf)>();
-            self.user_dict_tx = Some(tx);
-            std::thread::spawn(move || {
-                while let Ok((dict, path)) = rx.recv() {
-                    let mut latest = dict;
-                    let latest_path = path;
-                    while let Ok((next, next_path)) = rx.try_recv() {
-                        if next_path == latest_path {
-                            latest = next;
-                        }
-                    }
-                    if let Ok(file) = std::fs::File::create(&latest_path) {
-                        let _ =
-                            serde_json::to_writer_pretty(std::io::BufWriter::new(file), &latest);
-                    }
-                }
-            });
-        }
-    }
-
-    pub fn insert_learned(&self, profile: &str, pinyin: &str, entries: &[(String, u32)]) {
-        if let Some(ref db) = self.db {
-            let key = format!("learned:{}:{}", profile, pinyin);
-            if let Ok(val) = serde_json::to_vec(entries) {
-                let _ = db.insert(key, val);
-            }
-        }
-    }
-
-    pub fn insert_usage(&self, profile: &str, pinyin: &str, entries: &[(String, u32)]) {
-        if let Some(ref db) = self.db {
-            let key = format!("usage:{}:{}", profile, pinyin);
-            if let Ok(val) = serde_json::to_vec(entries) {
-                let _ = db.insert(key, val);
-            }
-        }
-    }
-
-    pub fn insert_ngram(&self, profile: &str, context: &str, entries: &[(String, u32)]) {
-        if let Some(ref db) = self.db {
-            let key = format!("ngram:{}:{}", profile, context);
-            if let Ok(val) = serde_json::to_vec(entries) {
-                let _ = db.insert(key, val);
-            }
         }
     }
 }

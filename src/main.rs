@@ -352,11 +352,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                     }
                 }
                 ui::tray::TrayEvent::ClearUserDict => {
-                    if let Ok(p) = processor_clone.lock() {
-                        p.ctx.config.learned_words.store(Arc::new(HashMap::new()));
-                        p.ctx.config.usage_history.store(Arc::new(HashMap::new()));
-                        if let Some(ref db) = p.ctx.config.db {
-                            let _ = db.clear();
+                    if let Ok(mut p) = processor_clone.lock() {
+                        let profiles = p.ctx.config.list_profiles();
+                        for profile in profiles {
+                            if let Err(e) = p.ctx.config.clear_user_data(&profile) {
+                                eprintln!("清除用户数据失败: {}", e);
+                            }
                         }
                     }
                 }
