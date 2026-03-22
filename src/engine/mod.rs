@@ -9,6 +9,7 @@ pub mod processor;
 pub mod scheme;
 pub mod schemes;
 pub mod session;
+pub mod traits;
 pub mod trie;
 pub mod user_data;
 
