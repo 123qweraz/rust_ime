@@ -116,30 +116,37 @@ impl GrabGuard {
         Self { device, is_grabbed }
     }
 
-    fn ungrab_temporarily(&mut self) {
+    fn ungrab(&mut self) {
         if self.is_grabbed {
             if let Ok(mut dev) = self.device.lock() {
-                let _ = dev.ungrab();
+                if dev.ungrab().is_ok() {
+                    self.is_grabbed = false;
+                    println!("[EvdevHost] 已临时释放键盘拦截");
+                }
             }
         }
     }
 
     fn re_grab(&mut self) {
         if !self.is_grabbed {
-            return;
-        }
-        if let Ok(mut dev) = self.device.lock() {
-            if let Err(e) = dev.grab() {
-                eprintln!("[EvdevHost] 警告: 重新锁定键盘失败: {e}");
+            if let Ok(mut dev) = self.device.lock() {
+                if dev.grab().is_ok() {
+                    self.is_grabbed = true;
+                    println!("[EvdevHost] 已重新获取键盘拦截");
+                }
             }
         }
     }
+}
 
-    fn is_meta_key(key: Key) -> bool {
-        matches!(
-            key,
-            Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA | Key::KEY_COMPOSE
-        )
+impl Drop for GrabGuard {
+    fn drop(&mut self) {
+        if self.is_grabbed {
+            if let Ok(mut dev) = self.device.lock() {
+                let _ = dev.ungrab();
+                println!("[EvdevHost] 键盘硬件拦截已安全释放。");
+            }
+        }
     }
 }
 
@@ -222,7 +229,6 @@ impl InputMethodHost for EvdevHost {
         // 使用 RAII Guard 自动管理 grab 生命周期
         let mut grab_guard = GrabGuard::new(self.dev.clone());
         let mut held_keys = HashSet::new();
-        let mut meta_grabbed = false;
         println!("[EvdevHost] 正在运行硬件拦截循环...");
 
         while !self.should_exit.load(Ordering::Relaxed) {
@@ -243,6 +249,27 @@ impl InputMethodHost for EvdevHost {
                 if let InputEventKind::Key(key) = ev.kind() {
                     let val = ev.value();
 
+                    // 0. 检测 Meta (Win) 键状态
+                    let is_meta_key = matches!(
+                        key,
+                        Key::KEY_LEFTMETA | Key::KEY_RIGHTMETA | Key::KEY_COMPOSE
+                    );
+                    let meta_is_held = held_keys.contains(&Key::KEY_LEFTMETA)
+                        || held_keys.contains(&Key::KEY_RIGHTMETA);
+
+                    if is_meta_key && val == 1 {
+                        // Meta 键按下：释放 grab，让系统快捷键通过
+                        grab_guard.ungrab();
+                    } else if is_meta_key && val == 0 && !meta_is_held {
+                        // Meta 键释放：重新获取 grab
+                        grab_guard.re_grab();
+                    }
+
+                    // 如果 Meta 键被按住，跳过所有按键处理（让它们通过系统）
+                    if meta_is_held || (is_meta_key && val == 1) {
+                        continue;
+                    }
+
                     // 1. 基础状态维护
                     if val == 1 {
                         held_keys.insert(key);
@@ -253,37 +280,12 @@ impl InputMethodHost for EvdevHost {
                         held_keys.remove(&key);
                     }
 
-                    // 2. Meta (Win) 键特殊处理：释放 grab 让系统快捷键通过
-                    if GrabGuard::is_meta_key(key) {
-                        if val == 1 {
-                            // Meta 键按下时，释放 grab
-                            grab_guard.ungrab_temporarily();
-                            meta_grabbed = true;
-                            println!("[EvdevHost] Meta 键按下，临时释放键盘拦截");
-                        } else if val == 0 {
-                            // Meta 键释放时，重新获取 grab
-                            grab_guard.re_grab();
-                            meta_grabbed = false;
-                            println!("[EvdevHost] Meta 键释放，重新获取键盘拦截");
-                        }
-                        // 让 Meta 键直接通过，不做任何处理
-                        continue;
-                    }
-
                     let shift = held_keys.contains(&Key::KEY_LEFTSHIFT)
                         || held_keys.contains(&Key::KEY_RIGHTSHIFT);
                     let ctrl = held_keys.contains(&Key::KEY_LEFTCTRL)
                         || held_keys.contains(&Key::KEY_RIGHTCTRL);
                     let alt = held_keys.contains(&Key::KEY_LEFTALT)
                         || held_keys.contains(&Key::KEY_RIGHTALT);
-                    let meta_held = held_keys.contains(&Key::KEY_LEFTMETA)
-                        || held_keys.contains(&Key::KEY_RIGHTMETA)
-                        || meta_grabbed;
-
-                    // 如果 Meta 键被按住，所有其他键都直接放行给系统处理
-                    if meta_held {
-                        continue;
-                    }
 
                     if let Ok(mut p) = self.processor.lock() {
                         if let Some(vk) = evdev_to_virtual(key) {
