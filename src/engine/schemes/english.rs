@@ -1,6 +1,6 @@
-use crate::engine::scheme::{InputScheme, SchemeContext, SchemeCandidate};
 use crate::engine::keys::VirtualKey;
 use crate::engine::processor::Action;
+use crate::engine::scheme::{InputScheme, SchemeCandidate, SchemeContext};
 
 pub struct EnglishScheme;
 
@@ -30,7 +30,7 @@ impl InputScheme for EnglishScheme {
                     results.push(cand);
                 }
             }
-            
+
             // 2. 前缀匹配
             if context.config.input.enable_prefix_matching {
                 let limit = if query.len() > 3 { 5 } else { 20 };
@@ -49,19 +49,30 @@ impl InputScheme for EnglishScheme {
         results
     }
 
-    fn post_process(&self, _query: &str, candidates: &mut Vec<SchemeCandidate>, _context: &SchemeContext) {
+    fn post_process(
+        &self,
+        _query: &str,
+        candidates: &mut Vec<SchemeCandidate>,
+        _context: &SchemeContext,
+    ) {
         // 英语方案通常按权重排序即可
         candidates.sort_by(|a, b| {
-            b.match_level.cmp(&a.match_level)
+            b.match_level
+                .cmp(&a.match_level)
                 .then_with(|| b.weight.cmp(&a.weight))
         });
-        
+
         // 去重
         let mut seen = std::collections::HashSet::new();
         candidates.retain(|c| seen.insert(c.text.clone()));
     }
 
-    fn handle_special_key(&self, _key: VirtualKey, _buffer: &mut String, _context: &SchemeContext) -> Option<Action> {
+    fn handle_special_key(
+        &self,
+        _key: VirtualKey,
+        _buffer: &mut String,
+        _context: &SchemeContext,
+    ) -> Option<Action> {
         None
     }
 }

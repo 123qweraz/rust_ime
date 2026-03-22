@@ -13,11 +13,30 @@ use std::time::{Duration, Instant};
 
 use crate::config::Config;
 use crate::engine::keys::VirtualKey;
-use crate::engine::scheme::InputScheme;
-use crate::engine::{Command, InputEvent, ModifierState};
+use crate::engine::{Command, EngineContext, InputEvent};
 
 pub use fsm::ImeState;
 pub use utils::*;
+
+const KEY_BATCH_DELAY_MS: u64 = 30;
+
+pub fn inject_text(ctx: &mut EngineContext, text: &str) -> Action {
+    use crate::engine::compositor::Compositor;
+    use crate::engine::pipeline::lookup;
+
+    ctx.session.buffer.push_str(text);
+    if ctx.session.state == ImeState::Idle {
+        ctx.session.state = ImeState::Composing;
+    }
+    ctx.session.preview_selected_candidate = false;
+    if let Some(act) = lookup(ctx) {
+        return act;
+    }
+    if let Some(act) = Compositor::check_auto_commit(ctx) {
+        return act;
+    }
+    Compositor::update_phantom_action(ctx)
+}
 
 #[derive(Debug, Clone, PartialEq)]
 pub enum Action {
@@ -26,164 +45,32 @@ pub enum Action {
     PassThrough,
     Consume,
     Alert,
-    Notify(String, String), // Summary, Body
+    Notify(String, String),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum FilterMode {
     None,
-    Global, // Shift + 字母 (全局筛选)
-    Page,   // Caps + 字母 (当前页筛选)
+    Global,
+    Page,
 }
 
 pub struct Processor {
-    pub session: crate::engine::InputSession,
-    pub session_state: session_state::SessionState,
-    pub config: crate::engine::ConfigManager,
-    pub dispatcher: crate::engine::KeyDispatcher,
-    pub engine: crate::engine::pipeline::SearchEngine,
-    pub syllables: HashSet<String>,
-    last_key_time: std::time::Instant,
-    pending_key_buffer: String,
+    pub ctx: EngineContext,
 }
-
-const KEY_BATCH_DELAY_MS: u64 = 30;
 
 impl Processor {
     pub fn new(
         trie_paths: HashMap<String, (std::path::PathBuf, std::path::PathBuf)>,
         syllables: HashSet<String>,
     ) -> Self {
-        let config = crate::engine::ConfigManager::new();
-        let syllables_arc = Arc::new(syllables.clone());
-
-        let engine = crate::engine::pipeline::SearchEngine::new(
-            trie_paths,
-            syllables_arc,
-            config.learned_words.clone(),
-            config.usage_history.clone(),
-            config.ngram_history.clone(),
-            {
-                let mut m: HashMap<String, Box<dyn InputScheme>> = HashMap::new();
-                m.insert(
-                    "stroke".to_string(),
-                    Box::new(crate::engine::schemes::StrokeScheme::new()),
-                );
-                m.insert(
-                    "english".to_string(),
-                    Box::new(crate::engine::schemes::EnglishScheme::new()),
-                );
-                m.insert(
-                    "chinese".to_string(),
-                    Box::new(crate::engine::schemes::ChineseScheme::new()),
-                );
-                m.insert(
-                    "japanese".to_string(),
-                    Box::new(crate::engine::schemes::JapaneseScheme::new()),
-                );
-                Arc::new(m)
-            },
-        );
-
         Self {
-            session: crate::engine::InputSession::new(),
-            session_state: session_state::SessionState::new(),
-            config,
-            dispatcher: crate::engine::KeyDispatcher::new(),
-            engine,
-            syllables,
-            last_key_time: std::time::Instant::now(),
-            pending_key_buffer: String::new(),
+            ctx: EngineContext::new(trie_paths, syllables),
         }
-    }
-
-    pub fn execute_command(&mut self, cmd: Command) -> Action {
-        commands::execute_command(self, cmd)
     }
 
     pub fn apply_config(&mut self, conf: &Config) {
-        self.config.apply_config(conf);
-        self.engine.clear_cache();
-
-        if !conf.input.enabled_profiles.is_empty() {
-            // 只激活已启用的方案中第一个为默认
-            let enabled: Vec<String> = conf
-                .input
-                .enabled_profiles
-                .iter()
-                .map(|p| p.to_lowercase())
-                .filter(|p| self.engine.trie_paths.contains_key(p))
-                .collect();
-            if !enabled.is_empty() {
-                self.session_state.active_profiles = vec![enabled[0].clone()];
-            }
-        } else {
-            let new_profile = conf.input.default_profile.to_lowercase();
-            if !new_profile.is_empty() && self.engine.trie_paths.contains_key(&new_profile) {
-                self.session_state.active_profiles = vec![new_profile];
-            } else {
-                self.session_state.active_profiles = vec!["chinese".to_string()];
-            }
-        }
-
-        // 异步预热核心词库（只预热已启用的）
-        let enabled_list: Vec<String> = conf
-            .input
-            .enabled_profiles
-            .iter()
-            .filter(|p| self.engine.trie_paths.contains_key(&p.to_lowercase()))
-            .map(|p| p.to_lowercase())
-            .collect();
-        for profile in enabled_list {
-            let engine = self.engine.clone();
-            std::thread::spawn(move || {
-                engine.prewarm_profile(&profile);
-            });
-        }
-        self.setup_default_keymap();
-    }
-
-    fn setup_default_keymap(&mut self) {
-        self.dispatcher.key_map.clear();
-        let none = ModifierState {
-            shift: false,
-            ctrl: false,
-            alt: false,
-            meta: false,
-        };
-
-        // 基础导航
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::Left, none), Command::PrevCandidate);
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::Right, none), Command::NextCandidate);
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::Up, none), Command::PrevPage);
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::Down, none), Command::NextPage);
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::PageUp, none), Command::PrevPage);
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::PageDown, none), Command::NextPage);
-
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::Space, none), Command::Commit);
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::Enter, none), Command::CommitRaw);
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::Esc, none), Command::Clear);
-        self.dispatcher
-            .key_map
-            .insert((VirtualKey::Delete, none), Command::Clear);
+        self.ctx.apply_config(conf);
     }
 
     pub fn handle_event(&mut self, event: InputEvent) -> Action {
@@ -226,8 +113,8 @@ impl Processor {
     }
 
     pub fn toggle(&mut self) -> Action {
-        self.session_state.chinese_enabled = !self.session_state.chinese_enabled;
-        let enabled = self.session_state.chinese_enabled;
+        self.ctx.session_state.chinese_enabled = !self.ctx.session_state.chinese_enabled;
+        let enabled = self.ctx.session_state.chinese_enabled;
         let short = self.get_short_display();
         self.reset();
 
@@ -240,12 +127,13 @@ impl Processor {
 
     pub fn next_profile(&mut self) -> String {
         let enabled: Vec<String> = self
+            .ctx
             .config
             .master_config
             .input
             .enabled_profiles
             .iter()
-            .filter(|p| self.engine.trie_paths.contains_key(*p))
+            .filter(|p| self.ctx.engine.trie_paths.contains_key(*p))
             .cloned()
             .collect();
 
@@ -254,6 +142,7 @@ impl Processor {
         }
 
         let current = self
+            .ctx
             .session_state
             .active_profiles
             .first()
@@ -264,7 +153,7 @@ impl Processor {
         let next_idx = (idx + 1) % enabled.len();
         let next = enabled[next_idx].clone();
 
-        self.session_state.active_profiles = vec![next.clone()];
+        self.ctx.session_state.active_profiles = vec![next.clone()];
         self.reset();
         next
     }
@@ -286,7 +175,7 @@ impl Processor {
             if let Some(action) = self.handle_global_hotkey(key, ctrl_pressed) {
                 return action;
             }
-            if self.session.nav_mode && !self.session.buffer.is_empty() {
+            if self.ctx.session.nav_mode && !self.ctx.session.buffer.is_empty() {
                 match key {
                     VirtualKey::H => return self.execute_command(Command::PrevCandidate),
                     VirtualKey::L => return self.execute_command(Command::NextCandidate),
@@ -295,8 +184,8 @@ impl Processor {
                     _ => {}
                 }
             }
-            if self.session_state.capslock_pending
-                && self.session.buffer.is_empty()
+            if self.ctx.session_state.capslock_pending
+                && self.ctx.session.buffer.is_empty()
                 && is_letter(key)
             {
                 if let Some(action) = self.handle_capslock_profile_switch(key) {
@@ -306,15 +195,15 @@ impl Processor {
         }
 
         if is_release && key == VirtualKey::CapsLock {
-            self.session.nav_mode = false;
-            self.session_state.capslock_down = false;
-            if !self.session_state.chinese_enabled {
+            self.ctx.session.nav_mode = false;
+            self.ctx.session_state.capslock_down = false;
+            if !self.ctx.session_state.chinese_enabled {
                 return Action::PassThrough;
             }
             return Action::Consume;
         }
 
-        if !self.session_state.chinese_enabled {
+        if !self.ctx.session_state.chinese_enabled {
             return Action::PassThrough;
         }
 
@@ -330,49 +219,44 @@ impl Processor {
             }
         }
 
-        if let Some(action) = intents::process_modifiers(self, key, is_press, is_release) {
+        if let Some(action) = intents::process_modifiers(&mut self.ctx, key, is_press, is_release) {
             return action;
         }
-        if let Some(action) = intents::process_intent(self, key, val, shift_pressed, now) {
+        if let Some(action) = intents::process_intent(&mut self.ctx, key, val, shift_pressed, now) {
             return action;
         }
         if key == VirtualKey::Grave {
             return Action::PassThrough;
         }
-        if let Some(action) = intents::process_switch_mode(self, key, is_press, is_release) {
+        if let Some(action) = intents::process_switch_mode(&mut self.ctx, key, is_press, is_release)
+        {
             return action;
         }
 
-        // Key batching: accumulate rapid keys and process together
         if is_press && is_letter(key) && perform_lookup {
-            let elapsed = now.duration_since(self.last_key_time);
+            let elapsed = now.duration_since(self.ctx.last_key_time);
 
             if elapsed < Duration::from_millis(KEY_BATCH_DELAY_MS) {
-                // Accumulate key for batching
                 if let Some(c) = key_to_char(key, shift_pressed, false) {
-                    self.pending_key_buffer.push(c);
+                    self.ctx.pending_key_buffer.push(c);
                 }
-                self.last_key_time = now;
+                self.ctx.last_key_time = now;
                 return Action::Consume;
-            } else if !self.pending_key_buffer.is_empty() {
-                // Process accumulated keys
-                let buffered = self.pending_key_buffer.clone();
-                self.pending_key_buffer.clear();
+            } else if !self.ctx.pending_key_buffer.is_empty() {
+                let buffered = self.ctx.pending_key_buffer.clone();
+                self.ctx.pending_key_buffer.clear();
 
-                // Add the current key
                 if let Some(c) = key_to_char(key, shift_pressed, false) {
-                    self.pending_key_buffer.push(c);
+                    self.ctx.pending_key_buffer.push(c);
                 }
-                self.last_key_time = now;
+                self.ctx.last_key_time = now;
 
-                // Process all buffered keys at once
                 return self.process_batched_keys(&buffered);
             } else {
-                // Start new batch
                 if let Some(c) = key_to_char(key, shift_pressed, false) {
-                    self.pending_key_buffer.push(c);
+                    self.ctx.pending_key_buffer.push(c);
                 }
-                self.last_key_time = now;
+                self.ctx.last_key_time = now;
             }
         }
 
@@ -398,7 +282,7 @@ impl Processor {
     }
 
     fn inject_char_internal(&mut self, c: char) -> Option<Action> {
-        self.session.push_char(c);
+        self.ctx.session.push_char(c);
         self.lookup()
     }
 
@@ -411,6 +295,8 @@ impl Processor {
         is_press: bool,
         perform_lookup: bool,
     ) -> Action {
+        use crate::engine::ModifierState;
+
         let input = fsm::FsmInput {
             key,
             mods: ModifierState {
@@ -419,79 +305,65 @@ impl Processor {
                 alt: alt_pressed,
                 meta: false,
             },
-            buffer_empty: self.session.buffer.is_empty(),
-            has_candidates: !self.session.candidates.is_empty(),
+            buffer_empty: self.ctx.session.buffer.is_empty(),
+            has_candidates: !self.ctx.session.candidates.is_empty(),
         };
 
-        let (new_state, effect) = fsm::StateMachine::transition(self.session.state, &input);
-        self.session.state = new_state;
+        let (new_state, effect) = fsm::StateMachine::transition(self.ctx.session.state, &input);
+        self.ctx.session.state = new_state;
 
-        if is_press && is_letter(key) && !self.session.nav_mode {
-            self.session_state.capslock_pending = false;
+        if is_press && is_letter(key) && !self.ctx.session.nav_mode {
+            self.ctx.session_state.capslock_pending = false;
         }
 
         match effect {
             fsm::FsmEffect::PassThrough => {
-                if self.session.state == ImeState::Idle {
-                    self.handle_idle(key, shift_pressed, perform_lookup)
+                if self.ctx.session.state == ImeState::Idle {
+                    handlers::handle_idle(&mut self.ctx, key, shift_pressed, perform_lookup)
                 } else {
                     Action::PassThrough
                 }
             }
             fsm::FsmEffect::UpdateLookup => {
-                self.handle_composing(key, shift_pressed, perform_lookup)
+                handlers::handle_composing(&mut self.ctx, key, shift_pressed, perform_lookup)
             }
             fsm::FsmEffect::Commit首选 => self.execute_command(Command::Commit),
             fsm::FsmEffect::CommitRaw => self.execute_command(Command::CommitRaw),
             fsm::FsmEffect::Clear => self.execute_command(Command::Clear),
-            fsm::FsmEffect::Consume => self.handle_composing(key, shift_pressed, perform_lookup),
+            fsm::FsmEffect::Consume => {
+                handlers::handle_composing(&mut self.ctx, key, shift_pressed, perform_lookup)
+            }
             fsm::FsmEffect::Alert => Action::Alert,
         }
     }
 
-    pub fn handle_idle(
-        &mut self,
-        key: VirtualKey,
-        shift_pressed: bool,
-        perform_lookup: bool,
-    ) -> Action {
-        handlers::handle_idle(self, key, shift_pressed, perform_lookup)
-    }
-
-    pub fn handle_composing(
-        &mut self,
-        key: VirtualKey,
-        shift_pressed: bool,
-        perform_lookup: bool,
-    ) -> Action {
-        handlers::handle_composing(self, key, shift_pressed, perform_lookup)
-    }
-
-    pub fn handle_punctuation(&mut self, key: VirtualKey, shift_pressed: bool) -> Action {
-        punctuation::handle_punctuation(self, key, shift_pressed)
-    }
-
     pub fn commit_candidate(&mut self, mut cand: Arc<str>, index: usize) -> Action {
         let now = Instant::now();
-        let py = self.session.last_lookup_pinyin.clone();
+        let py = self.ctx.session.last_lookup_pinyin.clone();
 
         if !py.is_empty() && index != 99 {
-            if now.duration_since(self.session_state.last_commit_time) > Duration::from_secs(3) {
-                self.session_state.commit_history.clear();
+            if now.duration_since(self.ctx.session_state.last_commit_time) > Duration::from_secs(3)
+            {
+                self.ctx.session_state.commit_history.clear();
             }
 
-            let last_word_opt = self.session_state.get_last_word().map(|s| s.to_string());
+            let last_word_opt = self
+                .ctx
+                .session_state
+                .get_last_word()
+                .map(|s| s.to_string());
             self.record_usage(&py, &cand, last_word_opt.as_deref());
-            self.session_state
+            self.ctx
+                .session_state
                 .add_to_history(py.clone(), cand.to_string());
 
-            for (py_c, word_c) in self.session_state.get_combination_candidates(8) {
+            for (py_c, word_c) in self.ctx.session_state.get_combination_candidates(8) {
                 self.record_usage(&py_c, &word_c, None);
             }
-            self.session_state.update_commit_time();
+            self.ctx.session_state.update_commit_time();
         }
 
-        if self.session_state.is_english_mode()
+        if self.ctx.session_state.is_english_mode()
             && !cand.is_empty()
             && cand.chars().last().unwrap_or(' ').is_alphanumeric()
         {
@@ -500,7 +372,7 @@ impl Processor {
             cand = Arc::from(s);
         }
 
-        let del = self.session.phantom_text.chars().count();
+        let del = self.ctx.session.phantom_text.chars().count();
         self.clear_composing();
         Action::DeleteAndEmit {
             delete: del,
@@ -509,14 +381,14 @@ impl Processor {
     }
 
     pub fn update_phantom_action(&mut self) -> Action {
-        if self.config.phantom_type() == crate::config::PhantomType::None {
+        if self.ctx.config.phantom_type() == crate::config::PhantomType::None {
             return Action::Consume;
         }
-        let target = crate::engine::compositor::Compositor::get_phantom_text(self);
-        if target == self.session.phantom_text {
+        let target = crate::engine::compositor::Compositor::get_phantom_text(&mut self.ctx);
+        if target == self.ctx.session.phantom_text {
             return Action::Consume;
         }
-        let old_phantom = self.session.phantom_text.clone();
+        let old_phantom = self.ctx.session.phantom_text.clone();
         let old_chars: Vec<char> = old_phantom.chars().collect();
         let target_chars: Vec<char> = target.chars().collect();
         let mut common_prefix_len = 0;
@@ -529,7 +401,7 @@ impl Processor {
         }
         let delete_count = old_chars.len() - common_prefix_len;
         let insert_text: String = target_chars[common_prefix_len..].iter().collect();
-        self.session.phantom_text = target;
+        self.ctx.session.phantom_text = target;
         if delete_count == 0 && insert_text.is_empty() {
             Action::Consume
         } else if delete_count == 0 {
@@ -546,81 +418,83 @@ impl Processor {
         self.lookup_with_limit(20)
     }
 
-    pub fn trigger_incremental_search(&mut self) {
-        let current_len = self.session.candidates.len();
-        if current_len >= 200 {
-            return;
-        }
-        self.lookup_with_limit(current_len + 50);
-    }
-
     pub fn lookup_with_limit(&mut self, limit: usize) -> Option<Action> {
-        let span = tracing::debug_span!("lookup", buffer = %self.session.buffer, limit);
+        let span = tracing::debug_span!("lookup", buffer = %self.ctx.session.buffer, limit);
         let _enter = span.enter();
-        if self.session.buffer.is_empty() {
+        if self.ctx.session.buffer.is_empty() {
             self.reset();
             return None;
         }
 
-        if self.session.filter_mode == FilterMode::Page && !self.session.page_snapshot.is_empty() {
+        if self.ctx.session.filter_mode == FilterMode::Page
+            && !self.ctx.session.page_snapshot.is_empty()
+        {
             let mut filtered = Vec::new();
-            for c in &self.session.page_snapshot {
-                if self.engine.matches_filter(c, &self.session.aux_filter) {
+            for c in &self.ctx.session.page_snapshot {
+                if self
+                    .ctx
+                    .engine
+                    .matches_filter(c, &self.ctx.session.aux_filter)
+                {
                     filtered.push(c.clone());
                 }
             }
             if !filtered.is_empty() {
-                self.session.candidates = filtered;
-                if self.session.candidates.len() == 1 {
-                    let word = self.session.candidates[0].text.clone();
+                self.ctx.session.candidates = filtered;
+                if self.ctx.session.candidates.len() == 1 {
+                    let word = self.ctx.session.candidates[0].text.clone();
                     return Some(self.commit_candidate(word, 0));
                 }
             } else {
-                self.session.candidates.clear();
+                self.ctx.session.candidates.clear();
             }
-            self.session.update_state();
+            self.ctx.session.update_state();
             return None;
         }
 
         let current_profile = self
+            .ctx
             .session_state
             .active_profiles
             .first()
             .cloned()
             .unwrap_or_default();
         let last_word = self
+            .ctx
             .session_state
             .commit_history
             .last()
             .map(|(_, word)| word.as_str());
 
         let query = crate::engine::pipeline::SearchQuery {
-            buffer: &self.session.buffer,
+            buffer: &self.ctx.session.buffer,
             profile: &current_profile,
-            syllables: &self.syllables,
-            config: &self.config.master_config,
+            syllables: &self.ctx.syllables,
+            config: &self.ctx.config.master_config,
             limit,
-            filter_mode: self.session.filter_mode.clone(),
-            aux_filter: &self.session.aux_filter,
+            filter_mode: self.ctx.session.filter_mode.clone(),
+            aux_filter: &self.ctx.session.aux_filter,
             context: last_word,
         };
-        let (results, segments) = self.engine.search(query);
-        self.session.candidates = results;
-        self.session.best_segmentation = segments;
-        self.session.has_dict_match = !self.session.candidates.is_empty();
-        self.session.last_lookup_pinyin = self.session.buffer.clone();
+        let (results, segments) = self.ctx.engine.search(query);
+        self.ctx.session.candidates = results;
+        self.ctx.session.best_segmentation = segments;
+        self.ctx.session.has_dict_match = !self.ctx.session.candidates.is_empty();
+        self.ctx.session.last_lookup_pinyin = self.ctx.session.buffer.clone();
 
-        // 触发预取（异步后台执行，不阻塞当前搜索）
         self.trigger_prefetch();
 
-        if self.session.candidates.len() == 1 && self.session.filter_mode == FilterMode::Global {
-            let word = self.session.candidates[0].text.clone();
+        if self.ctx.session.candidates.len() == 1
+            && self.ctx.session.filter_mode == FilterMode::Global
+        {
+            let word = self.ctx.session.candidates[0].text.clone();
             return Some(self.commit_candidate(word, 0));
         }
 
-        if self.session.candidates.is_empty() {
-            let buf_arc: Arc<str> = Arc::from(self.session.buffer.as_str());
-            self.session
+        if self.ctx.session.candidates.is_empty() {
+            let buf_arc: Arc<str> = Arc::from(self.ctx.session.buffer.as_str());
+            self.ctx
+                .session
                 .candidates
                 .push(crate::engine::pipeline::Candidate {
                     text: buf_arc.clone(),
@@ -632,26 +506,26 @@ impl Processor {
                     match_level: 0,
                 });
         }
-        self.session.update_state();
+        self.ctx.session.update_state();
         self.check_auto_commit()
     }
 
-    /// 触发预取下一个字符的结果
     pub fn trigger_prefetch(&self) {
-        if self.session.buffer.len() < 2 {
+        if self.ctx.session.buffer.len() < 2 {
             return;
         }
 
-        let buffer = self.session.buffer.clone();
+        let buffer = self.ctx.session.buffer.clone();
         let profile = self
+            .ctx
             .session_state
             .active_profiles
             .first()
             .cloned()
             .unwrap_or_default();
-        let syllables = self.syllables.clone();
-        let config = self.config.master_config.clone();
-        let engine = self.engine.clone();
+        let syllables = self.ctx.syllables.clone();
+        let config = self.ctx.config.master_config.clone();
+        let engine = self.ctx.engine.clone();
 
         std::thread::spawn(move || {
             let common_suffixes = [
@@ -676,36 +550,11 @@ impl Processor {
     }
 
     pub fn reset(&mut self) {
-        self.session.reset();
-        self.dispatcher.reset_states();
+        self.ctx.reset();
     }
 
     pub fn clear_composing(&mut self) {
-        self.session.clear_composing();
-    }
-    pub fn start_global_filter(&mut self) {
-        if self.session.state == ImeState::Idle {
-            return;
-        }
-        if self.session.filter_mode != FilterMode::Global {
-            self.session.filter_mode = FilterMode::Global;
-            self.session.aux_filter.clear();
-        }
-    }
-
-    pub fn inject_text(&mut self, text: &str) -> Action {
-        self.session.buffer.push_str(text);
-        if self.session.state == ImeState::Idle {
-            self.session.state = ImeState::Composing;
-        }
-        self.session.preview_selected_candidate = false;
-        if let Some(act) = self.lookup() {
-            return act;
-        }
-        if let Some(act) = self.check_auto_commit() {
-            return act;
-        }
-        self.update_phantom_action()
+        self.ctx.session.clear_composing();
     }
 
     pub fn get_short_display(&self) -> String {
@@ -716,99 +565,72 @@ impl Processor {
             "japanese" => "日".to_string(),
             "stroke" => "笔".to_string(),
             "mixed" => "混".to_string(),
-            _ => {
-                let mut chars = display.chars();
-                chars
-                    .next()
-                    .map(|c| c.to_string())
-                    .unwrap_or_else(|| " ".to_string())
-            }
+            _ => display
+                .chars()
+                .next()
+                .map(|c| c.to_string())
+                .unwrap_or_else(|| " ".to_string()),
         }
     }
 
     pub fn get_current_profile_display(&self) -> String {
-        if self.session_state.active_profiles.is_empty() {
+        if self.ctx.session_state.active_profiles.is_empty() {
             return "None".to_string();
         }
-        if self.session_state.active_profiles.len() == 1 {
-            return self.session_state.active_profiles[0].clone();
+        if self.ctx.session_state.active_profiles.len() == 1 {
+            return self.ctx.session_state.active_profiles[0].clone();
         }
         "Mixed".to_string()
     }
 
     pub fn check_auto_commit(&mut self) -> Option<Action> {
-        if self.session.candidates.is_empty() || !self.session.has_dict_match {
+        if self.ctx.session.candidates.is_empty() || !self.ctx.session.has_dict_match {
             return None;
         }
 
-        let raw_input = &self.session.buffer;
+        let raw_input = &self.ctx.session.buffer;
 
-        // 笔画输入法特殊逻辑：只有当第一个是精确匹配且没有重码时，直接上屏
-        if self.config.auto_commit_stroke() && self.session_state.is_stroke_mode() {
-            if !self.session.candidates.is_empty() && self.session.candidates[0].match_level == 3 {
-                let is_unique_exact = self.session.candidates.len() == 1
-                    || self.session.candidates[1].match_level != 3;
+        if self.ctx.config.auto_commit_stroke() && self.ctx.session_state.is_stroke_mode() {
+            if !self.ctx.session.candidates.is_empty()
+                && self.ctx.session.candidates[0].match_level == 3
+            {
+                let is_unique_exact = self.ctx.session.candidates.len() == 1
+                    || self.ctx.session.candidates[1].match_level != 3;
                 if is_unique_exact {
-                    let word = self.session.candidates[0].text.clone();
+                    let word = self.ctx.session.candidates[0].text.clone();
                     return Some(self.commit_candidate(word, 0));
                 }
             }
         }
 
-        // 辅码模式特殊逻辑：通常是为了筛选唯一字
-        if raw_input.contains(';') && !self.session.candidates.is_empty() {
-            if self.session.candidates[0].match_level == 3 {
-                let is_unique_exact = self.session.candidates.len() == 1
-                    || self.session.candidates[1].match_level != 3;
+        if raw_input.contains(';') && !self.ctx.session.candidates.is_empty() {
+            if self.ctx.session.candidates[0].match_level == 3 {
+                let is_unique_exact = self.ctx.session.candidates.len() == 1
+                    || self.ctx.session.candidates[1].match_level != 3;
                 if is_unique_exact {
-                    let word = self.session.candidates[0].text.clone();
+                    let word = self.ctx.session.candidates[0].text.clone();
                     return Some(self.commit_candidate(word, 0));
                 }
             }
         }
 
-        if !self.config.auto_commit_unique_full_match() || self.session.candidates.len() != 1 {
+        if !self.ctx.config.auto_commit_unique_full_match()
+            || self.ctx.session.candidates.len() != 1
+        {
             return None;
         }
 
         let has_longer = self
+            .ctx
             .session_state
             .active_profiles
             .iter()
-            .any(|p| self.engine.has_longer_match(p, raw_input));
+            .any(|p| self.ctx.engine.has_longer_match(p, raw_input));
         if !has_longer {
-            let word = self.session.candidates[0].text.clone();
+            let word = self.ctx.session.candidates[0].text.clone();
             return Some(self.commit_candidate(word, 0));
         }
         None
-    }
-
-    pub fn should_block_invalid_input(&mut self, old_buffer: &str) -> bool {
-        if self.session.has_dict_match {
-            self.session.last_blocked_buffer.clear();
-            return false;
-        }
-        match self.config.anti_typo_mode() {
-            crate::config::AntiTypoMode::None => false,
-            crate::config::AntiTypoMode::Strict => {
-                self.session.buffer = old_buffer.to_string();
-                let _ = self.lookup();
-                true
-            }
-            crate::config::AntiTypoMode::Smart => {
-                if !self.session.last_blocked_buffer.is_empty()
-                    && self.session.buffer == self.session.last_blocked_buffer
-                {
-                    self.session.last_blocked_buffer.clear();
-                    false
-                } else {
-                    self.session.last_blocked_buffer = self.session.buffer.clone();
-                    self.session.buffer = old_buffer.to_string();
-                    let _ = self.lookup();
-                    true
-                }
-            }
-        }
     }
 
     pub fn record_usage(&mut self, pinyin: &str, word: &str, context: Option<&str>) {
@@ -816,29 +638,44 @@ impl Processor {
             return;
         }
 
-        let profile = self.session_state.get_current_profile();
+        let profile = self.ctx.session_state.get_current_profile();
         let word_len = word.chars().count();
 
-        if self.config.enable_auto_reorder() {
-            let updated =
-                learning::update_mru(&self.config.usage_history, &profile, pinyin, word, false);
-            self.config.insert_usage(&profile, pinyin, &updated);
-            self.engine.clear_cache();
+        if self.ctx.config.enable_auto_reorder() {
+            let updated = learning::update_mru(
+                &self.ctx.config.usage_history,
+                &profile,
+                pinyin,
+                word,
+                false,
+            );
+            self.ctx.config.insert_usage(&profile, pinyin, &updated);
+            self.ctx.engine.clear_cache();
         }
 
-        if self.config.enable_auto_reorder() {
+        if self.ctx.config.enable_auto_reorder() {
             if let Some(ctx) = context {
-                let updated =
-                    learning::update_mru(&self.config.ngram_history, &profile, ctx, word, false);
-                self.config.insert_ngram(&profile, ctx, &updated);
+                let updated = learning::update_mru(
+                    &self.ctx.config.ngram_history,
+                    &profile,
+                    ctx,
+                    word,
+                    false,
+                );
+                self.ctx.config.insert_ngram(&profile, ctx, &updated);
             }
         }
 
-        if self.config.enable_word_discovery() && word_len > 1 {
-            if !self.engine.has_exact_match(&profile, pinyin, word) {
-                let updated =
-                    learning::update_mru(&self.config.learned_words, &profile, pinyin, word, true);
-                self.config.insert_learned(&profile, pinyin, &updated);
+        if self.ctx.config.master_config.input.enable_word_discovery && word_len > 1 {
+            if !self.ctx.engine.has_exact_match(&profile, pinyin, word) {
+                let updated = learning::update_mru(
+                    &self.ctx.config.learned_words,
+                    &profile,
+                    pinyin,
+                    word,
+                    true,
+                );
+                self.ctx.config.insert_learned(&profile, pinyin, &updated);
             }
         }
     }
@@ -846,30 +683,36 @@ impl Processor {
     fn handle_global_hotkey(&mut self, key: VirtualKey, ctrl_pressed: bool) -> Option<Action> {
         if key == VirtualKey::Space
             && ctrl_pressed
-            && self.config.master_config.hotkeys.enable_ctrl_space_toggle
+            && self
+                .ctx
+                .config
+                .master_config
+                .hotkeys
+                .enable_ctrl_space_toggle
         {
-            self.session_state.chinese_enabled = !self.session_state.chinese_enabled;
+            self.ctx.session_state.chinese_enabled = !self.ctx.session_state.chinese_enabled;
             return Some(Action::Consume);
         }
 
         if key == VirtualKey::Tab
-            && self.session.buffer.is_empty()
-            && self.config.master_config.hotkeys.enable_tab_toggle
+            && self.ctx.session.buffer.is_empty()
+            && self.ctx.config.master_config.hotkeys.enable_tab_toggle
         {
-            self.session_state.chinese_enabled = !self.session_state.chinese_enabled;
+            self.ctx.session_state.chinese_enabled = !self.ctx.session_state.chinese_enabled;
             return Some(Action::Consume);
         }
 
         if key == VirtualKey::CapsLock {
-            return Some(if !self.session_state.chinese_enabled {
-                self.session_state.caps_lock_enabled = !self.session_state.caps_lock_enabled;
+            return Some(if !self.ctx.session_state.chinese_enabled {
+                self.ctx.session_state.caps_lock_enabled =
+                    !self.ctx.session_state.caps_lock_enabled;
                 Action::PassThrough
             } else {
-                self.session_state.capslock_down = true;
-                if !self.session.buffer.is_empty() {
-                    self.session.nav_mode = true;
+                self.ctx.session_state.capslock_down = true;
+                if !self.ctx.session.buffer.is_empty() {
+                    self.ctx.session.nav_mode = true;
                 } else {
-                    self.session_state.capslock_pending = true;
+                    self.ctx.session_state.capslock_pending = true;
                 }
                 Action::Consume
             });
@@ -879,45 +722,50 @@ impl Processor {
     }
 
     fn handle_capslock_profile_switch(&mut self, key: VirtualKey) -> Option<Action> {
-        let key_char = crate::engine::processor::utils::key_to_char(key, false, false)
+        let key_char = key_to_char(key, false, false)
             .unwrap_or('\0')
             .to_lowercase()
             .to_string();
         if let Some(profile) = self
+            .ctx
             .config
             .profile_keys()
             .iter()
             .find(|(k, _)| k.to_lowercase() == key_char)
             .map(|(_, p)| p.clone())
         {
-            self.session_state.active_profiles =
+            self.ctx.session_state.active_profiles =
                 profile.split(',').map(|s| s.to_string()).collect();
             self.reset();
-            self.session_state.capslock_pending = false;
+            self.ctx.session_state.capslock_pending = false;
             return Some(Action::Notify(
                 self.get_short_display(),
                 format!("方案: {}", self.get_current_profile_display()),
             ));
         }
-        self.session_state.capslock_pending = false;
+        self.ctx.session_state.capslock_pending = false;
         None
     }
 
     fn handle_ctrl_punctuation(&mut self, key: VirtualKey, shift_pressed: bool) -> Option<Action> {
         let p_key = get_punctuation_key(key, shift_pressed)?;
-        let commit_text = if !self.session.joined_sentence.is_empty() {
-            self.session.joined_sentence.trim_end().to_string()
-        } else if !self.session.candidates.is_empty() {
-            self.session.candidates[0].text.trim_end().to_string()
+        let commit_text = if !self.ctx.session.joined_sentence.is_empty() {
+            self.ctx.session.joined_sentence.trim_end().to_string()
+        } else if !self.ctx.session.candidates.is_empty() {
+            self.ctx.session.candidates[0].text.trim_end().to_string()
         } else {
-            self.session.buffer.trim_end().to_string()
+            self.ctx.session.buffer.trim_end().to_string()
         };
-        let del_len = self.session.phantom_text.chars().count();
+        let del_len = self.ctx.session.phantom_text.chars().count();
         self.clear_composing();
-        self.session_state.commit_history.clear();
+        self.ctx.session_state.commit_history.clear();
         Some(Action::DeleteAndEmit {
             delete: del_len,
             insert: format!("{}{}", commit_text, p_key),
         })
+    }
+
+    pub fn execute_command(&mut self, cmd: Command) -> Action {
+        commands::execute_command(&mut self.ctx, cmd)
     }
 }

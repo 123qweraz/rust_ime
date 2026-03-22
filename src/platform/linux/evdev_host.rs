@@ -134,7 +134,7 @@ impl EvdevHost {
         {
             if let Ok(p) = processor.lock() {
                 if let Ok(mut vk) = vkbd.lock() {
-                    vk.apply_config(&p.config.master_config);
+                    vk.apply_config(&p.ctx.config.master_config);
                 }
             }
         }
@@ -270,7 +270,7 @@ impl InputMethodHost for EvdevHost {
                                         p_locked.handle_key_ext(vk, val, shift, ctrl, alt, true);
 
                                     // 如果状态发生了变化，同步到托盘
-                                    let enabled = p_locked.session_state.chinese_enabled;
+                                    let enabled = p_locked.ctx.session_state.chinese_enabled;
                                     let profile = p_locked.get_current_profile_display();
                                     let _ =
                                         self.tray_tx.send(crate::ui::tray::TrayEvent::SyncStatus {
@@ -324,27 +324,27 @@ impl EvdevHost {
 
 fn update_gui_internal(p: &Processor, gui_tx: &Option<Sender<GuiEvent>>) {
     if let Some(ref tx) = gui_tx {
-        if p.session.buffer.is_empty() || !p.session_state.chinese_enabled {
+        if p.ctx.session.buffer.is_empty() || !p.ctx.session_state.chinese_enabled {
             let _ = tx.send(GuiEvent::Update {
                 pinyin: "".into(),
                 candidates: vec![],
                 selected: 0,
                 sentence: "".into(),
                 cursor_pos: 0,
-                commit_mode: p.config.commit_mode().to_string(),
+                commit_mode: p.ctx.config.commit_mode().to_string(),
             });
             return;
         }
 
-        let pinyin = crate::engine::compositor::Compositor::get_preedit(p);
+        let pinyin = crate::engine::compositor::Compositor::get_preedit(&p.ctx);
 
-        if p.config.show_candidates() {
-            let page_size = p.config.page_size();
-            let start = p.session.page.min(p.session.candidates.len());
-            let end = (start + page_size).min(p.session.candidates.len());
+        if p.ctx.config.show_candidates() {
+            let page_size = p.ctx.config.page_size();
+            let start = p.ctx.session.page.min(p.ctx.session.candidates.len());
+            let end = (start + page_size).min(p.ctx.session.candidates.len());
 
             let mut display_candidates = Vec::new();
-            for (i, c) in p.session.candidates[start..end].iter().enumerate() {
+            for (i, c) in p.ctx.session.candidates[start..end].iter().enumerate() {
                 let label = format!("{}.", i + 1);
                 let full_display = if c.hint.is_empty() {
                     format!("{label}{}", c.text)
@@ -359,15 +359,15 @@ fn update_gui_internal(p: &Processor, gui_tx: &Option<Sender<GuiEvent>>) {
                 });
             }
 
-            let relative_selected = p.session.selected.saturating_sub(start);
+            let relative_selected = p.ctx.session.selected.saturating_sub(start);
 
             let _ = tx.send(GuiEvent::Update {
                 pinyin,
                 candidates: display_candidates,
                 selected: relative_selected,
-                sentence: p.session.joined_sentence.clone(),
-                cursor_pos: p.session.cursor_pos,
-                commit_mode: p.config.commit_mode().to_string(),
+                sentence: p.ctx.session.joined_sentence.clone(),
+                cursor_pos: p.ctx.session.cursor_pos,
+                commit_mode: p.ctx.config.commit_mode().to_string(),
             });
         } else {
             let _ = tx.send(GuiEvent::Update {
@@ -376,7 +376,7 @@ fn update_gui_internal(p: &Processor, gui_tx: &Option<Sender<GuiEvent>>) {
                 selected: 0,
                 sentence: "".into(),
                 cursor_pos: 0,
-                commit_mode: p.config.commit_mode().to_string(),
+                commit_mode: p.ctx.config.commit_mode().to_string(),
             });
         }
     }

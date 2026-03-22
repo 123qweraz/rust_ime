@@ -1,6 +1,6 @@
+use crate::engine::keys::VirtualKey;
 use std::collections::HashMap;
 use std::time::Instant;
-use crate::engine::keys::VirtualKey;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub struct ModifierState {
@@ -38,7 +38,7 @@ pub enum Command {
 
 pub struct KeyDispatcher {
     pub key_map: HashMap<(VirtualKey, ModifierState), Command>,
-    
+
     // 双击检测状态
     pub last_tap_key: Option<VirtualKey>,
     pub last_tap_time: Option<Instant>,
@@ -75,11 +75,21 @@ mod tests {
     #[test]
     fn test_dispatcher_key_map() {
         let mut dispatcher = KeyDispatcher::new();
-        let none = ModifierState { shift: false, ctrl: false, alt: false, meta: false };
-        
-        dispatcher.key_map.insert((VirtualKey::Space, none), Command::Commit);
-        
-        assert_eq!(dispatcher.key_map.get(&(VirtualKey::Space, none)), Some(&Command::Commit));
+        let none = ModifierState {
+            shift: false,
+            ctrl: false,
+            alt: false,
+            meta: false,
+        };
+
+        dispatcher
+            .key_map
+            .insert((VirtualKey::Space, none), Command::Commit);
+
+        assert_eq!(
+            dispatcher.key_map.get(&(VirtualKey::Space, none)),
+            Some(&Command::Commit)
+        );
         assert_eq!(dispatcher.key_map.get(&(VirtualKey::A, none)), None);
     }
 

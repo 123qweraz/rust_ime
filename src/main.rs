@@ -258,7 +258,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 ui::tray::TrayEvent::ToggleIme => {
                     if let Ok(mut p) = processor_clone.lock() {
                         p.toggle();
-                        let enabled = p.session_state.chinese_enabled;
+                        let enabled = p.ctx.session_state.chinese_enabled;
                         let short = p.get_short_display();
                         tray_handle.update(move |t| t.chinese_enabled = enabled);
 
@@ -272,7 +272,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 ui::tray::TrayEvent::NextProfile => {
                     if let Ok(mut p) = processor_clone.lock() {
                         let profile = p.next_profile();
-                        let enabled = p.session_state.chinese_enabled;
+                        let enabled = p.ctx.session_state.chinese_enabled;
                         let short = p.get_short_display();
                         tray_handle.update(move |t| t.active_profile = profile);
 
@@ -353,9 +353,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
                 }
                 ui::tray::TrayEvent::ClearUserDict => {
                     if let Ok(p) = processor_clone.lock() {
-                        p.config.learned_words.store(Arc::new(HashMap::new()));
-                        p.config.usage_history.store(Arc::new(HashMap::new()));
-                        if let Some(ref db) = p.config.db {
+                        p.ctx.config.learned_words.store(Arc::new(HashMap::new()));
+                        p.ctx.config.usage_history.store(Arc::new(HashMap::new()));
+                        if let Some(ref db) = p.ctx.config.db {
                             let _ = db.clear();
                         }
                     }

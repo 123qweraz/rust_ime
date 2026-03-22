@@ -93,7 +93,7 @@ fn run_bench_mode() {
 
     let mut processor = Processor::new(trie_paths, syllables);
     processor.apply_config(&Config::load());
-    processor.session_state.active_profiles = vec!["chinese".to_string()];
+    processor.ctx.session_state.active_profiles = vec!["chinese".to_string()];
 
     println!("词库加载完成，正在等待后台预热 (1s)...");
     std::thread::sleep(std::time::Duration::from_secs(1));
@@ -101,18 +101,20 @@ fn run_bench_mode() {
 
     println!("[Bench] 检查 FST 中是否存在 \"zhuomian\"...");
     let has_zm = processor
+        .ctx
         .engine
         .trie_paths
         .get("chinese")
         .and_then(|_| {
-            if processor.engine.schemes.get("chinese").is_some() {
+            if processor.ctx.engine.schemes.get("chinese").is_some() {
                 let found = !processor
+                    .ctx
                     .engine
                     .search(engine::pipeline::SearchQuery {
                         buffer: "zhuomian",
                         profile: "chinese",
-                        syllables: &processor.syllables,
-                        config: &processor.config.master_config,
+                        syllables: &processor.ctx.syllables,
+                        config: &processor.ctx.config.master_config,
                         limit: 10,
                         filter_mode: engine::processor::FilterMode::None,
                         aux_filter: "",
@@ -282,14 +284,14 @@ fn run_test_mode() {
             let action = processor.handle_key(vk, 1, shift, ctrl, alt);
             println!("动作反馈: {action:?}");
         } else {
-            processor.session.buffer = input.to_string();
-            let _ = processor.lookup();
+            processor.ctx.session.buffer = input.to_string();
+            let _ = engine::pipeline::lookup(&mut processor.ctx);
         }
 
-        let display_preedit = engine::compositor::Compositor::get_preedit(&processor);
+        let display_preedit = engine::compositor::Compositor::get_preedit(&processor.ctx);
         println!(
             "中英文状态: {}",
-            if processor.session_state.chinese_enabled {
+            if processor.ctx.session_state.chinese_enabled {
                 "开启"
             } else {
                 "关闭"
@@ -297,25 +299,25 @@ fn run_test_mode() {
         );
         println!(
             "大写锁定: {}",
-            if processor.session_state.caps_lock_enabled {
+            if processor.ctx.session_state.caps_lock_enabled {
                 "开启"
             } else {
                 "关闭"
             }
         );
-        println!("原始缓冲区: {}", processor.session.buffer);
+        println!("原始缓冲区: {}", processor.ctx.session.buffer);
         println!("预编辑: {display_preedit}");
-        println!("过滤模式: {:?}", processor.session.filter_mode);
-        println!("当前选中: {}", processor.session.selected);
+        println!("过滤模式: {:?}", processor.ctx.session.filter_mode);
+        println!("当前选中: {}", processor.ctx.session.selected);
         println!(
             "分页: {}/{}",
-            processor.session.page,
-            processor.session.candidates.len()
+            processor.ctx.session.page,
+            processor.ctx.session.candidates.len()
         );
-        println!("辅助码过滤: {}", processor.session.aux_filter);
-        println!("切分: {:?}", processor.session.best_segmentation);
+        println!("辅助码过滤: {}", processor.ctx.session.aux_filter);
+        println!("切分: {:?}", processor.ctx.session.best_segmentation);
         println!("候选词 (前 10 条):");
-        for (i, cand) in processor.session.candidates.iter().take(10).enumerate() {
+        for (i, cand) in processor.ctx.session.candidates.iter().take(10).enumerate() {
             println!(
                 "  {}. {} (hint: {}, source: {})",
                 i + 1,

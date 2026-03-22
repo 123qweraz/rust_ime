@@ -131,10 +131,6 @@ impl ConfigManager {
         &self.master_config.input.commit_mode
     }
 
-    pub fn enable_word_discovery(&self) -> bool {
-        self.master_config.input.enable_word_discovery
-    }
-
     pub fn enable_auto_reorder(&self) -> bool {
         self.master_config.input.enable_auto_reorder
     }

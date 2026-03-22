@@ -1,6 +1,7 @@
 pub mod compiler;
 pub mod compositor;
 pub mod config_manager;
+pub mod context;
 pub mod dispatcher;
 pub mod keys;
 pub mod pipeline;
@@ -11,6 +12,7 @@ pub mod session;
 pub mod trie;
 
 pub use config_manager::ConfigManager;
+pub use context::EngineContext;
 pub use dispatcher::{Command, InputEvent, KeyDispatcher, ModifierState};
 pub use processor::Processor;
 pub use session::InputSession;

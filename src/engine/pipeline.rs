@@ -1,5 +1,7 @@
 use crate::engine::config_manager::UserDictData;
+use crate::engine::processor::Action;
 use crate::engine::trie::TrieResult;
+use crate::engine::EngineContext;
 use crate::engine::Trie;
 use crate::Config;
 use arc_swap::ArcSwap;
@@ -804,6 +806,88 @@ impl SearchEngine {
         let parts: Vec<&str> = hint_clean.split([' ', '/', '(', ')', ',']).collect();
         parts.iter().any(|p| p.starts_with(&filter_lower)) || hint_clean.starts_with(&filter_lower)
     }
+}
+
+pub fn lookup(ctx: &mut EngineContext) -> Option<Action> {
+    use crate::engine::processor::FilterMode;
+    use std::sync::Arc;
+
+    if ctx.session.buffer.is_empty() {
+        ctx.reset();
+        return None;
+    }
+
+    if ctx.session.filter_mode == FilterMode::Page && !ctx.session.page_snapshot.is_empty() {
+        let mut filtered = Vec::new();
+        for c in &ctx.session.page_snapshot {
+            if ctx.engine.matches_filter(c, &ctx.session.aux_filter) {
+                filtered.push(c.clone());
+            }
+        }
+        if !filtered.is_empty() {
+            ctx.session.candidates = filtered;
+            if ctx.session.candidates.len() == 1 {
+                let word = ctx.session.candidates[0].text.clone();
+                return Some(crate::engine::compositor::Compositor::commit_candidate(
+                    ctx, word, 0,
+                ));
+            }
+        } else {
+            ctx.session.candidates.clear();
+        }
+        ctx.session.update_state();
+        return None;
+    }
+
+    let current_profile = ctx
+        .session_state
+        .active_profiles
+        .first()
+        .cloned()
+        .unwrap_or_default();
+    let last_word = ctx
+        .session_state
+        .commit_history
+        .last()
+        .map(|(_, word)| word.as_str());
+
+    let query = SearchQuery {
+        buffer: &ctx.session.buffer,
+        profile: &current_profile,
+        syllables: &ctx.syllables,
+        config: &ctx.config.master_config,
+        limit: 20,
+        filter_mode: ctx.session.filter_mode.clone(),
+        aux_filter: &ctx.session.aux_filter,
+        context: last_word,
+    };
+    let (results, segments) = ctx.engine.search(query);
+    ctx.session.candidates = results;
+    ctx.session.best_segmentation = segments;
+    ctx.session.has_dict_match = !ctx.session.candidates.is_empty();
+    ctx.session.last_lookup_pinyin = ctx.session.buffer.clone();
+
+    if ctx.session.candidates.len() == 1 && ctx.session.filter_mode == FilterMode::Global {
+        let word = ctx.session.candidates[0].text.clone();
+        return Some(crate::engine::compositor::Compositor::commit_candidate(
+            ctx, word, 0,
+        ));
+    }
+
+    if ctx.session.candidates.is_empty() {
+        let buf_arc: Arc<str> = Arc::from(ctx.session.buffer.as_str());
+        ctx.session.candidates.push(Candidate {
+            text: buf_arc.clone(),
+            simplified: buf_arc.clone(),
+            traditional: buf_arc.clone(),
+            hint: Arc::from(""),
+            source: Arc::from("Raw"),
+            weight: 0.0,
+            match_level: 0,
+        });
+    }
+    ctx.session.update_state();
+    crate::engine::compositor::Compositor::check_auto_commit(ctx)
 }
 
 #[cfg(test)]

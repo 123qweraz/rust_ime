@@ -1,6 +1,6 @@
-use crate::engine::scheme::{InputScheme, SchemeContext, SchemeCandidate};
 use crate::engine::keys::VirtualKey;
 use crate::engine::processor::Action;
+use crate::engine::scheme::{InputScheme, SchemeCandidate, SchemeContext};
 
 pub struct JapaneseScheme;
 
@@ -30,7 +30,7 @@ impl InputScheme for JapaneseScheme {
                     results.push(cand);
                 }
             }
-            
+
             // 2. 前缀匹配
             if context.config.input.enable_prefix_matching {
                 let limit = if query.len() > 3 { 5 } else { 20 };
@@ -49,24 +49,35 @@ impl InputScheme for JapaneseScheme {
         results
     }
 
-    fn post_process(&self, _query: &str, candidates: &mut Vec<SchemeCandidate>, _context: &SchemeContext) {
+    fn post_process(
+        &self,
+        _query: &str,
+        candidates: &mut Vec<SchemeCandidate>,
+        _context: &SchemeContext,
+    ) {
         // 日语方案按匹配级别和权重排序
         candidates.sort_by(|a, b| {
-            b.match_level.cmp(&a.match_level)
+            b.match_level
+                .cmp(&a.match_level)
                 .then_with(|| b.weight.cmp(&a.weight))
         });
-        
+
         let mut seen = std::collections::HashSet::new();
         candidates.retain(|c| seen.insert(c.text.clone()));
     }
 
-    fn handle_special_key(&self, key: VirtualKey, buffer: &mut String, _context: &SchemeContext) -> Option<Action> {
+    fn handle_special_key(
+        &self,
+        key: VirtualKey,
+        buffer: &mut String,
+        _context: &SchemeContext,
+    ) -> Option<Action> {
         // 处理日语专用标点符号映射
         // 只有在缓冲区为空时，标点符号才可能通过 handle_direct -> handle_punctuation 走通用逻辑
         // 在缓冲区不为空时，我们需要拦截这些按键实现上屏并附带标点
-        
+
         let _shift = false; // 简化处理，主要处理非 shift 情况
-        
+
         let punc = match key {
             VirtualKey::Dot => Some("。"),
             VirtualKey::Comma => Some("、"),
@@ -88,7 +99,7 @@ impl InputScheme for JapaneseScheme {
                 // 我们只需要确保 Processor 能获取到日语模式下的正确映射。
             }
         }
-        
+
         None
     }
 }

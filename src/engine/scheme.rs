@@ -1,20 +1,20 @@
-use std::collections::HashMap;
-use crate::engine::trie::Trie;
-use crate::engine::keys::VirtualKey;
 use crate::config::Config;
+use crate::engine::keys::VirtualKey;
 use crate::engine::processor::{Action, FilterMode};
+use crate::engine::trie::Trie;
+use std::collections::HashMap;
 
 /// 代表一个候选项的完整信息
 #[derive(Debug, Clone)]
 pub struct SchemeCandidate {
-    pub text: String,          // 显示的候选文字（如“的”）
-    pub simplified: String,    // 简体形式
-    pub traditional: String,   // 繁体形式
-    pub tone: String,          // 声调/拼音提示
-    pub english: String,       // 英文释义/提示
-    pub stroke_aux: String,    // 笔画辅助码提示
-    pub weight: u32,           // 排序权重
-    pub match_level: u8,       // 匹配级别：3=精确, 2=简拼, 1=前缀
+    pub text: String,        // 显示的候选文字（如“的”）
+    pub simplified: String,  // 简体形式
+    pub traditional: String, // 繁体形式
+    pub tone: String,        // 声调/拼音提示
+    pub english: String,     // 英文释义/提示
+    pub stroke_aux: String,  // 笔画辅助码提示
+    pub weight: u32,         // 排序权重
+    pub match_level: u8,     // 匹配级别：3=精确, 2=简拼, 1=前缀
 }
 
 impl SchemeCandidate {
@@ -32,9 +32,9 @@ impl SchemeCandidate {
     }
 }
 
-use std::sync::Arc;
 use crate::engine::config_manager::UserDictData;
 use arc_swap::ArcSwap;
+use std::sync::Arc;
 
 /// 方案执行时的上下文环境
 pub struct SchemeContext<'a> {
@@ -64,10 +64,20 @@ pub trait InputScheme: Send + Sync {
     fn lookup(&self, query: &str, context: &SchemeContext) -> Vec<SchemeCandidate>;
 
     /// 后处理阶段：过滤、排序和修饰结果
-    fn post_process(&self, query: &str, candidates: &mut Vec<SchemeCandidate>, context: &SchemeContext);
+    fn post_process(
+        &self,
+        query: &str,
+        candidates: &mut Vec<SchemeCandidate>,
+        context: &SchemeContext,
+    );
 
     /// 处理方案特有的按键（如快捷键开关）
-    fn handle_special_key(&self, _key: VirtualKey, _buffer: &mut String, _context: &SchemeContext) -> Option<Action> {
+    fn handle_special_key(
+        &self,
+        _key: VirtualKey,
+        _buffer: &mut String,
+        _context: &SchemeContext,
+    ) -> Option<Action> {
         None
     }
 }

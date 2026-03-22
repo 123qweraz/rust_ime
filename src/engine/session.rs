@@ -1,5 +1,5 @@
 use crate::engine::pipeline::Candidate;
-use crate::engine::processor::{ImeState, FilterMode};
+use crate::engine::processor::{FilterMode, ImeState};
 
 #[derive(Debug, Clone)]
 pub struct InputSession {
@@ -122,11 +122,10 @@ impl InputSession {
     }
 
     pub fn next_page(&mut self, page_size: usize) {
-        if !self.candidates.is_empty()
-            && self.page + page_size < self.candidates.len() {
-                self.page += page_size;
-                self.selected = self.page;
-            }
+        if !self.candidates.is_empty() && self.page + page_size < self.candidates.len() {
+            self.page += page_size;
+            self.selected = self.page;
+        }
     }
 
     pub fn prev_page(&mut self, page_size: usize) {
