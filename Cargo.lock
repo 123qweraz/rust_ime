@@ -4944,6 +4944,7 @@ dependencies = [
  "sled",
  "slint",
  "slint-build",
+ "thiserror 1.0.69",
  "tokio",
  "tower-http 0.5.2",
  "tracing",
