@@ -722,21 +722,24 @@ impl SearchEngine {
         let arc_p = Arc::new(pipeline);
 
         // LRU eviction: 如果缓存超过限制，移除最久未使用的
-        #[allow(clippy::mut_mut)]
         {
-            if let Ok(mut access_order) = self.pipeline_access_order.write() {
+            let maybe_oldest = {
+                let access_order = self.pipeline_access_order.read().ok()?;
                 if access_order.len() >= MAX_CACHED_PIPELINES {
-                    if let Some(oldest) = access_order.first().cloned() {
-                        drop(access_order);
-                        if let Ok(mut p_map) = self.pipelines.write() {
-                            p_map.remove(&oldest);
-                        }
-                        if let Ok(mut access_order) = self.pipeline_access_order.write() {
-                            access_order.remove(0);
-                        }
-                        tracing::debug!(profile = %oldest, "Evicted pipeline from cache");
-                    }
+                    access_order.first().cloned()
+                } else {
+                    None
                 }
+            };
+
+            if let Some(oldest) = maybe_oldest {
+                if let Ok(mut p_map) = self.pipelines.write() {
+                    p_map.remove(&oldest);
+                }
+                if let Ok(mut access_order) = self.pipeline_access_order.write() {
+                    access_order.remove(0);
+                }
+                tracing::debug!(profile = %oldest, "Evicted pipeline from cache");
             }
         }
 
