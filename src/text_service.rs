@@ -7,7 +7,7 @@ use windows::{
     Win32::Storage::FileSystem::*,
     Win32::System::Diagnostics::Debug::OutputDebugStringW,
     Win32::System::Pipes::WaitNamedPipeW,
-    Win32::UI::Input::KeyboardAndMouse::{VK_CONTROL, VK_MENU, VK_SHIFT},
+    Win32::UI::Input::KeyboardAndMouse::{VK_CONTROL, VK_LWIN, VK_MENU, VK_RWIN, VK_SHIFT},
     Win32::UI::TextServices::*,
 };
 
@@ -228,6 +228,23 @@ impl ITfKeyEventSink_Impl for TextService {
         _lparam: LPARAM,
     ) -> Result<BOOL> {
         let key_code = wparam.0 as u32;
+
+        // Win 键是系统键，应该让它们通过以支持系统快捷键 (如 Win+Shift+S 截图)
+        if key_code == VK_LWIN.0 || key_code == VK_RWIN.0 {
+            return Ok(FALSE);
+        }
+
+        // 检测 Alt+Tab, Alt+Shift+Tab 等系统快捷键
+        unsafe {
+            let alt_state =
+                windows::Win32::UI::Input::KeyboardAndMouse::GetKeyState(VK_MENU.0 as i32) as u16;
+            let tab_state =
+                windows::Win32::UI::Input::KeyboardAndMouse::GetKeyState(0x09 as i32) as u16; // VK_TAB = 0x09
+            if (alt_state & 0x8000) != 0 && (tab_state & 0x8000) != 0 {
+                return Ok(FALSE);
+            }
+        }
+
         let mut modifiers = 0u8;
         unsafe {
             if (windows::Win32::UI::Input::KeyboardAndMouse::GetKeyState(VK_SHIFT.0 as i32) as u16
@@ -264,6 +281,12 @@ impl ITfKeyEventSink_Impl for TextService {
         _lparam: LPARAM,
     ) -> Result<BOOL> {
         let key_code = wparam.0 as u32;
+
+        // Win 键是系统键，应该让它们通过以支持系统快捷键
+        if key_code == VK_LWIN.0 || key_code == VK_RWIN.0 {
+            return Ok(FALSE);
+        }
+
         let mut modifiers = 0u8;
         unsafe {
             if (windows::Win32::UI::Input::KeyboardAndMouse::GetKeyState(VK_SHIFT.0 as i32) as u16
@@ -309,6 +332,12 @@ impl ITfKeyEventSink_Impl for TextService {
         _lparam: LPARAM,
     ) -> Result<BOOL> {
         let key_code = wparam.0 as u32;
+
+        // Win 键是系统键，应该让它们通过
+        if key_code == VK_LWIN.0 || key_code == VK_RWIN.0 {
+            return Ok(FALSE);
+        }
+
         let mut modifiers = 0u8;
         unsafe {
             if (windows::Win32::UI::Input::KeyboardAndMouse::GetKeyState(VK_SHIFT.0 as i32) as u16
@@ -345,6 +374,12 @@ impl ITfKeyEventSink_Impl for TextService {
         _lparam: LPARAM,
     ) -> Result<BOOL> {
         let key_code = wparam.0 as u32;
+
+        // Win 键是系统键，应该让它们通过
+        if key_code == VK_LWIN.0 || key_code == VK_RWIN.0 {
+            return Ok(FALSE);
+        }
+
         let mut modifiers = 0u8;
         unsafe {
             if (windows::Win32::UI::Input::KeyboardAndMouse::GetKeyState(VK_SHIFT.0 as i32) as u16
