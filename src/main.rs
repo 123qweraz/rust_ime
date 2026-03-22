@@ -9,6 +9,7 @@ pub use crate::constants::{IME_ID, LANG_PROFILE_ID};
 mod app;
 mod config;
 mod engine;
+mod error;
 mod platform;
 mod ui;
 
