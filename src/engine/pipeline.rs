@@ -540,137 +540,6 @@ impl Pipeline {
     }
 }
 
-mod pipeline_cache {
-    use crate::engine::{ImeError, ImeResult};
-    use std::collections::HashMap;
-    use std::sync::{Arc, RwLock};
-    use std::vec::Vec;
-
-    pub struct PipelineCache {
-        pipelines: Arc<RwLock<HashMap<String, Arc<super::Pipeline>>>>,
-        access_order: Arc<RwLock<Vec<String>>>,
-    }
-
-    impl Clone for PipelineCache {
-        fn clone(&self) -> Self {
-            Self {
-                pipelines: self.pipelines.clone(),
-                access_order: self.access_order.clone(),
-            }
-        }
-    }
-
-    impl PipelineCache {
-        pub fn new() -> Self {
-            Self {
-                pipelines: Arc::new(RwLock::new(HashMap::new())),
-                access_order: Arc::new(RwLock::new(Vec::new())),
-            }
-        }
-
-        pub fn with_capacity() -> Self {
-            Self::new()
-        }
-
-        pub fn get(&self, profile: &str) -> ImeResult<Option<Arc<super::Pipeline>>> {
-            let p_map = self
-                .pipelines
-                .read()
-                .map_err(|e| ImeError::Lock(format!("Pipeline lock poisoned: {}", e)))?;
-            Ok(p_map.get(profile).cloned())
-        }
-
-        pub fn insert(&self, profile: String, pipeline: Arc<super::Pipeline>) -> ImeResult<()> {
-            let mut p_map = self
-                .pipelines
-                .write()
-                .map_err(|e| ImeError::Lock(format!("Pipeline lock poisoned: {}", e)))?;
-            p_map.insert(profile, pipeline);
-            Ok(())
-        }
-
-        pub fn remove(&self, profile: &str) -> ImeResult<Option<Arc<super::Pipeline>>> {
-            let mut p_map = self
-                .pipelines
-                .write()
-                .map_err(|e| ImeError::Lock(format!("Pipeline lock poisoned: {}", e)))?;
-            Ok(p_map.remove(profile))
-        }
-
-        pub fn clear(&self) -> ImeResult<()> {
-            let mut p_map = self
-                .pipelines
-                .write()
-                .map_err(|e| ImeError::Lock(format!("Pipeline lock poisoned: {}", e)))?;
-            p_map.clear();
-            Ok(())
-        }
-
-        pub fn len(&self) -> ImeResult<usize> {
-            let p_map = self
-                .pipelines
-                .read()
-                .map_err(|e| ImeError::Lock(format!("Pipeline lock poisoned: {}", e)))?;
-            Ok(p_map.len())
-        }
-
-        pub fn update_access_order(&self, profile: &str) -> ImeResult<()> {
-            let mut access_order = self
-                .access_order
-                .write()
-                .map_err(|e| ImeError::Lock(format!("Access order lock poisoned: {}", e)))?;
-            if let Some(pos) = access_order.iter().position(|p| p == profile) {
-                access_order.remove(pos);
-            }
-            access_order.push(profile.to_string());
-            Ok(())
-        }
-
-        pub fn evict_oldest_if_needed(&self, max_size: usize) -> ImeResult<Option<String>> {
-            let mut access_order = self
-                .access_order
-                .write()
-                .map_err(|e| ImeError::Lock(format!("Access order lock poisoned: {}", e)))?;
-
-            if access_order.len() >= max_size {
-                let oldest = access_order[0].clone();
-                drop(access_order);
-                self.remove(&oldest)?;
-                if let Ok(mut ao) = self.access_order.write() {
-                    ao.remove(0);
-                }
-                return Ok(Some(oldest));
-            }
-            Ok(None)
-        }
-
-        pub fn clear_access_order(&self) -> ImeResult<()> {
-            let mut access_order = self
-                .access_order
-                .write()
-                .map_err(|e| ImeError::Lock(format!("Access order lock poisoned: {}", e)))?;
-            access_order.clear();
-            Ok(())
-        }
-
-        pub fn pipelines(&self) -> Arc<RwLock<HashMap<String, Arc<super::Pipeline>>>> {
-            self.pipelines.clone()
-        }
-
-        pub fn access_order_arc(&self) -> Arc<RwLock<Vec<String>>> {
-            self.access_order.clone()
-        }
-    }
-
-    impl Default for PipelineCache {
-        fn default() -> Self {
-            Self::new()
-        }
-    }
-}
-
-use pipeline_cache::PipelineCache;
-
 /// 搜索引擎：协调所有的 Pipeline
 #[derive(Clone)]
 pub struct SearchEngine {
@@ -680,7 +549,8 @@ pub struct SearchEngine {
     usage_history: Arc<ArcSwap<UserDictData>>,
     ngram_history: Arc<ArcSwap<UserDictData>>,
     pub schemes: Arc<HashMap<String, Box<dyn crate::engine::scheme::InputScheme>>>,
-    cache: PipelineCache,
+    pipelines: Arc<RwLock<HashMap<String, Arc<Pipeline>>>>,
+    pipeline_access_order: Arc<RwLock<Vec<String>>>,
 }
 
 const MAX_CACHED_PIPELINES: usize = 10;
@@ -712,7 +582,8 @@ impl SearchEngine {
             usage_history,
             ngram_history,
             schemes,
-            cache: PipelineCache::new(),
+            pipelines: Arc::new(RwLock::new(HashMap::new())),
+            pipeline_access_order: Arc::new(RwLock::new(Vec::new())),
         }
     }
 
@@ -811,10 +682,18 @@ impl SearchEngine {
 
     fn get_or_create_pipeline(&self, profile: &str) -> Option<Arc<Pipeline>> {
         // 1. 尝试读取现有
-        if let Ok(Some(pipeline)) = self.cache.get(profile) {
-            // 更新访问顺序（LRU）
-            let _ = self.cache.update_access_order(profile);
-            return Some(pipeline);
+        {
+            let p_map = self.pipelines.read().ok()?;
+            if let Some(p) = p_map.get(profile) {
+                // 更新访问顺序（LRU）
+                if let Ok(mut access_order) = self.pipeline_access_order.write() {
+                    if let Some(pos) = access_order.iter().position(|p| p == profile) {
+                        access_order.remove(pos);
+                    }
+                    access_order.push(profile.to_string());
+                }
+                return Some(p.clone());
+            }
         }
 
         // 2. 如果不存在，尝试创建
@@ -843,13 +722,33 @@ impl SearchEngine {
         let arc_p = Arc::new(pipeline);
 
         // LRU eviction: 如果缓存超过限制，移除最久未使用的
-        if let Ok(Some(oldest)) = self.cache.evict_oldest_if_needed(MAX_CACHED_PIPELINES) {
-            tracing::debug!(profile = %oldest, "Evicted pipeline from cache");
+        #[allow(clippy::mut_mut)]
+        {
+            if let Ok(mut access_order) = self.pipeline_access_order.write() {
+                if access_order.len() >= MAX_CACHED_PIPELINES {
+                    if let Some(oldest) = access_order.first().cloned() {
+                        drop(access_order);
+                        if let Ok(mut p_map) = self.pipelines.write() {
+                            p_map.remove(&oldest);
+                        }
+                        if let Ok(mut access_order) = self.pipeline_access_order.write() {
+                            access_order.remove(0);
+                        }
+                        tracing::debug!(profile = %oldest, "Evicted pipeline from cache");
+                    }
+                }
+            }
         }
 
         // 插入新 pipeline
-        let _ = self.cache.insert(profile.to_string(), arc_p.clone());
-        let _ = self.cache.update_access_order(profile);
+        let mut p_map = self.pipelines.write().ok()?;
+        p_map.insert(profile.to_string(), arc_p.clone());
+
+        if let Ok(mut access_order) = self.pipeline_access_order.write() {
+            if !access_order.contains(&profile.to_string()) {
+                access_order.push(profile.to_string());
+            }
+        }
 
         Some(arc_p)
     }
@@ -865,8 +764,12 @@ impl SearchEngine {
     }
 
     pub fn clear_cache(&self) {
-        let _ = self.cache.clear();
-        let _ = self.cache.clear_access_order();
+        if let Ok(mut p_map) = self.pipelines.write() {
+            p_map.clear();
+        }
+        if let Ok(mut access_order) = self.pipeline_access_order.write() {
+            access_order.clear();
+        }
     }
 
     /// 预加载并初始化指定方案的 Pipeline
