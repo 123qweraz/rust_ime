@@ -1,7 +1,4 @@
-use crate::config::{
-    AntiTypoMode, AuxMode, Config, DoublePinyinScheme, FuzzyPinyinConfig, PhantomType,
-    PunctuationEntry,
-};
+use crate::config::{AntiTypoMode, Config, PhantomType, PunctuationEntry};
 use crate::engine::keys::VirtualKey;
 use arc_swap::ArcSwap;
 use std::collections::HashMap;
@@ -142,52 +139,8 @@ impl ConfigManager {
         self.master_config.input.enable_auto_reorder
     }
 
-    pub fn enable_fixed_first_candidate(&self) -> bool {
-        self.master_config.input.enable_fixed_first_candidate
-    }
-
-    pub fn enable_double_pinyin(&self) -> bool {
-        self.master_config.input.enable_double_pinyin
-    }
-
-    pub fn double_pinyin_scheme(&self) -> &DoublePinyinScheme {
-        &self.master_config.input.double_pinyin_scheme
-    }
-
-    pub fn enable_fuzzy_pinyin(&self) -> bool {
-        self.master_config.input.enable_fuzzy_pinyin
-    }
-
-    pub fn fuzzy_config(&self) -> &FuzzyPinyinConfig {
-        &self.master_config.input.fuzzy_config
-    }
-
-    pub fn enable_traditional(&self) -> bool {
-        self.master_config.input.enable_traditional
-    }
-
-    pub fn show_english_translation(&self) -> bool {
-        self.master_config.appearance.show_english_translation
-    }
-
-    pub fn show_stroke_aux(&self) -> bool {
-        self.master_config.appearance.show_stroke_aux
-    }
-
-    pub fn show_tone_hint(&self) -> bool {
-        self.master_config.appearance.show_tone_hint
-    }
-
-    pub fn aux_mode(&self) -> AuxMode {
-        self.master_config.appearance.aux_mode
-    }
-
     pub fn anti_typo_mode(&self) -> AntiTypoMode {
         self.master_config.input.anti_typo_mode
-    }
-
-    pub fn auto_commit_unique_en_fuzhuma(&self) -> bool {
-        self.master_config.input.auto_commit_unique_en_fuzhuma
     }
 
     pub fn auto_commit_unique_full_match(&self) -> bool {
@@ -198,36 +151,8 @@ impl ConfigManager {
         self.master_config.input.auto_commit_stroke
     }
 
-    pub fn enable_error_sound(&self) -> bool {
-        self.master_config.input.enable_error_sound
-    }
-
-    pub fn enable_prefix_matching(&self) -> bool {
-        self.master_config.input.enable_prefix_matching
-    }
-
-    pub fn prefix_matching_limit(&self) -> usize {
-        self.master_config.input.prefix_matching_limit
-    }
-
-    pub fn enable_abbreviation_matching(&self) -> bool {
-        self.master_config.input.enable_abbreviation_matching
-    }
-
-    pub fn filter_proper_nouns_by_case(&self) -> bool {
-        self.master_config.input.filter_proper_nouns_by_case
-    }
-
     pub fn swap_arrow_keys(&self) -> bool {
         self.master_config.input.swap_arrow_keys
-    }
-
-    pub fn enable_english_filter(&self) -> bool {
-        self.master_config.input.enable_english_filter
-    }
-
-    pub fn enable_caps_selection(&self) -> bool {
-        self.master_config.input.enable_caps_selection
     }
 
     pub fn enable_number_selection(&self) -> bool {
@@ -268,10 +193,6 @@ impl ConfigManager {
         } else {
             self.master_config.input.phantom_type
         }
-    }
-
-    pub fn enable_smart_backspace(&self) -> bool {
-        self.master_config.input.enable_smart_backspace
     }
 
     pub fn load_user_dicts(&mut self) {
