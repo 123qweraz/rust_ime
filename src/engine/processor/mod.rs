@@ -2,7 +2,7 @@ pub mod commands;
 pub mod fsm;
 pub mod handlers;
 pub mod intents;
-pub mod learning;
+mod learning;
 pub mod punctuation;
 pub mod session_state;
 pub mod utils;
@@ -337,49 +337,6 @@ impl Processor {
         }
     }
 
-    pub fn commit_candidate(&mut self, mut cand: Arc<str>, index: usize) -> Action {
-        let now = Instant::now();
-        let py = self.ctx.session.last_lookup_pinyin.clone();
-
-        if !py.is_empty() && index != 99 {
-            if now.duration_since(self.ctx.session_state.last_commit_time) > Duration::from_secs(3)
-            {
-                self.ctx.session_state.commit_history.clear();
-            }
-
-            let last_word_opt = self
-                .ctx
-                .session_state
-                .get_last_word()
-                .map(|s| s.to_string());
-            self.record_usage(&py, &cand, last_word_opt.as_deref());
-            self.ctx
-                .session_state
-                .add_to_history(py.clone(), cand.to_string());
-
-            for (py_c, word_c) in self.ctx.session_state.get_combination_candidates(8) {
-                self.record_usage(&py_c, &word_c, None);
-            }
-            self.ctx.session_state.update_commit_time();
-        }
-
-        if self.ctx.session_state.is_english_mode()
-            && !cand.is_empty()
-            && cand.chars().last().unwrap_or(' ').is_alphanumeric()
-        {
-            let mut s = cand.to_string();
-            s.push(' ');
-            cand = Arc::from(s);
-        }
-
-        let del = self.ctx.session.phantom_text.chars().count();
-        self.clear_composing();
-        Action::DeleteAndEmit {
-            delete: del,
-            insert: cand.to_string(),
-        }
-    }
-
     pub fn update_phantom_action(&mut self) -> Action {
         if self.ctx.config.phantom_type() == crate::config::PhantomType::None {
             return Action::Consume;
@@ -443,7 +400,7 @@ impl Processor {
                 self.ctx.session.candidates = filtered;
                 if self.ctx.session.candidates.len() == 1 {
                     let word = self.ctx.session.candidates[0].text.clone();
-                    return Some(self.commit_candidate(word, 0));
+                    return Some(commands::commit_candidate(&mut self.ctx, word, 0));
                 }
             } else {
                 self.ctx.session.candidates.clear();
@@ -488,7 +445,7 @@ impl Processor {
             && self.ctx.session.filter_mode == FilterMode::Global
         {
             let word = self.ctx.session.candidates[0].text.clone();
-            return Some(self.commit_candidate(word, 0));
+            return Some(commands::commit_candidate(&mut self.ctx, word, 0));
         }
 
         if self.ctx.session.candidates.is_empty() {
@@ -598,7 +555,7 @@ impl Processor {
                     || self.ctx.session.candidates[1].match_level != 3;
                 if is_unique_exact {
                     let word = self.ctx.session.candidates[0].text.clone();
-                    return Some(self.commit_candidate(word, 0));
+                    return Some(commands::commit_candidate(&mut self.ctx, word, 0));
                 }
             }
         }
@@ -609,7 +566,7 @@ impl Processor {
                     || self.ctx.session.candidates[1].match_level != 3;
                 if is_unique_exact {
                     let word = self.ctx.session.candidates[0].text.clone();
-                    return Some(self.commit_candidate(word, 0));
+                    return Some(commands::commit_candidate(&mut self.ctx, word, 0));
                 }
             }
         }
@@ -628,56 +585,9 @@ impl Processor {
             .any(|p| self.ctx.engine.has_longer_match(p, raw_input));
         if !has_longer {
             let word = self.ctx.session.candidates[0].text.clone();
-            return Some(self.commit_candidate(word, 0));
+            return Some(commands::commit_candidate(&mut self.ctx, word, 0));
         }
         None
-    }
-
-    pub fn record_usage(&mut self, pinyin: &str, word: &str, context: Option<&str>) {
-        if pinyin.is_empty() || word.is_empty() {
-            return;
-        }
-
-        let profile = self.ctx.session_state.get_current_profile();
-        let word_len = word.chars().count();
-
-        if self.ctx.config.enable_auto_reorder() {
-            let updated = learning::update_mru(
-                &self.ctx.config.usage_history,
-                &profile,
-                pinyin,
-                word,
-                false,
-            );
-            self.ctx.config.insert_usage(&profile, pinyin, &updated);
-            self.ctx.engine.clear_cache();
-        }
-
-        if self.ctx.config.enable_auto_reorder() {
-            if let Some(ctx) = context {
-                let updated = learning::update_mru(
-                    &self.ctx.config.ngram_history,
-                    &profile,
-                    ctx,
-                    word,
-                    false,
-                );
-                self.ctx.config.insert_ngram(&profile, ctx, &updated);
-            }
-        }
-
-        if self.ctx.config.master_config.input.enable_word_discovery && word_len > 1 {
-            if !self.ctx.engine.has_exact_match(&profile, pinyin, word) {
-                let updated = learning::update_mru(
-                    &self.ctx.config.learned_words,
-                    &profile,
-                    pinyin,
-                    word,
-                    true,
-                );
-                self.ctx.config.insert_learned(&profile, pinyin, &updated);
-            }
-        }
     }
 
     fn handle_global_hotkey(&mut self, key: VirtualKey, ctrl_pressed: bool) -> Option<Action> {

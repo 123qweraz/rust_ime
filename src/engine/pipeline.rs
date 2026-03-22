@@ -828,7 +828,7 @@ pub fn lookup(ctx: &mut EngineContext) -> Option<Action> {
             ctx.session.candidates = filtered;
             if ctx.session.candidates.len() == 1 {
                 let word = ctx.session.candidates[0].text.clone();
-                return Some(crate::engine::compositor::Compositor::commit_candidate(
+                return Some(crate::engine::processor::commands::commit_candidate(
                     ctx, word, 0,
                 ));
             }
@@ -869,7 +869,7 @@ pub fn lookup(ctx: &mut EngineContext) -> Option<Action> {
 
     if ctx.session.candidates.len() == 1 && ctx.session.filter_mode == FilterMode::Global {
         let word = ctx.session.candidates[0].text.clone();
-        return Some(crate::engine::compositor::Compositor::commit_candidate(
+        return Some(crate::engine::processor::commands::commit_candidate(
             ctx, word, 0,
         ));
     }

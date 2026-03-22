@@ -1,4 +1,5 @@
-use crate::engine::processor::{FilterMode, ImeState};
+use crate::engine::processor::commands::commit_candidate;
+use crate::engine::processor::{Action, FilterMode, ImeState};
 use crate::engine::EngineContext;
 
 pub struct Compositor;
@@ -155,7 +156,7 @@ impl Compositor {
                     ctx.session.candidates.len() == 1 || ctx.session.candidates[1].match_level != 3;
                 if is_unique_exact {
                     let word = ctx.session.candidates[0].text.clone();
-                    return Some(Self::commit_candidate(ctx, word, 0));
+                    return Some(commit_candidate(ctx, word, 0));
                 }
             }
         }
@@ -166,7 +167,7 @@ impl Compositor {
                     ctx.session.candidates.len() == 1 || ctx.session.candidates[1].match_level != 3;
                 if is_unique_exact {
                     let word = ctx.session.candidates[0].text.clone();
-                    return Some(Self::commit_candidate(ctx, word, 0));
+                    return Some(commit_candidate(ctx, word, 0));
                 }
             }
         }
@@ -182,94 +183,11 @@ impl Compositor {
             .any(|p| ctx.engine.has_longer_match(p, raw_input));
         if !has_longer {
             let word = ctx.session.candidates[0].text.clone();
-            return Some(Self::commit_candidate(ctx, word, 0));
+            return Some(commit_candidate(ctx, word, 0));
         }
         None
     }
-
-    pub fn commit_candidate(
-        ctx: &mut EngineContext,
-        cand: std::sync::Arc<str>,
-        index: usize,
-    ) -> Action {
-        use std::time::{Duration, Instant};
-
-        let now = Instant::now();
-        let py = ctx.session.last_lookup_pinyin.clone();
-
-        if !py.is_empty() && index != 99 {
-            if now.duration_since(ctx.session_state.last_commit_time) > Duration::from_secs(3) {
-                ctx.session_state.commit_history.clear();
-            }
-
-            let last_word_opt = ctx.session_state.get_last_word().map(|s| s.to_string());
-            record_usage(ctx, &py, &cand, last_word_opt.as_deref());
-            ctx.session_state
-                .add_to_history(py.clone(), cand.to_string());
-
-            for (py_c, word_c) in ctx.session_state.get_combination_candidates(8) {
-                record_usage(ctx, &py_c, &word_c, None);
-            }
-            ctx.session_state.update_commit_time();
-        }
-
-        if ctx.session_state.is_english_mode()
-            && !cand.is_empty()
-            && cand.chars().last().unwrap_or(' ').is_alphanumeric()
-        {
-            let mut s = cand.to_string();
-            s.push(' ');
-            ctx.session.clear_composing();
-            return Action::DeleteAndEmit {
-                delete: ctx.session.phantom_text.chars().count(),
-                insert: s,
-            };
-        }
-
-        let del = ctx.session.phantom_text.chars().count();
-        ctx.session.clear_composing();
-        Action::DeleteAndEmit {
-            delete: del,
-            insert: cand.to_string(),
-        }
-    }
 }
-
-fn record_usage(ctx: &mut EngineContext, pinyin: &str, word: &str, context: Option<&str>) {
-    use crate::engine::processor::learning;
-
-    if pinyin.is_empty() || word.is_empty() {
-        return;
-    }
-
-    let profile = ctx.session_state.get_current_profile();
-    let word_len = word.chars().count();
-
-    if ctx.config.enable_auto_reorder() {
-        let updated =
-            learning::update_mru(&ctx.config.usage_history, &profile, pinyin, word, false);
-        ctx.config.insert_usage(&profile, pinyin, &updated);
-        ctx.engine.clear_cache();
-    }
-
-    if ctx.config.enable_auto_reorder() {
-        if let Some(ctx_str) = context {
-            let updated =
-                learning::update_mru(&ctx.config.ngram_history, &profile, ctx_str, word, false);
-            ctx.config.insert_ngram(&profile, ctx_str, &updated);
-        }
-    }
-
-    if ctx.config.master_config.input.enable_word_discovery && word_len > 1 {
-        if !ctx.engine.has_exact_match(&profile, pinyin, word) {
-            let updated =
-                learning::update_mru(&ctx.config.learned_words, &profile, pinyin, word, true);
-            ctx.config.insert_learned(&profile, pinyin, &updated);
-        }
-    }
-}
-
-use crate::engine::processor::Action;
 
 pub fn start_global_filter(ctx: &mut EngineContext) {
     if ctx.session.state == ImeState::Idle {
