@@ -16,7 +16,10 @@ use crate::class_factory::ClassFactory;
 pub use crate::constants::{IME_ID, LANG_PROFILE_ID};
 
 #[cfg(windows)]
-static mut DLL_INSTANCE: HINSTANCE = HINSTANCE(0);
+use std::sync::OnceLock;
+
+#[cfg(windows)]
+static DLL_INSTANCE: OnceLock<HINSTANCE> = OnceLock::new();
 
 #[cfg(windows)]
 #[no_mangle]
@@ -27,7 +30,7 @@ unsafe extern "system" fn DllMain(
     _reserved: *mut std::ffi::c_void,
 ) -> bool {
     if call_reason == DLL_PROCESS_ATTACH {
-        DLL_INSTANCE = dll_module;
+        let _ = DLL_INSTANCE.set(dll_module);
     }
     true
 }
@@ -61,8 +64,12 @@ pub unsafe extern "system" fn DllGetClassObject(
 /// # Safety
 /// This function is called by Windows/regsvr32 to register the COM server.
 pub unsafe extern "system" fn DllRegisterServer() -> HRESULT {
-    registry::register_server(DLL_INSTANCE, &IME_ID, "Rust IME", None)
-        .map_or_else(|e| e.code(), |_| S_OK)
+    if let Some(&instance) = DLL_INSTANCE.get() {
+        registry::register_server(instance, &IME_ID, "Rust IME", None)
+            .map_or_else(|e| e.code(), |_| S_OK)
+    } else {
+        CO_E_NOTINITIALIZED
+    }
 }
 
 #[cfg(windows)]

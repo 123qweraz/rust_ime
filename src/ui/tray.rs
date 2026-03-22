@@ -192,9 +192,13 @@ pub struct ImeTrayStub {
 }
 
 #[cfg(target_os = "windows")]
-static mut TRAY_STATE: Option<Arc<Mutex<ImeTrayStub>>> = None;
+use std::sync::OnceLock;
+
 #[cfg(target_os = "windows")]
-static mut TRAY_TX: Option<Sender<TrayEvent>> = None;
+static TRAY_STATE: OnceLock<Arc<Mutex<ImeTrayStub>>> = OnceLock::new();
+
+#[cfg(target_os = "windows")]
+static TRAY_TX: OnceLock<Sender<TrayEvent>> = OnceLock::new();
 
 #[cfg(target_os = "windows")]
 pub struct WindowsTrayHandle(Arc<Mutex<ImeTrayStub>>);
@@ -219,10 +223,8 @@ pub fn start_tray(params: TrayParams) -> WindowsTrayHandle {
         show_status_bar: params.show_status_bar,
     }));
 
-    unsafe {
-        TRAY_STATE = Some(state.clone());
-        TRAY_TX = Some(params.tx);
-    }
+    TRAY_STATE.set(state.clone()).ok();
+    TRAY_TX.set(params.tx).ok();
 
     let (tx, rx) = std::sync::mpsc::channel();
     std::thread::spawn(move || unsafe {
@@ -315,10 +317,7 @@ unsafe extern "system" fn tray_wnd_proc(
                 let mut pt = POINT::default();
                 let _ = GetCursorPos(&mut pt);
 
-                if let Some(state_arc) = (&raw const TRAY_STATE)
-                    .as_ref()
-                    .and_then(|opt| opt.as_ref())
-                {
+                if let Some(state_arc) = TRAY_STATE.get() {
                     if let Ok(state) = state_arc.lock() {
                         let h_menu = CreatePopupMenu().expect("Failed to create popup menu");
 
@@ -381,7 +380,7 @@ unsafe extern "system" fn tray_wnd_proc(
         }
         WM_COMMAND => {
             let id = wparam.0 as u32;
-            if let Some(ref tx) = TRAY_TX {
+            if let Some(tx) = TRAY_TX.get() {
                 match id {
                     1001 => {
                         let _ = tx.send(TrayEvent::ToggleIme);
