@@ -45,3 +45,28 @@ pub fn update_mru(
     });
     result
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_user_dict_data_type() {
+        let data: UserDictData = UserDictData::new();
+        assert!(data.is_empty());
+    }
+
+    #[test]
+    fn test_user_dict_data_insert() {
+        let mut data: UserDictData = UserDictData::new();
+        data.entry("profile1".to_string())
+            .or_default()
+            .entry("ni".to_string())
+            .or_default()
+            .push(("你".to_string(), 1));
+
+        assert_eq!(data.len(), 1);
+        let profile_data = data.get("profile1").unwrap();
+        assert_eq!(profile_data.len(), 1);
+    }
+}

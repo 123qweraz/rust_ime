@@ -464,3 +464,44 @@ impl Trie {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_trie_result_clone() {
+        let result = TrieResult {
+            word: "test",
+            trad: "測試",
+            tone: "tēst",
+            en: "test",
+            stroke_aux: "",
+            weight: 100,
+        };
+        let cloned = result;
+        assert_eq!(result.word, cloned.word);
+        assert_eq!(result.weight, cloned.weight);
+    }
+
+    #[test]
+    fn test_trie_data_memory() {
+        let data = vec![1u8, 2, 3, 4];
+        let trie_data = TrieData::Memory(Arc::new(data.clone()));
+        assert_eq!(trie_data.as_ref(), &[1, 2, 3, 4]);
+    }
+
+    #[test]
+    fn test_trie_result_copy() {
+        let result = TrieResult {
+            word: "hello",
+            trad: "hello",
+            tone: "",
+            en: "hello",
+            stroke_aux: "",
+            weight: 0,
+        };
+        assert_eq!(result.word, "hello");
+        assert_eq!(result.weight, 0);
+    }
+}

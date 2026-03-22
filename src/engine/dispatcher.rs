@@ -101,4 +101,64 @@ mod tests {
         assert!(!dispatcher.long_press_triggered);
         assert!(dispatcher.last_tap_key.is_none());
     }
+
+    #[test]
+    fn test_modifier_state() {
+        let none = ModifierState {
+            shift: false,
+            ctrl: false,
+            alt: false,
+            meta: false,
+        };
+        let with_shift = ModifierState {
+            shift: true,
+            ctrl: false,
+            alt: false,
+            meta: false,
+        };
+        let with_ctrl = ModifierState {
+            shift: false,
+            ctrl: true,
+            alt: false,
+            meta: false,
+        };
+
+        assert_ne!(none, with_shift);
+        assert_ne!(none, with_ctrl);
+        assert_ne!(with_shift, with_ctrl);
+    }
+
+    #[test]
+    fn test_command_variants() {
+        use crate::engine::Command;
+
+        let commit = Command::Commit;
+        let clear = Command::Clear;
+        let select = Command::Select(0);
+        let next_page = Command::NextPage;
+        let prev_page = Command::PrevPage;
+
+        assert_ne!(commit, clear);
+        assert_ne!(commit, select);
+        assert_ne!(select, next_page);
+        assert_ne!(next_page, prev_page);
+    }
+
+    #[test]
+    fn test_input_event() {
+        use crate::engine::InputEvent;
+
+        let key_event = InputEvent::Key {
+            key: crate::engine::keys::VirtualKey::A,
+            val: 1,
+            shift: false,
+            ctrl: false,
+            alt: false,
+        };
+
+        if let InputEvent::Key { key, val, .. } = key_event {
+            assert_eq!(key, crate::engine::keys::VirtualKey::A);
+            assert_eq!(val, 1);
+        }
+    }
 }

@@ -213,4 +213,66 @@ mod tests {
         assert!(!session.nav_mode);
         assert_eq!(session.state, ImeState::Idle);
     }
+
+    #[test]
+    fn test_session_push_pop() {
+        let mut session = InputSession::new();
+        session.push_char('a');
+        session.push_char('b');
+        session.push_char('c');
+        assert_eq!(session.buffer, "abc");
+
+        session.pop_char();
+        assert_eq!(session.buffer, "ab");
+
+        session.pop_char();
+        session.pop_char();
+        assert_eq!(session.buffer, "");
+    }
+
+    #[test]
+    fn test_session_page_navigation() {
+        let mut session = InputSession::new();
+        session.candidates = vec![
+            create_candidate("a"),
+            create_candidate("b"),
+            create_candidate("c"),
+            create_candidate("d"),
+            create_candidate("e"),
+        ];
+
+        session.selected = 2;
+        session.next_candidate(3);
+        assert_eq!(session.selected, 3);
+
+        session.next_candidate(3);
+        assert_eq!(session.selected, 4);
+
+        session.prev_candidate(3);
+        assert_eq!(session.selected, 3);
+    }
+
+    #[test]
+    fn test_session_clear_composing() {
+        let mut session = InputSession::new();
+        session.buffer = "test".to_string();
+        session.phantom_text = "best".to_string();
+        session.clear_composing();
+        assert!(session.buffer.is_empty());
+        assert!(session.phantom_text.is_empty());
+        assert_eq!(session.state, ImeState::Idle);
+    }
+
+    fn create_candidate(text: &str) -> crate::engine::pipeline::Candidate {
+        use std::sync::Arc;
+        crate::engine::pipeline::Candidate {
+            text: Arc::from(text),
+            simplified: Arc::from(text),
+            traditional: Arc::from(text),
+            hint: Arc::from(""),
+            source: Arc::from("test"),
+            weight: 1.0,
+            match_level: 3,
+        }
+    }
 }
