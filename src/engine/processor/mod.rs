@@ -612,6 +612,22 @@ impl Processor {
             return Some(Action::Consume);
         }
 
+        if key == VirtualKey::CapsLock
+            && self.ctx.session.buffer.is_empty()
+            && self
+                .ctx
+                .config
+                .master_config
+                .hotkeys
+                .switch_language
+                .key
+                .to_lowercase()
+                == "capslock"
+        {
+            self.ctx.session_state.chinese_enabled = !self.ctx.session_state.chinese_enabled;
+            return Some(Action::Consume);
+        }
+
         if key == VirtualKey::CapsLock {
             return Some(if !self.ctx.session_state.chinese_enabled {
                 self.ctx.session_state.caps_lock_enabled =

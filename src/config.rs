@@ -701,7 +701,7 @@ impl Config {
             },
             hotkeys: Hotkeys {
                 switch_language: Hotkey {
-                    key: "tab".to_string(),
+                    key: "capslock".to_string(),
                     description: "核心: 切换中/英文模式".to_string(),
                 },
                 page_up: vec![

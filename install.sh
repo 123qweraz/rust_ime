@@ -5,32 +5,44 @@ set -e
 
 echo "=== Rust-IME Auto Installer ==="
 
-# 0. Check Rust environment
-if ! command -v cargo &> /dev/null;
-then
-    echo "❌ Error: Rust/Cargo environment not found"
-    echo "Please install Rust first: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
-    exit 1
+# Check if running with precompiled binary
+HAS_PRECOMPILED=false
+if [ -f "./rust-ime" ]; then
+    HAS_PRECOMPILED=true
 fi
 
-# 1. Install Dependencies
-echo -e "\n[1/4] Installing system dependencies..."
-if [ -f /etc/debian_version ]; then
-    # Detect Debian/Ubuntu/Pop!_OS
-    echo "Debian-based system detected, installing via apt..."
-    sudo apt-get update
-    sudo apt-get install -y libxcb-composite0-dev libx11-dev libdbus-1-dev build-essential pkg-config clang gtk4-layer-shell
-elif [ -f /etc/arch-release ]; then
-    # Detect Arch Linux/Manjaro
-    echo "Arch-based system detected, installing via pacman..."
-    sudo pacman -S --noconfirm --needed base-devel pkgconf clang gtk4-layer-shell libxcb libx11 dbus
+# 1. Install Dependencies (if needed)
+echo -e "\n[1/4] Checking system dependencies..."
+
+if [ "$HAS_PRECOMPILED" = true ]; then
+    echo "✅ Precompiled binary detected. Skipping build dependencies."
+    echo "   Runtime dependencies (dbus) are usually pre-installed on desktop environments."
 else
-    echo "⚠️  Unknown package manager (not apt or pacman)"
-    echo "Please ensure the following development libraries are installed:"
-    echo "  - xcb, x11, dbus development files"
-    echo "  - pkg-config, clang"
-    echo "  - gtk4-layer-shell"
-    read -p "Press Enter to continue..."
+    echo "⚠️  No precompiled binary found. Will need to build from source."
+    
+    # Check Rust environment
+    if ! command -v cargo &> /dev/null; then
+        echo "❌ Error: Rust/Cargo environment not found"
+        echo "Please install Rust first: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+        exit 1
+    fi
+    
+    # Install build dependencies
+    echo "Installing build dependencies..."
+    if [ -f /etc/debian_version ]; then
+        echo "Debian-based system detected, installing via apt..."
+        sudo apt-get update
+        sudo apt-get install -y build-essential pkg-config clang libdbus-1-dev
+    elif [ -f /etc/arch-release ]; then
+        echo "Arch-based system detected, installing via pacman..."
+        sudo pacman -S --noconfirm --needed base-devel pkgconf clang
+    else
+        echo "⚠️  Unknown package manager (not apt or pacman)"
+        echo "Please ensure the following are installed:"
+        echo "  - build-essential, pkg-config, clang"
+        echo "  - dbus development files"
+        read -p "Press Enter to continue..."
+    fi
 fi
 
 # 2. Configure Permissions
@@ -57,34 +69,22 @@ else
     echo "✅ Rule file already exists"
 fi
 
-# 3. Build Project / Prepare Binary
+# 3. Build Project (if needed)
 echo -e "\n[3/4] Preparing program files..."
-if [ -f "./rust-ime" ]; then
-    echo "✅ Precompiled binary detected, skipping build step."
+if [ "$HAS_PRECOMPILED" = true ]; then
     chmod +x ./rust-ime
+    echo "✅ Using precompiled binary."
 else
-    echo "Precompiled binary not found, attempting to build from source..."
-    if ! command -v cargo &> /dev/null; then
-        echo "❌ Error: Rust environment not found and no precompiled binary available."
-        echo "Please install Rust or use a release package."
-        exit 1
-    fi
+    echo "🔨 Building from source (this may take a few minutes)..."
     cargo build --release
     cp target/release/rust-ime .
+    echo "✅ Build complete."
 fi
 
-# 3.5 Compile Dictionaries
-echo -e "\n[3.5/4] Preparing dictionaries..."
-if [ -d "./data" ] && [ "$(ls -A ./data 2>/dev/null)" ]; then
-    echo "✅ Dictionaries already exist."
-else
-    echo "Compiling raw dictionaries (this may take a few seconds)..."
-    if command -v cargo &> /dev/null; then
-        cargo run --release --bin compile_dict
-    else
-        # If it's a binary package, we should ensure it has compiled data or run compilation via binary
-        ./rust-ime --compile-dict || echo "⚠️ Warning: Failed to automatically compile dictionaries. Ensure 'data' directory is complete."
-    fi
+# Check for required data files
+if [ ! -d "./data" ] || [ -z "$(ls -A ./data 2>/dev/null)" ]; then
+    echo "⚠️  Warning: Dictionaries not found. Please ensure 'data' directory exists."
+    echo "   You may need to run: ./rust-ime --compile-only"
 fi
 
 # 4. Install
@@ -119,7 +119,15 @@ fi
 
 echo -e "\n=========================================="
 echo "🎉 Installation Complete!"
-echo "You can start it by typing 'rust-ime' in the terminal."
-echo "⚠️  Note: If this is your first time running this script and you were added to the 'input' group,"
-echo "    you MUST 【logout and log back in】 (or restart) for it to work properly!"
+echo ""
+echo "📋 Next steps:"
+echo "   1. Start IME: rust-ime"
+echo "   2. Or find 'Rust-IME' in your application menu"
+echo ""
+if ! groups | grep -q "\binput\b"; then
+echo "⚠️  IMPORTANT: You were added to the 'input' group."
+echo "   You MUST logout and log back in (or restart) for it to work!"
+echo ""
+fi
+echo "📖 Documentation: ./INSTALL_GUIDE.md or ./INSTALL_GUIDE_ZH.md"
 echo "=========================================="

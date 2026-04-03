@@ -1,6 +1,6 @@
 {
   "switch_language": {
-    "key": "Tab",
+    "key": "CapsLock",
     "description": "核心: 切换中/英文模式"
   },
   "page_up": [
@@ -20,6 +20,6 @@
   "next_candidate": [
     "Right"
   ],
-  "enable_tab_toggle": true,
+  "enable_tab_toggle": false,
   "enable_ctrl_space_toggle": true
 }
